@@ -262,8 +262,9 @@ $(function() {
 	$(document).on("click", ".word", function(e) {
     var elm = $(this), word = G.trimWord(elm.text());
     var targetUrl = "https://www.shubang.net/dict/getword.php?word=" + encodeURIComponent(word);
-    var proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
-    
+    // var proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
+    var proxyUrl = "https://api.codetabs.com/v1/proxy/?quest=" + encodeURIComponent(targetUrl);
+
     $.ajax({
         url: proxyUrl,
         type: 'GET',
@@ -271,7 +272,9 @@ $(function() {
         success: function(res) {
             var msg = '';
             // AllOrigins返回的数据在`contents`字段里，需要解析
-            var response = JSON.parse(res.contents);
+            // var response = JSON.parse(res.contents);
+           var response = res;
+
             var wordHref=`https://www.youdao.com/m/result?word=${word}&lang=en`
             if (1 == response.flag) {
                 msg = '<div class="tipWord">' + word + '<a href="' + wordHref + '" target="_blank">详细解释</a></div>';
