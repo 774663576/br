@@ -144,6 +144,7 @@ function popTip(d,elm,e) {
 	}
 	tip.css({left: pos.l, top: pos.t, 'visibility': 'inherit'});
 }
+
 $(function() {
 	// 英文行
 	$(".line_en").each(function (index, element) {
@@ -259,27 +260,82 @@ $(function() {
 // });
 // });
 
-	$(document).on("click", ".word", function(e) {
+// 	$(document).on("click", ".word", function(e) {
+//     var elm = $(this), word = G.trimWord(elm.text());
+//     var targetUrl = "https://www.shubang.net/dict/getword.php?word=" + encodeURIComponent(word);
+//     // var proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
+//     var proxyUrl = "https://api.codetabs.com/v1/proxy/?quest=" + encodeURIComponent(targetUrl);
+
+//     $.ajax({
+//         url: proxyUrl,
+//         type: 'GET',
+//         dataType: 'json',
+//         success: function(res) {
+//             var msg = '';
+//             // AllOrigins返回的数据在`contents`字段里，需要解析
+//             // var response = JSON.parse(res.contents);
+//            var response = res;
+
+//             var wordHref=`https://www.youdao.com/m/result?word=${word}&lang=en`
+//             if (1 == response.flag) {
+//                 msg = '<div class="tipWord">' + word + '<a href="' + wordHref + '" target="_blank">详细解释</a></div>';
+//                 var wordInfo = response.data;
+                
+//                 if (wordInfo.am != '') {
+//                     msg += '<div style="clear:both;">美：[<i>' + wordInfo.am + '</i>] <img class="audio" align="absmiddle" src="../public/skin/images/mp3.png" onclick="G.playVoice(\'' + wordInfo.ammp3 + '\')"></div>';
+//                 }
+//                 if (wordInfo.en != '') {
+//                     msg += '<div style="clear:both;">英：[<i>' + wordInfo.en + '</i>] <img class="audio" align="absmiddle" src="../public/skin/images/mp3.png" onclick="G.playVoice(\'' + wordInfo.enmp3 + '\')"></div>';
+//                 }
+//                 msg += '<div style="clear:both;">' + G.replace(wordInfo.trans, "\n", "<br/>") + '</div>';
+                
+//                 // 自动播放
+//                 console.log("自动播放-----", wordInfo.ammp3);
+//                 if (wordInfo.en != '') {
+//                     G.playVoice(wordInfo.ammp3);
+//                 }
+//             } else {
+//                 msg = '<div class="tipWord">' + word + '</div><span style="color:red;">' + response.msg + '</span>';
+//             }
+//             msg = '<div class="tip">' + msg + '</div>';
+//             popTip(msg, elm, e);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error:', error);
+//         }
+//     });
+// });
+$(document).on("click", ".word", function(e) {
     var elm = $(this), word = G.trimWord(elm.text());
     var targetUrl = "https://www.shubang.net/dict/getword.php?word=" + encodeURIComponent(word);
-    // var proxyUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent(targetUrl);
     var proxyUrl = "https://api.codetabs.com/v1/proxy/?quest=" + encodeURIComponent(targetUrl);
 
+    // 在点击时立即弹出一个空的提示框
+    var msg = '<div class="tip"><div class="tipWord">' + word + '</div><div class="loading">查询中...</div></div>';
+    popTip(msg, elm, e);
+
+    // 发送 AJAX 请求
     $.ajax({
         url: proxyUrl,
         type: 'GET',
         dataType: 'json',
         success: function(res) {
             var msg = '';
-            // AllOrigins返回的数据在`contents`字段里，需要解析
-            // var response = JSON.parse(res.contents);
-           var response = res;
+            var response = res;
+            var wordHref = `https://www.youdao.com/m/result?word=${word}&lang=en`;
 
-            var wordHref=`https://www.youdao.com/m/result?word=${word}&lang=en`
             if (1 == response.flag) {
-                msg = '<div class="tipWord">' + word + '<a href="' + wordHref + '" target="_blank">详细解释</a></div>';
                 var wordInfo = response.data;
                 
+                // 将wordInfo转换为JSON字符串并进行HTML转义
+                var escapedWordInfo = encodeURIComponent(JSON.stringify(wordInfo));
+
+                // 构建显示信息，现在包含完整的wordInfo数据
+                msg = '<div class="tipWord">' + word + 
+                      '<a href="' + wordHref + '" target="_blank" style="margin-left: 10px;">详细解释</a>' +
+                      '<button class="add-to-wordbook" data-word="' + word + '" data-word-info="' + escapedWordInfo + '" style="margin-left: 10px;">加入到生词本</button></div>';
+
+                // 添加发音和翻译
                 if (wordInfo.am != '') {
                     msg += '<div style="clear:both;">美：[<i>' + wordInfo.am + '</i>] <img class="audio" align="absmiddle" src="../public/skin/images/mp3.png" onclick="G.playVoice(\'' + wordInfo.ammp3 + '\')"></div>';
                 }
@@ -287,23 +343,48 @@ $(function() {
                     msg += '<div style="clear:both;">英：[<i>' + wordInfo.en + '</i>] <img class="audio" align="absmiddle" src="../public/skin/images/mp3.png" onclick="G.playVoice(\'' + wordInfo.enmp3 + '\')"></div>';
                 }
                 msg += '<div style="clear:both;">' + G.replace(wordInfo.trans, "\n", "<br/>") + '</div>';
-                
+
                 // 自动播放
-                console.log("自动播放-----", wordInfo.ammp3);
-                if (wordInfo.en != '') {
+                if (wordInfo.ammp3) {
                     G.playVoice(wordInfo.ammp3);
                 }
             } else {
                 msg = '<div class="tipWord">' + word + '</div><span style="color:red;">' + response.msg + '</span>';
             }
             msg = '<div class="tip">' + msg + '</div>';
+            
+            // 更新提示框内容
             popTip(msg, elm, e);
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
+            var errorMsg = '<div class="tipWord">' + word + '</div><span style="color:red;">请求失败，请稍后再试。</span>';
+            popTip('<div class="tip">' + errorMsg + '</div>', elm, e);
         }
     });
 });
+
+// 处理"加入到生词本"按钮的点击事件
+$(document).on("click", ".add-to-wordbook", function() {
+    var word = $(this).data("word");
+    var wordInfoStr = $(this).data("word-info");
+    
+    try {
+        // 解码并解析wordInfo
+        var wordInfo = JSON.parse(decodeURIComponent(wordInfoStr));
+        
+        // 将单词信息传递给 Flutter 端
+		var json=JSON.stringify({
+            word: word, 
+            wordInfo: wordInfo
+        });
+		console.log("将单词和详细信息加入到生词本：", json);
+        window.addToWordBook.postMessage(json);
+    } catch (e) {
+        console.error("解析单词信息时出错:", e);
+    }
+});
+
 
 
 	$(document).on("mouseleave", "#J_FIXED", function(){
