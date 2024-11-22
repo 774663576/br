@@ -322,14 +322,49 @@ $(function () {
 		window.showWordPopup.postMessage(json);
 	});
 
+	// 获取页面中的所有 <a> 标签
+    const links = document.querySelectorAll('.pagebar a');
+    
+    let prevLink = null;
+    let nextLink = null;
+    
+    // 遍历所有链接，查找对应的“上一章”和“下一章”链接
+    links.forEach(link => {
+        if (link.textContent.trim() === '上一章') {
+            prevLink = link;  // 找到“上一章”链接
+        }
+        if (link.textContent.trim() === '下一章') {
+            nextLink = link;  // 找到“下一章”链接
+        }
+    });
+
+    console.log("--------prevLink:---------", prevLink);
+    console.log("--------nextLink:---------", nextLink);
+	// 判断链接是否存在
+	if (prevLink) {
+		prevLink.addEventListener('click', function (event) {
+			event.preventDefault(); // 阻止默认的链接跳转行为
+			preChapter();  // 执行 preChapter 方法
+		});
+	}
+
+	if (nextLink) {
+		nextLink.addEventListener('click', function (event) {
+			event.preventDefault(); // 阻止默认的链接跳转行为
+			nextChapter();  // 执行 nextChapter 方法
+		});
+	}
 
 	function preChapter() {
 		console.log("---preChapter---");
+		window.preChapter.postMessage();
 	}
 
 
 	function nextChapter() {
 		console.log("---nextChapter---");
+		window.nextChapter.postMessage();
+
 	}
 
 	$(document).on("mouseleave", "#J_FIXED", function () {
