@@ -357,13 +357,13 @@ $(function () {
 
 	function preChapter() {
 		console.log("---preChapter---");
-		window.preChapter.postMessage();
+		window.preChapter.postMessage("");
 	}
 
 
 	function nextChapter() {
 		console.log("---nextChapter---");
-		window.nextChapter.postMessage();
+		window.nextChapter.postMessage("");
 
 	}
 
