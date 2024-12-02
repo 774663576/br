@@ -1,3 +1,22 @@
+var h5Port;
+
+window.addEventListener('message', function (event) {
+	if (event.data == '__harmony_os_port__') {
+		console.error("------__harmony_os_port__----" + event.data);
+
+		if (event.ports[0] != null) {
+			h5Port = event.ports[0]; //保存从ets侧发送过来的端口
+		}
+	}
+})
+function postMsgToEts(data) {
+	if (h5Port) {
+		h5Port.postMessage(data);
+	} else {
+		console.error("h5Port is null, Please initialize first");
+	}
+}
+
 var opts = {
 	content: '[title]',		// content to display ('[title]', 'string', element, function(updateCallback){...}, jQuery)
 	className: 'tip-yellowsimple',	// class for the tips
@@ -314,32 +333,36 @@ $(function () {
 		var y = offset.top;
 
 		var json = JSON.stringify({
-			word: word,
-			x: x,
-			y: y
+			message: "showWordPopup",
+			data: {
+				word: word,
+				x: x,
+				y: y
+			}
 		});
 		console.log("+++++showWordPopup-----", json);
+		postMsgToEts(json);
 		window.showWordPopup.postMessage(json);
 	});
 
 	// 获取页面中的所有 <a> 标签
-    const links = document.querySelectorAll('.pagebar a');
-    
-    let prevLink = null;
-    let nextLink = null;
-    
-    // 遍历所有链接，查找对应的“上一章”和“下一章”链接
-    links.forEach(link => {
-        if (link.textContent.trim() === '上一章') {
-            prevLink = link;  // 找到“上一章”链接
-        }
-        if (link.textContent.trim() === '下一章') {
-            nextLink = link;  // 找到“下一章”链接
-        }
-    });
+	const links = document.querySelectorAll('.pagebar a');
 
-    console.log("--------prevLink:---------", prevLink);
-    console.log("--------nextLink:---------", nextLink);
+	let prevLink = null;
+	let nextLink = null;
+
+	// 遍历所有链接，查找对应的“上一章”和“下一章”链接
+	links.forEach(link => {
+		if (link.textContent.trim() === '上一章') {
+			prevLink = link;  // 找到“上一章”链接
+		}
+		if (link.textContent.trim() === '下一章') {
+			nextLink = link;  // 找到“下一章”链接
+		}
+	});
+
+	console.log("--------prevLink:---------", prevLink);
+	console.log("--------nextLink:---------", nextLink);
 	// 判断链接是否存在
 	if (prevLink) {
 		prevLink.addEventListener('click', function (event) {
@@ -357,12 +380,20 @@ $(function () {
 
 	function preChapter() {
 		console.log("---preChapter---");
+		var json = JSON.stringify({
+			message: "preChapter"
+		});
+		postMsgToEts(json);
 		window.preChapter.postMessage("");
 	}
 
 
 	function nextChapter() {
 		console.log("---nextChapter---");
+		var json = JSON.stringify({
+			message: "nextChapter"
+		});
+		postMsgToEts(json);
 		window.nextChapter.postMessage("");
 
 	}
