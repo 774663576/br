@@ -126,17 +126,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             stopCurrentSpeech();
             currentAudioButton = this;
-            //loading
             currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
             <circle cx="12" cy="12" r="10" opacity="0.25" />
             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
         </svg>`;
-
             responsiveVoice.cancel();
             responsiveVoice.speak(englishText, "US English Female", {
                 rate: parseFloat(speedSlider.value), // 语速
                 onstart: function () {
                     // 播放开始时的回调
+                    speedSlider.disabled = true;
                     console.log("Audio started");  // 调试信息
                     currentAudioButton = button;  // 确保正确引用当前按钮
                     currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -146,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 onend: function () {
                     // 播放结束时的回调
+                    speedSlider.disabled = false;
                     console.log("Audio ended");  // 调试信息
                     currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
