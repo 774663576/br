@@ -17,28 +17,37 @@ function postMsgToEts(data) {
 		console.error("h5Port is null, Please initialize first");
 	}
 }
+// 处理单词点击
+document.addEventListener("DOMContentLoaded", function () {
+    const englishTextElements = document.querySelectorAll('.line_en');
 
+    englishTextElements.forEach(function (paragraph) {
+        const text = paragraph.innerHTML;
+        const modifiedText = text.replace(/\b\w+\b/g, function (match) {
+            return `<span class="clickable" data-word="${match}">${match}</span>`;
+        });
+        paragraph.innerHTML = modifiedText;
+    });
+
+    document.body.addEventListener('click', function (event) {
+        if (event.target && event.target.classList.contains('clickable')) {
+            const wordText = event.target.innerText || event.target.textContent;
+            var json = JSON.stringify({
+                message: "showWordPopup",
+                data: {
+                    word: wordText,
+                    x: 0,
+                    y: 0
+                }
+            });
+            postMsgToEts(json);
+            window.showWordPopup.postMessage(json);
+        }
+    });
+});
 
 $(function () {
-	// 英文行
-	// $(".line_en").each(function (index, element) {
-	// 	$(this).mouseover(function (e) {
-	// 		e.stopPropagation();
-	// 		$this = $(this);
-	// 		var a = $this.find("a");
-	// 		if (0 < $(a).length) { return; }
-
-	// 		this.text = this.text || $this.text();
-	// 		var arr = this.text.split(" ");
-	// 		var words = [];
-	// 		var en = "";
-	// 		$(arr).each(function (i, w) {
-	// 			en += '<a class="word">' + w + '</a> ';
-	// 		});
-
-	// 		$this.html(en);
-	// 	});
-	// });
+	
 	// 中文行
 	var $cnLines = $(".line_cn");
 	for (var i = 0; i < $cnLines.length; i++) {
@@ -59,25 +68,7 @@ $(function () {
 	}
 
 
-	$(document).on("click", ".word", function (e) {
-		var elm = $(this), word = trimWord(elm.text());
-
-		// 获取点击的位置
-		var offset = $(this).offset();
-		var x = offset.left;
-		var y = offset.top;
-		var json = JSON.stringify({
-			message: "showWordPopup",
-			data: {
-				word: word,
-				x: x,
-				y: y
-			}
-		});
-		console.log("+++++showWordPopup-----", json);
-		postMsgToEts(json);
-		window.showWordPopup.postMessage(json);
-	});
+	
 
 	// 获取页面中的所有 <a> 标签
 	const links = document.querySelectorAll('.pagebar a');
@@ -249,13 +240,15 @@ function speakText(text, playButton, line) {
         </svg>`; // 更新按钮图标为暂停样式
 		},
 		onend: function () {
+			console.log("---------end------------------");
 			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>`; // 更新按钮图标为播放样式
 			resetHighlight();
 		},
-	 
+
 		onboundary: function(event) {
+			console.log("---------boundary------------------", event);
 			if (event.name === "word") {
 				// 高亮当前单词
 				highlightWord(currentWordIndex);
@@ -265,6 +258,7 @@ function speakText(text, playButton, line) {
 	});
 
 	function highlightWord(index) {
+		console.log("---------highlightWord---------", index);
 		const wordSpans = line.querySelectorAll('.word');
 		if (wordSpans[index]) {
 			resetHighlight();
@@ -277,4 +271,97 @@ function speakText(text, playButton, line) {
 		wordSpans.forEach(span => span.classList.remove('highlight'));
 	}
 }
+
+// document.addEventListener("DOMContentLoaded", function () {
+// 	const lines = document.querySelectorAll('.line_en');
+
+// 	lines.forEach(function (line) {
+// 		if (line.querySelector('.audio-control')) return;  // 防止重复添加按钮
+
+// 		const playButton = document.createElement('button');
+// 		playButton.classList.add('audio-control');
+
+// 		const svg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
+//                     </svg>`;
+// 		playButton.innerHTML = svg;
+
+// 		playButton.addEventListener('click', function () {
+// 			if (window.speechSynthesis.speaking) {
+// 				// 如果语音正在播放，暂停
+// 				window.speechSynthesis.cancel();
+// 				playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+// 				<polygon points="5 3 19 12 5 21 5 3"></polygon>
+// 			</svg>`;
+// 				return;
+// 			}
+// 			const loadingSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+//             <circle cx="12" cy="12" r="10" opacity="0.25" />
+//             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
+//         </svg>`;
+// 			playButton.innerHTML = loadingSvg;
+// 			speakText(line.textContent, playButton, line);
+// 		});
+
+// 		// 将按钮放在 line 元素的末尾
+// 		line.appendChild(playButton);
+// 	});
+
+// 	function speakText(text, playButton, line) {
+// 		const words = text.split(' ');
+
+// 		// 保存按钮位置，防止更新 innerHTML 时丢失
+// 		const buttonContainer = playButton.parentNode;
+
+// 		// 用 <span> 包裹每个单词
+// 		line.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+
+// 		// 重新插入按钮
+// 		buttonContainer.appendChild(playButton);
+
+// 		const utterance = new SpeechSynthesisUtterance(text);
+// 		utterance.rate = 1; // 语速
+// 		utterance.lang = 'en-US'; // 语音语言
+
+// 		let currentWordIndex = 0;
+
+// 		utterance.onstart = function () {
+// 			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//                                         <rect x="6" y="4" width="4" height="16"></rect>
+//                                         <rect x="14" y="4" width="4" height="16"></rect>
+//                                     </svg>`; // 播放中图标
+// 		};
+
+// 		utterance.onend = function () {
+// 			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
+//                                     </svg>`; // 播放完毕图标
+// 			resetHighlight();
+// 		};
+
+// 		utterance.onboundary = function (event) {
+// 			if (event.name === "word") {
+// 				highlightWord(currentWordIndex);
+// 				currentWordIndex++;
+// 			}
+// 		};
+
+// 		// 开始语音播放
+// 		window.speechSynthesis.speak(utterance);
+
+// 		function highlightWord(index) {
+// 			const wordSpans = line.querySelectorAll('.word');
+// 			if (wordSpans[index]) {
+// 				resetHighlight();
+// 				wordSpans[index].classList.add('highlight');
+// 			}
+// 		}
+
+// 		function resetHighlight() {
+// 			const wordSpans = line.querySelectorAll('.word');
+// 			wordSpans.forEach(span => span.classList.remove('highlight'));
+// 		}
+// 	}
+// });
+
 
