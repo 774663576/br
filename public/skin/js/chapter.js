@@ -1,3 +1,4 @@
+
 var h5Port;
 
 window.addEventListener('message', function (event) {
@@ -20,24 +21,24 @@ function postMsgToEts(data) {
 
 $(function () {
 	// 英文行
-	$(".line_en").each(function (index, element) {
-		$(this).mouseover(function (e) {
-			e.stopPropagation();
-			$this = $(this);
-			var a = $this.find("a");
-			if (0 < $(a).length) { return; }
+	// $(".line_en").each(function (index, element) {
+	// 	$(this).mouseover(function (e) {
+	// 		e.stopPropagation();
+	// 		$this = $(this);
+	// 		var a = $this.find("a");
+	// 		if (0 < $(a).length) { return; }
 
-			this.text = this.text || $this.text();
-			var arr = this.text.split(" ");
-			var words = [];
-			var en = "";
-			$(arr).each(function (i, w) {
-				en += '<a class="word">' + w + '</a> ';
-			});
+	// 		this.text = this.text || $this.text();
+	// 		var arr = this.text.split(" ");
+	// 		var words = [];
+	// 		var en = "";
+	// 		$(arr).each(function (i, w) {
+	// 			en += '<a class="word">' + w + '</a> ';
+	// 		});
 
-			$this.html(en);
-		});
-	});
+	// 		$this.html(en);
+	// 	});
+	// });
 	// 中文行
 	var $cnLines = $(".line_cn");
 	for (var i = 0; i < $cnLines.length; i++) {
@@ -182,3 +183,98 @@ function handleTextSelection(event) {
 // 监听 touchend 和 mouseup 事件
 document.addEventListener('mouseup', handleTextSelection);
 document.addEventListener('touchend', handleTextSelection);
+
+document.addEventListener("DOMContentLoaded", function () {
+	const lines = document.querySelectorAll('.line_en');
+
+	lines.forEach(function (line) {
+		if (line.querySelector('.audio-control')) return;  // 防止重复添加按钮
+
+		const playButton = document.createElement('button');
+		playButton.classList.add('audio-control');
+
+		const svg = `
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<polygon points="5 3 19 12 5 21 5 3"></polygon>
+			</svg>
+		`;
+		playButton.innerHTML = svg;
+
+		playButton.addEventListener('click', function () {
+			speakText(line.textContent, playButton, line);
+		});
+
+		// 将按钮放在 line 元素的末尾
+		line.appendChild(playButton);
+	});
+});
+
+function speakText(text, playButton, line) {
+	const words = text.split(' ');
+
+	// 保存按钮位置，防止更新 innerHTML 时丢失
+	const buttonContainer = playButton.parentNode;
+	line.innerHTML = words.map(word => {
+		return `<span class="word">${word}</span>`;
+	}).join(' ');
+
+	// 重新插入按钮
+	buttonContainer.appendChild(playButton);
+
+	if (responsiveVoice.isPlaying()) {
+		console.log("---------pause---------");
+		responsiveVoice.cancel();
+		const svg = `
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<polygon points="5 3 19 12 5 21 5 3"></polygon>
+			</svg>
+		`;
+		playButton.innerHTML = svg;
+		return;
+	}
+
+	const loadingSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+            <circle cx="12" cy="12" r="10" opacity="0.25" />
+            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
+        </svg>`;
+	playButton.innerHTML = loadingSvg;
+
+	let currentWordIndex = 0;
+	responsiveVoice.speak(text, "US English Female", {
+		rate: 1, // 语速
+		onstart: function () {
+			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>`; // 更新按钮图标为暂停样式
+		},
+		onend: function () {
+			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>`; // 更新按钮图标为播放样式
+			resetHighlight();
+		},
+	 
+		onboundary: function(event) {
+			if (event.name === "word") {
+				// 高亮当前单词
+				highlightWord(currentWordIndex);
+				currentWordIndex++;
+			}
+		}
+	});
+
+	function highlightWord(index) {
+		const wordSpans = line.querySelectorAll('.word');
+		if (wordSpans[index]) {
+			resetHighlight();
+			wordSpans[index].classList.add('highlight');
+		}
+	}
+
+	function resetHighlight() {
+		const wordSpans = line.querySelectorAll('.word');
+		wordSpans.forEach(span => span.classList.remove('highlight'));
+	}
+}
+
