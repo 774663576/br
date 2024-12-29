@@ -30,8 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     document.body.addEventListener('click', function (event) {
+        // 先移除之前的高亮
+        const highlighted = document.querySelector('.wordClickHighLight');
+        if (highlighted) {
+            highlighted.classList.remove('wordClickHighLight');
+        }
+
+        // 如果点击的是可点击单词
         if (event.target && event.target.classList.contains('clickable')) {
             const wordText = event.target.innerText || event.target.textContent;
+
+            // 给选中的单词添加高亮样式
+            event.target.classList.add('wordClickHighLight');
+            
             var json = JSON.stringify({
                 message: "showWordPopup",
                 data: {
@@ -45,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 
 $(function () {
 	
