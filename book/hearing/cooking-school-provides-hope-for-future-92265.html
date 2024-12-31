@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Cooking School Provides Hope for Future</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Cooking School Provides Hope for Future" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/cooking-school-provides-hope-for-future.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Cooking School Provides Hope for Future</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/cooking-school-provides-hope-for-future.mp3" id="mp3"></a>
+<a href="groups-seek-us-endangered-protection-for-horseshoe-crabs-92263.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">20 February 2024</span><br/>
+<p>When Clarissa Haglid completed <strong>culinary</strong> school at the Delaware Food Bank last summer, it was the first time she had graduated from anything in her life.</p>
+<p>Just a few years earlier, a goal like that did not seem within reach. In 2020, she was charged with armed robbery and later sentenced to prison. Haglid told VOA that she "lost everything," including the <strong>custody</strong> of her children.</p>
+<p>As she approached the end of her four-year prison sentence, she learned about a restaurant service training program available to people in jail. Haglid started attending culinary school classes at the Food Bank in Newark, Delaware, when she received permission to take part in the work-release program. Through the 14-week program, students learned cooking and life skills to prepare them for a job in the restaurant or <strong>hospitality</strong> industry.</p><div class="contentImage"><img alt="Clarissa Haglid, a graduate of the culinary school at the Delaware Food Bank, in the food bank's kitchen on February 7, 2024. Haglid received an apprenticeship at a nearby hotel following her completion of the program. (Dan Novak/VOA)" src="https://files.21voa.com/gdb/01000000-0a00-0242-6a12-08dc2ca56c19_cx0_cy17_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Clarissa Haglid, a graduate of the culinary school at the Delaware Food Bank, in the food bank's kitchen on February 7, 2024. Haglid received an apprenticeship at a nearby hotel following her completion of the program. (Dan Novak/VOA)</span></div>
+<p>Some of the students currently at Newark were <strong>incarcerated</strong> like Haglid. Others are in substance abuse recovery programs or underemployed, meaning they have been out of the workforce for a long time, said Anna McDermott. She is the Food Bank's Chief Impact Officer.</p>
+<p>Haglid and other students learned how to use knives in cooking, correct food preparation, and how to make the five foundational "mother" sauces and other skills. The program also teaches teamwork, <strong>work ethic</strong> and time <strong>management</strong>.</p>
+<p>Those kinds of life skills, also called "soft skills," are taught to "make sure that folks are really familiar with what is expected of them in the workplace to maintain employment," McDermott said. "Getting a job is the easiest part, sometimes. It's maintaining that job."</p>
+<p>At the end of the program, students are provided an entry-level job through the state restaurant association. Haglid is an <strong>apprentice</strong> at a nearby hotel, where she receives a paycheck and additional training as a cook.</p>
+<p>"This program meant everything to me because...it was a way for me to get not my life back, but a life to begin with," Haglid said. Attending the culinary school started to "bridge the gap of <strong>restora</strong><strong>tion</strong> between me and my kids."</p>
+<p>Haglid was able to attend the classes through a U.S. Department of Labor program called HOPES, Hospitality Opportunities for People Reentering Society. HOPES is operated through the National Restaurant Association Education Foundation (NRAEF), an industry group, which partners with community organizations like the Delaware Food Bank. The group's goal with HOPES is to get incarcerated people training and jobs in the restaurant industry.</p>
+<p>Rob Gifford is president of the NRAEF. He said restaurant jobs help prevent recidivism, the word for returning to prison. Gifford said food service jobs help people released from prison get work and a way to earn money as soon as possible.</p>
+<p>Food service, he said, has a "relatively low barrier to entry," compared to other jobs that might require more training. Since prisons provide food service, there is already a place to provide training. And unlike other work, restaurant jobs often do not require college or even high school degrees.</p>
+<p>"We're allowing these individuals to get on their feet quickly via the restaurant industry, but we're giving them ... <strong>transferable</strong> <strong>skills</strong>," Gifford said. "When they decide they're ready to move on to their next <strong>opportunity</strong>... they're positioned for success."</p>
+<p>Employment for formerly imprisoned people is very important to prevent recidivism. The NRAEF says that formerly imprisoned people who maintained a job for the first year following their release had a 16 percent recidivism rate over three years. That is compared to a 52 percent recidivism rate for those that did not maintain employment. The unemployment rate for people formerly incarcerated is more than six times the national rate.</p>
+<p>Gifford said about 1000 people have gone through the HOPES program nationwide, and two-thirds are currently employed.</p>
+<p>Haglid, who said she is regaining custody of her children, plans to continue her work in restaurants and one day lead a kitchen as a chef. She also said she wants to support the educational and job training programs that helped her find work. She said the programs are needed to prevent recidivism and provide hope for the future.</p>
+<p>"When you realize you have the ability to learn, (it) almost creates a hunger in you where you want to <strong>absorb</strong> as much as you possibly can," Haglid said. "You begin to have a drive that you never had before."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p class="CxSpMiddle"><em>_____________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>culinary </strong>–adj. related to cooking and the restaurant industry</p>
+<p class="CxSpMiddle"><strong>custody </strong><em>— n. </em>the legal right to take care of a child</p>
+<p class="CxSpMiddle"><strong>incarcerated </strong><em>— adj. </em>currently or previously in prison</p>
+<p class="CxSpMiddle"><strong>work ethic </strong><em>–n. </em>the idea that work and employment is good, moral and gives people purpose and meaning</p>
+<p class="CxSpMiddle"><strong>management </strong><em>–n.</em> the ability to plan, organize or supervise something</p>
+<p class="CxSpMiddle"><strong>hospitality </strong><em>— adj.(industry) </em>related to the business of restaurants, hotels, travel and tourism</p>
+<p class="CxSpMiddle"><strong>apprentice </strong><em>— n. </em>a person who is in training for a trade which is learned from an established tradesman<em> </em></p>
+<p class="CxSpMiddle"><strong>restore </strong><em>— v. </em>to bring a person back to a position or something back to a former condition<em> </em></p>
+<p class="CxSpMiddle"><strong>transferable</strong> <strong>skill </strong><em>— n. </em>skills that can be used in everyday life or in any job</p>
+<p class="CxSpMiddle"><strong>opportunity </strong><em>— n. </em>a chance for a new job, project or activity<em> </em></p>
+<p class="CxSpMiddle"><strong>absorb </strong><em>–v.</em> to take in or learn something</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

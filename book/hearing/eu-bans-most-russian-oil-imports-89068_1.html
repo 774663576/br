@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 欧盟禁止大部分俄罗斯石油进口</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 欧盟禁止大部分俄罗斯石油进口" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202205/eu-bans-most-russian-oil-imports.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>欧盟禁止大部分俄罗斯石油进口</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202205/eu-bans-most-russian-oil-imports.mp3" id="mp3"></a>
+<a href="/static/lrc/eu-bans-most-russian-oil-imports.lrc" id="lrc"></a>
+<a href="eu-bans-most-russian-oil-imports-89068.html" id="CnPage" target="_blank"></a>
+<a href="after-school-program-teaches-teens-how-to-fix-earn-a-bike-89067.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The European Union (EU) has agreed to ban the majority of Russian oil imports. The agreement marks the biggest move yet to punish Russia for its war in Ukraine.<br/>
+欧盟已经同意禁止大部分俄罗斯石油出口。该协议标志着迄今为止惩罚俄罗斯在乌克兰开战的最大举措。</p>
+<p>Since Russia's invasion of Ukraine on February 24, Western nations have sought to punish Russia economically for its aggression. But targeting the energy sector has proven difficult.<br/>
+自从2月24日俄罗斯入侵乌克兰以来，西方国家一直试图在经济上惩罚俄罗斯的侵略行为。但事实证明针对能源部门很困难。</p>
+<p>The EU depends on Russia for 25 percent of its oil and 40 percent of its natural gas. European countries that are even more heavily dependent on Russia have been especially resistant to act.<br/>
+欧盟25%的石油和40%的天然气依赖俄罗斯。一些对俄罗斯依赖更为严重的欧洲国家尤其不愿意采取行动。</p>
+<p>EU leaders agreed late Monday to cut around 90 percent of all Russian oil imports brought in by sea over the next six months.<br/>
+欧盟领导人周一晚上同意在未来6个月内削减约90%的俄罗斯海运石油进口。</p>
+<p>The ban permits a temporary exemption for imports delivered by pipeline. The exemption was critical in bringing Hungary on board with the decision, which required approval from all EU leaders. Hungarian Prime Minister Viktor Orban had made clear he could support the oil ban only if his country's supply was guaranteed. Hungary gets more than 60 percent of its oil from Russia through the Druzhba pipeline.<br/>
+该禁令允许暂时豁免通过管道输送的石油进口。这项豁免对于让匈牙利赞同这项需要所有欧洲领导人批准的决定来说至关重要。匈牙利总理维克多·欧尔班明确表示，只有在匈牙利的供应得到保证的情况下，他才会支持石油禁令。匈牙利通过德鲁日巴管道从俄罗斯获得该国超过60%的石油。</p>
+<p>Belgian Prime Minister Alexander De Croo on Tuesday called the oil ban, or embargo, a "big step forward." Irish Prime Minister Micheál Martin called it "a watershed moment." A watershed moment describes a major event that changes the direction of a situation.<br/>
+比利时首相亚历山大·德克鲁周二称石油禁令或禁运是“向前迈出一大步“。爱尔兰总理迈克尔·马丁称其为“分水岭时刻”。分水岭时刻是指改变局势方向的重大事件。</p>
+<p>Both leaders also noted that Europe would need time to get used to the effects of the ban. They said any additional bans on Russian energy could only come slowly, if at all.<br/>
+两位领导人还指出，欧洲需要时间来适应禁令的影响。他们说，即便如此，对俄罗斯能源的任何额外禁令只能缓慢实施。</p>
+<p>Dmitry Medvedev is the deputy head of Russia's Security Council. Medvedev is also a former Russian president and prime minister. He said Tuesday that energy sanctions against the country were meant to hurt Russian citizens by making it harder for the government to fund social programs.<br/>
+德米特里·梅德韦杰夫是俄罗斯安全委员会副主席。梅德韦杰夫也是俄罗斯前总统和总理。他周二表示，对该国的能源制裁旨在伤害俄罗斯公民，让政府更难为社会项目提供资金。</p>
+<p>"They hate us all! The basis for these decisions is hatred for Russia, for Russians, and for all its inhabitants," Medvedev wrote on the Telegram messaging app.<br/>
+梅德韦杰夫在Telegram消息应用程序上写道：“他们恨我们所有人！这些决定的基础是对俄罗斯、对俄罗斯人和所有居民的仇恨。”</p>
+<p>Simone Tagliapietra is an energy expert and research fellow at the Brussels-based organization Bruegel. She said Russia would likely have to sell its oil at a lower cost to other buyers. She called the embargo "a major blow."<br/>
+西蒙娜·塔利亚皮耶特拉是总部位于布鲁塞尔的布鲁盖尔研究所的能源专家和研究员。她说，俄罗斯可能不得不以更低的成本向其它国家销售石油。她称这次禁运是“重大打击”。</p>
+<p>Russia has also made moves to withhold its energy supplies, even with the economic damage it could suffer as a result. Russian energy company Gazprom said it cut natural gas supplies to Dutch trader GasTerra on Tuesday. The move was announced before EU leaders agreed to the embargo. Russia already cut supplies to Bulgaria, Poland and Finland. It is considering doing the same to Denmark.<br/>
+俄罗斯也已经采取措施冻结其能源供应，即使它可能因此遭受经济损失。俄罗斯天然气工业股份公司周二称其切断了对荷兰贸易商GasTerra的天然气供应。此举是在欧盟领导人同意禁运之前宣布的。俄罗斯已经切断了对保加利亚、波兰和芬兰的供应。它正在考虑对丹麦采取同样的举措。</p>
+<p>GasTerra said homes would not be affected; it had bought gas from other countries because it expected a possible shutoff.<br/>
+GasTerra表示家庭不会受到影响。它已经从其它国家购买了天然气，因为它预料到可能会被关闭。</p>
+<p>Talks on Tuesday at EU headquarters in Brussels centered on ways to end the EU's dependence on Russian energy. Leaders also expected to discuss how to help Ukraine export millions of tons of grain trapped inside the country as a worldwide food crisis grows.<br/>
+周二在布鲁塞尔欧盟总部举行的会谈聚焦于如何结束欧洲对俄罗斯能源的依赖。随着全球粮食危机的加剧，领导人预计还将讨论如何帮助乌克兰出口困在该国境内的数百万吨粮食。</p>
+<p>Leaders are calling on Russia to halt its attacks on transport infrastructure in Ukraine and lift its blockade of Black Sea ports so that food can be shipped.<br/>
+领导人呼吁俄罗斯停止对乌克兰交通基础设施的袭击，并解除对黑海港口的封锁以便可以运输食品。</p>
+<p>Ukrainian President Volodymyr Zelenskyy has said Russia has prevented the export of 22 million tons of grain, much of it meant for people across the Middle East and Africa. He accused Russia of "deliberately creating this problem."<br/>
+乌克兰总统泽连斯基曾表示，俄罗斯阻止了2200万吨谷物的出口，其中大部分是为中东和非洲人民提供的。他指责俄罗斯“故意制造这个问题。”</p>
+<p>I'm Ashley Thompson.<br/>
+我是阿什利·汤普森。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:EU Bans Most Russian Oil Imports]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The European Union (EU) has agreed to ban the majority of Russian oil imports.
+[00:07.72]The agreement marks the biggest move yet to punish Russia for its war in Ukraine.
+[00:16.24]Since Russia's invasion of Ukraine on February 24,
+[00:21.12]Western nations have sought to punish Russia economically for its aggression.
+[00:28.16]But targeting the energy sector has proven difficult.
+[00:33.32]The EU depends on Russia for 25 percent of its oil
+[00:39.24]and 40 percent of its natural gas.
+[00:43.00]European countries that are even more heavily dependent on Russia
+[00:48.56]have been especially resistant to act.
+[00:52.68]EU leaders agreed late Monday
+[00:55.72]to cut around 90 percent of all Russian oil imports
+[01:00.48]brought in by sea over the next six months.
+[01:04.80]The ban permits a temporary exemption for imports delivered by pipeline.
+[01:11.48]The exemption was critical in bringing Hungary on board with the decision,
+[01:17.04]which required approval from all EU leaders.
+[01:22.04]Hungarian Prime Minister Viktor Orban
+[01:25.32]had made clear he could support the oil ban
+[01:28.76]only if his country's supply was guaranteed.
+[01:32.60]Hungary gets more than 60 percent of its oil
+[01:36.84]from Russia through the Druzhba pipeline.
+[01:41.84]Belgian Prime Minister Alexander De Croo on Tuesday
+[01:45.92]called the oil ban, or embargo, a "big step forward."
+[01:51.56]Irish Prime Minister Micheál Martin called it "a watershed moment."
+[01:56.80]A watershed moment describes a major event
+[02:00.52]that changes the direction of a situation.
+[02:05.00]Both leaders also noted that Europe would need time
+[02:09.00]to get used to the effects of the ban.
+[02:12.12]They said any additional bans on Russian energy
+[02:16.24]could only come slowly, if at all.
+[02:19.96]Dmitry Medvedev is the deputy head of Russia's Security Council.
+[02:26.00]Medvedev is also a former Russian president and prime minister.
+[02:31.24]He said Tuesday that energy sanctions against the country
+[02:36.20]were meant to hurt Russian citizens
+[02:39.16]by making it harder for the government to fund social programs.
+[02:44.28]"They hate us all! The basis for these decisions is hatred for Russia,
+[02:50.28]for Russians, and for all its inhabitants,"
+[02:54.04]Medvedev wrote on the Telegram messaging app.
+[02:57.80]Simone Tagliapietra is an energy expert
+[03:02.44]and research fellow at the Brussels-based organization Bruegel.
+[03:07.56]She said Russia would likely have to sell its oil
+[03:11.28]at a lower cost to other buyers.
+[03:14.24]She called the embargo "a major blow."
+[03:17.84]Russia has also made moves to withhold its energy supplies,
+[03:22.96]even with the economic damage it could suffer as a result.
+[03:27.44]Russian energy company Gazprom said it cut natural gas supplies
+[03:33.44]to Dutch trader GasTerra on Tuesday.
+[03:37.28]The move was announced before EU leaders agreed to the embargo.
+[03:42.60]Russia already cut supplies to Bulgaria, Poland and Finland.
+[03:48.52]It is considering doing the same to Denmark.
+[03:52.48]GasTerra said homes would not be affected;
+[03:56.12]it had bought gas from other countries
+[03:58.88]because it expected a possible shutoff.
+[04:03.00]Talks on Tuesday at EU headquarters in Brussels
+[04:07.20]centered on ways to end the EU's dependence on Russian energy.
+[04:13.32]Leaders also expected to discuss how to help Ukraine export
+[04:17.08]millions of tons of grain trapped inside the country
+[04:21.12]as a worldwide food crisis grows.
+[04:25.40]Leaders are calling on Russia to halt its attacks
+[04:29.64]on transport infrastructure in Ukraine
+[04:33.20]and lift its blockade of Black Sea ports so that food can be shipped.
+[04:40.48]Ukrainian President Volodymyr Zelenskyy has said Russia has
+[04:45.24]prevented the export of 22 million tons of grain,
+[04:49.92]much of it meant for people across the Middle East and Africa.
+[04:55.00]He accused Russia of "deliberately creating this problem."
+[05:00.80]I'm Ashley Thompson.
+[05:02.32]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

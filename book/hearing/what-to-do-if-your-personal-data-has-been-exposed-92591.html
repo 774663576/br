@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What to Do If Your Personal Data Has Been Exposed</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, What to Do If Your Personal Data Has Been Exposed" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/what-to-do-if-your-personal-data-has-been-exposed.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What to Do If Your Personal Data Has Been Exposed</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/what-to-do-if-your-personal-data-has-been-exposed.mp3" id="mp3"></a>
+<a href="in-senegal-deaf-students-study-alongside-others-92585.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">24 April 2024</span><br/>
+<p>As more of our lives move online, the risk of our personal data being stolen or misused is increasing.</p>
+<p>Personal data includes email addresses, phone numbers, birthdates, and even passwords. And large data <strong>breaches </strong>are happening more often.</p>
+<p>In breaches, online criminals can use stolen data to target people with leading messages to get important information. Or they can take out loans and credit cards in their name.</p><div class="contentImage"><img alt="FILE - A person works on a laptop on June 19, 2017, in North Andover, Massachusetts. (AP Photo/Elise Amendola, File)" src="https://files.21voa.com/gdb/6eab674c-30d9-4821-9805-8cdd3f8a2d1c_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A person works on a laptop on June 19, 2017, in North Andover, Massachusetts. (AP Photo/Elise Amendola, File)</span></div>
+<p>Here are some ways to protect yourself:</p>
+<p><strong>Pay attention</strong></p>
+<p>Oren Arar is vice president of buyer privacy at online security company Malwarebytes. He said in the United States, there is no federal law enforcing companies or organizations to inform individuals of a data breach.</p>
+<p>But he said it is common <strong>practice</strong> for them to do so and they often provide identity protection services.</p>
+<p>The situation is better in the European Union. It requires companies and organizations to tell individuals of some kinds of breaches.</p>
+<p>Even after a breach has been made public, cyber security experts say people need to pay attention.</p>
+<p>Look out for emails or phone calls that say they are from the <strong>hacked</strong> organization or someone offering help. Contact the organization to see if they can confirm it.</p>
+<p>Use official links, do not use any links or contact details in any messages you have been sent.</p>
+<p>The Federal Trade Commission's website, identitytheft.gov, can tell you of identity theft victims. And it provides step-by-step advice with how to deal with different situations.</p>
+<p><strong>Change your password</strong></p>
+<p>If your data has been <strong>breached</strong>, the first thing you should do is change your password for the account involved.</p>
+<p>Use a strong, long password including letters, numbers and <strong>symbols</strong>. And make sure to add a second level of security. That may include having an email or text sent to you. It could also mean using a device called a USB authenticator.</p>
+<p>And if you have been using the same, or similar, password for different online accounts, make changes to it for each site. Hackers may take your password from one service and try it on your other accounts.</p>
+<p>Arar said, "Just because your info shows up in a breach doesn't mean someone's stolen your identity or money. But it does mean you're at risk." He said it is wise to <strong>monitor </strong>your accounts, change any leaked passwords, set up a second security system, and have a separate email address for less important sign-ups.</p>
+<p><strong>Keep monitoring</strong></p>
+<p>It can be hard to follow all the different data breaches. But there are online services that you can look at to see if your email has been involved in a data breach.</p>
+<p>Darren Guccione is CEO of Keeper Security. It makes password protection programming and offers a tool called BreachWatch. It keeps watch on the dark web to see if your personal information shows up there.</p>
+<p>He said, "When public data breaches <strong>occur</strong>, cybercriminals gather as much data as possible so they can sell it on the dark web."</p>
+<p><strong>Tell your bank and credit agencies</strong></p>
+<p>If your credit card payment numbers are stolen, inform your bank or credit card company. Explain that your card is at risk of <strong>fraud</strong> and ask them to warn you of any suspicious activity.</p>
+<p>They will likely give you a new card. Additionally, some banks and credit cards permit you to lock your account online.</p>
+<p>You can also inform credit agencies. The three main companies are Equifax, Experian and TransUnion. They can freeze your credit. That makes it hard to see your credit report and open a new account. Or they will ask lenders to contact you before lending money.</p>
+<p><strong>Take extra care</strong></p>
+<p>Online security experts warn that breaches involving a telephone company leave buyers at risk of having their phone numbers stolen. Thieves can use a stolen number to enter accounts that use that phone number as a second security.</p>
+<p>To reduce that risk, telephone company AT&amp;T advises creating a password that is needed to make large account changes. Also, delete emails containing personal information from your email account. That will help block possible damage by someone who gains entry to your email account.</p>
+<p>I'm Gena Bennett. And I'm Gregory Stachel.</p>
+<p><em>Kelvin Chan reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>breach </strong><em>– n.</em> an occurrence in which someone is able to get into a place that is guarded or is able to get secret information.</p>
+<p><strong>hack </strong><em>– v. </em>to secretly get access to the files on a computer or network in order to get information or cause damage</p>
+<p><strong>expose </strong><em>– v.</em> to reveal</p>
+<p><strong>symbol </strong><em>– n. </em>a letter, group of letters, character, or picture that is used instead of a word or group of words</p>
+<p><strong>monitor </strong><em>– v. </em>to watch, observe, listen to, or check (something) for a special purpose over a period of time</p>
+<p><strong>occur </strong><em>– v. </em>to happen</p>
+<p><strong>fraud </strong><em>– n. </em>the crime of using dishonest methods to take something valuable from another person</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

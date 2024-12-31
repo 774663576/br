@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Thanksgiving: An American Tradition</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Thanksgiving: An American Tradition" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/thanksgiving-american-tradition-2017.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Thanksgiving: An American Tradition</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/thanksgiving-american-tradition-2017.mp3" id="mp3"></a>
+<a href="poor-new-hampshire-man-leaves-millions-to-small-town-91828.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Ashley Thompson</span><br/>
+<span class="datetime">22 November 2023</span><br/>
+<p>The American holiday of Thanksgiving is celebrated every year on the fourth Thursday in November. The holiday is during autumn -- the main season for harvesting crops. Thanksgiving is an autumn harvest <strong>festival</strong> like those found in many cultures around the world.</p>
+<p>On this day, most Americans gather with friends and family. Many take time to think about what they are thankful for, cook <strong>up a storm</strong>, and eat.</p><div class="contentImage"><img alt="A VOA Learning English Thanksgiving" src="https://files.21voa.com/gdb/1acdaeb8-5890-43e7-9251-a0272d935591_tv_w268_r1.jpg"/><br/><span class="imagecaption">A VOA Learning English Thanksgiving</span></div>
+<p>A lot.</p>
+<p>The star of most Thanksgiving dinners is a <strong>roasted </strong>turkey. Turkeys are large birds native to North America.</p>
+<p>The turkey is cooked in an oven for many hours, often with a mix of celery, bread, onions and spices inside the bird. This mix becomes <strong>stuffing </strong>-- another star of the Thanksgiving dinner table.</p>
+<p>Anna Matteo here at Learning English says the smell of turkey and stuffing roasting together is the quintessential smell of Thanksgiving. "Quintessential" means the perfect example of something.</p>
+<p>After the bird is cooked, the stuffing is taken out and served as a side dish.</p>
+<p>One of <em>many </em>side dishes. Families often make other foods like mashed potatoes, sweet potatoes, cranberry sauce and vegetable casseroles. A casserole is a dish that cooks slowly in an oven.</p>
+<p>And do not forget about the gravy. This rich sauce is made from the fatty liquid that comes off the turkey as it cooks. People cover their turkey meat, stuffing and mashed potatoes with gravy.</p>
+<p>The meal does not end with the turkey, stuffing, and side dishes, though. For some people, the best part of the meal is dessert.</p>
+<p>The quintessential Thanksgiving dessert is pie. Pumpkin, cherry, apple or pecan pie are all great ways to finish off a Thanksgiving meal...if you are not too full of food by that point!</p>
+<p><strong>Thanksgiving travel </strong></p>
+<p>Some Americans must travel long distances to be with their families. In fact, the Sunday after Thanksgiving is the busiest travel day of the entire year. This is usually when people return home from family gatherings.</p>
+<p>Not everyone can make the return home each Thanksgiving. So, young people living in cities away from their hometowns sometimes celebrate "Friendsgiving" -- a Thanksgiving meal with their friends instead of their family. They gather at someone's apartment or house and have a "<strong>potluck</strong>." This is a meal where everyone who is invited brings food to share with others.</p>
+<p><strong>Beyond the table</strong></p>
+<p>Thanksgiving is a big day for television, games and other entertainment.</p>
+<p>One tradition is the television broadcast of Macy's Thanksgiving Day Parade. It takes place each year in New York City. Workers of the Macy's store on Herald Square organized the first parade in 1924. Many of the workers were immigrants and wanted to hold a big parade like the ones in Europe. So, they dressed in costumes and borrowed some animals from the zoo. They also carried small balloons that floated just overhead.</p>
+<p>Many professional American football games are also played on Thanksgiving. Fans of the sport enjoy relaxing and watching a game or two after eating a big Thanksgiving meal.</p>
+<p>Some start Thanksgiving Day early - and in a healthy way. So-called "Turkey <strong>Trot</strong>" races take place in many towns and cities. These events involve runners dressing up in a Thanksgiving-related costume and running a short distance -- usually five kilometers.</p>
+<p>Many Turkey Trots urge runners to bring canned food to donate to local food banks -- non-profit organizations that give food to poor people in a community.</p>
+<p><strong>Serving those less fortunate</strong></p>
+<p>Certainly, not everyone in America has an easy Thanksgiving. The United States is home to many poor and homeless people. Some cannot afford a Thanksgiving dinner. Others are without friends or families. Many religious and service organizations around the country try to fill these needs. Some provide community dinners at churches and other centers. Some groups also deliver Thanksgiving meals to people too sick or old to leave their homes.</p>
+<p>The writer O. Henry called Thanksgiving the one holiday that is purely American. It is not linked to a religion or a certain group. Anyone in the United States on the fourth Thursday of November is welcome to celebrate Thanksgiving.</p>
+<p>I'm Caty Weaver.</p>
+<p>And I'm Ashley Thompson.</p>
+<p><em>Ashley Thompson wrote this story for Learning English. It was first published in 2017.</em></p>
+<p>___________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>festival</strong> - <em>n</em>. a special time or event when people gather to celebrate something</p>
+<p><strong>up a storm</strong> - <em>idiom</em>. used to say that something is being done with a lot of energy or enthusiasm</p>
+<p><strong>roasted </strong>- <em>adj</em>. cooked with dry heat in an oven or over a fire</p>
+<p><strong>stuffing</strong> - <em>n</em>. a seasoned mixture of food that is put inside another food and cooked</p>
+<p><strong>potluck</strong> - <em>n</em>. a meal to which everyone who is invited brings food to share</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

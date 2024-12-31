@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国对完全接种疫苗者开放陆地边境</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国对完全接种疫苗者开放陆地边境" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202110/u-s-to-reopen-land-borders-for-fully-vaccinated.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国对完全接种疫苗者开放陆地边境</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202110/u-s-to-reopen-land-borders-for-fully-vaccinated.mp3" id="mp3"></a>
+<a href="/static/lrc/u-s-to-reopen-land-borders-for-fully-vaccinated.lrc" id="lrc"></a>
+<a href="u-s-to-reopen-land-borders-for-fully-vaccinated-87787.html" id="CnPage" target="_blank"></a>
+<a href="star-trek-s-william-shatner-becomes-oldest-man-to-fly-in-space-87786.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">United States officials announced Wednesday that the country will reopen its land borders to non-essential travel in November. The move ends a 19-month-long restriction put in place because of the COVID-19 pandemic.、<br/>
+美国官员周三宣布将于11月对非必要旅行重新开放陆地边境。此举结束了因新冠肺炎大流行而实施的为期19个月的限制。
+<p>Vehicle, rail and sea travel between the U.S. and Canada and Mexico has been largely restricted to essential travel, such as trade, since the earliest days of the pandemic. The new rules will permit fully vaccinated foreign nationals to enter the U.S. for any reason starting in early November. A similar easing of restrictions is set to begin for air travel to the U.S. By mid-January, even essential travelers seeking to enter the U.S., like truck drivers, will need to be fully vaccinated.<br/>
+自大流行初期以来，美国与加拿大和墨西哥之间的汽车、铁路和海运旅行很大程度上仅限于贸易之类的必要旅行。这项新规定将允许完全接种疫苗的外国人从11月初开始以任何理由进入美国。前往美国的航空旅行也将类似放宽限制。到明年1月中旬，即便是寻求进入美国的必要旅客，如卡车司机，也需要全面接种疫苗。</p>
+<p>Both Mexico and Canada have urged the U.S. for months to ease restrictions on travel. The latest move follows last month's announcement that the U.S. will end country-based travel bans for air travel. Instead, the U.S. will require vaccination for foreign nationals seeking to enter by airplane.<br/>
+墨西哥和加拿大几个月来一直督促美国放宽旅行限制。这一最新举措发生在美国上个月宣布将结束针对航空旅行的国家旅行禁令之后。与之相反，美国将要求寻求搭乘飞机入境的外国人接种疫苗。</p>
+<p>The new rules only effect legal entry to the U.S. Officials warned that those seeking to enter illegally will still be expelled under an existing law known as Title 42. Immigration activists have criticized the law for quickly removing migrants before they can ask for asylum. One official said the U.S. was continuing the policy because crowded conditions where migrants are held may increase the spread of COVID-19.<br/>
+这项新规定只对合法入境美国生效。有关官员警告说，根据一项现行法律的第42条，寻求非法入境的人士仍将被驱逐出去。移民活动人士批评该法律在移民申请庇护之前迅速驱逐他们。一位美国官员表示，美国将继续执行这项政策，因为扣押移民的拥挤条件可能会导致新冠肺炎的传播。</p>
+<p>Travelers entering the U.S. by vehicle, rail and sea will be asked if they are vaccinated as part of the U.S. Customs and Border Protection admissions process. Some travelers may be asked to provide proof of vaccination in a second inspection process.<br/>
+作为美国海关和边境保护局入境流程的一部分，通过汽车、铁路和海运进入美国的旅客将被问到是否接种了疫苗。一些旅客可能会在第二次检查过程中被要求提供疫苗接种证明。</p>
+<p>No testing will be required to enter the U.S. by land or sea. However, travelers must meet the vaccination requirement.<br/>
+通过陆路和海路进入美国无需任何检测。但是旅客必须满足疫苗接种要求。</p>
+<p>The U.S. Centers for Disease Control and Prevention (CDC) says the U.S. will accept travelers who have been fully vaccinated with any of the vaccines approved for emergency use by the World Health Organization. That means that the AstraZeneca vaccine, widely used in Canada, will be accepted.<br/>
+美国疾控预防中心表示，美国将接受已经完全接种世卫组织批准用于紧急用途的任何疫苗的旅客。这意味着在加拿大广泛使用的阿斯利康疫苗将被承认。</p>
+<p>Officials said the CDC was still working on the process for admitting those who received doses of two different vaccines.<br/>
+有关官员表示，美国疾控预防中心仍在研究承认接种两种不同疫苗人士的程序。</p>
+<p>Officials noted that the delay in the vaccination requirement for essential cross-border travel is meant to provide truck drivers and others with additional time to get vaccinated. They added that this will lower the risk of economic problems due to vaccination requirements.<br/>
+有关官员指出，推迟必要跨境旅客的疫苗接种要求是为了让卡车司机等人有更多时间接种疫苗。他们补充说，这将降低因疫苗接种要求而导致经济问题的风险。</p>
+<p>The move toward restoring regular travel comes as COVID-19 cases in the U.S. have dropped to about 85,000 a day. That is the lowest level since July, after an increase caused by the more infectious delta variant of the coronavirus. Case rates in Canada and Mexico have been much lower than in the U.S. throughout the pandemic.<br/>
+随着美国新冠肺炎病例降低至每天约8.5万人，恢复正常旅行的举措随之而来。这是自7月以来感染病例数的最低水平，此前由于更具传染性的新冠肺炎德尔塔变种引起了病例数攀升。加拿大和墨西哥的感染率远低于美国。</p>
+<p>Mexico has not put in place any COVID-19 entry measures for travelers. Canada permits entry of fully vaccinated individuals with proof of vaccination against COVID-19. Canada also permits people to provide proof of a negative test taken within 72 hours of entry to the country.<br/>
+墨西哥尚未针对旅客实施任何新冠肺炎入境措施。加拿大允许完全接种新冠疫苗且持有接种证明的个人入境。加拿大还允许可提供72小时内新冠阴性证明的人士入境。</p>
+<p>I'm Jonathan Evans.<br/>
+我是乔纳森·埃文斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US to Reopen Land Borders for Fully Vaccinated]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]United States officials announced Wednesday
+[00:03.36]that the country will reopen its land borders
+[00:06.76]to non-essential travel in November.
+[00:11.20]The move ends a 19-month-long restriction
+[00:15.16]put in place because of the COVID-19 pandemic.
+[00:20.40]Vehicle, rail and sea travel between the U.S. and Canada
+[00:26.00]and Mexico has been largely restricted to essential travel,
+[00:30.76]such as trade, since the earliest days of the pandemic.
+[00:37.00]The new rules will permit fully vaccinated foreign nationals
+[00:42.00]to enter the U.S. for any reason starting in early November.
+[00:49.00]A similar easing of restrictions
+[00:51.40]is set to begin for air travel to the U.S.
+[00:56.32]By mid-January, even essential travelers
+[01:00.80]seeking to enter the U.S., like truck drivers,
+[01:05.12]will need to be fully vaccinated.
+[01:08.96]Both Mexico and Canada have urged the U.S. for months
+[01:14.40]to ease restrictions on travel.
+[01:18.32]The latest move follows last month's announcement
+[01:22.40]that the U.S. will end country-based travel bans for air travel.
+[01:28.96]Instead, the U.S. will require vaccination
+[01:32.60]for foreign nationals seeking to enter by airplane.
+[01:38.04]The new rules only effect legal entry to the U.S.
+[01:42.60]Officials warned that those seeking to enter illegally
+[01:47.92]will still be expelled under an existing law known as Title 42.
+[01:55.08]Immigration activists have criticized the law
+[01:59.16]for quickly removing migrants before they can ask for asylum.
+[02:05.32]One official said the U.S. was continuing the policy
+[02:09.20]because crowded conditions where migrants are held
+[02:13.20]may increase the spread of COVID-19.
+[02:17.92]Travelers entering the U.S. by vehicle, rail and sea
+[02:22.68]will be asked if they are vaccinated as part of the U.S. Customs
+[02:27.68]and Border Protection admissions process.
+[02:32.08]Some travelers may be asked to provide proof of vaccination
+[02:36.96]in a second inspection process.
+[02:40.88]No testing will be required to enter the U.S. by land or sea.
+[02:47.28]However, travelers must meet the vaccination requirement.
+[02:53.44]The U.S. Centers for Disease Control and Prevention (CDC)
+[02:57.72]says the U.S. will accept travelers who have been fully vaccinated
+[03:02.56]with any of the vaccines approved for emergency use
+[03:07.08]by the World Health Organization.
+[03:10.76]That means that the AstraZeneca vaccine,
+[03:13.88]widely used in Canada, will be accepted.
+[03:18.52]Officials said the CDC was still working on the process
+[03:22.72]for admitting those who received doses
+[03:25.40]of two different vaccines.
+[03:28.32]Officials noted that the delay in the vaccination requirement
+[03:33.00]for essential cross-border travel is meant to provide truck drivers
+[03:38.24]and others with additional time to get vaccinated.
+[03:43.20]They added that this will lower the risk of economic problems
+[03:47.64]due to vaccination requirements.
+[03:51.56]The move toward restoring regular travel comes as
+[03:55.24]COVID-19 cases in the U.S. have dropped to about 85,000 a day.
+[04:02.84]That is the lowest level since July, after an increase caused
+[04:08.04]by the more infectious delta variant of the coronavirus.
+[04:13.72]Case rates in Canada and Mexico have been much lower
+[04:18.36]than in the U.S. throughout the pandemic.
+[04:23.00]Mexico has not put in place
+[04:25.40]any COVID-19 entry measures for travelers.
+[04:30.44]Canada permits entry of fully vaccinated individuals
+[04:34.80]with proof of vaccination against COVID-19.
+[04:40.16]Canada also permits people to provide proof of a negative test
+[04:45.20]taken within 72 hours of entry to the country.
+[04:50.52]I'm Jonathan Evans. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

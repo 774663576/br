@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Use QR Codes for Teaching</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Use QR Codes for Teaching" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202207/use-qr-codes-for-teaching.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Use QR Codes for Teaching</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202207/use-qr-codes-for-teaching.mp3" id="mp3"></a>
+<a href="drug-company-seeks-to-sell-birth-control-in-stores-89310.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">12 July 2022</span><br/>
+<p>You have probably seen those little boxes with a <strong>pattern</strong> of black marks on products in stores, on signs or in many other public places. The designs are called QR codes. That is short for "quick response code." They are a kind of <strong>bar code</strong> that a machine can read.</p>
+<p>You might not know that teachers are finding QR codes make it easy to send messages to students on a mobile device or laptop computer.</p>
+<p>So, in today's program, we will show you how to use QR codes and the many uses QR codes have for teaching English. In the second part of the program, we will show you how to make different kinds of QR codes using free services.</p>
+<div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/10050000-0aff-0242-14ac-08da60eb5ec9_w268_r1.png"/><br/>
+<span class="imagecaption"></span></div>
+<p><strong>How to "read" a QR code</strong></p>
+<p>To read a QR code, simply open the camera on your phone and point it at the code. When the phone has read the code, a web link appears over it.</p>
+<p>Touch, or tap it with your finger and a new window will open with the online material. If this does not work on your phone, you can find a free QR code <strong>app</strong> to download. They are available in the app store for Android or Apple Products. You can also use the camera on a laptop computer. If you are using a computer without a camera, you can right-<strong>click</strong> or control-click on the code and choose how to open the material.</p>
+<p><strong>Using QR codes for web links</strong></p>
+<p>The basic use of a QR code is to share a website address. For example, this code will take you to the Education page of VOA Learning English.</p>
+<p>In the classroom, the web link may go to presentation files, listening or reading materials, research resources, or learning games. An important reason for using a QR code is that it can be shared on printed material. Students do not need to type a long and complex series of letters into their tablet or phone to go to a web address.</p>
+<p>The codes can also show images for students who are not yet reading. With one touch of a finger, the code opens a player, so the student does not have to hunt for the correct application.</p>
+<p>Some teachers use QR codes in several places around a classroom called "learning centers." At one center, students might find a list of new words. On a card at this center is the QR code for the Learning English Word book. A student can <strong>scan</strong> it and look for the meaning of any unknown words.</p>
+<p><strong>Using QR codes for media files</strong></p>
+<p>Another learning center might have a choice of story books. A QR code can take the student to the sound of someone reading the story. This code takes you to a public library's collection of story books:</p>
+<p>Teachers can use existing videos or create their own with messages to students. If you are online, watch this on how to share a video with a QR code:</p>
+<p>Learning with songs can be enjoyable and a nice break from schoolwork. A teacher can create a QR code for a song and print it on the same page as the song's lyrics, or words, for students to listen and sing along.</p>
+<p>One new idea in education is project-based learning. A teacher may create a QR code to link to a PowerPoint presentation. The presentation can include spoken instructions so students can hear and read the instructions again whenever they need to.</p>
+<p><strong>How to make QR codes</strong></p>
+<p>To create QR codes, there are a number of services you can find by searching for "QR code generator." Take care to register for the free version of the service you want. If you do not, you may have to pay to keep the codes that you make active past a trial period.</p>
+<p>Once you have chosen a service, look for the choices available to share a web link, a document, image, social media message or video. Simply copy the link you want to share and paste it into the box the service provides. Follow the instructions to save the code onto your computer. You can print the QR code or add it to a document that you plan to share electronically.</p>
+<p><strong>Make audio QR codes</strong></p>
+<p>To share the pronunciation of a word or a spoken message, create a QR code for a sound <strong>clip</strong>. The code above is an example of a sound clip made on the service Vocaroo. It says, "Welcome to Voice of America Learning English."</p>
+<p><strong>Make QR codes for images</strong></p>
+<p>You can share any images or documents you want students to see by uploading them to a cloud service like Google Docs. For example, the file linked to this code is a Google Slides presentation.</p>
+<p>Getting started with QR codes requires a little time, but once you have set up an account, you will probably have many more ideas on how to use these funny little squares.</p>
+<p>I'm Anna Matteo.</p>
+<p>And I'm Greg Stachel.</p>
+<p>For more ideas, see the links below.</p>
+<p><em>Jill Robbins wrote this lesson for Learning English. </em></p>
+<p>More Ideas:</p>
+<p><a class="wsw__a" href="https://blog.tcea.org/qr-codes-language-development/" target="_blank">Five Ways to Use QR Codes for Second Language Development</a></p>
+<p><a class="wsw__a" href="https://www.qr-code-generator.com/blog/qr-codes-in-the-classroom/" target="_blank">How Teachers Are Using QR Codes in the Classroom to Enhance Learning</a></p>
+<p><a class="wsw__a" href="https://www.edutopia.org/blog/QR-codes-teaching-andrew-miller " target="_blank">Twelve Ideas for Teaching with QR Codes</a></p>
+<p><em>___________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>pattern </strong>–n. a repeated form or design</p>
+<p><strong>bar code</strong> – n. a patterned set of vertical lines printed on consumer products, mail, and the like to be read by a machine</p>
+<p><strong>app (application)</strong> <em>–n.</em> a computer program that carries out a specific job</p>
+<p><strong>click</strong> <em>– v. </em>to press and release (a button on a computer or phone)</p>
+<p><strong>scan </strong>– <em>v.</em> to read with an electronic device</p>
+<p><strong>clip</strong> – n. a short selection from a longer piece of a work</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

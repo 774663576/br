@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登走马上任并呼吁团结</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登走马上任并呼吁团结" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202101/biden-takes-office-calls-for-unity.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登走马上任并呼吁团结</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202101/biden-takes-office-calls-for-unity.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-takes-office-calls-for-unity.lrc" id="lrc"></a>
+<a href="biden-takes-office-calls-for-unity-86153.html" id="CnPage" target="_blank"></a>
+<a href="vice-president-kamala-harris-brings-historic-change-to-us-politics-86152.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">"I, Joseph Robinette Biden, Jr., do solemnly swear that I will faithfully execute the office of President of the United States..." With those words, Joe Biden was sworn in Wednesday as the 46th president of the United States.<br/>
+“我，小约瑟夫·罗宾内特·拜登，谨庄严宣誓，我将忠实履行美国总统职务......”说着这些话，乔·拜登周三宣誓就任美国第46任总统。
+<p>Speaking to Americans for the first time as president, Biden said, "Today, we celebrate the triumph not of a candidate, but of a cause, the cause of democracy... At this hour, my friends, democracy has prevailed."<br/>
+拜登作为总统首次对美国人发表讲话时表示：“今天我们庆祝的胜利，不是候选人的胜利，而是民主事业的胜利。此时此刻，我的朋友们，民主占了上风。”</p>
+<p>Biden came to office at a time of severe crisis in America. Just two weeks earlier, supporters of outgoing President Donald Trump attacked the Capitol in an attempt to prevent Biden from taking office. And millions of Americans have lost their jobs in the pandemic that has claimed more than 400,000 lives.<br/>
+拜登在美国处于严重危机之际上任。就在两周前，即将卸任的川普总统的支持者袭击了国会大厦，试图阻止拜登上任。并且有数以百万计的美国人在已经夺去超过40万生命的大流行当中失去了工作。</p>
+<p>At the age of 78, Biden is the oldest person to hold the office of U.S. president. He said, "Few people in our nation's history have been more challenged or found a time more challenging or difficult than the time we're in now."<br/>
+拜登以78岁高龄成为担任美国总统的最年长者。他说：“纵观我们国家的历史，很少有人比我们现在面临的挑战更大，或者所处的时代比我们当下更具挑战性或更困难。”</p>
+<p>To overcome these challenges, Biden said it "requires the most elusive of all things in a democracy: unity." Biden added that he will be a "president for all Americans" and will "fight as hard for those who did not support me as for those who did."<br/>
+拜登表示，要克服这些挑战，需要民主国家中最难以捉摸的东西——团结。拜登还表示，他将成为全体美国人的总统，并将为支持我的人，以及那些没有支持我的人同样去努力奋斗。</p>
+<p><strong>Historic ceremony<br/>
+历史性典礼</strong></p>
+<p>Surrounded by his wife, Jill, and family members, Biden placed his left hand on the Bible that has been in his family for 127 years. He then took the oath of office from U.S. Supreme Court Chief Justice John Roberts just before noon Wednesday.<br/>
+拜登在妻子吉尔以及家人的簇拥之下，将左手放到了一本已有127年传承的家族圣经上。然后在周三中午之前，他在美国最高法院首席法官约翰·罗伯茨的主持下宣誓就职。</p>
+<p>Earlier in the ceremony, Kamala Harris was sworn in as vice president. The former U.S. senator from California is the first Black person, the first Asian American and also the first woman to hold the office.<br/>
+在此之前，卡马拉·哈里斯宣誓就任副总统。这位来自加州的前美国参议员是担任该职务的第一位黑人、第一位亚裔美国人以及第一位女性。</p>
+<p>Three former presidents, Barack Obama, George W. Bush and Bill Clinton also attended. Former president Jimmy Carter could not attend because of health concerns. Donald Trump, the 45th president, had already left Washington earlier in the morning but his Vice President, Mike Pence, attended the ceremony.<br/>
+奥巴马、小布什和克林顿这三位前总统也出席了典礼。前总统吉米·卡特由于健康问题未能出席。第45任总统川普已于凌晨离开华盛顿，但是他的副总统彭斯出席了典礼。</p>
+<p>The event took place in front of a Capitol building surrounded with high fences and concrete barriers. About 25,000 National Guard troops and other security forces were brought in to protect the city.<br/>
+该活动在被围栏和混凝土屏障围绕的国会大厦前进行。大约有25000名国民警卫队士兵以及其它安全部队被派来保卫这座城市。</p>
+<p>On the National Mall, 200,000 flags were blowing in the wind to represent the usual crowd members who could not attend. Biden and Harris had asked Americans to watch the inauguration at home because of the coronavirus pandemic.<br/>
+在国家广场，20万面旗帜随风飘扬，它们代表着无法如常参加典礼的人群。由于新冠病毒大流行，拜登和哈里斯要求美国人在家中观看就职典礼。</p>
+<p>The day included performances from singers Lady Gaga, Jennifer Lopez and Garth Brooks. A 22-year-old poet, Amanda Gorman, noted that, "while democracy can be permanently delayed, it can never be permanently denied." She added, "For while we have our eyes on the future, history has its eyes on us."<br/>
+歌手雷蒂嘎嘎、詹妮弗·洛佩兹以及加斯·布鲁克斯当天进行了表演。22岁的诗人阿曼达·戈尔曼指出，“尽管民主可能会被长期推迟，但它永远不会被长期拒之门外。”她还表示：“当我们注视着未来，历史也在注视着我们。”</p>
+<p><strong>The new president and vice president<br/>
+新任总统和副总统</strong></p>
+<p>After a short gathering with Congressional leaders, President Biden and Vice President Harris took part in a "Pass in Review" ceremony, a military tradition to show the transfer of power to a new commander-in-chief.<br/>
+在与国会领导人的短暂会面之后，拜登总统和哈里斯副总统参加了阅兵仪式，这是一种展示将权力移交给新任总司令的军事传统。</p>
+<p>Biden and Harris laid a wreath at the Tomb of the Unknown Soldier at Arlington National Cemetery. Joining them were the three former presidents in a sign of unity. However, many traditional inaugural activities were not held because of the virus.<br/>
+拜登和哈里斯向阿灵顿国家公墓无名英雄墓敬献了花圈。与他们一起的是3位前任总统，这展示了团结。然而，由于新冠病毒，许多传统的就职典礼活动没有举行。</p>
+<p>There was no parade down Pennsylvania Avenue. In its place was a virtual "parade Across America." But the marching bands from the University of Delaware and Howard University were there to escort the country's new leaders to The White House. Biden went to Delaware and Harris was at Howard.<br/>
+宾夕法尼亚大街上没有举行游行。取而代之的是虚拟的全美游行。但是，特拉华大学和霍华德大学的行进乐队到场护送美国新任领导人前往白宫。拜登去了特拉华大学行进乐队，而哈里斯在霍华德大学行进乐队。</p>
+<p>As the virtual parade continued around the country, Vice President Harris returned to the Capitol to act in her constitutional role as presiding officer of the U.S. Senate.<br/>
+随着全国各地虚拟游行的继续，副总统哈里斯回到国会大厦，担任美国参议院议长的宪法职务。</p>
+<p>Harris swore in three new Democratic senators giving the Democrats effective control of both The White House and Congress for the first time in 10 years.<br/>
+哈里斯主持了3位新任民主党参议员的宣誓就职，这使得民主党10年来首次有效控制了白宫和国会。</p>
+<p>At The White House, Biden immediately signed several new executive orders to change policies enacted under the Trump administration. Among them were orders to require face covering on all federal property and to rejoin the Paris Climate Accord.<br/>
+在白宫，拜登立即签署了几项新的行政命令以改变川普政府制定的政策。其中包括下令在所有联邦财产内需佩戴口罩以及重新加入《巴黎气候协定》。</p>
+<p>Just days earlier, Biden had also proposed a $1.9 trillion plan to fight the pandemic and to help the U.S. economy.<br/>
+就在几天前，拜登还提出了一项1.9万亿美元的计划，以抗击新冠大流行并帮助美国经济。</p>
+<p>I'm Mario Ritter, Jr.<br/>
+我是小马里奥·里特。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Takes Office, Calls for 'Unity']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.44]"I, Joseph Robinette Biden, Jr., do solemnly swear
+[00:08.76]that I will faithfully execute
+[00:12.44]the office of President of the United States..."
+[00:17.72]With those words, Joe Biden was sworn in Wednesday
+[00:21.80]as the 46th president of the United States.
+[00:25.92]Speaking to Americans for the first time as president,
+[00:30.36]Biden said, "Today, we celebrate the triumph not of a candidate,
+[00:36.48]but of a cause, the cause of democracy...
+[00:41.08]At this hour, my friends, democracy has prevailed."
+[00:47.80]Biden came to office at a time of severe crisis in America.
+[00:53.32]Just two weeks earlier, supporters of outgoing President Donald Trump
+[00:58.92]attacked the Capitol in an attempt to prevent Biden from taking office.
+[01:05.24]And millions of Americans have lost their jobs in the pandemic
+[01:10.36]that has claimed more than 400,000 lives.
+[01:14.68]At the age of 78, Biden is the oldest person
+[01:19.56]to hold the office of U.S. president.
+[01:22.84]He said, "Few people in our nation's history
+[01:27.12]have been more challenged or found a time more challenging
+[01:32.32]or difficult than the time we're in now."
+[01:36.76]To overcome these challenges, Biden said
+[01:40.92]it "requires the most elusive of all things in a democracy: unity."
+[01:48.24]Biden added that he will be a "president for all Americans"
+[01:53.44]and will "fight as hard for those
+[01:56.16]who did not support me as for those who did."
+[02:01.04]Surrounded by his wife, Jill, and family members,
+[02:05.12]Biden placed his left hand on the Bible
+[02:08.44]that has been in his family for 127 years.
+[02:14.16]He then took the oath of office from U.S. Supreme Court Chief Justice
+[02:20.00]John Roberts just before noon Wednesday.
+[02:25.64]Earlier in the ceremony, Kamala Harris was sworn in as vice president.
+[02:33.12]The former U.S. senator from California is the first Black person,
+[02:39.32]the first Asian American and also the first woman to hold the office.
+[02:45.96]Three former presidents, Barack Obama, George W. Bush
+[02:51.64]and Bill Clinton also attended.
+[02:56.32]Former president Jimmy Carter
+[02:58.76]could not attend because of health concerns.
+[03:03.68]Donald Trump, the 45th president,
+[03:07.32]had already left Washington earlier in the morning
+[03:11.32]but his Vice President, Mike Pence, attended the ceremony.
+[03:18.64]The event took place in front of a Capitol building
+[03:23.00]surrounded with high fences and concrete barriers.
+[03:27.84]About 25,000 National Guard troops and other security forces
+[03:34.68]were brought in to protect the city.
+[03:38.36]On the National Mall, 200,000 flags were blowing in the wind
+[03:44.24]to represent the usual crowd members who could not attend.
+[03:49.64]Biden and Harris had asked Americans
+[03:54.04]to watch the inauguration at home
+[03:57.20]because of the coronavirus pandemic.
+[04:01.68]The day included performances from singers Lady Gaga,
+[04:07.52]Jennifer Lopez and Garth Brooks.
+[04:11.80]A 22-year-old poet, Amanda Gorman, noted that,
+[04:18.12]"while democracy can be permanently delayed,
+[04:21.88]it can never be permanently denied."
+[04:26.72]She added, "For while we have our eyes on the future,
+[04:31.76]history has its eyes on us."
+[04:37.08]After a short gathering with Congressional leaders,
+[04:40.96]President Biden and Vice President Harris
+[04:44.36]took part in a "Pass in Review" ceremony,
+[04:47.88]a military tradition to show the transfer of power
+[04:53.00]to a new commander-in-chief.
+[04:57.48]Biden and Harris laid a wreath at the Tomb of the Unknown Soldier
+[05:02.96]at Arlington National Cemetery.
+[05:07.12]Joining them were the three former presidents in a sign of unity.
+[05:13.96]However, many traditional inaugural activities
+[05:18.60]were not held because of the virus.
+[05:23.72]There was no parade down Pennsylvania Avenue.
+[05:28.04]In its place was a virtual "parade Across America."
+[05:34.52]But the marching bands from the University of Delaware and Howard University
+[05:40.80]were there to escort the country's new leaders to The White House.
+[05:46.60]Biden went to Delaware and Harris was at Howard.
+[05:53.48]As the virtual parade continued around the country,
+[05:57.76]Vice President Harris returned to the Capitol
+[06:01.88]to act in her constitutional role as presiding officer of the U.S. Senate.
+[06:08.64]Harris swore in three new Democratic senators
+[06:13.32]giving the Democrats effective control
+[06:16.84]of both The White House and Congress for the first time in 10 years.
+[06:23.72]At The White House, Biden immediately signed several new executive orders
+[06:29.80]to change policies enacted under the Trump administration.
+[06:34.76]Among them were orders to require face covering
+[06:40.08]on all federal property and to rejoin the Paris Climate Accord.
+[06:47.44]Just days earlier, Biden had also proposed a $1.9 trillion plan
+[06:55.68]to fight the pandemic and to help the U.S. economy.
+[07:02.92]I'm Mario Ritter, Jr. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

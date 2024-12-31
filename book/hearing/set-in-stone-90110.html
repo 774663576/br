@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Set in Stone'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Set in Stone'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/set-in-stone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Set in Stone'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/set-in-stone.mp3" id="mp3"></a>
+<a href="/static/lrc/set-in-stone.lrc" id="lrc"></a>
+<a href="lebanon-s-new-poor-face-long-term-economic-insecurity-90109.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">10 December 2022</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give examples and notes on usage.</p>
+<p>Some things in life change easily and often. They are fluid. They change and move as fluids do -- easily. When we are planning events or establishing rules and policies, sometimes it is good to keep things fluid or changeable.</p><div class="contentImage"><img alt="A skull-like stone carving and other parts representing the Flayed Lord are stored after being dug up from the Ndachjian–Tehuacan archaeological site in Tehuacan, Puebla state. This 2018 photo was provided by Mexico's National Institute of Anthropology. " src="https://files.21voa.com/gdb/E952563A-0ECE-4143-9C67-C616ABFFA2D2_w268_r1.jpg"/><br/><span class="imagecaption">A skull-like stone carving and other parts representing the Flayed Lord are stored after being dug up from the Ndachjian–Tehuacan archaeological site in Tehuacan, Puebla state. This 2018 photo was provided by Mexico's National Institute of Anthropology. </span></div>
+<p>But some things are not easily moved or changed. They are fixed or <strong>inflexible</strong>.</p>
+<p>To describe these inflexible things, we can say they are <u>set in stone</u>. Things that are <u>set in stone</u> are very difficult or impossible to change.</p>
+<p>We can say that permanent rules, laws, and policies are <u>set in stone</u>. It often takes several difficult actions to change them.</p>
+<p>The dates of some events are also <u>set in stone</u>.</p>
+<p>For example, <strong>weddings</strong> take a lot of planning. Some people even start planning for their wedding a year or more ahead of time.</p>
+<p>You simply cannot tell friends and family that your wedding will happen sometime in June. You must find a space for the ceremony. You need to invite people and find out how many are coming. You need to decide on food, music, and flowers. And you must have money to pay workers to do different things.</p>
+<p>So, <u>setting a wedding date in stone</u> is the best way to make sure the wedding happens smoothly. <u>Setting the date in stone</u> means it cannot change. Or at least, changes would cause problems for people and possibly cost you a lot of money.</p>
+<p>We also use this expression with two other verbs: <strong>carve</strong> and write. So, you can say <u>something is carved in stone</u> or <u>something is written in stone</u>. The meaning stays the same.</p>
+<p>On the other hand, if a rule, date, or event could be changed easily, we can say it is <u>penciled in</u>.</p>
+<p>If you <u>pencil something in</u>, you are admitting that it is <u>not set in stone</u>. It may change and may be <strong>erased</strong>. When using this expression, however, you do not need to really use a pencil.</p>
+<p>So, when we say something is <u>not carved, set, or written in stone</u>, we mean it can be changed.</p>
+<p>For example, many workers were upset by some new office rules. So, the supervisor said, "If they don't work, we can always change them." In other words, the rules are <u>not carved in stone</u>.</p>
+<p>Before we end the program, here is one more example for <u>set in stone</u>. The editor used it when he sent back my edited story. He gave some changes but added, "These are just suggestions. They are not <u>set in stone.</u>"</p>
+<p>It's good to have an editor with a <strong>sense of humor</strong>!</p>
+<p>And that's the end of this <em>Words and Their Stories</em>. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>inflexible </strong><em>– adj. </em>incapable of change</p>
+<p><strong>wedding </strong><em>– n. </em>a wedding anniversary or its celebration</p>
+<p><strong>carve</strong> <em>– v.</em> to cut with care or exactness</p>
+<p><strong>erase </strong><em>– v.</em> to rub or scrape out (something, such as written, painted, or engraved letters) : to remove written or drawn marks from</p>
+<p><strong>sense of humor </strong><em>– noun phrase </em>: a personality that gives someone the ability to say funny things and see the funny side of things</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'Set in Stone']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.64]And now, Words and Their Stories, from VOA Learning English.
+[00:18.88]On this program, we explore words and expressions
+[00:23.28]in the English language.
+[00:25.64]We give examples and notes on usage.
+[00:31.24]Some things in life change easily and often.
+[00:36.36]They are fluid.
+[00:38.84]They change and move as fluids do -- easily.
+[00:44.56]When we are planning events or establishing rules and policies,
+[00:49.44]sometimes it is good to keep things fluid or changeable.
+[00:55.92]But some things are not easily moved or changed.
+[01:00.64]They are fixed or inflexible.
+[01:05.52]To describe these inflexible things,
+[01:08.52]we can say they are set in stone.
+[01:13.16]Things that are set in stone
+[01:15.40]are very difficult or impossible to change.
+[01:19.96]We can say that permanent rules,
+[01:22.84]laws, and policies are set in stone.
+[01:28.24]It often takes several difficult actions to change them.
+[01:33.44]The dates of some events are also set in stone.
+[01:39.00]For example, weddings take a lot of planning.
+[01:44.20]Some people even start planning for their wedding
+[01:47.80]a year or more ahead of time.
+[01:51.84]You simply cannot tell friends and family
+[01:55.48]that your wedding will happen sometime in June.
+[02:00.32]You must find a space for the ceremony.
+[02:04.16]You need to invite people and find out how many are coming.
+[02:09.20]You need to decide on food, music, and flowers.
+[02:15.52]And you must have money to pay workers to do different things.
+[02:21.40]So, setting a wedding date in stone
+[02:24.32]is the best way to make sure the wedding happens smoothly.
+[02:30.32]Setting the date in stone means it cannot change.
+[02:34.96]Or at least, changes would cause problems for people
+[02:39.72]and possibly cost you a lot of money.
+[02:45.16]We also use this expression with two other verbs: carve and write.
+[02:52.68]So, you can say something is carved in stone
+[02:56.88]or something is written in stone.
+[03:00.72]The meaning stays the same.
+[03:04.20]On the other hand, if a rule, date, or event
+[03:08.80]could be changed easily, we can say it is penciled in.
+[03:14.44]If you pencil something in, you are admitting
+[03:18.32]that it is not set in stone.
+[03:21.76]It may change and may be erased.
+[03:25.80]When using this expression, however,
+[03:28.88]you do not need to really use a pencil.
+[03:33.28]So, when we say something is not carved, set,
+[03:37.96]or written in stone, we mean it can be changed.
+[03:43.60]For example, many workers were upset
+[03:46.96]by some new office rules.
+[03:49.40]So, the supervisor said, "If they don't work,
+[03:53.32]we can always change them."
+[03:56.52]In other words, the rules are not carved in stone.
+[04:02.08]Before we end the program,
+[04:04.12]here is one more example for set in stone.
+[04:08.08]The editor used it when he sent back my edited story.
+[04:14.24]He gave some changes but added,
+[04:16.92]"These are just suggestions. They are not set in stone."
+[04:22.04]It's good to have an editor with a sense of humor!
+[04:26.24]And that's the end of this Words and Their Stories.
+[04:29.92]Until next time ... I'm Anna Matteo.
+[04:33.40]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

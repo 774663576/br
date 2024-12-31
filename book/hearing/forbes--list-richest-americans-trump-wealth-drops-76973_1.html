@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 福布斯美国富豪榜出炉 川普排名大幅下降</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 福布斯美国富豪榜出炉 川普排名大幅下降" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201710/forbes-400-list-richest-americans-trump-wealth-drops.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>福布斯美国富豪榜出炉 川普排名大幅下降</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201710/forbes-400-list-richest-americans-trump-wealth-drops.mp3" id="mp3"></a>
+<a href="/static/lrc/forbes-400-list-richest-americans-trump-wealth-drops.lrc" id="lrc"></a>
+<a href="forbes--list-richest-americans-trump-wealth-drops-76973.html" id="CnPage" target="_blank"></a>
+<a href="nasa-lego-set-76962.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">President Donald Trump's wealth saw a major drop in the last year, mainly because some of his properties decreased in value.<br/>川普总统的财富去年大幅下滑，主要是因为他的一些房产价值缩水。 
+<p>American business magazine Forbes says Trump's net worth fell $600 million to $3.1 billion over the past 12 months. His net worth was estimated at $3.7 billion a year ago.<br/>美国福布斯商业杂志表示，过去12个月，川普的净资产下滑了6亿美元。一年前他的净资产预计为37亿美元。</p>
+<p>Each year Forbes puts together a list of the 400 richest Americans. This year, Trump was number 248 on the list, down from 156 in 2016.<br/>福布斯每年都会列出美国400富豪榜。今年，川普在这份榜单上从2016年的156名跌倒了248名。</p>
+<p>According to Forbes, much of Trump's wealth comes from a group of New York City luxury buildings in and around Manhattan. The magazine said property values in the area have dropped recently.<br/>福布斯杂志表示，川普大部分财富来自于纽约市曼哈顿及其周边的一堆豪华建筑。该杂志表示，最近该地区的房产价值有所下降。</p>
+<p>One of the buildings is Trump Tower, the headquarters for Trump's businesses. Trump also lived at Trump Tower with his family before moving into the White House.<br/>川普的企业总部川普大厦就是这其中一栋建筑。川普在搬入白宫之前和家人也都住在川普大厦。</p>
+<p>Trump also owns many other properties, including golf courses, in the United States and around the world. He also owns a winery and licenses his name to many companies worldwide.<br/>川普还拥有其它许多财产，包括位于美国和世界各地的高尔夫球场。他还拥有一家酒庄，并将他的名字授权给了全球很多公司。</p>
+<p>Forbes also said Trump's wealth dropped because he spent $66 million on his presidential campaign. He also paid $25 million to settle a legal action against him by former students of Trump University.<br/>福布斯还表示，川普的财富缩水还因为他在总统竞选上投入了6600万美元。他还花费了2500万美元摆平了一起川普大学毕业生对他的法律诉讼。</p>
+<p>A few of Trump's properties did rise in value last year, the Forbes report says. One was a hotel and residential building in Las Vegas, Nevada. The other was an office building in San Francisco, California.<br/>福布斯杂志报道称，川普有一小部分房产在去年有所升值。其中一处就是内华达州拉斯维加斯市的一家酒店和住宅楼，另外一处就是加州旧金山市的办公楼。</p>
+<p>Trump is the first billionaire to become president of the United States. He gave his two oldest sons control of his businesses while he serves his presidential term.<br/>川普是第一位成为美国总统的亿万富翁。他在总统任职期间将企业的控制权交给了两个大儿子。</p>
+<p>Every name in the top ten belonged to a white man. Two women, both white, are in the top twenty: Alice Walton, an owner of the Wal-Mart company and Jacqueline Mars, whose riches come mainly from the candy and pet food industries.<br/>福布斯榜单前十名都是白人男子。两位白人女性挤进了前二十，她们分别是沃尔玛公司的爱尔丽·沃尔顿（Alice Walton），以及财富主要来自糖果和宠物食品行业的杰奎琳·玛斯（Jacqueline Mars）。</p>
+<p>Two African-American billionaires made the list. Investor Robert Smith came in at number 226, with a net worth of $3.3 billion. Media businesswoman Oprah Winfrey was number 264, with an estimated worth of $3 billion.<br/>两位非裔美国亿万富豪榜上有名。投资者罗伯特·史密斯（Robert Smith）以33亿美元的净资产位列第226位。媒体业女商人奥普拉·温弗瑞（Oprah Winfrey）位列第264位，预计她的资产有30亿美元。</p>
+<p>Microsoft co-founder Bill Gates took the top spot on the Forbes list for the 24th year in a row. His net worth was estimated at $89 billion, up $8 billion from a year ago.<br/>微软公司联合创始人比尔·盖茨（Bill Gates）连续24年位居福布斯财富榜的榜首。他的净资产估计有890亿美元，比去年增加了80亿美元。</p>
+<p>At number two was Amazon founder Jeff Bezos, who added $14.5 billion to his wealth over the past year.<br/>排名第二的是亚马逊公司创始人杰夫·贝佐斯（Jeff Bezos），过去一年他的财富增长了145亿美元。</p>
+<p>The third richest American on the list was businessman and investor Warren Buffett. He was followed by Facebook founder Mark Zuckerberg, who had the biggest overall wealth increase of anyone, $15.5 billion.<br/>排名第三的美国富豪是商人和投资家巴菲特。Facebook创始人马克·扎克伯格（Mark Zuckerberg）排名紧随其后，他去年财富增长了155亿美元，增幅超过了所有人。</p>
+<p>Overall, the magazine said it was another record year for America's wealthiest people. To make the Forbes 400 list in 2017, people had to be worth at least $2 billion.<br/>福布斯杂志表示，总的来说，今年是美国富豪们创纪录的又一年。想要登上2017年美国福布斯400富豪榜，个人身价至少需要达到20亿美元。</p>
+<p>The group's total net worth climbed to $2.7 trillion, up from $2.4 trillion a year earlier. The average net worth for the wealthiest Americans rose from $6 billion to $6.7 billion.<br/>这群富豪的总净资产从去年的2.4万亿美元攀升到了2.7万亿美元，他们的平均净资产从60亿美元上涨到了67亿美元。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Forbes: Trump’s Wealth Suffers Major Drop Since Presidency]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]President Donald Trump's wealth saw a major drop in the last year,
+[00:06.08]mainly because some of his properties decreased in value.
+[00:12.30]American business magazine Forbes says Trump's net worth
+[00:20.08]fell $600 million to $3.1 billion over the past 12 months.
+[00:28.34]His net worth was estimated at $3.7 billion a year ago.
+[00:36.10]Each year Forbes puts together a list of the 400 richest Americans.
+[00:44.35]This year, Trump was number 248 on the list, down from 156 in 2016.
+[00:55.79]According to Forbes, much of Trump's wealth comes
+[01:02.19]from a group of New York City luxury buildings in and around Manhattan.
+[01:09.79]The magazine said property values in the area have dropped recently.
+[01:16.51]One of the buildings is Trump Tower,
+[01:20.66]the headquarters for Trump's businesses.
+[01:24.48]Trump also lived at Trump Tower with his family before moving into the White House.
+[01:32.44]Trump also owns many other properties, including golf courses,
+[01:38.89]in the United States and around the world.
+[01:43.36]He also owns a winery and licenses his name to many companies worldwide.
+[01:52.24]Forbes also said Trump's wealth dropped
+[01:56.40]because he spent $66 million on his presidential campaign.
+[02:03.08]He also paid $25 million to settle a legal action
+[02:09.04]against him by former students of Trump University.
+[02:14.29]A few of Trump's properties did rise in value last year, the Forbes report says.
+[02:21.94]One was a hotel and residential building in Las Vegas, Nevada.
+[02:28.06]The other was an office building in San Francisco, California.
+[02:33.73]Trump is the first billionaire to become president of the United States.
+[02:40.94]He gave his two oldest sons control of his businesses
+[02:45.56]while he serves his presidential term.
+[02:49.61]Every name in the top ten belonged to a white man.
+[02:54.91]Two women, both white, are in the top twenty: Alice Walton,
+[03:01.18]an owner of the Wal-Mart company and Jacqueline Mars,
+[03:06.35]whose riches come mainly from the candy and pet food industries.
+[03:12.44]Two African-American billionaires made the list.
+[03:17.30]Investor Robert Smith came in at number 226, with a net worth of $3.3 billion.
+[03:27.54]Media businesswoman Oprah Winfrey was number 264,
+[03:33.55]with an estimated worth of $3 billion.
+[03:38.33]Microsoft co-founder Bill Gates took the top spot on the Forbes list for the 24th year in a row.
+[03:48.49]His net worth was estimated at $89 billion, up $8 billion from a year ago.
+[03:58.15]At number two was Amazon founder Jeff Bezos,
+[04:04.24]who added $14.5 billion to his wealth over the past year.
+[04:11.35]The third richest American on the list was businessman and investor Warren Buffett.
+[04:18.76]He was followed by Facebook founder Mark Zuckerberg,
+[04:23.23]who had the biggest overall wealth increase of anyone, $15.5 billion.
+[04:30.75]Overall, the magazine said it was another record year for America's wealthiest people.
+[04:38.88]To make the Forbes 400 list in 2017, people had to be worth at least $2 billion.
+[04:48.26]The group's total net worth climbed to $2.7 trillion, up from $2.4 trillion a year earlier.
+[05:00.04]The average net worth for the wealthiest Americans rose from $6 billion to $6.7 billion.
+[05:11.09]I'm Bryan Lynn.
+[05:13.83]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - UN: Violence Is Harming Haiti’s Schools</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, UN: Violence Is Harming Haiti’s Schools" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/un-violence-is-harming-haiti-s-schools.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>UN: Violence Is Harming Haiti’s Schools</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/un-violence-is-harming-haiti-s-schools.mp3" id="mp3"></a>
+<a href="/static/lrc/un-violence-is-harming-haiti-s-schools.lrc" id="lrc"></a>
+<a href="us-reporter-used-ai-to-create-false-quotes-for-stories-92905.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">20 August, 2024</span><br/>
+<p>Schools in Haiti are operating without enough chairs, blackboards, and even <strong>bathrooms</strong>.</p>
+<p>Violent criminal groups limit basic government services and deepen poverty while the state education system faces a $23 million deficit.</p>
+<p>Yasmine Sherif is the executive director of the U.N. organization Education Cannot Wait. “The country needs help,” Sherif said during her three-day visit to the Caribbean country in July.</p><div class="contentImage"><img alt="Students attend a math class at the Jean Marie Vincent High School in Port-au-Prince, Haiti, on Thursday, July 25, 2024. (AP Photo/Odelyn Joseph)" src="https://files.21voa.com/gdb/01000000-0aff-0242-e7e8-08dcb8a3d59d_w268_r1.jpg"/><br/><span class="imagecaption">Students attend a math class at the Jean Marie Vincent High School in Port-au-Prince, Haiti, on Thursday, July 25, 2024. (AP Photo/Odelyn Joseph)</span></div>
+<p>Sherif said the organization provided $2.5 million to help nearly 75,000 children in Haiti with money, food and other programs. And she asked the European Union and other countries, including France and the U.S., to help close the educational deficit.</p>
+<p>"My main concern is security," she said, noting the effect that violence has had on education.</p>
+<p>Criminal groups, called <strong>gangs</strong>, killed or injured more than 2,500 people in the first three months of the year. Violence has seriously affected life in the capital, Port-au-Prince, and elsewhere.</p>
+<p>At least 919 schools remain closed in Port-au-Prince and in the central area of Artibonite because of gang violence. The U.N. says that school closures have affected more than 150,000 students.</p>
+<p>"Education is part of the solution," Sherif said. "That would end extreme poverty, extreme violence and create political stability and create a reliable workforce."</p>
+<p><strong>Gang violence impacts</strong></p>
+<p>Gang violence also has left some 580,000 people homeless across Haiti, with many crowding into temporary shelters or taking over schools, causing them to close. Schools that remain open are increasingly forced to take students from others that have closed.</p>
+<p>The Jean Marie Vincent School in central Port-au-Prince, for example, has accepted students from 12 other schools.</p>
+<p>Charles Luckerno is the head of the Vincent School. He said, "We're not the only ones" facing such serious problems. Luckerno said that when classes end for the day, people left homeless by gang violence enter the school and sleep on its ground.</p>
+<p>Although that creates health problems, Luckerno still lets them stay. He said, "We are human. We cannot throw them out."</p>
+<p><strong>Not enough chairs</strong></p>
+<p>Williamson Bissainthe is a 22-year-old high school student who is preparing to take his final exam to <strong>graduate</strong>. He described the sad state of some schools.</p>
+<p>"A lot of schools are missing benches or chairs. Teachers do not show up on time. The hardest part of this is that there are no bathrooms," he said.</p>
+<p>Bissainthe added, "I hope that the generation that comes after me doesn't have to go through the same suffering.”</p>
+<p>Private schools are out of reach for many in Haiti, a country of more than 11 million people. More than 60 percent of the population earns less than $2 a day.</p>
+<p><strong>Homeless students</strong></p>
+<p>Among those who have been forced to flee their homes is 20-year-old Megane Dumorcy. She would like to study agriculture, but completing her education has been difficult.</p>
+<p>"The insecurity has had a huge <strong>impact</strong> on my life," she said, noting that some students have been forced to leave their backpacks behind as they flee gangs. "The state should find a solution for that. We shouldn't be living in a country where our movement is limited."</p>
+<p>She said her school is only half-built and lacks a library, a computer room, a blackboard and chairs. She does research on her phone when needed.</p>
+<p>Another blow to Haitian schools came in late 2022. That was the time the U.S. started a program permitting Haitians and people from other countries to enter the country on humanitarian grounds.</p>
+<p>"A lot of teachers left," said Frantz Erine, an official at the Jean Marie Vincent School.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Evens Sanon reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>bathroom</strong> – <em>n. </em>a room with a sink and toilet and sometimes a bathtub or shower</p>
+<p><strong>gang</strong> – <em>n</em>. a group of criminals</p>
+<p><strong>graduate</strong> – <em>v</em>. to earn a degree or diploma from a school, college, or university</p>
+<p><strong>impact</strong> – <em>n</em>. a powerful or major influence or effect</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:UN: Violence Is Harming Haiti’s Schools]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.88]Schools in Haiti are operating
+[00:04.72]without enough chairs, blackboards,
+[00:07.36]and even bathrooms.
+[00:10.24]Violent criminal groups
+[00:11.88]limit basic government services
+[00:14.80]and deepen poverty
+[00:16.64]while the state education system
+[00:19.16]faces a $23 million deficit.
+[00:23.24]Yasmine Sherif is the executive director
+[00:26.68]of the U.N. organization Education Cannot Wait.
+[00:31.52]"The country needs help," Sherif said
+[00:33.96]during her three-day visit
+[00:35.48]to the Caribbean country in July.
+[00:38.84]Sherif said the organization provided
+[00:41.64]$2.5 million
+[00:43.56]to help nearly 75,000 children in Haiti
+[00:47.00]with money, food and other programs.
+[00:50.36]And she asked the European Union
+[00:53.32]and other countries,
+[00:54.80]including France and the U.S.,
+[00:56.92]to help close the educational deficit.
+[01:00.92]"My main concern is security," she said,
+[01:04.20]noting the effect that violence has had on education.
+[01:09.00]Criminal groups, called gangs,
+[01:11.08]killed or injured more than 2,500 people
+[01:15.20]in the first three months of the year.
+[01:18.36]Violence has seriously affected
+[01:20.20]life in the capital,
+[01:21.68]Port-au-Prince, and elsewhere.
+[01:24.84]At least 919 schools remain closed in Port-au-Prince
+[01:29.92]and in the central area of Artibonite
+[01:32.80]because of gang violence.
+[01:35.96]The U.N. says that school closures
+[01:38.48]have affected more than 150,000 students.
+[01:43.16]"Education is part of the solution," Sherif said.
+[01:48.12]"That would end extreme poverty,
+[01:50.32]extreme violence and create political stability
+[01:54.64]and create a reliable workforce."
+[01:58.44]Gang violence also has left some
+[02:01.48]580,000 people homeless across Haiti,
+[02:05.72]with many crowding into temporary shelters
+[02:09.00]or taking over schools, causing them to close.
+[02:14.00]Schools that remain open are increasingly forced
+[02:17.32]to take students from others that have closed.
+[02:21.04]The Jean Marie Vincent School
+[02:23.32]in central Port-au-Prince, for example,
+[02:26.00]has accepted students from 12 other schools.
+[02:30.56]Charles Luckerno is the head of the Vincent School.
+[02:34.08]He said, "We're not the only ones"
+[02:36.92]facing such serious problems.
+[02:40.16]Luckerno said that when classes end for the day,
+[02:43.72]people left homeless by gang violence
+[02:46.56]enter the school and sleep on its ground.
+[02:50.52]Although that creates health problems,
+[02:53.04]Luckerno still lets them stay.
+[02:56.16]He said, "We are human.
+[02:58.08]We cannot throw them out."
+[02:59.84]Williamson Bissainthe
+[03:02.20]is a 22-year-old high school student
+[03:04.84]who is preparing to take his final exam to graduate.
+[03:09.28]He described the sad state of some schools.
+[03:12.92]"A lot of schools are missing benches or chairs.
+[03:16.40]Teachers do not show up on time.
+[03:19.12]The hardest part of this
+[03:21.08]is that there are no bathrooms," he said.
+[03:25.00]Bissainthe added, "I hope that
+[03:27.52]the generation that comes after me
+[03:29.48]doesn't have to go through the same suffering."
+[03:33.60]Private schools are out of reach for many in Haiti,
+[03:36.44]a country of more than 11 million people.
+[03:40.44]More than 60 percent of the population
+[03:43.00]earns less than $2 a day.
+[03:46.28]Among those who have been forced to flee their homes
+[03:49.24]is 20-year-old Megane Dumorcy.
+[03:52.88]She would like to study agriculture,
+[03:55.36]but completing her education has been difficult.
+[03:59.76]"The insecurity has had a huge impact on my life,"
+[04:03.32]she said, noting that some students have been forced
+[04:06.92]to leave their backpacks behind as they flee gangs.
+[04:11.84]"The state should find a solution for that.
+[04:14.60]We shouldn't be living in a country
+[04:16.44]where our movement is limited."
+[04:19.16]She said her school is only half-built
+[04:21.64]and lacks a library, a computer room,
+[04:24.72]a blackboard and chairs.
+[04:27.56]She does research on her phone when needed.
+[04:30.12]Another blow to Haitian schools came in late 2022.
+[04:36.00]That was the time the U.S. started a program
+[04:39.12]permitting Haitians and people from other countries
+[04:42.32]to enter the country on humanitarian grounds.
+[04:46.60]"A lot of teachers left," said Frantz Erine,
+[04:49.52]an official at the Jean Marie Vincent School.
+[04:53.64]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

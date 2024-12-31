@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 新冠疫情下全球经济以惊人速度萎缩</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 新冠疫情下全球经济以惊人速度萎缩" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202003/the-economy-shrinks-with-shocking-speed.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>新冠疫情下全球经济以惊人速度萎缩</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202003/the-economy-shrinks-with-shocking-speed.mp3" id="mp3"></a>
+<a href="/static/lrc/the-economy-shrinks-with-shocking-speed.lrc" id="lrc"></a>
+<a href="the-economy-shrinks-with-shocking-speed-84171.html" id="CnPage" target="_blank"></a>
+<a href="us-capital-tries-to-cut-visits-to-famed-cherry-blossoms-park-84163.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Three weeks ago, the car service company EmpireCLS was heading toward its second straight year of a growing business. Empire, based in New Jersey, could not find enough drivers and office workers to meet its needs.<br/>
+三周前，EmpireCLS汽车服务公司正要迎来业务增长的第二年。总部位于新泽西州的Empire公司招不到足够司机和文员来满足其需求。 <p>Now, the company is on the edge of failure.<br/>
+现在，该公司正处于倒闭边缘。</p>
+<p>With extreme speed, business in the United States and around the world has collapsed in the face of the coronavirus. People are told to stay home. A car service like Empire is not needed.<br/>
+面对冠状病毒，美国和世界各地的企业都以极快的速度崩溃。人们被告知要待在家里。Empire这样的汽车服务不再被需要。</p>
+<p>The company has had a "90 percent revenue loss in three weeks," said company chief David Seelinger. "We've been through 9/11. We've seen recessions. We've never seen anything like this.''<br/>
+Empire公司首席执行官大卫·西林格表示，该公司“在三周时间里损失了90%的收入。我们经历过911，我们见证过经济衰退，但是我们从未见过这样的事情。”</p>
+<p>Seelinger spent last Sunday telling 750 of his 900 employees they no longer had a job.<br/>
+西林格上周日通知公司900名员工中的750人他们被解雇了。</p>
+<p>"It was the most difficult day of my career," he said.<br/>
+他说：“那是我职业生涯中最为艰难的一天。”</p>
+<p>Never before has the American economy come to such a sudden, violent stop. The fall has shocked Americans who had enjoyed more than 10 years of a growing job market and economy. Now, the economy is headed toward a deep recession. Millions of people will likely lose jobs within a few months.<br/>
+美国经济从未像现在这样突然停滞。这种下跌震惊了美国人，他们享受了10多年就业市场和经济的增长。现在，经济正走向严重衰退。数月之内可能会有数百万人失业。</p>
+<p>"The economy has never gone from healthy to disaster so quickly," said Jason Furman. He was former President Barack Obama's top economic adviser and is now a professor at Harvard's Kennedy School.<br/>
+杰森·弗曼表示：“经济从未如此迅速地从健康状态陷入灾难。”他曾担任前奥巴马总统的首席经济顾问，目前是哈佛大学肯尼迪学院的教授。</p>
+<p>"What would take years in a financial crisis has happened in days in this health crisis,'' Furman said.<br/>
+弗曼表示：“金融危机中需要数年时间才会发生的情况，在这场健康危机中只花了几天时间就发生了。”</p>
+<p>Since the Great Recession ended in 2009, the economy has risen for 11 years. Yearly growth has been at about 2.3 percent since 2010. Employers have added positions for workers for the last nine years.<br/>
+自2009年大萧条结束以来，美国经济已经增长了11年。2010年以来美国经济年增长率约为2.3%。在过去9年里，雇主们增加了就业岗位。</p>
+<p>Just two weeks ago, the government released a great employment report: A gain of 273,000 jobs in February. The country was experiencing a 50-year low in the rate of unemployment: 3.5 percent.<br/>
+就在两周前，美国政府发布了一份出色的就业报告：2月份增加了27.3万个就业岗位。美国失业率处于50年来的最低水平：3.5%。</p>
+<p>People were buying goods, eating out and spending money in other ways, too. Things were great.<br/>
+人们购物、外出就餐以及各种花钱。一切都很顺利。</p>
+<p>But all that went away after just a few weeks of the spread of the new coronavirus in America.<br/>
+但是新冠病毒在美国传播的短短几周之后，以上这一切都消失了。</p>
+<p>The investment bank and financial services company Goldman Sachs says it expects the economy to shrink at a 24 percent yearly rate between April to June. Days earlier, the company had predicted a drop of just five percent during the same period.<br/>
+高盛投资银行和金融服务公司表示，该公司预计4到6月期间美国经济将以每年24%的速度萎缩。几天前，该公司曾预测同期仅会下降5%。</p>
+<p>The information services company IHS Markit predicts 7 million job losses from April to June. It expects unemployment will rise to 8.8 percent in the final three months of 2020. Some economists say it will go even higher.<br/>
+IHS Markit信息服务公司预计，4到6月美国将会有700万人失业。该机构预计到2020年最后三个月，失业率将会上升到8.8%。一些经济学家称失业率将会更高。</p>
+<p>As investors began to understand the seriousness of the crisis, they began to sell. Since February 12, the Dow Jones Industrial Average has fallen 35 percent. The market events have sharply reduced family wealth and consumer confidence.<br/>
+随着投资者开始了解危机的严重性，他们开始抛售股票。自2月12日以来，道琼斯工业平均指数下跌了35%。这些市场活动大大降低了家庭财富和消费者信心。</p>
+<p>"I'm not sure that anyone honestly has any sense of how this... resolves," said Daniel Feldman. The former U.S. ambassador advises large international companies for a Washington, D.C.-based law firm.<br/>
+丹尼尔·费尔德曼说：“我不确定有任何人对此有什么解决办法。”这位前美国大使在总部位于华盛顿特区的一家律师事务所为大型国际企业提供咨询。</p>
+<p>Government officials are trying to help. The central bank has cut its main interest rate to almost zero. It is also trying to make certain that companies can use short-term credit so they can continue to pay employees. Congress and the White House are preparing a large stimulus program that includes giving money to citizens.<br/>
+政府官员正在努力提供帮助。美联储已经将其主要利率降低到接近为0。它还试图确保企业可以利用短期信贷以便可以继续向员工支付薪水。国会和白宫正准备出台一项大规模刺激计划，其中包括给公民发钱。</p>
+<p>Economists do not usually recognize a recession until long after it has begun. Now, they can see it coming.<br/>
+经济学家通常要到衰退开始很久之后才会承认衰退。现在，他们可以看到衰退的来临。</p>
+<p>"Never...have I known the week a recession started," said Diane Swonk, chief economist at the company Grant Thornton. She says the downturn began in the first week of March as the economy all but stopped.<br/>
+均富公司首席经济学家黛安·斯旺克表示：“我从不知道衰退开始的那周。”她说，这场衰退始于3月的第一周，经济几乎停滞。</p>
+<p>For now, some Americans are working from home and keeping their jobs. Some of them may be saving money, which will help the economy later, explained Scott Hoyt, an economist at Moody's Analytics.<br/>
+目前一些美国人正在家里工作，保住了他们的就业岗位。穆迪分析公司的经济学家斯科特·霍伊特解释说，其中一些人可能会存下钱，这对以后的经济将会有好处。</p>
+<p>Yet the future does not look promising. About 60 percent of American workers--82 million people--are paid by the hour. Most will not be paid if they cannot go to work.<br/>
+然而未来并不乐观。大约60%的美国工人（8200万人）拿时薪工资。如果不能上班，他们中的大多数人都无法获得报酬。</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:The Economy Shrinks with Shocking Speed]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:02.00]Three weeks ago, the car service company EmpireCLS
+[00:07.76]was heading toward its second straight year of a growing business.
+[00:13.72]Empire, based in New Jersey, could not find enough drivers and office workers to meet its needs.
+[00:23.12]Now, the company is on the edge of failure.
+[00:28.36]With extreme speed, business in the United States and around the world has collapsed in the face of the coronavirus.
+[00:38.88]People are told to stay home.
+[00:41.72]A car service like Empire is not needed.
+[00:47.12]The company has had a "90 percent revenue loss in three weeks," said company chief David Seelinger.
+[00:56.48]"We've been through 9/11. We've seen recessions. We've never seen anything like this.''
+[01:04.68]Seelinger spent last Sunday telling 750 of his 900 employees they no longer had a job.
+[01:14.44]"It was the most difficult day of my career," he said.
+[01:19.12]Never before has the American economy come to such a sudden, violent stop.
+[01:26.40]The fall has shocked Americans who had enjoyed more than 10 years of a growing job market and economy.
+[01:35.84]Now, the economy is headed toward a deep recession.
+[01:41.32]Millions of people will likely lose jobs within a few months.
+[01:46.84]"The economy has never gone from healthy to disaster so quickly," said Jason Furman.
+[01:55.04]He was former President Barack Obama's top economic adviser
+[02:00.28]and is now a professor at Harvard's Kennedy School.
+[02:05.60]"What would take years in a financial crisis has happened in days in this health crisis,'' Furman said.
+[02:14.24]Since the Great Recession ended in 2009, the economy has risen for 11 years.
+[02:22.40]Yearly growth has been at about 2.3 percent since 2010.
+[02:29.00]Employers have added positions for workers for the last nine years.
+[02:34.48]Just two weeks ago, the government released a great employment report: A gain of 273,000 jobs in February.
+[02:45.80]The country was experiencing a 50-year low in the rate of unemployment: 3.5 percent.
+[02:53.84]People were buying goods, eating out and spending money in other ways, too.
+[03:00.68]Things were great.
+[03:02.00]But all that went away after just a few weeks of the spread of the new coronavirus in America.
+[03:10.12]The investment bank and financial services company Goldman Sachs says
+[03:15.48]it expects the economy to shrink at a 24 percent yearly rate between April to June.
+[03:24.24]Days earlier, the company had predicted a drop of just five percent during the same period.
+[03:30.72]The information services company IHS Markit predicts 7 million job losses from April to June.
+[03:39.72]It expects unemployment will rise to 8.8 percent in the final three months of 2020.
+[03:48.56]Some economists say it will go even higher.
+[03:52.16]As investors began to understand the seriousness of the crisis, they began to sell.
+[03:59.84]Since February 12, the Dow Jones Industrial Average has fallen 35 percent.
+[04:07.28]The market events have sharply reduced family wealth and consumer confidence.
+[04:13.96]"I'm not sure that anyone honestly has any sense of how this... resolves," said Daniel Feldman.
+[04:21.40]The former U.S. ambassador advises large international companies for a Washington, D.C.-based law firm.
+[04:30.88]Government officials are trying to help.
+[04:33.20]The central bank has cut its main interest rate to almost zero.
+[04:39.40]It is also trying to make certain that companies can use short-term credit so they can continue to pay employees.
+[04:48.84]Congress and the White House are preparing a large stimulus program that includes giving money to citizens.
+[04:57.40]Economists do not usually recognize a recession until long after it has begun.
+[05:04.52]Now, they can see it coming.
+[05:07.24]"Never...have I known the week a recession started,"
+[05:11.36]said Diane Swonk, chief economist at the company Grant Thornton.
+[05:17.44]She says the downturn began in the first week of March as the economy all but stopped.
+[05:26.16]For now, some Americans are working from home and keeping their jobs.
+[05:31.72]Some of them may be saving money, which will help the economy later,
+[05:36.44]explained Scott Hoyt, an economist at Moody's Analytics.
+[05:42.56]Yet the future does not look promising.
+[05:45.12]About 60 percent of American workers--82 million people--are paid by the hour.
+[05:52.56]Most will not be paid if they cannot go to work.
+[05:57.56]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

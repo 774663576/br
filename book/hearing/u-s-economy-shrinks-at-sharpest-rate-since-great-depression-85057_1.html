@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国经济录得大衰退以来最严重萎缩</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美国经济录得大衰退以来最严重萎缩" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202007/u-s-economy-shrinks-at-sharpest-rate-since-great-depression.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国经济录得大衰退以来最严重萎缩</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202007/u-s-economy-shrinks-at-sharpest-rate-since-great-depression.mp3" id="mp3"></a>
+<a href="/static/lrc/u-s-economy-shrinks-at-sharpest-rate-since-great-depression.lrc" id="lrc"></a>
+<a href="u-s-economy-shrinks-at-sharpest-rate-since-great-depression-85057.html" id="CnPage" target="_blank"></a>
+<a href="government-records-lowest-energy-use-in--years-85056.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The United States economy shrank at a yearly rate of 32.9 percent between April and June of this year. It is the worst quarterly contraction in the economy ever recorded.<br/>
+今年4到6月，美国经济的萎缩速度按年化计算达到了32.9%。这是美国经济有史以来最严重的季度萎缩。
+<p>The contraction came as the coronavirus pandemic pushed struggling businesses to close for a second time in many parts of the country. The closures have left millions of Americans out of work.<br/>
+这次萎缩发生在新冠病毒大流行迫使美国许多地区陷入困境的企业再次关闭之际。企业关闭已经导致数百万人失业。</p>
+<p>The U.S. Commerce Department released the economic numbers Thursday. Its estimate of the contraction in the Gross Domestic Product (GDP) is the worst since the government began keeping such records in 1947.<br/>
+美国商务部周四公布了这组经济数据。该部门估计，这次国民生产总值的萎缩是自美国政府1947年开始统计此类数据以来最糟糕的一次。</p>
+<p>The decrease comes after a 5 percent drop in economic activity during the first three months of the year. That is when the economy officially entered a recession, ending 11 years of growth, the longest on record in the country.<br/>
+这次萎缩发生在今年首季度经济活动下降5%之后。当时美国经济结束了该国有记录以来最长的连续11年的增长，正式进入衰退。</p>
+<p>The record-setting contraction resulted from a collapse in consumer spending, which makes up about 70 percent of economic activity. Restaurants, stores, and theaters closed, while Americans stopped traveling. People did not spend as much money because there was nowhere to spend it.<br/>
+这次创纪录的萎缩是由于消费者支出下降而造成的，这项支出约占经济活动的70%。餐馆、商店和剧院关闭，同时美国人民停止出行。人们没有花那么多钱，是因为没地方消费。</p>
+<p>The drop in GDP shows the "unprecedented hit to the economy from the pandemic,"said economist Andrew Hunter. He added that "it will take years" for the economy to recover. Hunter works for Capital Economics, an economic research service based in London.<br/>
+经济学家安德鲁·亨特表示，国民生产总值的下降表明“大流行给经济造成了了前所未有的打击。”他还表示，经济复苏需要数年时间。亨特就职于凯投宏观，这是伦敦的一家经济研究服务机构。</p>
+<p>So great was the contraction that many experts expect economic activity to rise sharply during the current quarter. Some predict the economy will grow as much as 17 percent, or higher, between now and the end of September.<br/>
+这次萎缩如此严重，以至于很多专家预计本季度的经济活动将会急剧上升。一些人预测从现在到9月底，美国经济将增长17%或更高。</p>
+<p>Yet with the rate of confirmed coronavirus cases rising in many states, more businesses are being forced to either cancel their reopening, or close down again. In addition, the U.S. Senate is considering a proposal to cut government aid to the unemployed. So, it is possible the economy could get even worse in the months to come.<br/>
+然而，随着许多州新冠病毒确诊病例的上升，许多企业被迫取消重新开放或再次关闭。此外，美国参议院正在审议一项削减政府对失业者援助的提案。因此，未来几个月经济可能会变得更糟。</p>
+<p>In addition to consumer spending, business investment dropped 27 percent and housing fell 38.7 percent between April and June.<br/>
+除了消费者支出，4到6月的商业投资下降了27%，住房下降了38.7%。</p>
+<p>State and local governments have been hurt by the loss of tax money and job losses. State and local government spending decreased by a yearly rate of 5.6 percent.<br/>
+州政府和地方政府遭受了税收和就业岗位减少的重击。州政府和地方政府的支出按年化下降了5.6%。</p>
+<p>But total government spending was up 2.7 percent because of federal efforts to ease the pain of the recession. Federal spending has risen 17.4 percent, mostly for more than $2 trillion in a coronavirus aid plan. Congress sent many Americans $1,200, gave loans to many businesses and increased unemployment aid.<br/>
+但是由于联邦政府为缓解经济衰退的痛苦而采取的措施，政府总支出增长了2.7%。联邦支出增长了17.4%，其中大部分用于新冠病毒援助计划中的超2万亿美元支出。美国国会向许多美国人发放了1200美元的援助，为许多企业提供了贷款，并提高了失业援助。</p>
+<p>Congressional leaders and the Trump administration are talking about more aid for people and businesses to fight the recession.<br/>
+国会领导人和川普政府正在商讨为个人和企业提供更多援助以对抗经济衰退。</p>
+<p>In a separate report Thursday, the Labor Department said requests for unemployment aid increased 12,000 to 1.434 million in the week ending July 25. Nearly 30.2 million jobless Americans are receiving unemployment aid.<br/>
+在周四的另一份报告中，美国劳工部表示，截至7月25日这周，申请失业救济的人数增加了1.2万人，达到了143.4万人。近3020万美国失业者正在领取失业援助。</p>
+<p>President Trump has urged states to reopen businesses. But there are worries that the virus remains a threat to workers and consumers at service industry jobs that often require face-to-face contact.<br/>
+川普总统督促各州重新开放企业。但是令人担忧的是，该病毒仍然威胁着服务行业的员工和消费者，该行业通常需要面对面接触。</p>
+<p>Many economists say the economy cannot fully recover until the coronavirus is defeated. Federal Reserve Chairman Jerome Powell said on Wednesday that the virus has been endangering a small economic recovery. For that reason, he said, the U.S. central bank plans to keep interest rates near zero well into the future.<br/>
+许多经济学家表示，除非击败新冠病毒，否则经济无法完全恢复。美联储主席鲍威尔周三表示，该病毒一直在危及经济的小幅复苏。他说，出于这个原因，美国央行计划在未来很长时间内维持利率接近于零的水平。</p>
+<p>I'm Susan Shand.<br/>
+我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Economy Shrinks at Sharpest Rate Since Great Depression]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States economy shrank at a yearly rate of 32.9 percent
+[00:10.64]between April and June of this year.
+[00:14.92]It is the worst quarterly contraction in the economy ever recorded.
+[00:24.04]The contraction came as the coronavirus pandemic
+[00:28.68]pushed struggling businesses to close
+[00:32.28]for a second time in many parts of the country.
+[00:37.72]The closures have left millions of Americans out of work.
+[00:44.92]The U.S. Commerce Department released the economic numbers Thursday.
+[00:51.12]Its estimate of the contraction in the Gross Domestic Product (GDP)
+[00:56.20]is the worst since the government began keeping such records in 1947.
+[01:04.92]The decrease comes after a 5 percent drop in economic activity
+[01:10.68]during the first three months of the year.
+[01:14.68]That is when the economy officially entered a recession,
+[01:19.08]ending 11 years of growth, the longest on record in the country.
+[01:27.36]The record-setting contraction resulted from a collapse in consumer spending,
+[01:33.48]which makes up about 70 percent of economic activity.
+[01:39.96]Restaurants, stores, and theaters closed, while Americans stopped traveling.
+[01:47.76]People did not spend as much money because there was nowhere to spend it.
+[01:54.84]The drop in GDP shows the "unprecedented hit to the economy
+[02:00.96]from the pandemic,"said economist Andrew Hunter.
+[02:06.76]He added that "it will take years" for the economy to recover.
+[02:12.40]Hunter works for Capital Economics,
+[02:15.88]an economic research service based in London.
+[02:21.96]So great was the contraction that many experts expect economic activity
+[02:28.20]to rise sharply during the current quarter.
+[02:32.36]Some predict the economy will grow as much as 17 percent, or higher,
+[02:38.56]between now and the end of September.
+[02:43.96]Yet with the rate of confirmed coronavirus cases rising in many states,
+[02:50.44]more businesses are being forced
+[02:53.44]to either cancel their reopening, or close down again.
+[02:59.24]In addition, the U.S. Senate is considering a proposal
+[03:03.96]to cut government aid to the unemployed.
+[03:07.84]So, it is possible the economy could get even worse in the months to come.
+[03:15.96]In addition to consumer spending, business investment dropped 27 percent
+[03:22.68]and housing fell 38.7 percent between April and June.
+[03:30.88]State and local governments have been hurt by the loss of tax money and job losses.
+[03:38.08]State and local government spending decreased by a yearly rate of 5.6 percent.
+[03:46.96]But total government spending was up 2.7 percent
+[03:52.44]because of federal efforts to ease the pain of the recession.
+[03:58.32]Federal spending has risen 17.4 percent,
+[04:03.04]mostly for more than $2 trillion in a coronavirus aid plan.
+[04:10.56]Congress sent many Americans $1,200,
+[04:15.60]gave loans to many businesses and increased unemployment aid.
+[04:23.16]Congressional leaders and the Trump administration are talking about more aid
+[04:28.56]for people and businesses to fight the recession.
+[04:33.84]In a separate report Thursday,
+[04:36.56]the Labor Department said requests for unemployment aid
+[04:40.56]increased 12,000 to 1.434 million in the week ending July 25.
+[04:49.96]Nearly 30.2 million jobless Americans are receiving unemployment aid.
+[04:58.84]President Trump has urged states to reopen businesses.
+[05:04.04]But there are worries that the virus remains a threat to workers and consumers
+[05:10.20]at service industry jobs that often require face-to-face contact.
+[05:17.88]Many economists say the economy cannot fully recover until the coronavirus is defeated.
+[05:26.24]Federal Reserve Chairman Jerome Powell said on Wednesday
+[05:30.88]that the virus has been endangering a small economic recovery.
+[05:36.32]For that reason, he said, the U.S. central bank plans
+[05:41.72]to keep interest rates near zero well into the future.
+[05:47.48]I'm Susan Shand.
+[05:51.68]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

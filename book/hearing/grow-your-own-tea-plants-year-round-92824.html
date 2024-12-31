@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grow Your Own Tea Plants Year-round</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Grow Your Own Tea Plants Year-round" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/grow-your-own-tea-plants-year-round.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grow Your Own Tea Plants Year-round</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/grow-your-own-tea-plants-year-round.mp3" id="mp3"></a>
+<a href="ukrainian-companies-develop-robotic-vehicles-to-fight-russia-92823.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">22 July, 2024</span><br/>
+<p>People who grow their own food are familiar with planting tomatoes, peppers, squash, herbs, berries and other common fruits and vegetables.</p>
+<p>However, they may not think of growing plants for drinks.</p>
+<p><strong>Gardening </strong>expert Jessica Damiano recently wrote about plants you can grow to make tea. Damiano, who writes for the Associated Press, says that growing your own tea plants in the garden can provide enough leaves and flower <strong>buds</strong> to keep your tea pot filled year-round.</p><div class="contentImage"><img alt="This image provided by the Missouri Botanical Garden shows a hedge of Camellia sinensis plants. The plant's leaves are used to make white, green, black and oolong teas. (Missouri Botanical Garden via AP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-965b-08dc9c4106d0_w268_r1.jpg"/><br/><span class="imagecaption">This image provided by the Missouri Botanical Garden shows a hedge of Camellia sinensis plants. The plant's leaves are used to make white, green, black and oolong teas. (Missouri Botanical Garden via AP)</span></div>
+<p>And the plant to grow, she says, is camellia sinensis (var. sinensis), also known as the “tea plant.”</p>
+<p>These <strong>evergreen</strong> plants are easy to grow in any amount of sunlight, from deep <strong>shade</strong> to full sun. However, ideal growing conditions are part sun to light shade. They require well-draining soil with a slightly <strong>acidic</strong> pH.</p>
+<p>Young plants will take about two years to produce enough leaves for tea. In five years, one plant should provide enough for an average tea drinker. If you need more tea, Damiano says to plant more camellia sinensis.</p>
+<p>Camellia sinensis is called the “tea plant” because white, green, black, and oolong teas all come from this plant. Their differences come from harvesting practices and after-harvest treatments.</p>
+<p>For white tea, pick the flower buds before they fully open. Heat the buds in a pan over low heat, moving them often for about 10 minutes. Cool them and store in an airtight container.</p>
+<p>For green, black and oolong tea, pick two or three of the youngest leaves from each stem, along with the leaf bud from each stem tip. Do this every 10 to 12 days as new growth develops.</p>
+<p>Preparing green, oolong, or black tea all have different processes.</p>
+<p><strong>Green tea</strong></p>
+<p>For making green tea, briefly <strong>steam</strong> leaves over boiling water. Then put the leaves on a clean towel and let them sit for five minutes. Roll up the leaves in the towel gently to remove extra water. Remove the leaves from the towel, separate them, and place them on a baking sheet. Heat in an oven or toaster oven set to 148 degrees Celsius (300 degrees Fahrenheit) for 10 to 15 minutes or until the leaves are completely dry. <strong>Brew</strong> immediately or cool and keep them in an airtight container for future use.</p>
+<p><strong>Oolong tea</strong></p>
+<p>For making oolong tea, put the leaves in one layer on a baking tray. Put the tray in a sunny outdoor spot to let the leaves <strong>wilt.</strong> After 30 to 60 minutes, move the tray into the shade and move the leaves every hour for 8 to 10 hours. Next, place the leaves in a wide pan and cook them over low heat for 15 minutes, moving gently as needed to prevent burning. Let the leaves cool. And roll each leaf individually to keep its oils and flavors. They should be completely dry before storing in an airtight container.</p>
+<p><strong>Black tea</strong></p>
+<p>To make black tea, place leaves on a baking sheet in the sun for 10 to 12 hours to remove only 50 to 75 percent of the water. Then, cut the leaves into long pieces and roll into small balls. Place the balls in a warm room between 25 and 26 degrees Celsius (78 to 80 degrees F) that is not too dry of a room until they turn reddish-black. Then, dry them in an <strong>oven</strong> at 93 degrees Celsius (200 degrees F) for 5 minutes. Lower heat to 60 degrees C (140 degrees F) and continue drying for an additional hour. Cool and store in an airtight container.</p>
+<p>Native<strong> </strong>to China, camellia sinensis var. sinensis is cold-hardy. That means it can survive in cold weather. However, it may need some protection to survive cold winters.</p>
+<p>The same is true for another variety of this flower, camelia sinensis var. assamica. Native to India, this kind is more like a tree.</p>
+<p>You will have to research which kinds of camellia sinensis can grow in your area.</p>
+<p>On its website, the <a class="wsw__a" href="https://internationalcamellia.org/en-us/caring-for-camellias/winter-protection-of-camellias">International Camellia Society</a> gives you suggestions for how to protect these plants during a cold weather.</p>
+<ul>
+<li>Mulching: Apply a thick layer of mulch around the base to protect the roots.</li>
+<li>Covering: Use a cloth to cover the plant during extreme cold.</li>
+<li>Watering: Water the plant well before the first freeze.</li>
+<li>Location: Plant your camellia in a sheltered spot, such as near a building, to protect it from cold winds.</li>
+<li><strong>Pruning</strong>: Avoid pruning late in the season. New growth may not survive colder weather.</li>
+</ul>
+<p>I'm Anna Matteo. And I'm Andrew Smith.</p>
+<p><em>Jessica Damiano reported this story for the Associated Press. Anna Matteo adapted it for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>garden </strong><em>– v.</em><strong> </strong>to grow<strong> </strong>herbs, fruits, flowers, or vegetables</p>
+<p><strong>bud </strong><em>– n. </em>a small growth at the tip or on the side of a plant stem that later develops into a flower, leaf, or new shoot</p>
+<p><strong>evergreen </strong><em>– adj. </em>having foliage that remains green and functional through more than one growing season</p>
+<p><strong>shade </strong><em>– n. </em>space sheltered from the heat and bright light of the sun</p>
+<p><strong>acidic </strong><em>– adj. </em>Acidic soil tends to have mineral deficiencies that can affect plant growth. By definition, acidity is the characteristic of soil that has a pH level of less than 6.5 (a reading of 5.5 means the soil is very acidic).</p>
+<p><strong>steam </strong><em>– v. </em>the invisible vapor into which water is changed when heated to the boiling point</p>
+<p><strong>brew </strong><em>– v. </em>to prepare (as tea) by soaking in hot water</p>
+<p><strong>wilt </strong><em>– v. </em>to lose or cause to lose freshness and become limp</p>
+<p><strong>oven</strong> <em>– n. </em>a chamber used for baking, heating, or drying<em> </em></p>
+<p><strong>prune </strong><em>– v.</em> to cut off or cut back parts of for better shape or more fruitful growth</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Assessment and Evaluation</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Assessment and Evaluation" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/assessment-and-evaluation.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Assessment and Evaluation</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/assessment-and-evaluation.mp3" id="mp3"></a>
+<a href="grammar-and-figurative-language-in-take-me-home-country-roads-91973.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gena Bennett</span><br/>
+<span class="datetime">22 December 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question about the words "assessment" and "evaluation."</p>
+<p><strong>Question</strong></p>
+<p>What is difference between Assessment and evaluation?</p><div class="contentImage"><img alt="Assessment &amp; Evaluation" src="https://files.21voa.com/gdb/01000000-0aff-0242-f32e-08dc0101902a_w268_r1.png"/><br/><span class="imagecaption">Assessment &amp; Evaluation</span></div>
+<p>Noor</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing, Noor. This is a good question.</p>
+<p>Many people use the terms assessment and evaluation interchangeably. That means they see little or no difference between them in most cases. The terms are related. They both involve performance and education, but they are not the same thing. It is a mistake to use them interchangeably.</p>
+<p>Assessment <strong>focuses on</strong> student learning, documenting what students know and what they can do. Assessment has many purposes. They include finding out a student's overall ability, measuring to what <strong>degree</strong> a student has gained control of an identified set of <strong>criteria</strong>, and providing students with information about their strengths and weaknesses. Assessment is a continual process. Its goal is to help students improve.</p>
+<p>Here are some sentences using assessment.</p>
+<p><em>Teachers should use classroom assessments to inform instruction.</em></p>
+<p><em>The students completed a weekly assessment.</em></p>
+<p><em>The school uses a variety of assessment tools.</em></p>
+<p>Evaluation often focuses on the performance of an organization. Evaluation involves using criteria and evidence to find out if an organization is meeting its goals. Evaluation only happens at set times, and its goal is to judge the quality of an organization. Assessment can be a part of the evaluation process. That is because assessment results are often used to make judgements.</p>
+<p>Here are some sentences using evaluation.</p>
+<p><em>The class was canceled due to results from the curriculum evaluation.</em></p>
+<p><em>The school district completed its special education program evaluation last month.</em></p>
+<p><em>The governor focused on the lack of school counseling evaluations.</em></p>
+<p>Although assessment and evaluation are both used in education and relate to measuring performance, they have different focuses, purposes, timing, and <strong>outcomes</strong>. The terms are also used a lot in other fields such as finance, medicine and engineering.</p>
+<p>Please let us know if this explanation has helped you, Noor.</p>
+<p>Do you have a question about American English? Send us an email at learningenglish@voanews.com.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Gena Bennett.</p>
+<p><em>Gena Bennett wrote this lesson for VOA Learning English.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>focus on</strong>–<em>v</em>. pay attention to</p>
+<p><strong>degree</strong> –<em>n</em>. a level which can be measured in some way and compared to other levels</p>
+<p><strong>criteria</strong>—<em>n</em>. conditions which must be met</p>
+<p><strong>outcome</strong>–<em>n</em>. final product or end result</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

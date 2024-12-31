@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Saving Seeds for Next Year’s Flower Garden</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Saving Seeds for Next Year’s Flower Garden" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202210/saving-seeds-for-next-year-s-flower-garden.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Saving Seeds for Next Year’s Flower Garden</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202210/saving-seeds-for-next-year-s-flower-garden.mp3" id="mp3"></a>
+<a href="plant-garlic-now-for-next-summer-s-harvest-89818.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">17 October 2022</span><br/>
+<p>Just like vegetable seeds, you can save flower seeds from your garden this year to plant the following.</p>
+<p>Jessica Damiano writes about gardening for the Associated Press. She shares some tips for saving your flower seeds for next year.</p>
+<p>If you want the same kind of flower or plant for next year's garden, collect only the seeds from plants labeled as "<strong>heirloom</strong>" or "<strong>heritage</strong>." These kinds of plants will grow just like their parent plant.</p><div class="contentImage"><img alt="This Sept. 28, 2022, photo provided by Jessica Damiano shows a dry coneflower seed head. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/2a9e5cf9-e1d4-4297-a8e4-f59c2417703d_cx0_cy5_cw99_w268_r1.jpg"/><br/><span class="imagecaption">This Sept. 28, 2022, photo provided by Jessica Damiano shows a dry coneflower seed head. (Jessica Damiano via AP)</span></div>
+<p><strong>Hybrid</strong> seeds with a mixture of two different parents will produce new plants, but they will only look like one of the parents. Therefore, you are taking a risk with planting hybrid seeds.</p>
+<p>Even if you expect plants to be the same as their parents, there are no guarantees. Wind or insects could bring <strong>pollen</strong> from one plant to another and accidentally create a hybrid. You can avoid this by planting only the plant from which you plan to collect seeds.</p>
+<p>But if you like surprises, start experimenting! You could create a lovely new plant or flower!</p>
+<p>Just like everything else in gardening, timing is important. Collect seeds on a dry, sunny day. Let the seeds grow and dry on the plant or else they might not develop later on, but do not wait too long.</p>
+<p>After harvesting the seeds, remove the non-seed material like <strong>petals</strong>. Spread the seeds on something like an old newspaper and let them dry for one week.</p>
+<p>You can place the seeds in folded paper or a glass container that can be sealed. Then store them in a cool dry area. Make sure to mark your paper or container so you do not forget in the spring what they are.</p>
+<p>When stored with care, seeds are good for several years. But you should plant the harvested seeds the following year for best results.</p>
+<p>Also, be sure to leave some seeds outside to feed birds over the winter. They will help you in the spring by providing insect control in your garden.</p>
+<p><strong>Collecting seeds from different plants</strong></p>
+<p>Keep an eye on flowers like California poppies and Texas bluebonnets. When their <strong>pods </strong>open, these plants could spray their seeds up to 6 meters away. Once on the ground, it is difficult to collect them.</p>
+<p>Instead, tie a small bag for seed collection over the pod when it nearly opens. If the explosion happens when you are not looking, the bag will collect the seeds for you.</p>
+<p>For plants with <strong>prickly</strong> seed heads like Mexican sunflowers, cut the head off the plant and drop it into a paper <strong>bag</strong>. Give the bag a shake to help loosen and separate the seeds. This will save your fingers!</p>
+<p>Some flower seeds like sunflowers and daisies do not develop well. In this case, try to pick the fattest seeds for planting or even add more seeds to the soil to make sure that some will grow.</p>
+<p>Other kinds of flowers like marigolds produce seeds that have a rod-like structure in them. The petals are tight, so remove the dry petals and open the seed head to release the rods. After that, you can dry, store, and plant the entire structure, not just the seeds.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Jessica Damiano wrote this article for The Associated Press. Faith Pirlo adapted it for Learning English. </em></p>
+<p><em>_________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>heirloom</strong> – <em>n</em>. any garden plant passed down over time within a family, just like a piece of jewelry.</p>
+<p><strong>heritage</strong> <em>– n.</em> the history and culture of a family, community, or country</p>
+<p><strong>hybrid </strong>– <em>adj </em>or<em>. n</em>. referring to offspring of parents that are not simila<em>r;</em> the combination of two or more things</p>
+<p><strong>pollen</strong> – <em>n</em>. the very fine usually yellow dust that is produced by a plant and that is carried to other plants of the same kind usually by wind or insects so that the plants can produce seeds</p>
+<p><strong>petal </strong>– <em>n</em>. the soft, colorful part of a flower</p>
+<p><strong>pod </strong>– <em>n</em>. a long, thin part of a plant with seeds inside</p>
+<p><strong>prickly </strong><em>–</em><em> adj.</em> having many sharp points</p>
+<p><strong>bag </strong>– <em>n.</em> a sack or container that is made of strong paper, cloth, or plastic</p>
+<p> </p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

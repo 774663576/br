@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国新版新冠疫苗将于9月面市</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 美国新版新冠疫苗将于9月面市" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/new-covid-19-vaccine-to-launch-in-september.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国新版新冠疫苗将于9月面市</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/new-covid-19-vaccine-to-launch-in-september.mp3" id="mp3"></a>
+<a href="/static/lrc/new-covid-19-vaccine-to-launch-in-september.lrc" id="lrc"></a>
+<a href="new-covid--vaccine-to-launch-in-september-91377.html" id="CnPage" target="_blank"></a>
+<a href="study-ancient-mars-may-have-had-wet-dry-periods-91372.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The latest COVID-19 vaccine is set for release in September. But health experts say it remains unclear how many Americans will choose to get the new shot.<br/>
+最新的新冠肺炎疫苗将于今年9月发布。但卫生专家表示，目前尚不清楚有多少美国人会选择接种新疫苗。</p>
+<p>The efforts to prepare a new vaccine come as hospitals in the United States report increases in COVID-19 patients since early July. But the number of hospitalizations is still far below those reported earlier this year and throughout the COVID-19 pandemic.<br/>
+新疫苗的开发工作正值美国医院报告自7月初以来新冠肺炎患者增加之际。但住院人数仍远低于今年早些时候和整个新冠肺炎大流行期间报告的人数。</p>
+<p>A drop in infections has caused demand for the vaccine to fall sharply since the first shot became available in 2021. Officials say that overall, more than 240 million people in the U.S. had received at least one COVID-19 injection. That number represents about 73 percent of America's population.<br/>
+感染人数下降导致对疫苗的需求自2021年第一针疫苗问世以来的急剧下降。官员们表示，总体而言，美国有超过2.4亿人至少接种了一针新冠肺炎疫苗。这个数字约占美国人口的73%。</p>
+<p>By autumn of 2022, fewer than 50 million people got the vaccine shots. By that time, most people in the U.S. had either been infected with COVID-19 or had received at least one shot.<br/>
+到了2022年秋季，只有不到5000万人接种了疫苗。那时，大多数美国人要么感染了新冠肺炎，要么至少接种了一针。</p>
+<p>Public health experts have advised people to look at COVID-19 vaccines the same as they do shots for other sicknesses, such as the flu. Flu vaccines are developed to fight the latest virus versions, called variants, and are generally administered once per flu season.<br/>
+公共卫生专家建议人们像接种流感等其他疾病的疫苗一样，接种新冠肺炎疫苗。流感疫苗的开发是为了对抗最新版本的病毒，也就是所谓变种，通常每个流感季节都要接种一次。</p>
+<p>But efforts to get people to seek COVID-19 shots are likely to be hurt by decreasing concern about the virus. Some people also question if the vaccines are safe.<br/>
+但让人们接种新冠肺炎疫苗的努力可能会因为人们对该病毒的担忧减少而受到损害。一些人还质疑疫苗是否安全。</p>
+<p>Healthcare providers and drug businesses have said they plan to start offering the new COVID-19 vaccine next month. The vaccine was developed to fight virus versions linked to the Omicron variant, which has been spreading in the U.S. since last year.<br/>
+医疗保健提供商和制药企业表示，他们计划下个月开始提供新的新冠肺炎疫苗。该疫苗是为了对抗与奥密克戎变异株有关的病毒版本而开发的，奥密克龙变异株自去年以来一直在美国传播。</p>
+<p>Ashley Kirzinger is a lead researcher with the Kaiser Family Foundation. She told Reuters news agency that health officials need to send a clear message to the public that COVID-19 has not gone away. In addition, the messaging should note the new vaccine can protect individuals from serious sickness and hospitalization.<br/>
+阿什利·科齐格是凯撒家族基金会的首席研究员。她告诉路透社，卫生官员需要向公众发出一个明确的信息，即新冠肺炎尚未消失。此外，该信息还应该指出，新疫苗可以保护个人避免重症和住院治疗。</p>
+<p>Kirzinger noted her foundation has carried out public opinion studies on the issue. She said the top reason vaccinated people gave for rejecting more vaccinations was the belief that people were protected from the virus because of earlier shots or infections.<br/>
+科齐格指出，她所在的基金会已经对这个问题进行了民意调查。她说，接种过疫苗的人士拒绝接种更多疫苗的首要原因，是相信之前打过疫苗或已经感染过，不会再次感染病毒。</p>
+<p>The two largest COVID-19 vaccine makers – Pfizer-BioNTech and Moderna – have predicted far less demand this autumn for the shots. Last year, vaccine sales by Pfizer and Moderna reached a combined $56 billion worldwide. This year, experts estimate the shots will bring in $20 billion for the companies.<br/>
+两家最大的新冠肺炎疫苗制造商——辉瑞生物技术公司和莫德纳公司——预计今年秋季对疫苗需求将大幅减少。去年，辉瑞和莫德纳在全球的疫苗销售额总计达到560亿美元。专家估计，疫苗今年将为这些公司带来200亿美元的收入。</p>
+<p>The COVID-19 public health emergency officially ended in May. Since then, the government has handed over much of the vaccination effort to private companies. More than 1.1 million people in the United States have died from COVID, the U.S. Centers for Disease Control and Prevention (CDC) reports.<br/>
+新冠肺炎突发公共卫生事件于5月正式结束。自那时以来，政府已将大部分疫苗接种工作移交给私营公司。据美国疾控预防中心报道，美国已有110多万人死于新冠肺炎。</p>
+<p>The CDC and U.S. Food and Drug Administration (FDA) are considering for approval the final versions of the new vaccine. CDC Director Mandy Cohen said last week she expects the shots to be launched during the third or fourth week of September.<br/>
+美国疾控预防中心和美国食品药品监督管理局正在考虑批准新疫苗的最终版本。美国疾控预防中心主任曼迪·科恩上周表示，她预计疫苗将在9月的第三或第四周接种。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·琳恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New COVID-19 Vaccine to Launch in September]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The latest COVID-19 vaccine
+[00:03.72]is set for release in September.
+[00:07.44]But health experts say it remains unclear
+[00:12.24]how many Americans will choose to get the new shot.
+[00:17.68]The efforts to prepare a new vaccine
+[00:21.40]come as hospitals in the United States
+[00:25.40]report increases in COVID-19 patients since early July.
+[00:32.68]But the number of hospitalizations
+[00:35.84]is still far below those reported earlier this year
+[00:40.92]and throughout the COVID-19 pandemic.
+[00:45.80]A drop in infections has caused demand for the vaccine
+[00:51.52]to fall sharply since the first shot became available in 2021.
+[00:59.04]Officials say that overall,
+[01:02.24]more than 240 million people in the U.S.
+[01:07.04]had received at least one COVID-19 injection.
+[01:12.72]That number represents about 73 percent
+[01:17.16]of America's population.
+[01:20.36]By autumn of 2022, fewer than 50 million people
+[01:26.04]got the vaccine shots.
+[01:28.60]By that time, most people in the U.S.
+[01:32.52]had either been infected with COVID-19
+[01:36.08]or had received at least one shot.
+[01:40.12]Public health experts have advised people
+[01:44.08]to look at COVID-19 vaccines
+[01:47.56]the same as they do shots for other sicknesses,
+[01:51.64]such as the flu.
+[01:54.04]Flu vaccines are developed
+[01:56.36]to fight the latest virus versions, called variants,
+[02:01.44]and are generally administered once per flu season.
+[02:07.04]But efforts to get people to seek COVID-19 shots
+[02:11.96]are likely to be hurt
+[02:13.96]by decreasing concern about the virus.
+[02:18.40]Some people also question if the vaccines are safe.
+[02:23.96]Healthcare providers and drug businesses
+[02:28.16]have said they plan to start offering
+[02:31.16]the new COVID-19 vaccine next month.
+[02:36.08]The vaccine was developed to fight virus versions
+[02:40.84]linked to the Omicron variant,
+[02:43.92]which has been spreading in the U.S. since last year.
+[02:49.40]Ashley Kirzinger is a lead researcher
+[02:53.08]with the Kaiser Family Foundation.
+[02:56.40]She told Reuters news agency
+[02:59.52]that health officials need to send a clear message
+[03:03.72]to the public that COVID-19 has not gone away.
+[03:09.04]In addition, the messaging should note
+[03:12.76]the new vaccine can protect individuals
+[03:16.48]from serious sickness and hospitalization.
+[03:21.20]Kirzinger noted her foundation has carried out
+[03:25.08]public opinion studies on the issue.
+[03:28.92]She said the top reason vaccinated people gave
+[03:33.52]for rejecting more vaccinations
+[03:36.44]was the belief that people were protected from the virus
+[03:41.00]because of earlier shots or infections.
+[03:45.20]The two largest COVID-19 vaccine makers
+[03:50.08]– Pfizer-BioNTech and Moderna – have predicted
+[03:54.72]far less demand this autumn for the shots.
+[03:59.48]Last year, vaccine sales by Pfizer and Moderna
+[04:04.32]reached a combined $56 billion worldwide.
+[04:10.24]This year, experts estimate the shots
+[04:13.28]will bring in $20 billion for the companies.
+[04:18.28]The COVID-19 public health emergency
+[04:22.24]officially ended in May.
+[04:25.16]Since then, the government has handed over
+[04:28.48]much of the vaccination effort to private companies.
+[04:33.36]More than 1.1 million people in the United States
+[04:38.12]have died from COVID, the U.S. Centers
+[04:42.00]for Disease Control and Prevention (CDC) reports.
+[04:48.20]The CDC and U.S. Food and Drug Administration (FDA)
+[04:53.88]are considering for approval
+[04:56.32]the final versions of the new vaccine.
+[05:00.32]CDC Director Mandy Cohen said last week
+[05:05.00]she expects the shots to be launched
+[05:08.04]during the third or fourth week of September.
+[05:12.68]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

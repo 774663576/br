@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 脸书网开始评估用户可信度</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 脸书网开始评估用户可信度" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201808/facebook-now-rates-users-on-trustworthiness.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>脸书网开始评估用户可信度</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201808/facebook-now-rates-users-on-trustworthiness.mp3" id="mp3"></a>
+<a href="/static/lrc/facebook-now-rates-users-on-trustworthiness.lrc" id="lrc"></a>
+<a href="facebook-now-rates-users-on-trustworthiness-79916.html" id="CnPage" target="_blank"></a>
+<a href="trump-s-former-aides-admitted-convicted-of-crimes-79908.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Facebook is now rating users on how trustworthy they are in identifying and reporting real and false news.<br/>脸书网现在开始评估用户在识别和报告真假新闻方面的可信度。
+<p>The ratings system was first reported by The Washington Post. A Post reporter interviewed Facebook product manager Tessa Lyons, who leads the company's efforts to fight misinformation.<br/>《华盛顿邮报》最先报道了这一评估系统。一位邮报记者采访了脸书网负责打击虚假信息的产品经理泰莎·莱昂兹（Tessa Lyons）。</p>
+<p>Lyons told the newspaper the system was developed and put into place over the past year.<br/>莱昂兹对该报表示，该系统是在过去一年里开发并投入使用的。</p>
+<p>In January, Facebook announced a similar system to produce ratings for the trustworthiness of news sources. At that time, Facebook founder Mark Zuckerberg said those ratings would be based on information provided by Facebook users.<br/>今年一月，脸书网宣布了一个类似系统来对新闻来源的可信度进行评分。当时，脸书网创始人扎克伯格表示，这些评分将会基于脸书网用户提供的信息。</p>
+<p>Zuckerberg said news sources receiving higher trustworthy ratings from the community would be prioritized in the social media service's News Feed.<br/>扎克伯格表示，社区中获得高评分的新闻源在该社交网站的信息流中将会获得优先排序。</p>
+<p>The new ratings system is designed to predict how effective a user is at identifying and reporting false news stories. Every user is given a rating between zero and one, the Post reports.<br/>这一新的评分系统旨在预测用户识别和报道虚假新闻的效果。《华盛顿邮报》报道称，每位用户都将获得0到1分之间的评分。</p>
+<p>Lyons told the newspaper such a system is necessary because some users are incorrectly reporting whether a story is true or false.<br/>莱昂兹对该报表示，这种系统很必要，因为有些用户错误地报告新闻的真伪。</p>
+<p>It's "not uncommon for people to tell us something is false simply because they disagree with the premise of a story or they're intentionally trying to target a particular publisher," Lyons said.<br/>莱昂兹表示：“人们因为不赞同一条新闻的前提，或是他们有意针对特定的发布商，就报告其为虚假新闻，这种事情很常见。”</p>
+<p>As an example, she said a user's trustworthiness rating would go up if they previously reported a news story as false, and the story was later confirmed as false by an independent fact checker.<br/>她说，举例来说，如果用户之前报告一则新闻是虚假的，后来这条新闻被独立的真相核查人员证实为虚假的，用户的可信度等级就会提高。</p>
+<p>In addition to information from users, Facebook uses machine learning systems to choose stories to be checked for truthfulness. The company has a partnership with several major news and fact-checking organizations that examine news stories reported as possibly being false.<br/>除了来自用户的信息，脸书网还使用机器学习系统来筛选新闻进行真实性核查。该公司与几家重要新闻和真相核查机构合作，这些机构会审查被报告可能存在虚假的新闻。</p>
+<p>Lyons noted that the numbered rating is not the single measure Facebook uses to judge a user's overall trustworthiness. She said the company also uses other "signals" to rate users, but did not provide further details.<br/>莱昂兹指出，数字评分并非脸书网判断用户总体可信度的单一衡量标准。她说该公司还使用其它“信号”对用户进行评级，但是她没有提供进一步的细节。</p>
+<p><strong>Efforts to fight misinformation<br/>打击虚假信息</strong></p>
+<p>In addition to taking steps to fight misinformation, Facebook has also sought to limit efforts by foreign organizations to influence the U.S. political process. Facebook previously found evidence that false accounts created in Russia and other nations were used to try to influence American voters in the 2016 election.<br/>除了采取措施打击虚假信息，脸书网还试图限制外国组织影响美国政治进程的努力。脸书网此前发现有证据表明，在俄罗斯等国家注册的账户被用于试图影响2016年大选中的美国选民。</p>
+<p>On Tuesday, Facebook said it had identified and removed hundreds of accounts linked to Russia and Iran. It said the accounts were part of separate disinformation campaigns on Facebook.<br/>脸书网周二表示已经确定并删除了数百个跟俄罗斯和伊朗相关的账户。该公司表示，这些账户是脸书网上不同的虚假宣传活动的一部分。</p>
+<p>In announcing the findings, Facebook chief Zuckerberg said there was still a lot the company does not know about the operations. However, he described the campaigns as "sophisticated" and well-financed efforts that are likely to continue.<br/>脸书网首席执行官扎克伯格在宣布这一发现时表示，该公司对这些运作仍然不太了解。然而，他称这些宣传活动“非常复杂”并且获得充分资助，它可能会持续下去。</p>
+<p>"You're going to see people try to abuse the services in every way possible... including now nation states," Zuckerberg said.<br/>扎克伯格表示：“你会看到人们试图以各种可能的方式滥用脸书网的服务，包括现在的民族国家也在这么做。”</p>
+<p>Spokesmen for both Iran and Russia denied any state involvement in the activities described by Facebook.<br/>伊朗和俄罗斯发言人都否认卷入了脸书网所声称的活动。</p>
+<p>This week, American software maker Microsoft reported it had taken control of several websites created by hackers linked to Russia's government. The company said the websites were made to look like they belonged to the U.S. Senate and conservative research groups. But they were actually false websites created in an effort to gather personal details of users.<br/>本周，美国软件制造商微软公司报告称，它已经控制了几家网站，这些网站是由跟俄罗斯政府有关联的黑客创建的。该公司表示，这些网站伪装成属于美国参议院和保守派研究组织，但它们实际上是为了收集用户个人详细信息而创建的虚假网站。</p>
+<p>Microsoft warned the hacking incidents were further evidence that Russia is expanding its attacks before U.S. congressional elections in November.<br/>微软公司警告称，这些黑客事件进一步证实，俄罗斯在11月美国国会选举前开始加大攻击。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Facebook Now Rates Users on Trustworthiness]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]Facebook is now rating users on how trustworthy they are
+[00:05.77]in identifying and reporting real and false news.
+[00:12.56]The ratings system was first reported by The Washington Post.
+[00:19.77]A Post reporter interviewed Facebook product manager Tessa Lyons,
+[00:27.32]who leads the company's efforts to fight misinformation.
+[00:32.60]Lyons told the newspaper the system
+[00:36.75]was developed and put into place over the past year.
+[00:41.71]In January, Facebook announced a similar system
+[00:47.02]to produce ratings for the trustworthiness of news sources.
+[00:53.00]At that time, Facebook founder Mark Zuckerberg said those ratings
+[01:00.08]would be based on information provided by Facebook users.
+[01:05.72]Zuckerberg said news sources receiving higher trustworthy ratings
+[01:12.09]from the community would be prioritized in the social media service's News Feed.
+[01:19.30]The new ratings system is designed to predict
+[01:24.06]how effective a user is at identifying and reporting false news stories.
+[01:31.87]Every user is given a rating between zero and one, the Post reports.
+[01:40.31]Lyons told the newspaper such a system is necessary
+[01:45.97]because some users are incorrectly reporting whether a story is true or false.
+[01:53.71]It's "not uncommon for people to tell us something is false simply
+[02:01.02]because they disagree with the premise of a story
+[02:04.49]or they're intentionally trying to target a particular publisher," Lyons said.
+[02:12.62]As an example, she said a user's trustworthiness rating would go up
+[02:19.33]if they previously reported a news story as false,
+[02:24.06]and the story was later confirmed as false by an independent fact checker.
+[02:31.37]In addition to information from users, Facebook
+[02:36.44]uses machine learning systems to choose stories to be checked for truthfulness.
+[02:43.70]The company has a partnership with several major news and fact-checking organizations
+[02:50.81]that examine news stories reported as possibly being false.
+[02:57.18]Lyons noted that the numbered rating is not the single measure
+[03:03.74]Facebook uses to judge a user's overall trustworthiness.
+[03:09.49]She said the company also uses other "signals" to rate users,
+[03:15.36]but did not provide further details.
+[03:19.13]In addition to taking steps to fight misinformation,
+[03:24.53]Facebook has also sought to limit efforts
+[03:28.56]by foreign organizations to influence the U.S. political process.
+[03:33.99]Facebook previously found evidence that false accounts created in Russia
+[03:40.44]and other nations were used to try to influence American voters in the 2016 election.
+[03:48.93]On Tuesday, Facebook said it had identified
+[03:53.27]and removed hundreds of accounts linked to Russia and Iran.
+[03:59.12]It said the accounts were part of separate disinformation campaigns on Facebook.
+[04:06.07]In announcing the findings, Facebook chief Zuckerberg said
+[04:11.63]there was still a lot the company does not know about the operations.
+[04:16.49]However, he described the campaigns as "sophisticated"
+[04:21.79]and well-financed efforts that are likely to continue.
+[04:26.94]"You're going to see people try to abuse the services in every way possible...
+[04:33.08]including now nation states," Zuckerberg said.
+[04:38.07]Spokesmen for both Iran and Russia denied any state
+[04:44.81]involvement in the activities described by Facebook.
+[04:49.33]This week, American software maker Microsoft reported 
+[04:55.60]it had taken control of several websites created by hackers linked to Russia's government.
+[05:02.70]The company said the websites were made to look like they belonged
+[05:07.67]to the U.S. Senate and conservative research groups.
+[05:12.05]But they were actually false websites created in an effort to gather personal details of users.
+[05:20.75]Microsoft warned the hacking incidents were further evidence
+[05:26.11]that Russia is expanding its attacks before U.S. congressional elections in November.
+[05:33.50]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

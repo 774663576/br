@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 阿拉斯加发生7.1级大地震</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 阿拉斯加发生7.1级大地震" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201601/major-earthquake-hits-alaska.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>阿拉斯加发生7.1级大地震</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201601/major-earthquake-hits-alaska.mp3" id="mp3"></a>
+<a href="/static/lrc/major-earthquake-hits-alaska.lrc" id="lrc"></a>
+<a href="major-earthquake-hits-alaska-67577.html" id="CnPage" target="_blank"></a>
+<a href="only--percent-of-visitors-to-us-by-air-sea-overstayed-visas-67560.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>A magnitude-7.1 earthquake shook south-central Alaska Sunday.<br/>阿拉斯加中南部周日发生了一场里氏7.1级地震。</p>
+<p>At least four homes were destroyed but no injuries or deaths were reported, according to the Associated Press and the Alaska Dispatch News.<br/>根据美联社和阿拉斯加递信报消息，至少有四处房屋被震毁，但是没有人员伤亡的报道。</p>
+<p>The earthquake was centered 85 kilometers west of Anchor Point, Alaska, and about 250 kilometers southwest of Anchorage. One eyewitness said the earthquake lasted 30 seconds, according to a CNN news report.<br/>这场地震的震中位于阿拉斯加安克波因特以西85公里，同样位于安克雷奇西南大约250公里。根据CNN新闻报道，一位目击者称地震持续了30秒。</p>
+<p>Roads and building were damaged and power was out in many areas.<br/>很多地区的道路和房屋受损，电力中断。</p>
+<p>A resident of Kenai, Alaska, described the early morning quake.<br/>阿拉斯加基奈半岛一位居民描述了这场凌晨发生的地震。</p>
+<p>"It started out as a shaking, and it seemed very much like a normal earthquake," he said. "But then it started to feel like a normal swaying. It was unsettling. Some things got knocked over, but there was no damage."<br/>他说，“最开始只是震动，看起来非常像是一场普通地震。但是随后开始摇晃，这令人不安。有些东西被弄倒了，但是没有损坏。”</p>
+<p>Aftershocks followed the quake, including one of 4.7 magnitude felt in Anchorage and Juneau. Anchorage residents did not report any injuries or damage, according to NBC News.<br/>余震紧随地震而来，包括在安克雷奇和朱诺感受到的一场里氏4.7级的余震。根据NBC新闻的消息，安克雷奇居民并没有报告任何人身伤亡和财产损失。</p>
+<p>According to the U.S. Geological Survey, an earthquake with a 7.1 magnitude is considered a major earthquake. These earthquakes cause damage to buildings and can be felt across long distances.<br/>据美国地质调查局表示，里氏7.1级地震是一场大震。这种地震可以造成建筑物损坏，距离很远之外也能感觉到地震。</p>
+<p>I'm George Grow.<br/>我是乔治·戈洛。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.92]A magnitude-7.1 earthquake shook south-central Alaska Sunday.
+[00:09.52]At least four homes were destroyed but no injuries or deaths were reported,
+[00:16.84]according to the Associated Press and the Alaska Dispatch News.
+[00:22.68]The earthquake was centered 85 kilometers west of Anchor Point, Alaska,
+[00:29.00]and about 250 kilometers southwest of Anchorage.
+[00:34.00]One eyewitness said the earthquake lasted 30 seconds,
+[00:38.85]according to a CNN news report.
+[00:43.12]Roads and building were damaged and power was out in many areas.
+[00:50.88]A resident of Kenai, Alaska, described the early morning quake.
+[00:57.76]"It started out as a shaking,
+[01:00.00]and it seemed very much like a normal earthquake," he said.
+[01:04.68]"But then it started to feel like a normal swaying. It was unsettling.
+[01:12.20]Some things got knocked over, but there was no damage."
+[01:18.28]Aftershocks followed the quake,
+[01:20.31]including one of 4.7 magnitude felt in Anchorage and Juneau.
+[01:26.08]Anchorage residents did not report any injuries or damage,
+[01:30.76]according to NBC News.
+[01:33.64]According to the U.S. Geological Survey,
+[01:37.48]an earthquake with a 7.1 magnitude is considered a major earthquake.
+[01:44.24]These earthquakes cause damage to buildings
+[01:47.16]and can be felt across long distances.
+[01:50.88]I'm George Grow.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

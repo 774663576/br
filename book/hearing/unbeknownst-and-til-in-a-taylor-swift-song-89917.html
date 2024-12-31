@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Unbeknownst and ‘Til in a Taylor Swift Song</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Unbeknownst and ‘Til in a Taylor Swift Song" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/unbeknownst-and-til-in-a-taylor-swift-song.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Unbeknownst and ‘Til in a Taylor Swift Song</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/unbeknownst-and-til-in-a-taylor-swift-song.mp3" id="mp3"></a>
+<a href="india-s-first-fully-solar-village-lights-up-lives-89915.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">03 November 2022</span><br/>
+<p>Two popular singers, Taylor Swift and Lana Del Rey, came out with a song together called <em>Snow on the Beach</em>. The song is about two people falling in love with each other at the same time, which is uncommon — like snow falling on a beach.</p>
+<p>In this week's <em>Everyday Grammar</em>, we look closely at this song. While there are many grammatical structures in it, we will look at just two words: "unbeknownst" and "‘til."</p>
+<p>Let's listen to parts of <em>Snow on the Beach</em>:</p><div class="contentImage"><img alt="Everyday Grammar: Unbeknownst and ‘Til in a Taylor Swift Song" src="https://files.21voa.com/gdb/00020000-0aff-0242-5025-08dabda57580_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Unbeknownst and ‘Til in a Taylor Swift Song</span></div>
+<p>I saw <strong>flecks</strong> of what could've been lights<br/>
+But it might just have been you<br/>
+Passing by unbeknownst to me...</p>
+<p>And it's fine to <strong>fake</strong> it 'til you make it...</p>
+<p>‘Til you do</p>
+<p>‘Til it's true</p>
+<p><strong>Unbeknownst </strong></p>
+<p>The word "unbeknownst" is an adjective meaning "not known or existing without knowledge of someone."</p>
+<p>"Unbeknownst" sounds very old. It has the suffix "st" which was put on the ends of some words hundreds of years ago. However, "unbeknownst" is a "newer" version of the old adjective "unbeknown."</p>
+<p>Today it is more common to hear someone using the adjective "unknown," but from time to time you will hear "unbeknownst," just like in the Taylor Swift song.</p>
+<p>So how do we use this adjective?</p>
+<p>We mostly use "unbeknownst" with the preposition "to."</p>
+<p>Something or someone is "unbeknownst to" someone else.</p>
+<p>Here, once again, are the <strong>lyrics</strong> of Swift's <em>Snow on the Beach</em>.</p><div class="contentImage"><img alt="Everyday Grammar: Unbeknownst and ‘Til in a Taylor Swift Song" src="https://files.21voa.com/gdb/00020000-0aff-0242-5025-08dabda57580_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Unbeknownst and ‘Til in a Taylor Swift Song</span></div>
+<p>I saw <strong>flecks</strong> of what could've been lights<br/>
+But it might just have been you<br/>
+Passing by unbeknownst to me...</p>
+<p>We have the structure:</p>
+<p>"...you (passing by) unbeknownst to me."</p>
+<p>"Unbeknownst to me" is an adjective <strong>phrase</strong>. Adjective phrases contain an adjective that describe a noun that is close to the phrase.</p>
+<p>In this part of the song, "unbeknownst to me" as an adjective phrase is actually describing the direct object, the noun of "you."</p>
+<p>Let's look at some other examples of how we can use "unbeknownst."</p>
+<p>Her mom's wedding dress in the back of the closet was unbeknownst to her.</p>
+<p>Here the adjective phrase of "unbeknownst..." is modifying the noun and subject of the sentence "wedding dress."</p>
+<p>We can also use "unbeknownst" in the beginning of a sentence:</p>
+<p>Unbeknownst to many cat owners, dry cat food can make their cats very <strong>thirsty</strong>.</p>
+<p>Here cat owners do not know that dry food can make cats want water.</p>
+<p>Now let's consider "'til."</p>
+<p><strong>‘Til</strong></p>
+<p>The word "'til" is a shorter form of "until." We use it in everyday speech, especially when telling time or using dates.</p>
+<p>We use "until" for somewhat <strong>formal </strong>writing. The word "'til" often appears in spoken language and in writing, like in songs or poems.</p>
+<p>"Until" and "'til" mean "up to a certain point or event in time." They can be either a preposition or a <strong>conjunction</strong>, linking two <strong>clauses</strong> together.</p>
+<p>Let us look at how Taylor uses "'til" in <em>Snow on the Beach</em>:</p>
+<p>And it's fine to fake it 'til you make it</p>
+<p>‘Til you do</p>
+<p>‘Til it's true</p>
+<p>In all three lines of the song, Swift uses "'til" as a conjunction, linking the first clause to the second.</p>
+<p>And it's fine to fake it + ‘til + you make it</p>
+<p>First clause + conjunction "'til" + second clause.</p>
+<p>Remember that a clause is a group of words that contains a subject and a <strong>predicate</strong>. Clauses do not always contain a complete thought, like a sentence does.</p>
+<p>We can take the three other lines and create two additional sentences:</p>
+<p>And it's fine to fake it 'til you do.</p>
+<p>And it's fine to fake it 'til it's true.</p>
+<p>In these sentences, "'til" is still a conjunction, linking the first clause with the second clause to make a complete sentence.</p>
+<p>Let us look at some other examples of how "'til" can be used as a preposition.</p>
+<p>We can use "'til" just like "until" with points or events in time. Here are some examples.</p>
+<p>We have ‘til Friday to get the report done.</p>
+<p>Andrew: What time is it?</p>
+<p>Jill: It's 10 minutes ‘til 6 PM or 5:50 PM.</p>
+<p>In the summer, it does not get dark ‘til later in the evening<em>. </em></p>
+<p><strong>Closing thoughts </strong></p>
+<p>Today we looked at two interesting words from the song <em>Snow on the Beach</em> by Taylor Swift and Lana Del Rey, "unbeknownst" and "'til." Both of these words are newer forms of much older words.</p>
+<p>"Unbeknownst" is an adjective and is often used with the preposition "to."</p>
+<p>"'Til" is the short form of the word "until" and can be used as either a preposition or a conjunction.</p>
+<p>Now it's your turn. Have you heard or tried to use these words before? Do you know any other words with similar meanings or usages?</p>
+<p>Let us know in the comments!</p>
+<p>I'm Faith Pirlo. I'm Andrew Smith. And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>___________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fleck </strong><em>– n. </em>a small spot or mark</p>
+<p><strong>fake </strong><em>– v.</em> to make (something) seem real or true in an effort to trick someone</p>
+<p><strong>beach</strong><em> – n.</em> an area covered with sand or small rocks that is next to an ocean or lake</p>
+<p><strong>lyrics </strong><em>–n. (pl.) </em>the words of a song or poem</p>
+<p><strong>phrase</strong><em> – n</em>. a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>thirsty </strong><em>– adj.</em> needing water</p>
+<p><strong>formal </strong>–<em> adj.</em> following or according with established form, custom, or rule</p>
+<p><strong>conjunction</strong> <em>– n. grammar :</em> a word that joins together sentences, clauses, phrases, or words</p>
+<p><strong>clause </strong>– <em>n</em>. (grammar) a part of a sentence that has its own subject and verb</p>
+<p><strong>predicate</strong> <em>– n. grammar: </em>the part of a sentence that expresses what is said about the subject</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

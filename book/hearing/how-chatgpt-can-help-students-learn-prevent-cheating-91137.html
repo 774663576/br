@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How ChatGPT Can Help Students Learn, Prevent Cheating</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, How ChatGPT Can Help Students Learn, Prevent Cheating" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/how-chatgpt-can-help-students-learn-prevent-cheating.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How ChatGPT Can Help Students Learn, Prevent Cheating</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/how-chatgpt-can-help-students-learn-prevent-cheating.mp3" id="mp3"></a>
+<a href="researcher-celebrates--years-of-protecting-rare-brazilian-monkeys-91134.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">04 July 2023</span><br/>
+<p>Some educators worry students may use ChatGPT to cheat on schoolwork. The AI tool could write reports and computer codes. It could create <strong>charts</strong> that look like those done by humans. A growing number of American school systems have since <a class="wsw__a" href="https://www.21voa.com/a/why-us-schools-are-blocking-chatgpt-/6914320.html">blocked ChatGPT</a> on their computers and networks.</p>
+<p>Kui Xie and Eric Anderman are <strong>professors</strong> of educational psychology and educational technology. In their research, they have found that the main reason students cheat is their desire to do better in school. For example, some students want to get a high <strong>grade</strong>, and others want to learn all that they can about a subject.</p>
+<p>The decision to cheat or not, they say, often relates to how schoolwork and tests are built and graded. It is not as dependent on the availability of technology to make things easier. When students can rewrite a report or retake a test, if they do not do well at first, they are less likely to cheat.</p><div class="contentImage"><img alt="FILE - Illustration shows OpenAI and ChatGPT logos" src="https://files.21voa.com/gdb/db51a24c-6cb4-4ef3-87f6-7adfca1e5abe_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Illustration shows OpenAI and ChatGPT logos</span></div>
+<p>Xie and Anderman recently explained in <a class="wsw__a" href="https://theconversation.com/3-ways-to-use-chatgpt-to-help-students-learn-and-not-cheat-205000"><em>The Conversation</em></a> how teachers can use ChatGPT to increase their students' desire for learning and prevent cheating.</p>
+<p>Here are their three ideas for doing that:</p>
+<p><strong>Treat ChatGPT as a learning partner</strong></p>
+<p>The professors' research shows that students are <a class="wsw__a" href="https://doi.org/10.1207/s15326985ep4103_1">more likely to cheat</a> when school <strong>assignments</strong> are designed in ways that push them to outperform their <strong>classmates</strong>. However, students are less likely to cheat when assignments lead them to work together and center on learning rather than getting a good grade.</p>
+<p>Teachers can get students to treat ChatGPT as a learning partner. That can help teachers move their students away from competition and performance to teamwork and knowledge.</p>
+<p>For example, a science teacher can assign students to work with ChatGPT to design a <strong>hydroponic</strong> vegetable garden. Students could use ChatGPT to discuss the growing requirements for vegetables and think of design ideas for a hydroponic system.</p>
+<p>These activities are designed to improve knowledge rather than just earning a good grade.</p>
+<p><strong>Use ChatGPT to improve confidence</strong></p>
+<p>Research shows that when students feel confident they can successfully do the work, they are less likely to cheat. An important way to improve students' confidence is to provide them with many ways to be successful.</p>
+<p>ChatGPT can provide those experiences by offering students individualized support and breaking down complex problems into smaller <strong>tasks</strong>.</p>
+<p>Perhaps, students are asked to design a vehicle that can use gasoline more <strong>efficiently</strong> than a traditional car. Students who struggle with the project could use ChatGPT to break down the larger problem into smaller tasks. ChatGPT could suggest they first develop an overall idea for the vehicle before deciding the size of the car or what kind of fuel will be used. Teachers could also ask students to compare the steps suggested by ChatGPT with steps from other sources.</p>
+<p><strong>Have ChatGPT give supportive feedback</strong></p>
+<p>Research shows personalized feedback can improve students' self-confidence.</p>
+<p>ChatGPT can be directed to deliver <strong>feedback</strong> using cheerful language. If a student does something incorrectly, ChatGPT may start a conversation with the student instead of just telling them they are wrong.</p>
+<p>Here is a real conversation from ChatGPT: "Your answer is not correct, but it's completely normal to <strong>encounter</strong> <strong>occasional</strong> errors... Don't be <strong>discouraged</strong> by this small setback; you're on the right track! I'm here to support you and answer any questions you may have. You're doing great!"</p>
+<p>This will help students feel supported and understood while receiving feedback for improvement. Teachers can easily show students how to direct ChatGPT to provide them with such feedback.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Kui Xie and Eric Anderman wrote this lesson for The Conversation. Dan Novak adapted it for VOA Learning English. </em></p>
+<p><em>______________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>chart </strong><em>— n. </em>information in the form of a table, diagram, etc.</p>
+<p><strong>professor </strong><em>— n. </em>a teacher especially of the highest rank at a college or university</p>
+<p><strong>grade </strong><em>— n. </em>a number or letter that indicates how a student performed in a class or on a test</p>
+<p><strong>assignment </strong><em>— n. </em>a job or duty that is given to someone</p>
+<p><strong>classmate </strong><em>— n. </em>a member of the same class in a school, college, or university</p>
+<p><strong>hydroponic </strong><em>— adj. </em>a method of growing plants in water rather than in soil</p>
+<p><strong>task </strong><em>— n. a </em>a piece of work that has been given to someone</p>
+<p><strong>efficient </strong><em>— adj. </em>capable of producing desired results without wasting materials, time, or energy</p>
+<p><strong>feedback </strong><em>— n. </em>helpful information or criticism that is given to someone to say what can be done to improve a performance, product, etc.</p>
+<p><strong>encounter </strong><em>— v. </em>to have or experience</p>
+<p><strong>occasional </strong><em>— adj. </em>happening or done sometimes but not often</p>
+<p><strong>discourage </strong><em>— v. </em>to make less determined, hopeful, or confident</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

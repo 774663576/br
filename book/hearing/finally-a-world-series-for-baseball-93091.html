@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Finally, a World Series for Baseball</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Finally, a World Series for Baseball" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/finally-a-world-series-for-baseball.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Finally, a World Series for Baseball</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/finally-a-world-series-for-baseball.mp3" id="mp3"></a>
+<a href="new-zealand-puts-limits-on-goodbyes-93089.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By VOA</span><br/><span class="datetime">24 October, 2024</span><br/>
+<p>Baseball has long called its championship the World Series although it only involves teams playing in the United States and Canada.</p>
+<p>It started in 1903 when the Pittsburgh Pirates of the National League beat the Boston Americans of the American League for the championship. But the first official World Series, as it is known today, was in 1905 between the New York Giants and the Philadelphia Athletics.</p>
+<p>Since then, the New York Yankees have won 27 World Series titles, more than any other team. This year, the Yankees will face the Los Angeles Dodgers for what sports fans believe will be a World Series seen around the world.</p><div class="contentImage"><img alt="Los Angeles Dodgers' Shohei Ohtani celebrates after their win against the New York Mets in Game 6 of a baseball NL Championship Series, Sunday, Oct. 20, 2024, in Los Angeles. The Dodgers will face the New York Yankees in the World Series. (AP Photo/Ashley Landis)
+" src="https://files.21voa.com/gdb/df51d02f-5f37-47d3-86d0-7c5ed086be4c_w268_r1.jpg"/><br/><span class="imagecaption">Los Angeles Dodgers' Shohei Ohtani celebrates after their win against the New York Mets in Game 6 of a baseball NL Championship Series, Sunday, Oct. 20, 2024, in Los Angeles. The Dodgers will face the New York Yankees in the World Series. (AP Photo/Ashley Landis)
+</span></div>
+<p>The competition is a best-of-seven-game championship. That means four wins in the series are needed to become the champion.</p>
+<p>This year's series might have everything that sports fans could want. It is a competition between teams from the two largest cities in the U.S. It is a competition between the two best teams in baseball. And the contest involves two of the biggest baseball stars, Shohei Ohtani of Japan and Aaron Judge of the U.S.</p>
+<p>Both players have already won the Most Valuable Player Award or MVP, given to the best player in the National League and the American League. Ohtani has won it twice and Judge once. The two are likely to be named MVP in each league again this year.</p>
+<p>Ohtani joined the Dodgers earlier this year with a record 10-year <a class="wsw__a" href="https://www.21voa.com/a/japan-s-ohtani-gets-700-million-biggest-team-sports-deal/7393301.html">contract valued at $700 million</a>. After receiving the largest contract ever in team sports history, Ohtani hit 54 <strong>home runs</strong>, <strong>stole</strong> 59 <strong>bases</strong>, and led the National League in almost all offensive numbers.</p>
+<p>Talking to reporters on Tuesday, October 22, Judge called Ohtani “the best player in the game.” He added that Ohtani “hits for average, he hits for power, the speed.”</p>
+<p>But Judge himself holds the American League record with 62 home runs in 2022. This year, he leads all of baseball, hitting 58 home runs. And he also leads all of baseball, both American and National Leagues, in offensive numbers, including 144 <strong>RBIs</strong>, 133 <strong>walks</strong>, on-base percentage, and <strong>slugging percentage</strong>.</p>
+<p>As expected, Ohtani led the Dodgers to the best record in the National League, and Judge captained the Yankees to the best record in the American League. The two best players, though, have a lot of help.</p>
+<p>The Dodgers have two former MVPs, Mookie Betts and Freddie Freeman, in the <strong>lineup</strong>. The Yankees have just one former MVP in Giancarlo Stanton. But they also have Juan Soto of the Dominican Republic, who is often called a “generational <strong>talent</strong>” in the game.</p>
+<p>The first game of the 2024 World Series will start on Friday, October 25. The games are sold out meaning all tickets have been sold. But, for those who still want to watch the game in person, it is possible to pay more than $1,000 for a seat or up to $10,000 for the best seats in the reselling market StubHub.</p>
+<p>Others can watch the television broadcast that is expected to set a record for people watching in Ohtani's home country of Japan.</p>
+<p>After the Dodgers beat the New York Mets to get to the World Series, Ohtani told reporters, “The goal was to get this far.”</p>
+<p>As for Judge, “getting a chance to play on the biggest stage and in the biggest moment, I think that's going to be pretty cool to watch,” he said.</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Hai Do wrote this report for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>home run </strong>–n. to score in baseball by hitting a fair ball out of play</p>
+<p><strong>(stolen) bases</strong> <em>–n. (pl.) </em>the number of times that a batter who has reached a base has moved to another base, closer to home, when someone else is batting</p>
+<p><strong>RBI (runs batted in)</strong><em> –n.</em> the number of times a player has scored or caused a teammate to score</p>
+<p><strong>walk</strong> –n. to reach base without being credited with a hit</p>
+<p><strong>slugging percentage </strong>–n. a measure of the quality of hits a batter has</p>
+<p><strong>lineup </strong><em>–n.</em> the official list of players who start a baseball game</p>
+<p><strong>talent </strong><em>–n.</em> a skilled player</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

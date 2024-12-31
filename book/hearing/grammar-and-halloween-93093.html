@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar and Halloween</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar and Halloween" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/grammar-and-halloween.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar and Halloween</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/grammar-and-halloween.mp3" id="mp3"></a>
+<a href="polio-rises-in-pakistan-ahead-of-a-new-vaccination-campaign-93092.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">24 October, 2024</span><br/>
+<p>An interesting holiday in the United States is coming up soon. Halloween happens on the last day of October. If you have lived in the U.S., you have probably noticed many changes in the month or so before Halloween. Let's hear about some of them and explore the vocabulary and expressions you might hear this time of year.</p>
+<p><strong>‘Trick-or-treat'</strong></p>
+<p>First, you should know about trick-or-treating. Children <strong>dress</strong> <strong>up</strong> in special clothes, or costumes, to look like frightening creatures. They might dress up as little <strong>vampires</strong>, <strong>ghosts</strong> and <strong>witches </strong>or superheroes. Then their parents walk with them to the homes of neighbors, where the children knock at the door and call out, “Trick or treat!”</p><div class="contentImage"><img src="https://files.21voa.com/gdb/01000000-0a00-0242-4cc8-08dbd581255f_w268_r1.png"/></div>
+<p>Some people believe the custom goes back to an old Celtic celebration in which people went from door to door asking for firewood. The Celts believed that the spirits of the dead would return to their homes on October 31, the day of the autumn feast. The Celts would build large fires to frighten away evil spirits on that night.</p>
+<p>In modern-day Halloween, the children ask for candy. That's the “treat” part. The “trick” part is what happens if you do not give them something.</p>
+<p>Before Halloween, communities might create a “<strong>haunted</strong> house” in an old house or an open field. Visitors can walk through the place and be frightened and surprised by unusual noises and people dressed up like ghosts or spirits.</p>
+<p>Fear plays a big part in Halloween celebrations. The words we use to talk about fear include “scary,” an adjective to show something causes fear and “afraid” an adjective that describes the person who feels fear. We might say, “I'm scared of ghosts,” to say we are afraid of ghosts.</p>
+<p>Another word we use to describe things that cause fear is “<strong>spooky</strong>.” Little people trying to look like ghosts might say, “Boo!” to frighten others. Let's put some of these expressions together to see how they work.</p>
+<p><em>Greg has a really scary costume this year. He said “Boo!” to me and I jumped!</em></p>
+<p><em>Caty's house looks really spooky with all those skeletons and spider webs that she put out in her yard.</em></p>
+<p><em>I'm not afraid of ghosts but seeing people dressed up as witches scares me!</em></p>
+<p>You will see that stores begin offering many kinds of candies in small packages. We call these “individually wrapped” treats. They are meant for handing out to children as part of trick-or-treating. Some candy makers call these small packages “fun-sized” treats.</p>
+<p><strong>Halloween decorations</strong></p>
+<p>People put some strange things on and around their homes for Halloween. People hang toy spiders, skeletons and other scary <strong>decorations</strong> on trees and bushes. You will see pumpkins everywhere. People often empty the pumpkins and make scary faces on them. Then they place a candle inside so the pumpkin face shines in the night. We call these “jack-o-lanterns.”</p>
+<p>The custom of carving scary faces into vegetables is believed to come to us from the Irish. They had an old story about a wandering soul named Stingy Jack. They carved faces in turnips to frighten him away. When they came to America, they found the pumpkin was widely available. So, they carved faces into pumpkins, and made what we call the jack-o-lantern today. Now, children carry plastic buckets made to look like a carved pumpkin. They fill them with candy as they trick-or-treat around their neighborhood.</p>
+<p>We close with a usual conversation around Halloween in the U.S. See how many traditions and customs you can spot.</p>
+<p><em>A: Are you going to any Halloween parties this year?</em></p>
+<p><em>B: No, I have to take my kids trick-or-treating. Then I'm too tired to dress up and go out to a party. Are you going?</em></p>
+<p><em>A: Yes, I'm going to be a vampire this year. My block has a great party with a haunted house every year.</em></p>
+<p><em>B: Oh, I wish I could go. Hey, will you help me carve these pumpkins? I want to put them out front.<br/>
+B: Sure, I love carving jack-o-lanterns. Can I have some of that candy while I'm working?</em></p>
+<p><em>A: Of course. Help yourself to those fun-sized Hershey bars. I only have a hundred of them.</em></p>
+<p>Does your culture have any celebrations where you dress up or give out treats? Write to us in the comments to tell us about them!</p>
+<p>And that's Everyday Grammar for Halloween. Boo!</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>dress up </strong><em>– v.</em> to wear a special kind of clothing for a festival or event</p>
+<p><strong>vampire – </strong><em>n. </em>a dead person who leaves the grave at night to bite and suck the blood of living people</p>
+<p><strong>ghost – </strong><em>n. </em>the soul of a dead person thought of as living in an unseen world or as appearing to living people</p>
+<p><strong>witch – </strong><em>n. </em>a woman who is thought to have magic powers</p>
+<p><strong>candy – </strong><em>n. </em>a sweet food made with sugar or chocolate</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

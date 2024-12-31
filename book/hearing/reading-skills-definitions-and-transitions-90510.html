@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reading Skills: Definitions and Transitions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Reading Skills: Definitions and Transitions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/reading-skills-definitions-and-transitions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reading Skills: Definitions and Transitions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/reading-skills-definitions-and-transitions.mp3" id="mp3"></a>
+<a href="technology-tool-aims-to-let-young-people-remove-explicit-images-from-internet-90506.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">03 March 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about reading skills like finding definitions and transitions.</p>
+<p><strong>Question:</strong></p>
+<p>Greetings from Ecuador,</p><div class="contentImage"><img alt="Ask a Teacher: Reading Skills: Definitions and Transitions " src="https://files.21voa.com/gdb/01000000-0aff-0242-a2ed-08db1b6d6e55_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Reading Skills: Definitions and Transitions </span></div>
+<p>Could you please provide me any information and guidance to improve my reading skills and share them with my English students?</p>
+<p>Thank you in advance for your help and support,</p>
+<p>Angel</p>
+<p><strong>Answer </strong></p>
+<p>Thanks for writing to us, Angel. When we read, we are reading someone's piece of writing. So, we can bring writing skills to the activity of reading. Finding transitions and definitions can help us with our reading.</p>
+<p><strong>Transitions </strong></p>
+<p>Transitions are words and phrases that connect ideas. Transitions help with organizing thoughts in writing. They help develop ideas smoothly. Identifying transitions while reading can help us better understand what we are reading.</p>
+<p>Transitions can be found within <strong>paragraphs</strong>, between paragraphs, and between longer divisions of text.</p>
+<p>There are several kinds of transitions. Time-order transitions are words like "first," "next," "second," "finally," and "lastly." They establish the order of events or ideas.</p>
+<p>There are also transitions that show a relationship between ideas.</p>
+<p>For example, we can show <strong>contrast</strong> between ideas by using "however" or "nonetheless." We can show results by using the phrases "as a result" or "consequently."</p>
+<p>Here is an example paragraph from a recent story called, "<a class="wsw__a" href="https://www.21voa.com/a/five-ways-that-the-ukraine-war-has-changed-the-world/6974517.html">Five Ways That the Ukraine War Has Changed the World."</a></p>
+<p>What transitions are used?</p>
+<p>"Before the war, much of the grain and vegetable oil sent to the Middle East and Africa came from Ukraine and Russia.... Now, countries are thinking about ways to provide their own food and energy."</p>
+<p>Two time-order transitions, "before" and "now," are used to show the time relationship between events that happened.</p>
+<p>Spotting the transitions and knowing what they mean can be helpful when reading.</p>
+<p><strong>Definitions</strong></p>
+<p>We can also find definitions within the text to help us better understand unfamiliar words. There are a few ways to do this.</p>
+<p>We can find verb phrases like "is/are," "is defined as," "is called," "means, or "is a type of." Noticing these phrases within the story can help us learn new vocabulary.</p>
+<p>Here is an example from the article, "<a class="wsw__a" href="https://www.21voa.com/a/study-better-instruments-needed-to-discover-life-on-mars/6976918.html">Study: Better Instruments Needed to Discover Life on Mars</a>."</p>
+<p>"Such testing is carried out in areas where bodies of water once existed.</p>
+<p>This is because those areas, called deltas, contain higher levels of ancient microbes to study. The Red Stone area was a river delta about 100 million years ago."</p>
+<p>We can see from this example, that "called" is used. The term "delta" is in an earlier paragraph, too. A delta is a kind of body of water, a place where a river meets the sea. We even have an example with The Red Stone area as a river delta.</p>
+<p>Another way to show definitions is through <strong>punctuation</strong> like <strong>dashes</strong> or commas.</p>
+<p><strong>Here is an example from our American Presidents stories: "</strong><a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-washington/3714877.html">George Washington: Reluctant."</a><strong> This example uses two ways of showing a new word. </strong></p>
+<p>"He established a group of advisors — called the cabinet — as well as the nation's official money.</p>
+<p>Here, we see that the writer uses dashes and "called" to give an informal definition of the group of advisors."</p>
+<p><strong>And, we can find definitions by reading further into the text. </strong></p>
+<p>Here is an example from another recent story called, "<a class="wsw__a" href="https://www.21voa.com/a/imperfect-models-in-italy-redefine-beauty/6980652.html">'Imperfect' Models in Italy Redefine Beauty</a>."</p>
+<p>"Sonia Spartá is one of the models. The 28-year-old from Sicily has a condition called hyperpigmentation or unusual skin coloring. It results in dark spots on her face and body."</p>
+<p>The word that is defined is "hyperpigmentation." The definition is found right after the <strong>conjunction</strong> "or," which shows the definition. But if you read further into the next sentence, you can find out more about Sonia's condition. The writer uses the verb "results" to show the relationship between the condition of hyperpigmentation and its results.</p>
+<p>Please let us know if these explanations and examples have helped you, Angel!</p>
+<p>What question do you<em> </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>___________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>paragraph</strong> – n. a part of a piece of writing that usually that begins on a new line and often is made up of a few sentences</p>
+<p><strong>contrast </strong>–<em>n</em>. a difference between things or the act of comparing two things to show their differences</p>
+<p><strong>punctuation </strong><em>–n. </em>the marks (such as periods and commas) in a piece of writing that make its meaning clear</p>
+<p><strong>dash </strong>– <em>n</em>. a horizontal line that represents a break in meaning; often used before a definition</p>
+<p><strong>conjunction</strong> <em>– n. grammar:</em> a word that joins together sentences, clauses, phrases, or words</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

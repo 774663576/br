@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 早期版本米老鼠即将版权到期进入共有领域</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 早期版本米老鼠即将版权到期进入共有领域" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/mickey-mouse-will-soon-belong-to-you-me-everyone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>早期版本米老鼠即将版权到期进入共有领域</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/mickey-mouse-will-soon-belong-to-you-me-everyone.mp3" id="mp3"></a>
+<a href="/static/lrc/mickey-mouse-will-soon-belong-to-you-me-everyone.lrc" id="lrc"></a>
+<a href="mickey-mouse-will-soon-belong-to-you-me-everyone-91953.html" id="CnPage" target="_blank"></a>
+<a href="when-does-a-problem-snowball-91951.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>An early version of Mickey Mouse, the famous Disney character, will soon belong to you, me and everybody else.<br/>
+迪士尼著名角色米老鼠的早期版本很快就会属于大众。</p>
+<p>The mouse that started a Hollywood empire, along with several other characters, movies, and books will enter the public domain on January 1st.<br/>
+这只开创了好莱坞帝国的老鼠，以及其他几个角色、电影和书籍将于1月1日进入公有领域。</p>
+<p>Public domain is the term to describe creative works that are no longer protected by U.S. copyright law. Once a work enters the public domain, it can legally be shared, performed, reused, or repurposed without permission or cost.<br/>
+公有领域是一个专业术语，用于描述不再受美国版权法保护的创意作品。一旦作品进入公有领域，就可以合法地共享、表演、重利用或重新调整用途，而无需获得许可或支付费用。</p>
+<p>Mickey Mouse, and Minnie Mouse, first appeared publicly in the 1928 film Steamboat Willie. Copyright law at the time provided protection for 75 years. But in 1998, U.S. law extended copyright protection for another 20 years.<br/>
+米老鼠和米妮老鼠首次公开出现在1928年的电影《汽船威利》中。当时的版权法提供了75年的保护。但在1998年，美国法律将版权保护期又延长了20年。</p>
+<p>Jennifer Jenkins is head of Duke University's Center for the Study of Public Domain. Jenkins says copyright law is sometimes called the Mickey Mouse Protection Act. As the character is about to enter the public domain, she says "This is it. This is Mickey Mouse. This is exciting because it's kind of symbolic."<br/>
+詹妮弗·詹金斯是杜克大学公有领域研究中心的负责人。詹金斯说，版权法有时被称为《米老鼠保护法》。随着这个角色即将进入公有领域，她说：“就是这样。这是米老鼠。这很令人兴奋，因为它有点象征意义。”</p>
+<p>In a statement, the Disney Company told The Associated Press, "Ever since Mickey Mouse's first appearance in the 1928 short film Steamboat Willie, people have associated the character with Disney's stories, experiences, and authentic products." The company added, "More modern versions of Mickey will remain unaffected by the expiration of the Steamboat Willie copyright..."<br/>
+迪士尼公司在一份声明中告诉美联社，“自从米老鼠第一次出现在1928年的短片《汽船威利》中以来，人们已经把这个角色与迪士尼的故事、经历和正牌产品联系在一起。”该公司补充道，“现代版本的米奇将不受《汽船威利》版权到期的影响……”</p>
+<p>People will only be able to use the version of the mouse in Steamboat Willie that has become public. However, observers expect the courts to be busy in the coming years judging what is inside and outside Disney's ownership.<br/>
+人们将只能使用已经开放版权的《汽船威利》中使用米老鼠版本。然而观察人士预计，未来几年，法院将忙于判断属于和不属于迪士尼所有权的情况。</p>
+<p>Disney also holds a trademark on Mickey to represent the company and its brand. That law bars the use of the character as a Disney product identifier for anyone except Disney.<br/>
+迪士尼还持有米奇的商标，以代表公司及其品牌。该法律禁止除迪士尼以外的任何人使用该角色作为迪士尼产品的标识符。</p>
+<p><span style="font-weight: bold;">Others in the public domain<br/>
+公有领域的其他</span></p>
+<p>Another famous animal character, Tigger, will also join his friend Winnie the Pooh in the public domain. The bouncing tiger first appeared in the book The House at Pooh Corner by British writer A.A. Milne. It turns 96 in January.<br/>
+另一个著名的动物角色跳跳虎，也将加入他的朋友小熊维尼的行列进入公有领域。这只蹦蹦跳跳的老虎首次出现在英国作家A.A.米尔恩的《维尼角的小屋》一书中。今年一月份它就满96岁了。</p>
+<p>The silly old bear Pooh, himself, became public property two years ago when Milne's book Winnie the Pooh came of age. The soft-spoken bear, no longer protected by copyright, is seen terrorizing women in this year's horror film Winnie the Pooh: Blood and Honey.<br/>
+两年前，当米尔恩的书《小熊维尼》到了法定年头时，这只傻里傻气的老熊维尼就成了公共财产。这只说话轻声细语的熊不再受版权保护，在今年的恐怖电影《小熊维尼：血与蜜》中，可以看到它吓唬女性。</p>
+<p>Other creative works entering the U.S. public domain are Charlie Chaplin's film Circus, Virginia Woolf's book Orlando, and Eugene O'Neill's play Long Day's Journey into Night.<br/>
+其他进入美国公有领域的创意作品包括查理·卓别林的电影《马戏团》、弗吉尼亚·伍尔夫的书《奥兰多》和尤金·奥尼尔的戏剧《漫漫长夜》。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦弗。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Mickey Mouse Will Soon Belong to You, Me, Everyone]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]An early version of Mickey Mouse,
+[00:04.04]the famous Disney character,
+[00:06.64]will soon belong to you, me and everybody else.
+[00:12.76]The mouse that started a Hollywood empire,
+[00:16.96]along with several other characters,
+[00:20.40]movies, and books
+[00:22.72]will enter the public domain on January 1st.
+[00:27.44]Public domain is the term
+[00:30.68]to describe creative works
+[00:33.16]that are no longer protected
+[00:35.60]by U.S. copyright law.
+[00:38.88]Once a work enters the public domain,
+[00:42.28]it can legally be shared,
+[00:45.12]performed, reused, or repurposed
+[00:49.20]without permission or cost.
+[00:53.40]Mickey Mouse, and Minnie Mouse,
+[00:56.60]first appeared publicly in the 1928 film Steamboat Willie.
+[01:03.76]Copyright law at the time
+[01:06.28]provided protection for 75 years.
+[01:10.32]But in 1998, U.S. law
+[01:14.48]extended copyright protection for another 20 years.
+[01:20.84]Jennifer Jenkins is head
+[01:23.04]of Duke University's Center
+[01:25.56]for the Study of Public Domain.
+[01:28.76]Jenkins says copyright law is sometimes
+[01:32.84]called the Mickey Mouse Protection Act.
+[01:36.24]As the character is about to enter the public domain,
+[01:41.28]she says "This is it. This is Mickey Mouse.
+[01:45.80]This is exciting because it's kind of symbolic."
+[01:51.24]In a statement, the Disney Company
+[01:53.96]told The Associated Press,
+[01:56.56]"Ever since Mickey Mouse's first appearance
+[02:00.16]in the 1928 short film Steamboat Willie,
+[02:04.92]people have associated the character
+[02:08.12]with Disney's stories, experiences,
+[02:12.04]and authentic products."
+[02:14.56]The company added, "More modern versions of Mickey
+[02:19.32]will remain unaffected by the expiration
+[02:23.04]of the Steamboat Willie copyright,..."
+[02:27.00]People will only be able to use
+[02:29.60]the version of the mouse in Steamboat Willie
+[02:32.88]that has become public.
+[02:35.04]However, observers expect the courts to be busy
+[02:40.20]in the coming years judging what is inside
+[02:44.40]and outside Disney's ownership.
+[02:48.60]Disney also holds a trademark on Mickey
+[02:52.44]to represent the company and its brand.
+[02:56.24]That law bars the use of the character
+[02:59.48]as a Disney product identifier
+[03:02.36]for anyone except Disney.
+[03:05.92]Another famous animal character, Tigger,
+[03:09.64]will also join his friend Winnie the Pooh
+[03:13.64]in the public domain.
+[03:16.24]The bouncing tiger first appeared
+[03:19.04]in the book The House at Pooh Corner
+[03:22.44]by British writer A.A. Milne.
+[03:25.44]It turns 96 in January.
+[03:30.16]The silly old bear Pooh, himself,
+[03:33.48]became public property two years ago
+[03:37.04]when Milne's book Winnie the Pooh came of age.
+[03:42.12]The soft-spoken bear,
+[03:44.12]no longer protected by copyright,
+[03:47.08]is seen terrorizing women
+[03:50.28]in this year's horror film
+[03:52.48]Winnie the Pooh: Blood and Honey.
+[03:56.44]Other creative works entering the U.S. public domain
+[04:00.60]are Charlie Chaplin's film Circus,
+[04:03.96]Virginia Woolf's book Orlando,
+[04:07.56]and Eugene O'Neill's play Long Day's Journey into Night.
+[04:13.28]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

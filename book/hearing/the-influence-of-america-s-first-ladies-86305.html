@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - The Influence of America’s First Ladies</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, The Influence of America’s First Ladies" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202102/the-influence-of-america-s-first-ladies.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>The Influence of America’s First Ladies</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202102/the-influence-of-america-s-first-ladies.mp3" id="mp3"></a>
+<a href="/static/lrc/the-influence-of-america-s-first-ladies.lrc" id="lrc"></a>
+<a href="math-expert-all-covid-virus-in-the-world-would-fit-in-a-soda-can-86304.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">14 February 2021</span><br/>
+<p>When Joe Biden became president on January 20, Jill Biden, his wife, took on an important job in American society. She became first lady of the United States.</p>
+<p>The position comes with no pay, but it is influential.</p>
+<p>So, many people paid attention when Biden became the first of America's first ladies to keep the job she had before her husband became president. Jill Biden has a <strong>doctorate</strong> in education and is a professor of English at a community college in Virginia, just outside of Washington, D.C.</p>
+<p>Some Americans might be surprised to learn that Biden would keep her old job. An expert on the subject is Katherine Jellison. She is a history professor at Ohio University. Jellison said, since Biden is a teacher, which is a traditional job for women, most Americans will accept her outside work.</p>
+<p>Barbara Perry is a presidential historian at the University of Virginia. She said most Americans see presidents as "father figures." She said: "That makes first ladies <strong>maternal</strong> figures and kind of mothers of our country."</p>
+<p>What about if they are younger women?</p>
+<p>John F. Kennedy's wife, Jacqueline, was only 31 when she became first lady. If the first lady is a younger woman, Perry said, Americans "see her as an older sister or <strong>glamorous</strong> aunt."</p>
+<p><strong>An activist tradition</strong></p>
+<p>However, first ladies do not just stand behind their husbands. They often take on projects. Among first ladies, Eleanor Roosevelt was possibly the first to be remembered as an activist. She came to the White House, the official presidential home, in 1933 after Franklin Roosevelt won the election in 1932.</p>
+<p>Perry said some Americans thought Eleanor Roosevelt pushed too hard for changes. She asked her husband to work on civil rights, labor rights and women's rights. "She was always pressing for the social programs that she wanted and was much <strong>reviled</strong> because of that," Perry said.</p>
+<p>While not every first lady was like Roosevelt, she set an example for those to come. First ladies have long been recognized for the causes they supported. Jacqueline Kennedy worked to <strong>renovate</strong> the White House and make sure it was home to historic art and objects from U.S. history. Lyndon Johnson's wife, Lady Bird Johnson, supported environmental protection causes. Nancy Reagan asked children to stay away from drugs. Barbara Bush worked to help more people learn to read. Michelle Obama was interested in healthy eating and planted a vegetable garden at the White House.</p>
+<div class="contentImage"><img alt="Nancy Reagan" src="https://files.21voa.com/gdb/D12CE629-5BC1-4792-B82C-5E0DB99660DC_w268_r1.jpg"/><br/>
+<span class="imagecaption">Nancy Reagan</span></div>
+<p>Perry said most Americans were happy to support those kinds of projects. But sometimes Americans think women in the White House do too much. Perry said that happened with Hillary Clinton.</p>
+<p>In 1993, she said, Bill Clinton appointed Hillary to lead a group that worked to change the American health care system. Perry said the public was not accepting of Clinton's part in shaping policy: "She had to go back to more soft-power approaches to being first lady."</p>
+<p><strong>Who would be in...</strong></p>
+<p>Kate Andersen Brower is a presidential historian who wrote about first ladies in a book called "First Women."</p>
+<p>She said both Melania Trump and Nancy Reagan had influence over who worked with the president. Brower said Trump did not like the way one adviser treated one of the people who worked for her during a trip overseas. Melania Trump asked that the adviser be dismissed.</p>
+<p>Reagan, Brower said, "decided who would be in and who was out."</p>
+<p>Clinton was not successful in her attempt at shaping healthcare policy. However, Brower said she did suggest that her husband choose Ruth Bader Ginsberg as a Supreme Court justice.</p>
+<p>Brower said Jill Biden can change the way Americans think about first ladies by being both a working woman and a wife. She also said there is likely to be a big change ahead when, one day, a woman is elected president.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>VOA's Dora Mekouar reported this story. Dan Friedell adapted it for Learning English. Mario Ritter, Jr. was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p><em>Do you think Jill Biden will be a good first lady? We want to hear from you. Write to us in the Comments Section </em><em>and </em><a class="wsw__a" href="https://www.21voa.com" target="_blank"><em>visit 51VOA.COM</em></a><em>. </em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>doctorate</strong>- n. the highest degree that is given by a university</p>
+<p><strong>maternal</strong>- adj. of or relating to a mother</p>
+<p><strong>glamorous </strong><em>–</em>adj<em>. </em>very exciting and attractive</p>
+<p><strong>revile</strong>- v. to speak about (someone or something) in a very critical or insulting way</p>
+<p><strong>renovate</strong>- v. to make changes and repairs to (an old house, building, room, etc.) so that it is back in good condition</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:The Influence of America’s First Ladies]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]When Joe Biden became president on January 20,
+[00:04.92]Jill Biden, his wife, took on an important job in American society.
+[00:12.44]She became first lady of the United States.
+[00:18.08]The position comes with no pay, but it is influential.
+[00:23.24]So, many people paid attention
+[00:26.80]when Biden became the first of America’s first ladies
+[00:32.08]to keep the job she had before her husband became president.
+[00:38.40]Jill Biden has a doctorate in education
+[00:42.04]and is a professor of English at a community college in Virginia,
+[00:47.12]just outside of Washington, D.C.
+[00:51.60]Some Americans might be surprised to learn
+[00:55.28]that Biden would keep her old job.
+[00:58.28]An expert on the subject is Katherine Jellison.
+[01:03.44]She is a history professor at Ohio University.
+[01:07.68]Jellison said, since Biden is a teacher,
+[01:11.56]which is a traditional job for women,
+[01:14.52]most Americans will accept her outside work.
+[01:19.20]Barbara Perry is a presidential historian at the University of Virginia.
+[01:24.68]She said most Americans see presidents as “father figures.”
+[01:30.88]She said: “That makes first ladies
+[01:34.32]maternal figures and kind of mothers of our country.”
+[01:40.76]What about if they are younger women?
+[02:02.32]However, first ladies do not just stand behind their husbands.
+[02:08.16]They often take on projects.
+[02:10.56]Among first ladies, Eleanor Roosevelt
+[02:14.24]was possibly the first to be remembered as an activist.
+[02:19.44]She came to the White House, the official presidential home,
+[02:24.76]in 1933 after Franklin Roosevelt won the election in 1932.
+[02:33.96]Perry said some Americans thought Eleanor Roosevelt
+[02:38.24]pushed too hard for changes.
+[02:41.88]She asked her husband to work on civil rights,
+[02:45.68]labor rights and women’s rights.
+[02:50.48]“She was always pressing for the social programs that she wanted
+[02:55.00]and was much reviled because of that,” Perry said.
+[03:01.28]While not every first lady was like Roosevelt,
+[03:04.64]she set an example for those to come.
+[03:08.40]First ladies have long been recognized for the causes they supported.
+[03:14.48]Jacqueline Kennedy worked to renovate the White House
+[03:18.32]and make sure it was home to historic art and objects from U.S. history.
+[03:25.36]Lyndon Johnson’s wife, Lady Bird Johnson,
+[03:29.44]supported environmental protection causes.
+[03:34.36]Nancy Reagan asked children to stay away from drugs.
+[03:40.12]Barbara Bush worked to help more people learn to read.
+[03:44.80]Michelle Obama was interested in healthy eating
+[03:48.20]and planted a vegetable garden at the White House.
+[03:52.68]Perry said most Americans were happy to support those kinds of projects.
+[03:58.32]But sometimes Americans think women in the White House do too much.
+[04:04.56]Perry said that happened with Hillary Clinton.
+[04:08.96]In 1993, she said, Bill Clinton appointed Hillary
+[04:14.36]to lead a group that worked to change the American health care system.
+[04:19.28]Perry said the public was not accepting of Clinton’s part in shaping policy:
+[04:27.44]“She had to go back to more soft-power approaches to being first lady.”
+[04:34.28]Kate Andersen Brower is a presidential historian
+[04:39.44]who wrote about first ladies in a book called “First Women.”
+[04:44.52]She said both Melania Trump and Nancy Reagan
+[04:49.52]had influence over who worked with the president.
+[04:53.72]Brower said Trump did not like the way one adviser treated one of the people
+[04:59.60]who worked for her during a trip overseas.
+[05:03.48]Melania Trump asked that the adviser be dismissed.
+[05:08.60]Reagan, Brower said, “decided who would be in and who was out.”
+[05:15.24]Clinton was not successful in her attempt at shaping healthcare policy.
+[05:21.16]However, Brower said she did suggest
+[05:25.68]that her husband choose Ruth Bader Ginsberg as a Supreme Court justice.
+[05:33.16]Brower said Jill Biden can change the way Americans think
+[05:38.20]about first ladies by being both a working woman and a wife.
+[05:45.16]She also said there is likely to be a big change ahead
+[05:50.00]when, one day, a woman is elected president.
+[05:55.00]I’m Dan Friedell.
+[05:56.64]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

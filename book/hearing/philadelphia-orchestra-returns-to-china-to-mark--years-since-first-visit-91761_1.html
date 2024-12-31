@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - </title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, " name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/philadelphia-orchestra-returns-to-china-to-mark-50-years-since-first-visit.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1></h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/philadelphia-orchestra-returns-to-china-to-mark-50-years-since-first-visit.mp3" id="mp3"></a>
+<a href="/static/lrc/philadelphia-orchestra-returns-to-china-to-mark-50-years-since-first-visit.lrc" id="lrc"></a>
+<a href="philadelphia-orchestra-returns-to-china-to-mark--years-since-first-visit-91761.html" id="CnPage" target="_blank"></a>
+<a href="lack-of-housing-in-los-angeles-brings-activism-art-91759.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The Philadelphia Orchestra arrived in Beijing Tuesday for a tour that celebrates the 50th anniversary of the group's first visit to China.<br/>
+费城交响乐团星期二抵达北京，开启了一场庆祝该乐团首次访问中国50周年的巡演。</p>
+<p>The visit comes as the United States and China prepare for a meeting next week between their top leaders.<br/>
+此次访问正值美国和中国筹备两国最高领导人下周会晤之际。</p>
+<p>The orchestra's 1973 trip has been called "historic" as an early example of the start of diplomatic relations between China and the U.S. The orchestra's visit followed President Richard Nixon's visit in 1972. He was the first American president to visit China while in office.<br/>
+该乐团1973年的访问作为中美开始外交关系的早期例子被称为“历史性的”。该乐团的访问是在1972年理查德·尼克松总统访问之后进行的。尼克松是首位在任期间访问中国的美国总统。</p>
+<p>Orchestra officials say 14 members are on the trip, including 73-year-old violin player Davyd Booth. Booth was among the visitors in 1973, as well.<br/>
+乐团官员称有14名成员参加了这次旅行，其中包括73岁的小提琴演奏家戴维·布斯。布斯也是1973年的访客之一。</p>
+<p>"This constant 50-year connection with China has been really very deep and very wonderful," Booth said after the group arrived at the Beijing airport.<br/>
+布斯在乐团抵达北京机场后表示：“与中国50年来的持续联系真的非常深厚，非常美妙。”</p>
+<p>The orchestra is making its 13th visit to China. It last visited in 2019.<br/>
+该乐团正在进行第13次中国之行。它上次访问是在2019年。</p>
+<p>The American musicians will perform with the China National Symphony Orchestra starting Friday. They will also visit the cities of Tianjin, Suzhou and Shanghai and hold special classes at schools.<br/>
+这些美国音乐家将于周五开始与中国国家交响乐团合作演出。他们还将访问天津、苏州和上海，并在学校开设特殊课程。</p>
+<p>Another cultural exchange is going on, too. The American Ballet Theatre is currently in China.<br/>
+另一场文化交流也在进行当中。美国芭蕾舞剧院目前正在中国。</p>
+<p>The music and dance group trips follow visits from high-level U.S. representatives. Secretary of State Antony Blinken, Treasury Secretary Janet Yellen and Commerce Secretary Gina Raimondo all traveled to China recently.<br/>
+此次音乐和舞蹈团队之旅紧随美国高层代表访问之后。国务卿安东尼·布林肯、财政部长珍妮特·耶伦和商务部长吉娜·雷蒙多最近都访问了中国。</p>
+<p>The U.S. and China have slowly been returning to normal communications after years of rising tensions and disputes.<br/>
+在经历了多年的紧张局势和争端后，美国和中国的沟通已慢慢恢复正常。</p>
+<p>The two countries are preparing for a meeting between President Joe Biden and Xi Jinping at the Asia-Pacific Economic Cooperation event in San Francisco next week.<br/>
+两国正在筹备拜登总统和习主席下周在旧金山亚太经济合作会议上的会晤。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·费里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Philadelphia Orchestra Returns to China to Mark 50 Years Since First Visit]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Philadelphia Orchestra arrived in Beijing Tuesday
+[00:04.28]for a tour that celebrates
+[00:07.16]the 50th anniversary of the group's first visit to China.
+[00:12.28]The visit comes as the United States and China
+[00:16.36]prepare for a meeting next week
+[00:18.68]between their top leaders.
+[00:21.80]The orchestra's 1973 trip has been called "historic"
+[00:27.84]as an early example of the start of diplomatic relations
+[00:32.20]between China and the U.S.
+[00:35.12]The orchestra's visit followed
+[00:37.16]President Richard Nixon's visit in 1972.
+[00:40.96]He was the first American president
+[00:43.64]to visit China while in office.
+[00:46.96]Orchestra officials say 14 members are on the trip,
+[00:51.36]including 73-year-old violin player Davyd Booth.
+[00:56.08]Booth was among the visitors in 1973, as well.
+[01:01.68]"This constant 50-year connection with China
+[01:05.72]has been really very deep and very wonderful," Booth said
+[01:10.04]after the group arrived at the Beijing airport.
+[01:14.84]The orchestra is making its 13th visit to China.
+[01:18.84]It last visited in 2019.
+[01:22.16]The American musicians will perform
+[01:24.56]with the China National Symphony Orchestra starting Friday.
+[01:29.40]They will also visit the cities of Tianjin, Suzhou
+[01:34.12]and Shanghai and hold special classes at schools.
+[01:39.00]Another cultural exchange is going on, too.
+[01:42.88]The American Ballet Theatre is currently in China.
+[01:46.92]The music and dance group trips
+[01:50.56]follow visits from high-level U.S. representatives.
+[01:54.76]Secretary of State Antony Blinken,
+[01:57.80]Treasury Secretary Janet Yellen
+[02:00.56]and Commerce Secretary Gina Raimondo
+[02:04.72]all traveled to China recently.
+[02:07.24]The U.S. and China have slowly been returning
+[02:10.48]to normal communications
+[02:13.16]after years of rising tensions and disputes.
+[02:16.80]The two countries are preparing for a meeting
+[02:19.48]between President Joe Biden and Xi Jinping
+[02:23.52]at the Asia-Pacific Economic Cooperation event
+[02:27.40]in San Francisco next week.
+[02:29.80]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

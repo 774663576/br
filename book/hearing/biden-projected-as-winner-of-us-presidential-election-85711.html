@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Biden Projected as Winner of US Presidential Election</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, Biden Projected as Winner of US Presidential Election" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202011/biden-projected-as-winner-of-us-presidential-election.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Biden Projected as Winner of US Presidential Election</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202011/biden-projected-as-winner-of-us-presidential-election.mp3" id="mp3"></a>
+<a href="astronomers-discover-source-of-fast-radio-burst-85709.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">07 November 2020</span><br/>
+<p>Democratic Party candidate Joe Biden is the projected winner of the U.S. presidential election.</p>
+<p>His victory over Republican President Donald Trump came after more than three days of a close vote count. A large number of mail-in votes delayed the processing of some ballots. With 270 Electoral College votes needed to win, Biden reached 273 votes when he won the northeastern state of Pennsylvania.</p>
+<p>Biden reacted to the news on <a class="wsw__a" href="https://twitter.com/JoeBiden/status/1325118992785223682">Twitter</a>, "America, I'm honored that you have chosen me to lead our great country." He added, "I promise you this: I will be a President for all Americans - whether you voted for me or not."</p>
+<p><strong>Reactions to the news</strong></p>
+<p>In the nation's capital of Washington, DC, people gathered outside the White House waving signs and taking pictures. Others came out shouting and <strong>banging pots</strong>. The sound of the Queen song, "We are the Champions," could be heard floating through the air.</p>
+<p>Across the country, people celebrated in New York's Times Square, danced in the streets of Philadelphia, Pennsylvania, and set off fireworks in Atlanta, Georgia.</p>
+<p>In Lansing, Michigan, Donald Trump supporters and Black Lives Matter demonstrators prayed together to the sound of the spiritual song "Amazing Grace."</p>
+<p>Lola Faleit of New York City told the Associated Press, "I feel less worried for my immigrant friends. In 2016, we woke up crying. Today we are celebrating. Look, the sky is clear blue, the sun is out, Mother Nature is celebrating, too."</p>
+<div class="contentImage"><img alt="People celebrate at Times Square in New York after Joe Biden was declared winner of the 2020 presidential election on November 7, 2020 (Photo by Kena Betancur / AFP)" src="https://files.21voa.com/gdb/3A52F7F1-AD04-4DB3-80DA-1A9F261DCF3E_w268_r0.jpg"/><br/>
+<span class="imagecaption">People celebrate at Times Square in New York after Joe Biden was declared winner of the 2020 presidential election on November 7, 2020 (Photo by Kena Betancur / AFP)</span></div>
+<p>
+<strong>"This election is far from over"</strong></p>
+<p>President Trump was at his golf course in Virginia when news of Biden's win broke.</p>
+<p>The Trump campaign said, "This election is far from over." It released a <a class="wsw__a" href="https://www.donaldjtrump.com/media/statement-from-president-donald-j.-trump/">statement</a> saying it would begin to argue in court Monday "to ensure election laws are fully upheld and the rightful winner is seated."</p>
+<p>Republican Senator Josh Hawley of Missouri <a class="wsw__a" href="https://twitter.com/HawleyMO/status/1325136203851526145">tweeted</a> his support for the Trump campaign, writing that the media does not get to decide who wins. "The people do," he continued. "When all lawful votes have been counted, recounts finished, and <strong>allegations</strong> of <strong>fraud addressed</strong>, we will know who the winner is."</p>
+<p>
+Sen. Mitt Romney was the 2012 Republican presidential nominee. On <a class="wsw__a" href="https://twitter.com/MittRomney/status/1325142815354064896">Twitter</a>, he wrote "congratulations to President-elect Joe Biden and Vice President-elect Kamala Harris." Romney added, "We know both of them as people of good will."</p>
+<p>Former Democratic Presidents Jimmy Carter, Barack Obama, and Bill Clinton also sent congratulations to Biden and Harris.</p>
+<p>World leaders, including French President Emmanuel Macron, Canadian Prime Minister Justin Trudeau, and British Prime Minister Boris Johnson said they look forward to working with the new administration.</p>
+<p>
+<strong>Race for the White House</strong></p>
+<p>From the start of his third campaign for president, Biden centered his effort on winning Pennsylvania and the midwestern states of Michigan and Wisconsin.</p>
+<p>Biden argued that his popularity among working-class voters would return the three states, known as the "Blue Wall," to the Democratic Party. In 2016, Republican Donald Trump won the three states and the presidency over Hillary Clinton.</p>
+<p>Biden visited his birth state of Pennsylvania on Election Day. He wrote on the wall of his boyhood home in Scranton, "From this house to the White <a class="wsw__a" href="https://www.theguardian.com/us-news/joebiden">House</a>...." Four days later, Pennsylvania provided the electoral votes that Biden needed to win the presidency.</p>
+<p>A record number of Americans voted this year through mail-in ballots and stood in long lines at voting places. With vote-counting continuing in some states, Biden has already received more votes than any presidential candidate in U.S. history, with his name marked on 74 million ballots. Trump received about 70 million, the second-highest number recorded for any candidate.</p>
+<p>
+<strong>Biden's career</strong></p>
+<p>Biden has been in national politics for many years. He first served as a senator from Delaware and then two terms as Obama's vice president.</p>
+<p>In 1972, just weeks after his election to the Senate, Biden's wife and one-year-old daughter were killed in a car accident. He was left a single father of two sons and briefly considered leaving his Senate seat. But he decided to stay in office. As senator, Biden traveled daily to and from Washington on the train, so he could be home in Delaware with his sons every night.</p>
+<p>Biden turns 78 years old on November 20. Eight weeks later, on January 20, 2021, Biden will become the oldest person to take office as president.</p>
+<p>Kamala Harris has also made history as the first woman, first Black person and first person of South Asian descent to become vice president.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Hai Do wrote this story for Learning English with additional reporting from the Associated Press and Reuters. Caty Weaver was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>bang -</strong> v. to hit something in a way to make a loud noise</p>
+<p><strong>pot</strong> - n. a round container used for cooking</p>
+<p><strong>allegation </strong>- n. a statement saying that someone has done something wrong or illegal</p>
+<p><strong>fraud </strong>- n. a crime of using dishonest methods</p>
+<p><strong>address </strong>- v. to deal with an issue</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 报告称到2030年非洲儿童将会占到全球贫困人口的一半以上</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 报告称到2030年非洲儿童将会占到全球贫困人口的一半以上" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201909/report-african-children-will-make-up-half-of-world-s-poor-by-2030.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>报告称到2030年非洲儿童将会占到全球贫困人口的一半以上</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201909/report-african-children-will-make-up-half-of-world-s-poor-by-2030.mp3" id="mp3"></a>
+<a href="/static/lrc/report-african-children-will-make-up-half-of-world-s-poor-by-2030.lrc" id="lrc"></a>
+<a href="report-african-children-will-make-up-half-of-world-s-poor-by--82913.html" id="CnPage" target="_blank"></a>
+<a href="un-among-babies-and-pregnant-mothers-a-death-every--seconds-82908.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">By the year 2030, African children will make up more than half of the world's poor people, warns a new report.<br/>一份新的报告称，到2030年，非洲儿童将会占到全球穷人的一半以上。
+<p>The warning comes as more than 150 world leaders prepare to attend the United Nations Sustainable Development Summit. The conference opens in New York City on September 25.<br/>发出这一警告之际，150多位世界领导人正准备参加联合国可持续发展峰会。这次会议将于9月25日在纽约举行。</p>
+<p>UN member states agreed on 17 Sustainable Development Goals at the 2015 General Assembly meetings. Number one on the list of goals is ending extreme poverty by 2030. But the world will not meet that target, the report said. It added that international efforts to end extreme poverty among children in Africa are a failure.<br/>联合国成员国于2015年在联大会议上商定了17个可持续发展目标。目标清单上的第一个就是在2030年前消除极端贫困。但是这份报告指出，全球将无法实现这个目标。报告还称，为消除非洲儿童中的极度贫困所作的国际努力是一项失败。</p>
+<p>The report comes from the aid group Save the Children and the London-based Overseas Development Institute.<br/>这份报告出自“救助儿童会”以及总部位于伦敦的“海外发展研究所。”</p>
+<p>Children in Africa will account for around 55% of all extreme poverty in the world by 2030," notes Kevin Watkins. He is the head of Save the Children UK.<br/>凯文·沃特金斯指出，到2030年，非洲儿童将约占世界所有极端贫困人口的55%。他是“救助儿童会”的负责人。</p>
+<p>An estimated 87 million African children will be born into poverty each year in the 2020s, the report said. It noted that about 40% of Africans still live on less than $1.90 a day.<br/>报告称，预计到本世纪20年代，每年会有8700万儿童出生在贫困家庭。报告指出，大约40%的非洲人每天的生活费仍不足1.9美元。</p>
+<p>"Women are still having four to five children, and it's the part of the world where poverty is coming down most slowly, partly because of slow growth but also because of very high levels of inequality," Watkins said.<br/>沃特金斯表示：“（非洲的）妇女们还会生四五个孩子，这是全球贫困率下降缓慢的部分原因。还有部分原因是增长缓慢，但是不平等程度很高也是一个原因。”</p>
+<p>"A child born into poverty ... they are between two and three times more likely to die before their fifth birthday. They are far less likely to escape poverty themselves," he added.<br/>他还说：“孩子生在贫困家庭，他们在5岁前死亡的可能性要高出2到3倍。他们靠自己摆脱贫困的可能性也更小。”</p>
+<p>The report criticizes African governments for failing to develop reasonable policies. It also warns that the International Monetary Fund, the World Bank and other donors are failing in their efforts to end child poverty in Africa.<br/>该报告批评非洲政府未能制定合理的政策。报告还警告说，国际货币基金组织、世界银行以及其它捐助者消除非洲儿童贫困的努力未能奏效。</p>
+<p>Watkins said big changes are needed immediately.<br/>沃特金斯表示需要立即作出重大变革。</p>
+<p>Getting financial "resources to children who are living in poverty has to be part of the solution," Watkins said. "But we also know that money is not enough." He added that the children will need healthful food, basic medical care and quality education to beat poverty.<br/>沃特金斯表示：“向贫困儿童提供资金是解决方案之一。但是我们也知道，光有钱不够。”他还说，儿童需要健康的食物、基本的医疗和素质教育来打败贫困。</p>
+<p>The report warns that if poverty reduction targets are not met, the world will also fall short on other development goals in education, health and gender equality.<br/>报告警告称，如果减少贫困的目标未能实现，全球也将达不到教育、卫生和性别平等方面的发展目标。</p>
+<p>I'm Susan Shand.<br/>我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Report: African Children Will Make Up ‘Half of World’s Poor’ by 2030]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.01]By the year 2030, African children will make up more than half of the world's poor people, warns a new report.
+[00:12.88]The warning comes as more than 150 world leaders 
+[00:19.24]prepare to attend the United Nations Sustainable Development Summit. 
+[00:25.74]The conference opens in New York City on September 25.
+[00:32.40]UN member states agreed on 17 Sustainable Development Goals at the 2015 General Assembly meetings. 
+[00:44.59]Number one on the list of goals is ending extreme poverty by 2030. 
+[00:52.23]But the world will not meet that target, the report said. 
+[00:57.55]It added that international efforts to end extreme poverty among children in Africa are a failure.
+[01:07.21]The report comes from the aid group Save the Children and the London-based Overseas Development Institute.
+[01:17.33]Children in Africa will account for around 55% of all extreme poverty in the world by 2030," notes Kevin Watkins. 
+[01:30.92]He is the head of Save the Children UK.
+[01:35.61]An estimated 87 million African children will be born into poverty each year in the 2020s, the report said. 
+[01:47.40]It noted that about 40% of Africans still live on less than $1.90 a day.
+[01:57.55]"Women are still having four to five children, and it's the part of the world where poverty is coming down most slowly, 
+[02:07.33]partly because of slow growth but also because of very high levels of inequality," Watkins said.
+[02:15.94]"A child born into poverty ... they are between two and three times more likely to die before their fifth birthday. 
+[02:26.44]They are far less likely to escape poverty themselves," he added.
+[02:32.87]The report criticizes African governments for failing to develop reasonable policies. 
+[02:40.53]It also warns that the International Monetary Fund, 
+[02:45.38]the World Bank and other donors are failing in their efforts to end child poverty in Africa.
+[02:54.11]Watkins said big changes are needed immediately.
+[02:59.71]Getting financial "resources to children who are living in poverty has to be part of the solution," Watkins said. 
+[03:09.69]"But we also know that money is not enough." 
+[03:13.92]He added that the children will need healthful food, basic medical care and quality education to beat poverty.
+[03:24.60]The report warns that if poverty reduction targets are not met, 
+[03:30.57]the world will also fall short on other development goals in education, health and gender equality.
+[03:39.30]I'm Susan Shand. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

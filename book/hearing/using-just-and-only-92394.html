@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Using 'Just' and 'Only'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Using 'Just' and 'Only'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/using-just-and-only.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Using 'Just' and 'Only'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/using-just-and-only.mp3" id="mp3"></a>
+<a href="wildlife-workers-dress-up-to-care-for-orphaned-fox-92388.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gena Bennett</span><br/>
+<span class="datetime">15 March 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Mohammad.</p>
+<p><strong>Question</strong></p>
+<p>What is the difference between just and only?</p><div class="contentImage"><img alt="Using 'Just' and 'Only'" src="https://files.21voa.com/gdb/01000000-0aff-0242-2d6e-08dc442cb5c6_w268_r1.png"/><br/><span class="imagecaption">Using 'Just' and 'Only'</span></div>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing, Mohammad. This is a good question.</p>
+<p>In an earlier <em>Ask a Teacher</em>, we <a class="wsw__a" href="https://www.21voa.com/a/just-and-only/5408390.html" target="_blank">explained</a> how the two words, "just" and "only," seem to mean the same thing. For example:</p>
+<p><em>She was <u>just</u> a baby when she came to America.</em></p>
+<p>Or</p>
+<p><em>She was <u>only</u> a baby when she came to America.</em></p>
+<p>In that article, we also explained how the two words have different meanings and when you should use one and not the other. The difference in usage is so small that you might not even notice at first. But it is very important.</p>
+<p>So, let's look at more ways to use the two words today.</p>
+<p><strong>Usage</strong></p>
+<p>Usage is the way in which a word or phrase is normally used.</p>
+<p>The word "only" can be used in an undesirable situation. For example:</p>
+<p><em>He <u>only</u> finished half his homework.</em></p>
+<p><em><u>Only</u> two banks stay open after 4 p.m.</em></p>
+<p><em>You're <u>only</u> coming on Saturday? I wish you could come earlier.</em></p>
+<p>Its usage is also common when we are not happy about something:</p>
+<p><em>It's <u>only</u> right that they get the same pay for the same work.</em></p>
+<p><em>The noise is fine, <u>only</u> if it does not hurt my ear.</em></p>
+<p>However, we use the word "just" when we want to make an <strong>emphasis</strong>, or a stronger statement. Let's compare the last two examples with these:</p>
+<p><em>It's <u>just</u> not right that he gets more pay for the same work.</em></p>
+<p><em>The noise hurts my ear. <u>Just</u> be quiet, please!</em></p>
+<p>In spoken English, believe it or not, we also use "just" when we want to make something smaller or less important.</p>
+<p>For example, when someone thinks the distance is too far, we might say:</p>
+<p><em>Your friend lives <u>just</u> down the road.</em></p>
+<p>If they do not have a lot of time, we might ask:</p>
+<p><em>Can you wait <u>just</u> a minute?</em></p>
+<p>And when someone appears to be busy, we might say:</p>
+<p><em>Could I <u>just</u> ask you something?</em></p>
+<p><em>I was <u>just</u> wondering, can we meet tomorrow?</em></p>
+<p>Please let us know if this explanation has helped you, Mohammad.</p>
+<p>Do you have a question about American English? Send us an email at learningenglish@voanews.com.</p>
+<p>And that's Ask a Teacher.</p>
+<p>I'm Gena Bennett.</p>
+<p><em>Gena Bennett wrote this lesson for VOA Learning English.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>emphasis</strong>—<em>n</em>. special importance, value, or attention</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

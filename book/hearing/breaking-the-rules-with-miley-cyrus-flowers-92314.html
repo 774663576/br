@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Breaking the Rules with Miley Cyrus’ ‘Flowers’</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Breaking the Rules with Miley Cyrus’ ‘Flowers’" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/breaking-the-rules-with-miley-cyrus-flowers.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Breaking the Rules with Miley Cyrus’ ‘Flowers’</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/breaking-the-rules-with-miley-cyrus-flowers.mp3" id="mp3"></a>
+<a href="how-to-use-ai-tools-to-improve-quality-of-internet-searches-92308.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">29 February 2024</span><br/>
+<p>Every year, the Recording Academy in the United States gives awards to the performers and songwriters with the most outstanding <strong>achievements</strong> from the year before. The Academy calls those awards "the <a class="wsw__a" href="https://newsroom.ap.org/detail/GrammyAward/c4cf1e8a33aa407e81a41363730f51da">Grammys</a>."</p>
+<p>At the 2024 Grammy awards, the Song of the Year award went to Miley Cyrus for her song <em>Flowers</em>. In today's lesson, we will look at some grammar rules Cyrus follows in the song and one rule she breaks. The song begins with the story of a break-up:</p>
+<p><em>We were good, we were gold</em><br/>
+<em>Kinda dream that can't be sold</em><br/>
+<em>We were right 'til we weren't</em><br/>
+<em>Built a home and watched it burn</em></p><div class="contentImage"><img alt="Everyday Grammar: Breaking the Ruke With Miley Cyrus' 'Flowers'" src="https://files.21voa.com/gdb/01000000-0a00-0242-b31f-08dc37a9b0c2_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Breaking the Ruke With Miley Cyrus' 'Flowers'</span></div>
+<p><em>Mm, I didn't wanna leave you</em><br/>
+<em>I didn't wanna lie</em><br/>
+<em>Started to cry, but then remembered I... </em></p>
+<p>In this first part, Cyrus uses an informal adverb, "kinda," to describe the dream she and her partner had. In formal language, she would say, "It was the <em>kind of</em> dream that can't be sold." We expect to hear informal language in songs, so this is not really breaking any rules.</p>
+<p>She follows with another informal word, the verb form "wanna," in "I didn't wanna leave you, I didn't wanna lie." It is very common to hear this pronunciation in spoken English of the words "want to."</p>
+<p><strong>Reflexive pronoun rule</strong></p>
+<p>Next, we get to where Cyrus follows and breaks the same rule. She describes the expressive actions of a romantic partner that she can do for herself. Her song tells us about the kinds of things a romantic partner might do, but Cyrus says she, as an independent woman, can do those things without the partner.</p>
+<p>Listen for the <strong>reflexive</strong> pronoun "myself" in these lines:</p>
+<p><em>I can buy myself flowers</em></p>
+<p><em>Write my name in the sand</em></p>
+<p><em>Talk to myself for hours</em></p>
+<p><em>Say things you don't understand</em></p>
+<p><em>I can take myself dancing</em></p>
+<p><em>And I can hold my own hand</em></p>
+<p><em>Yeah, I can love me better than you can</em></p>
+<p>Did you catch the place where she broke the rule about when to use a reflexive pronoun? The rule is: when the object and the subject of the verb are the same, use the reflexive pronoun to describe the object.</p>
+<p>Cyrus follows this rule when she sings, "I can buy myself flowers," "talk to myself for hours" and "I can take myself dancing." But she breaks it when she sings, "I can love me better than you can."</p>
+<p>Let's take a moment for a little quiz here. Can you say or sing the same line with the reflexive pronoun? Take a moment so you can think.</p>
+<p>Following the rule, this should be "I can love myself better than you can." Cyrus probably uses "me" to match the beat of the music. Often, that is more important to singers than following grammar rules!</p>
+<p><strong>Adjective "own"</strong></p>
+<p>In one line of the song, Cyrus uses the adjective "own" to refer to things belonging to herself. Let's listen to that line:</p>
+<p>And I can hold my own hand</p>
+<p>Here, "own" is correct because it makes the action clear. If she had not used "own," we might not understand. She could be singing about holding her hand up, for example. "Hold my own hand" makes it clear to us that she is using one hand to hold another.</p>
+<p>What do you think of Miley Cyrus' song? Are there any singers in your country who sing about their independence in this way?</p>
+<p>Write to us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a> and tell us about them.</p>
+<p>And that's Everyday Grammar!</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for Learning English.</em></p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>______________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>achievement </strong>– <em>n.</em> something accomplished, especially by superior ability, special effort, or great courage</p>
+<p><strong>reflexive (pronoun)</strong> <em>– adj. </em>a class of pronouns that refer back to the subject of a sentence or clause</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

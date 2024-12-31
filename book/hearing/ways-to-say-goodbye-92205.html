@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ways to Say 'Goodbye'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Ways to Say 'Goodbye'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/ways-to-say-goodbye.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ways to Say 'Goodbye'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/ways-to-say-goodbye.mp3" id="mp3"></a>
+<a href="sea-otters-help-save-california-s-wetlands-92201.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">08 February 2024</span><br/>
+<p>It is never easy to say goodbye, but at least in English, we have many ways to do so. For my final <em>Everyday Grammar</em>, I want to share the many ways to say goodbye in English.</p>
+<p>There are polite or <strong>formal</strong> ways. There are also ways we can say goodbye in everyday conversation, including fun <strong>slang</strong> that you can use.</p>
+<p>"Goodbye" is believed to have come from the expression, "God be with ye," about 500 years ago. "Ye" is an old form of "you." Over time "God" became "good." Today, the expression is for wishing someone well when you are leaving.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0a00-0242-e99c-08dc275bec53_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>"Goodbye" is probably the most common way to say this. Shorter forms include "bye" and "bye-bye." If you enjoy the 1990's pop band, NSYNC, you can say: "Bye Bye Bye!"</p>
+<p><em>"It might sound </em><a class="wsw__a" href="https://www.21voa.com/a/crazy-and-insane/6514528.html"><em>crazy</em></a><em> but it ain't no lie</em></p>
+<p><em>Baby, bye bye bye"</em></p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p><strong>In formal conversation</strong></p>
+<p>When you part with someone and you want to wish them a good time, you can use this general structure:</p>
+<p>Have + a + adjective + period of time:</p>
+<p><em>Have a good night! </em></p>
+<p><em>Have a wonderful weekend! </em></p>
+<p><em>Have a nice day.</em></p>
+<p>"Have" is in the imperative form of the verb. The imperative form gives instructions, directions or commands. Imperative sentences use the base form of the verb.</p>
+<p>If parting ways with someone during the nighttime, we combine "good" with "night" to wish someone a "goodnight." We use this expression usually when going to sleep at night.</p>
+<p><em>I always say "goodnight" to everyone in my house before bedtime.</em></p>
+<p>We use other command forms in formal settings to say "goodbye."</p>
+<p>"Take care (of yourself)" is meant to wish someone physical or emotional health.</p>
+<p>If we have enjoyed our time with someone we can say:</p>
+<p><em>It was a pleasure speaking with you.</em></p>
+<p>It + form of "be" in present or past tense + article and noun or adjective + gerund + (with) you.</p>
+<p><em>It was great seeing you this weekend. </em></p>
+<p>We can also say that we "look forward to" seeing or speaking with someone. This expression suggests hope for the future.</p>
+<p><em>I look forward to our next meeting.</em></p>
+<p><em>I look forward to seeing you then.</em></p>
+<p><em>I look forward to speaking with you.</em></p>
+<p>Shorter forms of this expression include a sentence with "will."</p>
+<p><em>I will see you then. </em></p>
+<p><em>See you then!</em></p>
+<p><em>Speak to you then!</em><em> </em></p>
+<p><strong>In everyday conversation</strong></p>
+<p>When speaking with friends and family, you can use informal ways to communicate leaving.</p>
+<p>Shorter forms like "see you" are said even more conversationally when "you" becomes "ya" in fast speech. We can combine the expression with an adverb to say when we will see someone in the future.</p>
+<p><em>See you soon!</em></p>
+<p><em>See ya' later.</em></p>
+<p><em>See ya' around! </em></p>
+<p><em>Catch you later.</em></p>
+<p><em>Catch ya' later.</em></p>
+<p>To express a similar meaning, we can use a prepositional phrase with "until." There is no subject or object. Just the preposition is used.</p>
+<p>Until + time expression</p>
+<p><em>Until then.</em></p>
+<p><em>Until Tuesday! </em></p>
+<p><em>Until next week! </em></p>
+<p>If you need to quickly leave, you can use these expressions. "Gotta" is a contraction that is used in everyday speech.</p>
+<p><em>I've got to go.</em></p>
+<p><em>I've gotta go.</em></p>
+<p><em>I'm heading off.</em></p>
+<p>If you want someone to connect with you in the future, you can use these:</p>
+<p><em>Don't be a stranger.</em></p>
+<p><em>Keep in touch!</em></p>
+<p>If someone is leaving you on a trip, you can wish them a safe journey:</p>
+<p><em>Have a safe trip!</em></p>
+<p><em>Drive safely. </em></p>
+<p><em>Drive safe!</em></p>
+<p><em>Safe travels!</em></p>
+<p>Note that in "drive safe," "safe" is, what is sometimes called, a "flat" adverb. These are older adverb forms in English that do not use the -ly ending. Phrases "sleep tight" or "go slow" are examples.</p>
+<p>Another expression that uses a flat adverb is "take it easy."</p>
+<p>And lastly, if you must leave quickly, you can use the expression:</p>
+<p><em>I've got to hit the road. </em></p>
+<p><em>I gotta hit the road.</em></p>
+<p>We often use it when we are going to drive somewhere, but we can use it for other means of travel.</p>
+<p><strong>Slang</strong></p>
+<p>Finally, we have a few slang words that are used very informally in speech, especially by some groups of people. Slang is often spoken by young people and is generational, meaning that each new generation has its own slang. Remember, using slang is very informal and not a good idea in groups of people who are of several different age groups.</p>
+<p>From the expression "see you later," we get the one-word slang expression "later." You can use this word by itself or with the person's name.</p>
+<p><em>Later!</em></p>
+<p><em>Later, John! </em></p>
+<p>We also have the expression:</p>
+<p><em>I'm out of here. </em></p>
+<p>We can make this even more informal by shortening "out of" to "outta."</p>
+<p><em>I'm outta here.</em></p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+renderExternalContent("https://www.youtube.com/embed/g7nnpxLZpCQ?&amp;&amp;&amp;fs=1&amp;enablejsapi=1")
+
+
+
+<p>One of my favorite expressions was often heard in 1990's and early 2000's hip hop music: "bounce."</p>
+<p>According to <a class="wsw__a" href="https://www.urbandictionary.com/define.php?term=bounce">Urban Dictionary</a>, to "bounce" means to leave and go somewhere else better or quickly.</p>
+<p>A song by Destiny's Child, "Say My Name," uses this expression:</p>
+<p><em>See you gotta bounce</em></p>
+<p><em>When two seconds ago</em></p>
+<p><em>You said you just got in the house</em></p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+renderExternalContent("https://www.youtube.com/embed/sQgd6MccwZc?&amp;&amp;&amp;fs=1&amp;enablejsapi=1")
+
+
+
+<p><strong>Final thoughts</strong></p>
+<p>In today's <em>Everyday Grammar</em>, we talked about different expressions we can use to say "goodbye." Many "goodbye" expressions in both formal and everyday language use the imperative form. We also looked at some fun slang words for "goodbye."</p>
+<p>I wanted to thank our audience for the past two years here at VOA Learning English. This might not be "goodbye," maybe it is just "see ya later!"</p>
+<p>Take care,</p>
+<p>I'm Faith Pirlo. And I'm John Russel.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>__________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>formal </strong>– <em>adj</em>. language that is used for serious or official writing and speaking</p>
+<p><strong>slang </strong>– <em>n</em>. a word or expression that is not standard usage, is considered very informal and is usually used by people of a certain age group or ethnic background</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

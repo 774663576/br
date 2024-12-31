@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Alzheimer's Drug Available, But Sales Slow</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Alzheimer's Drug Available, But Sales Slow" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/alzheimer-s-drug-available-but-sales-slow.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Alzheimer's Drug Available, But Sales Slow</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/alzheimer-s-drug-available-but-sales-slow.mp3" id="mp3"></a>
+<a href="old-recordings-gain-new-listeners-in-brazil-92640.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">06 May 2024</span><br/>
+<p>From VOA Learning English, this is the Health &amp; Lifestyle report.</p>
+<p>Alzheimer's disease affects a person's memory, thinking and behavior. The first drug shown to slow the effects of Alzheimer's disease reached the market in the United States over a year ago. However, sales of the drug Leqembi have been slow.</p>
+<p><strong>Reasons for slow sales</strong></p><div class="contentImage"><img alt="FILE - This image provided by Eisai in January 2023 shows vials and packaging for their medication, Leqembi. On Thursday, July 6, 2023. (Eisai via AP, File)" src="https://files.21voa.com/gdb/ca222bfa-3e92-4b6f-99e0-f4d8fd09d833_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - This image provided by Eisai in January 2023 shows vials and packaging for their medication, Leqembi. On Thursday, July 6, 2023. (Eisai via AP, File)</span></div>
+<p>Major hospital systems in the U.S. have taken months to start using the new Alzheimer's drug. Some health <strong>insurers</strong> have rejected paying for the medication. And doctors say they expect some patients will be slow to take Leqembi because of the drug's limited results and possible side effects.</p>
+<p>Doctors say it will take years to learn how best to use the drug. They add that work must be done to improve the <strong>diagnosis</strong> of Alzheimer's.</p>
+<p>Dr. Ambar Kulshreshtha specializes in treating dementia near Atlanta, Georgia. He is hopeful about the drug. He said, "This is the start of a very exciting <strong>journey</strong>."</p>
+<p>In the U.S., about 6 million Americans suffer from Alzheimer's. There is no cure for the disease. But studies show Leqembi helps clear a kind of protein that builds up in the brain called beta amyloid. Beta amyloid is considered an important sign of Alzheimer's.</p>
+<p>Studies showed that Leqembi can delay the progression of the disease by a few months in people with mild symptoms. Some experts say the delay may be too small for patients to notice.</p>
+<p>The drug's side effects can include swelling or bleeding in the brain. Patients taking Leqembi require regular tests to watch for possible side effects.</p>
+<p>Last July the U.S. Food and Drug Administration gave Leqembi <a class="wsw__a" href="https://www.21voa.com/a/us-approves-drug-to-slow-early-effects-of-alzheimer-s-disease-/7171589.html">full approval</a> for patients with early <strong>stages</strong> of the disease. The U.S. healthcare coverage program for people aged 65 and over, called Medicare, covers Leqembi and the cost of tests needed to diagnose patients.</p>
+<p><strong>Complex system for administering the drug</strong></p>
+<p>Alexander Scott is an official with Eisai, the Japanese company that makes Leqembi. Scott said hospitals and health systems have needed more time than expected to provide Leqembi.</p>
+<p>"It's not like we are adding a drug to an existing system," he said. He said hospitals need to build a system for the drug.</p>
+<p>The Cedars-Sinai health system in Los Angeles, for example, started administering the drug in early March. This effort required months to establish a plan that dealt with diagnosis, treatment, and watching for problems. "We were very careful about it," said Dr. Sarah Kremen, a behavioral neurologist at Cedars-Sinai.</p>
+<p>The Mayo Clinic in Rochester, Minnesota, started using Leqembi in October of last year. The health center only uses the drug for patients who live within about 160 kilometers of its offices. This is so doctors can reach them quickly if they have problems.</p>
+<p><strong>Paying for the costly drug</strong></p>
+<p>Health systems still do not know how coverage for the drug, its <strong>infusions</strong>, and the needed tests work. Because the drug can cost more than $26,000 a year, there are concerns patients will face costs they cannot pay.</p>
+<p>An Eisai spokesperson said nearly three-quarters of <strong>commercial</strong> healthcare plans in the U.S. cover the drug outside of Medicare.</p>
+<p>But doctors are concerned that getting coverage still might be difficult for some patients, especially those too young to qualify for Medicare.</p>
+<p>Scott Berkheiser is 57 years old and lives in Florida. His health insurance company would not pay for the drug. So, his first Leqembi infusion was delayed until last December.</p>
+<p>He said the drugmaker agreed to supply him with the drug at no cost while he made partial insurance payments, known as co-payments, for the treatment.</p>
+<p>"It was a little crazy," he said. "It seemed like it was kind of a game that must make sense for some monetary reason."</p>
+<p><strong>Delayed and complex diagnosis and treatment</strong></p>
+<p>Getting treatments started on time remains another problem.</p>
+<p>When Leqembi launched last year, doctors at Texas Neurology in the city of Dallas tested 60 people as possible candidates for Leqembi. However, only eight started the treatment. The chief of Texas Neurology, David Evans, said the other candidates either refused the drug or had gone beyond the early stage of the disease. Evans said the period, or "window," when the drug is best to use is very short.</p>
+<p>Doctors say more must be done to quickly identify patients and get treatment started before the disease worsens. For example, if people say they have trouble with their memory, doctors must rule out other causes.</p>
+<p>Dr. Kulshreshtha said these can include thyroid problems, vitamin deficiencies, medication problems, and depression. Memory tests for dementia can also require several visits to a doctor.</p>
+<p>Some patients might be <strong>ineligible</strong> for Leqembi because it would conflict with medication they take to prevent <strong>strokes</strong>. And patients might have to wait months to see a brain specialist who would <strong>prescribe</strong> the drug.</p>
+<p>Those who do get the first infusion have said the treatment process is not difficult. Leqembi patient Berkheiser said his infusions have gone "like clockwork" after he started treatment.</p>
+<p>Charles Clegg from Salem, Alabama, recently finished his 13th Leqembi infusion. He visits a treatment center that is close to his home. Clegg and his wife, Carol, said he has had no side effects, and his short-term memory has improved.</p>
+<p>"This drug gives you hope," Carol Clegg said.</p>
+<p>And that's the Health &amp; Lifestyle report.</p>
+<p>I'm Anna Matteo. And I'm Dan Friedell.</p>
+<p><em>Tom Murphy reported this story for the Associated Press. Anna Matteo adapted it for VOA Learning English. </em></p>
+<p>____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>insurer </strong>–n. the provider of insurance, such as health insurance, in which a person pays a company regularly so that the company will pay most of the costs of a covered expense</p>
+<p><strong>diagnosis </strong>–n. the act of identifying a disease affecting a person</p>
+<p><strong>journey </strong>–n. a trip or a long process that involves unexpected events</p>
+<p><strong>stage </strong>–n. a level or condition that is different from earlier and later ones</p>
+<p><strong>infusion </strong>–n. a treatment that involves adding a medicine by one of several means</p>
+<p><strong>commercial </strong>–adj. related to business and making a profit</p>
+<p><strong>ineligible </strong>–adj. not able to use or take</p>
+<p><strong>stroke </strong>–n. a severe medical problem in which blood flow is blocked preventing blood from reaching the brain or heart</p>
+<p><strong>prescribe </strong>–v. to approve the use of medicine whose use is restricted by law (the approval must come from a medical doctor)</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国小女孩卖柠檬水筹钱做脑部手术</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国小女孩卖柠檬水筹钱做脑部手术" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202103/girl-raises-money-for-medical-operation-by-selling-lemonade.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国小女孩卖柠檬水筹钱做脑部手术</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202103/girl-raises-money-for-medical-operation-by-selling-lemonade.mp3" id="mp3"></a>
+<a href="/static/lrc/girl-raises-money-for-medical-operation-by-selling-lemonade.lrc" id="lrc"></a>
+<a href="girl-raises-money-for-medical-operation-by-selling-lemonade-86435.html" id="CnPage" target="_blank"></a>
+<a href="bats-and-the-origins-of-outbreaks-86433.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Liza Scott is a seven-year-old girl in the southern U.S. state of Alabama. Like many young girls, she became interested in earning money. So, she created a small table where she sells a cold drink made from lemon juice, water and sugar.<br/>
+丽莎·斯科特是美国南部阿拉巴马州的一名7岁女孩。像很多小女孩一样，她对赚钱产生了兴趣。因此，她摆了一张小桌子，出售由柠檬汁、水和糖制成的冷饮。
+<p>This is called a lemonade stand. The stand is at her mother's bakery, a business that sells baked goods like bread. Her mother, Elizabeth Scott, runs Savage's Bakery, near the city of Birmingham.<br/>
+这就是所谓的柠檬水小摊。这个小摊摆在她妈妈的面包店里，这是一家出售面包等烘培食品的商店。她的妈妈伊丽莎白·斯科特在伯明翰市附近经营萨维奇面包店。</p>
+<p>At first, the lemonade stand was something to do for fun. Liza sold the drinks for 25 cents a glass. She was going to use the money to buy toys and pretty shoes.<br/>
+最初，这个柠檬水小摊是出于乐趣。丽莎每杯饮料卖25美分。她打算用这些钱买玩具和漂亮的鞋子。</p>
+<p>But then the stand became much more important.<br/>
+但是随后这个小摊变得更加重要。</p>
+<p>Liza has a health problem that will require surgery.<br/>
+丽莎患上了一种需要手术治疗的疾病。</p>
+<p>She suffers from seizures because part of her brain did not grow correctly. Doctors in Boston will work to fix the problem during several visits.<br/>
+因为她的大脑有一部分发育不好，她患上了癫痫症。波士顿的医生将在几次诊疗中努力解决这个问题。</p>
+<p>Elizabeth Scott said she has good health insurance, which will help pay for some of the treatment. But the trips to Boston will be costly and the insurance will not pay for them.<br/>
+伊丽莎白·斯科特表示，她买了健康保险，这将有助于支付一些治疗费用。但是去波士顿的旅费很昂贵，保险不会承担这部分费用。</p>
+<p>Now, instead of just being a way to raise money for fun things, the money from the lemonade stand will help pay for the treatment.<br/>
+现在不仅仅是为了攒钱买喜欢的东西，柠檬水小摊赚的钱还有助于支付治疗费用。</p>
+<p>Selling cold drinks for less than a dollar will not actually raise much money. So instead, the stand is a place where people can visit to give money that will help Liza with her medical treatment.<br/>
+以不到一美元的价格出售冷饮实际上筹集不到太多钱。于是，这个小摊成为人们可以前去捐款帮助丽莎进行治疗的一个地点。</p>
+<p>So far, people have come to the bakery to buy lemonade and given Liza some extra money, too.<br/>
+到目前为止，人们到面包店购买柠檬水，并且还额外给了丽莎一些钱。</p>
+<p>"I've got a $20 bill, and a $50 bill and a $10 bill and a $5 bill and a $100 bill," Liza said, counting donations.<br/>
+丽莎数着这些捐款说：“我有一张20美元、一张50美元、一张10美元、一张5美元，还有一张100美元。”</p>
+<p>So far, people have given over $12,000.<br/>
+到目前为止，人们已经捐赠了超过12000美元。</p>
+<p>But Elizabeth Scott also created an internet fundraiser where people from anywhere can donate money to Liza. It has gathered over $300,000 so far.<br/>
+但是伊丽莎白·斯科特还发起了一项互联网筹款，任何地方的人们都可以给丽莎捐款。到目前为止，它已经筹集到了超过30万美元。</p>
+<p>"I can't fund that by myself," Elizabeth said about the extra medical costs for her daughter. She called the costs "pretty exorbitant."<br/>
+伊丽莎白谈到女儿的这笔额外医疗费用时表示：“我自己承担不起这笔治疗费用。”她称这笔费用“相当高。”</p>
+<p>Critics of the U.S. healthcare system say they do not think a child who needs a brain operation should have to raise money to fund her own care.<br/>
+美国医保系统的批评者表示，他们认为一名需要做脑部手术的儿童不应该需要自己来筹款治疗。</p>
+<p>Liza said she thinks running the lemonade stand makes her feel like she is helping. "It's better than just begging," she said.<br/>
+丽莎表示，她认为经营柠檬水小摊让她觉得自己有所帮助。她说：“这比单纯乞讨要好。”</p>
+<p>The family did not find out about Liza's problem until late January. She had a seizure that lasted 45 minutes, her mother said.<br/>
+直到一月下旬，这家人才发现丽莎的疾病。她妈妈说，她癫痫发作持续了45分钟。</p>
+<p>If Liza's brain problem is not treated, doctors say she could suffer a more serious brain injury, like a stroke.<br/>
+医生表示，如果丽莎的大脑疾病不进行治疗，她可能会遭受更严重的脑部伤害，例如中风。</p>
+<p>Liza's first surgery will be on March 8, but she could need additional visits for another 25 years.<br/>
+丽莎的第一次手术将在3月8日进行，但是她可能需要再进行25年的随访。</p>
+<p>Liza said she tries not to think too much about her brain problem.<br/>
+丽莎表示，她尽量不去多想自己的大脑疾病。</p>
+<p>"I'm not worried, but I'm afraid," she said.<br/>
+她说：“我不担心，但是我害怕。”</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗雷德尔。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Girl Sells Lemonade to Raise Money for Brain Operation]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Liza Scott is a seven-year-old girl in the southern U.S. state of Alabama.
+[00:07.60]Like many young girls, she became interested in earning money.
+[00:12.96]So, she created a small table
+[00:16.24]where she sells a cold drink made from lemon juice, water and sugar.
+[00:22.56]This is called a lemonade stand.
+[00:25.88]The stand is at her mother's bakery,
+[00:29.32]a business that sells baked goods like bread.
+[00:34.24]Her mother, Elizabeth Scott, runs Savage's Bakery,
+[00:39.80]near the city of Birmingham.
+[00:43.12]At first, the lemonade stand was something to do for fun.
+[00:48.72]Liza sold the drinks for 25 cents a glass.
+[00:53.88]She was going to use the money to buy toys and pretty shoes.
+[01:00.56]But then the stand became much more important.
+[01:06.28]Liza has a health problem that will require surgery.
+[01:11.20]She suffers from seizures because
+[01:15.08]part of her brain did not grow correctly.
+[01:19.32]Doctors in Boston will work to fix the problem during several visits.
+[01:26.72]Elizabeth Scott said she has good health insurance,
+[01:31.28]which will help pay for some of the treatment.
+[01:35.04]But the trips to Boston will be costly
+[01:38.36]and the insurance will not pay for them.
+[01:42.08]Now, instead of just being a way to raise money for fun things,
+[01:47.92]the money from the lemonade stand will help pay for the treatment.
+[01:54.44]Selling cold drinks for less than a dollar
+[01:58.52]will not actually raise much money.
+[02:02.04]So instead, the stand is a place where people can visit
+[02:07.32]to give money that will help Liza with her medical treatment.
+[02:12.76]So far, people have come to the bakery to buy lemonade
+[02:17.96]and given Liza some extra money, too.
+[02:22.08]"I've got a $20 bill, and a $50 bill and a $10 bill
+[02:27.56]and a $5 bill and a $100 bill," Liza said, counting donations.
+[02:34.88]So far, people have given over $12,000.
+[02:40.48]But Elizabeth Scott also created an internet fundraiser
+[02:45.68]where people from anywhere can donate money to Liza.
+[02:50.36]It has gathered over $300,000 so far.
+[02:56.48]"I can't fund that by myself," Elizabeth said
+[03:00.32]about the extra medical costs for her daughter.
+[03:04.04]She called the costs "pretty exorbitant."
+[03:08.88]Critics of the U.S. healthcare system
+[03:12.52]say they do not think a child who needs a brain operation
+[03:17.40]should have to raise money to fund her own care.
+[03:22.44]Liza said she thinks running the lemonade stand
+[03:25.96]makes her feel like she is helping.
+[03:29.36]"It's better than just begging," she said.
+[03:33.52]The family did not find out about Liza's problem until late January.
+[03:39.92]She had a seizure that lasted 45 minutes, her mother said.
+[03:46.12]If Liza's brain problem is not treated,
+[03:49.80]doctors say she could suffer a more serious brain injury, like a stroke.
+[03:56.48]Liza's first surgery will be on March 8,
+[03:59.68]but she could need additional visits for another 25 years.
+[04:05.60]Liza said she tries not to think too much about her brain problem.
+[04:13.16]"I'm not worried, but I'm afraid," she said.
+[04:17.88]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

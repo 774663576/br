@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 巴黎气候变化会议开幕 科比宣布本赛季结束后退役</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 巴黎气候变化会议开幕 科比宣布本赛季结束后退役" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201511/cop21-kobe-bryant-cyber-monday.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>巴黎气候变化会议开幕 科比宣布本赛季结束后退役</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201511/cop21-kobe-bryant-cyber-monday.mp3" id="mp3"></a>
+<a href="/static/lrc/cop21-kobe-bryant-cyber-monday.lrc" id="lrc"></a>
+<a href="cop-kobe-bryant-cyber-monday--66648.html" id="CnPage" target="_blank"></a>
+<a href="african-union-promised-to-stop-child-marriage-66637.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p><strong>Climate change on the Agenda<br/>气候变化议程</strong></p>
+<p>The hashtag #COP21 started trending over the weekend ahead of the United Nations' conference on climate change.<br/>这个周末，话题标签#COP21在联合国气候变化大会前开始走热。</p>
+<p>What is COP21?<br/>COP21是什么？</p>
+<p>It stands for the 21st Conference of the Parties to the United Nations Framework Convention on Climate Change.<br/>它代表《联合国气候变化框架公约》第21次缔约方会议。</p>
+<p>World leaders like U.S. President Barack Obama and Chinese President Xi Jinping spoke about this year's conference as a new beginning.<br/>世界各国领导人，像总统奥巴马和中国国家主席习近平谈到今年的会议时称其为一个新起点。</p>
+<p>Xi called the summit "a new starting point." Obama said, "Our generation may not even live to see the full realization of what we do here."<br/>习主席称这次峰会是一个新的起点。奥巴马则表示，“我们这一代甚至活不到看着我们今天在这里所作出努力的全面实现。”</p>
+<p>But it's a tweet from outer space that has received all the attention. American astronaut Scott Kelly wrote, "From space, we are privileged to see the beauty of Earth, but also our impact on its environment." <br/>但是从外太空发表的一条推特吸引了所有注意力。美国宇航员斯科特·凯利（Scott Kelly）写道：“我们从外太空很荣幸地看到了地球的美丽，但是也看到了我们对地球环境的影响。”</p>
+<p>The tweet was liked over 4,000 times in seven hours.<br/>这条推特在7小时内获得了4千多次点赞。</p>
+<p><strong>Kobe Bryant makes retirement plans<br/>科比·布莱恩特宣布退役计划</strong></p>
+<p>Basketball star Kobe Bryant has been grabbing headlines his entire career.<br/>篮球明星科比·布莱恩特（Kobe Bryant）的整个职业生涯一直是头条新闻。</p>
+<p>Bryant was a teenager when he entered the NBA draft straight out of high school. He won five NBA titles with the Los Angeles Lakers. He even scored 81 points in one game in 2006 – the second-highest single-game total ever.<br/>科比十多岁时从高中直接选秀进入NBA。他在洛杉矶湖人队赢得了五次NBA总冠军。他在2006年的一场比赛中甚至拿下来81分，是有史以来的单场第二高分。</p>
+<p>On Sunday night, Bryant announced he would retire at the end of this season. Bryant made the announcement with a poem on the website The Players' Tribune.<br/>上周日晚上，科比宣布本赛季末他将退役。科比在《球员论坛》网站上以一首诗做出宣布这一消息。</p>
+<p>Bryant wrote, "This season is all I have left to give. My heart can take the pounding. My mind can handle the grind. But my body knows it's time to say goodbye."<br/>科比写道：“这是我能征战的最后一个赛季，我的心还能承受冲击，我的意志还能处理好磨难，但我的身体知道，是时候说再见了。”</p>
+<p>By Monday morning in the U.S., the word "Kobe" was the subject of over one million tweets.<br/>到美国周一上午，科比这个词成为超过一百万条推特的主题。</p>
+<p>Bryant will retire after 20 seasons in the league. He missed almost all of the last two seasons due to major injuries. Bryant will finish his career with the third-most career points in NBA history.<br/>科比在联盟中征战20个赛季后将会退役。由于严重伤病，他几乎错过了上两个赛季的所有比赛。科比将以NBA历史上生涯总得分的第三名结束自己的职业生涯。</p>
+<p><strong>Cyber Monday after Black Friday<br/>黑色星期五之后迎来网络星期一</strong></p>
+<p>This is the time of year retail businesses in the U.S. look to start making money. Businesses offer customers discounts and incentives to make them come to stores and shop.<br/>这是美国零售业一年中期待开始赚钱的时间。各个商家向客户提供折扣和奖励吸引他们进店消费。</p>
+<p>The day after Thanksgiving is called "Black Friday." It refers to the first time all year businesses are "in the black" or making profit.<br/>感恩节之后的这天被称为黑色星期五。它指的是商家一年下来第一次盈利。</p>
+<p>With more businesses selling their goods online, the Monday after Thanksgiving has the name "Cyber Monday." There were over two million Google searches with the term "Cyber Monday" on Sunday alone for discounts on computers, clothes and shoes.<br/>随着越来越多的商家在网上销售自己的产品，感恩节之后的这个星期一有了网络星期一的名号。单单是上周日就有超过两百万用户用谷歌搜索网络星期一这个术语，来寻找电脑、衣服和鞋子的折扣。</p>
+<p>Perhaps some businesses hyped the big day too much. Target's website could not handle the traffic and had to slow down.<br/>也许一些商家过于炒作这个重大日子。目标网站无法处理这些流量不得不放慢速度。</p>
+<p>Some users got the message "So sorry, but high traffic's causing delays."<br/>一些用户得到了“抱歉，网络流量过大造成延误”的消息。</p>
+<p>One Twitter user was a little disappointed that he could not access the sales on Target's website.<br/>一位推特用户对无法参加目标网站的促销而感觉有点失望。</p>
+<p>The website CNBC.com said PayPal had trouble keeping up with demand, too.<br/>CNBC网站表示，PayPal也已经难以跟上支付需求了。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳森·埃文斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]The hashtag #COP21 started trending over the weekend
+[00:06.24]ahead of the United Nations' conference on climate change.
+[00:11.04]What is COP21?
+[00:14.48]It stands for the 21st Conference of the Parties
+[00:18.24]to the United Nations Framework Convention on Climate Change.
+[00:23.76]World leaders like U.S. President Barack Obama
+[00:27.68]and Chinese President Xi Jinping
+[00:30.76]spoke about this year's conference as a new beginning.
+[00:34.92]Xi called the summit "a new starting point."
+[00:38.68]Obama said, "Our generation may not even live
+[00:42.40]to see the full realization of what we do here."
+[00:46.59]But it's a tweet from outer space that has received all the attention.
+[00:52.84]American astronaut Scott Kelly wrote,
+[00:56.02]"From space, we are privileged to see the beauty of Earth,
+[01:00.32]but also our impact on its environment."
+[01:04.32]The tweet was liked over 4,000 times in seven hours.
+[01:09.20]Kobe Bryant makes retirement plans
+[01:10.68]Basketball star Kobe Bryant has been grabbing headlines his entire career.
+[01:16.92]Bryant was a teenager when he entered the NBA draft straight out of high school.
+[01:22.56]He won five NBA titles with the Los Angeles Lakers.
+[01:27.96]He even scored 81 points in one game in 2006
+[01:33.48]– the second-highest single-game total ever.
+[01:37.40]On Sunday night, Bryant announced he would retire at the end of this season.
+[01:44.36]Bryant made the announcement with a poem on the website The Players' Tribune.
+[01:50.92]Bryant wrote, "This season is all I have left to give.
+[01:55.80]My heart can take the pounding. My mind can handle the grind.
+[02:01.16]But my body knows it's time to say goodbye."
+[02:05.44]By Monday morning in the U.S.,
+[02:08.40]the word "Kobe" was the subject of over one million tweets.
+[02:13.92]Bryant will retire after 20 seasons in the league.
+[02:18.32]He missed almost all of the last two seasons due to major injuries.
+[02:24.00]Bryant will finish his career with the third-most career points in NBA history.
+[02:30.08]Cyber Monday after Black Friday
+[02:31.35]This is the time of year retail businesses in the U.S. look to start making money.
+[02:37.36]Businesses offer customers discounts and incentives
+[02:41.76]to make them come to stores and shop.
+[02:45.32]The day after Thanksgiving is called "Black Friday."
+[02:50.00]It refers to the first time all year businesses are "in the black" or making profit.
+[02:57.08]With more businesses selling their goods online,
+[03:00.56]the Monday after Thanksgiving has the name "Cyber Monday."
+[03:05.16]There were over two million Google searches with the term "Cyber Monday"
+[03:10.36]on Sunday alone for discounts on computers, clothes and shoes.
+[03:16.68]Perhaps some businesses hyped the big day too much.
+[03:22.24]Target's website could not handle the traffic and had to slow down.
+[03:27.64]Some users got the message
+[03:30.24]"So sorry, but high traffic's causing delays."
+[03:34.80]One Twitter user was a little disappointed
+[03:37.68]that he could not access the sales on Target's website.
+[03:42.11]The website CNBC.com said
+[03:45.08]PayPal had trouble keeping up with demand, too.
+[03:49.44]I'm Jonathan Evans.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

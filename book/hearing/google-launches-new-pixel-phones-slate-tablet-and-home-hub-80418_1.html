@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 谷歌推出新款手机、平板电脑以及智能音箱</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 谷歌推出新款手机、平板电脑以及智能音箱" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201810/google-launches-new-pixel-phones-slate-tablet-and-home-hub.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>谷歌推出新款手机、平板电脑以及智能音箱</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201810/google-launches-new-pixel-phones-slate-tablet-and-home-hub.mp3" id="mp3"></a>
+<a href="/static/lrc/google-launches-new-pixel-phones-slate-tablet-and-home-hub.lrc" id="lrc"></a>
+<a href="google-launches-new-pixel-phones-slate-tablet-and-home-hub-80418.html" id="CnPage" target="_blank"></a>
+<a href="taylor-swift-jumps-into-politics-80410.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Google has launched the latest versions of its Pixel smartphone, as well as a new tablet computer and a smart home controller.<br/>谷歌公司发布了最新款的Pixel智能手机，以及新款的平板电脑和智能家居控制设备。
+<p>The new products were announced during an event Tuesday in New York.<br/>谷歌公司于周二在纽约的一场活动中公布了这些新产品。</p>
+<p>Google launched the first Pixel smartphone two years ago as part of a major new effort to develop hardware. The company is better known for building software to power internet search technology and the Android smartphone operating system.<br/>作为硬件开发的重大举措之一，谷歌公司在两年前推出了首款Pixel智能手机。该公司以打造了支持互联网搜索技术的软件和安卓智能手机操作系统而闻名于世。</p>
+<p>Over the past two years, Google has sold about 7 million Pixel phones, the technology research company IDC estimates. Those sales are a very small part of the estimated 3.6 billion phones sold by all manufacturers during that same two-year period. Apple, for example, sold about 388 million iPhones during the two years.<br/>IDC科技研究公司估计，过去两年谷歌售出了大约7百万台Pixel手机，这一销量只占同期所有制造商估计销售的36亿台手机中的一小部分。以苹果公司为例，该公司在这两年期间售出了大概3.88亿台iPhone手机。</p>
+<p>Google's new smartphones – the Pixel 3 and Pixel 3 XL - appear aimed at providing iPhone-like features at a lower price.<br/>谷歌公司新推出的Pixel 3和Pixel 3 XL智能手机似乎旨在以更低的价格提供类似iPhone手机的功能。</p>
+<p>The Pixel 3 will be available October 18 in the United States for $799. The larger Pixel 3 XL will cost $899. This compares to the iPhone Xs, which sells for $999, and the iPhone Xs Max, priced at $1099.<br/>Pixel 3手机将于10月18日在美国上市，售价为799美元。尺寸更大的 Pixel 3 XL手机售价为899美元。相比之下，iPhone Xs售价为999美元，iPhone Xs Max售价为1099美元。</p>
+<p>Both new Pixels are also being released in 12 other countries, including Japan, Singapore and India.<br/>这两款新的Pixel系列手机还将在包括日本、新加坡和印度在内的其它12个国家发布。</p>
+<p>During Tuesday's launch event, Google officials demonstrated new features and improvements to the Pixel 3. At times, they made direct comparisons to iPhones.<br/>在周二的发布会上，谷歌公司员工展示了Pixel 3手机的新功能和改进。有时候他们会直接跟iPhone做比较。</p>
+<p>Google promises better camera performance in its Pixel 3 devices. A new tool is designed to use machine learning software to produce better low-light and close-up shots. The tool works by combining many shots quickly taken one after the other. The camera also uses machine learning to examine the many photos it takes in an effort to find and suggest the best ones.<br/>谷歌承诺在其Pixel 3系列设备中提供更好的相机性能。 一种新工具旨在利用机器学习软件来提供更好的低光和特写镜头。该工具将多次拍摄一个接一个地快速组合起来以实现效果。该相机还利用机器学习软件来检查所拍摄的多张照片，以便找出或推荐拍得最好的照片。</p>
+<p>Pixel 3 phones were also built with two camera lenses in front, which Google demonstrated as a helpful tool when taking selfies with large groups.<br/>Pixel 3 手机同样配备了两个前置镜头，谷歌证明了它是拍摄大型集体照时的有效工具。</p>
+<p>The phone is also able to answer itself if the user cannot or does not want to pick up. If a call comes in, the user can touch the screen to have the phone answer and ask who is calling. The answer from the person placing the call is then put into a text message and shared with the user in real time.<br/>该手机在用户无法接听或不想接听时，还能自动应答。如果有电话打进来，用户可以触摸屏幕，让手机自动应答并询问是谁打过来的。拨打者的回应随后将会转换成文字信息并实时与用户共享。</p>
+<p>Google Product Manager Liza Ma said the feature puts the user in complete control of the phone.<br/>谷歌产品经理Liza Ma表示，该功能可以让用户完全控制手机。</p>
+<p>"You can decide whether to pick up, send a quick reply, or mark the call spam. You'll never have to talk to another telemarketer."<br/>她说：“你可以决定是否接听，发送快速回复或标记为骚扰电话。你再也不用跟电话推销员对话。”</p>
+<p>As with the earlier models, the new Pixels center heavily on the company's search engine and other products. These include maps, Google Assistant and YouTube video service.<br/>与之前的型号一样，新款Pixel系列手机主要围绕该公司的搜索引擎和其它产品。其中包括地图、谷歌智能助理以及Youtube视频服务。</p>
+<p>Google also introduced its new Home Hub, an internet-connected smart speaker and home controller with a small screen. The device is similar to Amazon's Echo Show and Facebook's new Portal.<br/>谷歌还推出了新款Home Hub，这是一种配备了小屏幕的联网智能音箱和家居控制设备。该设备类似于亚马逊公司的Echo Show和脸书网新推出的Portal。</p>
+<p>The company said Home Hub is designed to be a central controller for many devices throughout the home, such as lights, outdoor cameras, temperature controls and televisions. Like similar devices, it can be activated by voice to play music and look up information on the internet.<br/>该公司表示，Home Hub旨在成为家中众多设备的中央控制器，例如灯光、户外摄像机、温度调节和电视。与类似设备一样，它可以通过语音激活播放音乐以及在互联网上查找信息。</p>
+<p>Home Hub will cost $149 when it goes on sale later this month in the United States, Britain and Australia. This compares to the new version of Amazon's Echo Show, which sells for $229. The cost of the Facebook Portal starts at $199.<br/>Home Hub将于本月晚些时候在美国、英国和澳大利亚上市，届时售价将为149美元。相比之下，亚马逊公司新款的Echo Show售价为229美元，脸书网的Portal起价199美元。</p>
+<p>Google also announced it would launch a new computer tablet later this year called the Pixel Slate. The company says the device will be powered by its own newly designed Chrome OS system. It appears aimed at competing with Apple's iPad Pro.<br/>谷歌公司还宣布将在今年晚些时候推出一款名为 Pixel Slate的新款平板电脑。该公司表示，该设备将由其自行设计的Chrome OS系统提供支持，它似乎旨在同苹果公司的 iPad Pro展开竞争。</p>
+<p>The Slate will run Android phone apps, but Google says it offers performance closer to a desktop computer. It is priced at $599. An exact release date has not yet been announced.<br/>Pixel Slate将运行安卓手机应用程序，但是谷歌公司表示，它可以提供接近台式机的性能。它的售价为599美元。确切的发布日期尚未公布。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Google Launches New Phones, Tablet, Home Hub]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]Google has launched the latest versions of its Pixel smartphone,
+[00:05.82]as well as a new tablet computer and a smart home controller.
+[00:12.56]The new products were announced during an event Tuesday in New York.
+[00:19.87]Google launched the first Pixel smartphone two years ago
+[00:26.46]as part of a major new effort to develop hardware.
+[00:31.42]The company is better known for building software
+[00:36.38]to power internet search technology
+[00:39.60]and the Android smartphone operating system.
+[00:44.09]Over the past two years, Google has sold about 7 million Pixel phones,
+[00:52.40]the technology research company IDC estimates.
+[00:57.57]Those sales are a very small part of the estimated 3.6 billion phones
+[01:05.77]sold by all manufacturers during that same two-year period.
+[01:12.07]Apple, for example, sold about 388 million iPhones during the two years.
+[01:21.52]Google's new smartphones – the Pixel 3 and Pixel 3 XL
+[01:29.10]- appear aimed at providing iPhone-like features at a lower price.
+[01:36.18]The Pixel 3 will be available October 18 in the United States for $799.
+[01:46.00]The larger Pixel 3 XL will cost $899.
+[01:53.39]This compares to the iPhone Xs,
+[01:57.39]which sells for $999, and the iPhone Xs Max, priced at $1099.
+[02:08.99]Both new Pixels are also being released in 12 other countries,
+[02:15.47]including Japan, Singapore and India.
+[02:21.19]During Tuesday's launch event, Google officials demonstrated
+[02:28.03]new features and improvements to the Pixel 3.
+[02:32.81]At times, they made direct comparisons to iPhones.
+[02:38.82]Google promises better camera performance in its Pixel 3 devices.
+[02:46.24]A new tool is designed to use machine learning software
+[02:51.88]to produce better low-light and close-up shots.
+[02:56.61]The tool works by combining many shots quickly taken one after the other.
+[03:03.64]The camera also uses machine learning to examine the many photos it takes
+[03:10.85]in an effort to find and suggest the best ones.
+[03:16.46]Pixel 3 phones were also built with two camera lenses in front,
+[03:23.96]which Google demonstrated as a helpful tool
+[03:27.43]when taking selfies with large groups.
+[03:31.82]The phone is also able to answer itself
+[03:36.32]if the user cannot or does not want to pick up.
+[03:40.29]If a call comes in, the user can touch the screen
+[03:44.91]to have the phone answer and ask who is calling.
+[03:49.22]The answer from the person placing the call
+[03:52.75]is then put into a text message and shared with the user in real time.
+[03:59.33]Google Product Manager Liza Ma said the feature
+[04:05.13]puts the user in complete control of the phone.
+[04:09.91]"You can decide whether to pick up,
+[04:12.34]send a quick reply, or mark the call spam.
+[04:15.94]You'll never have to talk to another telemarketer."
+[04:18.92]As with the earlier models, the new Pixels center heavily
+[04:26.37]on the company's search engine and other products.
+[04:30.70]These include maps, Google Assistant and YouTube video service.
+[04:37.94]Google also introduced its new Home Hub,
+[04:43.29]an internet-connected smart speaker
+[04:46.22]and home controller with a small screen.
+[04:50.29]The device is similar to Amazon's Echo Show and Facebook's new Portal.
+[04:58.18]The company said Home Hub is designed to be a central controller
+[05:03.80]for many devices throughout the home,
+[05:07.27]such as lights, outdoor cameras, temperature controls and televisions.
+[05:14.30]Like similar devices, it can be activated by voice to play music
+[05:20.47]and look up information on the internet.
+[05:24.31]Home Hub will cost $149 when it goes on sale
+[05:31.18]later this month in the United States, Britain and Australia.
+[05:36.90]This compares to the new version of Amazon's Echo Show,
+[05:42.38]which sells for $229.
+[05:46.48]The cost of the Facebook Portal starts at $199.
+[05:53.72]Google also announced it would launch a new computer tablet
+[05:59.41]later this year called the Pixel Slate.
+[06:03.44]The company says the device will be powered
+[06:07.49]by its own newly designed Chrome OS system.
+[06:12.27]It appears aimed at competing with Apple's iPad Pro.
+[06:17.86]The Slate will run Android phone apps,
+[06:22.04]but Google says it offers performance closer to a desktop computer.
+[06:28.51]It is priced at $599.
+[06:32.75]An exact release date has not yet been announced.
+[06:37.40]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

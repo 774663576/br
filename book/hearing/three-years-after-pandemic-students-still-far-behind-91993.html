@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Three Years after Pandemic, Students Still Far Behind</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Three Years after Pandemic, Students Still Far Behind" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/three-years-after-pandemic-students-still-far-behind.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Three Years after Pandemic, Students Still Far Behind</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/three-years-after-pandemic-students-still-far-behind.mp3" id="mp3"></a>
+<a href="rohingya-girls-forced-into-dangerous-marriages-in-malaysia-91989.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">26 December 2023</span><br/>
+<p>In the third full school year since the COVID-19 pandemic began, students continued to feel the effects of school closures. Some leading experts and education officials worry that the learning loss caused by the pandemic may be long-term.</p>
+<p>Making matters worse, many students are missing school. <strong>Chronic</strong> <strong>absenteeism</strong> is becoming more common at school <strong>districts</strong> around the country. Some students went missing from the attendance rolls during the pandemic and have never been accounted for.</p>
+<p>And in a year of growing artificial intelligence technology, AI has also entered the classroom. Some schools have banned the use of chatbots like ChatGPT. Other teachers are using the new technology to help students, hoping they use the technology in <strong>appropriate</strong> ways.</p><div class="contentImage"><img alt="FILE - Jenes Ochoa Rojas goes over the lines of a three-scene play written by ChatGPT in Donnie Piercey's class at Stonewall Elementary in Lexington, Ky., Monday, Feb. 6, 2023.&lt;I&gt;&amp;#&lt;/I&gt;160; (AP Photo/Timothy D. Easley)" src="https://files.21voa.com/gdb/01000000-0aff-0242-c5aa-08db135b1214_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Jenes Ochoa Rojas goes over the lines of a three-scene play written by ChatGPT in Donnie Piercey's class at Stonewall Elementary in Lexington, Ky., Monday, Feb. 6, 2023.<i>&amp;#</i>160; (AP Photo/Timothy D. Easley)</span></div>
+<p>Here is a look at the big issues that shaped education in 2023 and will shape education in the year to come.</p>
+<p><strong>Continued learning loss </strong></p>
+<p>In June, the U.S. Department of Education released the scores from a national math and reading test that is given to 13-year-olds. About 8,700 students took the test in both math and reading in late 2022.</p>
+<p>The results showed a drop of nine points in math and four points in reading compared to 2020, the last year the test was administered. The department's information shows that those are the largest point decreases between tests recorded since 1973.</p>
+<p>The test asks students to read short <strong>passages</strong> and identify the main idea or some facts. In math, students had to answer simple multiplication and geometry questions.</p>
+<p>The latest test scores show that American 13-year-old students are back to their lowest level in math since 1990 and lowest reading level since 2004.</p>
+<p>Math and Reading scores were no better outside the U.S. Students around the world suffered historic setbacks in reading and math. That information comes from results of the latest Program for International Student Assessment (PISA).</p>
+<p>The PISA is an international comparative study of the scores of 15-year-old students on tests in reading, math and science. It is administered by OECD. Nearly 700,000 students worldwide took part in the study.</p>
+<p>PISA is given every three years. The latest results showed an "<strong>unprecedented</strong> drop in performance" since 2018. The 2022 results were released on December 5. It is the first extensive study with data on how the pandemic has affected student performance around the world.</p>
+<p>The COVID-19 pandemic was a major reason for the worldwide score drops. But science and reading scores were dropping even before the pandemic. This suggests there are other reasons for the decrease.</p>
+<p>Factors such as the level of investment in education, the social value and pay levels of teachers, and educational beliefs of students have all influenced educational results, OECD found.</p>
+<p><strong>Absent, missing students</strong></p>
+<p>Students are not going to make gains in learning if they miss school. Education officials and activists are concerned about an increase in the number of students who are absent for many days during the school year.</p>
+<p>Education policy experts call the problem "chronic absenteeism." Chronic absenteeism is defined as missing more than 10 percent out of the days in a school year.</p>
+<p>There are many reasons why students miss a lot of school. Certain physical problems and mental health problems, which have increased since the pandemic, are possible causes.</p>
+<p>Certain community conditions also can affect attendance, says Joshua Childs, a professor of education policy at the University of Texas at Austin. These include whether a student has safe transportation to and from school and whether the school itself is a safe environment. Childs added that if families do not feel connected with the school community or do not value education that can add to absenteeism.</p>
+<p>Hundreds of thousands of American students have also dropped out of public schools since the start of the COVID-19 pandemic. They have essentially gone missing from schools.</p>
+<p>A recent examination found an estimated 240,000 students in 21 states whose absences from school could not be explained. These students did not move out of state. They also did not sign up for private school or home-school.</p>
+<p>The issue of missing students received a lot of attention in 2020 after the pandemic closed schools around the country. In the years since, however, the issue has largely become a budgeting problem.</p>
+<p>There is no longer urgency to find the students who disappeared from school. Early in the pandemic, school workers would go to the students' homes to try and help them return to the classroom. Most of those efforts have ended.</p>
+<p><strong>Changing technology</strong></p>
+<p>The COVID-19 pandemic showed how useful digital technology could be for schools. But it also showed the limitations of technology in the educational setting. Millions of students were able to attend classes online and avoid spreading the virus. But many students failed to learn by such methods.</p>
+<p>The United Nations Educational, Scientific and Cultural Organization ( or UNESCO) argues against unsupervised wide use of digital tools and AI in education. A recent UNESCO report says there is little evidence that wide technology use improves learning.</p>
+<p>The organization says digital educational tools can never replace the human connection of teacher and student. There is a very large divide, or gap, between rich and poor countries when it comes to digital resources</p>
+<p>"Even if connectivity was <strong>universal</strong>, it would still be necessary to demonstrate ...that digital technology offers real added value in terms of effective learning," the UNESCO report says.</p>
+<p>Many educators fear students will use the AI tool ChatGPT to write their reports or <strong>cheat</strong> on homework. New York City school officials started blocking the writing tool on school devices and networks in January. But other teachers are including it in the classroom.</p>
+<p>Donnie Piercey is a teacher in Lexington, Kentucky. He told his fifth-grade students to try and outsmart the tool that was creating writing <strong>assignments</strong>. Piercey says his job is to prepare students for a world where knowledge of AI will be required.</p>
+<p>He describes ChatGPT as just the latest technology in his 17 years of teaching that raised concerns about the possibility of cheating. Other tools include Google, Wikipedia and YouTube.</p>
+<p>"As educators, we haven't <strong>figured</strong> out the best way to use artificial intelligence yet," he added. "But it's coming, whether we want it to or not."</p>
+<p>I'm Dan Novak.</p>
+<p>And I'm Anna Matteo.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English. </em></p>
+<p class="CxSpFirst"><em>________________________________________________</em></p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>chronic </strong><em>— adj. </em>continuing or occurring again and again for a long time</p>
+<p class="CxSpMiddle"><strong>absent</strong><strong><em> </em></strong><em>— adj. </em>not present at a usual or expected place</p>
+<p class="CxSpMiddle"><strong>district</strong><strong><em> </em></strong><em>— n. </em>an area established by a government for official government business</p>
+<p class="CxSpMiddle"><strong>appropriate </strong><em>— adj. </em>right or suited for some purpose or situation</p>
+<p class="CxSpMiddle"><strong>passage </strong><em>— adj. </em>a usually short section of a book, poem, speech, etc.</p>
+<p class="CxSpMiddle"><strong>unprecedented </strong><em>— adj. </em>not done or experienced before</p>
+<p class="CxSpMiddle"><strong>access </strong><em>— n. </em> a way of getting near, at, or to something or someone</p>
+<p class="CxSpMiddle"><strong>universal </strong><em>— adj. </em>done or experienced by everyone</p>
+<p class="CxSpMiddle"><strong>cheat </strong><em>— v. </em>to break a rule or law usually to gain an advantage at something</p>
+<p class="CxSpMiddle"><strong>assignment </strong><em>— n. </em>a job or duty that is given to someone : a task someone is required to do</p>
+<p class="CxSpMiddle"><strong>figure </strong><em>— v. </em>to understand or find by thinking</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

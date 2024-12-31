@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - ‘La La Land’ Wins Big at Golden Globes</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Economics Report, ‘La La Land’ Wins Big at Golden Globes" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201701/golden-globes-la-la-land-wins-big-meryl-streep-uses-speech-to-criticize-donald-trump.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>‘La La Land’ Wins Big at Golden Globes</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201701/golden-globes-la-la-land-wins-big-meryl-streep-uses-speech-to-criticize-donald-trump.mp3" id="mp3"></a>
+<a href="us-could-become-an-energy-exporting-country-73383.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">09 January, 2017</span><br/>
+<p>The movie "La La Land" was the big winner at the 74th <strong>annual</strong> Golden Globe Awards in Hollywood, California. The Hollywood Foreign Press Association honored the musical with seven awards, including best actor and best actress.</p>
+<p>"La La Land" is about an actor and jazz musician who fall in love while seeking success in Hollywood. Emma Stone and Ryan Gosling star in the film and each won a Golden Globe for their work.</p>
+<p>"La La Land" also won awards for directing, writing and music.</p>
+<p>The award for best dramatic film went to "Moonlight." It tells the story of a boy growing up, abused by his mother, in a poor neighborhood where crime and drugs are common. The story is told in three parts: boyhood, teenage years and adulthood.</p>
+<div class="mediaReplacer externalMedia"></div>
+<p>
+<p>In other dramatic film categories, French actress Isabelle Huppert was honored for her performance in the movie "Elle." And, American Casey Affleck won best actor for his work in "Manchester by the Sea."</p>
+<p>Some industry experts consider the Golden Globes an early predictor of the Academy Awards, also called Oscars. The Academy of Motion Picture Arts and Sciences will hold the Oscars ceremony in Los Angeles on February 26. "La La Land" and "Moonlight" are seen as strong possibilities for receiving honors that night.</p>
+<p>In television awards, the show "Atlanta" won the Golden Globe for best comedy series.</p>
+<p>For television drama, the British series "The Crown" won over nominees "Game of Thrones" and "Westworld."</p>
+<div class="contentImage"><img -="" 2017.?="" 8,="" a="" actress="" after="" alt="The cast and crew of " an="" as="" award="" best="" by="" claire="" crown?="" drama="" drama,="" for="" foy="" globe="" golden="" her="" holds="" in="" jan.="" performance="" pose="" series="" src="https://files.21voa.com/gdb/11F4D5CE-2A8F-4A5C-B0F6-472DB05EE17F_w268_r1.jpg" star="" television="" the="" together="" winning=""/><br/><span class="imagecaption">The cast and crew of "The Crown" pose together after winning the Golden Globe award for Best Television Series - Drama as star Claire Foy holds her award for Best Performance by an Actress In A Television Series - Drama, Jan. 8, 2017.</span></div>
+<p>
+<p>But the awards themselves might not have been the most memorable part of the night. Instead, much public attention has gone to actress Meryl Streep's speech at the ceremony.</p>
+<p>Streep received a lifetime <strong>achievement</strong> award. During her acceptance speech she criticized President-elect Donald Trump. Streep noted his treatment of a disabled reporter during a campaign appearance.</p>
+<p>The 67-year-old actress said she could not believe it when, in her words, "the person asking to sit in the most respected seat in our country <strong>imitated</strong> a disabled reporter."</p>
+<p>"I still can't get it out of my head because it wasn't in a movie, it was real life," she said. She called the president-elect a bully and said when "the powerful use their position to bully others, we all lose.</p>
+<p>Trump answered the criticism early Monday on Twitter. The president-elect wrote that Streep was, in his words, "one of the most over-rated actresses in Hollywood." He also criticized her for supporting his opponent, saying Hillary Clinton "lost big."</p>
+<p>Trump denied, as he has in the past, that he was making fun of the reporter. "For the 100th time, I never '<strong>mocked</strong>' a disabled reporter," he tweeted. There is video of the interaction between Trump and the reporter. It has been broadcast many times.</p>
+<p>Trump was <strong>mentioned</strong> at other times during the Golden Globes ceremony. Several other award winners also used their acceptance speeches to voice their opinions on the president-elect.</p>
+<p>The<strong> host</strong> of the show, television star Jimmy Fallon, joked that the Globes is "one of the few places where America still honors the popular vote."</p>
+<div class="mediaReplacer externalMedia"></div>
+<p>
+<p>Hillary Clinton won the popular vote in the American presidential election by close to three million ballots. But, she did not receive enough votes in the U.S. Electoral College to win the presidency.</p>
+<p>Fallon also joked about Russian President Vladimir Putin, whom U.S. intelligence officials have accused of trying to influence the election. He said, "Of course the ballots for tonight's Golden Globes were carefully <strong>tabulated</strong> by the accounting <strong>firm</strong> Ernst and Young and Putin."</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, with material from VOA News, Associated Press and Reuters. Caty Weaver was the editor.</em></p>
+<div>
+<p><em>What movies would you like to see win awards this year? We want to hear from you. Write to us in the Comments section,</em> <em>and visit</em> <a class="underline" href="http://www.21voa.com"><em>51VOA.COM</em></a><em>.</em></p></div>
+<p>________________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>annual </strong>– <em>adj</em>. happening every year</p>
+<p><strong>achievement </strong>– <em>n</em>. success in doing something, usually by working hard</p>
+<p><strong>imitate</strong> – <em>v. </em>copy the way someone looks, sounds or behaves</p>
+<p><strong>mock</strong> <em>– v. </em>to laugh at someone or something in an unkind way</p>
+<p><strong>mention</strong> <em>– v. </em>to refer to or suggest</p>
+<p><strong>host </strong><em>– n. </em>person who leads a television or radio show</p>
+<p><strong>tabulate</strong> <em>– v. </em>to add up, calculate</p>
+<p><strong>firm</strong> <em>– n. </em>a company</p></p></p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

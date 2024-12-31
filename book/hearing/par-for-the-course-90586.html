@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Par for the Course</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Par for the Course" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/par-for-the-course.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Par for the Course</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/par-for-the-course.mp3" id="mp3"></a>
+<a href="/static/lrc/par-for-the-course.lrc" id="lrc"></a>
+<a href="material-from-coconuts-helps-protect-coastal-areas-90585.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">18 March 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>In news reports, you can hear about surprising events. You can learn about new technologies, new plans, and big changes.</p>
+<p>But in today's <em>Words and Their Stories</em>, we consider how to talk about things that do not change — at least not very much.</p><div class="contentImage"><img alt="FILE - England's Marcus Armitage plays out of a bunker on the 14th during the second round at the 150th Open Championship, in St Andrews, Scotland on July 15, 2022. (REUTERS/Phil Noble)" src="https://files.21voa.com/gdb/01460000-0aff-0242-45e6-08da668ebbd6_w268_r1.jpg"/><br/><span class="imagecaption">FILE - England's Marcus Armitage plays out of a bunker on the 14th during the second round at the 150th Open Championship, in St Andrews, Scotland on July 15, 2022. (REUTERS/Phil Noble)</span></div>
+<p>The sun rises in the east and sets in the west. Babies cry when they are hungry. Water turns to ice when the temperature drops below freezing. These are things we expect. In fact, we are so sure about them that we <u>can bank on them</u>.</p>
+<p>To <u>bank on something </u>means that you are not taking a chance by saying something is going to happen or that something is true. It is a stronger way of saying that <u>you can count on something.</u></p>
+<p>And there are some days when we feel like nothing new happened, where today seems almost the same as yesterday. In such a situation, we can say <u>same old, same old</u>, which is another way of saying "nothing new or different happened."</p>
+<p>Now consider people's behavior. Imagine you are planning to spend time with a friend. You agree to meet your friend at a local market, but when you arrive, your friend is not there. After waiting almost an hour, you receive a message on your phone. It says, "I'm so sorry! I forgot about our meeting! Are you still there?"</p>
+<p>At this point, you simply say to yourself, "<u>par for the course</u>."</p>
+<p>In this example, <u>par for the course</u> means your friend's behavior was not surprising but expected. That is because you know your friend often forgets things. But it also means you are not pleased with the behavior. We mostly use <u>par for the course </u>to express both that we do not like a situation and that the situation is the same as what we expected.</p>
+<p>We can use <u>par</u><u> for the course </u>to talk about rules or policies we don't like, but also expect. For example, regarding a competition, someone might say, "The rules are so unfair. Unfortunately, that's <u>just par for the course</u>."</p>
+<p>You can also use the expression in a <strong>neutral</strong> way—that is, with neither a positive nor a negative feeling. This happens when we are trying to make clear that people shouldn't be surprised by something or place too much importance on it.</p>
+<p>For example, someone might say, "Security checks at airports are <u>par for the course</u>." Here, the speaker means, "Because security checks are normal at airports, you shouldn't be surprised by them."</p>
+<p>The word "par" comes from Latin. It can mean "that which is equal."</p>
+<p>Language experts suspect the expression <u>par for the course</u> came from the game of golf, where "par" is the expected score of a skilled player for part of the golf course, or the whole course.</p>
+<p>Next, we look at an expression in American English: <u>Is that a thing?</u> This question asks if something is new or becoming more common.</p>
+<p>For example, imagine you travel far from your home. You see a car with unusual lights on its wheels. You wonder if that car is the only one with those special lights. But the next day, you see another car with similar lights. In this situation, you might ask someone who lives in the area, "Is that a thing?" The person can tell you if the lights are unusual, or if they are starting to become popular with some people. If it's a <strong>trend</strong>, the person can simply answer, "Yeah, it's a thing."</p>
+<p>We don't ask "Is that a thing?" for something that is already common or expected. For example, you would not say "Is that a thing?" for an activity like brushing your teeth.</p>
+<p>However, you could ask the question about a new health trend.</p>
+<p>For example, in 2023, a person might ask if something is "a thing" about using virtual reality for health and fitness. That is because the technology is still new and not used by most people.</p>
+<p>Was today's <em>Words and Their Stories</em> the <u>same old, same old</u> for you? I hope not!</p>
+<p>Listen for the expressions from today's program as you read and listen to English. Then let us know what you find by writing to us in the Comments section.</p>
+<p>I'm Andrew Smith. And I'm Jill Robbins.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English. </em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>neutral </strong><em>-adj. </em>not having positive, negative, or other characterizations based on a person's likes or dislikes.</p>
+<p><strong>trend </strong><em>-n. </em>a development toward something new and different</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Par for the Course]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:06.24]And now, Words and Their Stories,
+[00:10.24]from VOA Learning English.
+[00:14.92]In news reports,
+[00:23.24]you can hear about surprising events.
+[00:27.04]You can learn about new technologies,
+[00:31.04]new plans, and big changes.
+[00:35.92]But in today's Words and Their Stories,
+[00:39.64]we consider how to talk about things
+[00:42.72]that do not change — at least not very much.
+[00:48.48]The sun rises in the east and sets in the west.
+[00:54.32]Babies cry when they are hungry.
+[00:57.16]Water turns to ice
+[00:59.76]when the temperature drops below freezing.
+[01:04.24]These are things we expect.
+[01:07.24]In fact, we are so sure about them
+[01:11.16]that we can bank on them.
+[01:14.84]To bank on something 
+[01:16.80]means that you are not taking a chance 
+[01:19.88]by saying something is going to happen 
+[01:23.36]or that something is true. 
+[01:26.92]It is a stronger way of saying 
+[01:29.56]that you can count on something.
+[01:32.92]And there are some days 
+[01:34.68]when we feel like nothing new happened, 
+[01:38.16]where today seems 
+[01:40.68]almost the same as yesterday. 
+[01:45.04]In such a situation, 
+[01:47.16]we can say same old, same old, 
+[01:51.08]which is another way of saying 
+[01:54.40]"nothing new or different happened."
+[01:58.40]Now consider people's behavior. 
+[02:01.04]Imagine you are planning 
+[02:03.32]to spend time with a friend. 
+[02:05.40]You agree to meet your friend at a local market, 
+[02:08.92]but when you arrive, 
+[02:10.76]your friend is not there. 
+[02:13.52]After waiting almost an hour, 
+[02:15.72]you receive a message on your phone. 
+[02:18.20]It says, "I'm so sorry! 
+[02:23.04]I forgot about our meeting! 
+[02:25.16]Are you still there?"
+[02:28.00]At this point, you simply say to yourself, 
+[02:31.24]"par for the course."
+[02:34.24]In this example, 
+[02:35.64]par for the course means your friend's behavior 
+[02:38.32]was not surprising but expected.  
+[02:42.16]That is because you know 
+[02:43.52]your friend often forgets things. 
+[02:45.76]But it also means 
+[02:48.08]you are not pleased with the behavior. 
+[02:51.28]We mostly use par for the course 
+[02:53.56]to express both that we do not like a situation 
+[02:57.00]and that the situation 
+[02:58.92]is the same as what we expected.
+[03:02.08]We can use par for the course 
+[03:03.88]to talk about rules or policies we don't like, 
+[03:06.96]but also expect. 
+[03:10.28]For example, regarding a competition, 
+[03:13.20]someone might say, 
+[03:15.64]"The rules are so unfair. 
+[03:18.08]Unfortunately, that's just par for the course."
+[03:23.32]You can also use the expression 
+[03:25.28]in a neutral way—that is, 
+[03:27.56]with neither a positive nor a negative feeling. 
+[03:32.88]This happens when we are trying to make clear 
+[03:35.48]that people shouldn't be surprised by something 
+[03:38.24]or place too much importance on it.
+[03:42.04]For example, someone might say, 
+[03:44.92]"Security checks at airports are par for the course." 
+[03:50.12]Here, the speaker means, 
+[03:52.40]"Because security checks are normal at airports, 
+[03:57.20]you shouldn't be surprised by them."
+[04:01.24]The word "par" comes from Latin. 
+[04:03.56]It can mean "that which is equal."
+[04:07.36]Language experts suspect the expression 
+[04:10.00]par for the course 
+[04:11.48]came from the game of golf, 
+[04:13.36]where "par" is the expected score of a skilled player 
+[04:17.12]for part of the golf course, or the whole course.
+[04:21.80]Next, we look at an expression in American English: 
+[04:27.64]Is that a thing? 
+[04:29.32]This question asks if something is new 
+[04:33.92]or becoming more common.
+[04:38.08]For example, imagine you travel 
+[04:41.76]far from your home. 
+[04:44.56]You see a car with unusual lights on its wheels. 
+[04:49.76]You wonder if that car 
+[04:51.72]is the only one with those special lights. 
+[04:56.28]But the next day, 
+[04:58.44]you see another car with similar lights. 
+[05:03.68]In this situation, 
+[05:05.56]you might ask someone who lives in the area, 
+[05:09.72]"Is that a thing?" 
+[05:11.80]The person can tell you if the lights are unusual, 
+[05:16.76]or if they are starting to become 
+[05:19.56]popular with some people. 
+[05:22.40]If it's a trend, the person can simply answer, 
+[05:26.76]"Yeah, it's a thing."
+[05:30.56]We don't ask "Is that a thing?" 
+[05:34.44]for something that is 
+[05:36.08]already common or expected. 
+[05:40.20]For example, you would not say "Is that a thing?" 
+[05:44.96]for an activity like brushing your teeth.
+[05:50.08]However, you could ask the question 
+[05:53.16]about a new health trend.
+[05:56.76]For example, in 2023, 
+[06:00.20]a person might ask if something is "a thing" 
+[06:04.72]about using virtual reality for health and fitness. 
+[06:10.48]That is because the technology is still new 
+[06:14.72]and not used by most people.
+[06:19.00]Was today's Words and Their Stories 
+[06:22.08]the same old, same old for you? 
+[06:25.28]I hope not!
+[06:27.00]Listen for the expressions 
+[06:29.80]from today's program 
+[06:32.16]as you read and listen to English. 
+[06:35.76]Then let us know what you find 
+[06:39.08]by writing to us in the Comments section.
+[06:44.64]I'm Andrew Smith. And I'm Jill Robbins.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

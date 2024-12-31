@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 川普在达沃斯会议上强调：美国优先不是美国独行</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 川普在达沃斯会议上强调：美国优先不是美国独行" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201801/trump-davos-america-first-does-not-mean-america-alone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>川普在达沃斯会议上强调：美国优先不是美国独行</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201801/trump-davos-america-first-does-not-mean-america-alone.mp3" id="mp3"></a>
+<a href="/static/lrc/trump-davos-america-first-does-not-mean-america-alone.lrc" id="lrc"></a>
+<a href="trump-davos-america-first-does-not-mean-america-alone-77889.html" id="CnPage" target="_blank"></a>
+<a href="new-tools-to-detect-breast-cancer-77878.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">United States President Donald Trump repeated his ‘America First' message in a speech Friday to the World Economic Forum in Davos, Switzerland.<br/>美国总统川普周五在瑞士达沃斯举行的世界经济论坛上发表讲话时再次重申了他的“美国优先”的理念。
+<p>But he said although his policies seek to put America first, this "does not mean America alone."<br/>但是他表示，尽管他的政策试图将美国放在首位，但是这并不意味着“美国独行”。</p>
+<p>"When the United States grows, so does the world," Trump said. He added that U.S. economic growth, creativity and innovation has led to the creation of "countless jobs around the globe."<br/>川普说：“当美国增长的时候，世界也会跟着增长。”他补充表示，美国经济的增长、创造力和创新引领“世界各地创造出无数的工作岗位。”</p>
+<p>The World Economic Forum is a not-for-profit organization established in 1971. The yearly meeting is attended by world political and business leaders, including many heads of state.<br/>世界经济论坛是一家成立于1971年的非营利组织。每年的会议都有世界政治和商界领袖出席，其中包括许多国家元首。</p>
+<p>Trump's comments about his ‘America First' policies were expected at the gathering. But some experts were unsure how the theme would be received: the Davos meeting traditionally centers on global economic growth.<br/>人们对川普在会上阐述他的“美国优先”理念早有预料，但是一些专家不确定这一主题会得到何等回应，因为达沃斯论坛一向聚焦于全球经济增长。</p>
+<p>Trump said the U.S. economy had improved during his first year in office. He pointed to the creation of 2.4 million jobs, dropping unemployment rates and record highs in the stock market. This growth, Trump said, had created a great chance for global investment in America.<br/>川普表示，美国经济在他第一年任期内已经有所改善。他指出，美国创造了240万个就业岗位，失业率下降，股市创下历史新高。川普称这种增长为全球投资美国创造了良好机会。</p>
+<p>"I'm here to deliver a simple message: There has never been a better time to hire, to build, to invest and to grow in the United States. America is open for business and we are competitive once again."<br/>川普说：“我在这里要传递一个简单的信息：现在是到美国雇人、建设、投资和发展的最好时机。美国是开放的，我们再次具备竞争力。”</p>
+<p>However, Trump said he believes the current international trading system is unfair. He said it does not reward nations that "play by the rules."<br/>然而川普表示，他认为现有国际贸易体系是不公平的。他说，该体系无法让“遵守规则”的国家得到奖励。</p>
+<p>"We cannot have free and open trade if some countries exploit the system at the expense of others. We support free trade, but it needs to be fair, and it needs to be reciprocal. Because in the end, unfair trade undermines us all."<br/>川普说：“如果有些国家以牺牲其它国家为代价压榨该体系，我们就不会有自由开放贸易。我们支持自由贸易，但是必须要公平、互惠。因为最终，不公平贸易会削弱我们所有人。”</p>
+<p>Trump also spoke about the Trans-Pacific Partnership free trade agreement. The U.S. president said he is willing to negotiate trade deals individually or as a group with nations in that agreement.<br/>川普还谈到了跨太平洋伙伴关系自由贸易协定。川普表示，他愿意与参与该协定的国家以一对一或团体协商的方式进行贸易谈判。</p>
+<p>Last year, Trump withdrew the U.S. from the Trans-Pacific Partnership, which includes 11 Pacific area nations. Trump said the U.S. already has agreements with several member nations. He added that the U.S. would consider negotiating with others, as long as "it is in all of our interests."<br/>去年，川普退出了包括11个太平洋地区国家的跨太平洋伙伴关系。川普表示，美国已经跟几个成员国达成了协议。他补充说，只要符合大家的利益，美国就会考虑跟其它国家谈判。</p>
+<p>Before his trip to Davos, Trump signed an executive order that placed import taxes on washing machines and solar panels. The order calls for a 30 percent tax on imported solar panels.<br/>在前往达沃斯之前，川普签署了一项行政命令，对洗衣机和太阳能电池板征收进口税。该命令要求对太阳能电池板征收30%的税收。</p>
+<p>A 20 percent tax will be placed on the first 1.2 million imported washers in the first year. A 50 percent tax will be placed on additional imported washers.<br/>美国第一年进口的前120万台洗衣机将被征收20%的税收，额外进口的洗衣机将被征收50%的税收。</p>
+<p>China and South Korea quickly condemned the action. U.S. solar industry officials also criticized the move. They predicted the new import taxes would lead to thousands of job losses and price increases.<br/>中国和韩国迅速谴责了这一行动。美国太阳能行业官员也批评了这一举动。他们预计新的进口税将会导致数千人失业，并导致物价上涨。</p>
+<p>While at the Davos meeting, Trump also held talks with the leaders of Britain, Israel, Switzerland and Rwanda.<br/>川普在达沃斯会议期间还同英国、以色列、瑞士和卢旺达领导人进行了会谈。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Trump in Davos: ‘America First’ Does Not Mean ‘America Alone’]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.12]United States President Donald Trump repeated his ‘America First' message
+[00:07.96]in a speech Friday to the World Economic Forum in Davos, Switzerland.
+[00:14.76]But he said although his policies seek to put America first,
+[00:22.24]this "does not mean America alone."
+[00:27.40]"When the United States grows, so does the world," Trump said.
+[00:33.30]He added that U.S. economic growth, creativity and innovation
+[00:40.44]has led to the creation of "countless jobs around the globe."
+[00:47.64]The World Economic Forum is a not-for-profit organization established in 1971.
+[00:57.12]The yearly meeting is attended by world political and business leaders,
+[01:03.16]including many heads of state.
+[01:07.84]Trump's comments about his ‘America First' policies
+[01:12.48]were expected at the gathering.
+[01:16.16]But some experts were unsure how the theme would be received:
+[01:21.48]the Davos meeting traditionally centers on global economic growth.
+[01:29.48]Trump said the U.S. economy had improved
+[01:33.04]during his first year in office.
+[01:36.32]He pointed to the creation of 2.4 million jobs,
+[01:41.44]dropping unemployment rates and record highs in the stock market.
+[01:47.84]This growth, Trump said, had created a great chance for global investment in America.
+[01:55.78]"I'm here to deliver a simple message:
+[01:59.48]There has never been a better time to hire,
+[02:02.52]to build, to invest and to grow in the United States.
+[02:05.92]America is open for business and we are competitive once again."
+[02:13.20]However, Trump said he believes the current international trading system is unfair.
+[02:21.72]He said it does not reward nations that "play by the rules."
+[02:28.32]"We cannot have free and open trade
+[02:32.52]if some countries exploit the system at the expense of others.
+[02:37.52]We support free trade, but it needs to be fair,  and it needs to be reciprocal.
+[02:46.96]Because in the end, unfair trade undermines us all."
+[02:52.80]Trump also spoke about the Trans-Pacific Partnership free trade agreement.
+[03:00.32]The U.S. president said he is willing to negotiate trade deals individually
+[03:06.56]or as a group with nations in that agreement.
+[03:12.12]Last year, Trump withdrew the U.S. from the Trans-Pacific Partnership,
+[03:17.92]which includes 11 Pacific area nations.
+[03:22.32]Trump said the U.S. already has agreements with several member nations.
+[03:29.20]He added that the U.S. would consider negotiating with others,
+[03:34.16]as long as "it is in all of our interests."
+[03:39.48]Before his trip to Davos, Trump signed an executive order
+[03:44.44]that placed import taxes on washing machines and solar panels.
+[03:50.48]The order calls for a 30 percent tax on imported solar panels.
+[03:57.08]A 20 percent tax will be placed on the first
+[04:00.44]1.2 million imported washers in the first year.
+[04:06.28]A 50 percent tax will be placed on additional imported washers.
+[04:12.88]China and South Korea quickly condemned the action.
+[04:18.08]U.S. solar industry officials also criticized the move.
+[04:23.56]They predicted the new import taxes
+[04:26.56]would lead to thousands of job losses and price increases.
+[04:32.80]While at the Davos meeting,
+[04:35.00]Trump also held talks with the leaders of Britain,
+[04:38.84]Israel, Switzerland and Rwanda.
+[04:43.68]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

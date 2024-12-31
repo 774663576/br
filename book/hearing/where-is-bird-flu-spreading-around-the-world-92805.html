@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Where Is Bird Flu Spreading around the World?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Where Is Bird Flu Spreading around the World?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/where-is-bird-flu-spreading-around-the-world.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Where Is Bird Flu Spreading around the World?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/where-is-bird-flu-spreading-around-the-world.mp3" id="mp3"></a>
+<a href="can-resistance-training-keep-us-feeling-young-92804.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">16 July, 2024</span><br/>
+<p>Different versions of bird flu have been spreading around the world in recent years.</p>
+<p>The virus, officially known as H5N1, is believed to have killed millions of wild and <strong>domestic</strong> birds worldwide. Some other animals have also been infected.</p>
+<p>The virus infected a very small number of people as well. But, H5N1 largely has remained outside the human population. Most of the few human cases involved direct contact between people and infected birds.</p><div class="contentImage"><img (reuters="" 14,="" 2023.="" alt="FILE - Illustration shows test tubes labeled " bird="" dado="" file="" flu"="" illustration="" january="" on="" photo)"="" ruvic="" src="https://files.21voa.com/gdb/598094f6-f9d7-4f61-84fa-9988e9551f21_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Illustration shows test tubes labeled "Bird Flu" on January 14, 2023. (REUTERS/Dado Ruvic/Illustration/File Photo)</span></div>
+<p>Reuters news agency recently explored areas of the world where versions of H5N1 have infected humans.</p>
+<p><strong>United States</strong></p>
+<p>In the United States, the first known cases of infected <strong>dairy </strong>cows happened in Texas in March. Currently, dairy cow groups in at least 12 states have been affected.</p>
+<p>The U.S. Agriculture Department has said tests so far suggest the virus identified in cows is the same H5N1 found to have infected wild birds and farm birds, also called poultry. Four dairy workers who tested <strong>positive</strong> for the virus this year showed only minor signs of sickness, such as conjunctivitis, an eye condition.</p>
+<p>Officials from the European Food Safety Agency (EFSA) said in a report the H5N1 virus spreading in the U.S. is related to a version only identified in North America so far.</p>
+<p><strong>Mexico</strong></p>
+<p>The World Health Organization (WHO) said on June 5 that a resident of Mexico died with the first known cases of H5N2 bird flu in humans. Mexico's government disputed that cause of death, saying instead the person died of another sickness. Officials said the person had no known contact with animals.</p>
+<p><strong>Australia</strong></p>
+<p>On June 7, the WHO said a child reported by Australia to have H5N1 had traveled to Kolkata, India. Genetic testing showed the virus was a version of H5N1. That version was known to have been spreading in Southeast Asia and has been identified in previous human infections and in poultry.</p>
+<p>Separately, Australia is dealing with three outbreaks of different bird flu versions on poultry farms. These include H7N3, H7N8 and H7N9. Officials said those versions likely arrived on farms through wild birds.</p>
+<p><strong>India</strong></p>
+<p>In India, the WHO reported a case of human infection with bird flu on June 11. It was caused by the H9N2 version in a four-year-old child in the eastern Indian state of West Bengal. The agency said it was the second human infection of H9N2 bird flu from India following a case in 2019.</p>
+<p>The H9N2 virus generally only causes mild sickness. But the WHO said further human cases could happen because this version is one of the most common at poultry farms in different areas.</p>
+<p><strong>Vietnam</strong></p>
+<p>In March, Vietnam reported a 21-year-old student had died from the H5N1 virus. He had no existing medical conditions. But officials said the student had had contact with wild birds from hunting a couple of weeks before signs of sickness appeared. No contact with dead or sick poultry was reported at the time.</p>
+<p>The EFSA said Vietnam also reported an outbreak of H9N2 in a 37-year-old man.</p>
+<p><strong>Cambodia</strong></p>
+<p>Cambodia has reported five human cases of H5N1 as of June 20.</p>
+<p><strong>Germany</strong></p>
+<p>Germany reported a rare outbreak of H7N5 bird flu on a farm in a western part of the country near the border with the Netherlands. The case was identified July 4 by the <a class="wsw__a" href="https://www.woah.org/en/home/">World Organization for Animal Health</a>. The group said it was the first outbreak anywhere of H7N5 on the group's public records.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Reuters reported this story. Bryan Lynn adapted the report for VOA Learning English.</em></p>
+<p><strong>__________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>domestic</strong><em> adj.</em> relating to the home and family relationships</p>
+<p><strong>dairy </strong><em>– n.</em> containing or made from milk</p>
+<p><strong>positive </strong><em>– adj. </em>in a medical test, positive means the person being tested has a disease or condition</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

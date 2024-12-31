@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - LeBron James Sets NBA Scoring Record</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, LeBron James Sets NBA Scoring Record" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/lebron-james-sets-nba-scoring-record.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>LeBron James Sets NBA Scoring Record</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/lebron-james-sets-nba-scoring-record.mp3" id="mp3"></a>
+<a href="/static/lrc/lebron-james-sets-nba-scoring-record.lrc" id="lrc"></a>
+<a href="rescuers-hurry-to-find-survivors-of-major-earthquake-in-turkey-syria-90398.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">08 February 2023</span><br/>
+<p>LeBron James is the new all-time scoring leader of the National Basketball Association (NBA).</p>
+<p>He set the record with a jump shot in the third quarter of the Los Angeles Lakers game Tuesday night against Oklahoma City. James pushed his career total to 38,388 points and passed the scoring record that Kareem Abdul-Jabbar held for nearly 39 years.</p>
+<p>After he made the shot for his 36th point of the night, James threw both hands in the air, then smiled. Abdul-Jabbar sat up from his seat and <strong>clapped</strong>. The game stopped as members of James' family, including his mother, his wife and their three children, went to the court for a ceremony honoring the moment.</p><div class="contentImage"><img alt="LeBron James celebrates after scoring to pass Kareem Abdul-Jabbar to become the NBA's all-time leading scorer on Feb. 7, 2023. (AP Photo/Mark J. Terrill)" src="https://files.21voa.com/gdb/09320000-0a00-0242-9e94-08db0a029659_cx14_cy0_cw66_w268_r1.jpg"/><br/><span class="imagecaption">LeBron James celebrates after scoring to pass Kareem Abdul-Jabbar to become the NBA's all-time leading scorer on Feb. 7, 2023. (AP Photo/Mark J. Terrill)</span></div>
+<p>"I'm there now because I never, ever thought about it," James told <em>The Associated Press</em>, when asked what the scoring record means to him. "The only thing I ever thought about was winning championships... But scoring championships and records, I'm telling you, that was never on my mind."</p>
+<p>Abdul-Jabbar was a longtime player for the Lakers. He became the NBA's all-time leading scorer on April 5, 1984 and retired in 1989 with 38,387 points. It was a record that some thought would last forever, with very few coming close. Great basketball players, including Karl Malone, Kobe Bryant, and Michael Jordan retired when they were still thousands of points away.</p>
+<p>James, who is 38 years old, passed all of them and set the record in his 20th season. Abdul-Jabbar also played 20 NBA seasons.</p>
+<p>During the on-court ceremony, Abdul-Jabbar handed a ball to James, signaling a <strong>passing of the torch</strong>. James wiped away tears from his eyes, then thanked the crowd. He also thanked his family and those who have supported him, including NBA Commissioner Adam Silver and the late NBA Commissioner David Stern.</p>
+<p>"I thank you guys so much for <strong>allowing</strong> me to be a part of something I've always dreamed about," James said.</p>
+<p>James is likely to remain the league's career-scoring leader for a long time. No current NBA player is within 10,000 points of James. He is under contract for two more years and will likely become the league's first 40,000-point scorer sometime next season.</p>
+<p>"Nobody will ever, ever touch it," said Kevin Love, James' teammate on Cleveland's 2016 championship team. "The scoring record now will never be <strong>eclipsed</strong>."</p>
+<p>James could have had the scoring record long ago if he really wanted to do it. But he always preferred passing. James is behind only John Stockton, Jason Kidd and Chris Paul on the all-time <strong>assists</strong> list. James is the only player to have at least 10,000 points, 10,000 <strong>rebounds</strong> and 10,000 assists.</p>
+<p>There has long been a debate over who is the best basketball player of all time. But no one has ever been this good, for this long. James, a four-time champion with three different teams, is averaging 30 points per game in his 20th season. Only three other players have averaged more than 10 points per game this late into their careers.</p>
+<p>In a television interview after Tuesday's game, James said he plans to continue to play as long as he feels good physically and mentally.</p>
+<p>"I know I can play a couple more years. It's all about my mind. If my mind is still into it, if I'm still <strong>motivated</strong> to go out and try to compete for championships...then I can continue to play this game."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press.</em></p>
+<p><em>______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>clap </strong><em>— v. </em>to hit the palms of your hands together usually more than once</p>
+<p><strong>pass the torch </strong><em>— idiom</em> to give your job, duties, etc., to another person.</p>
+<p><strong>allow </strong><em>— v. </em> to regard or treat (something) as acceptable</p>
+<p><strong>eclipse </strong><em>— v. </em>to do or be much better than</p>
+<p><strong>assist </strong><em>— n. </em>an action that helps a teammate to score</p>
+<p><strong>rebound </strong><em>— n. </em>to catch the ball after a shot has missed going in the basket</p>
+<p><strong>motivate </strong><em>— v. </em>to give a reason for doing something</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:LeBron James Sets NBA Scoring Record]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]LeBron James is the new all-time scoring leader
+[00:04.88]of the National Basketball Association (NBA).
+[00:10.88]He set the record with a jump shot
+[00:14.16]in the third quarter of the Los Angeles Lakers game
+[00:18.04]Tuesday night against Oklahoma City.
+[00:21.48]James pushed his career total to 38,388 points
+[00:28.72]and passed the scoring record
+[00:31.36]that Kareem Abdul-Jabbar held for nearly 39 years.
+[00:38.16]After he made the shot for his 36th point of the night,
+[00:42.84]James threw both hands in the air, then smiled.
+[00:47.64]Abdul-Jabbar sat up from his seat and clapped.
+[00:52.80]The game stopped as members of James' family,
+[00:57.04]including his mother, his wife and their three children,
+[01:01.64]went to the court for a ceremony honoring the moment.
+[01:07.16]"I'm there now because I never, ever thought about it,"
+[01:10.80]James told The Associated Press,
+[01:13.76]when asked what the scoring record means to him.
+[01:17.40]"The only thing I ever thought about was winning championships...
+[01:22.32]But scoring championships and records,
+[01:25.52]I'm telling you, that was never on my mind."
+[01:30.12]Abdul-Jabbar was a longtime player for the Lakers.
+[01:34.28]He became the NBA's all-time leading scorer
+[01:38.32]on April 5, 1984 and retired in 1989 with 38,387 points.
+[01:49.16]It was a record that some thought would last forever,
+[01:52.88]with very few coming close. Great basketball players,
+[01:58.20]including Karl Malone, Kobe Bryant, and Michael Jordan
+[02:03.12]retired when they were still thousands of points away.
+[02:08.36]James, who is 38 years old, passed all of them
+[02:13.56]and set the record in his 20th season.
+[02:16.96]Abdul-Jabbar also played 20 NBA seasons.
+[02:23.36]During the on-court ceremony, Abdul-Jabbar
+[02:27.60]handed a ball to James, signaling a passing of the torch.
+[02:33.60]James wiped away tears from his eyes, then thanked the crowd.
+[02:39.56]He also thanked his family and those who have supported him,
+[02:44.36]including NBA Commissioner Adam Silver
+[02:47.76]and the late NBA Commissioner David Stern.
+[02:53.04]"I thank you guys so much for allowing me
+[02:56.32]to be a part of something I've always dreamed about," James said.
+[03:02.56]James is likely to remain
+[03:04.84]the league's career-scoring leader for a long time.
+[03:09.52]No current NBA player is within 10,000 points of James.
+[03:15.16]He is under contract for two more years
+[03:18.32]and will likely become the league's
+[03:20.68]first 40,000-point scorer sometime next season.
+[03:26.80]"Nobody will ever, ever touch it," said Kevin Love,
+[03:31.56]James' teammate on Cleveland's 2016 championship team.
+[03:36.88]"The scoring record now will never be eclipsed."
+[03:41.96]James could have had the scoring record long ago
+[03:45.80]if he really wanted to do it. But he always preferred passing.
+[03:50.84]James is behind only John Stockton, Jason Kidd
+[03:55.64]and Chris Paul on the all-time assists list.
+[04:00.84]James is the only player to have at least 10,000 points,
+[04:05.96]10,000 rebounds and 10,000 assists.
+[04:11.48]There has long been a debate
+[04:13.56]over who is the best basketball player of all time.
+[04:17.76]But no one has ever been this good, for this long.
+[04:22.16]James, a four-time champion with three different teams,
+[04:27.48]is averaging 30 points per game in his 20th season.
+[04:32.20]Only three other players have averaged
+[04:35.60]more than 10 points per game this late into their careers.
+[04:40.88]In a television interview after Tuesday's game,
+[04:44.88]James said he plans to continue to play
+[04:48.40]as long as he feels good physically and mentally.
+[04:53.76]"I know I can play a couple more years.
+[04:56.72]It's all about my mind. If my mind is still into it,
+[05:01.28]if I'm still motivated to go out and try to compete for championships...
+[05:06.48]then I can continue to play this game."
+[05:09.68]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

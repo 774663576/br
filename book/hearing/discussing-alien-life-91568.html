@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Discussing Alien Life</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Discussing Alien Life" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/discussing-alien-life.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Discussing Alien Life</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/discussing-alien-life.mp3" id="mp3"></a>
+<a href="scientists-recover-genetic-rna-from-extinct-tasmanian-tiger-91567.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">28 September 2023</span><br/>
+<p>Over the last several months, there have been many news reports about possible <strong>alien</strong> life and strange objects in the skies, sometimes called UFOs. The stories have led to public discussion in the United States. Today, we have some English terms and structures to share that can help learners take part in the discussion, too.</p>
+<p><strong>Do + believe</strong></p>
+<p>Let's start with the basic yes/no question of, "Do you believe in aliens?"</p><div class="contentImage"><img alt="Everyday Grammar: Discussing Alien Life " src="https://files.21voa.com/gdb/01000000-0aff-0242-2a32-08dbbf752678_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Discussing Alien Life </span></div>
+<p>The verb "believe" is common to hear when talking about non-Earth life in the universe. To "believe" something means to accept something as true. Simple answers to this question are:</p>
+<p><em>Yes, I believe in aliens.</em></p>
+<p><em>No, I do not believe in them.</em></p>
+<p>If you want to <strong>emphasize</strong> that you believe in aliens, you can use "do" before the main verb of "believe" in the positive form. This gives extra emphasis to the main verb. The stress would be on the verb "do" when you speak.</p>
+<p><em>I do believe in aliens.</em></p>
+<p><em>I do believe that we are not alone in the universe. </em></p>
+<p><strong>Adverbs of possibility </strong></p>
+<p>Another way we can express our opinion about aliens is through adverbs of possibility. Possibility is the likelihood of something happening.</p>
+<p>There are adverbs to show a stronger chance of something happening, like the adverbs "definitely" or "certainly." And there are adverbs to show a weaker chance or probability of something occurring like "maybe," "probably" or "perhaps."</p>
+<p>Let's look at short dialogue using these adverbs of possibility.</p>
+<p><em>Carlos: Do you believe in aliens, Joy?</em></p>
+<p><em>Joy: I certainly believe in aliens. I think they are definitely among us.</em></p>
+<p><em>Carlos: So, you believe the sightings of UFOs are true?</em></p>
+<p><em>Joy: Clearly! The UFOs are probably held in <strong>Area 51</strong>! </em></p>
+<p><em>Carlos: Maybe, they are not enemies. Perhaps, they want to be friendly. </em></p>
+<p>Joy uses three strong adverbs to express her opinion and show the chance of something happening.</p>
+<p>The adverbs "certainly" and "clearly" are used to add emphasis and <strong>confidence</strong> to Joy's opinions about aliens. She uses the strong adverb "definitely" to show that she thinks there is a strong possibility that aliens might already live among humans.</p>
+<p>Joy also uses a weaker adverb of "probably" to express that she thinks that UFOs might be held in Area 51.</p>
+<p>Notice the placement of the adverbs. Typically, we place adverbs before the main verb in the sentence.</p>
+<p><em>I certainly believe in aliens</em></p>
+<p>But some adverbs like "maybe" and "perhaps" can be used in the beginning of sentences.</p>
+<p><em>Carlos said, "Maybe, they are not enemies. Perhaps, they want to be friendly." </em></p>
+<p>Next, we have the placement of adverbs with auxiliary verbs like "be" or "have." Adverbs always come after the auxiliary verb, but before the base verb, like in these examples:</p>
+<p><em>I think they are definitely among us. </em></p>
+<p><em>The UFOs are probably held in Area 51.</em></p>
+<p>And lastly, adverbs can be used as interjections or at the beginning of sentences. Interjections are short statements that show more of a feeling and are grammatically independent from other sentences. They usually have an exclamation mark (!) as <strong>punctuation</strong>.</p>
+<p>Joy uses the adverb "clearly" as an interjection to answer Carlos' question about UFO sightings.</p>
+<p>Carlos then answers Joy using the adverbs "maybe" and "perhaps" to express his opinion about the chance that aliens are friendly. He uses the weaker adverbs here. "Maybe" and "perhaps" often come in the beginning of the sentence.</p>
+<p><strong>Final thoughts</strong></p>
+<p>Today we looked at how we can express our opinion of alien life. The verb "believe" is often used to express if we accept aliens as true. We can use the verb "do" in front of the main verb in the positive to give extra emphasis to our belief.</p>
+<p>And we looked at the use of adverbs of possibility. We can use stronger adverbs such as "definitely" or "clearly" to say that there is a greater chance of something and to add emphasis to our opinions. Weaker adverbs such as "maybe" and "perhaps" can express that the likelihood of something is less. And finally, we looked at the placement of those adverbs within sentences.</p>
+<p>Now it is your turn. Share your opinions of aliens using the expressions and grammar above. Do you believe in life outside of Earth? Are there aliens among us? Let us know in an email to learningenglish@voanews.com.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>_______________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>alien</strong> – n. a being that comes from somewhere other than the planet Earth; an extraterrestrial</p>
+<p><strong>fiction </strong><em>– n.</em> a story that describes imaginary events and people</p>
+<p><strong>emphasize </strong>– v. to place importance or call attention to</p>
+<p><strong>Area 51</strong> – <em>n</em>. a once-secret military area in the state of Nevada where people think the United States government held beings from other planets</p>
+<p><strong>confidence </strong><em>– n.</em> a feeling that you can do something correctly</p>
+<p><strong>punctuation </strong><em>– n.</em> markings that make it clear how to separate sentences and parts of sentences, so reading is easier</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

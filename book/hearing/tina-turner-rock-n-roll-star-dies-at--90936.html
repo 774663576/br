@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Tina Turner, 'Rock ‘n’ Roll' Star, Dies at 83</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Tina Turner, 'Rock ‘n’ Roll' Star, Dies at 83" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/tina-turner-rock-n-roll-star-dies-at-83.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Tina Turner, 'Rock ‘n’ Roll' Star, Dies at 83</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/tina-turner-rock-n-roll-star-dies-at-83.mp3" id="mp3"></a>
+<a href="grammar-for-guests-90935.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">25 May 2023</span><br/>
+<p>Singer Tina Turner, known as the "Queen of Rock ‘n' Roll" has died at the age of 83.</p>
+<p>Turner's representative said she died Wednesday night after a long illness in her home in Küsnacht near Zurich, Switzerland. She became a Swiss citizen about 10 years ago.</p>
+<p>The entertainer teamed up with her husband Ike Turner for a series of hit records and live shows in the 1960s and '70s. She survived the abusive marriage and returned as a solo artist with the best-selling album <em>Private Dancer</em> in 1984. The album had three huge hit songs <em>Private Dancer</em>, <em>Better Be Good to Me</em> and <em>What's Love Got to Do With It</em>.</p><div class="contentImage"><img alt="FILE - Singer Tina Turner acknowledges applause after performing on the closing night of her Twenty Four Seven concert tour, at the Arrowhead Pond arena in Anaheim, California, U.S., December 6, 2000. (REUTERS/Rose Prouser/File Photo)" src="https://files.21voa.com/gdb/01000000-0aff-0242-5bba-08db5c8ec87a_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Singer Tina Turner acknowledges applause after performing on the closing night of her "Twenty Four Seven" concert tour, at the Arrowhead Pond arena in Anaheim, California, U.S., December 6, 2000. (REUTERS/Rose Prouser/File Photo)</span></div>
+<p>"How do we say farewell to a woman who owned her pain and <strong>trauma</strong> and used it as a means to help change the world?" actor Angela Bassett said in a statement. Bassett played Turner in the 1993 movie <em>What's Love Got to Do With It</em>.</p>
+<p>Turner sold more than 150 million records worldwide and won 12 Grammys. She was voted along with Ike Turner into the Rock and Roll Hall of Fame in 1991, and on her own in 2021. Her life story was made into a movie and Broadway musical.</p>
+<p>Leader of The Rolling Stones, Mick Jagger, wrote on <a class="wsw__a" href="https://www.instagram.com/p/Cso1EW5KXjL/?utm_source=ig_web_copy_link">Instagram</a>, "I'm so saddened by the passing of my wonderful friend Tina Turner. She was truly an <strong>enormously</strong> <strong>talented</strong> performer and singer. She was inspiring, warm, funny and <strong>generous</strong>. She helped me so much when I was young, and I will never forget her." Turner and Jagger had a memorable performance at the 1985 Live Aid concert in Philadelphia.</p>
+<p>"Tina Turner was raw. She was powerful. She was unstoppable... Today we join fans around the world in honoring the Queen of Rock and Roll, and a star whose light will never fade," former U.S. President Barack Obama wrote on Twitter.</p>
+<p>Other <strong>tributes</strong> came in from U.S. President Joe Biden, Beyonce, Elton John, and Mariah Carey among many others.</p>
+<p>Turner was born in a racially separated hospital in Nutbush, Tennessee in 1939. She would say she received "no love" from either her mother or father. After her parents separated, she moved often around Tennessee and Missouri, living with different relatives.</p>
+<p>She loved to sing and would go to blues music places in St. Louis. There, one of the top performers was Ike Turner and his Kings of Rhythm. Over her mother's objections, she joined his group and married him in 1962.</p>
+<p>Turner was among the first well-known stars to speak honestly about marriage abuse. She wrote in her book, <em>I, Tina</em>, that Ike Turner began hitting her not long after they met, in the mid-1950s, and only grew worse. She remembered that he threw hot coffee in her face, choked her, or beat her until her eyes were swollen shut, then sexually attacked her. Before one show, he broke her jaw, and she went on stage with her mouth full of blood.</p>
+<p>Ike did not deny mistreating Tina but tried to blame her for their troubles. When he died, in 2007, a representative for his ex-wife said simply: "Tina is aware that Ike passed away."</p>
+<p>The Turners were popular with music fans during the 1960s and into the '70s. They also opened for the Rolling Stones in 1966 and 1969.</p>
+<p>But by the end of the 1970s, Turner's career seemed finished at the age of 40. Needing work and money, she even agreed to perform in South Africa when the country was widely boycotted because of its racist policy.</p>
+<p>Turner's <em>Private Dancer</em> album came out in May 1984 and sold more than eight million copies. "People look at me now and think what a hot life I must have lived — ha!" she wrote in her book.</p>
+<p>Turner married her second husband Erwin Bach in a civil ceremony in Switzerland in 2013. "It's that happiness that people talk about," Turner said, "when you wish for nothing, when you can finally take a deep breath and say, ‘Everything is good.'"</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Hai Do wrote this report for VOA Learning English from Associated Press and Reuters sources. </em></p>
+<p>______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>trauma</strong> <em>–n. </em>a difficult or unpleasant experience that causes someone to have problems for a long time</p>
+<p><strong>enormously</strong> <em>–adv.</em> to a very great extent</p>
+<p><strong>talented </strong>–adj. a special ability to do something well</p>
+<p><strong>generous </strong>–adj. willing to freely give time and property to others</p>
+<p><strong>tribute </strong>–n. praise honoring and showing respect for someone (often someone who has recently died)</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

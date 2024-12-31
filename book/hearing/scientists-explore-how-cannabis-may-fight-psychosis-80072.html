@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Scientists Explore How Cannabis May Fight Psychosis</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Scientists Explore How Cannabis May Fight Psychosis" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201809/scientists-explore-how-cannabis-may-fight-psychosis.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Scientists Explore How Cannabis May Fight Psychosis</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201809/scientists-explore-how-cannabis-may-fight-psychosis.mp3" id="mp3"></a>
+<a href="us-timekeeping-stations-might-go-silent-80069.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Pete Musto</span><br/>
+<span class="datetime">09 September, 2018</span><br/>
+<p>British scientists have found how a substance in the cannabis plant acts in the brain to reduce <strong>abnormal</strong> activity in patients at risk of <strong>psychosis</strong>.</p>
+<p>Their findings suggest that the substance could be used in a possible treatment for the condition.</p>
+<p>Cannabis, also known as marijuana, is illegal to grow, sell or use in many countries. Using powerful forms of cannabis can increase a person's chances of developing psychosis. But the substance the researchers studied, the chemical cannabidiol, appears to have the opposite effect.</p>
+<div class="contentImage"><img alt="A young marijuana plant is held by Joy Hollingsworth, of the Hollingsworth Cannabis Company, Thursday, April 12, 2018, in one of the company's pot growing facilities near Shelton, Wash. (AP Photo/Ted S. Warren)" src="https://files.21voa.com/gdb/01D1C604-EFA7-4868-BCC5-D08AFA6BA404_cx0_cy3_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">A young marijuana plant is held by Joy Hollingsworth, of the Hollingsworth Cannabis Company, Thursday, April 12, 2018, in one of the company's pot growing facilities near Shelton, Wash. (AP Photo/Ted S. Warren)</span></div>
+<p>Cannabidiol, or CBD, is non-intoxicating. That means it is unlike drugs or alcoholic products, which can affect the user's judgement or behavior.</p>
+<p>CBD is the same cannabis substance that has also been shown to help patients with epilepsy, a disorder of the nervous system. This led to the approval in the United States of a cannabis-based drug, a specially processed form of CBD, in June.</p>
+<p>Earlier research at King's College London had shown that CBD seemed to block the effects of tetrahydrocannabinol, the intoxicating substance in cannabis. But how this happened was a mystery.</p>
+<p>Now, King's College researchers say they have more evidence of the health <strong>benefits</strong> of CBD.</p>
+<p>Sagnik Bhattacharyya and his team gave 33 young people <strong>capsules</strong> containing the substance. All 33 subjects were experiencing signs of psychosis, although they had not been shown to have the <strong>full-blown</strong> mental condition.</p>
+<p>The researchers studied images from the brains of the young people. They found that taking CBD capsules reduced abnormal activity in three areas of the brain: the striatum, medial temporal cortex and midbrain.</p>
+<p>Abnormal activity in all three areas has been linked to the development of psychotic disorders, such as schizophrenia.</p>
+<p>Most current anti-psychotic drugs target the chemical dopamine. The brain uses dopamine to send signals from one nerve cell to another. But CBD works in a different way.</p>
+<p>One major difference is that the body has an easier time dealing with CBD than other substances. CBD is less likely to cause harmful <strong>side effects</strong>, such as weight gain and other health problems linked to existing medicines.</p>
+<p>Bhattacharyya told the Reuters news agency, "One of the reasons CBD is exciting is because it is very well <strong>tolerated</strong> compared to the other anti-psychotics we have available."</p>
+<p>"There is an urgent need for a safe treatment for young people at risk of psychosis," he added.</p>
+<p>The Institute of Psychiatry, Psychology and Neuroscience at King's College now plans a 300-patient <strong>clinical</strong> trial of CBD as a treatment.</p>
+<p>Researchers plan to start identifying subjects for the clinical trial in early 2019.</p>
+<p>The latest findings show the complexity of the combination of chemicals found within the marijuana plant. They come at a time when many countries are beginning to make their laws against cannabis less severe.</p>
+<p>I'm ­Pete Musto.</p>
+<p><em>Ben Hirschler reported this story for the Reuters news agency. Pete Musto adapted his report for VOA Learning English. George Grow was the editor. </em></p>
+<p><em>We want to hear from you. What other health benefits do you think scientists will discover in the cannabis plant? Write to us in the Comments Section or on 51VOA.COM.</em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>abnormal</strong> – <em>adj.</em> unusual especially in a way that causes problems</p>
+<p><strong>psychosis</strong> – <em>n.</em> a very serious mental illness that makes you behave strangely or believe things that are not true</p>
+<p><strong>benefit</strong>(<strong>s</strong>) – <em>n.</em> a good or helpful result or effect</p>
+<p><strong>capsule</strong>(<strong>s</strong>) – <em>n.</em> a very small container that is filled with medicine and swallowed whole</p>
+<p><strong>full-blown</strong> – <em>adj.</em> having all of the qualities that are associated with a particular thing or type of person</p>
+<p><strong>side effect</strong>(<strong>s</strong>) – <em>n.</em> an often harmful and unwanted effect of a drug or chemical that occurs along with the desired effect</p>
+<p><strong>tolerate</strong>(<strong>d</strong>) – <em>v.</em> to experience something harmful or unpleasant without being harmed</p>
+<p><strong>clinical</strong> – <em>adj.</em> relating to or based on work done with real patients</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

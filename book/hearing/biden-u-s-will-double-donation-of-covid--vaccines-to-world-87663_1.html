@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登称美国将向全球翻倍捐赠新冠肺炎疫苗</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登称美国将向全球翻倍捐赠新冠肺炎疫苗" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202109/biden-u-s-will-double-donation-of-covid-19-vaccines-to-world.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登称美国将向全球翻倍捐赠新冠肺炎疫苗</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202109/biden-u-s-will-double-donation-of-covid-19-vaccines-to-world.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-u-s-will-double-donation-of-covid-19-vaccines-to-world.lrc" id="lrc"></a>
+<a href="biden-u-s-will-double-donation-of-covid--vaccines-to-world-87663.html" id="CnPage" target="_blank"></a>
+<a href="project-uses-light-signals-to-provide-high-speed-internet-87660.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">President Joe Biden said Wednesday that the United States is doubling its purchase of Pfizer's COVID-19 vaccines, up to 1 billion shots, to share with the world.<br/>
+乔·拜登总统周三表示，美国将翻倍采购辉瑞公司的新冠肺炎疫苗多达10亿支，以便与世界各国分享。
+<p>Biden made the announcement at a COVID-19 meeting of world and business leaders and aid groups alongside the U.N. General Assembly. Speaking to the group over video conferencing, Biden said, "We're not going to solve this crisis with half measures or middle of the road ambitions — we need to go big."<br/>
+拜登是在与联合国大会同期举行的一场汇集全球领导人、商业领袖以及援助团体的新冠肺炎会议上宣布了这一消息。拜登在视频会议上对这群人表示：“我们在解决这场危机上不会半途而废，我们要大张旗鼓。”</p>
+<p>The purchase of another 500 million shots brings the total U.S. vaccination guarantee to more than 1.1 billion through 2022. That is more than donations from the rest of the world combined.<br/>
+再次采购5亿支疫苗，使得美国承诺到2022年捐赠疫苗总额将超过11亿支。这比世界其它地区全部加起来的捐赠总额还要多。</p>
+<p>However, the latest U.S. donation is only a small part of what will be necessary to meet a goal of vaccinating 70 percent of the world's population by next September.<br/>
+然而，美国的最新捐赠只是实现明年9月前接种全球70%人口目标所需疫苗总额的一小部分。</p>
+<p>Biden added that the U.S. would also increase the amount of money given to groups and nations that are administering the shots. He also urged other wealthy nations to donate, rather than sell, the shots to poorer nations. And the European Union said the group would donate another 500 million vaccines, a small increase from its earlier plans.<br/>
+拜登还表示，美国还将提高向支配这些疫苗的组织和国家提供的资金额。他还督促其它发达国家向贫困国家捐赠而不是出售疫苗。欧盟表示，该组织将再捐赠5亿支疫苗，比此前计划略有提高。</p>
+<p><strong>Too little<br/>
+做得太少</strong></p>
+<p>Some have criticized the plans for being too little. Many people in poor nations have not received their first shot while the U.S. is considering additional booster shots to millions of Americans.<br/>
+有人批评这些方案做得太少。当美国考虑给数百万美国人提供额外的加强针时，许多贫困国家人民还没打第一针。</p>
+<p>About 6 billion COVID-19 vaccines have been administered worldwide to 43 percent of the world's population in the past year. But many poor nations are struggling to vaccinate even those with the most risk of infection. Some have yet to vaccinate more than 2 percent of their population.<br/>
+在过去的一年里，全球43%人口接种了大约60亿支新冠肺炎疫苗。但是，许多国家仍然很难获得疫苗，即便是那些感染风险最高的国家亦是如此。一些国家的疫苗接种量尚不足人口的2%。</p>
+<p>Colombian President Iván Duque said Tuesday at the United Nations, "The existing gaps between nations with regard to the vaccination process are unheard of."<br/>
+哥伦比亚总统伊万·杜克周日在联合国表示：“各国在疫苗接种过程方面存在的差距简直闻所未闻。”</p>
+<p>The World Health Organization (WHO) says only 15 percent of promised donations of vaccines from rich countries have been delivered. The health agency has said it wants countries to meet the sharing goals "immediately." The WHO especially wants to make the shots available for programs that benefit poor countries and Africa.<br/>
+世卫组织表示，发达国家承诺捐赠的疫苗只有15%已经交付。该卫生机构称其希望各国“立即”实现共享疫苗的目标。世卫组织尤其希望让贫困国家和非洲受益的项目获得疫苗。</p>
+<p>COVAX, the U.N.- supported program to ship vaccines to all countries, has struggled to produce and supply vaccines. The WHO has appealed to wealthy countries to delay booster shots so vaccines can be made available to developing countries. As of Tuesday, COVAX had shipped more than 296 million vaccines to 141 countries.<br/>
+新冠肺炎疫苗实施计划是联合国支持的向所有国家运送疫苗的项目，该项目一直在努力生产和供应疫苗。世卫组织呼吁发达国家推迟加强针接种，以便向发展中国家提供疫苗。截至周二，新冠肺炎疫苗实施计划已经向141个国家运送了超过2.96亿支疫苗。</p>
+<p>To deal with the supply problem, Biden said the U.S. would work with drug companies and other nations to produce vaccines in their own country.<br/>
+拜登表示，为了解决供应问题，美国将与制药公司及其它国家合作，在他们国内生产疫苗。</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden: U.S. Will Double Donation of COVID-19 Vaccines to World]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]President Joe Biden said Wednesday that the United States
+[00:05.08]is doubling its purchase of Pfizer's COVID-19 vaccines,
+[00:10.08]up to 1 billion shots, to share with the world.
+[00:14.96]Biden made the announcement
+[00:16.60]at a COVID-19 meeting of world and business leaders
+[00:20.64]and aid groups alongside the U.N. General Assembly.
+[00:26.36]Speaking to the group over video conferencing, Biden said,
+[00:30.76]“We’re not going to solve this crisis with half measures
+[00:33.88]or middle of the road ambitions — we need to go big.”
+[00:38.92]The purchase of another 500 million shots
+[00:42.04]brings the total U.S. vaccination guarantee
+[00:45.72]to more than 1.1 billion through 2022.
+[00:51.16]That is more than donations from the rest of the world combined.
+[00:55.92]However, the latest U.S. donation
+[00:58.60]is only a small part of what will be necessary
+[01:01.76]to meet a goal of vaccinating 70 percent
+[01:05.52]of the world’s population by next September.
+[01:09.32]Biden added that the U.S. would also increase the amount of money
+[01:14.24]given to groups and nations that are administering the shots.
+[01:19.88]He also urged other wealthy nations to donate,
+[01:23.36]rather than sell, the shots to poorer nations.
+[01:28.40]And the European Union said
+[01:31.16]the group would donate another 500 million vaccines,
+[01:35.56]a small increase from its earlier plans.
+[01:40.12]Some have criticized the plans for being too little.
+[01:43.96]Many people in poor nations have not received their first shot
+[01:49.68]while the U.S. is considering additional booster shots
+[01:53.88]to millions of Americans.
+[01:57.32]About 6 billion COVID-19 vaccines have been administered worldwide
+[02:02.88]to 43 percent of the world’s population in the past year.
+[02:08.12]But many poor nations are struggling to vaccinate
+[02:11.64]even those with the most risk of infection.
+[02:15.96]Some have yet to vaccinate more than 2 percent of their population.
+[02:21.56]Colombian President Iván Duque said Tuesday at the United Nations,
+[02:26.60]"The existing gaps between nations
+[02:29.44]with regard to the vaccination process are unheard of."
+[02:35.04]The World Health Organization (WHO)
+[02:38.24]says only 15 percent of promised donations of vaccines
+[02:42.88]from rich countries have been delivered.
+[02:46.76]The health agency has said
+[02:48.68]it wants countries to meet the sharing goals "immediately."
+[02:53.20]The WHO especially wants to make the shots available
+[02:57.20]for programs that benefit poor countries and Africa.
+[03:02.32]COVAX, the U.N.- supported program to ship vaccines to all countries,
+[03:07.76]has struggled to produce and supply vaccines.
+[03:11.96]The WHO has appealed to wealthy countries to delay booster shots
+[03:17.68]so vaccines can be made available to developing countries.
+[03:23.04]As of Tuesday, COVAX had shipped
+[03:25.68]more than 296 million vaccines to 141 countries.
+[03:32.80]To deal with the supply problem, Biden said
+[03:36.12]the U.S. would work with drug companies and other nations
+[03:40.04]to produce vaccines in their own country.
+[03:44.12]I’m Jill Robbins.
+[03:46.08]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Does It Mean to ‘Hit Pay Dirt'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, What Does It Mean to ‘Hit Pay Dirt'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/what-does-it-mean-to-hit-pay-dirt.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Does It Mean to ‘Hit Pay Dirt'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/what-does-it-mean-to-hit-pay-dirt.mp3" id="mp3"></a>
+<a href="most-and-almost-93151.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">16 November, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program we explore words and expressions in the English language. We give examples and notes on usage.</p>
+<p>Many valuable materials are buried deep inside the ground, such as gold, oil and diamonds. But finding these riches and bringing them to the surface takes much time and effort.</p><div class="contentImage"><img (john="" (pay="" 1889.="" alt="FILE - " and="" at="" black="" c.="" congress)"="" dillon="" dirt)="" for="" gold="" grabill="" h.="" hills,="" in="" lamb="" library="" of="" old="" panning="" rockervill,="" s.d.,="" spriggs,="" src="https://files.21voa.com/gdb/03370000-0aff-0242-c00c-08daf30a700c_cx4_cy12_cw90_w268_r1.jpeg" the="" timers,="" work"=""/><br/><span class="imagecaption">FILE - "Old timers, Spriggs, Lamb and Dillon at work" panning for gold (pay dirt) at Rockervill, S.D., in the Black Hills, 1889. (John C. H. Grabill/Library of Congress)</span></div>
+<p>In the past, the term <u>pay dirt </u>was used to describe something found in the dirt that could bring you money. Gold is a common example of pay dirt. In fact, word experts say the term dates back to when North America's famous gold rush was happening.</p>
+<p>By the mid-1800s, thousands of people had come to parts of the United States and Canada to search for gold. The work was hard and dangerous. The weather and <strong>terrain</strong> presented many difficulties.</p>
+<p>Here is an example of how to use <u>pay dirt</u> from <a class="wsw__a" href="https://dictionary.cambridge.org/us/dictionary/english/pay-dirt">Cambridge's</a> online dictionary:</p>
+<p><em>Gold rushes continued into the 19th century as lucky <strong>prospectors</strong> struck <u>pay dirt</u>.</em></p>
+<p>However, <u>pay dirt</u> does not have to be a valuable material found in the ground. These days, it can also describe something that produces money or profit. Or it can even be the money or profit itself.</p>
+<p>Here are some additional examples:</p>
+<p><em>Email addresses are the new <u>pay dirt</u> in social media marketing. You can reach a possible buyer in their inbox.</em></p>
+<p><em>The musical group <u>hit pay dirt</u> with their song after it went viral on TikTok. </em></p>
+<p>And that gives us the expression <u>to hit pay dirt.</u></p>
+<p><u>To hit pay dirt</u> means to do or find something that results in money or success. And like digging gold, it usually doesn't come easily. It requires work. When you <u>hit pay dirt,</u> you work hard to make money or profit from an idea or activity.</p>
+<p>We often use the verb “hit” when using the term <u>pay dirt</u>. But sometimes we also say “strike” pay dirt. This is similar to the expression <u>to strike it rich</u>. Many people have dreams of <u>striking it rich</u> one day.</p>
+<p>In her book <em>Gold Rush</em>, author and illustrator Flora Delargy describes the process of <u>hitting pay dirt</u>. She writes that in order to get large amounts of <u>pay dirt</u> out of the ground, “<strong>miners</strong> would have to break through layers of <strong>permafrost</strong> to reach the <strong>gravel</strong> <strong>bedrock</strong> beneath.”</p>
+<p>This description demonstrates the difficulties faced by miners seeking to <u>strike pay dirt.</u></p>
+<p>And that's the end of this <em>Words and Their Stories. </em>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>terrain </strong><em>-n.</em> the surface features of an area of land</p>
+<p><strong>prospector </strong><em>-n. </em>someone who explores for mineral deposits</p>
+<p><strong>miner </strong><em>-n. </em>one who digs or forms a pit or tunnel from which minerals (as coal, gold, or diamonds) are taken</p>
+<p><strong>permafrost </strong><em>-n. </em>a permanently frozen layer at variable depth below the surface in frigid regions of a planet (such as earth)</p>
+<p><strong>gravel </strong><em>-n. </em>loose rounded fragments of rock</p>
+<p><strong>bedrock </strong><em>-n. </em>the solid rock lying under surface materials (as soil) that are not in layers</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

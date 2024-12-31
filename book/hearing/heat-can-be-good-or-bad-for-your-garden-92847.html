@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Heat Can Be Good or Bad for Your Garden</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Heat Can Be Good or Bad for Your Garden" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/heat-can-be-good-or-bad-for-your-garden.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Heat Can Be Good or Bad for Your Garden</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/heat-can-be-good-or-bad-for-your-garden.mp3" id="mp3"></a>
+<a href="us-research-farm-raises-pigs-to-produce-organs-for-humans-92846.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By </span><br/><span class="datetime">29 July, 2024</span><br/>
+<p>Summer brings very high temperatures to many parts of the United States. That can be both good news and bad news for <strong>gardens</strong> and gardeners.</p>
+<p>Jessica Damiano writes about gardening for the Associated Press. She keeps a garden in New York, where summer temperatures can reach 32 degrees Celsius.</p>
+<p>Recently, Damiano repeated a difficult truth for gardeners: weather has a lot to do with success, but it is out of our control.</p><div class="contentImage"><img alt="This image shows a nearly 6-foot tall tomato plant growing on Long Island, N.Y. on July 9, 2024. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/01000000-0a00-0242-389f-08dca2a4ff28_w268_r1.jpg"/><br/><span class="imagecaption">This image shows a nearly 6-foot tall tomato plant growing on Long Island, N.Y. on July 9, 2024. (Jessica Damiano via AP)</span></div>
+<p>There are measures that plant lovers can take to ease the effects of hot summer weather. One measure is to spread a thick layer of <strong>mulch</strong> over plant roots. This can help keep plant roots cool and will preserve water, or moisture, in the soil. When watering plants, use a lot of water and let it <strong>soak</strong> deep into the ground. You can water your garden less often if you provide a few deep soaks regularly. Light watering causes roots to spread near the surface of the soil.</p>
+<p>If there is too much sun for young plants, don't be afraid to give them shade. Damiano said she has been known to place an umbrella on the ground to protect <strong>tender</strong> plants from the sun.</p>
+<p><strong>The good news about heat</strong></p>
+<p>Heat is not all bad for a garden. Some plants love heat. Damiano grows a kind of tomato called Big Boy. The plant, she says, has grown quickly in the summer heat. Zucchini, a form of squash, also does well.</p>
+<p>Heat can also keep harmful insects away. Cabbage, onion and corn <strong>maggots</strong> prefer cooler weather and struggle in the heat. So do cutworms, which can be especially destructive to gardens.</p>
+<p>Damiano says some of her <strong>perennial</strong> flowering plants have bloomed two weeks earlier than usual. For this reason, she decided to add late-blooming plants to her garden to ensure a good crop of flowers.</p>
+<p>She reported that her hydrangea plants have never looked better. She has 12 of them, and they are blooming well. However, Damiano said that might not be the result of hot weather this summer. Instead, unusually heavy rains late last summer and fall may have helped <strong>buds</strong> to form. A smaller number of those buds were damaged by the <strong>mild</strong> winter weather. The result is a lot of blooms.</p>
+<p><strong>And the downside</strong></p>
+<p>Some plants suffer in the heat, including impatiens. The small flowers are not doing well.</p>
+<p>But what Damiano dislikes are the creatures that become more active and numerous when temperatures rise.</p>
+<p>Mosquitos are most active at sunrise and sunset, but they can bite at any time. Although heat theoretically slows their activity, hot conditions can help mosquitoes spread.</p>
+<p>Damiano advises to prevent water from collecting in places around the garden or to put something called Bti in wet areas where mosquitos might lay eggs. Bti is a kind of bacteria that produces a substance poisonous to young mosquitos and a few other flying insects. It is natural, and the U.S. Environmental Protection Agency (EPA) says it is safe for people and most other insects and animals as well.</p>
+<p>Ticks present another problem. The creatures bite people and spread disease. Cold weather kills them, but they do well in hot weather. Normally found in the eastern U.S. and on the Pacific coast, ticks appear to be spreading to new areas. The EPA even said, “Climate change has <strong>contributed</strong> to the expanded <strong>range</strong> of ticks.”</p>
+<p>Wearing long sleeves and pants and using special chemicals to keep ticks away can help protect against their bites.</p>
+<p>Earwigs also like heat and humidity. They can make holes in plant leaves, Damiano said. But the “pincher bugs” also eat aphids, which are enemies of the garden. So are thrips and spider mites.</p>
+<p>In addition to insects, heat and humidity are good conditions for slugs. These creatures have soft slimy bodies, and they eat plants.</p>
+<p>Luckily, there are easy ways to control these garden problems. One is to spray soapy water onto soft-bodied insects like aphids, spider mites, thrips and whiteflies.</p>
+<p>As for slugs, salt will kill them but is not good for garden soil. They do not like sharp surfaces, however, so adding crushed eggshells can be an effective control method. The eggshells break down and nourish the plants over time.</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Jessica Damiano wrote this story for the Associated Press. Mario Ritter, Jr. adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>garden</strong><strong> </strong><em>–n. </em>a place where plants are raised for their beauty or as food</p>
+<p><strong>mulch</strong> <em>–n.</em> usually organic material that is in small pieces and is used to cover the ground to prevent drying and enrich the soil</p>
+<p><strong>soak </strong><em>–v.</em> to get very wet</p>
+<p><strong>tender </strong><em>–adj.</em> very soft</p>
+<p><strong>maggot </strong><em>–n.</em> the larval stage of flies and similar insects</p>
+<p><strong>perennial </strong><em>–adj.</em> lasting for many years</p>
+<p><strong>bud </strong><em>–n.</em> a growth on a plant from which a new branch or fruit will grow</p>
+<p><strong>mild </strong><em>–adj.</em> not strong or sharp</p>
+<p><strong>contribute </strong><em>–v.</em> to be involved in the cause of some outcome</p>
+<p><strong>range </strong><em>–n.</em> the area where something is found or where it lives</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

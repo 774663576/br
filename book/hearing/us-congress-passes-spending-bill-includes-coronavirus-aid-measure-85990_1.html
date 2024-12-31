@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国参议院通过包含新冠病毒援助措施的支出法案</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国参议院通过包含新冠病毒援助措施的支出法案" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202012/us-congress-passes-spending-bill-includes-coronavirus-aid-measure.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国参议院通过包含新冠病毒援助措施的支出法案</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202012/us-congress-passes-spending-bill-includes-coronavirus-aid-measure.mp3" id="mp3"></a>
+<a href="/static/lrc/us-congress-passes-spending-bill-includes-coronavirus-aid-measure.lrc" id="lrc"></a>
+<a href="us-congress-passes-spending-bill-includes-coronavirus-aid-measure-85990.html" id="CnPage" target="_blank"></a>
+<a href="to-keep-schools-open-schools-ask-college-students-to-help-85989.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The United States Congress passed a massive year-end bill Monday night that includes a $900-billion coronavirus aid plan.<br/>
+美国国会周一晚上通过了一项庞大的年终法案，其中包括一项9000亿美元的新冠病毒援助计划。
+<p>Both the House of Representatives and the Senate passed the measure with large majorities, although lawmakers had only a few hours to examine the more than 5,000-page bill. It approved 1.4 trillion dollars in spending to keep the U.S. government operating.<br/>
+众议院和参议院都以绝大多数优势通过了这项法案，尽管议员们只有几个小时的时间来审议这份超过5000页的法案。它还批准了一项1.4万亿美元的支出以维持美国政府的运转。</p>
+<p>President Donald Trump is expected to sign the bill in the coming days.<br/>
+预计川普总统将会在未来几天内签署这项法案。</p>
+<p>The legislation comes after weeks of negotiations. Congressional leaders from both parties debated how much government assistance should be provided in coronavirus aid and whether the aid should center on help to individuals or businesses.<br/>
+这项立法经过了数周的谈判。来自两党的国会领导人就政府应该提供多少新冠病毒援助，以及援助重点应该是个人还是企业进行了辩论。</p>
+<p>The United States is experiencing a sharp and growing rise in COVID-19 infections. The country recorded more than 18 million confirmed cases as of Monday night. More than 319,000 Americans have died of the disease, the Johns Hopkins Coronavirus Resource Center reports.<br/>
+美国新冠病毒感染量正在急剧增加。截至周一晚上，美国已经录得超过1800万例确诊病例。约翰霍普金斯大学新冠病毒资源中心报告称，已经有超过31.9万名美国人死于这种疾病。</p>
+<p>One of the main parts of the new bill provides direct payments of $600 to most people. Treasury Secretary Steven Mnuchin said millions of Americans could begin seeing the payments as soon as next week. Payments of $1,200 were included in a much larger coronavirus relief bill in March.<br/>
+新法案的主要内容之一是向大部分人提供600美元的直接补贴。美国财政部长史蒂夫·姆努钦表示，数百万美国人最早下周就能看到这笔补贴。3月份一项更大的新冠病毒救济法案中包括一笔1200美元的补贴。</p>
+<p>The new bill also includes $284 billion for the U.S. Paycheck Protection Program. The program is designed to help businesses keep workers employed during the economic pressure caused by the health crisis.<br/>
+新法案还包括用于美国薪资保护计划的2840亿美元。该计划旨在帮助企业在这次健康危机导致的经济压力期间维持工人就业。</p>
+<p>And the bill contains almost $300 a week in unemployment assistance for 11 weeks, $82 billion for local schools and universities, $25 billion in home cost assistance, $15 billion for theaters and $10 billion for child care.<br/>
+该法案还包括持续11周的每周近300美元的失业补助，820亿美元对本地学校和大学的补贴，250亿美元的住房补贴，150亿美元的剧院补贴，以及100亿美元的儿童保育补贴。</p>
+<p>The bill also provides $4 billion to help other countries with vaccination efforts for COVID-19.<br/>
+该法案还提供了40亿美元用于帮助其它国家进行新冠肺炎的疫苗接种工作。</p>
+<p>"The American people can rest assured that more help is on the way, immediately," said Senate Majority Leader Mitch McConnell, a Republican.<br/>
+参议院多数党领袖、共和党人米奇·麦康奈尔表示：“美国人民放宽心，马上会有更多援助。”</p>
+<p>Democratic Party lawmakers had pushed for a much larger aid program, with the House passing a $3-trillion package in May and a $2-trillion version in October. But Republicans opposed that level of spending.<br/>
+民主党议员一直在推动出台更大规模的援助计划，众议院在5月份通过了3万亿美元的一揽子计划，在10月份通过了2万亿美元的一揽子计划。但是共和党人反对这种支出水平。</p>
+<p>Democrats say the aid measure is just a first step of what will come after President-elect Joe Biden take office on January 20.<br/>
+民主党人表示，这项援助措施只是候任总统乔·拜登在1月20日就职后的第一步。</p>
+<p>Biden wrote about the bill's passage on Twitter. He praised the progress but said "our work is far from over."<br/>
+拜登在推特上提到了这项法案的通过。他称赞了这一进展，但是表示“我们的工作还远远没有结束。”</p>
+<p>"Starting in the new year, Congress will need to immediately get to work on support for our COVID-19 plan," he wrote.<br/>
+他写道：“从新一年开始，国会需要立即着手为我们的新冠肺炎计划提供支持。”</p>
+<p>Senate Minority Leader Chuck Schumer said anyone who considers the new aid as enough, in his words, "hasn't heard the desperation in the voices of their constituents, has not looked into the eyes of the small business owner on the brink of ruin."<br/>
+参议院少数党领袖舒默表示，如果有人认为新的援助已经足够了，那么他“一定没有听到选民们绝望的声音，没有看到濒临破产的小企业主的眼神。”</p>
+<p>Any proposals for additional spending will be highly dependent on two January 5 runoff elections for Senate seats. Both are in the state of Georgia. The results will decide which party controls the Senate.<br/>
+新增支出的任何提案都将高度依赖于1月5日举行的两场参议院决选。这两场决选都在佐治亚州。结果将决定哪个党控制参议院。</p>
+<p>The total $1.4-trillion spending package will keep the government operational through next September. It includes an extension of tax help for numerous businesses for at least the next year, $45 billion for transportation needs and $13 billion for a major expansion in food assistance.<br/>
+这项总计1.4万亿美元的一揽子支出将会维持政府运转到明年9月之前。它包括将对大多数企业的税收援助至少延长至明年，提供450亿美元用于交通需求，130亿美元用于大力扩充食品援助。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Congress Passes Spending Bill, Includes Coronavirus Aid Measure]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States Congress passed a massive year-end bill Monday night
+[00:06.52]that includes a $900-billion coronavirus aid plan.
+[00:13.08]Both the House of Representatives and the Senate
+[00:16.76]passed the measure with large majorities,
+[00:19.92]although lawmakers had only a few hours to examine the more than 5,000-page bill.
+[00:29.92]It approved 1.4 trillion dollars in spending to keep the U.S. government operating.
+[00:39.44]President Donald Trump is expected to sign the bill in the coming days.
+[00:45.56]The legislation comes after weeks of negotiations.
+[00:50.72]Congressional leaders from both parties debated
+[00:54.52]how much government assistance should be provided in coronavirus aid
+[01:00.60]and whether the aid should center on help to individuals or businesses.
+[01:08.96]The United States is experiencing a sharp and growing rise in COVID-19 infections.
+[01:17.40]The country recorded more than 18 million confirmed cases as of Monday night.
+[01:25.76]More than 319,000 Americans have died of the disease,
+[01:31.80]the Johns Hopkins Coronavirus Resource Center reports.
+[01:36.92]One of the main parts of the new bill provides direct payments of $600 to most people.
+[01:45.92]Treasury Secretary Steven Mnuchin said millions of Americans
+[01:51.84]could begin seeing the payments as soon as next week.
+[01:57.52]Payments of $1,200 were included
+[02:02.00]in a much larger coronavirus relief bill in March.
+[02:07.80]The new bill also includes $284 billion for the U.S. Paycheck Protection Program.
+[02:16.88]The program is designed to help businesses keep workers employed
+[02:22.80]during the economic pressure caused by the health crisis.
+[02:27.76]And the bill contains almost $300 a week in unemployment assistance
+[02:34.92]for 11 weeks, $82 billion for local schools and universities,
+[02:42.00]$25 billion in home cost assistance,
+[02:47.44]$15 billion for theaters and $10 billion for child care.
+[02:54.76]The bill also provides $4 billion
+[02:58.48]to help other countries with vaccination efforts for COVID-19.
+[03:05.24]"The American people can rest assured that more help is on the way, immediately,"
+[03:12.08]said Senate Majority Leader Mitch McConnell, a Republican.
+[03:17.52]Democratic Party lawmakers had pushed for a much larger aid program,
+[03:23.12]with the House passing a $3-trillion package in May
+[03:28.32]and a $2-trillion version in October.
+[03:32.36]But Republicans opposed that level of spending.
+[03:37.48]Democrats say the aid measure is just a first step of what will come
+[03:43.72]after President-elect Joe Biden take office on January 20.
+[03:49.72]Biden wrote about the bill's passage on Twitter.
+[03:54.36]He praised the progress but said "our work is far from over."
+[04:00.40]"Starting in the new year, Congress will need to immediately get to work
+[04:06.92]on support for our COVID-19 plan," he wrote.
+[04:12.00]Senate Minority Leader Chuck Schumer said
+[04:16.20]anyone who considers the new aid as enough, in his words,
+[04:21.84]"hasn't heard the desperation in the voices of their constituents,
+[04:27.48]has not looked into the eyes of the small business owner on the brink of ruin."
+[04:34.36]Any proposals for additional spending will be highly dependent
+[04:39.88]on two January 5 runoff elections for Senate seats.
+[04:45.96]Both are in the state of Georgia.
+[04:49.32]The results will decide which party controls the Senate.
+[04:55.28]The total $1.4-trillion spending package
+[05:00.04]will keep the government operational through next September.
+[05:04.80]It includes an extension of tax help
+[05:08.68]for numerous businesses for at least the next year,
+[05:13.28]$45 billion for transportation needs
+[05:17.68]and $13 billion for a major expansion in food assistance.
+[05:25.12]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

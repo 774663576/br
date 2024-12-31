@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Rock Group Ends Live Concerts, Becomes Computerized Avatars</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Rock Group Ends Live Concerts, Becomes Computerized Avatars" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/rock-group-ends-live-concerts-becomes-computerized-avatars.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Rock Group Ends Live Concerts, Becomes Computerized Avatars</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/rock-group-ends-live-concerts-becomes-computerized-avatars.mp3" id="mp3"></a>
+<a href="/static/lrc/rock-group-ends-live-concerts-becomes-computerized-avatars.lrc" id="lrc"></a>
+<a href="how-hanukkah-is-celebrated-around-the-world-91908.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">08 December 2023</span><br/>
+<p>Recently, members of the American rock band Kiss closed out their final performance. The group's "The End of the Road" <strong>concert</strong> series ended in New York City's famous Madison Square Garden.</p>
+<p>But as it turns out, fans will still be able to enjoy Kiss performances for years to come.</p>
+<p>The band formed in 1973. It is currently made up of founders Paul Stanley and Gene Simmons, as well as Tommy Thayer and Eric Singer. Towards the end of Saturday's show, the band members left the stage and <strong>revealed</strong> computerized likenesses of themselves. The computerized <strong>avatars</strong> launched into a performance of the song "God Gave Rock and Roll to You."</p>
+<div class="contentImage"><img alt="Gene Simmons, left, Tommy Thayer and Paul Stanley of KISS perform during the final night of the Kiss Farewell Tour on Saturday, Dec. 2, 2023, at Madison Square Garden in New York. (Photo by Evan Agostini/Invision/AP)" src="https://files.21voa.com/gdb/7ab7da4f-f61f-4895-8da8-93c4dcd6ee61_cx0_cy10_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">Gene Simmons, left, Tommy Thayer and Paul Stanley of KISS perform during the final night of the "Kiss Farewell Tour" on Saturday, Dec. 2, 2023, at Madison Square Garden in New York. (Photo by Evan Agostini/Invision/AP)</span></div>
+<p>After 50 years of Kiss, the band now hopes to be remembered forever.</p>
+<p>The avatars were created by George Lucas' special-effects company Industrial Light &amp; Magic. The company also worked with Pophouse Entertainment Group. Bjorn Ulvaeus, a member of the Swedish musical group ABBA, is its founder.</p>
+<p>The two companies recently came together for the "ABBA Voyage" show in London. Fans there could enjoy a full concert by the Swedish band as performed by the computerized avatars.</p>
+<p>Per Sundin is chief executive officer of Pophouse Entertainment. He said the new technology lets Kiss continue its history for "<strong>eternity</strong>."</p>
+<p>He said the band was not on stage during the computerized performance. He added, "Kiss could have a concert in three cities in the same night across three different continents. That's what you could do with this."</p>
+<p>In order to create their computerized avatars, Kiss performed in equipment that followed their movement. This equipment is called motion capture suits.</p>
+<p>Experimentation with this kind of technology has become increasingly common in the music industry. In October, K-pop star Mark Tuan partnered with Soul Machines to create a computerized version of himself called "Digital Mark." The technology lets fans have one-on-one talks with Digital Mark. Tuan is the first famous person to attach their likeness to OpenAI's GPT artificial intelligence technology.</p>
+<p>Aespa is a K-pop girl group. The group often performs alongside their computerized avatars. In fact, the four-member band is meant to be seen as a group of eight.</p>
+<p>Another girl group, Eternity, is made up entirely of computerized performers. No humans are necessary.</p>
+<p>Kiss performer Paul Stanley told reporters that what they have done "... has been <strong>amazing</strong>, but it's not enough. The band<strong> deserves</strong> to live on because the band is bigger than we are."</p>
+<p>"We can be forever young and forever <strong>iconic</strong> by taking us to places we've never dreamed of before," Kiss performer Gene Simmons added. "The technology is going to make Paul jump higher than he's ever done before."</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Maria Sherman reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>concert </strong>– <em>n</em>. a public performance of music</p>
+<p><strong>revealed </strong>– <em>v</em>. to make (something) known</p>
+<p><strong>avatar </strong>– <em>n</em>. a small picture that represents a computer user in a game or on the Internet</p>
+<p><strong>eternity </strong>– <em>n</em>. time without an end</p>
+<p><strong>amazing </strong>– <em>adj</em>. causing great surprise or wonder</p>
+<p><strong>deserve </strong>– <em>v</em>. used to say that someone or something should or should not have or be given something</p>
+<p><strong>iconic </strong>– <em>adj</em>. being a famous person or thing that people admire and see as a symbol of a particular idea or way of life</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Rock Group Ends Live Concerts, Becomes Computerized Avatars]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Recently, members of the American rock band Kiss
+[00:06.16]closed out their final performance.
+[00:10.24]The group's "The End of the Road" concert series
+[00:14.64]ended in New York City's famous Madison Square Garden.
+[00:21.28]But as it turns out, fans will still be able
+[00:25.96]to enjoy Kiss performances for years to come.
+[00:31.92]The band formed in 1973.
+[00:36.76]It is currently made up of founders Paul Stanley
+[00:41.36]and Gene Simmons, as well as Tommy Thayer and Eric Singer.
+[00:48.84]Towards the end of Saturday's show,
+[00:52.04]the band members left the stage
+[00:55.28]and revealed computerized likenesses of themselves.
+[01:01.52]The computerized avatars launched into a performance
+[01:06.84]of the song "God Gave Rock and Roll to You."
+[01:12.16]After 50 years of Kiss, the band now hopes
+[01:16.52]to be remembered forever.
+[01:20.08]The avatars were created by George Lucas'
+[01:24.48]special-effects company Industrial Light &amp; Magic.
+[01:30.40]The company also worked
+[01:32.16]with Pophouse Entertainment Group.
+[01:36.44]Bjorn Ulvaeus, a member of
+[01:39.40]the Swedish musical group ABBA, is its founder.
+[01:45.04]The two companies recently came together
+[01:48.52]for the "ABBA Voyage" show in London.
+[01:53.44]Fans there could enjoy a full concert by the Swedish band
+[01:58.64]as performed by the computerized avatars.
+[02:03.68]Per Sundin is chief executive officer
+[02:07.96]of Pophouse Entertainment.
+[02:11.52]He said the new technology
+[02:14.04]lets Kiss continue its history for "eternity."
+[02:19.44]He said the band was not on stage
+[02:22.32]during the computerized performance.
+[02:26.36]He added, "Kiss could have a concert in three cities
+[02:31.04]in the same night across three different continents.
+[02:35.72]That's what you could do with this."
+[02:39.32]In order to create their computerized avatars,
+[02:43.56]Kiss performed in equipment
+[02:45.92]that followed their movement.
+[02:49.12]This equipment is called motion capture suits.
+[02:54.28]Experimentation with this kind of technology
+[02:58.64]has become increasingly common in the music industry.
+[03:04.44]In October, K-pop star Mark Tuan
+[03:08.28]partnered with Soul Machines
+[03:11.08]to create a computerized version of himself
+[03:14.72]called "Digital Mark."
+[03:17.68]The technology lets fans
+[03:19.88]have one-on-one talks with Digital Mark.
+[03:25.08]Tuan is the first famous person
+[03:28.32]to attach their likeness to OpenAI's
+[03:32.20]GPT artificial intelligence technology.
+[03:37.68]Aespa is a K-pop girl group.
+[03:40.92]The group often performs
+[03:43.16]alongside their computerized avatars.
+[03:47.76]In fact, the four-member band
+[03:50.60]is meant to be seen as a group of eight.
+[03:55.08]Another girl group, Eternity,
+[03:57.88]is made up entirely of computerized performers.
+[04:03.00]No humans are necessary.
+[04:06.44]Kiss performer Paul Stanley told reporters
+[04:10.64]that what they have done "... has been amazing,
+[04:14.36]but it's not enough. The band deserves to live on
+[04:19.12]because the band is bigger than we are."
+[04:23.24]"We can be forever young and forever iconic
+[04:27.28]by taking us to places we've never dreamed of before,"
+[04:31.92]Kiss performer Gene Simmons added.
+[04:36.00]"The technology is going to make Paul jump higher
+[04:39.84]than he's ever done before."
+[04:42.84]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

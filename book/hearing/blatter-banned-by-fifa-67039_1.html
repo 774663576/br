@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 国际足联禁止布拉特和普拉蒂尼8年内涉足足球运动</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 国际足联禁止布拉特和普拉蒂尼8年内涉足足球运动" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/blatter-banned-by-fifa.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>国际足联禁止布拉特和普拉蒂尼8年内涉足足球运动</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/blatter-banned-by-fifa.mp3" id="mp3"></a>
+<a href="/static/lrc/blatter-banned-by-fifa.lrc" id="lrc"></a>
+<a href="blatter-banned-by-fifa-67039.html" id="CnPage" target="_blank"></a>
+<a href="hermione-cast-star-wars-box-office-67038.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The International Football Association's ethics committee banned its president, Sepp Blatter, from the organization for eight years on Monday. The association is known as FIFA.<br/>周一，国际足联道德委员会禁止足联主席巴拉特8年内涉足该组织。国际足联也被称为FIFA。</p>
+<p>Also getting an eight-year ban was Michel Platini, the head of the European soccer federation, UEFA.<br/>欧洲足联主席（简称UEFA）普拉蒂尼也被禁足8年。</p>
+<p>The ruling came because of a $2 million payment from FIFA to Platini in 2011. The two men called it salary for advising the president. But according to the Associated Press news service, Platini had no such contract with FIFA at the time.<br/>这项判决出台是因为2011年国际足联向普拉蒂尼支付了2百万美元。这两人称这是普拉蒂尼向国际足联主席提供顾问服务的工资。但是根据美联社报道，当时普拉蒂尼同国际足联之间并没有签署这类合同。</p>
+<p>The payment is also being investigated by authorities in Switzerland.<br/>这笔付款也正在接受瑞士当局的调查。</p>
+<p>Blatter was already serving a provisional ban over the scandal earlier this year when 14 FIFA officials were arrested on corruption charges.<br/>今年早些时候，当14名国际足联官员因为腐败指控被捕时，布拉特已经因为该丑闻临时停职。</p>
+<p>The organization will elect a new president in February.<br/>该组织将在明年二月份选出新任主席。</p>
+<p>For many years, it was anticipated that Platini would take over for Blatter. That is not likely after the news of his eight-year ban. Also, Platini is not on the list of candidates for the upcoming election.<br/>多年来人们一直预期普拉蒂尼会接替布拉特。在这项8年禁令的消息公布之后，这已经变得不太可能。此外，普拉蒂尼也不在即将进行的选举的候选人名单上。</p>
+<p>Blatter promised to fight the ban in the Court of Arbitration for Sport.<br/>布拉特承诺将在体育仲裁法庭对该禁令提出上诉。</p>
+<p>He denied doing anything wrong by authorizing payments to Platini, calling the lack of a contract an administrative error.<br/>他否认在授权支付普拉蒂尼一事上犯了任何错误，他称没有合同是管理失误。</p>
+<p>Blatter said "I am now suspended eight years, suspended eight years. But, I will fight. I will fight for me and I will fight for FIFA."<br/>布拉特表示，“我现在被停职8年。但是我将会上诉，我将为自己和国际足联而提起上诉。”</p>
+<p>Blatter has been the president of FIFA since 1998.<br/>自1998年以来布拉特一直担任国际足联主席。</p>
+<p>I'm Dan Friedell.<br/>我是丹·费里德尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]The International Football Association's ethics committee 
+[00:04.12]banned its president, Sepp Blatter, 
+[00:06.76]from the organization for eight years on Monday. 
+[00:10.76]The association is known as FIFA.
+[00:14.08]Also getting an eight-year ban was Michel Platini, 
+[00:18.24]the head of the European soccer federation, UEFA.
+[00:22.00]The ruling came because of a $2 million payment from FIFA to Platini in 2011.
+[00:30.64] The two men called it salary for advising the president. 
+[00:35.24]But according to the Associated Press news service, 
+[00:38.84]Platini had no such contract with FIFA at the time. 
+[00:43.60]The payment is also being investigated by authorities in Switzerland.
+[00:48.24]Blatter was already serving a provisional ban
+[00:51.72] over the scandal earlier this year 
+[00:54.20]when 14 FIFA officials were arrested on corruption charges.
+[00:59.72]The organization will elect a new president in February.
+[01:03.96]For many years, it was anticipated that Platini would take over for Blatter.
+[01:09.72] That is not likely after the news of his eight-year ban. 
+[01:13.52]Also, Platini is not on the list of candidates for the upcoming election.
+[01:19.48]Blatter promised to fight the ban in the Court of Arbitration for Sport.
+[01:25.60]He denied doing anything wrong by authorizing payments to Platini, 
+[01:31.08]calling the lack of a contract an administrative error. 
+[01:35.92]Blatter said "I am now suspended eight years,  suspended eight years. 
+[01:41.44]But, I will fight. I will fight for me and I will fight for FIFA."
+[01:47.40]Blatter has been the president of FIFA since 1998.
+[01:51.48]I'm Dan Friedell.
+[01:52.96]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

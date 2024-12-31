@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - US Congress Requires New Technology to Stop Drunken Driving</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, US Congress Requires New Technology to Stop Drunken Driving" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202111/congress-mandates-new-car-technology-to-stop-drunken-driving.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>US Congress Requires New Technology to Stop Drunken Driving</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202111/congress-mandates-new-car-technology-to-stop-drunken-driving.mp3" id="mp3"></a>
+<a href="/static/lrc/congress-mandates-new-car-technology-to-stop-drunken-driving.lrc" id="lrc"></a>
+<a href="community-built-for-foreigners-in-dubai-to-be-torn-down-87964.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">14 November 2021</span><br/>
+<p>
+The United States Congress has created a new requirement for carmakers: they must find a way from keeping <strong>drunk</strong> people from driving cars.</p>
+<p>It is just one of the rules included in the large increase of new spending aimed at improving car safety. <strong>Funding</strong> for the requirement is included in the $1-trillion <strong>infrastructure</strong> bill that President Joe Biden is expected to sign into law.</p>
+<p>The <strong>mandate</strong> requires carmakers to have systems built into new cars as early as 2026 that help stop drunk drivers.</p>
+<p>In total, about $17 billion is set to be given to road safety programs. It is the biggest increase in such funding in many years, says the Eno Center for Transportation. Transportation Secretary Pete Buttigieg says the money means more <strong>bike</strong> paths and greener spaces could be built into busy roads.</p>
+<p>"It's <strong>monumental</strong>," said Alex Otte. She is president of the organization Mothers Against Drunk Driving. Otte added that the mandate would remove the "number-one killer on America's roads."</p>
+<p>Last month, the National Highway Traffic Safety Administration (NHTSA) reported that an estimated 20,160 people died in car crashes in the first half of 2021. That is the highest first-half total since 2006. The agency has said that fast driving, <strong>impaired</strong> driving and not wearing seatbelts are reasons for the increase.</p>
+<p>Each year, around 10,000 people in the United States are killed because of alcohol-related car crashes. That is almost 30 percent of all traffic deaths, the NHTSA says.</p>
+<p>Currently, some people who were charged with drunken driving in the past must use a breathalyzer device in order to start their car. A breathalyzer measures blood alcohol level. The device can turn off a car if the driver's blood alcohol level is too high.</p>
+<p>The bill does not name a kind of technology, only that it must "identify whether that driver may be impaired."</p>
+<div class="contentImage"><img alt="Transportation Secretary Pete Buttigieg speaks during the daily briefing at the White House in Washington, on Nov. 8, 2021. (AP Photo/Susan Walsh)" src="https://files.21voa.com/gdb/D91861B7-6139-4BE7-950F-E9599C25AD4A_w268_r0.jpg"/><br/>
+<span class="imagecaption">Transportation Secretary Pete Buttigieg speaks during the daily briefing at the White House in Washington, on Nov. 8, 2021. (AP Photo/Susan Walsh)</span></div>
+<p>Sam Abuelsamid is with Guidehouse Insights, a market research company. He said the most likely system to prevent drunken driving is <strong>infrared</strong> cameras that look for driver behavior. The cameras make sure a driver is watching the road, and they look for signs of sleepiness or impairment. Such technology is already being used by some carmakers, including General Motors, Nissan and BMW.</p>
+<p>If the system sees any signs, the car will warn the driver. If the behavior continues, the car will turn on warning lights, slow down and move to the side of the road.</p>
+<p>The bill also requires carmakers to create back-seat reminders to tell parents if a child is left in the back seat. Since 1990, about 1,000 children have died from heat illness after being left in the car.</p>
+<p>Congress has also ordered the NHTSA to make new safety requirements for cars. The new rules are meant to help avoid deaths from collapsing front seats and require automatic emergency brakes. Many carmakers, however, have already made those changes in their latest models.</p>
+<p>I'm Dan Novak.</p>
+<p><em>The Associated Press reported this story. Dan Novak adapted it for VOA Learning English. Ashley Thompson was the editor. </em></p>
+<p><em>_______________________________________</em></p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fund </strong>— <em>n. </em>an amount of money that is used for a special purpose</p>
+<p><strong>infrastructure </strong>— <em>n. </em>the basic equipment and structures (such as roads and bridges) that are needed for a country, region, or organization to function properly</p>
+<p><strong>bicycle </strong>— <em>n. </em>a 2-wheeled vehicle that a person rides by pushing on foot pedals</p>
+<p><strong>mandate </strong>— <em>n. </em>an official order to do something</p>
+<p><strong>drunk </strong>— <em>adj. </em>having drunk so much alcohol that normal actions (such as talking, thinking, and moving) become difficult to do</p>
+<p><strong>monumental </strong>— <em>adj. </em>very important</p>
+<p><strong>impair </strong> — <em>v. </em>to make (something) weaker or worse</p>
+<p><strong>infrared </strong>— <em>adj. </em>producing or using rays of light that cannot be seen and that are longer than rays that produce red light</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Congress Requires New Technology to Stop Drunken Driving]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States Congress has created a new requirement
+[00:04.36]for carmakers: they must find a way
+[00:08.04]from keeping drunk people from driving cars.
+[00:12.48]It is just one of the rules included in the large increase
+[00:16.40]of new spending aimed at improving car safety.
+[00:21.20]Funding for the requirement is included in the $1-trillion infrastructure bill
+[00:27.04]that President Joe Biden is expected to sign into law.
+[00:32.60]The mandate requires carmakers to have systems built into new cars
+[00:37.76]as early as 2026 that help stop drunk drivers.
+[00:43.64]In total, about $17 billion is set to be given to road safety programs.
+[00:50.24]It is the biggest increase in such funding in many years,
+[00:54.92]says the Eno Center for Transportation.
+[00:59.32]Transportation Secretary Pete Buttigieg
+[01:02.72]says the money means more bike paths and greener spaces
+[01:07.32]could be built into busy roads.
+[01:11.24]"It's monumental," said Alex Otte.
+[01:14.76]She is president of the organization Mothers Against Drunk Driving.
+[01:20.44]Otte added that the mandate would remove
+[01:23.28]the "number-one killer on America's roads."
+[01:27.48]Last month, the National Highway Traffic Safety Administration (NHTSA)
+[01:34.28]reported that an estimated 20,160 people
+[01:39.48]died in car crashes in the first half of 2021.
+[01:43.88]That is the highest first-half total since 2006.
+[01:48.20]The agency has said that fast driving, impaired driving
+[01:53.24]and not wearing seatbelts are reasons for the increase.
+[01:59.16]Each year, around 10,000 people in the United States
+[02:03.16]are killed because of alcohol-related car crashes.
+[02:07.24]That is almost 30 percent of all traffic deaths, the NHTSA says.
+[02:14.92]Currently, some people who were charged
+[02:17.44]with drunken driving in the past
+[02:19.68]must use a breathalyzer device in order to start their car.
+[02:24.72]A breathalyzer measures blood alcohol level.
+[02:28.60]The device can turn off a car
+[02:31.36]if the driver's blood alcohol level is too high.
+[02:36.12]The bill does not name a kind of technology,
+[02:39.04]only that it must "identify whether that driver may be impaired."
+[02:45.56]Sam Abuelsamid is with Guidehouse Insights,
+[02:49.84]a market research company.
+[02:52.20]He said the most likely system to prevent drunken driving
+[02:56.68]is infrared cameras that look for driver behavior.
+[03:01.32]The cameras make sure a driver is watching the road,
+[03:05.00]and they look for signs of sleepiness or impairment.
+[03:09.48]Such technology is already being used by some carmakers,
+[03:13.72]including General Motors, Nissan and BMW.
+[03:18.92]If the system sees any signs, the car will warn the driver.
+[03:23.68]If the behavior continues, the car will turn on warning lights,
+[03:28.44]slow down and move to the side of the road.
+[03:33.24]The bill also requires carmakers to create back-seat reminders
+[03:38.40]to tell parents if a child is left in the back seat.
+[03:43.48]Since 1990, about 1,000 children
+[03:46.96]have died from heat illness after being left in the car.
+[03:51.60]Congress has also ordered the NHTSA
+[03:55.52]to make new safety requirements for cars.
+[03:59.36]The new rules are meant to help avoid
+[04:02.32]deaths from collapsing front seats
+[04:04.76]and require automatic emergency brakes.
+[04:08.12]Many carmakers, however,
+[04:10.52]have already made those changes in their latest models.
+[04:16.00]I'm Dan Novak.
+[04:17.08]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - NASA Follows Asteroid Moving Closer to Earth from Sun’s Orbit</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, NASA Follows Asteroid Moving Closer to Earth from Sun’s Orbit" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/nasa-follows-asteroid-moving-closer-to-earth-from-sun-s-orbit.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>NASA Follows Asteroid Moving Closer to Earth from Sun’s Orbit</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/nasa-follows-asteroid-moving-closer-to-earth-from-sun-s-orbit.mp3" id="mp3"></a>
+<a href="is-pie-in-the-sky-just-a-dream-93040.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">06 October, 2024</span><br/>
+<p>Scientists have discovered a small <strong>asteroid</strong> that recently moved closer to Earth's orbit. The object was first observed August 7 by two astronomers from Spain's Complutense University of Madrid.</p>
+<p>The asteroid, named 2024 PT5, is believed to be about 10 meters long. It usually orbits around the sun. But Earth's gravitational forces recently pulled the object closer to our planet.</p>
+<p>Scientists sometimes call such objects “mini-moons.” This is because they behave similarly to the permanent moon orbiting Earth when they are captured by gravity. But they are much smaller and only temporarily stay in Earth's orbit.</p><div class="contentImage"><img alt="This file image shows a supermoon with a partial lunar eclipse rises over Lake Michigan in Chicago, Tuesday, Sept. 17, 2024. (AP Photo/Kiichiro Sato, File)" src="https://files.21voa.com/gdb/e23bba79-51ea-4edd-8299-bfd781d42074_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This file image shows a supermoon with a partial lunar eclipse rises over Lake Michigan in Chicago, Tuesday, Sept. 17, 2024. (AP Photo/Kiichiro Sato, File)</span></div>
+<p>The American space agency NASA said <a class="wsw__a" href="https://blogs.nasa.gov/planetarydefense/2024/10/02/nasa-to-track-asteroid-2024-pt5-on-next-close-pass-january-2025/">in a statement</a> that 2024 PT5 is “not quite a mini-moon” because it will never be fully captured by Earth's gravity. However, it described the asteroid as “an interesting object” the agency plans to follow, or track, with radar-equipped telescopes. NASA noted the traveling asteroid presented no danger to Earth.</p>
+<p>NASA and its international partners continuously search the skies for what scientists call near-Earth objects. Such objects include asteroids and <strong>comets</strong> that come within 50 million kilometers of Earth's orbit.</p>
+<p>The search system, called ATLAS, involves four different telescopes. Two of the telescopes are based in Hawaii. Another operates in Chile and the other sits in South Africa. NASA <a class="wsw__a" href="https://atlas.fallingstar.com/">explains</a> that ATLAS is designed to search the whole sky several times each night looking for moving objects.</p>
+<p>2024 PT5 was identified by the telescope observing station in Sutherland, South Africa. The discovery was made by two astronomers from Complutense University of Madrid – Carlos de la Fuente Marcos and Raúl de la Fuente Marcos. They recently <a class="wsw__a" href="https://iopscience.iop.org/article/10.3847/2515-5172/ad781f">described</a> the find in the publication <em>Research Notes of the</em> <em>American Astronomical Society</em>.</p>
+<p>The Spanish astronomers said it appeared 2024 PT5 is part of a group of near-Earth objects belonging to the Arjuna asteroid belt. The objects in this asteroid belt are believed to be “surrounding the path followed by the Earth-moon system,” they wrote.</p>
+<p>Such objects are likely more common than we think, said Richard Binzel, an astronomer at the Massachusetts Institute of Technology (MIT). He was not involved in the latest research.</p>
+<p>Binzel told The Associated Press, “This happens with some <strong>frequency</strong>, but we rarely see them because they're very small and very hard to <strong>detect</strong>.” But he noted that in recent years, progress in space observation technologies had made it possible to identify more of these moon-like objects.</p>
+<p>Binzel added that currently, it is not known whether the asteroid broke off from a larger asteroid. He said the space rock might even be a piece of our moon “that got <strong>blasted</strong> out.” NASA said such an asteroid could have been created by our moon being struck by an asteroid a very long time ago.</p>
+<p>One of the discovering scientists, Carlos de la Fuente Marcos, told the AP in an email that because of its size and brightness, 2024 PT5 can only be seen from Earth with special equipment.</p>
+<p>NASA said teams at the agency's Center for Near Earth Object Studies are continually tracking the movements of 2024 PT5. The center expects the asteroid to remain at a distance about nine times farther away from Earth than the moon. Scientists say it will remain gravitationally linked to Earth until November 25.</p>
+<p>NASA plans to use its large Goldstone Solar System Radar observer to follow the asteroid. The object is set to make another close pass of Earth in January 2025, when it should stay about five times the distance between Earth and the moon. 2024 PT5 is then expected to turn away from Earth “as it continues its orbit around the sun,” NASA said.</p>
+<p>After that, the asteroid is not expected to pass close by Earth until 2055.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, NASA and </em><em>Research Notes of the</em> <em>American Astronomical Society.</em></p>
+<p><strong>_____________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>asteroid </strong><em>– n. </em>a rocky object that goes around the sun like a planet</p>
+<p><strong>comet </strong><em>– n. </em>an object in space that leaves a bright line behind it in the sky</p>
+<p><strong>frequency</strong><em> – n. </em>how often something happens</p>
+<p><strong>detect </strong><em>– v. </em>to discover or identify something, especially something that is difficult to see hear, smell, etc.</p>
+<p><strong>blast </strong><em>– n. </em>an explosion</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

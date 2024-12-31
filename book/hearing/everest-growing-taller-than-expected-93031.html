@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Everest Growing Taller than Expected</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Everest Growing Taller than Expected" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/everest-growing-taller-than-expected.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Everest Growing Taller than Expected</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/everest-growing-taller-than-expected.mp3" id="mp3"></a>
+<a href="stair-climbing-a-sure-way-to-burn-calories-93029.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">02 October, 2024</span><br/>
+<p>Mount Everest, standing 8.85 kilometers above sea level, is Earth's tallest mountain.</p>
+<p>And Mount Everest is still growing.</p>
+<p>Mount Everest and the rest of the Himalayas are continuing on an upward movement that began at their birth around 50 million years ago. The mountains are a product of a collision between Eurasia and the Indian subcontinent.</p><div class="contentImage"><img alt="FILE - Mount Everest or Sagarmatha (top), the highest peak in the world with an altitude of 8.848 meters is seen in this aerial view next to Mount Ama Dablam (bottom R) on April 22, 2007. (REUTERS/ Desmond Boylan/File Photo)" src="https://files.21voa.com/gdb/40c273c6-65b7-469f-bdfd-5b78400ac6c0_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Mount Everest or Sagarmatha (top), the highest peak in the world with an altitude of 8.848 meters is seen in this aerial view next to Mount Ama Dablam (bottom R) on April 22, 2007. (REUTERS/ Desmond Boylan/File Photo)</span></div>
+<p>But Everest is growing more than expected. And, scientists now think they know the reason why.</p>
+<p>Everest's growth has to do with the major joining, or merger, of two nearby river systems. The Kosi river joined with the Arun river around 89,000 years ago, the researchers estimated.</p>
+<p>This change in the area's river system has led to Everest gaining around 15-50 meters in height.</p>
+<p>That suggests an upward movement rate of about 0.2-0.5 millimeters per year.</p>
+<p>The geological process at work, researchers said, is called isostatic rebound.</p>
+<p>Isostatic rebound involves the rise of land masses on Earth's <strong>crust</strong> when the weight of the surface declines. The crust, Earth's outermost part, floats atop hot, semi-liquid rock.</p>
+<p>In this case, the joining of the rivers resulted in increased <strong>erosion</strong> which carried off large amounts of rock and soil. This reduced the weight of the area near Everest.</p>
+<p>"Isostatic rebound can be likened to a floating object adjusting its position when weight is removed," said Jin-Gen Dai of China University of Geosciences in Beijing.</p>
+<p>Dai is one of the leaders of the study published recently in Nature Geoscience.</p>
+<p>"When a heavy load, such as ice or eroded rock, is removed from the Earth's crust, the land beneath slowly rises in<strong> response</strong>, much like a boat rising in water when cargo is unloaded," Dai added.</p>
+<p>The researchers, who used numerical models to study the development of the river system, estimated that isostatic rebound accounts for about 10 percent of Everest's yearly upward movement, or uplift rate.</p>
+<p>This geological process is seen in other places around the world.</p>
+<p>"A classic example is in Scandinavia, where the land is still rising in response to the melting of thick ice sheets that covered the <strong>region</strong> during the last Ice Age. This process continues today, affecting coastlines and landscapes, thousands of years after the ice retreated," Dai said.</p>
+<p>Study co-writer Adam Smith, a University College London doctoral student, said GPS measurements show the continued rising of Everest and the rest of the Himalayas.</p>
+<p>This uplift is faster than the continued surface erosion caused by wind, rain and river flow. As this erosion continues, Everest's uplift rate from isostatic rebound may increase, Smith said.</p>
+<p>Neighboring mountains, including Lhotse, the world's fourth highest, and Makalu, the fifth highest, also get a boost from the same process. Lhotse is experiencing an uplift rate similar to Everest. Makalu has a slightly higher uplift rate.</p>
+<p>Dai said that the research shows our planet's changing nature. Even a seemingly unchanging element like Mount Everest is "subject to ongoing geological processes, reminding us that Earth is constantly changing, often in ways<strong> imperceptible</strong> in our daily lives."</p>
+<p>Earth's rigid outer part is divided into large plates that move slowly over time. The Himalayas rose following a collision between two plates.</p>
+<p>Everest is located on the border between Nepal and the Tibet Autonomous Region of China. It was named for George Everest, a 19th century British <strong>surveyor</strong> in India.</p>
+<p>"Mount Everest occupies a <strong>unique</strong> place in human consciousness," Dai said.</p>
+<p>"Physically, it represents Earth's highest point," giving it a lot of importance simply because of its size, Dai explained.</p>
+<p>He added that Everest has cultural importance to local Sherpa and Tibetan communities. Worldwide, Dai said, the mountain represents a big test for human endurance.</p>
+<p>I'm John Russell.</p>
+<p><em>Will Dunham reported on this story for Reuters. John Russell adapted it for VOA Learning English. </em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>crust</strong> <em>– n.</em> the outer part of a planet, moon, or asteroid</p>
+<p><strong>erosion </strong><em>– n.</em> the process of diminishment or destruction by degrees</p>
+<p><strong>response</strong> <em>– n.</em> something constituting a reply or reaction</p>
+<p><strong>region</strong> <em>– n.</em> a broad geographic area distinguished by similar features</p>
+<p><strong>imperceptible</strong> <em>– adj.</em> extremely slight, gradual, or subtle</p>
+<p><strong>surveyor</strong><em> – n.</em> one who determines and delineate the form, extent, and position of a tract of land by taking measurements</p>
+<p><strong>unique</strong> <em>– adj.</em> being without like or equal</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

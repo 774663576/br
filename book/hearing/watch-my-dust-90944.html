@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Watch My Dust!'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Watch My Dust!'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/watch-my-dust.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Watch My Dust!'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/watch-my-dust.mp3" id="mp3"></a>
+<a href="/static/lrc/watch-my-dust.lrc" id="lrc"></a>
+<a href="message-to--graduates-want-things-to-change-take-over-90943.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">27 May 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Dust is very small pieces of earth or other matter. It is so fine it floats in the air. And it gets everywhere.</p>
+<p>Inside, it covers our floors, our belongings, and other surfaces. Outside, it covers things as well. And a small wind can blow dust into our eyes and mouth.</p><div class="contentImage"><img alt="FILE - On a horse farm near Frankfurt, Germany, Iceland horses kick up dust as they run in their enclosure as the sun rises early one morning in August, 2020. (AP Photo/Michael Probst)" src="https://files.21voa.com/gdb/0adcfeb5-83fa-424c-aa7f-9634cf8e5300_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - On a horse farm near Frankfurt, Germany, Iceland horses kick up dust as they run in their enclosure as the sun rises early one morning in August, 2020. (AP Photo/Michael Probst)</span></div>
+<p>When we drive a car on dry ground, it can create a dust cloud. And when we run in a foot race, we can kick up a lot of dust, too.</p>
+<p>That is why we have the expression <u>eat my dust</u>. It means you are ahead of someone. They are behind you and must deal with the dust you have made.</p>
+<p>Sometimes, we also say <u>watch my dust</u>. This means you are so sure of winning that you are telling others they will lose.</p>
+<p>We often use these expressions to talk about a race or a competition.</p>
+<p>Using the same reasoning, if you <u>leave someone in the dust</u>, you have left them far behind. Again, you have won some kind of competition and you have won big!</p>
+<p>However, if something <u>bites the dust,</u> it has failed.</p>
+<p>To bite the dust can mean suffering defeat. It can also mean something comes to an early end or is no longer useful. For example, if my old car dies on a long road trip, I can say my car <u>bit the dust</u>. In the past ten years, many technologies have <u>bitten the dust</u>.</p>
+<p>Sometimes, this expression means death in battle. But used this way, <u>bite the dust</u> is very <strong>informal</strong> and not respectful.</p>
+<p>Our last "dust" expression is <u>when the dust settles</u>. In a dust storm, it is very difficult to see. When the dust settles, you can finally see clearly.</p>
+<p>So, we use this expression to talk about the calm and <strong>clarity</strong> that comes after a big change or time of confusion. We often use it as advice or a warning. It is often a good idea to wait for a situation to calm down before making a big decision.</p>
+<p>For example, let's say you are moving to a new city and changing jobs. You will be very busy. So, you can tell your friends that you will contact them when the dust settles. In other words, you will contact them when things calm down.</p>
+<p>And that's <em>Words and Their Stories</em>. Have fun using these "dust" expressions! Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>informal </strong><em>– adj.</em><strong> </strong>suited for use between friends and family but not perhaps professional relationships</p>
+<p><strong>clarity </strong><em>– n.</em><strong> </strong>the quality of being easily seen or heard</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'Watch My Dust!']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.40]And now, Words and Their Stories, from VOA Learning English.
+[00:19.80]Dust is very small pieces of earth or other matter.
+[00:25.08]It is so fine it floats in the air. And it gets everywhere.
+[00:32.56]Inside, it covers our floors, our belongings, and other surfaces.
+[00:39.76]Outside, it covers things as well.
+[00:42.48]And a small wind can blow dust into our eyes and mouth.
+[00:49.00]When we drive a car on dry ground,
+[00:51.72]it can create a dust cloud.
+[00:55.76]And when we run in a foot race, we can kick up a lot of dust, too.
+[01:03.00]That is why we have the expression eat my dust.
+[01:08.24]It means you are ahead of someone.
+[01:11.76]They are behind you and must deal with the dust you have made.
+[01:18.40]Sometimes, we also say watch my dust.
+[01:23.04]This means you are so sure of winning
+[01:26.28]that you are telling others they will lose.
+[01:30.68]We often use these expressions to talk about a race or a competition.
+[01:37.68]Using the same reasoning, if you leave someone in the dust,
+[01:42.56]you have left them far behind.
+[01:45.16]Again, you have won some kind of competition
+[01:49.68]and you have won big!
+[01:53.68]However, if something bites the dust, it has failed.
+[01:59.68]To bite the dust can mean suffering defeat.
+[02:03.76]It can also mean something comes to an early end
+[02:08.20]or is no longer useful.
+[02:12.28]For example, if my old car dies on a long road trip,
+[02:17.12]I can say my car bit the dust.
+[02:21.40]In the past ten years,
+[02:23.28]many technologies have bitten the dust.
+[02:28.20]Sometimes, this expression means death in battle.
+[02:32.60]But used this way, bite the dust
+[02:35.92]is very informal and not respectful.
+[02:41.20]Our last "dust" expression is when the dust settles.
+[02:47.16]In a dust storm, it is very difficult to see.
+[02:51.60]When the dust settles, you can finally see clearly.
+[02:57.40]So, we use this expression to talk about the calm and clarity
+[03:03.28]that comes after a big change or time of confusion.
+[03:09.36]We often use it as advice or a warning.
+[03:15.32]It is often a good idea to wait for a situation to calm down
+[03:20.48]before making a big decision.
+[03:24.80]For example, let's say you are moving to a new city
+[03:29.24]and changing jobs.
+[03:31.36]You will be very busy.
+[03:33.80]So, you can tell your friends
+[03:36.56]that you will contact them when the dust settles.
+[03:41.28]In other words, you will contact them
+[03:44.24]when things calm down.
+[03:47.20]And that's Words and Their Stories.
+[03:49.84]Have fun using these "dust" expressions!
+[03:54.68]Until next time ... I'm Anna Matteo.
+[03:58.60]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

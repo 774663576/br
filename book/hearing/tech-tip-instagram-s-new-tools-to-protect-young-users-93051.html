@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Tech Tip: Instagram’s New Tools to Protect Young Users</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Tech Tip: Instagram’s New Tools to Protect Young Users" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/tech-tip-instagram-s-new-tools-to-protect-young-users.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Tech Tip: Instagram’s New Tools to Protect Young Users</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/tech-tip-instagram-s-new-tools-to-protect-young-users.mp3" id="mp3"></a>
+<a href="scientists-win-nobel-in-chemistry-for-predicting-designing-proteins-93050.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">09 October, 2024</span><br/>
+<p>Meta's Instagram service recently introduced some built-in tools designed to protect young users. The changes also give parents more control over their children's accounts to improve safety and limit the amount of time spent on the social networking <strong>app</strong>.</p>
+<p>Instagram <a class="wsw__a" href="https://about.fb.com/news/2024/09/instagram-teen-accounts/#:~:text=Teens%20under%2016%20will%20need%20their%20parent's%20permission%20to%20use,to%20turn%20on%20parental%20supervision.">says</a> the new tools aim to “<strong>reassure</strong> parents that teens are having safe experiences.” The main change was the establishment of Teen Accounts, which Meta says was developed “with parents and teens in mind.”</p>
+<p>The Associated Press offers the following tips as a guide for parents to get the most out of the new tools.</p><div class="contentImage"><img alt="In this file photo, students use their cellphones as they leave for the day the Ramon C. Cortines School of Visual and Performing Arts High School in downtown Los Angeles, Aug. 13, 2024. (AP Photo/Damian Dovarganes, File)" src="https://files.21voa.com/gdb/170a62cc-b678-4c17-bb1e-a11dbfe92812_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">In this file photo, students use their cellphones as they leave for the day the Ramon C. Cortines School of Visual and Performing Arts High School in downtown Los Angeles, Aug. 13, 2024. (AP Photo/Damian Dovarganes, File)</span></div>
+<p><strong>What limits will young users have? </strong></p>
+<p>Instagram already restricts anyone under 13 from signing up for the service. Now, teen accounts will <strong>automatically</strong> be set to private. That means they will have to accept or reject requests from new followers. Other users will not be able to see a teen user's posts and videos or communicate with the account.</p>
+<p>Teens will also face messaging restrictions. They can only receive direct messages from people they are following or who follow them. But they can still send messages to other accounts.</p>
+<p>Teen Accounts will also restrict certain kinds of material, or content. This will include sensitive subjects such as videos of people fighting or content that pushes methods to improve appearance. In addition, Instagram's anti-bullying tools will be set to the highest level to prevent offensive words and phrases in comments and direct message requests.</p>
+<p>To restrict usage time, teens will get a message to stop using the app after it has been open for more than an hour. This message can be ignored, however.</p>
+<p><strong>Can the new limits be changed?</strong></p>
+<p>The new limits will be turned on automatically for all teens. But 16 and 17-year-olds will have the ability to turn them off. Children under 16 will need parental permission to do so.</p>
+<p>Teens might also seek to lie about their age to get around the restrictions. But Meta has made it more difficult for them to do so. Young users are required to confirm their ages by uploading an identification card or by sending a short video of themselves.</p>
+<p>Instagram says it will also begin testing artificial intelligence (AI) software early next year that will aim to prevent false birth dates from being accepted.</p>
+<p><strong>New controls for parents </strong></p>
+<p>If a parent does not think the limits for their child are strong enough, they can add more protective controls. For example, a parent has the ability to see who their teen has traded messages with within the past seven days.</p>
+<p>The new tools also provide controls for parents to set daily limits for Instagram use. A parent can also block a teen from using Instagram during specific times of the day and follow subjects they are seeing.</p>
+<p><strong>How to set up parental controls</strong></p>
+<p>To set up additional controls, a parent first needs to set up family <strong>supervision</strong> on his or her account. On the mobile app, this can be done by going into settings and scrolling to find the family center to activate the tools.</p>
+<p>Next, the Teen Account will have to invite a parent. This will be in the form of a link the teen can send by text message to the parent. After accepting the invite, the teen user has 48 hours to confirm the parent's response.</p>
+<p><strong>Can I use the teen settings right away?</strong></p>
+<p>The restrictive tools will be automatically activated for anyone under 18 who now signs up for Instagram in the U.S., Britain, Canada and Australia. For existing accounts, the restrictions will be put in place by mid-November.</p>
+<p>The protections will be available for teens in the European Union's 27 countries beginning later this year. And the rest of the world will get Teen Accounts for Instagram in January. Meta says it will also bring the changes to other services like Facebook next year.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>The Associated Press reported on this story. Bryan Lynn adapted the report for VOA Learning English, with additional information from Meta.</em></p>
+<p><strong>___________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>app </strong><em>– n. </em>a small computer program that can be put onto a mobile phone or other electronic device</p>
+<p><strong>reassure </strong><em>– v. </em>to say something to stop someone from worrying</p>
+<p><strong>automatic </strong><em>– adj.</em><em> </em>working by itself with little human control</p>
+<p><strong>supervise </strong><em>– v. </em>to watch a person or activity to make sure things are being done correctly, safely, etc.</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

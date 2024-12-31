@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 全球学习与新冠肺炎共存</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 全球学习与新冠肺炎共存" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/learning-to-live-with-covid.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>全球学习与新冠肺炎共存</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/learning-to-live-with-covid.mp3" id="mp3"></a>
+<a href="/static/lrc/learning-to-live-with-covid.lrc" id="lrc"></a>
+<a href="learning-to-live-with-covid-90191.html" id="CnPage" target="_blank"></a>
+<a href="italian-man-lives-without-electricity-90190.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>After two years of pandemic emergency, could 2022 be the year the world finally learned to live with COVID-19?<br/>
+在经历了两年多大流行紧急状况之后，2022年会是世界最终学会与新冠肺炎共存的一年吗？</p>
+<p>From Asia to Africa, countries re-opened for business and visitors following developments in COVID-19 vaccination and treatment.<br/>
+从亚洲到非洲，随着新冠疫苗接种和治疗的发展，各国重新对商业和游客开放。</p>
+<p>On New Year's Day, Portugal's President Marcelo Rebelo de Sousa announced the easing of COVID-19 restrictions. He said his country had "moved into the endemic" period of the pandemic. Endemic means a disease has settled in a place for years to come.<br/>
+今年元旦，葡萄牙总统德索萨宣布放宽新冠肺炎限制。他表示，该国已经进入大流行的地方流行病时期。地方流行病是指某种疾病未来几年内在一个地方流行。</p>
+<p>Britain's Prime Minister at the time, Boris Johnson, took similar action later that month. Announcing an end to requirements for face coverings, he said, "We will trust the judgment of the British people and no longer criminalize anyone who chooses not to wear one."<br/>
+时任英国首相鲍里斯在当月晚些时候也采取了类似的行动。他在宣布废除口罩令时表示，“我们将相信英国人民的判断，不再将任何选择不戴口罩的人士定为犯罪。"</p>
+<p>The moves were the start of re-opening borders to members of the European Union and then to vaccinated travelers from around the world.<br/>
+这些举措是向欧盟成员国重新开放边境，然后向世界各地接种过疫苗的旅行者重新开放边境的开始。</p>
+<p>Australian officials, however, denied entry to Novak Djokovic, the world's top tennis player, in January. The country's health officials ruled that Djokovic failed to meet the country's vaccination requirement.<br/>
+然而，澳大利亚官员在1月份拒绝了世界顶级网球运动员德约科维奇参赛。该国卫生官员裁定，德约科维奇未能满足该国的疫苗接种要求。</p>
+<p>The World Health Organization (WHO) added in January that countries could consider easing COVID rules if they had high vaccination rates and strong healthcare systems.<br/>
+世卫组织在1月份补充说，如果国家有很高的疫苗接种率和强大的医疗体系，则可以考虑放宽对新冠肺炎的限制。</p>
+<p>In June, South Africa lifted its COVID restrictions. Visitors can come and go without vaccination papers or testing. Other African countries including Madagascar, Egypt, and Botswana soon followed.<br/>
+6月份，南非解除了新冠限制。游客可以在没有接种疫苗或检测的情况下来去自由。包括马达加斯加、埃及和博茨瓦纳在内的其它非洲国家也紧随其后。</p>
+<p>Many Asian countries opened back up in 2022 as well. Thailand, Vietnam, India, Japan, South Korea, and Indonesia all eased restrictions and welcomed visitors.<br/>
+许多亚洲国家也在2022年重新开放。泰国、越南、印度、日本、韩国和印尼都放宽了限制并欢迎游客。</p>
+<p><strong>Paxlovid and bivalents<br/>
+利托那韦片和二价疫苗</strong></p>
+<p>In the State of the Union speech to Congress in March, American President Joe Biden said, "Last year COVID-19 kept us apart. This year we are finally together again."<br/>
+美国总统拜登在3月份向国会发表的国情咨文中表示：“去年新冠肺炎让我们分开了。今年我们终于又聚在了一起。”</p>
+<p>He noted that the gathering did not require face coverings. That was possible, he said in his speech, because of the progress in vaccine and anti-viral treatment efforts.<br/>
+他指出，聚会不需要戴口罩。他在演讲中表示，这都是可能的，因为疫苗和抗病毒治疗工作都取得了进展。</p>
+<p>As the Omicron version of the virus was quickly spreading around the world, United States health officials approved the first drug against COVID-19 that could be taken at home.<br/>
+随着奥密克戎版本的病毒在全球迅速传播，美国卫生官员批准了第一种可以在家服用的抗新冠肺炎药物。</p>
+<p>The drug, Paxlovid, is a pill made by the U.S. drug company Pfizer. All the earlier approved drugs against COVID require injection directly into the blood by healthcare professionals.<br/>
+这种名为利托那韦片的药物是美国辉瑞制药公司生产的一种药片。所有早期获批的抗新冠药物都需要由医护人员直接注射到血液中。</p>
+<p>Pfizer made Paxlovid available at low prices to the poorest countries.<br/>
+辉瑞公司以低价向贫困国家提供利托那韦片。</p>
+<p>Dr. Gregory Poland of the Mayo Clinic in Minnesota spoke about Paxlovid at the time. He said: "You're looking at a 90 percent decreased risk of hospitalization and death in a high-risk group..."<br/>
+明尼苏达州梅奥诊所的格雷戈里·博兰博士当时谈到了利托那韦片。他说：“高风险人群的住院和死亡风险降低了90%。”</p>
+<p>The high-risk group includes older people and those with conditions like being severely overweight or having heart disease.<br/>
+高风险人群包括老年人，以及患有肥胖或心脏病的人士。</p>
+<p>In August, U.S. health officials approved new vaccines made by Pfizer-BioNTech and Moderna. The new shots are called "bivalent." They are designed to protect against both the earliest and newer versions of Omicron called BA.4 and BA.5.<br/>
+8月，美国卫生官员批准了辉瑞&amp;德国生物新科技公司以及莫德那公司生产的新疫苗。这些新疫苗被称为二价疫苗。它们的设计目的是防止奥密克戎最早的版本以及最新版本BA.4和BA.5。</p>
+<p>The approval of the updated vaccines is the first step toward dealing with COVID-19 vaccine updates in the same way as yearly flu shots. In this case, health officials ordered vaccine makers to make changes and to target the latest coronavirus versions without depending on human testing.<br/>
+新疫苗的批准是以年度接种流感疫苗同种方式对待新冠疫苗更新的第一步。在这种情况下，卫生官员命令疫苗制造商做出改变，在不依赖人体检测的情况下，将最新冠状病毒版本作为目标。</p>
+<p>The U.S. was not the only country with plans to update COVID-19 vaccines. Health officials in Britain and other European countries also offered "bivalent" shots to target different versions of the virus.<br/>
+美国并不是唯一一个计划更新新冠疫苗的国家。英国和其它欧洲国家的卫生官员也提供了针对不同版本病毒的二价疫苗。</p>
+<p>I'm Caty Weaver . And I'm Mario Ritter Jr.<br/>
+我是凯蒂·韦弗。我是小马里奥·里特。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Learning to Live with COVID]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]After two years of pandemic emergency,
+[00:05.76]could 2022 be the year the world
+[00:10.04]finally learned to live with COVID-19?
+[00:15.72]From Asia to Africa,
+[00:18.08]countries re-opened for business and visitors
+[00:22.08]following developments in COVID-19 vaccination and treatment.
+[00:29.60]On New Year's Day, Portugal's President Marcelo Rebelo de Sousa
+[00:36.00]announced the easing of COVID-19 restrictions.
+[00:41.68]He said his country had "moved
+[00:44.28]into the endemic" period of the pandemic.
+[00:49.36]Endemic means a disease
+[00:51.68]has settled in a place for years to come.
+[00:56.64]Britain's Prime Minister at the time, Boris Johnson,
+[01:01.08]took similar action later that month.
+[01:05.68]Announcing an end to requirements for face coverings,
+[01:10.68]he said, "We will trust the judgment of the British people
+[01:16.32]and no longer criminalize anyone
+[01:20.36]who chooses not to wear one."
+[01:24.16]The moves were the start of re-opening borders
+[01:28.20]to members of the European Union
+[01:31.00]and then to vaccinated travelers from around the world.
+[01:35.96]Australian officials, however,
+[01:39.56]denied entry to Novak Djokovic,
+[01:43.44]the world's top tennis player, in January.
+[01:47.32]The country's health officials ruled that Djokovic
+[01:52.44]failed to meet the country's vaccination requirement.
+[01:57.52]The World Health Organization (WHO) added in January
+[02:03.76]that countries could consider easing COVID rules
+[02:08.00]if they had high vaccination rates
+[02:11.36]and strong healthcare systems.
+[02:15.68]In June, South Africa lifted its COVID restrictions.
+[02:21.44]Visitors can come and go
+[02:24.12]without vaccination papers or testing.
+[02:28.68]Other African countries including Madagascar,
+[02:33.44]Egypt, and Botswana soon followed.
+[02:39.44]Many Asian countries opened back up in 2022 as well.
+[02:46.04]Thailand, Vietnam, India, Japan, South Korea,
+[02:52.08]and Indonesia all eased restrictions and welcomed visitors.
+[02:59.76]In the State of the Union speech to Congress in March,
+[03:04.24]American President Joe Biden said,
+[03:08.00]"Last year COVID-19 kept us apart.
+[03:12.72]This year we are finally together again."
+[03:17.32]He noted that the gathering did not require face coverings.
+[03:22.44]That was possible, he said in his speech,
+[03:26.36]because of the progress in vaccine
+[03:29.52]and anti-viral treatment efforts.
+[03:34.04]As the Omicron version of the virus
+[03:37.16]was quickly spreading around the world,
+[03:40.20]United States health officials approved the first drug
+[03:45.20]against COVID-19 that could be taken at home.
+[03:51.00]The drug, Paxlovid, is a pill
+[03:54.92]made by the U.S. drug company Pfizer.
+[03:59.32]All the earlier approved drugs against COVID
+[04:03.24]require injection directly
+[04:06.64]into the blood by healthcare professionals.
+[04:12.16]Pfizer made Paxlovid available
+[04:15.12]at low prices to the poorest countries.
+[04:20.76]Dr. Gregory Poland of the Mayo Clinic in Minnesota
+[04:25.76]spoke about Paxlovid at the time.
+[04:29.16]He said: "You're looking at a 90 percent decreased risk
+[04:34.64]of hospitalization and death in a high-risk group..."
+[04:41.00]The high-risk group includes older people
+[04:44.64]and those with conditions like
+[04:47.28]being severely overweight or having heart disease.
+[04:52.60]In August, U.S. health officials approved new vaccines
+[04:57.60]made by Pfizer-BioNTech and Moderna.
+[05:02.36]The new shots are called "bivalent."
+[05:06.16]They are designed to protect against both the earliest
+[05:11.12]and newer versions of Omicron called BA.4 and BA.5.
+[05:19.20]The approval of the updated vaccines
+[05:22.48]is the first step toward dealing with COVID-19 vaccine updates
+[05:28.84]in the same way as yearly flu shots.
+[05:34.12]In this case, health officials ordered vaccine makers
+[05:38.76]to make changes and to target the latest coronavirus versions
+[05:45.08]without depending on human testing.
+[05:49.88]The U.S. was not the only country
+[05:53.00]with plans to update COVID-19 vaccines.
+[05:57.64]Health officials in Britain and other European countries
+[06:02.28]also offered "bivalent" shots
+[06:05.12]to target different versions of the virus.
+[06:10.04]I'm Caty Weaver.
+[06:11.52]And I'm Mario Ritter Jr.
+[06:14.32]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

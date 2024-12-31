@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Jupiter’s Great Red Spot Captured Close-up</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Jupiter’s Great Red Spot Captured Close-up" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201707/jupiters-great-red-spot-captured-close-up.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Jupiter’s Great Red Spot Captured Close-up</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201707/jupiters-great-red-spot-captured-close-up.mp3" id="mp3"></a>
+<a href="trump-gives-afghan-robotic-team-ok-to-compete-in-us-75930.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anne Ball</span><br/>
+<span class="datetime">13 July, 2017</span><br/>
+<p>For nearly 200 years, scientists have wondered about the Giant Red Spot on Jupiter. This week, pictures of the planet show dark clouds moving around, and through, a large red oval center. </p>
+<p>These are the closest images humans have ever seen of the spot, on the giant gas planet.</p>
+<p>America's space agency NASA, sent the Juno spacecraft to Jupiter to gather scientific data on the solar system's biggest planet. On Monday Juno flew over the Giant Red Spot, which is a storm larger than our planet Earth.</p>
+<p>First observed in 1830, scientists think it may be more than 350 years old. The storm measures 16,350 kilometers wide and appears to be getting smaller.</p>
+<p>"For hundreds of years scientists have been observing, wondering and theorizing about Jupiter's Great Red Spot," said Scott Bolton. He is the Juno principal investigator from the Southwest Research Institute in San Antonio, Texas.</p>
+<div class="contentImage"><img alt="This enhanced-color image of Jupiter's Great Red Spot was created by citizen scientist Jason Major using data from NASA's Juno spacecraft.(Credits: NASA/JPL-Caltech/SwRI/MSSS/Jason Major)" src="https://files.21voa.com/gdb/F8BA4928-284C-480F-89DF-5C062438B090_w268_r0.jpg"/><br/><span class="imagecaption">This enhanced-color image of Jupiter's Great Red Spot was created by citizen scientist Jason Major using data from NASA's Juno spacecraft.(Credits: NASA/JPL-Caltech/SwRI/MSSS/Jason Major)</span></div>
+<p>
+<p>Bolton said it will take time for the scientists to process the information Juno is sending back to Earth. "Now we have the best pictures ever of this <strong>iconic</strong> storm. It will take us some time to analyze all the data from not only JunoCam, but Juno's eight science instruments, to <strong>shed</strong> some new light on the past, present and future of the Great Red Spot."</p>
+<p>NASA hopes the information will also tell them what is underneath the storm.</p>
+<p>James O'Donoghue is a scientist at NASA Goddard Space Flight Center near Washington DC. He told VOA Learning English in an email that scientists could see "more detail than we ever have before" in these new images.</p>
+<p>He said, "What we are finding is that the closer we look, the more wild it looks!"</p>
+<p>O'Donoghue explained that this storm is "a great deal more complex" than a regular storm system, with smaller storms inside itself. "There are rich colors that indicate a complex <strong>three-dimensional </strong>sense," he added. That is because "some parts of the storm are towering above others, much like storms at Earth tower above the surface."</p>
+<p>Juno was launched on August 5, 2011 from Cape Canaveral in Florida. The spacecraft will continue flybys to get more information for scientists to learn about the planet.</p>
+<p>I'm Anne Ball.</p>
+<p><em>Anne Ball wrote this story for Learning English. Hai Do was the editor. We want to hear from you. Write to us in the Comments Section and visit us <a class="underline" href="http://www.21voa.com/">on 51VOA.COM</a>. </em></p>
+<p>______________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>iconic </strong><em>– adj.</em> widely known</p>
+<p><strong>shed </strong><em>– v.</em> give off</p>
+<p><strong>three-dimensional </strong><em>– adj.</em> having or seeming to have length, width, and depth</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

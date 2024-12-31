@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Memories, Mother’s Day and Grammar</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Memories, Mother’s Day and Grammar" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/memories-mother-s-day-and-grammar.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Memories, Mother’s Day and Grammar</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/memories-mother-s-day-and-grammar.mp3" id="mp3"></a>
+<a href="experts-dallas-shooter-was-covered-with-signs-of-extremism-90850.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">11 May 2023</span><br/>
+<p>Think back to one of your favorite memories. What do you remember? Is it a time that you think about often?</p>
+<p>In this week's <em>Everyday Grammar</em>, we will share ways to talk about your memories, including verbal tenses and <strong>phrases</strong> that you can use to start talking about your memories. Let's take a trip down memory lane!</p>
+<p>This weekend is Mother's Day. I want to celebrate by remembering my mom, Ellen. She was a writer. When I was growing up, she would sit at the kitchen table with either a pen and paper or her <strong>typewriter</strong>. Now, when I sit down to write, I am reminded of my mom.</p><div class="contentImage"><img alt="Everyday Grammar: Memories, Mother's Day and Grammar" src="https://files.21voa.com/gdb/01000000-0aff-0242-a916-08db519347b0_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Memories, Mother's Day and Grammar</span></div>
+<p>The springtime also reminds me of her. She loved flowers. If my memory serves me right, she did not like red flowers. She loved yellow, pink and white flowers. Now that spring is here, she is on my mind more.</p>
+<p>Let's look at some of the ways we can write about our memories.</p>
+<p><strong>Using the past tense </strong></p>
+<p>When we want to talk about our memories, we use the simple past tense.</p>
+<p>In the first paragraph about my mom, I use the simple past of the verb "be." It is an irregular verb and has many forms. In the past tense, two forms are used, "was" and "were."</p>
+<p><em>She was a writer.</em></p>
+<p><em>They were <strong>inspired</strong> by her writing.</em></p>
+<p>For regular verbs, like "love," we add the regular verb ending of "-ed."</p>
+<p><em>She loved flowers.</em></p>
+<p>We can also use "would" to talk in the past tense. "Would" can describe habitual actions in the past that are no longer done. Habitual means happening often or every day.</p>
+<p><em>...she would sit at the kitchen table...</em></p>
+<p>Lastly, we use the auxiliary or helping verb "do" to make a negative sentence. The past tense form of "do" is "did."</p>
+<p><em>...she did not like red flowers...</em></p>
+<p><strong>Verbs and other phrases for remembering</strong></p>
+<p>There are other verbs and phrases that we use to help us introduce those memories in conversation.</p>
+<p>The verb "remind" means to cause someone to remember someone or something.</p>
+<p>The sentence structure for "remind" is:</p>
+<p>Subject + remind + direct object + preposition "of"</p>
+<p><em>The springtime also reminds me of my mom.</em></p>
+<p><em>Springtime reminded me of her.</em></p>
+<p>We can also use "remind" in the <strong>passive voice</strong> to express that a memory came into our mind or to say that we are reminded of something.</p>
+<p><em>I am reminded of my mom when I sit down to write.</em></p>
+<p>The sentence is passive because the agent, the "who" or "what" that reminded us, is missing. This works when we do not know the cause of what is acting on us. It is the opposite of the <strong>active voice </strong>in which the cause of the action is known.</p>
+<p>We can use other phrases to introduce our memories. For example, in the second paragraph, I introduced more details using the phrase, "If my memory serves me right." This is an informal way to say, "If I remember correctly."</p>
+<p>In the last paragraph, I used the prepositional phrase, "on my mind." This is a <strong>figurative</strong> phrase meaning that you are thinking or remembering someone or something. The structure is:</p>
+<p>Subject + form of "be" + on + possessive pronoun + mind.</p>
+<p><em>She is on my mind. (Simple present tense)</em></p>
+<p><strong>Final Thoughts</strong></p>
+<p>Today, we looked at different verbs, tenses and phrases we can use to talk about our memories. Whether it is remembering loved ones or events, these phrases can help you to talk about what you remember.</p>
+<p>Now for some homework. Use these verbs and phrases to share a memory. Remember to use the past tense. Is it a person you remember or an event that happened? Hopefully, it is a memory that you think about often. Write to us in the comments or send your memory message to <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>. We may share your message in a future <em>Everyday Grammar</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>____________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>phrase</strong> – <em>n</em>. a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>typewriter</strong><em> – n. </em>a machine that prints letters or figures on a sheet of paper when a person pushes its keys</p>
+<p><strong>inspired </strong><em>– adj. </em>having a particular cause or influence</p>
+<p><strong>passive voice</strong> <em>–</em> <em>n</em>. a way of writing or speaking that uses passive verbs where the subject receives the action of a verb</p>
+<p><strong>active voice </strong>– <em>n</em>.<strong> </strong>a way of writing of speaking that uses active verbs where the subject performs the action of the verb</p>
+<p><strong>figurative </strong>– <em>adj</em>. used with a meaning that is different from the basic meaning</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

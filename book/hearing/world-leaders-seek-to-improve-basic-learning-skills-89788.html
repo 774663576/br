@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - World Leaders Seek to Improve Basic Learning Skills</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, World Leaders Seek to Improve Basic Learning Skills" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202210/world-leaders-seek-to-improve-basic-learning-skills.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>World Leaders Seek to Improve Basic Learning Skills</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202210/world-leaders-seek-to-improve-basic-learning-skills.mp3" id="mp3"></a>
+<a href="/static/lrc/world-leaders-seek-to-improve-basic-learning-skills.lrc" id="lrc"></a>
+<a href="rising-costs-hurt-turkey-s-tobacco-industry-89787.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">11 October 2022</span><br/>
+<p>Before a child can read a book, they must know how to read a sentence. Before they can read a sentence, they must know how to read individual words. And before they can read words, they must know letters and learn the alphabet.</p>
+<p>To be successful at reading or in any subject at school, students must start with learning the most basic knowledge. And many students around the world are not learning these basic skills, also called foundational learning. The problem and possible solutions were recently discussed at the United Nations' Transforming Education Summit. Conference attendees said that while the problem already existed before the COVID-19 pandemic, the health crisis made it worse.</p>
+<p>"This is a <strong>global</strong> learning crisis," said UNICEF director Catherine Russell. "Millions of children are still out of school. And millions of children are in school ... but not learning the basic skills."</p><div class="contentImage"><img alt="FILE - Children work on a digital program at Coby Preschool in Yoshikawa, suburban Tokyo, on an assignment, which was to draw on a triangle on an iPad, July 12, 2018." src="https://files.21voa.com/gdb/A0D2FC36-A1C2-4096-8B9F-55425D58BFEF_cx0_cy9_cw99_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Children work on a digital program at Coby Preschool in Yoshikawa, suburban Tokyo, on an assignment, which was to draw on a triangle on an iPad, July 12, 2018.</span></div>
+<p>UNICEF <a class="wsw__a" href="https://www.unicef.org/bulgaria/en/press-releases/unicef-only-third-10-year-olds-globally-are-estimated-be-able-read-and-understand">found</a> that two out of every three children around the world cannot read and understand a simple story by age 10. This was a 12 percent increase since before the pandemic. Three-quarters of children by grade four also do not have basic math skills.</p>
+<p>In poorer countries, the numbers are even worse. Just one in 10 children in sub-Saharan Africa have basic reading skills by grade three.</p>
+<p>"Learning poverty fuels economic poverty," Russell said.</p>
+<p>UNICEF found that long school closures during the pandemic greatly worsened educational inequality around the world. Millions of children left the educational system during the pandemic, and many still have not returned to the classroom. In 2021, UNICEF estimated that 244 million children between the ages of 6 and 18 were out of school.</p>
+<p>Ibrahim Natatou is the secretary of education of Niger. "This is not the same situation in developed countries," he told the UN meeting. "For us it's a disaster."</p>
+<p>Natatou said Niger and other sub-Saharan African countries are currently at war, which adds to the current educational system problems. He said there is also a lack of good teachers. Natatou noted that 57 percent of primary school teachers in Niger do not have good writing and reading skills, and schools are often in poor condition.</p>
+<p>Despite these very large global difficulties, leaders see the pandemic as a chance to change education for the better. As a part of the meeting, the U.N., World Bank and other organizations urged governments to take action on the foundational learning crisis. Countries like the U.S., Britain, Sierra Leone, Egypt and Bulgaria have come together to <a class="wsw__a" href="https://www.unicef.org/media/126926/file">sign a promise</a> to improve foundational learning.</p>
+<p>Eleonora Villegas-Reimers is an education expert at Boston University. She said, "We are dealing with the pandemic still, but it's a very, very important <strong>opportunity</strong> for us to <strong>transform</strong> education." She added, "Governments around the world have been asked to take a stand and <strong>commit</strong> to ensure children develop foundational skills."</p>
+<p>In Niger, Natatou said there has already been some progress. More training and support have been provided to teachers. And, officials are working to get computers to all students across the country.</p>
+<p>Julius Maada Bio is the president of Sierra Leone. He said his country has been able to increase school <strong>enrollment</strong> by 50 percent through its free quality education program. He also said more girls and children from poor and rural areas are now attending school. Maada Bio added that schools across the country are now providing children with free warm meals as well.</p>
+<p>"We owe our children a future of promise, where as productive citizens we continue to build <strong>inclusive</strong>, equitable and peaceful societies," he said.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English based information from UNICEF and the World Economic Forum.</em></p>
+<p><em>______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>global </strong><em>— adj. </em>involving the entire world</p>
+<p><strong>opportunity </strong><em>— n. </em>an amount of time or a situation in which something can be done</p>
+<p><strong>transform </strong><em>— v. </em> to change completely and usually in a good way</p>
+<p><strong>commit </strong><em>— v. </em>to say that someone will definitely do something</p>
+<p><strong>enroll </strong><em>— v. </em> to become a member or participant</p>
+<p><strong>inclusive </strong><em>— adj. </em>covering or including everything</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:World Leaders Seek to Improve Basic Learning Skills]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Before a child can read a book,
+[00:02.60]they must know how to read a sentence.
+[00:05.88]Before they can read a sentence,
+[00:08.32]they must know how to read individual words.
+[00:11.72]And before they can read words,
+[00:14.48]they must know letters and learn the alphabet.
+[00:19.28]To be successful at reading or in any subject at school,
+[00:23.40]students must start with learning the most basic knowledge.
+[00:28.68]And many students around the world
+[00:31.44]are not learning these basic skills,
+[00:34.20]also called foundational learning.
+[00:36.84]The problem and possible solutions were recently discussed
+[00:41.72]at the United Nations' Transforming Education Summit.
+[00:46.00]Conference attendees said that while the problem already existed
+[00:51.60]before the COVID-19 pandemic, the health crisis made it worse.
+[00:58.00]"This is a global learning crisis,"
+[01:00.40]said UNICEF director Catherine Russell.
+[01:03.64]"Millions of children are still out of school.
+[01:07.28]And millions of children are in school
+[01:10.36]… but not learning the basic skills."
+[01:14.56]UNICEF found that two out of every three children around the world
+[01:19.72]cannot read and understand a simple story by age 10.
+[01:25.20]This was a 12 percent increase since before the pandemic.
+[01:30.08]Three-quarters of children by grade four
+[01:32.68]also do not have basic math skills.
+[01:37.16]In poorer countries, the numbers are even worse.
+[01:40.64]Just one in 10 children in sub-Saharan Africa
+[01:44.88]have basic reading skills by grade three.
+[01:49.04]"Learning poverty fuels economic poverty," Russell said.
+[01:54.60]UNICEF found that long school closures during the pandemic
+[01:59.20]greatly worsened educational inequality around the world.
+[02:03.68]Millions of children left the educational system during the pandemic,
+[02:08.72]and many still have not returned to the classroom.
+[02:13.40]In 2021, UNICEF estimated that 244 million children
+[02:19.36]between the ages of 6 and 18 were out of school.
+[02:25.56]Ibrahim Natatou is the secretary of education of Niger.
+[02:31.72]"This is not the same situation in developed countries,"
+[02:34.92]he told the UN meeting. "For us it's a disaster."
+[02:41.08]Natatou said Niger and other sub-Saharan African countries
+[02:45.88]are currently at war,
+[02:47.44]which adds to the current educational system problems.
+[02:51.12]He said there is also a lack of good teachers.
+[02:54.92]Natatou noted that 57 percent of primary school teachers in Niger
+[03:00.72]do not have good writing and reading skills,
+[03:03.84]and schools are often in poor condition.
+[03:08.88]Despite these very large global difficulties,
+[03:12.04]leaders see the pandemic
+[03:13.92]as a chance to change education for the better.
+[03:17.24]As a part of the meeting, the U.N., World Bank and other organizations
+[03:23.52]urged governments to take action on the foundational learning crisis.
+[03:28.32]Countries like the U.S., Britain, Sierra Leone, Egypt and Bulgaria
+[03:34.68]have come together to sign a promise to improve foundational learning.
+[03:41.36]Eleonora Villegas-Reimers
+[03:44.20]is an education expert at Boston University.
+[03:48.76]She said, "We are dealing with the pandemic still,
+[03:51.92]but it's a very, very important opportunity
+[03:54.60]for us to transform education."
+[03:57.84]She added, "Governments around the world
+[04:01.04]have been asked to take a stand
+[04:03.16]and commit to ensure children develop foundational skills."
+[04:09.08]In Niger, Natatou said there has already been some progress.
+[04:13.96]More training and support have been provided to teachers.
+[04:18.24]And, officials are working to get computers
+[04:21.32]to all students across the country.
+[04:25.16]Julius Maada Bio is the president of Sierra Leone.
+[04:30.32]He said his country has been able to increase
+[04:33.04]school enrollment by 50 percent
+[04:35.24]through its free quality education program.
+[04:39.20]He also said more girls and children from poor
+[04:42.84]and rural areas are now attending school.
+[04:46.80]Maada Bio added that schools across the country
+[04:50.12]are now providing children with free warm meals as well.
+[04:55.28]"We owe our children a future of promise,
+[04:58.12]where as productive citizens we continue to build inclusive,
+[05:02.80]equitable and peaceful societies," he said.
+[05:06.64]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

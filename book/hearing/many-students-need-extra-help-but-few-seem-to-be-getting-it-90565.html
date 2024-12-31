@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Many Students Need Extra Help, But Few Seem to Be Getting It</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Many Students Need Extra Help, But Few Seem to Be Getting It" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/many-students-need-extra-help-but-few-seem-to-be-getting-it.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Many Students Need Extra Help, But Few Seem to Be Getting It</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/many-students-need-extra-help-but-few-seem-to-be-getting-it.mp3" id="mp3"></a>
+<a href="/static/lrc/many-students-need-extra-help-but-few-seem-to-be-getting-it.lrc" id="lrc"></a>
+<a href="us-finance-officials-take-over-two-failed-banks-90561.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">14 March 2023</span><br/>
+<p>A federal government report from December found that half of all U.S. students started this school year behind their grade level in at least one subject.</p>
+<p>Many American education experts say <strong>tutoring</strong> is the best way to help students make up for learning loss during the COVID-19 pandemic.</p>
+<p>But, although many schools have received a lot of federal aid, only a small number of students have been getting tutored. That finding comes from research by the nonprofit news organization Chalkbeat and the Associated Press.</p><div class="contentImage"><img alt="Jessica Blalack, left, watches as her son Phoenix Blalack, 6 , works with a tutor on his laptop in his Indianapolis home, Tuesday, March 7, 2023. (AP Photo/AJ Mast)" src="https://files.21voa.com/gdb/01000000-0aff-0242-0664-08db23f6c883_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Jessica Blalack, left, watches as her son Phoenix Blalack, 6 , works with a tutor on his laptop in his Indianapolis home, Tuesday, March 7, 2023. (AP Photo/AJ Mast)</span></div>
+<p>The two organizations <strong>surveyed</strong> 12 of the nation's school systems. Eight systems provided information. The schools reported that fewer than 10 percent of students received any kind of tutoring in the fall of last year.</p>
+<p>A new tutoring group in Chicago served about three percent of students, officials said. But less than one percent of students in three big school systems received tutoring. They were Georgia's Gwinnett County, Florida's Miami-Dade County, and Philadelphia, Pennsylvania. Philadelphia reported that 800 students had been tutored. In those three systems, there are more than 600,000 students who spent no time in a tutoring program last fall.</p>
+<p>The low tutoring numbers suggest several problems. Some parents said they did not know tutoring was available or did not think their child needed it. Some school systems have struggled to <strong>hire</strong> tutors. Other school systems said their small tutoring programs were part of their efforts to meet students' greatest needs.</p>
+<p>Whatever the reason, the result is clear: at an important time for students' recovery, millions of children have not received the extra help.</p>
+<p>"It works, it's effective, it gets students to improve in their learning and catch up," said Amie Rapaport. She is a researcher with the University of Southern California (USC) who is studying why so many students are not getting intensive tutoring.</p>
+<p>The Indianapolis <strong>school district</strong> last year began two tutoring programs that connect students with teachers by video link. One is available to all students after school. The other is offered during the day for some low-performing schools.</p>
+<p>District officials said the tutoring test program improved student test scores. Parents also liked the program.</p>
+<p>The two programs served 3,200 students last fall. That is about 17 percent of students in district schools. Two other tutoring programs operate at a small number of schools.</p>
+<p>The school district also said that only 35 percent of the students who registered for after-school tutoring last fall attended more than one <strong>session</strong>.</p>
+<p>Marc Ransford is the Indianapolis Public Schools spokesperson. He said the district wants to improve attendance and hopes to sign up<strong> </strong>more students for tutoring next school year.</p>
+<p>A federal survey from December found schools reported that about 10 percent of students received intensive tutoring several days a week. The real number could be lower. Only two percent of U.S. households said their children are getting intensive tutoring, a study from USC found.</p>
+<p>Schools trying to increase tutoring face problems, including hiring and planning. Experts say tutoring is most effective when provided three times a week for at least 30 minutes during school hours. Offering after-school or weekend tutoring is simpler, but attendance is often low.</p>
+<p>Low family interest has been another problem. Although test scores sharply dropped during the pandemic, many parents do not believe their children experienced learning loss.</p>
+<p>In Wake County, North Carolina, the school district began planning a reading tutoring program in November. District officials last month said volunteers are tutoring fewer than 140 students. That is far fewer than the 1,000 students the program was designed to help.</p>
+<p>Many worry that not enough students are getting the help they need even as programs continue to grow.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press.</em></p>
+<p><em>__________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>tutor </strong><em>— n. </em>a teacher who works with one or a small number of students to help them with regular schoolwork</p>
+<p><strong>survey </strong><em>— n. </em>an effort to collect information by asking people questions or having them fill out papers with questions on them</p>
+<p><strong>hire</strong> <em>— v. </em>to employ someone</p>
+<p><strong>school district</strong><strong> </strong><em>— n. </em>an area that is served by a public school and which is defined by a local government <em> </em></p>
+<p><strong>session </strong>–n. a time set aside for a special activity or meeting that takes place regularly</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Many Students Need Extra Help, But Few Seem to Be Getting It]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A federal government report from December
+[00:03.56]found that half of all U.S. students started this school year
+[00:08.96]behind their grade level in at least one subject.
+[00:13.64]Many American education experts say tutoring
+[00:17.84]is the best way to help students make up for learning loss
+[00:22.08]during the COVID-19 pandemic.
+[00:25.80]But, although many schools have received a lot of federal aid,
+[00:30.60]only a small number of students have been getting tutored.
+[00:34.60]That finding comes from research
+[00:37.44]by the nonprofit news organization Chalkbeat and the Associated Press.
+[00:44.16]The two organizations surveyed 12 of the nation's school systems.
+[00:49.44]Eight systems provided information.
+[00:52.68]The schools reported that fewer than 10 percent of students
+[00:57.76]received any kind of tutoring in the fall of last year.
+[01:03.56]A new tutoring group in Chicago
+[01:06.32]served about three percent of students, officials said.
+[01:10.84]But less than one percent of students
+[01:14.04]in three big school systems received tutoring.
+[01:18.56]They were Georgia's Gwinnett County,
+[01:21.04]Florida's Miami-Dade County, and Philadelphia, Pennsylvania.
+[01:26.96]Philadelphia reported that 800 students had been tutored.
+[01:31.52]In those three systems, there are more than 600,000 students
+[01:37.36]who spent no time in a tutoring program last fall.
+[01:42.16]The low tutoring numbers suggest several problems.
+[01:46.48]Some parents said they did not know tutoringwas available
+[01:50.52]or did not think their child needed it.
+[01:53.52]Some school systems have struggled to hire tutors.
+[01:57.12]Other school systems said their small tutoring programs
+[02:02.16]were part of their efforts to meet students' greatest needs.
+[02:07.20]Whatever the reason, the result is clear:
+[02:10.28]at an important time for students' recovery,
+[02:14.12]millions of children have not received the extra help.
+[02:19.16]"It works, it's effective, it gets students to improve
+[02:23.48]in their learning and catch up," said Amie Rapaport.
+[02:27.92]She is a researcher with the University of Southern California (USC)
+[02:34.08]who is studying why so many students are not getting intensive tutoring.
+[02:40.64]The Indianapolis school district last year
+[02:44.08]began two tutoring programs
+[02:46.72]that connect students with teachers by video link.
+[02:50.76]One is available to all students after school.
+[02:54.84]The other is offered during the day
+[02:57.60]for some low-performing schools.
+[03:01.12]District officials said the tutoring test program
+[03:05.24]improved student test scores.
+[03:08.08]Parents also liked the program.
+[03:11.72]The two programs served 3,200 students last fall.
+[03:17.00]That is about 17 percent of students in district schools.
+[03:22.24]Two other tutoring programs operate at a small number of schools.
+[03:28.76]The school district also said
+[03:30.88]that only 35 percent of the students who registered
+[03:34.40]for after-school tutoring last fall attended more than one session.
+[03:40.80]Marc Ransford is the Indianapolis Public Schools spokesperson.
+[03:45.84]He said the district wants to improve attendance
+[03:50.04]and hopes to sign up more students for tutoring next school year.
+[03:56.36]A federal survey from December found schools reported
+[04:01.12]that about 10 percent of students
+[04:03.28]received intensive tutoring several days a week.
+[04:07.36]The real number could be lower.
+[04:10.32]Only two percent of U.S. households
+[04:13.36]said their children are getting intensive tutoring,
+[04:16.76]a study from USC found.
+[04:20.28]Schools trying to increase tutoring face problems,
+[04:23.96]including hiring and planning.
+[04:27.00]Experts say tutoring is most effective
+[04:30.68]when provided three times a week for at least 30 minutes
+[04:35.00]during school hours.
+[04:37.28]Offering after-school or weekend tutoring is simpler,
+[04:41.60]but attendance is often low.
+[04:45.72]Low family interest has been another problem.
+[04:49.32]Although test scores sharply dropped during the pandemic,
+[04:53.84]many parents do not believe their children
+[04:56.76]experienced learning loss.
+[04:59.88]In Wake County, North Carolina, the school district
+[05:03.56]began planning a reading tutoring program in November.
+[05:07.60]District officials last month
+[05:10.48]said volunteers are tutoring fewer than 140 students.
+[05:16.12]That is far fewer than the 1,000 students
+[05:19.76]the program was designed to help.
+[05:23.36]Many worry that not enough students
+[05:26.04]are getting the help they need
+[05:27.76]even as programs continue to grow.
+[05:31.28]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

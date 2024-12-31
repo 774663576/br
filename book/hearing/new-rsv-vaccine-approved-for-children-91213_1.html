@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国FDA批准新的儿童RSV疫苗</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 美国FDA批准新的儿童RSV疫苗" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/new-rsv-vaccine-approved-for-children.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国FDA批准新的儿童RSV疫苗</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/new-rsv-vaccine-approved-for-children.mp3" id="mp3"></a>
+<a href="/static/lrc/new-rsv-vaccine-approved-for-children.lrc" id="lrc"></a>
+<a href="new-rsv-vaccine-approved-for-children-91213.html" id="CnPage" target="_blank"></a>
+<a href="trump-says-he-is-a-target-of-jan--investigation-91210.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>U.S. officials on Monday approved the first long-acting drug to protect babies and young children against respiratory syncytial virus, or RSV.<br/>
+美国官员周一批准了第一种防止婴幼儿感染呼吸道合胞病毒的长效药物。</p>
+<p>RSV sends tens of thousands of American children to the hospital each year. The virus is a cold-like disease for most healthy people. But it can be life-threatening in the very young and very old. Last year, a large increase in RSV cases crowded U.S. hospitals with sick children.<br/>
+呼吸道合胞病毒每年导致数以万计的美国儿童前往医院。对大多数健康的人士来说，这种病毒是一种类似感冒的疾病。但它可能会危及老少的生命。去年，呼吸道合胞病毒病例的大幅增长使美国医院挤满了患病儿童。</p>
+<p>The Food and Drug Administration (FDA) approved the injection for infants and children up to 2 years old who face increased risk of severe RSV.<br/>
+美国食品药品监督管理局批准为面临严重呼吸道合胞病毒风险加大的婴儿和2岁以下儿童注射该疫苗。</p>
+<p>The approval helps "reduce the impact of RSV disease on children, families and the health care system" said FDA's Dr. John Farley in a statement.<br/>
+美国食品药品监督管理局的约翰·法利博士在一份声明中表示，这次批准有助于“减轻呼吸道合胞病毒疾病对儿童、家庭和医疗保健系统的影响”。</p>
+<p>The drugmaker AstraZeneca developed the drug. It will be sold under the name Beyfortus. It is a laboratory-made version of an antibody that helps the immune system fight off RSV.<br/>
+制药商阿斯利康开发了这种药物。它将以Beyfortus的名字出售。这是一种实验室制造的抗体，它有助于免疫系统对抗呼吸道合胞病毒。</p>
+<p>Under the FDA approval, babies — including small infants — can receive a single injection to protect against their first season of RSV, which usually lasts about five months. Children up to age 2 can receive another dose to protect them during their second season facing the virus.<br/>
+根据美国食品药品监督管理局的批准，包括新生儿在内的婴儿可以接受一次注射，以预防他们在第一个呼吸道合胞病毒流行季感染，这个时期通常会持续大约五个月。2岁以下儿童可以在面临病毒感染的第二个流行季再接种一剂以保护他们。</p>
+<p>Beyfortus is already approved in Canada, Europe and Britain. It did not immediately announce the U.S. price of the treatment.<br/>
+Beyfortus已经在加拿大、欧洲和英国获得批准。它没有立即宣布美国的治疗价格。</p>
+<p>FDA officials approved the drug based on three studies. They showed Beyfortus reduced the risk of RSV infection between 70 percent and 75 percent among infants and children 2 and younger.<br/>
+美国食品药品监督管理局官员根据三项研究批准了该药物。这些研究表明，Beyfortus将婴儿和2岁及以下儿童感染呼吸道合胞病毒的风险降低了70%至75%。</p>
+<p>Advisers to the Centers for Disease Control and Prevention will meet early next month to recommend exactly who should get the drug.<br/>
+美国疾病控制与预防中心的顾问将于下月初开会，就该药物的适用人群提出确切建议。</p>
+<p>A similar antibody drug won FDA approval more than 20 years ago. But the drug is only recommended for high-risk babies and requires monthly injections. Doctors say that drug is underused. But they expect the longer-lasting effect of AstraZeneca's shot to be more popular.<br/>
+20多年前，一种类似的抗体药物获得了美国食品药品监督管理局的批准。但这种药物只推荐给高危婴儿，并且需要每月注射一次。医生说这种药未充分利用。但他们预计阿斯利康的长效疫苗会更受欢迎。</p>
+<p>In the U.S., about 58,000 children younger than 5 are hospitalized for RSV each year. Several hundred die.<br/>
+在美国，每年约有5.8万名5岁以下的儿童因呼吸道合胞病毒住院。有几百人死亡。</p>
+<p>After years of setbacks for RSV research, drugmakers have made big improvements this year. In May, the FDA approved two RSV vaccines for older adults from GlaxoSmithKline and Pfizer.<br/>
+在呼吸道合胞病毒研究经历了多年的挫折之后，制药商今年取得了重大进展。今年5月，美国食品药品监督管理局批准了来自葛兰素史克和辉瑞公司的两种针对老年人的呼吸道合胞病毒疫苗。</p>
+<p>In August, the FDA is expected to make a decision on approving Pfizer's vaccine for pregnant women. The aim is for the vaccine to pass along protection to their newborns.<br/>
+预计美国食品药品监督管理局将于8月就批准辉瑞公司的疫苗用于孕妇做出决定。其目的是让疫苗为新生儿提供保护。</p>
+<p>I'm Dan Novak.<br/>
+我是丹·诺瓦克。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New RSV Vaccine Approved for Children]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]U.S. officials on Monday approved the first long-acting drug
+[00:05.84]to protect babies and young children
+[00:09.76]against respiratory syncytial virus, or RSV.
+[00:16.76]RSV sends tens of thousands of American children
+[00:21.44]to the hospital each year.
+[00:23.60]The virus is a cold-like disease for most healthy people.
+[00:29.00]But it can be life-threatening in the very young and very old.
+[00:34.48]Last year, a large increase in RSV cases
+[00:38.92]crowded U.S. hospitals with sick children.
+[00:43.76]The Food and Drug Administration (FDA)
+[00:47.96]approved the injection for infants and children up to 2 years old
+[00:53.80]who face increased risk of severe RSV.
+[00:59.32]The approval helps "reduce the impact of RSV disease
+[01:04.84]on children, families and the health care system"
+[01:09.56]said FDA's Dr. John Farley in a statement.
+[01:16.48]The drugmaker AstraZeneca developed the drug.
+[01:20.12]It will be sold under the name Beyfortus.
+[01:23.92]It is a laboratory-made version of an antibody
+[01:28.64]that helps the immune system fight off RSV.
+[01:33.88]Under the FDA approval, babies — including small infants —
+[01:39.64]can receive a single injection to protect against their first season of RSV,
+[01:46.08]which usually lasts about five months.
+[01:49.88]Children up to age 2 can receive another dose
+[01:54.48]to protect them during their second season facing the virus.
+[02:00.52]Beyfortus is already approved in Canada, Europe and Britain.
+[02:06.00]It did not immediately announce the U.S. price of the treatment.
+[02:12.40]FDA officials approved the drug based on three studies.
+[02:17.40]They showed Beyfortus reduced the risk of RSV infection
+[02:22.64]between 70 percent and 75 percent
+[02:27.00]among infants and children 2 and younger.
+[02:32.72]Advisers to the Centers for Disease Control and Prevention
+[02:38.48]will meet early next month
+[02:40.76]to recommend exactly who should get the drug.
+[02:45.36]A similar antibody drug won FDA approval more than 20 years ago.
+[02:50.96]But the drug is only recommended for high-risk babies
+[02:55.80]and requires monthly injections.
+[02:59.20]Doctors say that drug is underused.
+[03:03.08]But they expect the longer-lasting effect
+[03:06.52]of AstraZeneca's shot to be more popular.
+[03:11.44]In the U.S., about 58,000 children younger than 5
+[03:16.32]are hospitalized for RSV each year. Several hundred die.
+[03:23.12]After years of setbacks for RSV research,
+[03:26.72]drugmakers have made big improvements this year.
+[03:30.96]In May, the FDA approved two RSV vaccines for older adults
+[03:37.36]from GlaxoSmithKline and Pfizer.
+[03:41.84]In August, the FDA is expected to make a decision
+[03:46.36]on approving Pfizer's vaccine for pregnant women.
+[03:50.24]The aim is for the vaccine to pass along protection to their newborns.
+[03:56.52]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

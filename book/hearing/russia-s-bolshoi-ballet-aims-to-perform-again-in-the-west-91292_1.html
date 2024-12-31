@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯著名芭蕾舞团渴望重返西方舞台</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 俄罗斯著名芭蕾舞团渴望重返西方舞台" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/russia-s-bolshoi-ballet-aims-to-perform-again-in-the-west.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯著名芭蕾舞团渴望重返西方舞台</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/russia-s-bolshoi-ballet-aims-to-perform-again-in-the-west.mp3" id="mp3"></a>
+<a href="/static/lrc/russia-s-bolshoi-ballet-aims-to-perform-again-in-the-west.lrc" id="lrc"></a>
+<a href="russia-s-bolshoi-ballet-aims-to-perform-again-in-the-west-91292.html" id="CnPage" target="_blank"></a>
+<a href="experts-worry-about-news-stories-written-with-artificial-intelligence-91288.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The artistic director of Moscow's state-owned Bolshoi Ballet has promised the group will one day perform in the West again.<br/>
+莫斯科国有的莫斯科大剧院芭蕾舞团的艺术总监承诺，该团终有一天会再次在西方演出。</p>
+<p>The famous ballet company performed last week in China at Beijing's National Centre for the Performing Arts. It was the company's first performance outside of Russia since the COVID-19 pandemic began in 2020. The company has faced boycotts from many countries because of Russia's invasion of Ukraine in February 2022.<br/>
+这家著名的芭蕾舞团上周在北京国家大剧院演出。这是该舞团自2020年新冠肺炎疫情开始以来首次在国外表演。由于2022年2月俄罗斯入侵乌克兰，该舞团面临许多国家的抵制。</p>
+<p>Artistic director Mahkar Vaziev said the Bolshoi was "not suffering" from being unable to perform in the West.<br/>
+艺术总监马哈尔·瓦齐耶夫表示，莫斯科大剧院无法在西方演出“并不痛苦”。</p>
+<p>"I have no doubt that one day everything will go back to how it should be because culture is a wave that is very hard to suppress," Vaziev said.<br/>
+瓦齐耶夫说：“我毫不怀疑，总有一天一切都会回到它应有的状态，因为文化是一股很难压制的浪潮。”</p>
+<p>For many people, the Bolshoi represents the highest level of Russian culture. The ballet company was founded in 1776 by Empress Catherine the Great. The company performed around the world even during the most difficult times of the Cold War.<br/>
+对许多人来说，莫斯科大剧院代表了俄罗斯文化的最高水平。这支芭蕾舞团由女皇凯瑟琳大帝于1776年创立。即使在冷战最困难的时期，该舞团也在世界各地演出。</p>
+<p>Bolshoi's dancers hope their performance in China is a sign that they will return to performing around the world.<br/>
+莫斯科大剧院的舞者们希望他们在中国的表演是他们将重返世界各地表演的标志。</p>
+<p>However, only two other performances are currently on the company's schedule. The dancers are set to perform in the Belarusian capital Minsk in November and Oman next January.<br/>
+然而，目前该舞团日程上只有另外两场演出。舞者们将于11月在白俄罗斯首都明斯克表演，明年1月在阿曼表演。</p>
+<p>The Bolshoi's time in Beijing includes two performances that will show parts of its best-known ballets. It will then give a three-day staging of the 19th-century ballet "Don Quixote".<br/>
+莫斯科大剧院在北京的演出将包括两台演出，它将展示其最著名的芭蕾舞剧的部分内容。然后它将连续三天上演19世纪芭蕾舞剧《堂吉诃德》。</p>
+<p>The Bolshoi still receives around 70 percent of its financial support from the Russian government, a company official said. No current performers have spoken out against the Russian invasion. The United Nations reports the war has injured or killed about 8,500 civilians.<br/>
+莫斯科大剧院官员表示，其70%左右的财政支持仍来自俄罗斯政府。目前没有任何表演者公开反对俄罗斯的入侵。联合国报告称，这场战争已造成约8500名平民受伤或死亡。</p>
+<p>In February 2022, the day after Moscow sent thousands of troops into Ukraine, London's Royal Opera House canceled Bolshoi performances planned for the summer of that year.<br/>
+2022年2月，在莫斯科向乌克兰派遣数千名士兵的第二天，伦敦皇家歌剧院取消了原定于当年夏天举行的莫斯科大剧院演出。</p>
+<p>Cancellations in other Western cities soon followed. Creative work with Western artists and theaters came to a stop.<br/>
+其他西方城市也很快取消了预订。该舞团与西方艺术家和剧院的创造性工作陷入停滞。</p>
+<p>Several Russian and foreign dancers also quit the company to show their strong disapproval of the Ukraine war. Former principal ballerina Olga Smirnova was among those who quit.<br/>
+几名俄罗斯和外国舞者也退出了该舞团，以表达他们对乌克兰战争的强烈不满。前首席芭蕾舞演员奥尔加·斯米尔诺娃也在辞职之列。</p>
+<p>Elizaveta Kokoreva joined the company at the beginning of the pandemic. She is now its principal ballerina. She said, "I would really like to visit other countries, see the world, and get to know different venues, theatres, teachers and choreographers."<br/>
+伊丽莎维塔·科科雷娃在疫情开始时加入了该舞团。她现在是该舞团的首席芭蕾舞演员。她说：“我真的很想访问其他国家，看看世界，了解不同的场地、剧院、老师和编舞家。”</p>
+<p>She added, "But it is what it is right now."<br/>
+她补充道，“但现状就是这样。”</p>
+<p>I'm Andrew Smith.<br/>
+我是安德鲁·史密斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Russia’s Bolshoi Ballet Aims to Perform again in the West]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.84]The artistic director of Moscow's state-owned
+[00:04.24]Bolshoi Ballet has promised the group
+[00:08.80]will one day perform in the West again.
+[00:13.08]The famous ballet company performed
+[00:15.52]last week in China
+[00:17.72]at Beijing's National Centre for the Performing Arts.
+[00:23.24]It was the company's first performance
+[00:26.60]outside of Russia
+[00:28.16]since the COVID-19 pandemic began in 2020.
+[00:33.88]The company has faced boycotts from many countries
+[00:38.32]because of Russia's invasion of Ukraine in February 2022.
+[00:45.60]Artistic director Mahkar Vaziev
+[00:49.12]said the Bolshoi was "not suffering"
+[00:52.84]from being unable to perform in the West.
+[00:55.92]"I have no doubt that one day everything
+[01:00.88]will go back to how it should be
+[01:03.88]because culture is a wave
+[01:06.08]that is very hard to suppress," Vaziev said.
+[01:12.24]For many people, the Bolshoi represents
+[01:16.76]the highest level of Russian culture.
+[01:20.68]The ballet company was founded in 1776
+[01:26.40]by Empress Catherine the Great.
+[01:30.36]The company performed around the world
+[01:33.60]even during the most difficult times of the Cold War.
+[01:39.04]Bolshoi's dancers hope their performance in China
+[01:43.24]is a sign that they will return to performing around the world.
+[01:49.32]However, only two other performances
+[01:52.92]are currently on the company's schedule.
+[01:56.76]The dancers are set to perform in the Belarusian capital Minsk
+[02:01.80]in November and Oman next January.
+[02:07.16]The Bolshoi's time in Beijing
+[02:09.96]includes two performances
+[02:12.64]that will show parts of its best-known ballets.
+[02:17.56]It will then give a three-day staging of
+[02:21.24]the 19th-century ballet "Don Quixote".
+[02:26.48]The Bolshoi still receives around 70 percent
+[02:30.76]of its financial support from the Russian government,
+[02:35.08]a company official said.
+[02:37.96]No current performers have spoken out
+[02:40.88]against the Russian invasion.
+[02:44.20]The United Nations reports the war has injured
+[02:47.76]or killed about 8,500 civilians.
+[02:54.20]In February 2022,
+[02:57.12]the day after Moscow sent
+[03:00.12]thousands of troops into Ukraine,
+[03:03.44]London's Royal Opera House
+[03:05.68]canceled Bolshoi performances
+[03:08.72]planned for the summer of that year.
+[03:12.12]Cancellations in other Western cities soon followed.
+[03:17.68]Creative work with Western artists
+[03:20.40]and theaters came to a stop.
+[03:24.48]Several Russian and foreign dancers also quit the company
+[03:29.32]to show their strong disapproval of the Ukraine war.
+[03:34.68]Former principal ballerina Olga Smirnova
+[03:38.40]was among those who quit.
+[03:40.92]Elizaveta Kokoreva joined the company
+[03:44.88]at the beginning of the pandemic.
+[03:47.72]She is now its principal ballerina.
+[03:51.44]She said, "I would really like to visit other countries,
+[03:56.52]see the world, and get to know different venues,
+[04:00.24]theatres, teachers and choreographers."
+[04:05.56]She added, "But it is what it is right now."
+[04:10.96]I'm Andrew Smith. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

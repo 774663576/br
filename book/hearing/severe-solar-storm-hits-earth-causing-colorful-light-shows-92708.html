@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Severe Solar Storm Hits Earth, Causing Colorful Light Shows</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Severe Solar Storm Hits Earth, Causing Colorful Light Shows" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/severe-solar-storm-hits-earth-causing-colorful-light-shows.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Severe Solar Storm Hits Earth, Causing Colorful Light Shows</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/severe-solar-storm-hits-earth-causing-colorful-light-shows.mp3" id="mp3"></a>
+<a href="/static/lrc/severe-solar-storm-hits-earth-causing-colorful-light-shows.lrc" id="lrc"></a>
+<a href="us-campus-protests-face-summer-break-92703.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">19 May 2024</span><br/>
+<p>Earth was recently hit by the most powerful solar storm in more than 20 years.</p>
+<p>The storm caused some colorful light shows in some parts of the world, but no major damage was reported. Solar storms can hurt the operation of some equipment on Earth that uses radio waves. This includes GPS services, electrical systems and satellites.</p>
+<p>The U.S. National Oceanic and Atmospheric Administration (NOAA) issued warnings about the storm before it reached Earth on May 10. In a statement, NOAA <a class="wsw__a" href="https://www.noaa.gov/stories/strong-geomagnetic-storm-reaches-earth-continues-through-weekend">said</a> it had observed heavy solar storm activity in the days before. Based on the activity, the agency issued a <a class="wsw__a" href="https://www.swpc.noaa.gov/news/g4-conditions-observed">Geomagnetic Storm Warning</a>.</p>
+<div class="contentImage"><img alt="The northern lights flare in the sky over a farmhouse, late Friday, May 10, 2024, in Brunswick, Maine. (AP Photo/Robert F. Bukaty)" src="https://files.21voa.com/gdb/01000000-0aff-0242-a03e-08dc761d7eee_cx0_cy8_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">The northern lights flare in the sky over a farmhouse, late Friday, May 10, 2024, in Brunswick, Maine. (AP Photo/Robert F. Bukaty)</span></div>
+<p>Solar storms can involve two different processes. One is called a solar flare, while the other is a coronal mass ejection (CME). Both involve huge releases from the sun of magnetic field energy and a substance called plasma. The American space agency NASA <a class="wsw__a" href="https://svs.gsfc.nasa.gov/14299/">explains</a> that plasma is a form of matter made up of ionized particles. This means the particles have taken in so much energy that it causes electrons to separate from their atoms.</p>
+<p>Solar flares travel at the speed of light in all directions. They can reach Earth in about eight minutes. But CMEs travel much slower. They reach Earth in one to three days. NOAA <a class="wsw__a" href="https://www.swpc.noaa.gov/news/region-3664-not-done-yet-produces-x87-flarelargest-solar-cycle">said</a> a strong "solar flare event" had led to the latest CMEs hitting Earth.</p>
+<p>NASA says its observatories see solar flares as flashes of light on the sun, while CMEs are seen as large explosions spreading out into space. The agency examines data from its Parker Solar Probe on plasma flowing out of the sun's corona.</p>
+<p>Because the latest CME explosions were directed at Earth, they caused geomagnetic storms. NOAA's Space Weather Prediction Center issued a warning, calling the storm activity "an unusual and <strong>potentially</strong> historic event."</p>
+<p>NOAA noted that such storms can cause problems for some communication systems. The agency informed major power operators and NASA officials about the storm activity. The electric power <strong>grid</strong> can also be affected, or disrupted, along with radio, satellite and spacecraft operations.</p>
+<p>NOAA noted that severe geomagnetic storms can also produce intense, colorful light shows, or displays, in the sky. Such shows are also known as auroras.</p>
+<p>Colorful displays could be seen overnight in different parts of the world. Reuters news agency reported on several areas in Latin America experiencing auroras after the solar storm activity. In Mexico's desert city of Mexicali, pink and purple light could be seen lighting up the night sky last Friday and Saturday.</p>
+<p>In Chile, Reuters reported local media and social media users shared photos of the sky in the city of Punta Arenas, where the lights took on red and purple <strong>tones</strong>. Local media in Argentina also reported similar displays in the Patagonian city of Ushuaia.</p>
+<p>The French news agency AFP reported social media services were filled up with people publishing images of auroras from areas including northern Europe and Australasia.</p>
+<p>Iain Mansfield lives in Hertford, Britain. He told AFP, "We've just woken the kids to go watch the Northern Lights in the back <strong>garden</strong>! Clearly visible with <strong>the</strong> <strong>naked eye</strong>."</p>
+<p>Other people also compared the intense color shows to the Northern Lights. Sometimes also called aurora borealis, the Northern Lights are natural, colored light displays that sometimes appear in the night sky in the most northern parts of the world.</p>
+<p>From Australia's island state of Tasmania, photographer Sean O' Riordan published a message on X explaining what he saw. "Absolutely biblical skies in Tasmania at 4am this morning. I'm leaving today and knew I could not pass up this <strong>opportunity</strong>."</p>
+<p>People in the United States were also able to see colorful auroras, including parts of the West Coast and as far south as Alabama.</p>
+<p>The most intense solar storm in recorded history happened in 1859. It mainly produced auroras in Central America. A severe geomagnetic storm in 2003 cut power in Sweden and damaged power transformers in South Africa.</p>
+<p>Storm activity coming from the sun generally intensifies as it reaches the height of a repeating, 11-year solar cycle. The activity increases as the sun experiences magnetic field changes that affect its polar areas.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, Reuters, Agence France-Presse, NASA and NOAA. </em></p>
+<p><strong>_____________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>potential </strong><em>– adj. </em>possible when the necessary conditions exist<em> </em></p>
+<p><strong>grid </strong><em>– n. </em>a system of wires through which electricity is connected to different power stations across a particular area</p>
+<p><strong>tone </strong><em>– n. </em>a form or degree of color</p>
+<p><strong>garden </strong><em>– n. </em>a piece of land, usually in a yard next to a house, where things are grown</p>
+<p><strong>the naked eye </strong><em>– n. </em>something that can be seen with just the eyes, without the need for devices or special equipment</p>
+<p><strong>opportunity </strong><em>– n. </em>the chance to do something</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Severe Solar Storm Hits Earth, Causing Colorful Light Shows]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Earth was recently hit
+[00:02.52]by the most powerful solar storm
+[00:06.52]in more than 20 years.
+[00:09.28]The storm caused some colorful light shows
+[00:13.72]in some parts of the world,
+[00:15.88]but no major damage was reported.
+[00:19.44]Solar storms can hurt the operation
+[00:23.20]of some equipment on Earth
+[00:26.00]that uses radio waves.
+[00:28.64]This includes GPS services,
+[00:32.96]electrical systems and satellites.
+[00:37.12]The U.S. National Oceanic
+[00:40.64]and Atmospheric Administration (NOAA)
+[00:44.80]issued warnings about the storm
+[00:47.52]before it reached Earth on May 10.
+[00:51.24]In a statement, NOAA said it had observed
+[00:55.20]heavy solar storm activity
+[00:58.28]in the days before.
+[01:00.48]Based on the activity, the agency
+[01:04.28]issued a Geomagnetic Storm Warning.
+[01:08.24]Solar storms can involve two different processes.
+[01:14.00]One is called a solar flare,
+[01:17.44]while the other is a coronal mass ejection (CME).
+[01:23.52]Both involve huge releases
+[01:26.96]from the sun of magnetic field energy
+[01:30.56]and a substance called plasma.
+[01:34.32]The American space agency NASA
+[01:37.52]explains that plasma is a form of matter
+[01:42.12]made up of ionized particles.
+[01:45.52]This means the particles
+[01:48.56]have taken in so much energy
+[01:51.32]that it causes electrons
+[01:53.64]to separate from their atoms.
+[01:56.32]Solar flares travel
+[01:59.00]at the speed of light in all directions.
+[02:02.28]They can reach Earth in about eight minutes.
+[02:05.96]But CMEs travel much slower.
+[02:09.84]They reach Earth in one to three days.
+[02:13.72]NOAA said a strong "solar flare event"
+[02:18.48]had led to the latest CMEs hitting Earth.
+[02:23.60]NASA says its observatories
+[02:26.96]see solar flares as flashes of light on the sun,
+[02:31.76]while CMEs are seen as
+[02:34.84]large explosions spreading out into space.
+[02:39.20]The agency examines data
+[02:42.44]from its Parker Solar Probe
+[02:44.84]on plasma flowing out of the sun's corona.
+[02:49.88]Because the latest CME explosions
+[02:53.40]were directed at Earth,
+[02:55.56]they caused geomagnetic storms.
+[02:59.04]NOAA's Space Weather Prediction Center
+[03:03.00]issued a warning, calling the storm activity
+[03:06.76]"an unusual and potentially historic event."
+[03:11.60]NOAA noted that such storms can cause
+[03:16.08]problems for some communication systems.
+[03:19.40]The agency informed major power operators
+[03:24.20]and NASA officials about the storm activity.
+[03:28.72]The electric power grid can also be affected,
+[03:32.68]or disrupted, along with radio, satellite
+[03:36.80]and spacecraft operations.
+[03:39.88]NOAA noted that severe geomagnetic storms
+[03:44.84]can also produce intense,
+[03:47.68]colorful light shows, or displays, in the sky.
+[03:52.08]Such shows are also known as auroras.
+[03:57.16]Colorful displays could be seen
+[04:00.32]overnight in different parts of the world.
+[04:03.36]Reuters news agency
+[04:06.28]reported on several areas in Latin America
+[04:10.24]experiencing auroras
+[04:12.60]after the solar storm activity.
+[04:15.60]In Mexico's desert city of Mexicali,
+[04:20.36]pink and purple light could be seen lighting up
+[04:23.92]the night sky last Friday and Saturday.
+[04:28.24]In Chile, Reuters reported
+[04:31.20]local media and social media users
+[04:34.48]shared photos of the sky in the city of Punta Arenas,
+[04:40.28]where the lights took on red and purple tones.
+[04:44.56]Local media in Argentina
+[04:47.40]also reported similar displays
+[04:50.60]in the Patagonian city of Ushuaia.
+[04:55.08]The French news agency AFP reported
+[04:59.12]social media services were filled up with people
+[05:03.04]publishing images of auroras from areas
+[05:07.16]including northern Europe and Australasia.
+[05:11.76]Iain Mansfield lives in Hertford, Britain.
+[05:15.76]He told AFP, "We've just woken the kids
+[05:20.04]to go watch the Northern Lights in the back garden!
+[05:23.88]Clearly visible with the naked eye."
+[05:27.44]Other people also compared
+[05:30.36]the intense color shows to the Northern Lights.
+[05:34.32]Sometimes also called aurora borealis,
+[05:38.80]the Northern Lights are natural,
+[05:41.64]colored light displays
+[05:43.64]that sometimes appear in the night sky
+[05:46.96]in the most northern parts of the world.
+[05:51.40]From Australia's island state of Tasmania,
+[05:55.52]photographer Sean O' Riordan
+[05:58.20]published a message on X explaining what he saw.
+[06:02.76]"Absolutely biblical skies in Tasmania
+[06:07.08]at 4am this morning.
+[06:09.44]I'm leaving today and knew
+[06:11.96]I could not pass up this opportunity."
+[06:15.12]People in the United States
+[06:17.92]were also able to see colorful auroras,
+[06:21.84]including parts of the West Coast
+[06:24.84]and as far south as Alabama.
+[06:27.88]The most intense solar storm
+[06:30.88]in recorded history happened in 1859.
+[06:35.68]It mainly produced auroras in Central America.
+[06:40.12]A severe geomagnetic storm in 2003
+[06:45.36]cut power in Sweden and damaged
+[06:48.76]power transformers in South Africa.
+[06:52.04]Storm activity coming from the sun
+[06:55.88]generally intensifies as it reaches the height
+[07:00.20]of a repeating, 11-year solar cycle.
+[07:04.24]The activity increases as the sun
+[07:08.28]experiences magnetic field changes
+[07:11.72]that affect its polar areas.
+[07:15.28]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

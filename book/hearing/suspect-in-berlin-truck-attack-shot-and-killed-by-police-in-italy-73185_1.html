@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 柏林卡车袭击嫌犯在米兰被警方击毙</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 柏林卡车袭击嫌犯在米兰被警方击毙" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201612/suspect-in-berlin-truck-attack-shot-and-killed-by-police-in-italy.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>柏林卡车袭击嫌犯在米兰被警方击毙</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201612/suspect-in-berlin-truck-attack-shot-and-killed-by-police-in-italy.mp3" id="mp3"></a>
+<a href="/static/lrc/suspect-in-berlin-truck-attack-shot-and-killed-by-police-in-italy.lrc" id="lrc"></a>
+<a href="suspect-in-berlin-truck-attack-shot-and-killed-by-police-in-italy-73185.html" id="CnPage" target="_blank"></a>
+<a href="year-in-review-word-of-the-year--surreal-73172.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The suspected driver in the deadly truck attack at a Christmas market in Germany was shot and killed Friday by police in Italy.<br/>德国圣诞集市卡车袭击嫌犯周五在意大利被警察击毙。
+<p>The 24-year-old Tunisian man, Anis Amri, was killed during a shootout with two police officers in Milan. Amri pulled out a gun and shot one officer in the arm after he was asked to show identification papers during a normal patrol.<br/>24岁的突尼斯男子阿尼斯·阿姆里（Anis Amri）在和米兰警察的枪战中被击毙。在一次正常巡查中，阿姆里被要求出示身份证件，然后他掏出枪击中了一名警察的手臂。</p>
+<p>German officials said they had confirmed through fingerprints that the man killed in Milan was the suspect in Monday's truck attack. Amri is suspected of hijacking the truck and killing its driver before driving into a Christmas market in central Berlin.<br/>德国官员表示，他们已经通过指纹证实在米兰被击毙的这名男子就是周一发生的卡车袭击的嫌疑人。阿姆里被怀疑劫持卡车并杀死了司机，然后开车冲进了柏林市中心的圣诞集市。</p>
+<p>The attack killed 12 people and injured more than 50 others.<br/>这次袭击造成12人死亡和50多人受伤。</p>
+<p>Police said they found documents belonging to Amri inside the truck.<br/>警方表示，他们在卡车内发现了属于阿姆里的文件。</p>
+<p>Before Amri was identified as the main suspect, police detained a Pakistani man for possible involvement in the attack. He was later cleared and released.<br/>在阿姆里被确定为主要嫌犯之前，警方拘留了一名可能参与袭击的巴基斯坦男子，但是他随后被释放。</p>
+<p>Germany's head prosecutor told reporters the investigation is continuing. He added that it is not yet known whether other suspects might have helped carry out the attack.<br/>德国总检察长告诉记者，调查仍在继续。他还补充说，目前尚不清楚是否有其他嫌犯帮助发动这次袭击。</p>
+<p>The Islamic State (IS) said the attacker was inspired by its call for people to strike members of a coalition fighting the militant group in Syria and Iraq.<br/>伊斯兰国表示，这名袭击者是受到了他们的鼓舞。该组织呼吁人们对在叙利亚和伊拉克与伊斯兰国作战的联盟成员国发动袭击。</p>
+<p>In a video posted by IS's Amaq news agency, Amri pledged his allegiance to Islamic State leader Abu Bakr al-Baghdadi. He also urged others to carry out attacks on "Crusaders who are striking Muslims daily." He added: "I swear to God that we will come to slaughter you, you pigs."<br/>在伊斯兰国Amaq通讯社发布的视频中，阿姆里宣誓效忠于伊斯兰国领导人阿布·贝克尔·巴格达迪(Abu Bakr al-Baghdadi)。他还督促其他人对“每天都在攻击穆斯林的十字军”发动袭击。他还补充说，“我对天发誓，我要来屠杀你们这些猪们！”</p>
+<p>Officials say Amri arrived in Germany in July 2015, after serving time in jail in Italy for setting fire to a refugee shelter. He sought asylum in Germany but the request was denied. Authorities said he could not be sent back to Tunisia because he had no passport and that country had refused to accept him.<br/>官员们表示，阿姆里于2015年7月抵达德国。在此之前他因为在一家难民收容所纵火被送进意大利一家监狱服刑。他在德国寻求庇护但是遭到了拒绝。当局表示，他无法被送回突尼斯，因为他没有护照，该国拒绝接收他。</p>
+<p>German Chancellor Angela Merkel has ordered an investigation into the policies that resulted in Amri staying in the country so long. Merkel is facing increasing political pressure in Germany to take a stronger position on immigration and asylum policies. Her popularity has dropped since Germany opened its border to accept about one million refugees.<br/>德国总理默克尔下令对导致阿姆里在该国长期滞留的政策进行调查。默克尔在德国面临越来越大的压力，被迫对移民和庇护政策采取更加强有力的立场。自从德国开放边境接受了大约一百万难民以来，默克尔的人气已经下降。</p>
+<p>I'm John Russell.<br/>我是约翰·罗素。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Suspect in Berlin Truck Attack Shot by Police in Italy+++柏林卡车袭击嫌犯在米兰被警方击毙]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.68]The suspected driver in the deadly truck attack
+[00:06.68]at a Christmas market in Germany
+[00:10.04]was shot and killed Friday by police in Italy.
+[00:16.52]The 24-year-old Tunisian man, Anis Amri,
+[00:22.60]was killed during a shootout with two police officers in Milan.
+[00:30.08]Amri pulled out a gun and shot one officer in the arm
+[00:36.44]after he was asked to show identification papers during a normal patrol.
+[00:44.48]German officials said they had confirmed through fingerprints
+[00:51.20]that the man killed in Milan was the suspect in Monday's truck attack.
+[00:58.76]Amri is suspected of hijacking the truck and killing its driver
+[01:05.40]before driving into a Christmas market in central Berlin.
+[01:11.36]The attack killed 12 people and injured more than 50 others.
+[01:19.44]Police said they found documents belonging to Amri inside the truck.
+[01:26.24]Before Amri was identified as the main suspect,
+[01:32.24]police detained a Pakistani man for possible involvement in the attack.
+[01:40.04]He was later cleared and released.
+[01:44.28]Germany's head prosecutor told reporters the investigation is continuing.
+[01:52.32]He added that it is not yet known whether other suspects
+[01:57.72]might have helped carry out the attack.
+[02:01.72]The Islamic State (IS) said the attacker was inspired
+[02:09.32]by its call for people to strike members of a coalition
+[02:14.60]fighting the militant group in Syria and Iraq.
+[02:19.56]In a video posted by IS's Amaq news agency,
+[02:25.40]Amri pledged his allegiance to Islamic State leader Abu Bakr al-Baghdadi.
+[02:33.24]He also urged others to carry out attacks
+[02:37.20]on "Crusaders who are striking Muslims daily."
+[02:41.88]He added: "I swear to God that we will come to slaughter you, you pigs."
+[02:48.76]Officials say Amri arrived in Germany in July 2015,
+[02:55.88]after serving time in jail in Italy for setting fire to a refugee shelter.
+[03:04.48]He sought asylum in Germany but the request was denied.
+[03:10.60]Authorities said he could not be sent back to Tunisia
+[03:15.52]because he had no passport and that country had refused to accept him.
+[03:21.92]German Chancellor Angela Merkel has ordered an investigation into the policies
+[03:30.88]that resulted in Amri staying in the country so long.
+[03:36.68]Merkel is facing increasing political pressure in Germany
+[03:41.88]to take a stronger position on immigration and asylum policies.
+[03:48.08]Her popularity has dropped since Germany opened its border
+[03:53.04]to accept about one million refugees.
+[03:57.28]I'm John Russell.
+[03:58.96]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

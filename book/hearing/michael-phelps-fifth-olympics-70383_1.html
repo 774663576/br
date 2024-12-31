@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 菲尔普斯第五次出战奥运会</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 菲尔普斯第五次出战奥运会" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201607/michael-phelps-fifth-olympics.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>菲尔普斯第五次出战奥运会</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201607/michael-phelps-fifth-olympics.mp3" id="mp3"></a>
+<a href="/static/lrc/michael-phelps-fifth-olympics.lrc" id="lrc"></a>
+<a href="michael-phelps-fifth-olympics-70383.html" id="CnPage" target="_blank"></a>
+<a href="austria-to-hold-second-presidential-election-70373.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Michael Phelps has become the first American male swimmer to qualify for five Olympics. He won the 200-meter butterfly race at the U.S. Olympic trials on Wednesday.<br/>迈克尔·菲尔普斯（Michael Phelps）已经成为首位五次晋级奥运会的美国男游泳选手。周三他在美国奥运选拔赛上赢得了200米蝶泳比赛。</p>
+<p>Phelps has won 18 gold medals, more than anybody in Olympic history. He won eight gold medals in a single Olympics in 2008 in Beijing, China.<br/>菲尔普斯已经赢得了18枚金牌，超过了奥运历史上任何人。2008年他在北京这一届奥运会上就赢得了8枚金牌。</p>
+<p>But his golden image was tarnished after the 2012 London Olympics. He was arrested two times for drunk driving.<br/>但是在2012年伦敦奥运会之后他的金色形象被玷污了。他两次因为酒驾被捕。</p>
+<p>He stepped away from swimming. He entered a rehabilitation program. He then returned to the pool to train for the Rio de Janeiro Olympic Games.<br/>他逐步远离了游泳运动。他参加了一个康复计划，然后重新回到游泳池备战里约热内卢奥运会。</p>
+<p>The Games' opening ceremony is August 5.<br/>这届奥运会的开幕式在8月5日。</p>
+<p>Phelps first appeared in the Olympic Games in Sydney, Australia, in 2000. He was 15 years old. Now 31, Phelps still holds three world records. He says he is happy to represent his country at the Olympic Games one more time.<br/>菲尔普斯首次现身于2000年悉尼奥运会，当时他只有15岁。现年31岁的菲尔普斯仍保持着三项世界记录。他说，他很高兴再一次代表美国出战奥运会。</p>
+<p>"Being able to make my fifth [Olympics] is something that means a lot to me," Phelps said. "...I think 20 years from now, I'll be able to look and be happy with that decision to come back."<br/>菲尔普斯说，“能够第五次参加奥运会对我来说意义非凡。我想20年后，我会很高兴看到自己做出重回泳坛的这一决定。”</p>
+<p>Another goal for Phelps is setting one more personal best time during the next month.<br/>菲尔普斯的另一个目标是在下个月再次刷新个人最好成绩。</p>
+<p>"It's been a long time since I've got a best time," he said. "I'd like to have maybe one before I retire. I hope we can get at least one in the next four weeks."<br/>他说，“距离我游出个人最好成绩已经很长时间了。我想在退役前再游出一次个人最好成绩。我希望在下个月至少能游出一次。”</p>
+<p>When the Rio Olympic Games begin in August, Phelps will be joined on the U.S. swim team by Allison Schmitt. Schmitt is another athlete who won gold medals in London in 2012. But she has struggled in her personal life since winning gold.<br/>当里约奥运会于8月开幕时，菲尔普斯将同埃里森·施密特（Allison Schmitt）一起进入美国游泳队。施密特是另一名运动员，她在2012年伦敦奥运会上赢得了金牌。但是她自赢得金牌后一直在私人生活中挣扎。</p>
+<p>For Schmitt, it was depression that included suicidal thoughts. It was not until her cousin committed suicide that she looked for help. She qualified for Rio on Wednesday after placing fourth in the 200-meter freestyle race. She won that event at the London Games in 2012.<br/>对施密特来说，这种挣扎是指包括自杀念头的抑郁症。直到看到她的堂兄自杀，她才寻求了帮助。周三她在200米自由泳比赛中排名第四成功晋级里约奥运会。2012年她在这项比赛中赢得了金牌。</p>
+<p>"I'm going to Rio," Schmitt said. "It's been a tough four years, but I'm so happy right now."<br/>施密特表示，“我要去里约，这是艰难的四年，但是我现在很开心。”</p>
+<p>The star swimmer of the 2016 summer games may be 19-year-old Katie Ledecky. In 2012, she was a young swimmer from the suburbs of Washington, D.C. Ledecky won a surprise gold medal in the 800 meter freestyle in London. In less than four years, she broke three world records.<br/>2016年夏季奥运会的游泳明星可能是19岁的姬蒂·雷德基（Katie Ledecky）。2012年她只是一名来自华盛顿郊区的年轻泳将。雷德基在伦敦奥运会上意外赢得800米自由泳金牌。在不到4年时间里，她打破了三项世界记录。</p>
+<p>At last year's world championships, Ledecky won five gold medals. She says she will not try to break German swimmer Kristin Otto's record of six gold medals at a single Olympics.<br/>在去年的世锦赛上，雷德基夺得了5枚金牌。她说，她不会尝试去打破德国泳将克里斯汀·奥托（Kristin Otto）在单届奥运上上夺得6枚金牌的记录。</p>
+<p>"I don't think about who I'm chasing or any of the historical implications," Ledecky said.<br/>雷德基表示，“我不会去考虑追赶谁，也不会去考虑任何历史意义。”</p>
+<p>The U.S. team will also feature Missy Franklin. She is a four-time gold medalist at the 2012 Olympics. She will race in the 200-meter freestyle event in Rio.<br/>美国队还将以米西·富兰克林（Missy Franklin）为重要一员。她是2012年伦敦奥运会的四枚金牌得主。她将参加里约奥运会的200米自由泳比赛。</p>
+<p>I'm Dan Friedell.<br/>我是丹·费里德尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.08]Michael Phelps has become the first American male swimmer
+[00:05.32]to qualify for five Olympics.
+[00:09.40]He won the 200-meter butterfly race at the U.S. Olympic trials on Wednesday.
+[00:16.16]Phelps has won 18 gold medals, more than anybody in Olympic history.
+[00:22.88]He won eight gold medals in a single Olympics in 2008 in Beijing, China.
+[00:30.52]But his golden image was tarnished after the 2012 London Olympics.
+[00:38.12]He was arrested two times for drunk driving.
+[00:42.73]He stepped away from swimming.
+[00:46.00]He entered a rehabilitation program.
+[00:49.88]He then returned to the pool to train for the Rio de Janeiro Olympic Games.
+[00:57.36]The Games' opening ceremony is August 5.
+[01:02.28]Phelps first appeared in the Olympic Games in Sydney, Australia, in 2000.
+[01:10.44]He was 15 years old.
+[01:13.48]Now 31, Phelps still holds three world records.
+[01:19.84]He says he is happy to represent his country at the Olympic Games one more time.
+[01:27.56]"Being able to make my fifth [Olympics] is something that means a lot to me," Phelps said.
+[01:34.96]"...I think 20 years from now, I'll be able to look and be happy with that decision to come back."
+[01:42.92]Another goal for Phelps is setting one more personal best time during the next month.
+[01:51.04]"It's been a long time since I've got a best time," he said.
+[01:55.64]"I'd like to have maybe one before I retire.
+[01:59.44]I hope we can get at least one in the next four weeks."
+[02:04.48]When the Rio Olympic Games begin in August,
+[02:08.20]Phelps will be joined on the U.S. swim team by Allison Schmitt.
+[02:14.28]Schmitt is another athlete who won gold medals in London in 2012.
+[02:20.48]But she has struggled in her personal life since winning gold.
+[02:25.48]For Schmitt, it was depression that included suicidal thoughts.
+[02:31.36]It was not until her cousin committed suicide that she looked for help.
+[02:37.71]She qualified for Rio on Wednesday
+[02:41.44]after placing fourth in the 200-meter freestyle race.
+[02:46.48]She won that event at the London Games in 2012.
+[02:51.56]"I'm going to Rio," Schmitt said.
+[02:54.60]"It's been a tough four years, but I'm so happy right now."
+[02:59.92]The star swimmer of the 2016 summer games may be 19-year-old Katie Ledecky.
+[03:08.00]In 2012, she was a young swimmer from the suburbs of Washington, D.C.
+[03:15.16]Ledecky won a surprise gold medal in the 800 meter freestyle in London.
+[03:21.48]In less than four years, she broke three world records.
+[03:26.64]At last year's world championships, Ledecky won five gold medals.
+[03:32.56]She says she will not try to break German swimmer
+[03:37.16]Kristin Otto's record of six gold medals at a single Olympics.
+[03:42.92]"I don't think about who I'm chasing
+[03:45.36]or any of the historical implications," Ledecky said.
+[03:50.04]The U.S. team will also feature Missy Franklin.
+[03:54.00]She is a four-time gold medalist at the 2012 Olympics.
+[03:59.12]She will race in the 200-meter freestyle event in Rio.
+[04:04.72]I'm Dan Friedell.
+[04:06.24]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

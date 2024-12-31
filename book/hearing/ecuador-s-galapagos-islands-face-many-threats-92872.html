@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ecuador’s Galapagos Islands Face Many Threats</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Ecuador’s Galapagos Islands Face Many Threats" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/ecuador-s-galapagos-islands-face-many-threats.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ecuador’s Galapagos Islands Face Many Threats</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/ecuador-s-galapagos-islands-face-many-threats.mp3" id="mp3"></a>
+<a href="korean-air-takes-instant-noodles-off-the-menu-92871.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">07 August, 2024</span><br/>
+<p>The Galapagos, a group of islands in the Eastern Pacific Ocean, are coming under increased pressure.</p>
+<p>Observers say climate change and invasive<strong> species </strong>threaten wildlife on and around the islands, which are part of the South American country of Ecuador.</p>
+<p>Warming ocean waters affect the food<strong> sources</strong> of many of the sea animals around the Galapagos.</p><div class="contentImage"><img (ap="" 2024.="" 9,="" a="" alie="" alt="A whale shark swims through the waters off of Wolf Island, Ecuador, next to Enrique " cruz="" ecuador="" from="" galapagos="" in="" island,="" june="" local="" moran,="" naturalist="" on="" photo="" quike"="" santa="" skowronski)"="" src="https://files.21voa.com/gdb/2c630d2a-a854-4d87-b3b5-530a96621a88_cx0_cy8_cw0_w268_r1.jpg" sunday,="" the=""/><br/><span class="imagecaption">A whale shark swims through the waters off of Wolf Island, Ecuador, next to Enrique "Quike" Moran, a local naturalist from Santa Cruz Island, Ecuador in the Galapagos on Sunday, June 9, 2024. (AP Photo/Alie Skowronski)</span></div>
+<p>Marine iguanas are one of many species that are <strong>unique</strong> to the Galapagos. The <strong>reptiles</strong> have a harder time finding the food they prefer - red and green algae. A recent Associated Press (AP) report said sea turtles struggle to <strong>nest </strong>in warmer temperatures. Raising young gets harder as water warms and fewer nutrients are available.</p>
+<p>“We have something of everything here – that's why people say the Galapagos is so <strong>diverse</strong> – but we have a small number of each thing,” said Natasha Cabezas, a naturalist guide.</p>
+<p><strong>A changing climate </strong></p>
+<p>The Galapagos Islands are famous for animals that were studied by Charles Darwin in the 1800s. He developed the theory that living things change over large amounts of time.</p>
+<p>The group of islands is where major ocean currents meet — cool water from the south, warm water from the north, and a cold current from the west. In addition to those, there is El Ni<i>&amp;#</i>241;o, the periodic and natural Pacific Ocean warming that affects weather worldwide.</p>
+<p>While temperatures depend on the season and other natural climate events, scientists say ocean temperatures have been rising. They blame climate change caused by human activities.</p>
+<p>Some scientists say the ocean has reached its warmest level since at least the 1800s within the last 10 years. The U.S. space agency NASA says 2023 was the ocean's warmest year on record.</p>
+<p>In the Southern Hemisphere, June is the first month of winter. One of the ocean currents, the Cromwell current, brings sea creatures like whale sharks, hammerheads, and sunfish to the surface. It also provides nutrients for penguins, marine iguanas and sea lions in search of food.</p>
+<p>Scientists are studying how the past year's El Ni<i>&amp;#&lt;/I&gt;241;o affected those creatures.&lt;/p&gt;
+&lt;p&gt;El Ni&lt;I&gt;&amp;#&lt;/I&gt;241;o can bring food shortages for some species like marine iguanas and sea turtles. Scientists observing the species have noted a decrease in their populations during El Ni&lt;I&gt;&amp;#&lt;/I&gt;241;o events.&lt;/p&gt;
+&lt;p&gt;Marine iguanas were “one of the most affected species from El Ni&lt;I&gt;&amp;#&lt;/I&gt;241;o last year and right now they are still recovering,” said Galapagos Conservancy Director Jorge Carrión.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Invasive species &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;As rising ocean temperatures threaten sea life, on land there is a different problem. Animals — cats, dogs, pigs, goats and cattle, none of them native — are threatening the unique species of the islands.&lt;/p&gt;
+&lt;p&gt;After the COVID-19 pandemic, many people left dogs and cats they had been taking care of, Cabezas said.&lt;/p&gt;
+&lt;p&gt;“If you don't take care of them, they become a problem and now it's a &lt;strong&gt;shame&lt;/strong&gt; to see dogs everywhere. We have a big problem right now I don't know what we're going to do,” she said.&lt;/p&gt;
+&lt;p&gt;The non-native animals are a special threat to the giant tortoises of the Galapagos. The tortoises almost disappeared in the 1800s because of hunting. Officials have tried to protect them from humans. It has been illegal to kill a giant tortoise since 1933.&lt;/p&gt;
+&lt;p&gt;“In one night, a&lt;strong&gt; feral&lt;/strong&gt; pig can destroy all nesting sites in an area,” Carrión said. Park rangers try to visit areas with nesting sites once a day and kill pigs when they find them. But the pigs are difficult to find, Carrion said.&lt;/p&gt;
+&lt;p&gt;Feral cats feed on young marine iguanas, and both pigs and cats compete for food with the tortoises.&lt;/p&gt;
+&lt;p&gt;Plastic is also a widespread problem in the world's oceans. One recent study reported microplastics in the bellies of Galapagos penguins.&lt;/p&gt;
+&lt;p&gt;“There are no animals in the Galapagos that do not have microplastics in their food,” Carrión said.&lt;/p&gt;
+&lt;p&gt;I'm John Russell.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Alie Skowronski reported on this story for the Associated Press. John Russell adapted it for VOA Learning English.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;_____________________________________________&lt;/p&gt;
+&lt;h2 class="wsw__h2"&gt;Words in This Story&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;species&lt;/strong&gt;&lt;em&gt; – n.&lt;/em&gt; a class of creatures having common attributes and designated by a common name&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;source&lt;/strong&gt;&lt;em&gt; –n.&lt;/em&gt; the place from which something, such as food, comes&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;unique&lt;/strong&gt;&lt;em&gt; – adj.&lt;/em&gt; being the only one; being without a like or equal&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;reptile&lt;/strong&gt; &lt;em&gt;–n.&lt;/em&gt; an animal with scales that lays eggs and needs sunlight to increase its body temperature to become active&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;nest&lt;/strong&gt; &lt;em&gt;–v.&lt;/em&gt; to make a place where eggs can be laid or where young can be raised&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;diverse &lt;/strong&gt;&lt;em&gt;–adj.&lt;/em&gt; containing many different kinds of things, such as plants and animals&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;shame&lt;/strong&gt; &lt;em&gt;– n.&lt;/em&gt; something to be regretted&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;feral &lt;/strong&gt;–&lt;em&gt; adj.&lt;/em&gt; having escaped from domestication and become wild&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="judge-rules-google-has-illegal-monopoly-over-search-92870.html" target=_blank&gt;Judge Rules Google Has Illegal Monopoly over Search&lt;/A&gt;   (24/8/7)&lt;/LI&gt;&lt;LI&gt;&lt;A href="severe-drought-returns-to-the-amazon-earlier-than-expected-92868.html" target=_blank&gt;Severe Drought Returns to the Amazon Earlier Than Expected&lt;/A&gt;   (24/8/6)&lt;/LI&gt;&lt;LI&gt;&lt;A href="algae-blamed-for-sickening-california-sea-lions-92867.html" target=_blank&gt;Algae Blamed for Sickening California Sea Lions&lt;/A&gt;   (24/8/6)&lt;/LI&gt;&lt;LI&gt;&lt;A href="ancient-egyptian-woman-s-suffering-frozen-in-final-scream-92864.html" target=_blank&gt;Ancient Egyptian Woman’s Suffering Frozen in Final Scream&lt;/A&gt;   (24/8/5)&lt;/LI&gt;&lt;LI&gt;&lt;A href="nasa-rover-captures-rock-showing-possible-signs-of-microbial-life-92861.html" target=_blank&gt;NASA Rover Captures Rock Showing Possible Signs of Microbial Life&lt;/A&gt;   (24/8/4)&lt;/LI&gt;&lt;LI&gt;&lt;A href="study-super-jupiter-planet-takes-100-years-to-orbit-star-92856.html" target=_blank&gt;Study: ‘Super Jupiter’ Planet Takes 100 Years to Orbit Star&lt;/A&gt;   (24/8/1)&lt;/LI&gt;&lt;LI&gt;&lt;A href="first-online-child-safety-bill-passes-us-senate-92852.html" target=_blank&gt;First Online Child Safety Bill Passes US Senate&lt;/A&gt;   (24/7/31)&lt;/LI&gt;&lt;LI&gt;&lt;A href="study-new-evidence-suggests-earth-like-exoplanet-may-hold-liquid-ocean-92838.html" target=_blank&gt;Study: New Evidence Suggests Earth-like Exoplanet May Hold Liquid Ocean&lt;/A&gt;   (24/7/28)&lt;/LI&gt;&lt;LI&gt;&lt;A href="indonesia-s-nickel-mining-hurting-forests-92833.html" target=_blank&gt;Indonesia's Nickel Mining Hurting Forests&lt;/A&gt;   (24/7/25)&lt;/LI&gt;&lt;LI&gt;&lt;A href="businesses-recover-from-major-worldwide-tech-outage-92829.html" target=_blank&gt;Businesses Recover from Major Worldwide Tech Outage&lt;/A&gt;   (24/7/24)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></p></div></div></div></body></body></html>

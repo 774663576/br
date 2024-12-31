@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 非洲经济有望继续强劲增长</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 非洲经济有望继续强劲增长" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201408/se-econ-african-economies-14aug14.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>非洲经济有望继续强劲增长</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201408/se-econ-african-economies-14aug14.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-african-economies-14aug14.lrc" id="lrc"></a>
+<a href="african-economies-expected-to-continue-growing-strongly-58089.html" id="CnPage" target="_blank"></a>
+<a href="words-and-their-stories-farm-expresions-58075.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>International economists say they are hopeful about Africa's economy. They say economic growth on the continent will increase by as much as five or six percent over the next two years. That would be the continent's highest growth rate since the worldwide economic recession in 2009.<br/>国际经济学家表示，他们非常看好非洲经济。他们说，未来两年非洲大陆的经济增长将会提高到百分之五到六。这将是2009年全球经济衰退以来非洲大陆最高的增速。</p>
+<p>Economic experts say the growth is partly because governments have established policies inviting to foreign investors. They say increased trade among African nations is also growing the continent's economy. And the experts say the growth is widespread. They made the observations in the African Economic Outlook 2014 report.<br/>经济学家表示，这一增长的部分原因是由于非洲各国政府制定了吸引外国投资者的政策。他们说，非洲国家之前贸易的增长也提升了非洲大陆的经济。专家还表示，这一增长是普遍的。他们在2014年非洲经济展望报告中做出了这样的表述。</p>
+<p>The African Development Bank, the United Nations Development Program and the OECD Development Center produced the report together. Angela Lusigi is a U. N. Development Program economist and policy adviser for Africa.<br/>非洲开发银行、联合国开发计划署以及经合组织发展中心共同发布了这一报告。安吉拉（Angela Lusigi）是联合国非洲发展计划的经济学家和政策制定者。</p>
+<p>"A lot of people think growth in Africa, they think the only driven by mineral wealth or oil-exporting countries, but we find now the report that even countries that are not resource rich are still growing effectively. This is mainly because of their agricultural sector but also growth in services [including tourism] and a little in manufacturing," said Lusigi.<br/>她说，“很多人认为非洲增长的唯一动力是矿藏或石油出口国，但我们发现即使资源并不丰富的国家也在有效增长。这主要是因为它们的农产品部门，以及包括旅游在内的服务业和小部分制造业的增长。”</p>
+<p>The report says Africa's top foreign trade partner is Europe. About 40 percent of African trade is with European nations. 25 percent is with Asian countries and about 12 percent is with North America.<br/>该报告称，非洲最大的贸易伙伴是欧洲。非洲贸易大约40%是同欧洲国家，25%是同亚洲国家，大约12%是同北美。</p>
+<p>The report says African countries traded $81 million worth of goods among themselves in 2012. Much of it is in the making of clothing, leather, building material, farm tools and wood products like furniture.<br/>报告称2012年非洲国家之间成交的货物总值为810亿美元。其中大部分是在服装、皮革、建材、农产品以及家具等木材行业。</p>
+<p>Angela Lusigi says there's strong demand in Africa for manufactured goods. These include television sets, telephones and other mobile technology. She says many of these products can be made in Africa.<br/>安吉拉说，非洲对工业品的需求非常强劲，其中包括电视机、电话和其它移动技术。她表示这些产品大多能在非洲生产。</p>
+<p>The report says East and West Africa are leading the economic expansion. The report says low inflation especially in energy and food prices is helping economic growth in Africa. And it says African nations have put in place careful economic policies to cut spending and improve tax collection.<br/>报告说，东非和西非引领了这一经济爆发。该报告还表示，低通货膨胀，特别是在能源和食品价格上的低通货膨胀有助于非洲的经济增长。它还表示，非洲国家已经制订了审慎的经济政策以削减支出并提高税收征管。</p>
+<p>However, the report notes that official development assistance remains an important support for poor countries that lack enough foreign direct investment. Total official development assistance is estimated to be $55 billion.<br/>不过，该报告指出，官方发展援助仍然是缺乏外国直接投资的贫穷国家的一个重要支撑。官方发展援助总额预计为550亿美元。</p>
+<p>And that's the VOA Learning English Economics Report. You can find more stories about economics and other subjects online on our website as well. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。更多有关经济以及其它主题的网上新闻，请访问我们的网站21voa.com。我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:African Economies Expected to Continue Growing Strongly]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.21]International economists say 
+[00:08.41]they are hopeful about Africa's economy. 
+[00:11.86]They say economic growth on the continent 
+[00:15.57]will increase by as much as five or six percent 
+[00:19.97]over the next two years. 
+[00:22.45]That would be the continent's highest growth rate 
+[00:26.21]since the worldwide economic recession in 2009.
+[00:31.38]Economic experts say the growth is partly because 
+[00:37.59]governments have established policies 
+[00:40.47]inviting to foreign investors. 
+[00:43.28]They say increased trade among African nations 
+[00:47.66]is also growing the continent's economy. 
+[00:51.32]And the experts say the growth is widespread. 
+[00:56.18]They made the observations 
+[00:59.22]in the African Economic Outlook 2014 report.
+[01:03.97]The African Development Bank, 
+[01:07.46]the United Nations Development Program 
+[01:10.74]and the OECD Development Center 
+[01:14.05]produced the report together. 
+[01:16.29]Angela Lusigi is a U. N. Development Program economist 
+[01:22.89]and policy adviser for Africa.
+[01:25.64]"A lot of people think growth in Africa, 
+[01:28.73]they think the only driven by mineral wealth 
+[01:32.23]or oil-exporting countries, 
+[01:34.43]but we find now the report that even countries 
+[01:36.92]that are not resource rich are still growing effectively. 
+[01:40.87]This is mainly because of their agricultural sector 
+[01:43.82]but also growth in services [including tourism] 
+[01:45.67]and a little in manufacturing," said Lusigi.
+[01:47.57]The report says Africa's top foreign trade partner is Europe. 
+[01:53.16]About 40 percent of African trade is with European nations. 
+[01:58.73]25 percent is with Asian countries 
+[02:03.48]and about 12 percent is with North America.
+[02:07.72]The report says African countries traded $81 million 
+[02:14.18]worth of goods among themselves in 2012. 
+[02:18.28]Much of it is in the making of clothing, leather, building material, 
+[02:24.72]farm tools and wood products like furniture.
+[02:29.22]Angela Lusigi says there’s strong demand in Africa 
+[02:35.12]for manufactured goods. 
+[02:37.11]These include television sets, telephones and other mobile technology. 
+[02:43.75]She says many of these products can be made in Africa.
+[02:50.08]The report says East and West Africa are leading the economic expansion. 
+[02:56.63]The report says low inflation especially in energy 
+[03:02.44]and food prices is helping economic growth in Africa. 
+[03:07.19]And it says African nations have put in place careful economic policies 
+[03:14.41]to cut spending and improve tax collection.
+[03:17.95]However, the report notes that official development assistance 
+[03:23.98]remains an important support for poor countries 
+[03:28.73]that lack enough foreign direct investment. 
+[03:31.92]Total official development assistance is estimated to be $55 billion.
+[03:39.62]And that's the VOA Learning English Economics Report. 
+[03:44.90]You can find more stories about economics 
+[03:49.08]and other subjects online on our website as well. I'm Mario Ritter.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

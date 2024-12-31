@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Art Helps Afghan Women Struggling with Depression</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Art Helps Afghan Women Struggling with Depression" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/art-helps-afghan-women-struggling-with-depression.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Art Helps Afghan Women Struggling with Depression</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/art-helps-afghan-women-struggling-with-depression.mp3" id="mp3"></a>
+<a href="make-your-home-spick-and-span-91367.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">20 August 2023</span><br/>
+<p>At her home in northern Afghanistan, a 19-year old woman draws her own image. In the drawing, she is covered by a blue <strong>burqa</strong> and is inside a cage.</p>
+<p>The woman, named Khushi, is a former university student. She once attended classes in law and political science at northern Balkh province's main university.</p>
+<p>However, the Taliban closed it and other learning institutions to women in December of 2022. Since then, Khushi has developed deep sadness, or depression. She now needs mental health treatment. Part of her treatment includes art <strong>therapy</strong> classes.</p><div class="contentImage"><img alt="Khushi talks to her art teacher Zaheen in an art studio in Mazar-i-Sharif, Afghanistan, August 6, 2023. (REUTERS/Ali Khara)" src="https://files.21voa.com/gdb/01000000-0aff-0242-5ac6-08db9e82448c_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Khushi talks to her art teacher Zaheen in an art studio in Mazar-i-Sharif, Afghanistan, August 6, 2023. (REUTERS/Ali Khara)</span></div>
+<p>She told Reuters reporters, "When I realized that I am not mentally well, I got sad ... I was not happy at all. I was always depressed, I felt like a bird being stuck in a cage, one who has lost all her happiness."</p>
+<p>Khushi, who is identified by only one name for security reasons, added, "After the Taliban banned girls from universities and announced that girls can no longer continue our education, I felt so upset."</p>
+<p>Over time, she said, her mental health got worse. She finally decided to see a mental health doctor, called a psychiatrist.</p>
+<p>Khushi's psychiatrist cannot be named for security reasons. But he told Reuters that art <strong>studios</strong> are the only places that remain for helping his patients.</p>
+<p>He said, art studios "...have become the only place where girls can clear their minds, catch up with old friends, make new friends, and apart from that, they can learn art too."</p>
+<p>Inside a small art studio in Balkh's capital Mazar-i-Sharif, paintings hang on the walls. Several young women, including Khushi, have gathered for a pencil drawing class. Many of them have been sent here at the recommendation of a mental health expert. The goals are to ease their loneliness and learn a new skill, as well as talk about their situations and take medication.</p>
+<p>One of the former university students in the pencil drawing class said, "When I felt depressed, the doctor <strong>prescribed</strong> me to go to a place where I can calm my mind. I chose the art studio. Not only did I make good friends here, I also receive art therapy."</p>
+<p>Khushi said art therapy gave her a break from her home situation. She said it also gave her a bit of hope for the future.</p>
+<p>"It gives me a sense of <strong>accomplishment</strong> for having made something...overall drawing empowers me with <strong>confidence</strong>," she said. "I'm <strong>disappointed</strong> in my life, but I am not giving up, I will fight. I hope things will get better in the future."</p>
+<p>Khushi now sees her psychiatrist twice a month. The doctor used to see four to five patients a day. But he said he now sees 10 to 15 patients each day. Most of them are women. The increase became especially noticeable after the Taliban banned female students from attending universities, the doctor said.</p>
+<p><strong>Restrictions on women</strong></p>
+<p>A source told Reuters that "...since the Islamic Emirate (the Taliban administration) started ruling the country, they have <strong>imposed</strong> so many restrictions on women." This source adds that women have been banned from universities, as well as <strong>amusement parks</strong> and <strong>beauty salons</strong>.</p>
+<p>Health organizations estimate half of Afghanistan's 40 million people have experienced mental struggles after many years of war. There have been few dependable studies on mental health issues in the country. But doctors and aid workers say that more women are struggling with mental health after government orders to restrict their work and education.</p>
+<p>Afghan women and mental health experts say that many women are now struggling with a deep sense of hopelessness and mental health problems. This is especially true of women in cities. Those women gained openings in education and work during the 20-year presence of foreign troops and a Western-backed government.</p>
+<p>The Taliban closed universities to women in December of last year. The move led to rare public protests. The decision came after the closure of most girls' high schools. Later, the Taliban ordered most female humanitarian workers not to work.</p>
+<p>The orders restricting women from public life have led to strong international criticism. Western governments have said it is a main problem standing in the way of officially recognizing the Taliban's government. The Taliban government took over the area as foreign forces left two years ago.</p>
+<p>The Taliban say they respect women's rights in line with their view of Islamic law and Afghan culture.</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Reporting by Reuters TV; Writing by Charlotte Greenfield. Anna Matteo adapted this story for VOA Learning English. </em></p>
+<p>___________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>burqa</strong> <em>– n. </em>a loose piece of clothing that covers the face and body and is worn in public by certain Muslim women</p>
+<p><strong>therapy </strong><em>– n. </em>treatment of an abnormal state of the mind or body</p>
+<p><strong>studio </strong><em>– n. </em>a place for the <a class="wsw__a" href="https://www.merriam-webster.com/dictionary/study">study</a> of an art (such as dancing, singing, or acting)</p>
+<p><strong>prescribe </strong><em>– v.</em></p>
+<p><strong>accomplishment </strong><em>– n. </em>an ability, social quality, or skill gained through training or practice</p>
+<p><strong>confidence </strong><em>– n. </em>a feeling of trust or belief</p>
+<p><strong>disappointed </strong><em>– adj. </em>defeated in expectation or hope</p>
+<p><strong>impose </strong><em>– v. </em>to establish or apply as a charge or penalty</p>
+<p><strong>amusement park </strong><em>– n. </em>a park with many rides (as a roller coaster or merry-go-round) and games for entertainment</p>
+<p><strong>beauty salon </strong><em>– n. </em>a place of business for the care of customers' hair, skin, and nails</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

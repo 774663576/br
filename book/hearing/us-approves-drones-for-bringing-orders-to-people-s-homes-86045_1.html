@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国批准无人机送货</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国批准无人机送货" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202101/us-approves-drones-for-bringing-orders-to-people-s-homes.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国批准无人机送货</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202101/us-approves-drones-for-bringing-orders-to-people-s-homes.mp3" id="mp3"></a>
+<a href="/static/lrc/us-approves-drones-for-bringing-orders-to-people-s-homes.lrc" id="lrc"></a>
+<a href="us-approves-drones-for-bringing-orders-to-people-s-homes-86045.html" id="CnPage" target="_blank"></a>
+<a href="how-do-i-continue-a-conversation-in-english-86043.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The U.S. Federal Aviation Administration (FAA) recently said it is issuing long-awaited rules that permit small drones to fly at night and over people. Drones, a kind of small aircraft, fly without a pilot.<br/>
+美国联邦航空管理局最近表示，它将发布被期待已久的，允许小型无人机在夜间和人群上空飞行的规定。无人机是一种无需飞行员操纵进行飞行的小型飞机。
+<p>The FAA's move is an important step toward the use of drones for large numbers of business deliveries in the United States.<br/>
+美国联邦航空管理局此举是朝着美国使用无人机进行大规模商业运输迈出的重要一步。</p>
+<p>The FAA is also requiring identification of most drones for security and safety reasons.<br/>
+出于安保和安全考虑，美国联邦航空管理局还要求大多数无人机提供身份识别。</p>
+<p><strong>Deliveries<br/>
+派送</strong></p>
+<p>FAA Administrator Steve Dickson said in a statement that the new rules "get us closer to the day when we will more routinely see drone operations such as the delivery of packages."<br/>
+美国联邦航空管理局局长史蒂夫·迪克森在一份声明中表示，这项新规定“让我们离更经常看到无人机运输包裹等操作的那一天更近。”</p>
+<p>Packages are boxes or large envelopes that are sent or delivered.<br/>
+包裹是指派送的箱子或大信封。</p>
+<p>Since the beginning of the coronavirus crisis, companies have raced to create drone fleets to speed deliveries.<br/>
+自从新冠病毒危机爆发以来，各公司都竞相打造无人机机队来加快派送速度。</p>
+<p>Delivery companies like UPS and Amazon have been investing in the technology for years. Both companies have seen growing profits during the coronavirus pandemic as more Americans turn to home delivery for many products, including groceries.<br/>
+UPS和Amazon等快递公司在这项技术上已经投入了很多年。这两家公司在新冠病毒大流行期间都看到了利润的增长，因为越来越多美国人都转向把包括食杂在内的许多商品送货上门。</p>
+<p>The rules also come at a time when drones represent the fastest-growing area in the transportation sector, an FAA Press Release Statement said.<br/>
+美国联邦航空管理局发布的声明称，这些规定出台时，也正值无人机成为交通行业发展最快领域的代表。</p>
+<p>The statement added that there are over 1.7 million drone registrations and 203,000 FAA-approved remote pilots in the United States.<br/>
+声明还称，美国有超过170万份无人机注册信息和20.3万名获得美国联邦航空管理局认证的远程飞行员。</p>
+<p><strong>Safety and Security Concerns<br/>
+安全和安保问题</strong></p>
+<p>For night operations, the FAA said drones must have special lights that help the aircraft avoid accidents. Remote ID, a form of identification, is required for all drones weighing around 250 grams or more. But, it is required for smaller drones in some situations. The Remote ID rule requires drones to broadcast ID messages via radio.<br/>
+美国联邦航空管理局表示，对于夜间飞行，无人机必须具备特殊灯光以帮助飞机避免事故。所有重量在250克以上的无人机都需要远程ID，这是一种身份证明。但是在某些情况下，更小的无人机也需要远程ID。远程ID的相关规定要求无人机通过无线电来广播身份信息。</p>
+<p><strong>Companies Seek Approval for Drone Deliveries<br/>
+各公司寻求无人机派送认证</strong></p>
+<p>The FAA's new rules are the latest in a series of policies about drone use for deliveries. In October 2019, United Parcel Service Inc. said that it won the U.S. government's first full approval to operate a drone airline.<br/>
+美国联邦航空管理局的这项新规定是一系列关于无人机派送政策中最新出台的政策。2019年10月，美国联合包裹服务公司（UPS）表示，它已经率先获得了美国政府的全面批准，可以运营无人机航空公司。</p>
+<p>Last year, Alphabet's Wing, a sister company of search engine Google, was the first to get U.S. air carrier approval for a single-pilot drone operation. In August, Amazon's drone service received federal approval. The approval lets the company begin testing business deliveries through its drone fleet.<br/>
+去年，Alphabet公司旗下的Wing公司率先获得了进行单飞行员无人机操作的美国航空承运人认证，Wing公司是搜索引擎谷歌的姊妹公司。今年8月，亚马逊公司的无人机服务获得联邦批准。该批准使得亚马逊公司开始测试通过其无人机机队进行商业交付。</p>
+<p>The new FAA rules will become official 60 days after publication next month. Drone manufacturers will have 18 months to begin producing drones with Remote ID, while drone operators have an additional year to begin using drones with Remote ID.<br/>
+美国联邦航空管理局的新规定将在下个月公布的60天之后正式生效。无人机制造商将有18个月时间开始生产带有远程ID的无人机，而无人机运营商还有更多1年时间开始使用带有远程ID的无人机。</p>
+<p>I'm John Russell.<br/>
+我是约翰·拉塞尔。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Approves Drones for Bringing Orders to People’s Homes]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The U.S. Federal Aviation Administration (FAA)
+[00:07.04]recently said it is issuing long-awaited rules
+[00:11.52]that permit small drones to fly at night and over people.
+[00:17.40]Drones, a kind of small aircraft, fly without a pilot.
+[00:23.56]The FAA's move is an important step
+[00:27.92]toward the use of drones for large numbers
+[00:31.44]of business deliveries in the United States.
+[00:35.60]The FAA is also requiring identification of most drones
+[00:42.12]for security and safety reasons.
+[00:45.60]FAA Administrator Steve Dickson said in a statement
+[00:51.32]that the new rules "get us closer to the day
+[00:55.08]when we will more routinely see drone operations
+[00:59.20]such as the delivery of packages."
+[01:03.04]Packages are boxes or large envelopes that are sent or delivered.
+[01:09.16]Since the beginning of the coronavirus crisis,
+[01:13.64]companies have raced to create drone fleets to speed deliveries.
+[01:19.36]Delivery companies like UPS and Amazon
+[01:23.64]have been investing in the technology for years.
+[01:28.28]Both companies have seen growing profits during the coronavirus pandemic
+[01:34.52]as more Americans turn to home delivery
+[01:38.32]for many products, including groceries.
+[01:42.28]The rules also come at a time
+[01:44.96]when drones represent the fastest-growing area
+[01:49.28]in the transportation sector, an FAA Press Release Statement said.
+[01:56.60]The statement added that there are over 1.7 million drone registrations
+[02:03.04]and 203,000 FAA-approved remote pilots in the United States.
+[02:10.72]For night operations, the FAA said drones must have special lights
+[02:17.24]that help the aircraft avoid accidents.
+[02:21.16]Remote ID, a form of identification,
+[02:25.48]is required for all drones weighing around 250 grams or more.
+[02:32.52]But, it is required for smaller drones in some situations.
+[02:39.48]The Remote ID rule requires drones to broadcast ID messages via radio.
+[02:47.44]The FAA's new rules are the latest in a series of
+[02:51.92]policies about drone use for deliveries.
+[02:55.92]In October 2019, United Parcel Service Inc.
+[03:01.84]said that it won the U.S. government's
+[03:05.00]first full approval to operate a drone airline.
+[03:09.96]Last year, Alphabet's Wing, a sister company of search engine Google,
+[03:16.28]was the first to get U.S. air carrier approval for a single-pilot drone operation.
+[03:24.68]In August, Amazon's drone service received federal approval.
+[03:30.40]The approval lets the company begin testing
+[03:34.04]business deliveries through its drone fleet.
+[03:38.16]The new FAA rules will become official
+[03:42.20]60 days after publication next month.
+[03:45.96]Drone manufacturers will have 18 months to begin producing drones
+[03:51.96]with Remote ID, while drone operators have
+[03:55.68]an additional year to begin using drones with Remote ID.
+[04:02.04]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

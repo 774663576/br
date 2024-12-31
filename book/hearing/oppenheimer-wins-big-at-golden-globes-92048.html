@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - ‘Oppenheimer’ Wins Big at Golden Globes</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, ‘Oppenheimer’ Wins Big at Golden Globes" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/oppenheimer-wins-big-at-golden-globes.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>‘Oppenheimer’ Wins Big at Golden Globes</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/oppenheimer-wins-big-at-golden-globes.mp3" id="mp3"></a>
+<a href="/static/lrc/oppenheimer-wins-big-at-golden-globes.lrc" id="lrc"></a>
+<a href="consumer-reports-finds-widespread-plastics-in-food-92045.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">08 January 2024</span><br/>
+<p>The historical film "Oppenheimer" won big at the Golden Globe awards Sunday. It won five awards, including best drama.</p>
+<p>And the <strong>comedy</strong> "Poor Things" <strong>upset</strong> summer hit "Barbie," as Hollywood threw its biggest party since labor disputes shut down much of show business last year.</p>
+<p>"Oppenheimer" is about the making of the atomic bomb. It won five awards, including best movie drama. Actors Cillian Murphy and Robert Downey Jr. won awards for their performances. Christopher Nolan won his first Golden Globe award for best director for the film.</p><div class="contentImage"><img alt="Producer Emma Thomas accepts best motion picture drama award for Oppenheimer during the 81st Annual Golden Globe Awards in Beverly Hills, Calif., on Sunday, Jan. 7, 2024. (Sonja Flemming/CBS via AP)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-3e1c-08dc105902a0_cx5_cy1_cw94_w268_r1.jpg"/><br/><span class="imagecaption">Producer Emma Thomas accepts best motion picture drama award for "Oppenheimer" during the 81st Annual Golden Globe Awards in Beverly Hills, Calif., on Sunday, Jan. 7, 2024. (Sonja Flemming/CBS via AP)</span></div>
+<p>"Poor Things" stars Emma Stone as a woman who was brought back to life by scientists. It won best movie musical or comedy. Awards watchers had widely expected that honor to go to "Barbie," the female empowerment story <strong>inspired</strong> by the famous toy.</p>
+<p>"Barbie" led 2023 box office lists and went into the night with a leading nine nominations. But it went home with just two awards. One was for Billie Eilish's song "What Was I Made For." Another was for a new <strong>category</strong> called cinematic and box office achievement, created for widely seen films.</p>
+<p>Lily Gladstone was the best actress winner for her role in "Killers of the Flower Moon." She began her acceptance speech by introducing herself in the Blackfeet Native American language, which she learned in school.</p>
+<p>"This is an historic win," Gladstone continued in English. "It doesn't belong to just me. I am holding it right now with all my beautiful sisters."</p>
+<p>She thanked director Martin Scorsese as well as Leonardo DiCaprio and Robert De Niro, her co-stars in the film. The movie was based on murders of members of the Osage Nation in the 1920s.</p>
+<p>In television, "Succession" was named best drama and led all series with four wins, including a lead acting award for Kieran Culkin.</p>
+<p>"The Bear," a television series about the struggles of owning a restaurant, won best TV comedy. Actors Jeremy Allen White and Ayo Edebiri both won awards for their performances in "The Bear."</p>
+<p>Less serious than the Academy Awards, the Golden Globes nearly collapsed in recent years. A 2021 <em>Los Angeles Times</em> report noted a lack of <strong>diversity</strong> among the 80 members of the Hollywood Foreign Press Association (HFPA). That is the group that previously voted on the Globes. The 2022 ceremony was canceled and the HFPA was shut down. The awards returned last year but drew a small audience.</p>
+<p>The awards are now voted on by a group of about 300 entertainment reporters from around the world.</p>
+<p>Sunday's ceremony showed Hollywood has re-accepted the Globes. Several of Hollywood's biggest stars could be seen in the crowd, including Meryl Streep and De Niro. Pop singer Taylor Swift also joined the crowd as a nominee for her recent concert film.</p>
+<p>The ceremony at the Beverly Hilton hotel started Hollywood's yearly awards season, which ends with the Academy Awards on March 10. The event brought top stars together for the first time after six months of strikes by actors and writers last year.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by Reuters and The Associated Press. </em></p>
+<p class="CxSpMiddle"><em>_______________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>upset </strong><em>— v. </em>angry or unhappy</p>
+<p class="CxSpMiddle"><strong>inspire </strong><em>— v. </em>to make want to do something</p>
+<p class="CxSpMiddle"><strong>category </strong><em>— n. </em>a group of people or things that are similar in some way</p>
+<p class="CxSpMiddle"><strong>marketing </strong><em>— n. </em>the activities that are involved in making people aware of a company's products, making sure that the products are available to be bought, etc.</p>
+<p class="CxSpMiddle"><strong>contender </strong><em>— n. </em>a person who tries to win something in a contest</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:‘Oppenheimer’ Wins Big at Golden Globes]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The historical film "Oppenheimer"
+[00:02.52]won big at the Golden Globe awards Sunday.
+[00:06.60]It won five awards, including best drama.
+[00:11.84]And the comedy "Poor Things"
+[00:14.20]upset summer hit "Barbie,"
+[00:16.60]as Hollywood threw its biggest party
+[00:19.32]since labor disputes
+[00:20.88]shut down much of show business last year.
+[00:25.24]"Oppenheimer" is about
+[00:26.84]the making of the atomic bomb.
+[00:29.52]It won five awards, including best movie drama.
+[00:33.88]Actors Cillian Murphy and Robert Downey Jr.
+[00:38.24]won awards for their performances.
+[00:41.20]Christopher Nolan won his first Golden Globe award
+[00:45.00]for best director for the film.
+[00:48.68]"Poor Things" stars Emma Stone as a woman
+[00:51.88]who was brought back to life by scientists.
+[00:54.32]It won best movie musical or comedy.
+[00:58.84]Awards watchers had widely expected
+[01:02.12]that honor to go to "Barbie,"
+[01:04.28]the female empowerment story
+[01:06.36]inspired by the famous toy.
+[01:10.52]"Barbie" led 2023 box office lists
+[01:14.48]and went into the night with a leading nine nominations.
+[01:19.28]But it went home with just two awards.
+[01:22.88]One was for Billie Eilish's song "What Was I Made For."
+[01:27.80]Another was for a new category
+[01:30.44]called cinematic and box office achievement,
+[01:33.64]created for widely seen films.
+[01:38.16]Lily Gladstone was the best actress winner
+[01:41.56]for her role in "Killers of the Flower Moon."
+[01:44.92]She began her acceptance speech
+[01:47.88]by introducing herself
+[01:49.44]in the Blackfeet Native American language,
+[01:52.32]which she learned in school.
+[01:54.96]"This is an historic win," Gladstone continued in English.
+[01:58.96]"It doesn't belong to just me.
+[02:01.52]I am holding it right now with all my beautiful sisters."
+[02:06.76]She thanked director Martin Scorsese
+[02:09.60]as well as Leonardo DiCaprio and Robert De Niro,
+[02:13.56]her co-stars in the film.
+[02:15.52]The movie was based on murders
+[02:18.32]of members of the Osage Nation in the 1920s.
+[02:23.40]In television, "Succession" was named best drama
+[02:27.12]and led all series with four wins,
+[02:30.56]including a lead acting award for Kieran Culkin.
+[02:36.04]"The Bear," a television series
+[02:38.32]about the struggles of owning a restaurant,
+[02:41.24]won best TV comedy.
+[02:43.44]Actors Jeremy Allen White and Ayo Edebiri
+[02:47.80]both won awards for their performances in "The Bear."
+[02:52.96]Less serious than the Academy Awards,
+[02:55.80]the Golden Globes nearly collapsed in recent years.
+[02:59.56]A 2021 Los Angeles Times report
+[03:03.28]noted a lack of diversity among the 80 members of
+[03:07.28]the Hollywood Foreign Press Association (HFPA).
+[03:11.88]That is the group that previously voted on the Globes.
+[03:16.40]The 2022 ceremony was canceled
+[03:19.84]and the HFPA was shut down.
+[03:23.52]The awards returned last year
+[03:26.12]but drew a small audience.
+[03:28.48]The awards are now voted on
+[03:31.12]by a group of about 300 entertainment reporters
+[03:34.96]from around the world.
+[03:38.44]Sunday's ceremony showed
+[03:40.68]Hollywood has re-accepted the Globes.
+[03:43.56]Several of Hollywood's biggest stars
+[03:47.16]could be seen in the crowd,
+[03:48.80]including Meryl Streep and De Niro.
+[03:52.64]Pop singer Taylor Swift also joined the crowd
+[03:56.00]as a nominee for her recent concert film.
+[04:00.56]The ceremony at the Beverly Hilton hotel
+[04:03.68]started Hollywood's yearly awards season,
+[04:06.56]which ends with the Academy Awards on March 10.
+[04:11.20]The event brought top stars together for the first time
+[04:15.08]after six months of strikes by actors and writers last year.
+[04:21.00]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

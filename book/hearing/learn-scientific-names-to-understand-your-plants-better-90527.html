@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Learn Scientific Names to Understand Your Plants Better</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Learn Scientific Names to Understand Your Plants Better" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/learn-scientific-names-to-understand-your-plants-better.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Learn Scientific Names to Understand Your Plants Better</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/learn-scientific-names-to-understand-your-plants-better.mp3" id="mp3"></a>
+<a href="shoeshine-businesses-disappearing-in-the-u-s-90521.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">06 March 2023</span><br/>
+<p>Plant lovers often look at lists of plants or seeds for sale in the winter to plan their gardens for the coming year.</p>
+<p>Those lists usually have two names for each plant: a common name and a <strong>botanical</strong>, or scientific name. The botanical name is not in English, which makes a lot of people unsure about what it means or how to say it.</p>
+<p>The language is Latin. Its purpose is to help growers be sure that the plant they bring home is the one they wanted to buy. The problem with common names is that they are nicknames, or informal names, for plants. Many plants can share a common name. One plant can also have many common names. You can see how this can cause misunderstandings.</p><div class="contentImage"><img alt="A sculpture of Swedish botanist, zoologist and physician Carl Linnaeus stands in the Heritage Garden of the Chicago Botanic Garden." src="https://files.21voa.com/gdb/01000000-0aff-0242-c795-08db1b653793_w268_r1.jpg"/><br/><span class="imagecaption">A sculpture of Swedish botanist, zoologist and physician Carl Linnaeus stands in the Heritage Garden of the Chicago Botanic Garden.</span></div>
+<p>For example, you may have heard the name "geranium." The common name for the true <em>Geranium</em> is perennial cranesbill. The container plant people call the geranium is actually a <em>Pelargonium</em>.</p>
+<p><strong>History of Botanical Latin</strong></p>
+<p>The Latin system of naming goes back to the 1700s and Swedish botanist, zoologist and physician Carl Linnaeus. His books <em>Systema Naturae</em> and <em>Fundamenta Botanica</em> created rules for <strong>classifying</strong> and naming plants in botanical Latin. For this reason, gardeners should try to become familiar with it.</p>
+<p>Linnaeus spent his life giving every plant and animal that he knew a two-part, or binomial, name. The two parts are: <strong>genus</strong> and <strong>species</strong>. These names are often based on the appearance of parts of the plant or animal.</p>
+<p>Linnaeus' International Code of Botanical Nomenclature<em> </em>sets rules for how plants should be named. They include:</p>
+<ol>
+<li>A plant name must start with a capitalized genus,</li>
+<li>The second part of the name is the species, written in lower-case, usual letter.</li>
+<li>Next, the name includes either a <strong>variety</strong> (if the plant is found in nature), <strong>cultivar</strong> (if the plant is created by a breeder) or <strong>hybrid</strong> name (if it is a cross between two plants, an "x" is used).</li>
+</ol>
+<p><strong>Who chooses the scientific name?</strong></p>
+<p>The International Botanical Congress has gathered every six years to examine and decide on new naming questions. The questions come up because of new genetic research and scientific findings. After all, Linnaeus did not have modern microscopes or DNA testing laboratories to decide which plants are related.</p>
+<p>For example, bleeding hearts, once officially called <em>Dicentra spectabilis</em>, were moved into the newly created <em>Lamprocapnos</em> genus several years ago. Their name is now <em>Lamprocapnos spectabilis</em>.</p>
+<p>The snapdragon, a popular garden flower, was once in the <em>Antirrhinum</em> genus. The Congress moved it into the plantain family, <em>Plantaginaceae</em>.</p>
+<p><strong>No control over common names</strong></p>
+<p>Since no group controls the use of common names, the same plant may have several. Take <em>Rudbeckia hirta.</em> Some call it a black-eyed Susan, others say it is a yellow-oxeye daisy and others know it as the gloriosa daisy.</p>
+<p>Ask a garden center employee for a snowball bush, and you might walk out with a <em>Hydrangea arborescens</em> or a <em>Viburnum plicatum</em>. There is a big difference. The first one has large round flower heads that bloom in the summer. The second one has groups of smaller flowers and blooms in the spring. But both are beautiful.</p>
+<p>How can you learn the botanical name for a plant before you buy it? Search for the common name in the Royal Horticultural Society's free online <a class="wsw__a" href="https://www.rhs.org.uk/plants/search-form">Garden Plant Finder</a> and get a list of the botanical names. You can also search for a botanical name and learn the common names.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jessica Damiano wrote this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>botanical </strong>– <em>adj.</em> of plants or plant life</p>
+<p><strong>classify </strong>–v. to order in groups based systematically on qualities of one kind or another</p>
+<p><strong>genus</strong><strong><em> </em></strong><em>– n.</em> a major category in the classification of animals, plants, and the like, ranking above a species and below a family: it can include one species or many similar species</p>
+<p><strong>species</strong> – <em>n.</em> a class of plants or animals whose members have the same main characteristics and are able to breed with each other.</p>
+<p><strong>variety</strong> – <em>n.</em> a kind of animal or plant produced by artificial breeding</p>
+<p><strong>cultivar</strong> – <em>n. </em>a variety of plant that began and continued under cultivation</p>
+<p><strong>hybrid</strong> – <em>n.</em> an animal or plant resulting from a cross between genetically unlike individuals</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Boston Common: America’s First Public Park</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Boston Common: America’s First Public Park" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/boston-common-america-s-first-public-park.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Boston Common: America’s First Public Park</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/boston-common-america-s-first-public-park.mp3" id="mp3"></a>
+<a href="/static/lrc/boston-common-america-s-first-public-park.lrc" id="lrc"></a>
+<a href="indonesian-bird-could-face-new-threat-from-capital-city-development-91939.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">14 December 2023</span><br/>
+<p>Almost 400 years ago, America's early European colonists voted to tax each household in Boston about $70 in today's money. The money was used to buy a local farm. The plan was to use it as a common area for the public.</p>
+<p>That is how Boston Common, in the state of Massachusetts, became America's first public <strong>park.</strong></p>
+<p>Liz Vizza is president of the Friends of the Public Garden, an organization that supports Boston Common. She noted that Bostonians did not have backyards – private outdoor spaces behind their homes. Boston Common, she said, became "their front yard and backyard and common ground. It was a place that everybody owned."</p><div class="contentImage"><img alt="America's Oldest Public Park" src="https://files.21voa.com/gdb/01000000-c0a8-0242-d371-08dbf4d37028_tv_w268_r1.jpg"/><br/><span class="imagecaption">America's Oldest Public Park</span></div>
+<p>On any given day, colonists walking though Boston Common would see soldiers setting up camp or their neighbors taking walks. They may also have seen public punishments. Presidents George Washington and John Adams also visited the park.</p>
+<p>Visitors would have seen cows, because everyone had the right to keep one cow per household in the area.</p>
+<p>Today, visitors will find dogs instead of cows in the 20-hectare park. The cows became outlawed in 1830 as Boston Common became more of a place for <strong>recreation</strong>.</p>
+<p>Friends of the Public Garden estimates that Boston Common sees 7 million visitors each year.</p>
+<p>"Boston Common is a central stage of <strong>civic</strong> life in Boston and it's been that center stage of civic life for hundreds of years, ever since it began as a park in 1634," Vizza said. "America's oldest park is a place where we come to celebrate, we come to protest, we come to find a place alone," she added.</p>
+<p>Boston Common is home to several large pieces of art. They include "The Embrace," a <strong>sculpture </strong>that shows civil rights leader Martin Luther King, Jr. holding his wife, Coretta Scott King. The Brewer Fountain was the park's first public piece of art. It won the top award at the 1855 World's Fair in Paris, France.</p>
+<p>The pieces of art found on the Common may soon change to include a wider selection of subjects.</p>
+<p>Vizza said, "We want people to look at it with new eyes and just have a deeper understanding and respect and <strong>awareness</strong> of the history."</p>
+<p>That history includes the native Massachusett tribe, the first people to live where the Common is now. The state of Massachusetts is named after the Massachusett people.</p>
+<p>Vizza said, "People have lived on this land for 12,000 years. So, we do want to think about colonial America because that's a <strong>fascinating</strong> story for us. But what's an even more fascinating story is to <strong>peel</strong> those layers open to think about the Native Americans living here."</p>
+<p>Vizza's team is working with tribal members to develop a piece to recognize the Massachusett tribe. They hope to have something in place by 2026, when America will celebrate its 250th birthday.</p>
+<p>I'm Ashley Thompson.</p>
+<p><em>Dora Mekouar reported this story for Voice of America. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>park </strong>– <em>n</em>. a piece of public land in or near a city that is kept free of houses and other buildings and can be used for pleasure and exercise</p>
+<p><strong>recreation </strong>– <em>n</em>. something people do to relax or have fun: activities done for enjoyment</p>
+<p><strong>civic </strong>– <em>adj</em>. of or relating to a city or town or the people who live there</p>
+<p><strong>sculpture </strong>– <em>n</em>. a piece of art that is made by carving or molding clay, stone, or metal</p>
+<p><strong>landscape </strong>– <em>n</em>. a picture that shows a natural scene of land or the countryside</p>
+<p><strong>awareness </strong>– <em>adj</em>. knowing that something (such as a situation, condition, or problem) exists</p>
+<p><strong>fascinating </strong>– <em>adj</em>. very interesting or appealing</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Boston Common: America’s First Public Park]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Almost 400 years ago,
+[00:02.60]America's early European colonists voted
+[00:06.72]to tax each household in Boston
+[00:10.16]about $70 in today's money.
+[00:13.88]The money was used to buy a local farm.
+[00:17.44]The plan was to use it as a common area for the public.
+[00:23.48]That is how Boston Common,
+[00:25.44]in the state of Massachusetts,
+[00:27.60]became America's first public park.
+[00:31.56]Liz Vizza is president of the Friends of the Public Garden,
+[00:36.44]an organization that supports Boston Common.
+[00:40.68]She noted that Bostonians did not have backyards –
+[00:45.04]private outdoor spaces behind their homes.
+[00:48.52]Boston Common, she said,
+[00:50.48]became "their front yard
+[00:52.12]and backyard and common ground.
+[00:54.44]It was a place that everybody owned."
+[00:58.20]On any given day,
+[00:59.84]colonists walking though Boston Common
+[01:02.60]would see soldiers setting up camp
+[01:05.68]or their neighbors taking walks.
+[01:07.92]They may also have seen public punishments.
+[01:11.48]Presidents George Washington and
+[01:13.92]John Adams also visited the park.
+[01:17.60]Visitors would have seen cows,
+[01:20.24]because everyone had the right to keep
+[01:22.60]one cow per household in the area.
+[01:25.28]Today, visitors will find dogs
+[01:28.24]instead of cows in the 20-hectare park.
+[01:32.60]The cows became outlawed in 1830
+[01:35.84]as Boston Common became more of a place for recreation.
+[01:40.40]Friends of the Public Garden estimates
+[01:44.16]that Boston Common sees 7 million visitors each year.
+[01:49.72]"Boston Common is a central stage of civic life in Boston
+[01:54.40]and it's been that center stage of civic life
+[01:57.72]for hundreds of years,
+[01:59.40]ever since it began as a park in 1634," Vizza said.
+[02:05.28]"America's oldest park is a place
+[02:08.24]where we come to celebrate, we come to protest,
+[02:11.44]we come to find a place alone," she added.
+[02:16.40]Boston Common is home
+[02:18.08]to several large pieces of art.
+[02:20.44]They include "The Embrace,"
+[02:23.00]a sculpture that shows
+[02:24.68]civil rights leader Martin Luther King, Jr.
+[02:28.00]holding his wife, Coretta Scott King.
+[02:32.16]The Brewer Fountain was the park's first public piece of art.
+[02:36.44]It won the top award at the 1855
+[02:40.76]World's Fair in Paris, France.
+[02:44.52]The pieces of art found on the Common
+[02:47.04]may soon change to include
+[02:48.96]a wider selection of subjects.
+[02:51.36]Vizza said, "We want people to look at it with new eyes
+[02:55.76]and just have a deeper understanding and respect
+[02:59.84]and awareness of the history."
+[03:03.04]That history includes the native Massachusett tribe,
+[03:06.96]the first people to live where the Common is now.
+[03:10.68]The state of Massachusetts is named
+[03:13.44]after the Massachusett people.
+[03:16.44]Vizza said, "People have lived on this land
+[03:19.84]for 12,000 years. So,
+[03:22.64]we do want to think about colonial America
+[03:26.04]because that's a fascinating story for us.
+[03:29.44]But what's an even more fascinating story
+[03:32.52]is to peel those layers open
+[03:34.72]to think about the Native Americans living here."
+[03:38.88]Vizza's team is working with tribal members
+[03:42.12]to develop a piece to recognize the Massachusett tribe.
+[03:46.12]They hope to have something in place by 2026,
+[03:50.64]when America will celebrate its 250th birthday.
+[03:55.16]I'm Ashley Thompson. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

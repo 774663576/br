@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Disputed Elections Have Changed American Democracy</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, How Disputed Elections Have Changed American Democracy" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202011/how-disputed-presidential-elections-have-changed-american-democracy.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Disputed Elections Have Changed American Democracy</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202011/how-disputed-presidential-elections-have-changed-american-democracy.mp3" id="mp3"></a>
+<a href="trying-growing-plants-from-cuttings-85715.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Mario Ritter Jr.</span><br/>
+<span class="datetime">09 November 2020</span><br/>
+<p>
+President Donald Trump is not the first candidate to dispute the results of a U.S. presidential election. The United States has had several highly contested elections in the past. Here are a few of them.</p>
+<p><strong>Voting machines</strong></p>
+<p>The disputed presidential election of 2000 led to changes to voting systems in many states across the country. Republican George W. Bush and Democrat Al Gore were the two main candidates.</p>
+<p>The dispute over votes centered on a few counties in the state of Florida. After legal action by both sides, the result was decided by the U.S. Supreme Court on December 12, 2000. Gore lost the election although his supporters note that he won the popular vote.</p>
+<p>The United States elects presidents through a system called the Electoral College. That system gives each state a certain number of votes. A candidate needs at least 270 electoral votes to gain the presidency.</p>
+<p>Robert Speel is a professor of political science at Penn State University in Erie, Pennsylvania. He said that in 2000 much of the United States used a <strong>punch</strong> <strong>card</strong> ballot system using mechanical voting machines.</p>
+<p>Speel said: "...Unknown to most Americans, every year thousands of ballots were getting thrown out because that punch card system was <strong>malfunctioning</strong> and also was <strong>confusing</strong> voters."</p>
+<p>"Election officials knew that and hadn't told anyone and it didn't become public until that election," he said. Speel went on to say that the election of 2000 led to more modern voting systems being used in the United States. That led to the end of the punch card in the United States and Americans now use more modern voting systems."</p>
+<p>Alexander Cohen is an assistant professor of political science at Clarkson University in Potsdam, New York. He said, "Al Gore had an opportunity to question the <strong>legitimacy</strong> of some of those votes."</p>
+<p>However, Cohen argued that Gore "...chose not to because it would be damaging to democracy to keep fighting."</p>
+<div class="contentImage"><img alt="FILE - President-elect Bush meets with Vice President Gore at Gore's official residence in Washington, Tuesday, Dec. 19, 2000. (AP Photo/J. Scott Applewhite)" src="https://files.21voa.com/gdb/A800056E-28AE-4B6E-A13E-D6AA69D72AD7_w268_r0.jpg"/><br/>
+<span class="imagecaption">FILE - President-elect Bush meets with Vice President Gore at Gore's official residence in Washington, Tuesday, Dec. 19, 2000. (AP Photo/J. Scott Applewhite)</span></div>
+<p>
+<strong>The election of 1960</strong></p>
+<p>The 1960 presidential election between Democrat John F. Kennedy and Republican Richard Nixon also was notable for accusations of cheating. Republicans suspected that Chicago Mayor Richard Daley provided just enough votes to give Kennedy the state of Illinois and the presidency. There also were questions about voting numbers in several other states. After considering it, Nixon decided not to seek court action. </p>
+<p>"There's some evidence to suggest again that Nixon didn't want to make things that divisive," said Cohen.</p>
+<p><strong>The election of 1876</strong></p>
+<p>Some historians say that the 1876 contested election between Republican Rutherford B. Hayes and Democrat Samuel Tilden had long-term bad results. They say the deal to settle the election resulted in discriminatory laws in the American South that hurt Black Americans. </p>
+<p>That year, both parties claimed they had won a majority in the Electoral College. The election was decided by the U.S. House of Representatives, as the U.S. Constitution provides.</p>
+<p>
+The Democratic Party was the majority party in the South during the Civil War, which ended in 1865. Democratic lawmakers eventually <strong>conceded</strong> to Republican lawmakers in exchange for a withdrawal of Union forces from the South. Hayes was then elected president. But, historians say the Union forces were also protecting the civil rights of the former slaves. In the years that followed, they say, discriminatory laws that separated the races were put in place in the South.</p>
+<p>Penn State University's Speel said: "Very quickly the political leaders who had been leading in the South before the American Civil War and who had supported slavery, again rose to the top and began dominating politics again in the South."</p>
+<p>He said that led to the loss of almost all political and social rights for African Americans. </p>
+<p>Cohen blames Congress for permitting this to happen. "How do you quantify the loss of lives, and the pain...that came from that decision?" said Cohen.</p>
+<p><strong>Secret ballots </strong></p>
+<p>The election of 1888 was marked by accusations of buying votes or <strong>bribing</strong> voters. Democrat incumbent Grover Cleveland faced Republican Benjamin Harrison in that election.</p>
+<p>In those days, ballots were given out by the political parties. Some votes were taken publicly. Some people, known as floaters, sold their votes to whoever would pay the most.</p>
+<p>A letter sent by the Republican National Committee told party workers to divide voters into groups of five. They were told to pay them to vote for the Republican candidate. The resulting situation led to the end of public ballots.</p>
+<p>"That particular election, in which there were widespread accusations of corruption, led to the <strong>adoption</strong> of the secret ballot nationwide where Americans now vote privately without people knowing how they vote," Speel said.</p>
+<p><strong>The process of voting in the country </strong></p>
+<p>Cohen looks to the failure of democracies in Latin America and Africa when considering the effects of questioning the <strong>integrity</strong> of voting.</p>
+<p>Cohen said people have to believe that the political system is fair and that their votes matter for democracy to succeed.</p>
+<p>Cohen went on to say that: "...Once you take the position that our votes don't count because there are so many other <strong>fraudulent</strong> votes out there, you're <strong>inspiring</strong> people to revolt because you're...arguing that democracy isn't working."</p>
+<p>Cohen said that, so far in the 2020 election, he does not see that any lasting damage has been done to American democracy.</p>
+<p>"We still have rule of law. We still follow the rule of law and ... so far the [Trump] campaign is following the rule of law," he said. "They're asking <strong>specific</strong> things from judges, and the states seem to be behaving as well."</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Dora Mekaouar reported this story for VOANEWS. Mario Ritter Jr. adapted it for VOA Learning English. Ashley Thompson was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>punch card </strong><em>– n.</em> a card with holes that has been punched in different positions to represent information, once used widely as a way to capture voting information</p>
+<p><strong>malfunctioning </strong><em>–v. </em>to fail to work properly</p>
+<p><strong>confuse</strong> <em>– v.</em> to be unsure or unable to understand something</p>
+<p><strong>legitimacy </strong><em>–n. </em>permitted according to law or rules</p>
+<p><strong>concede </strong><em>–v. </em>to admit defeat</p>
+<p><strong>adoption </strong><em>–n. </em>to begin to officially accept or approve something</p>
+<p><strong>fraudulent </strong><em>–adj. </em>done to trick someone or many people to get something valuable</p>
+<p><strong>inspire</strong> <em>– v</em>. to cause something to happen or to cause people to want to do something</p>
+<p><strong>integrity</strong> <em>– n</em>. the quality of being honest and fair</p>
+<p><strong>specific </strong><em>–n. </em>clearly and exactly presented or stated</p>
+<p><em>We want to hear from you. Write to us in the Comments section, and </em><a class="wsw__a" href="https://www.21voa.com" target="_blank"><em>visit 51VOA.COM</em></a><em>.</em></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

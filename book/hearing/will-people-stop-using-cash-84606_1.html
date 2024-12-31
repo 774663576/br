@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 人们会停止使用现金吗？</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 人们会停止使用现金吗？" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202005/will-people-stop-using-cash.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>人们会停止使用现金吗？</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202005/will-people-stop-using-cash.mp3" id="mp3"></a>
+<a href="/static/lrc/will-people-stop-using-cash.lrc" id="lrc"></a>
+<a href="will-people-stop-using-cash-84606.html" id="CnPage" target="_blank"></a>
+<a href="take-time-to-stop-and-smell-the-roses-84601.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">For centuries, people have kept large amounts of cash at home during difficult times. But in the coronavirus crisis, things are different. These metal coins and paper bills can be a source of worry rather than hope.<br/>
+几个世纪以来，人们在困难时期都会在家里存放大量现金。但是在新冠病毒危机中，情况却有所不同。这些硬币和纸币可能会引发担忧，而不是带来希望。 
+<p>The fear is that these objects, possibly touched by thousands of people, could be a way for the coronavirus to spread. Public officials and health experts have said that the risk is small. Still, some businesses refuse to accept them, and some countries have suggested that their citizens should stop using them altogether.<br/>
+人们担心这些被成千上万人触摸过的现金可能成为新冠病毒传播的一种途径。政府官员和卫生专家表示，这种风险很小。然而一些商店仍然拒绝收取现金，一些国家建议本国公民应该完全停止使用现金。</p>
+<p>Zachary Cohle is an economics professor at Quinnipiac University in Connecticut. "In many areas, cash was already beginning to disappear due the increased risk of robbery, the ease of internet ordering, and the ubiquity of cell phones," he said. The term ubiquity refers to something being seen everywhere.<br/>
+扎卡里·科尔是康涅狄格州昆尼皮亚克大学的经济学教授。他说：“由于增加被抢劫的风险，互联网购物的便利性以及手机的普及，在许多地区，现金已经开始消失。”Ubiquity这个术语是指随处可见的事物。</p>
+<p>Sweden, Finland, Norway, Canada and others have slowly reduced cash use to the point where using it in large amounts seems unusual. Britain and Australia are expected to become cashless countries. And in China, cash use has dropped as electronic payment services increased in popularity over the past ten years.<br/>
+瑞士、芬兰、挪威、加拿大等国已经逐渐减少现金使用量，以至于使用大额现金看上去很奇怪。预计英国和澳大利亚将会成为无现金国家。过去10年随着电子支付服务的普及，中国的现金使用量有所下降。</p>
+<p>"Cash ist Fesch" is a common saying in Austria and southern Germany. The words mean cash is beautiful. Since the virus outbreak, shops that have remained open, like grocery stores, have encouraged people to pay with cards. And Germany's central bank said 43 percent of Germans recently paid for goods and services with a card.<br/>
+Cash ist Fesch 是奥地利和德国南部的一句俗语。这句话的意思是现金很美。自从新冠病毒爆发以来，诸如杂货店之类的仍然开放的商店鼓励人们用银行卡付款。德国中央银行表示，最近有43%的德国人使用银行卡购买商品和服务。</p>
+<p>The Bank of Japan estimates that cash makes up for 53 percent of household assets. But the threat of the coronavirus could move the country toward going cashless, said Hiroki Maruyama, head of the nonprofit Fintech Association of Japan. He added, "The culture is slowly changing."<br/>
+日本银行估计现金占到了家庭资产的53%。但是非营利性组织日本金融科技协会会长丸山弘树说，新冠病毒的威胁可能使得日本迈向无现金社会。他还说：“日本的这种文化正在慢慢改变。”</p>
+<p>In Iran, there are no international bank cards, like Visa or Mastercard, because of U.S. sanctions. Yet new signs appeared at some gas stations in Tehran: "Service is only for those who will pay by debit cards." A debit card is a small plastic card that is used in place of cash to buy things.<br/>
+伊朗由于受到美国制裁没有维萨和万事达之类的国家银行卡。然而在德黑兰的一些加油站出现了新招牌，写着“仅能使用借记卡付款。”借记卡是指可代替现金用于购物的小塑料卡片。</p>
+<p><strong>Will cash disappear?<br/>
+现金会消失吗？</strong></p>
+<p>However, cash use is still common in places like West and Central Africa where many cannot pay for the cost of banking services.<br/>
+然而，使用现金在西非和中非等地仍然很普遍，那里许多人付不起银行服务的费用。</p>
+<p>Dorothy Harpool teaches at Wichita State University's W. Frank Barton School of Business. Harpool thought some people would rethink their use of cash during the crisis. But she said the world would not be cashless "until everyone and every country has reliable access to the internet."<br/>
+多萝西·哈普在威奇塔州立大学弗兰克巴顿商学院任教。哈普认为有些人在这次危机期间会重新考虑对现金的使用。但是她表示，这个世界不会成为无现金社会，“直到每个人和每个国家都拥有可靠的互联网访问权限为止。”</p>
+<p>In Lebanon, as the economy worsened late last year, the central bank said people withdrew an estimated $3 billion and saved it at home.<br/>
+在黎巴嫩，由于去年年底经济恶化，该国央行表示人们提取了大约30亿美元放在家里。</p>
+<p>"Corona is the last thing on people's minds right now," Ihsan, a money changer in Beirut said. "All they're thinking about is how to handle this crisis and get money to live."<br/>
+贝鲁特的货币兑换商伊桑表示：“现在新冠病毒是人们最后才考虑的事情。他们所考虑的只是如何处理这场经济危机并赚钱生活。”</p>
+<p>He said there are some things you just cannot do without cash. "Like how else can you bribe a government employee to get your business done? With a credit card?"<br/>
+他说，有些事情离不开现金。“就像你能还如何贿赂政府雇员来完成你的业务？难道用信用卡？”</p>
+<p>I'm John Russell.<br/>
+我是约翰·罗素。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Will People Stop Using Cash?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]For centuries, people have kept large amounts of cash at home during difficult times.
+[00:09.24]But in the coronavirus crisis, things are different.
+[00:14.48]These metal coins and paper bills can be a source of worry rather than hope.
+[00:22.04]The fear is that these objects, possibly touched by thousands of people,
+[00:28.80]could be a way for the coronavirus to spread.
+[00:33.32]Public officials and health experts have said that the risk is small.
+[00:40.00]Still, some businesses refuse to accept them, and some countries have suggested
+[00:47.76]that their citizens should stop using them altogether.
+[00:53.08]Zachary Cohle is an economics professor at Quinnipiac University in Connecticut.
+[01:00.60]"In many areas, cash was already beginning to disappear
+[01:05.76]due the increased risk of robbery, the ease of internet ordering,
+[01:12.20]and the ubiquity of cell phones," he said.
+[01:16.64]The term ubiquity refers to something being seen everywhere.
+[01:22.48]Sweden, Finland, Norway, Canada and others have slowly reduced cash use
+[01:30.64]to the point where using it in large amounts seems unusual.
+[01:36.76]Britain and Australia are expected to become cashless countries.
+[01:42.72]And in China, cash use has dropped as electronic payment services
+[01:48.92]increased in popularity over the past ten years.
+[01:54.24]"Cash ist Fesch" is a common saying in Austria and southern Germany.
+[02:00.92]The words mean cash is beautiful.
+[02:04.92]Since the virus outbreak, shops that have remained open,
+[02:09.88]like grocery stores, have encouraged people to pay with cards.
+[02:15.24]And Germany's central bank said 43 percent of Germans
+[02:20.60]recently paid for goods and services with a card.
+[02:25.12]The Bank of Japan estimates that cash makes up for 53 percent of household assets.
+[02:33.64]But the threat of the coronavirus could move the country toward going cashless,
+[02:40.56]said Hiroki Maruyama, head of the nonprofit Fintech Association of Japan.
+[02:47.72]He added, "The culture is slowly changing."
+[02:52.28]In Iran, there are no international bank cards,
+[02:56.68]like Visa or Mastercard, because of U.S. sanctions.
+[03:02.08]Yet new signs appeared at some gas stations in Tehran:
+[03:07.40]"Service is only for those who will pay by debit cards."
+[03:12.16]A debit card is a small plastic card that is used in place of cash to buy things.
+[03:20.32]However, cash use is still common in places like West and Central Africa
+[03:27.24]where many cannot pay for the cost of banking services.
+[03:32.16]Dorothy Harpool teaches at Wichita State University's W. Frank Barton School of Business.
+[03:40.80]Harpool thought some people would rethink their use of cash during the crisis.
+[03:47.92]But she said the world would not be cashless
+[03:51.68]"until everyone and every country has reliable access to the internet."
+[03:58.44]In Lebanon, as the economy worsened late last year, the central bank
+[04:05.04]said people withdrew an estimated $3 billion and saved it at home.
+[04:12.16]"Corona is the last thing on people's minds right now,"
+[04:16.76]Ihsan, a money changer in Beirut said.
+[04:20.60]"All they're thinking about is how to handle this crisis and get money to live."
+[04:27.20]He said there are some things you just cannot do without cash.
+[04:32.44]"Like how else can you bribe a government employee
+[04:36.28]to get your business done? With a credit card?"
+[04:40.76]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

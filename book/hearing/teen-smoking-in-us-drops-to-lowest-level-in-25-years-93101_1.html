@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国青少年吸烟率降至25年来最低水平</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 美国青少年吸烟率降至25年来最低水平" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/teen-smoking-in-us-drops-to-lowest-level-in-25-years.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国青少年吸烟率降至25年来最低水平</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/teen-smoking-in-us-drops-to-lowest-level-in-25-years.mp3" id="mp3"></a>
+<a href="/static/lrc/teen-smoking-in-us-drops-to-lowest-level-in-25-years.lrc" id="lrc"></a>
+<a href="teen-smoking-in-us-drops-to-lowest-level-in-25-years-93101.html" id="CnPage" target="_blank"></a>
+<a href="us-agency-issues-final-rules-for-flying-air-taxis-93097.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>A new government study suggests U.S. teen smoking rates reached an all-time low this year.<br/>一项新的政府研究表明，美国青少年吸烟率今年达到了历史最低水平。</p><p>The study was a survey of American youth carried out by the U.S. Centers for Disease Control and Prevention (CDC).<br/>这项研究是美国疾控预防中心对美国青少年进行的一项调查。</p><p>The survey involved middle school students – which includes grades six through eight – and high school students in grades nine through 12. Nearly 30,000 students from 283 U.S. schools took part in the effort, which was carried out from January to May.<br/>该调查涉及六至八年级的初中生以及九至十二年级的高中生。来自美国283所学校的近3万名学生参加了这项今年一月到五月进行的调查。</p><p>An estimated 33 percent of youth took part in the voluntary survey.<br/>据估计，33%的青少年参加了这项自愿调查。</p><p>The study showed a 20 percent drop in the number of middle and high school students who said they recently used at least one tobacco product. These include cigarettes, electronic cigarettes, nicotine patches and hookahs.<br/>研究显示，最近至少使用过一种烟草制品的中学生人数下降了20%。这些制品包括香烟、电子烟、尼古丁贴片和水烟。</p><p>That number decreased from 2.8 million last year to 2.25 million this year. The result suggested the change was the lowest usage rate of those products since the CDC survey began in 1999.<br/>这一数字从去年的280万下降到今年的225万。该结果表明，这是自1999年美国疾控预防中心开始调查以来，这类产品的最低使用率。</p><p>The Associated Press (AP) reports the drop is largely explained by another recent government survey showing e-cigarette use among U.S. youth in 2024 fell to its lowest level in 10 years.<br/>美联社报道称，这一下降主要是由于最近的另一项政府调查显示，2024年美国青少年的电子烟使用率降至10年来的最低水平。</p><p>The youth e-cigarette rate fell to under six percent this year, a drop of 7.7 percent over last year. That was the lowest rate at any time during the past 10 years. Government records show e-cigarettes are the most commonly used tobacco products among teens. The second most common is the nicotine patch.<br/>今年，青少年电子烟的使用率从去年的7.7%，降至6%以下。这是过去10年的最低使用率。政府记录显示，电子烟是青少年中最常用的烟草产品。第二常用的是尼古丁贴片。</p><p>In 1999, nearly 30 percent of American high school students smoked. In 2024, it was just 1.7 percent. Currently, the share of middle school students who smoke is also at its lowest rate. Recent use of hookahs also dropped, from 1.1 to 0.7 percent.<br/>1999年，近30%的美国高中生吸烟。2024年，这一比例仅为1.7%。目前，初中生吸烟的比例也处于最低水平。最近水烟的使用率也从1.1%下降到0.7%。</p><p>CDC officials said the decreases are linked to several measures. These include product cost increases, public health education campaigns, age restrictions and more aggressive enforcement actions against makers and sellers to children.<br/>美国疾控预防中心官员表示，这一下降与多项措施有关。这些措施包括产品成本上涨、公共卫生教育活动、年龄限制，以及对向儿童的制造商和销售商采取更严厉的执法行动。</p><p>Among high school students, use of any tobacco product dropped from 13 to 10 percent in 2024 while e-cigarette use fell from 10 to eight percent. The survey showed there was no change reported for middle school students who generally vape or smoke less than older children.<br/>在高中生中，2024年烟草产品的使用率从13%下降到10%，而电子烟的使用率则从10%下降到8%。调查显示，对于比高中生使用电子烟或吸烟更少的初中生来说，烟草使用率没有变化。</p><p>The study found that tobacco use among girls and Hispanic students fell. But it rose among American Indian and Alaska Native students. The survey also showed the current use of nicotine patches increased among white youth.<br/>研究发现，女孩和西班牙裔学生的烟草使用率下降。但它在美洲印第安人和阿拉斯加原住民学生中有所上升。调查还显示，目前白人青年使用尼古丁贴片的情况有所增加。</p><p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(21VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Teen Smoking in US Drops to Lowest Level in 25 Years]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A new government study suggests
+[00:03.84]U.S. teen smoking rates
+[00:06.72]reached an all-time low this year.
+[00:10.72]The study was a survey of American youth
+[00:15.08]carried out by the U.S. Centers
+[00:18.16]for Disease Control and Prevention (CDC).
+[00:23.28]The survey involved middle school students
+[00:27.72]– which includes grades six through eight
+[00:31.80]– and high school students
+[00:33.88]in grades nine through 12.
+[00:36.92]Nearly 30,000 students from 283 U.S. schools
+[00:44.00]took part in the effort,
+[00:45.84]which was carried out from January to May.
+[00:50.08]An estimated 33 percent of youth
+[00:54.60]took part in the voluntary survey.
+[00:58.60]The study showed a 20 percent drop
+[01:01.92]in the number of middle and high school students
+[01:05.60]who said they recently used
+[01:08.16]at least one tobacco product.
+[01:11.36]These include cigarettes, electronic cigarettes,
+[01:16.44]nicotine patches and hookahs.
+[01:20.12]That number decreased from 2.8 million last year
+[01:26.44]to 2.25 million this year.
+[01:30.00]The result suggested the change
+[01:33.68]was the lowest usage rate of those products
+[01:37.84]since the CDC survey began in 1999.
+[01:44.04]The Associated Press (AP)
+[01:47.88]reports the drop is largely explained
+[01:51.60]by another recent government survey
+[01:54.64]showing e-cigarette use
+[01:57.00]among U.S. youth in 2024
+[02:00.44]fell to its lowest level in 10 years.
+[02:04.88]The youth e-cigarette rate
+[02:07.52]fell to under six percent this year,
+[02:10.84]a drop of 7.7 percent over last year.
+[02:16.28]That was the lowest rate at any time
+[02:19.84]during the past 10 years.
+[02:22.72]Government records show e-cigarettes
+[02:26.12]are the most commonly used
+[02:28.68]tobacco products among teens.
+[02:32.28]The second most common is the nicotine patch.
+[02:37.16]In 1999, nearly 30 percent
+[02:42.00]of American high school students smoked.
+[02:45.80]In 2024, it was just 1.7 percent.
+[02:51.36]Currently, the share of middle school students
+[02:55.16]who smoke is also at its lowest rate.
+[02:59.76]Recent use of hookahs also dropped,
+[03:03.32]from 1.1 to 0.7 percent.
+[03:08.36]CDC officials said the decreases
+[03:13.24]are linked to several measures.
+[03:16.40]These include product cost increases,
+[03:20.80]public health education campaigns,
+[03:24.04]age restrictions
+[03:26.08]and more aggressive enforcement actions
+[03:29.20]against makers and sellers to children.
+[03:33.20]Among high school students,
+[03:36.16]use of any tobacco product
+[03:39.04]dropped from 13 to 10 percent in 2024
+[03:44.64]while e-cigarette use fell from 10 to eight percent.
+[03:49.96]The survey showed there was no change reported
+[03:54.48]for middle school students
+[03:56.80]who generally vape or smoke less than older children.
+[04:01.84]The study found that tobacco use among girls
+[04:06.72]and Hispanic students fell.
+[04:09.68]But it rose among American Indian
+[04:12.96]and Alaska Native students.
+[04:15.52]The survey also showed
+[04:18.60]the current use of nicotine patches
+[04:21.68]increased among white youth.
+[04:25.44]I'm Bryan Lynn. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

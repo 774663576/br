@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Deep Breathing Can Reduce Stress, Anxiety</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Deep Breathing Can Reduce Stress, Anxiety" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/deep-breathing-can-reduce-stress-anxiety.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Deep Breathing Can Reduce Stress, Anxiety</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/deep-breathing-can-reduce-stress-anxiety.mp3" id="mp3"></a>
+<a href="report-wealth-held-by-billionaires-jumped-in-2024-93216.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">09 December, 2024</span><br/>
+<p>From VOA Learning English, this is the <em>Health &amp; Lifestyle</em> report.</p>
+<p>At Myosin Marketing in Austin, Texas, the group employee meeting begins with an uncommon activity for a workplace. The members gather on Zoom and the head of the company, Sean Clayton, leads them through a deep-breathing exercise.</p>
+<p>Clayton says the activity helps his employees <strong>relax</strong> and to be willing to take creative risks.</p><div class="contentImage"><img alt="FILE - A woman meditates on the beach in Miami, Florida, April 28, 2010. According to a study published on Nov. 9, 2022 in the journal JAMA Psychiatry, mindfulness meditation worked as well as a standard drug for treating anxiety. (AP Photo/Lynne Sladky, File)" src="https://files.21voa.com/gdb/1dabb073-c37b-4b77-bdd5-19cf18b12302_cx0_cy12_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A woman meditates on the beach in Miami, Florida, April 28, 2010. According to a study published on Nov. 9, 2022 in the journal JAMA Psychiatry, mindfulness meditation worked as well as a standard drug for treating anxiety. (AP Photo/Lynne Sladky, File)</span></div>
+<p>“At first they thought it was really <strong>weird</strong>,”<strong> </strong>he said, adding that most people turned off their cameras. But, after a couple of weeks, there was a change. The employees said the deep breathing felt good.</p>
+<p>Studies show that deep breathing can be an effective way to reduce tension, or stress, at work. But people may not think about their breathing while on the job.</p>
+<p>Workers who sit at computers for long periods tend to take <strong>shallow</strong> breaths as their shoulders slowly rise. Workers who spend the day on their feet in retail or health care may be too busy to center their attention on breathing.</p>
+<p>But there is good reason to stop what you are doing and take deep breaths, research suggests.</p>
+<p>Long-lasting stress can increase the risk of heart disease and stroke. Experts at the American Heart Association say it can be as harmful as secondhand smoke. Research suggests deep-breathing exercises can lower a person's blood pressure and reduce <strong>anxiety</strong>.</p>
+<p>There are many <strong>benefits</strong> to deep breathing. For starters, it is free. It can be done anywhere. And unlike a 30-minute <strong>meditation</strong> practice, most deep breathing exercises do not take much time.</p>
+<p>Also, it gives you something to <strong>focus</strong> on – your breathing. Experts say that this can help to calm racing thoughts.</p>
+<p>Focusing on breathing for one to five minutes can help you clear your mind and let you “get back to focusing on the one thing you want to <strong>accomplish</strong>,” said Glenn Levine. He is a heart and blood system doctor and professor at Baylor College of Medicine in Houston, Texas.</p>
+<p>A good way to do deep breathing exercises is outside, Levine said. However, if that is not possible, doing them at a desk works.</p>
+<p>“Instead of focusing on the screen or work, just focus on your breathing. If possible,” Levine said, “close your eyes.”</p>
+<p>Even very busy people can find time for daily breathing exercises.</p>
+<p>Lisa Marie Deleveaux is a marketing professional and mother of five. She lost her job several months ago and has struggled to find a new one. Deleveaux wakes early most mornings before her children, to do breathing exercises.</p>
+<p>“If you set a <strong>priority</strong> for yourself ... you can make the time,” Deleveaux said.</p>
+<p>With one breathing exercise, she breaths in through one nostril and then out through the other. She uses a thumb or forefinger to hold one nostril closed at a time.</p>
+<p>“It relaxes my mind. It makes my mind so full of ease. It brings you back to the present moment,” she added.</p>
+<p>To get ahead of anxiety before starting her workday, sales representative Lindsay Carlisle of Michigan does breathing exercises with her seven-year-old daughter during their drive to school. They breathe in for seven counts, hold their breath for five, and then breathe out for seven counts. They repeat this several times.</p>
+<p>“Throughout that process, my shoulders start to drop on their own, and it really is calming,” Carlisle said.</p>
+<p>Suze Yalof Schwartz was an overworked magazine editor when her mother-in-law taught her a three-minute meditation method.</p>
+<p>Yalof Schwartz says it changed her life. She left her career and founded Unplug Meditation, a Santa Monica, California, company with a meditation studio, an app, and programs for corporate customers.</p>
+<p>“When we slow down our breath, we send a signal to our brain that everything's OK, even when it's not,” she said.</p>
+<p>Another 16-second breathing exercise is called box breathing. You breathe in for four counts, hold for four, breathe out for four counts and hold for another four. Yalof Schwartz has taught it to people in stressful jobs including firefighters, police and doctors.</p>
+<p>“It is the best thing that you can do at work before you have a meeting, before you send out an email that you wish you didn't send, before you have a difficult conversation, because it just calms you down, gets rid of your <strong>negative </strong>energy,” she said.</p>
+<p>Employers such as Coca-Cola, Mattel and Netflix have used Unplug Meditation to teach breathing or meditation.</p>
+<p>It is not always easy for workers to find space for deep breathing exercises. For example, salespeople often work alongside their customers. Yalof Schwartz suggests doing breathing exercises when making a sale or organizing items.</p>
+<p>Carlisle, the sales representative, sets a timer on her phone telling her to breathe deeply. She also keeps a note near her computer that simply says “Breathe.”</p>
+<p>“The anxiety is always going to be there,” Carlisle said. “But at least I know I have one small tool. ... It sounds so simple and <strong>silly</strong>, but it works.”</p>
+<p>And that's the <em>Health &amp; Lifestyle</em> report.</p>
+<p>I'm Anna Matteo. And I'm Mario Ritter, Jr.</p>
+<p><em>Cathy Bussewitz</em><em> reported this story for the Associated Press. Anna Matteo adapted it for VOA Learning English. </em></p>
+<p><strong>________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>relax </strong><em>–v. </em>to make less tense or rigid</p>
+<p><strong>weird </strong><em>–adj. </em>of strange or extraordinary character</p>
+<p><strong>shallow </strong><em>–adj. </em>having little depth</p>
+<p><strong>anxiety </strong><em>–n. </em>fear or nervousness about what might happen</p>
+<p><strong>benefit </strong><em>–n. </em>something that produces good or helpful results or effects or that promotes well-being</p>
+<p><strong>meditate </strong><em>–v. </em>to spend time in quiet thinking and breathing : <strong>meditation </strong><em>–n. </em>the act of meditating</p>
+<p><strong>focus </strong><em>–n. </em>a center of activity, attraction, or attention</p>
+<p><strong>accomplish </strong><em>–v. </em>to succeed in reaching (a stage in a progression)</p>
+<p><strong>priority</strong> <em>–n. </em>precedence in exercise of rights in the same subject matter</p>
+<p><strong>negative </strong><em>–adj. </em>not positive or helpful</p>
+<p><strong>silly </strong><em>–adj. </em>playfully lighthearted and amusing</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

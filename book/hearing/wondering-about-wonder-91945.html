@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Wondering About Wonder?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Wondering About Wonder?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/wondering-about-wonder.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Wondering About Wonder?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/wondering-about-wonder.mp3" id="mp3"></a>
+<a href="the-gift-of-the-magi-o-henry-91944.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">15 December 2023</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we answer a question about the word "wonder" as a noun and a verb.</p>
+<p><strong>Question:</strong></p>
+<p>Hello teacher,</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-36f1-08dbfc22883a_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>I am one of your followers from Iran.</p>
+<p>I have question about the word "wonder."</p>
+<p>How can I use it as a noun and a verb in a sentence in various ways?</p>
+<p>Thanks,</p>
+<p>Ali</p>
+<p><strong>Answer</strong></p>
+<p>This is a great question, especially for the month of December, Ali. We sometimes describe Christmas as "the most wonderful time of the year." The expression comes from a song by Andy Williams.</p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>"Wonderful" mean full of wonder. But what exactly is "wonder?"</p>
+<p>In today's Ask a Teacher will we answer your question by looking at "wonder" as a noun and a verb.</p>
+<p><strong>Wonder as a noun</strong></p>
+<p>"Wonder" is the feeling of surprise and <strong>amazement</strong> usually caused by something that is new, strange, unexpected or different. It can also be something that people can <strong>admire</strong> or love and want to protect.</p>
+<p><em>The <strong>roaming</strong> cats of Old San Juan are one of the wonders of Puerto Rico.</em></p>
+<p>You may have heard people say, "no wonder." This is another way of saying "it is not surprising." For example:</p>
+<p><em>It is no wonder that the meeting started late. Everyone was stuck in traffic!</em></p>
+<p>Now let's look at "wonder" as a verb.</p>
+<p><strong>Wonder as verb</strong></p>
+<p>"Wonder" can mean to be in a state of surprise.</p>
+<p><em>I always wonder at Amaury Guichon's life-size chocolate <strong>sculptures</strong> of things like dragons and giraffes!</em></p>
+<p>It can also mean to think about something because it interests you.</p>
+<p><em>I wonder what the economy will be like after inflation.</em></p>
+<p><em>Jessica wondered where her next vacation would be: Scotland or Thailand?</em></p>
+<p>We can also use "wonder" to make <strong>formal</strong> and polite requests.</p>
+<p><em>I wonder if you could pick me up at the train station next week.</em></p>
+<p>"Wonder" can also be used as an adjective. We use "wonder" to describe something that is extraordinary.</p>
+<p><em>Wonder Woman has superhuman strength and the ability to fly!</em></p>
+<p><em>There were many wonder drugs developed in the 20<sup>th</sup> century, including penicillin and insulin.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Ali.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>__________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>amazement </strong>– n. a feeling of being very surprised or shocked</p>
+<p><strong>admire</strong> – <em>v</em>. to feel respect or approval of someone</p>
+<p><strong>roam</strong><em> </em>— <em>v. </em>to go to different places without having a particular purpose or plan</p>
+<p><strong>sculpture</strong> – n. a form of art in which hard materials are worked into object that has width, height, and depth</p>
+<p><strong>formal </strong>–<em> adj. </em>serious and official</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

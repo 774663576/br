@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 联合国估计新冠疫情导致国际游客人数下降65%</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 联合国估计新冠疫情导致国际游客人数下降65%" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202009/un-coronavirus-pandemic-causes-65-drop-in-international-travel.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>联合国估计新冠疫情导致国际游客人数下降65%</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202009/un-coronavirus-pandemic-causes-65-drop-in-international-travel.mp3" id="mp3"></a>
+<a href="/static/lrc/un-coronavirus-pandemic-causes-65-drop-in-international-travel.lrc" id="lrc"></a>
+<a href="un-coronavirus-pandemic-causes--drop-in-international-travel-85405.html" id="CnPage" target="_blank"></a>
+<a href="us-supreme-court-justice-ruth-bader-ginsburg-dies-at--85401.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">A new report says the coronavirus pandemic caused a 65 percent decrease in international travel during the first six months of 2020.<br/>
+一份新的报告称，新冠病毒大流行导致2020年上半年的国际旅行减少了65%。
+<p>The World Tourism Organization, an agency of the United Nations, published the report on Tuesday. It noted that the drop in international travel resulted in a loss of $460 billion in export revenues from tourism.<br/>
+联合国下属的世界旅游组织周二发布了该报告。报告指出，国际旅行减少导致旅游业的出口收入损失了4600亿美元。</p>
+<p>The loss is five times greater than the loss recorded in 2009 during the international financial crisis.<br/>
+这一损失是2009年国际金融危机期间录得损失的5倍。</p>
+<p>The organization said in a statement that the U.N. agency estimates it will take between two to four years for tourist arrivals to return to 2019 levels.<br/>
+该组织在一份声明中称其估计游客人数恢复到2019年水平将需要2到4年时间。</p>
+<p>The report shows that Asia and the Pacific were the first areas to be affected by COVID-19, the disease caused by the virus. They faced the sharpest drop as the number of tourists fell 72 percent during the first half of the year.<br/>
+报告显示，亚太地区是最早受新冠肺炎影响的地区。今年上半年期间，该地区接待的游客人数下降了72%，下降幅度最大。</p>
+<p>Europe had the next largest decrease, falling 66 percent.<br/>
+欧洲接待的游客人数下降了66%，紧随其次。</p>
+<p>North and South America, Africa and Middle East experienced similar levels of decrease.<br/>
+北美和南美、非洲以及中东地区接待游客人数的下降幅度比较接近。</p>
+<p>"This represents an unprecedented decrease, as countries...closed their borders and introduced travel restrictions in response to the pandemic," the U.N. agency said.<br/>
+该联合国机构表示：“这代表着接待游客人数前所未有的下降，因为各国关闭了边境，并且为了应对大流行实施了旅行限制。”</p>
+<p>Around the world, countries have recorded decreases of more than 50 percent in international tourism arrivals, threatening millions of jobs and businesses.<br/>
+在全球范围内，各国接待国际游客人数减少了50%以上，威胁到数百万的就业岗位和企业。</p>
+<p>The report shows that as of early September, 53 percent of international tourism destinations lifted some travel restrictions.<br/>
+报告显示，截至9月初，53%的国际旅游目的地取消了一些旅行限制。</p>
+<p>However, as some countries begin reporting a "second wave" of the coronavirus, those restrictions may return.<br/>
+然而，随着一些国家开始报告新冠病毒的第二波疫情，这些限制可能会再次出现。</p>
+<p>The World Tourism Organization estimates that the year 2020 will show an overall decrease of about 70 percent, but that number may rise.<br/>
+世界旅游组织估计，2020年全年游客总人数将会下降70%，但是该数字可能会上升。</p>
+<p>I'm Susan Shand.<br/>
+我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:UN: Coronavirus Pandemic Causes 65% Drop in International Travel]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A new report says the coronavirus pandemic
+[00:04.80]caused a 65 percent decrease in international travel
+[00:11.04]during the first six months of 2020.
+[00:15.68]The World Tourism Organization, an agency of the United Nations,
+[00:22.64]published the report on Tuesday.
+[00:26.80]It noted that the drop in international travel
+[00:31.04]resulted in a loss of $460 billion in export revenues from tourism.
+[00:41.64]The loss is five times greater than the loss recorded
+[00:46.56]in 2009 during the international financial crisis.
+[00:52.84]The organization said in a statement that the U.N. agency estimates
+[00:58.84]it will take between two to four years
+[01:03.88]for tourist arrivals to return to 2019 levels.
+[01:10.72]The report shows that Asia and the Pacific
+[01:14.96]were the first areas to be affected by COVID-19,
+[01:20.24]the disease caused by the virus.
+[01:23.96]They faced the sharpest drop as the number of tourists
+[01:29.52]fell 72 percent during the first half of the year.
+[01:35.80]Europe had the next largest decrease, falling 66 percent.
+[01:42.80]North and South America, Africa and Middle East
+[01:48.28]experienced similar levels of decrease.
+[01:52.60]"This represents an unprecedented decrease,
+[01:56.92]as countries...closed their borders and introduced travel restrictions
+[02:03.20]in response to the pandemic," the U.N. agency said.
+[02:08.64]Around the world, countries have recorded decreases of
+[02:13.28]more than 50 percent in international tourism arrivals,
+[02:19.08]threatening millions of jobs and businesses.
+[02:23.40]The report shows that as of early September,
+[02:28.68]53 percent of international tourism destinations
+[02:34.24]lifted some travel restrictions.
+[02:37.80]However, as some countries begin reporting a "second wave"
+[02:43.76]of the coronavirus, those restrictions may return.
+[02:50.04]The World Tourism Organization estimates that the year 2020
+[02:56.68]will show an overall decrease of about 70 percent,
+[03:03.40]but that number may rise.
+[03:06.56]I'm Susan Shand. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

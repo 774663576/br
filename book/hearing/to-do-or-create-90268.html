@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - To Do or Create?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, To Do or Create?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/to-do-or-create.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>To Do or Create?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/to-do-or-create.mp3" id="mp3"></a>
+<a href="once-upon-a-time-90263.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">13 January 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "create" and "do."</p>
+<p><strong>Question</strong></p>
+<p>Hello Learning English,</p><div class="contentImage"><img alt="Ask a Teacher: To Do or Create?" src="https://files.21voa.com/gdb/09410000-0a00-0242-baba-08daf4f2798e_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: To Do or Create?</span></div>
+<p>I would like to ask you about the word "<strong>essay</strong>." Do we say, "create an essay" or "do an essay?"</p>
+<p>Thank you for your help,</p>
+<p>Mekhpara</p>
+<p><strong>Answer </strong></p>
+<p>Dear Mekhpara,</p>
+<p>This is a great question, and one that we actually have not talked about. Your question is less about the word "essay," and more about the choice of which verb to use, "do" or "create."</p>
+<p>Let's look at each of these more closely. Let's start with "do."</p>
+<p><strong>Do</strong></p>
+<p>The verb "do" is an <strong>irregular </strong>verb that has many uses.</p>
+<p>We use "do" for actions that we are required or must do and for general activities that we often repeat.</p>
+<p><em>I will do the dishes tonight after dinner.</em></p>
+<p>We also use "do" to show the completion or<strong> achievement </strong>of things.</p>
+<p><em>Is that report done?</em></p>
+<p>Sometimes we use "do" for talking about a job or for studying.</p>
+<p><em>What did you do at your last job?</em></p>
+<p>We can use "do" to mean "produce" something, like an essay or something artistic. We use it in place of more specific verbs that focus on the operative action. Using "do" focuses more on the general action or completion of the action.</p>
+<p><em>I'm doing my essay this weekend, so I do not have to worry about it over spring break.</em></p>
+<p><em>I'm writing my essay this weekend, so I do not have to worry about it over spring break.</em></p>
+<p>She did the painting in <strong>watercolors</strong>.</p>
+<p>She painted in watercolors.</p>
+<p>This brings us to "create."</p>
+<p><strong>Create</strong></p>
+<p>To "create" something means to bring something new into existence. When we think of "create," we think of something new that has not been produced before.</p>
+<p>To "create" something requires imagination, a special skill or talent, a new method, or a <strong>unique </strong>process.</p>
+<p><em>Heather likes to create new dances for her students.</em></p>
+<p><em>She created the recipe from just 5 simple <strong>ingredients</strong>.</em></p>
+<p>We can "create" an essay. For example, your teacher might ask you to "create" an essay about a problem or a solution.</p>
+<p>But think about the actions that you perform to "create" the essay. You might research the subject, form ideas about how to express yourself and more. Yet finally, to create an essay you must write. This is the required action and the more specific verb.</p>
+<p>So just like "do" is a less specific verb, here "create" is the less specific verb for the entire process of writing an essay.</p>
+<p><em>Tony is writing an essay about climate change.</em></p>
+<p><em>I wrote many essays in college.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Mekhpara.</p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>___________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>essay </strong>- n. a piece of writing that tells a person's thoughts or opinions about a subject</p>
+<p><strong>irregular </strong>– <em>adj</em>. not following the usual rules about what should be done</p>
+<p><strong>achievement </strong><em>– n. </em>a thing that is completed successfully</p>
+<p><strong>watercolors</strong> – <em>n</em>. colored paints combined with water or a wet brush to create an effect</p>
+<p><strong>unique </strong><em>– adj. </em>used to say that something or someone is unlike anything or anyone else</p>
+<p><strong>ingredient </strong>– <em>n</em>. one of the things that are used to make a food, product, etc</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

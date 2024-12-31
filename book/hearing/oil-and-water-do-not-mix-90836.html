@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Oil and Water Do Not Mix</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Oil and Water Do Not Mix" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/oil-and-water-do-not-mix.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Oil and Water Do Not Mix</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/oil-and-water-do-not-mix.mp3" id="mp3"></a>
+<a href="/static/lrc/oil-and-water-do-not-mix.lrc" id="lrc"></a>
+<a href="soccer-playing-robot-set-to-compete-in-robo-cup-90835.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">06 May 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Oil and water are two very different substances. Oil is thick. Water is thin. If you pour oil into water, they do not mix, and the oil floats to the top.</p>
+<p>This difficult relationship can play a part in some laboratory experiments. It can play a big part in kitchens as we cook food. It can also be used to describe some of our personal relationships.</p><div class="contentImage"><img alt="In this June 26, 2010 file photo, oil from the Deepwater Horizon oil spill floats on the surface of the water in Bay Jimmy in the southern U.S. state of Louisiana. (AP Photo/Gerald Herbert)" src="https://files.21voa.com/gdb/04B00B16-5EC6-42CE-BDDE-9CE638BE2F38_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">In this June 26, 2010 file photo, oil from the Deepwater Horizon oil spill floats on the surface of the water in Bay Jimmy in the southern U.S. state of Louisiana. (AP Photo/Gerald Herbert)</span></div>
+<p>If we say two people are <u>like oil and water,</u> it means they do not get along. They are not <strong>compatible</strong>.</p>
+<p>Things like objects, elements, and people that do not or cannot mix together easily can be compared to <u>oil and water</u>.</p>
+<p>Here is an example from experience. My friend often asked me to watch her cat Bluey when she would travel out of town. Usually, cats love me but not Bluey. He would make terrible cat noises as soon as I walked into the apartment. Every time I tried to pet him, he would bite and scratch me. So, I didn't like him either. We were <u>like oil and water</u>. I took care of him, but for the most part, we<strong> </strong>ignored each other.</p>
+<p>This expression describes how oil and water naturally separate. They are incompatible. So are people who have nothing in common and do not get along.</p>
+<p>We sometimes say <u>oil and water do not mix</u> to express an opinion that two things do not go together.<u> </u></p>
+<p>Here is another "oil" expression. If you <u>pour oil on troubled water</u>, you calm a tense situation. You might not hear this expression too much in America as it is mainly a British usage.</p>
+<p>Now let's hear the expression used between two friends.</p>
+<p><em>A: I'm worried about my birthday party. </em></p>
+<p><em>B: Why? It's not until next weekend. </em></p>
+<p><em>A: It doesn't matter. My two best friends will never find a way to get along. Ben likes to plan everything and is a bit of a <strong>control freak.</strong> Kara is super easy going and likes to <strong>play things by ear</strong>. </em></p>
+<p><em>B: Those two sound like oil and water. </em></p>
+<p><em>A: They are! And they want to throw the party together. What a truly bad idea. </em></p>
+<p><em>B: I have a good idea. I'll come to the party early. If things between them get heated, I'll get between them and calm things down. </em></p>
+<p><em>A: You'll be the oil on my troubled waters! </em></p>
+<p><em>B: Sure. Whatever you say. I just want to have fun at your party! </em></p>
+<p>And that's all the time we have for this <em>W</em><em>ords and Their Stories</em>. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story </strong></h2>
+<p><strong>compatible </strong><em>– adj.</em> able to coexist without problems</p>
+<p><strong>control freak </strong><em>– n. </em><strong> </strong>a person whose behavior indicates a powerful need to control people or circumstances in everyday matters</p>
+<p><strong>play things by ear</strong><em><strong> </strong>– idiom<strong> </strong></em>to do something without special preparation</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Oil and Water Do Not Mix]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.52]And now, Words and Their Stories,
+[00:10.92]from VOA Learning English.
+[00:14.36]Oil and water are two very different substances.
+[00:24.52]Oil is thick. Water is thin.
+[00:29.60]If you pour oil into water,
+[00:32.24]they do not mix,
+[00:34.20]and the oil floats to the top.
+[00:38.12]This difficult relationship
+[00:40.28]can play a part in some laboratory experiments.
+[00:45.12]It can play a big part in kitchens as we cook food.
+[00:50.20]It can also be used to describe some of our personal relationships.
+[00:57.32]If we say two people are like oil and water,
+[01:01.44]it means they do not get along.
+[01:05.52]They are not compatible.
+[01:08.40]Things like objects, elements, and people that do not
+[01:13.24]or cannot mix together easily
+[01:16.20]can be compared to oil and water.
+[01:20.64]Here is an example from experience.
+[01:23.80]My friend often asked me to watch her cat Bluey
+[01:28.36]when she would travel out of town.
+[01:31.08]Usually, cats love me but not Bluey.
+[01:36.08]He would make terrible cat noises
+[01:38.68]as soon as I walked into the apartment.
+[01:42.72]Every time I tried to pet him,
+[01:45.00]he would bite and scratch me.
+[01:47.64]So, I didn't like him either.
+[01:51.52]We were like oil and water.
+[01:54.40]I took care of him, but for the most part,
+[01:58.52]we ignored each other.
+[02:01.48]This expression describes how oil
+[02:04.20]and water naturally separate.
+[02:07.08]They are incompatible.
+[02:09.44]So are people who have nothing in common
+[02:12.52]and do not get along.
+[02:15.60]We sometimes say oil and water do not mix
+[02:19.52]to express an opinion that two things do not go together.
+[02:26.08]Here is another "oil" expression.
+[02:29.32]If you pour oil on troubled water,
+[02:32.24]you calm a tense situation.
+[02:36.28]You might not hear this expression too much in America
+[02:40.04]as it is mainly a British usage.
+[02:44.96]Now let's hear the expression used between two friends.
+[02:50.00]A: I'm worried about my birthday party.
+[02:53.56]B: Why? It's not until next weekend.
+[02:57.52]A: It doesn't matter.
+[02:59.32]My two best friends will never find a way to get along.
+[03:04.92]Ben likes to plan everything
+[03:08.72]and is a bit of a control freak.
+[03:11.80]Kara is super easy going
+[03:14.56]and likes to play things by ear.
+[03:17.72]B: Those two sound like oil and water.
+[03:21.68]A: They are! And they want to throw the party together.
+[03:26.72]What a truly bad idea.
+[03:29.88]B: I have a good idea. I'll come to the party early.
+[03:34.52]If things between them get heated,
+[03:37.04]I'll get between them and calm things down.
+[03:40.88]A: You'll be the oil on my troubled waters!
+[03:44.28]B: Sure. Whatever you say.
+[03:47.40]I just want to have fun at your party!
+[03:50.00]And that's all the time we have
+[03:53.24]for this Words and Their Stories.
+[03:56.12]Until next time ... I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Disease Continues to Threaten American Bats</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Disease Continues to Threaten American Bats" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201709/disease-continues-to-threaten-american-bats.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Disease Continues to Threaten American Bats</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201709/disease-continues-to-threaten-american-bats.mp3" id="mp3"></a>
+<a href="us-counterterrorism-76649.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">17 September, 2017</span><br/>
+<p>Most people do not have a high opinion of bats.</p>
+<p>Bats often appear in movies and literature as terrifying creatures to be avoided.</p>
+<p>The animals have even been linked in popular culture to <strong>vampires</strong>, seeking to attack and drink the blood of human victims.</p>
+<p>In reality, bats are usually not a threat to people. Like other wild animals, some bats can carry the dangerous virus rabies. But bats can do good things for people and the environment.</p>
+<p>For example, bats eat a lot of different insects that can harm our environment. They can also <strong>pollinate</strong> plants and spread seeds.</p><span class="sticky-element__close-btn sticky-element__swipe-el" title="close"><span class="ico ico-close"></span></span>
+<p>
+<p>But a serious disease is currently threatening the bat population in many parts of the United States. The disease is a <strong>fungus</strong> called white-nose syndrome. It has killed more than 6 million bats across North America since 2007.</p>
+<p>Bats catch the fungus through their skin while resting on the walls of mountain <strong>caves</strong>. Biologist Lindsay Rohrbaugh says the disease spreads quickly and can lead to strange behavior in bats. </p>
+<p>"Bats are <strong>arousing</strong> more often than they are supposed to be during hibernation. And when they do that, they are unable to find food, and they unfortunately die."</p>
+<div class="contentImage"><img alt="In this Thursday May 8, 2014 photo, bats hang from the ceiling of the Aeolus cave in Dorset, Vt. (AP Photo/Wilson Ring)" src="https://files.21voa.com/gdb/236C22D9-7A95-404A-AC8F-9AB4817BF170_w268_r1.jpg"/><br/><span class="imagecaption">In this Thursday May 8, 2014 photo, bats hang from the ceiling of the Aeolus cave in Dorset, Vt. (AP Photo/Wilson Ring)</span></div>
+<p>In Washington D.C., researchers are studying how white-nose syndrome is affecting the area's nine species of bats. Some scientists are trapping bats on an island in the middle of the Anacostia River to test for the disease. The group is receiving federal money to help carry out their studies.</p>
+<p>Marco Carvello is with the D.C. government's Department of Energy and Environment. He says scientists are concerned that the disease is continuing to greatly reduce the bat population.</p>
+<p>"They typically have one <strong>pup</strong> a year when they reproduce. So, that's another reason that white-nose has been so <strong>detrimental</strong>. They don't have a lot of babies."</p>
+<p>The bat deaths are affecting the quality of human life in many ways, according to Lindsay Rohrbaugh.</p>
+<p>"Without bats, we are seeing an increase of mosquitoes and other <strong>pests</strong> that are <strong>decimating</strong> food sources for us. And I think that's only going to get worse over time if we don't find some way to protect the species that we have left."</p>
+<div class="contentImage2"><img alt="In this undated image from video, a bat suspected of having white-nose syndrome clings to a cave wall in Mammoth Cave National Park in Mammoth Cave, Ky. (AP Photo/Alex Sanz)" src="https://files.21voa.com/gdb/8256F1CA-EFCD-456A-B659-813FC3B7F823_w268_r1.jpg"/><br/><span class="imagecaption">In this undated image from video, a bat suspected of having white-nose syndrome clings to a cave wall in Mammoth Cave National Park in Mammoth Cave, Ky. (AP Photo/Alex Sanz)</span></div>
+<p>One theory is that some bats are no longer returning to caves to avoid getting sick. This means more of them are now making their way into cities, where contact with humans is more likely.</p>
+<p>Experts advise people to keep away from bats in case they are infected with rabies. Instead, they say animal control officers should be called to come and safely remove the animals.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Veronica Balderas Iglesias and Erika Celeste reported on this story for VOA News. Bryan Lynn adapted their report for Learning English. George Grow was the editor.</em></p>
+<p><em>We want to hear from you. Write to us in the Comments section,</em> <em>and visit</em> <a class="underline" href="http://www.21voa.com"><em>51VOA.COM</em></a><em>.</em></p>
+<p>_____________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>vampire </strong>– <em>n.</em> dead person who leaves the grave at night to bite and suck the blood of living people</p>
+<p><strong>pollinate</strong> <em>– v.</em> to carry pollen from a male part of a flower to the female part of another flower</p>
+<p><strong>fungus </strong><em>– n.</em> type of plant that gets its food from other living or decaying things</p>
+<p><strong>hibernate </strong>– <em>v.</em> to spend the winter sleeping or resting</p>
+<p><strong>cave </strong>– <em>n.</em> large hole naturally formed in the side of a mountain or under the ground</p>
+<p><strong>rouse </strong>– <em>v.</em> to wake up from sleep</p>
+<p><strong>pup </strong>– <em>n.</em> a young dog</p>
+<p><strong>detrimental </strong>– <em>n.</em> causing damage or injury</p>
+<p><strong>pest </strong>– animal or insect that causes damage to plants or food</p>
+<p><strong>decimate </strong>– <em>v.</em> to destroy large numbers of things</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯计划在月球建造核电站</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 俄罗斯计划在月球建造核电站" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/russia-and-china-aim-to-put-a-nuclear-plant-on-the-moon.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯计划在月球建造核电站</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/russia-and-china-aim-to-put-a-nuclear-plant-on-the-moon.mp3" id="mp3"></a>
+<a href="/static/lrc/russia-and-china-aim-to-put-a-nuclear-plant-on-the-moon.lrc" id="lrc"></a>
+<a href="russia-and-china-aim-to-put-a-nuclear-plant-on-the-moon-92359.html" id="CnPage" target="_blank"></a>
+<a href="an-italian-shop-in-rome-is-behind--academy-awards-92357.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Russia and China are considering putting a nuclear power station on the moon in about 10 years.<br/>
+俄罗斯和中国正在考虑在大约10年后将核电站送上月球。</p>
+<p>The head of Russia's space agency Roscosmos, Yuri Borisov, made the statement recently. He added that such a project could support the building of moon settlements one day.<br/>
+俄罗斯航天局局长尤里·鲍里索夫最近发表了上述声明。他补充说，这种项目有一天可以支持月球基地的建设。</p>
+<p>Borisov said that Russia and China had been working on a moon program together. The former deputy defense minister explained that Russia was able to help with its expertise in "nuclear space energy."<br/>
+鲍里索夫说，俄罗斯和中国一直在共同致力于月球计划。这位前国防部副部长解释说，俄罗斯能够利用其在“太空核能”方面的专业知识提供帮助。</p>
+<p>"Today we are seriously considering a project - somewhere at the turn of 2033-2035 - to deliver and install a power unit on the lunar surface together with our Chinese colleagues," Borisov said.<br/>
+鲍里索夫说：“今天，我们正在认真考虑一个项目——在2033至2035年左右——与中国同行一起在月球表面交付和安装发电机组。”</p>
+<p>Solar panels would not be able to provide enough electricity to power future moon settlements, he said, while nuclear power could.<br/>
+他说，太阳能电池板无法为未来的月球基地提供足够电力，而核电可以。</p>
+<p>He said the possible plan should be done "without the presence of humans."<br/>
+他说，这项可能的计划应该在“无人在场的情况下”完成。</p>
+<p>Borisov also spoke about Russian plans to build a nuclear-powered spaceship to carry cargo. He said all the technical questions concerning the project had been solved, except for finding out how to cool the nuclear reactor.<br/>
+鲍里索夫还谈到了俄罗斯建造核动力飞船运载货物的计划。他说，除了找出如何冷却核反应堆的办法之外，有关该项目的所有技术问题都已解决。</p>
+<p>He said the ship would be a large "structure that would be able, thanks to a nuclear reactor and ... high-power turbines...to transport large cargoes from one orbit to another." He added that such a ship could collect objects for many other projects.<br/>
+他说，这艘飞船将是一个大型“结构，由于有核反应堆和大功率涡轮机，将能够将大型货物从一个轨道运输到另一个轨道。”他补充说，这艘飞船可以为许多其他项目收集物体。</p>
+<p>Russian officials have spoken before about plans to mine minerals on the moon. But the Russian space program has suffered a series of problems in recent years.<br/>
+俄罗斯官员此前曾谈到在月球上开采矿产的计划。但近年来，俄罗斯的太空计划遇到了一系列问题。</p>
+<p>Its first moon mission in 47 years failed last year after Russia's Luna-25 spacecraft lost control and crashed.<br/>
+去年，在俄罗斯的月球-25号宇宙飞船失控坠毁后，其47年来的首次月球任务失败了。</p>
+<p>Russian officials have said they will launch further lunar missions and then explore the possibility of a joint Russian-China crewed mission and even a lunar base.<br/>
+俄罗斯官员表示，他们将进一步发动月球任务，然后探索俄中联合载人任务甚至月球基地的可能性。</p>
+<p>Last month, China said it aimed to put the first Chinese astronaut on the moon before 2030.<br/>
+中国上月表示计划在2030年前将首位中国宇航员送上月球。</p>
+<p>Russian President Vladimir Putin last month said a warning by the United States that Russia planned to put nuclear weapons in space was false. Putin said the warning was part of a plan to force Russia into arms negotiations on the West's terms.<br/>
+俄罗斯总统弗拉基米尔·普京上个月表示，美国警告俄罗斯计划在太空部署核武器是虚假的。普京表示，这一警告是迫使俄罗斯按照西方条件进行武器谈判计划的一部分。</p>
+<p>I'm John Russell.<br/>
+我是约翰·拉塞尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Russia, China Aim to Put a Nuclear Plant on the Moon]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Russia and China are considering
+[00:03.96]putting a nuclear power station
+[00:06.48]on the moon in about 10 years.
+[00:09.84]The head of Russia's space agency Roscosmos,
+[00:14.20]Yuri Borisov, made the statement recently.
+[00:18.04]He added that such a project could support
+[00:21.92]the building of moon settlements one day.
+[00:25.28]Borisov said that Russia and China
+[00:28.64]had been working on a moon program together.
+[00:32.40]The former deputy defense minister
+[00:36.04]explained that Russia was able to help
+[00:39.56]with its expertise in "nuclear space energy."
+[00:44.28]"Today we are seriously considering a project
+[00:48.16]- somewhere at the turn of 2033-2035
+[00:53.68]- to deliver and install a power unit
+[00:57.32]on the lunar surface together
+[01:00.08]with our Chinese colleagues," Borisov said.
+[01:03.32]Solar panels would not be able
+[01:06.64]to provide enough electricity
+[01:09.20]to power future moon settlements, he said,
+[01:12.52]while nuclear power could.
+[01:15.76]He said the possible plan should be done
+[01:18.92]"without the presence of humans."
+[01:21.56]Borisov also spoke about Russian plans
+[01:25.48]to build a nuclear-powered spaceship to carry cargo.
+[01:31.08]He said all the technical questions
+[01:33.88]concerning the project had been solved,
+[01:37.00]except for finding out how to cool the nuclear reactor.
+[01:42.76]He said the ship would be a large "structure
+[01:46.36]that would be able, thanks to a nuclear reactor and
+[01:50.56]... high-power turbines...to transport large cargoes
+[01:54.96]from one orbit to another."
+[01:57.72]He added that such a ship
+[02:00.12]could collect objects for many other projects.
+[02:04.08]Russian officials have spoken before
+[02:07.32]about plans to mine minerals on the moon.
+[02:11.12]But the Russian space program
+[02:13.64]has suffered a series of problems in recent years.
+[02:18.20]Its first moon mission in 47 years
+[02:21.96]failed last year after Russia's
+[02:24.64]Luna-25 spacecraft lost control and crashed.
+[02:30.04]Russian officials have said they will launch
+[02:32.96]further lunar missions
+[02:34.84]and then explore the possibility of
+[02:37.76]a joint Russian-China crewed mission
+[02:41.08]and even a lunar base.
+[02:44.08]Last month, China said it aimed
+[02:46.88]to put the first Chinese astronaut
+[02:49.76]on the moon before 2030.
+[02:52.84]Russian President Vladimir Putin last month
+[02:56.84]said a warning by the United States
+[03:00.12]that Russia planned to put nuclear weapons
+[03:03.52]in space was false.
+[03:05.80]Putin said the warning was part of a plan
+[03:09.72]to force Russia into arms negotiations
+[03:13.52]on the West's terms.
+[03:16.76]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

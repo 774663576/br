@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Barbenheimer: Two Movies, One Day</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Barbenheimer: Two Movies, One Day" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/barbenheimer-two-movies-one-day.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Barbenheimer: Two Movies, One Day</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/barbenheimer-two-movies-one-day.mp3" id="mp3"></a>
+<a href="a-close-reading-of-looking-for-america-part--91220.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">21 July 2023</span><br/>
+<p>Two of the biggest summer movies are being released on the same day, July 21<sup>st</sup>, <em>Barbie</em> directed by Greta Gerwig and Christopher Nolan's <em>Oppenheimer</em>.</p>
+<p>The release of the movies has gotten a lot of attention on the internet and in social media. Many people are buying tickets to watch both films on the same day, creating the <strong>double feature</strong> event called "Barbenheimer."</p>
+<div class="contentImage"><img alt="BARBENHEIMER" src="https://files.21voa.com/gdb/0ca68c55-e942-4c26-ab57-d999520c59ea_w268_r1.jpg"/><br/><span class="imagecaption">BARBENHEIMER</span></div>
+<p>The word "Barbenheimer" is a portmanteau or blend word of, not only the letters of the words, but their meanings as well. There is even some disagreement about how the word should be spelled: "Barbieheimer" or "Barbenheimer" or even "Boppenheimer."</p>
+<p>Studios often target films in different <strong>genres</strong> for release on the same weekend. <em>Oppenheimer</em> is a serious <strong>drama</strong> about the man who supervised the development of the atomic bomb. <em>Barbie</em> is a colorful film about a popular line of American toys played by real people.</p>
+<p>Directors Gerwig and Nolan have <strong>enthusiastic</strong> fans online. Some people are fans of both. When a new advertisement is shown for one movie, both show a lot of social media interactions.<strong> </strong>There are even <strong>memes</strong> and tee-shirts made about the release of the two movies on the same day.</p>
+<p>Paul Dergarabedian is a media expert. He said that the "Barbenheimer" marketing is good for both movies.</p>
+<p>"You're certainly aware of both movies in a more <strong>profound</strong> and <strong>compelling</strong> way," Dergarabedian said of the two movies.</p>
+<p>Many theaters have already reported tickets sale for the double feature. AMC Theaters reported that 20,000 AMC Stubs members have bought tickets for both movies. That is over four hours of movie-watching.</p>
+<p><strong>Barbenheimer days</strong></p>
+<p>The stars say they are planning "Barbenheimer" days.</p>
+<p>Margot Robbie plays Barbie. She spoke at the movie's first showing in London. She said people should start and end their day with Barbie, watching Oppenheimer in the middle. "It's a perfect <strong>double bill</strong>. "I think actually start your day with 'Barbie,' then go <span style="color:black">straight into <em>Oppenheimer</em> and then a <em>Barbie</em>..." The movie's star said people should watch her film twice.</span></p>
+<p><span style="color:black">Actor Tom Cruise's movie <em>Mission: Impossible – Dead Reckoning Part One</em> was released just one week before "Barbenheimer." He said that he plans to see both films on opening day, probably starting with <em>Oppenheimer</em>. </span></p>
+<p>Issa Rae is one of the actresses in <em>Barbie</em>. At the London premiere, she said there is a reason for people wanting to end their day with <em>Barbie</em>.</p>
+<p><span style="color:black">"I think that there's a very specific order that (you should) see them in," Rae said. </span></p>
+<p>Some people in Hollywood think that the July 21<sup>st</sup> date for the opening of both films is not by chance. Many wonder if Warner Bros. Studios wanted <em>Barbie</em> to open the same weekend as <em>Oppenheimer</em> because Nolan had opened other films like <em>Inception</em> and <em>Dunkirk</em> through Warner Bros.</p>
+<p>Nolan left the studio because of a decision to send a year's worth of movies to <strong>streaming</strong> <strong>services</strong>. Nolan then made <em>Oppenheimer </em>with Universal Studios.</p>
+<p><strong>Unspoken rule</strong></p>
+<p>There is an unspoken rule in Hollywood: Never publicly say bad things about another studio's movie. This idea is connected to a belief that supporting one movie is good for other movies. If a person goes to one movie and sees advertisements for another, it might create more interest and help the whole industry.</p>
+<p>Cruise knew that that his <em>Mission: Impossible</em> would no longer be shown on the huge IMAX screens at some theaters when <em>Oppenheimer</em> is released. But Cruise posted photos of himself and director Christophere McQuarrie in front of advertisements for competing movies <em>Indiana Jones and the Dial of Destiny</em>, <em>Barbie</em>, and <em>Oppenheimer</em>.</p>
+<p>Cruise posted the photos on his social media account saying: "This summer is full of amazing movies to see in theaters. These are just a few that we can't wait to see on the big screen."</p>
+<p>Dergarabedian said, "Not only is Tom Cruise the biggest <strong>box office</strong> star in the world, but he's also an incredible ambassador<strong> </strong>for the movie theater, for the movie theater experience and <strong>boosting</strong> other movies."</p>
+<p>He added that the friendly environment created by competition in Hollywood was a good thing.</p>
+<p>The actors, directors and official social media accounts of all the movies have been very supportive of one another. Cillian Murphy plays Robert Oppenheimer. He told the Associated Press at the movie's London showing that, "of course" he would watch <em>Barbie</em>.</p>
+<p>But everyone still enjoys a number one <strong>debut</strong>. Both <em>Barbie</em> and <em>Oppenheimer</em> reportedly cost $100 million to make, not including millions of dollars spent on marketing.</p>
+<p>The <em>Barbie</em> opening weekend could make over $90 million in North America only, while <em>Oppenheimer</em> is expected to make $40 million on its first weekend. But <em>Oppenheimer</em> may have a longer life into awards season.</p>
+<p>There is a lot of pressure on "Barbenheimer" to increase <strong>revenues </strong>for underperforming summer movies. <span style="color:black">And other issues like the </span><a class="wsw__a" data-auth="NotApplicable" data-linkindex="0" href="https://www.21voa.com/a/hollywood-writers-expected-to-settle-in-for-long-strike/7079918.html" target="_blank"><span style="color:inherit">writers' strike</span></a><span style="color:black"><span style="color:inherit">, which actors recently joined, are on people's minds. For example, the actors of <em>Oppenheimer</em> walked out of their movie's first showing in London as the actors' strike was announced.</span></span></p>
+<p><span style="color:#222f3a">I'm Dan Friedell.</span></p>
+<p><span style="color:#222f3a">And I'm Faith Pirlo.</span></p>
+<p><em><span style="color:#222f3a">Faith Pirlo adapted this story for Learning English based on reporting by The Associated Press. </span></em></p>
+<p><strong><span style="color:#333333">______________________________</span></strong></p>
+<h2 class="wsw__h2"><strong><span style="color:#333333">Words in This Story</span></strong></h2>
+<p><strong>double feature</strong> <em>–n.</em> showing two long films (traditionally) for the price of one ticket</p>
+<p><strong>genre </strong><em>–n.</em> a particular form or kind of art</p>
+<p><strong>drama </strong><em>–n</em>. a performance about a serious subject</p>
+<p><strong>enthusiastic </strong><em>–adj.</em> showing strong emotion and excitement</p>
+<p><strong>meme </strong><em>–n. </em>a picture, video or idea that spreads widely through the internet</p>
+<p><strong>profound </strong><em>–adj.</em> affecting people deeply</p>
+<p><strong>compelling </strong><em>–adj.</em> causing people to want to see more</p>
+<p><strong>double bill </strong><em>–n.</em> two shows on one program; a double feature</p>
+<p><strong>streaming </strong><strong>service </strong><em>–n.</em> a business that provides movies and shows through the internet <strong> </strong></p>
+<p><strong>box office </strong><em>–adj.</em> related to the business of filmmaking, especially ticket sales</p>
+<p><strong>boost </strong><em>–v. </em>to show support for something or someone</p>
+<p><strong>debut <em>–</em></strong><em>n.</em> The first appearance of something in public; the first performance of an artist in public</p>
+<p><strong>revenues </strong><em>–n.</em> <em>(often pl.)</em> money made or paid to a business or organization; money collected in taxes</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

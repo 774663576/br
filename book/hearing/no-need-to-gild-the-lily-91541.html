@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - No Need to 'Gild the Lily'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, No Need to 'Gild the Lily'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/no-need-to-gild-the-lily.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>No Need to 'Gild the Lily'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/no-need-to-gild-the-lily.mp3" id="mp3"></a>
+<a href="on-time-or-in-time-91537.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">23 September 2023</span><br/>
+<p>Now it's time for <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program we explore words and expressions in the English language. We give examples and notes on usage.</p>
+<p>Before we talk about today's idiom, let's talk about words that you will need to know – gilt and gild.</p><div class="contentImage"><img alt="FILE - A lily is seen on display at the Chelsea Flower Show in London, Britain, May 23, 2016. (REUTERS/Toby Melville)" src="https://files.21voa.com/gdb/09320000-0a00-0242-0869-08db0a0935ba_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A lily is seen on display at the Chelsea Flower Show in London, Britain, May 23, 2016. (REUTERS/Toby Melville)</span></div>
+<p>"Gilt" as a noun is the gold, or something that looks like gold, laid on a surface. It can also be an adjective. "Gild" is a verb. It means to cover with a fine layer of gilt. Sometimes we add gilt to a plain material like wood to make it look better. In fact, entire buildings can be gilded to make them more pleasing to the eye.</p>
+<p>Word experts say American writer Mark Twain created the term "Gilded Age." In the 1873 novel, <em>The Gilded Age: A Tale of Today</em>,<em> </em>he and co-writer Charles Dudley Warner made fun of newly rich people. They discussed how these people would cover wood and other objects with a thin <strong>layer</strong> of gold to make them look more costly.</p>
+<p>So, when you gild something you could be trying to cover up something <strong>ugly</strong>. But sometimes we may try to improve something that cannot be improved. It is already wonderful just the way it is. And our attempts to make it better can make it worse.</p>
+<p>Take for example, a lily. Lilies are beautiful flowers. Like many beautiful things in nature, they do not need any additions to make them more beautiful.</p>
+<p>And that brings us to the idiom <u>gild the lily</u>.</p>
+<p>If I "gild the lily," I add some unnecessary <strong>decoration </strong>to something already beautiful. The thing I add is <strong>superfluous</strong>. It is not needed.</p>
+<p>Imagine if someone added a really bright shiny gold frame to the Mona Lisa painting. The frame is so bright that it is hard to see the smile on the famous woman. That would be <u>gilding the lily</u>.</p>
+<p>However, we use this expression to talk about anything, not just artwork or objects. We gild the lily anytime we try to improve something that is already excellent.</p>
+<p>For example, my friend has good bone structure and lovely skin. She's just gilding the lily when she wears makeup.</p>
+<p>Here is another example. Once I went to a beautiful garden. It had flowers of every height and color. It had a fish pond and was completely lined with beautiful trees and bushes. The garden was beautiful and peaceful. It was perfect. And then the owners built a tall structure in the middle of it. The structure was made almost of entirely of <strong>stained glass</strong>, like church windows. And while it was beautiful, it was truly gilding the lily. When the sun shone through it, you could not see one flower.</p>
+<p>Here are some expressions that are similar: To go overboard, to overdo it, or to get carried away. Listen to this example.</p>
+<p><em>A: I got carried away with the decorations on the birthday cake. </em></p>
+<p><em>B: Yeah, you really went overboard with the <strong>sprinkles</strong>. The cake was so pretty and now I can't even see it!</em></p>
+<p>Experts on the website Meriam Webster explain where the expression came from. The website says that "gild the lily" comes from Shakespeare. But the expression has changed over the years. In his play <em>The Life and Death of King John</em> the line is actually "to paint the lily."</p>
+<p>Here is the shortened form from that play -- Act 4, Scene 2: "To gild refined gold, to paint the lily / To throw a <strong>perfume</strong> on the violet.... / Is wasteful and <strong>ridiculous</strong> <strong>excess</strong>."</p>
+<p>These days we just say "gild the lily."</p>
+<p>And that's all the time we have for this Words and Their Stories. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>__________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>layer</strong> <em>– n.</em> one thickness or fold over or under another</p>
+<p><strong>ugly </strong><em>– adj. </em>horrid or unpleasant especially to the sight</p>
+<p><strong>decoration </strong><em>– n. </em>something that decorates or beautifies</p>
+<p><strong>superfluous </strong><em>– adj. </em>going beyond what is enough or necessary</p>
+<p><strong>stained glass </strong><em>– n. </em>glass colored or stained (as by fusing metallic oxides into it) for decorative applications (as in windows)</p>
+<p><strong>sprinkles </strong><em>– n. </em>small particles of candy used as a topping</p>
+<p><strong>perfume</strong> <em>– n. </em>the scent of something sweet-smelling</p>
+<p><strong>ridiculous</strong> <em>– adj. </em>extremely silly or unreasonable</p>
+<p><strong>excess </strong><em>– n. </em>an amount beyond what is usual, needed, or asked</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

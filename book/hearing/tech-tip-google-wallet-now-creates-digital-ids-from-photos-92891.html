@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Tech Tip: Google Wallet Now Creates Digital IDs from Photos</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Tech Tip: Google Wallet Now Creates Digital IDs from Photos" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/tech-tip-google-wallet-now-creates-digital-ids-from-photos.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Tech Tip: Google Wallet Now Creates Digital IDs from Photos</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/tech-tip-google-wallet-now-creates-digital-ids-from-photos.mp3" id="mp3"></a>
+<a href="more-us-schools-are-taking-breaks-for-meditation-92890.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">14 August, 2024</span><br/>
+<p>Google has added a new tool that permits Android users to create digital versions of many kinds of identification (ID) cards and event passes for device <strong>wallets</strong>.</p>
+<p>The tool is part of the <a class="wsw__a" href="https://wallet.google/">Google Wallet</a> <strong>app</strong>. It was first announced in May along with other changes to the latest operating system, <a class="wsw__a" href="https://developer.android.com/about/versions/15/get">Android 15</a>. The change <a class="wsw__a" href="https://support.google.com/wallet/answer/12060038#zippy=%2Cadd-items-from-a-photo-us-only">is explained</a> on a Google Wallet help website. The tool is now available for Android users in the United States who have the latest update of Google Wallet.</p>
+<p>Digital wallets are designed to permit users to save non-physical versions of credit cards, personal IDs, membership passes and event tickets to their smartphones or other devices. Credit cards in wallets are linked directly to the banks that offer them and can be used to pay for things just like with a physical credit card.</p><div class="contentImage"><img alt="The Google Wallet logo is on display during a news conference, Thursday, May 26, 2011, in New York. (AP Photo/Mary Altaffer)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-891f-08dcbc7d06db_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">The Google Wallet logo is on display during a news conference, Thursday, May 26, 2011, in New York. (AP Photo/Mary Altaffer)</span></div>
+<p>The use of digital wallets has expanded over the years as people depend more on digital IDs and other documents. Supporters say this reduces the need to carry a lot of cards in a physical wallet.</p>
+<p>Until now, Google Wallet divided its digital document offerings into <strong>categories</strong>. Examples of these categories would be payment or gift cards, transportation passes for bus, train or air travel as well as official IDs.</p>
+<p>Google's new tool is designed to permit device users to easily add many more kinds of documents to its Wallet service. These could include the kinds of passes many people carry in their physical wallets, such as <strong>gym </strong>memberships and medical or <strong>insurance </strong>cards.</p>
+<p>These digital versions can be created by the user taking a picture of the physical document or by doing a screen capture of a digital version from a device. Some documents have an electronic <strong>barcode</strong> or QR code that can be entered into the Wallet app.</p>
+<p>Google Wallet then uses artificial intelligence (AI) technology to use information from the photo to create a new digital pass.</p>
+<p>The process of creating these digital documents is similar to adding new documents to Google Wallet. Users open the app and then click on “Add to Google Wallet (+).” The app then gives users a choice of what kind of card or pass to create. These include groups like “Payment Card,” “Transit Pass” or “ID Card.”</p>
+<p>The new Google Wallet has a new category, called “Everything Else.” This offering was created to permit users to make digital copies of just about any card, pass or document they want to keep in their devices.</p>
+<p>Google offers additional security steps to users storing official documents on Android devices. These “private passes” <a class="wsw__a" href="https://support.google.com/wallet/answer/13026633?hl=en">can also be added</a> to Google Wallet. Google says data contained in official digital documents is only saved on the device as an extra security measure.</p>
+<p>People in some American states can create a digital ID to be used to officially prove their identity. Google <a class="wsw__a" href="https://support.google.com/wallet/answer/12436402?hl=en">explains</a> that this service is currently only available in Arizona, Colorado, Georgia and Maryland</p>
+<p>There is a process users must follow to have their digital IDs <strong>verified</strong> by each state. The Transportation Security Administration (TSA) even accepts this form of state ID at <a class="wsw__a" href="https://www.tsa.gov/travel/frequently-asked-questions/when-will-phased-digital-id-rollout-start-which-airportsstates">many major U.S. airports</a>.</p>
+<p>Online technology website <em>Android Authority</em> recently <a class="wsw__a" href="https://www.androidauthority.com/google-wallet-e-passport-support-3444362/">reported</a> Google Wallet will soon be equipped to also create digital versions of American passports. To create this official digital document, users would need to be holders of a U.S. government issued <a class="wsw__a" href="https://www.dhs.gov/e-passports">e-Passport</a>.</p>
+<p>The online publication said one of its writers discovered the Google Wallet passport is still in development at Google. <em>Android Authority </em>noted that having a passport saved in Google Wallet might remove the need to present an actual passport in some cases. However, the digital version is not designed to replace the physical passport, which the user should continue to carry.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from Google and </em><em>Android Authority.</em></p>
+<p><strong>____________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>wallet</strong> <em>– n.</em> a small container used to carry money and credit cards, or a digital version used for the same purpose</p>
+<p><strong>app </strong>–<em> n.</em> a computer program that is designed to do one task or set of tasks and is usually aimed at use on mobile devices</p>
+<p><strong>category </strong><em>– n.</em> a group of people or things that are similar in some way</p>
+<p><strong>gym (gymnasium) </strong>–n. a business where people go to exercise or play sports</p>
+<p><strong>insurance</strong> <em>– n. </em>an agreement in which you pay a company to cover necessary costs in case there is an accident that causes damage or injuries</p>
+<p><strong>barcode </strong><em>– n. </em>a small, printed pattern of thick and think black lines that is printed on products and documents</p>
+<p><strong>verify </strong><em>– v. </em>to prove that something exists or is true</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

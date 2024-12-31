@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - First Dibs</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, First Dibs" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/first-dibs.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>First Dibs</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/first-dibs.mp3" id="mp3"></a>
+<a href="how-to-use-avoid-prevent-90341.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">28 January 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>See if you can <strong>guess</strong> the meaning of <u>first dibs</u> from the following exchange:</p>
+<p>A: <em>"Hi, I was calling about the house for <strong>rent</strong>, and I was wondering if it's still available."</em></p><div class="contentImage"><img alt="FILE - Sand and pebbles on Glen Haven beach at Lake Michigan in Sleeping Bear Dunes National Lakeshore on June 29, 2011. The expression first dibs come from a children's game using pebbles." src="https://files.21voa.com/gdb/DADE0854-AAA9-43D1-88CF-3636AF350CEF_cx7_cy13_cw79_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Sand and pebbles on Glen Haven beach at Lake Michigan in Sleeping Bear Dunes National Lakeshore on June 29, 2011. The expression "first dibs" come from a children's game using pebbles.</span></div>
+<p>B: <em>"Yes, well, it is empty, at the moment—but I can't rent it out yet. My <strong>nephew</strong> is interested, and he's got <u>first dibs on</u> it, so I'm waiting to hear from him."</em></p>
+<p>A: <em>"Oh, OK—do you know how long it'll be until he decides?"</em></p>
+<p>B: <em>"Um, you know, it could be a month. I'm not really sure."</em></p>
+<p>Here, the owner is giving his nephew a chance to rent the house before anyone else can. Having <u>first dibs on</u> something means having the right to get something before anyone else.</p>
+<p>We can have <u>first dibs on</u> one thing or on one or more things from a collection of objects. For example, you can say: "She has <u>first dibs on</u> the World Cup <strong>tickets</strong>."</p>
+<p>In both examples, note that we use the preposition <em>on</em> before a noun.</p>
+<p>American dictionary publisher Merriam-Webster <a class="wsw__a" href="https://www.merriam-webster.com/words-at-play/word-origin-dibs#:~:text=The%20term%20is%20derived%20from,has%20had%20many%20different%20incarnations">says</a> the expression <u>first dibs</u> likely comes from a children's game called <em>dibstones </em>played in 17th-century Britain. Children would try to catch small objects like <strong>pebbles</strong> on the backs of their hands. The objects were called <em>dibstones </em>or <em>dibs</em>.</p>
+<p>By the early 1900s, <em><u>get</u></em><u> first dibs</u> was in common use in American English.</p>
+<p>Here are the verbs we often use with the expression:</p>
+<p>You can <u>have first dibs</u>. You can <u>get first dibs</u>. Someone can <u>give you first dibs,</u> or you can <u>give first dibs</u> to others. And when you <u>call first dibs</u>, that means you claim possession even if nobody said you could choose first.</p>
+<p>If you <u>call first dibs</u>, you should only do so if you think other people probably do not want, or care about, the thing you are claiming. Otherwise, people might view you as <strong>selfish</strong> or not respectful of the rights of others, and that could create conflict.</p>
+<p>Can you think of something you'd like to <u>have first dibs on</u>? You can let us know in the comments section.</p>
+<p>Until next time, I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English. Hai Do was the editor. </em></p>
+<p>______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>guess </strong><em>-v. </em>to try to answer a question correctly but without having the necessary knowledge to know if the answer is correct</p>
+<p><strong>rent </strong><em>-v. </em>to pay a fee for the temporary use of something, such as a car, apartment, or piece of equipment</p>
+<p><strong>nephew </strong><em>-n. </em>the son of one's brother or sister</p>
+<p><strong>ticket </strong><em>-n. </em>a small card, piece of paper, or other document which allows entry to an event such as a concert, athletic contest, and the like</p>
+<p><strong>pebble </strong><em>-n. </em>a small stone about one to two centimeters in diameter</p>
+<p><strong>selfish </strong><em>-adj. </em>characterized by not sharing with others and being concerned only for oneself</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

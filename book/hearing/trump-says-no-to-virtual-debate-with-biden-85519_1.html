@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 川普拒绝同拜登进行远程辩论</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 川普拒绝同拜登进行远程辩论" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202010/trump-says-no-to-virtual-debate-with-biden.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>川普拒绝同拜登进行远程辩论</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202010/trump-says-no-to-virtual-debate-with-biden.mp3" id="mp3"></a>
+<a href="/static/lrc/trump-says-no-to-virtual-debate-with-biden.lrc" id="lrc"></a>
+<a href="trump-says-no-to-virtual-debate-with-biden-85519.html" id="CnPage" target="_blank"></a>
+<a href="american-poet-louise-gluck-wins-nobel-prize-in-literature-85518.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">American President Donald Trump said Thursday he will not take part in a presidential debate next week with former Vice President Joe Biden.<br/>
+美国总统川普周四表示，他不会参加下周跟前副总统拜登的总统辩论。
+<p>Trump spoke shortly after organizers of the event announced that it would be held online. They added that Trump and Biden, the two main candidates, would be in separate locations. Organizers said the move was designed to protect the health and safety of all involved with the second presidential debate.<br/>
+在活动组织者宣布将在网上举行辩论后，川普说了这番话。他们还称川普和拜登这两位主要候选人将在不同地点进行辩论。组织者称此举是为了保护参与第二次总统辩论的所有人员的健康和安全。</p>
+<p>Biden is the Democratic Party's candidate in the November 3 election. Trump is seeking re-election as the Republican nominee.<br/>
+拜登是11月3日美国总统大选中的民主党候选人。川普正以共和党候选人身份谋求连任。</p>
+<p>The president told Fox Business News, "I'm not going to waste my time on a virtual debate." He added, "You sit behind a computer and do a debate. It's ridiculous. And then they cut you off whenever they want."<br/>
+川普对福克斯新闻表示：“我不会浪费时间参加远程辩论。”他还表示：“坐在电脑后面进行辩论太荒唐了。然后他们会在需要时把我断开。”</p>
+<p>The two candidates were to meet in person in Miami, Florida for the debate on October 15. However, Trump became sick with COVID-19 last week, just two days after their first debate in Cleveland, Ohio.<br/>
+两位候选人原定于10月15日在佛罗里达州迈阿密市碰面进行辩论。然后上周川普在俄亥俄州克利夫兰的首次辩论后仅两天就感染了新冠肺炎。</p>
+<p>The president received aggressive treatments, including oxygen to help his breathing, during a three-day stay at Walter Reed National Military Medical Center. Trump is now back at the White House. His doctor has provided limited information on his current condition.<br/>
+川普在沃尔特·里德国家军事医学中心住了3天院，期间接受了积极治疗，包括吸氧以帮助呼吸。川普现在回到了白宫。关于川普的现状，他的医生只提供了有限的信息。</p>
+<p>In a statement, the U.S. Centers for Disease Control and Prevention (CDC) said a person with COVID-19 should isolate from others for at least 10 days. It added that those "who were admitted to a hospital and needed oxygen" should stay away from others for as many as 20 days.<br/>
+美国疾病控制与预防中心在一份声明中表示，新冠肺炎患者应该至少隔离10天。声明还称，那些“住院并需要吸氧的人士”应该隔离长达20天。</p>
+<p>A representative of the Biden campaign signaled that the candidate would join the virtual debate. She said in a statement, "Vice President Biden looks forward to speaking directly to the American people."<br/>
+拜恩竞选团队的一位代表表示，拜恩将会参加远程辩论。她在声明中表示：“副总统拜登期待着直接向美国人民讲话。”</p>
+<p>Trump's campaign manager said the president would take part in an election campaign event instead of the debate. During his phone call with Fox Business News, Trump said, "I think I'm better... I'd love to do a rally tonight...I want to do one last night."<br/>
+川普的竞选经理表示，川普将会参加一场竞选活动，而不是参加辩论。川普在接受《福克斯商业新闻》电话采访中表示：“我认为我康复了。我今晚想举办一场集会，我昨晚就想这样做了。”</p>
+<p>Getting on a flight to campaign in Arizona Thursday, Biden said, "We don't know what the president's going to do. He changes his mind every second." He added, "If he goes off and has a rally — I don't know what I'll do."<br/>
+拜登周四在飞往亚利桑那州参加竞选活动时表示：“我们不知道总统会怎么做，他每一秒都在改变主意。”他还说：“如果他不参加辩论，而去搞集会。我也不知道该咋办。”</p>
+<p>Later on Thursday, the Biden campaign suggested delaying the second debate until October 22 so that both candidates could attend. The Trump campaign released a statement saying, "Americans deserve to hear directly from both presidential candidates on these dates, October 22 and 29."<br/>
+周四晚些时候，拜登竞选团队建议将第二次辩论推迟到10月22日，这样两位候选人都能出席。川普竞选团队发表声明表示：“美国人应该在10月22日和29日这两天直接听取两位总统候选人的辩论。”</p>
+<p>Frank J. Fahrenkopf Jr. is a co-chairman of the Commission on Presidential Debates. He told USA TODAY, "There's no way you can force a presidential candidate to debate. It's up to them whether they debate or not." Fahrenkopf noted that the commission would not hold the event with just one candidate.<br/>
+小弗兰克·法伦科普夫是总统辩论委员会的联席主席。他对《今日美国》表示：“我们没办法强迫总统候选人进行辩论。是否辩论取决于他们自己。”法伦科普夫指出，委员会不会搞一场只有一位总统候选人参加的辩论。</p>
+<p>If it does happen, it is not the first debate in which the candidates are not in the same room. In 1960, a debate between Richard Nixon and John F. Kennedy was broadcast with the two presidential candidates on opposite sides of the country. Kennedy was in New York, while Nixon appeared from Los Angeles.<br/>
+如果真搞远程辩论，这也不是第一次。1960年，尼克松和肯尼迪之间的一场辩论进行了广播，两位候选人就天各一方。肯尼迪在纽约，而尼克松在洛杉矶。</p>
+<p>Wednesday night, the two main candidates for vice president debated in Salt Lake City, Utah. Vice President Mike Pence is the Republican nominee. The Democratic Party candidate is U.S. Senator Kamala Harris of California.<br/>
+周三晚上，两位主要的副总统候选人在犹他州盐湖城进行了辩论。副总统彭斯是共和党候选人。民主党候选人是美国加州参议员哈里斯。</p>
+<p>The two were seated 3.6 meters apart from each other and separated by plexiglass to prevent the possible spread of the coronavirus. Both tested negative for the virus.<br/>
+两人隔了3.6米坐下，并用有机玻璃隔开，以防止新冠病毒传播。两人病毒检测均为阴性。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Trump Says No to Virtual Debate with Biden]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]American President Donald Trump said Thursday
+[00:04.64]he will not take part in a presidential debate next week
+[00:10.12]with former Vice President Joe Biden.
+[00:14.40]Trump spoke shortly after organizers of the event
+[00:18.76]announced that it would be held online.
+[00:23.08]They added that Trump and Biden, the two main candidates,
+[00:28.96]would be in separate locations.
+[00:33.00]Organizers said the move was designed to protect the health and safety
+[00:39.80]of all involved with the second presidential debate.
+[00:45.52]Biden is the Democratic Party's candidate in the November 3 election.
+[00:52.12]Trump is seeking re-election as the Republican nominee.
+[00:58.16]The president told Fox Business News,
+[01:01.56]"I'm not going to waste my time on a virtual debate."
+[01:07.28]He added, "You sit behind a computer and do a debate.
+[01:12.56]It's ridiculous. And then they cut you off whenever they want."
+[01:19.28]The two candidates were to meet in person in Miami, Florida
+[01:24.40]for the debate on October 15.
+[01:28.40]However, Trump became sick with COVID-19 last week,
+[01:34.00]just two days after their first debate in Cleveland, Ohio.
+[01:40.24]The president received aggressive treatments,
+[01:43.64]including oxygen to help his breathing, during a three-day stay
+[01:49.76]at Walter Reed National Military Medical Center.
+[01:55.12]Trump is now back at the White House.
+[01:58.04]His doctor has provided limited information on his current condition.
+[02:05.28]In a statement, the U.S. Centers for Disease Control and Prevention (CDC)
+[02:11.24]said a person with COVID-19 should isolate from others for at least 10 days.
+[02:20.36]It added that those "who were admitted to a hospital and needed oxygen"
+[02:26.92]should stay away from others for as many as 20 days.
+[02:32.96]A representative of the Biden campaign signaled
+[02:36.68]that the candidate would join the virtual debate.
+[02:41.36]She said in a statement, "Vice President Biden looks forward
+[02:46.28]to speaking directly to the American people."
+[02:50.84]Trump's campaign manager said the president would take part
+[02:55.32]in an election campaign event instead of the debate.
+[03:00.96]During his phone call with Fox Business News, Trump said,
+[03:05.60]"I think I'm better... I'd love to do a rally tonight...
+[03:10.36]I want to do one last night."
+[03:14.04]Getting on a flight to campaign in Arizona Thursday, Biden said,
+[03:20.04]"We don't know what the president's going to do.
+[03:23.60]He changes his mind every second."
+[03:26.76]He added, "If he goes off and has a rally — I don't know what I'll do."
+[03:34.04]Later on Thursday, the Biden campaign suggested
+[03:38.04]delaying the second debate until October 22
+[03:42.80]so that both candidates could attend.
+[03:46.92]The Trump campaign released a statement saying,
+[03:50.56]"Americans deserve to hear directly from both presidential candidates
+[03:56.08]on these dates, October 22 and 29."
+[04:02.76]Frank J. Fahrenkopf Jr. is a co-chairman
+[04:06.80]of the Commission on Presidential Debates.
+[04:10.44]He told USA TODAY,
+[04:13.20]"There's no way you can force a presidential candidate to debate.
+[04:18.36]It's up to them whether they debate or not."
+[04:22.40]Fahrenkopf noted that the commission would not hold the event
+[04:26.92]with just one candidate.
+[04:29.44]If it does happen, it is not the first debate
+[04:33.52]in which the candidates are not in the same room.
+[04:37.88]In 1960, a debate between Richard Nixon and John F. Kennedy
+[04:44.40]was broadcast with the two presidential candidates
+[04:48.00]on opposite sides of the country.
+[04:51.48]Kennedy was in New York, while Nixon appeared from Los Angeles.
+[04:59.00]Wednesday night, the two main candidates for vice president
+[05:03.36]debated in Salt Lake City, Utah.
+[05:06.44]Vice President Mike Pence is the Republican nominee.
+[05:11.88]The Democratic Party candidate is U.S. Senator Kamala Harris of California.
+[05:19.72]The two were seated 3.6 meters apart from each other
+[05:25.56]and separated by plexiglass to prevent the possible spread of the coronavirus.
+[05:33.32]Both tested negative for the virus.
+[05:36.76]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

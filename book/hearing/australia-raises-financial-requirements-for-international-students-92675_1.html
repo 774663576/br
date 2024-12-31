@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 澳大利亚提高国际学生资金要求</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Education Report, 澳大利亚提高国际学生资金要求" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/australia-raises-financial-requirements-for-international-students.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>澳大利亚提高国际学生资金要求</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/australia-raises-financial-requirements-for-international-students.mp3" id="mp3"></a>
+<a href="/static/lrc/australia-raises-financial-requirements-for-international-students.lrc" id="lrc"></a>
+<a href="australia-raises-financial-requirements-for-international-students-92675.html" id="CnPage" target="_blank"></a>
+<a href="astronomers-find-super-hot-super-earth-92673.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>One of Australia's top officials said the government of Prime Minister Anthony Albanese is concerned about "a completely broken" migration system. Minister for Home Affairs Clare O'Neil made the statement in an announcement about a new policy that affects international students.<br/>
+澳大利亚一名高级官员表示，总理安东尼·阿尔巴内塞领导的政府对“完全崩溃”的移民系统感到担忧。内政部长克莱尔·奥尼尔在一份关于影响国际学生的新政策的公告中发表了上述声明。</p>
+<p>O'Neil said the Australian government will require students to have more than $19,000 in savings to qualify for a student visa. That is about $3,000 more than last year.<br/>
+奥尼尔说，澳大利亚政府将要求学生拥有超过19000美元的存款才能获得学生签证。这比去年增加了约3000美元。</p>
+<p>She said the larger bank accounts will ensure that international students can support themselves while studying. She said having more money will reduce targeting of students for exploitation. The Australian government is concerned that students come to study but spend too much time working in outside jobs.<br/>
+她说，提高存款要求将确保国际学生能够在学习期间养活自己。她说，拥有更多资金将减少针对学生的剥削。澳大利亚政府担心学生来这里学习，但却花了太多时间外出打工。</p>
+<p>O'Neil also warned 34 education providers that they might be suspended for "non-genuine or exploitative recruitment practices."<br/>
+奥尼尔还警告了34家教育机构，他们可能会因“非真实或剥削性的招生行为”而被停学。</p>
+<p>O'Neil called these education organizations "dodgy providers." Dodgy means false or operating without morals. She said the letters will "help weed out the bottom feeders" in the education business.<br/>
+奥尼尔称这些教育机构为“滑头机构”。滑头的意思是虚假的或无道德运作。她说，这些函件将“有助于清除教育行业的底层食客”。</p>
+<p>Some government officials are worried that the schools make false promises to students about how much they can work or the quality of their study programs.<br/>
+一些政府官员担心学校对学生可以打工的时长或学习项目的质量做出虚假承诺。</p>
+<p>O'Neil also said the bad actors "trash," or hurt, the opinions people have of good schools.<br/>
+奥尼尔还说，害群之马“破坏”或伤害了人们对合规学校的看法。</p>
+<p>International education is a large part of Australia's economy. During the 2022 to 2023 school year, foreign students added about $24 billion to the economy.<br/>
+国际教育是澳大利亚经济的重要组成部分。在2022至2023学年，外国学生为经济增加了约240亿美元。</p>
+<p>The increase in international students is starting to worry some Australian leaders. As of last September, Australia reported that immigration resulted in 548,000 more people in the country than the year before. The government is also blaming the fast rise in the cost of renting places to live on the increase in short-term visitors.<br/>
+国际学生的增加开始让一些澳大利亚领导人感到担忧。截至去年9月，澳大利亚报告称，外来移民导致该国人口比前一年多出548000人。政府还将租房成本的快速上涨归咎于短期游客的增加。</p>
+<p>The government expects the new financial policy to cut the number of new migrants in half over two years.<br/>
+政府预计，新的金融政策将使新移民人数在两年内减少一半。</p>
+<p>I'm Ashley Thompson.<br/>
+我是阿什利·汤普森。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Australia Raises Financial Requirements for International Students]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]One of Australia's top officials
+[00:03.40]said the government
+[00:04.72]of Prime Minister Anthony Albanese
+[00:07.92]is concerned about "a
+[00:11.00]completely broken" migration system.
+[00:14.16]Minister for Home Affairs Clare O'Neil
+[00:17.76]made the statement in an announcement
+[00:20.76]about a new policy
+[00:22.44]that affects international students.
+[00:25.64]O'Neil said the Australian government
+[00:29.20]will require students to have more than
+[00:32.48]$19,000 in savings
+[00:35.48]to qualify for a student visa.
+[00:38.40]That is about $3,000 more than last year.
+[00:43.88]She said the larger bank accounts will ensure
+[00:47.40]that international students can
+[00:49.56]support themselves while studying.
+[00:53.08]She said having more money will reduce
+[00:55.92]targeting of students for exploitation.
+[01:00.00]The Australian government is concerned
+[01:02.52]that students come to study
+[01:04.68]but spend too much time working in outside jobs.
+[01:10.72]O'Neil also warned 34 education providers
+[01:15.12]that they might be suspended for "non-genuine
+[01:18.80]or exploitative recruitment practices."
+[01:22.60]O'Neil called these education organizations
+[01:25.92]"dodgy providers."
+[01:27.68]Dodgy means false
+[01:30.24]or operating without morals.
+[01:33.08]She said the letters will "help weed out
+[01:36.80]the bottom feeders" in the education business.
+[01:40.84]Some government officials are worried
+[01:43.88]that the schools make false promises to students
+[01:47.68]about how much they can work
+[01:50.08]or the quality of their study programs.
+[01:53.72]O'Neil also said the bad actors "trash," or hurt,
+[01:58.92]the opinions people have of good schools.
+[02:03.24]International education
+[02:05.12]is a large part of Australia's economy.
+[02:08.32]During the 2022 to 2023 school year,
+[02:12.96]foreign students added about
+[02:15.08]$24 billion to the economy.
+[02:19.64]The increase in international students
+[02:22.20]is starting to worry some Australian leaders.
+[02:26.00]As of last September,
+[02:28.44]Australia reported that immigration
+[02:31.20]resulted in 548,000 more people in the country
+[02:35.72]than the year before.
+[02:37.88]The government is also blaming the fast rise
+[02:41.84]in the cost of renting places to live
+[02:44.52]on the increase in short-term visitors.
+[02:48.00]The government expects the new financial policy
+[02:51.76]to cut the number of new migrants in half
+[02:54.72]over two years.
+[02:56.96]I'm Ashley Thompson. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

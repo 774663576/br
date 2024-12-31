@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Seeing 'Double'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Seeing 'Double'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/seeing-double.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Seeing 'Double'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/seeing-double.mp3" id="mp3"></a>
+<a href="for-some-getting-married-needs-to-be-an-experience-unlike-any-other-91227.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">22 July 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Today we talk about one of those English words that changes meaning depending on the words added to it. "Double" is just such a word.</p><div class="contentImage"><img alt="Identical twins Taiwo Adejare and Kehinde Adejare pose for a picture in Igbo Ora, Oyo State, Nigeria April 4, 2019. Picture taken April 4, 2019. REUTERS/Afolabi Sotunde" src="https://files.21voa.com/gdb/B6908C41-A7C2-40C5-B0FC-E778873A89D2_w268_r1.jpg"/><br/><span class="imagecaption">Identical twins Taiwo Adejare and Kehinde Adejare pose for a picture in Igbo Ora, Oyo State, Nigeria April 4, 2019. Picture taken April 4, 2019. REUTERS/Afolabi Sotunde</span></div>
+<p>It is such a useful word that we should discuss it <u>on the double</u>! That means quickly. If I say, "Get here on the double," it means get here as soon as you can. Please.</p>
+<p>But that is just one of the many uses of this <strong>versatile </strong>word.</p>
+<p>"Double" means two of something. So, if you <u>double up</u> on something, you increase the amount by two. For example, if I plan to enter a swimming race, I might want to <u>double up</u> on my training. So, if I train one hour a day, I would increase my training to two hours a day.</p>
+<p>Now, if you add "down" to "double" you get something completely different. If you <u>double down,</u> you stick to a position or undertaking even if it is not a good one. You are not willing to change your position at all. For example, instead of apologizing for a poorly worded statement, the politician doubled down and said it again. Here, we could also say he <strong><u>dug in</u></strong><u> his heels</u>.</p>
+<p>Now, if something does <u>double duty</u> is serves two purposes. For example, an exercise bike serves double duty if I can also dry my towels on it. People can also do double duty. That means they do two jobs or the work of two people.</p>
+<p>Let's combine "double" with the word "back." If you <u>double back</u>, you turn around and come back the same way that you came. One time I took a hike and got a little lost. So, instead of continuing, I just doubled back: I returned the way that I came.</p>
+<p>A delayed reaction to something that takes you by surprise is called a <u>double take</u>. We usually say <u>do a double take</u>. For example, I did a double take when I saw my co-worker after a year. She had a new haircut and a <strong>tattoo</strong>. I had to <u>double-check</u> if it was even her. When I looked again and made sure it was my friend, I told her how much I liked her tattoo. Then she <u>doubled over</u> with laughter. As it turns out, it was a temporary tattoo. When we <u>double over</u>, we bend over and cannot stand up straight because of laughter or from pain.</p>
+<p>For some reason, certain "double" words are not good.</p>
+<p>For example, <u>double-crossing</u> someone means to cheat them. A double-cross is a <strong>betrayal</strong>. We could also use the word <u>double-dealing</u> which has a similar meaning.</p>
+<p><u>Double talk</u> is language that appears to be meaningful but, in fact, is a mixture of sense and nonsense. And <u>doublespeak</u> is language used to trick people by hiding some of the truth.</p>
+<p>A <u>double standard</u> is a set of <strong>principles</strong> or rules that apply differently and usually more severely to one group of people than to another. For example, people are not surprised if an older man dates a much younger woman. However, those same people may criticize a woman who dates a much younger man. That is a common <u>double standard</u> because the outcomes are so different.</p>
+<p>And that's the end of <a class="wsw__a" name="_Int_4BdUHSsO">this</a> <em>Words and Their Stories</em>. I hope you enjoyed this exploration of the many word combinations using "double." You may want to <u>double up</u> on your English lessons by practicing with the combinations of this very useful word.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this story for VOA Learning English. </em></p>
+<p>_______________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>versatile </strong><em>–adj. </em>something with many different uses</p>
+<p><strong>dig in </strong><em>–v.</em> to take a position and to be unwilling to give up that position</p>
+<p><strong>tattoo </strong><em>–n.</em> a permanent picture written in ink on a person's skin</p>
+<p><strong>betrayal </strong><em>–n.</em> to hurt someone who trusts you or who can expect you to deal with them honestly or impartially by moral or ethical rules</p>
+<p><strong>principle </strong><em>–n. (often pl.)</em> a moral rule or belief that people use to decide what is right and what is wrong</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

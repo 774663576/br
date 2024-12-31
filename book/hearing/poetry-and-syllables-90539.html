@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Poetry and Syllables</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Poetry and Syllables" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/poetry-and-syllables.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Poetry and Syllables</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/poetry-and-syllables.mp3" id="mp3"></a>
+<a href="egypt-struggles-with-economic-problems-intensified-by-ukraine-war-90533.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">09 March 2023</span><br/>
+<p>Last week, we looked at two kinds of poems, the cinquain and the diamante or diamond poem. We explored parts of speech: nouns, verbs, adjectives and adverbs with poems. Many of you wrote to us and shared your poems.</p>
+<p>In today's <em>Everyday Grammar</em>, we will look at the<strong> </strong>cinquain and the haiku. But we will place our attention on the use of syllables to create the poems.</p>
+<p><strong>Syllables</strong></p><div class="contentImage"><img alt="Everyday Grammar: Poetry and Syllables " src="https://files.21voa.com/gdb/01000000-0aff-0242-d769-08db1f543c6b_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Poetry and Syllables </span></div>
+<p>A syllable is a natural division of a word. For example, the word, "flower" has two syllables: -flow and -er.</p>
+<p>The number of syllables in the word depends on the number of <strong>vowel</strong> sounds. In the word "flower" there are two vowel sounds.</p>
+<p>Although there are about 20 vowels sounds in English, all the sounds can be written with the letters <em>a, e, i, o, u,</em> and sometimes <em>y.</em></p>
+<p>One syllable can be written with more than one vowel letter, like in the word "boot." Although there are two vowel letters, <em>o</em> and <em>o</em>, there is only one vowel sound <em>-oo</em>.</p>
+<p>When two separate vowel sounds are next to each other in the same syllable, it is called a diphthong.</p>
+<p>One way to identify vowel sounds is to <strong>clap</strong> your hands together when you hear the vowel sounds. Take the word "winter." We clap our hands together twice, win-ter. If you cannot clap, you can tap your foot or tap a desk, or even count on your fingers.</p>
+<p><strong>Haiku poems</strong></p>
+<p>Haiku are short poems that are based on syllables and not do rhyme. They are a Japanese art form. But writers in many countries have copied them. In English, they are expressed in three lines, and the poem has 17 syllables throughout the three lines. They are centered on nature and two opposing ideas in a single moment in time.</p>
+<p>In English, haiku can deal with nature, or they can be about anything, as long as the traditional structure is maintained.</p>
+<p>Let's look at the English form of the syllable structure for a haiku:</p>
+<p>Line 1: Five syllables</p>
+<p>Line 2: Seven syllables</p>
+<p>Line 3: Five syllables</p>
+<p>Let's look at an example:</p>
+<p><em>Sleeping <strong>guinea pigs</strong></em></p>
+<p><em>Eyes wide open, no true trust</em></p>
+<p><em>Until food arrives</em></p>
+<p>In the poem above, I wrote about my guinea pigs. We can see the syllable structure below:</p>
+<p><em>Slee-ping gui-nea pigs (5 syllables)</em></p>
+<p><em>Eyes wide o-pen, no true trust (7 syllables)</em></p>
+<p><em>Un-til food ar-rives (5 syllables)</em></p>
+<p>Here is another example about winter.</p>
+<p><em>Still snowing in March</em></p>
+<p><em>When will spring be on its way?</em></p>
+<p><em>No sunshine, so sad</em></p>
+<p>Let's clap this one out.</p>
+<p><em>Still snow-ing in March</em></p>
+<p><em>When will spring be on its way?</em></p>
+<p><em>No sun-shine, so sad</em></p>
+<p>Hopefully, spring will be here soon. Let's move on to another kind of poem that we learned about before, the cinquain.</p>
+<p><strong>Cinquain with syllables </strong></p>
+<p>Just like the cinquain from last week, the form with syllables has five lines. Each line contains an even number of syllables.</p>
+<p>Line 1 contains two syllables.</p>
+<p>Line 2 has four syllables.</p>
+<p>Line 3 has six syllables.</p>
+<p>Line 4 has eight syllables.</p>
+<p>Line 5 contains just two syllables, like the first line.</p>
+<p>Here is an example:</p>
+<p><em>Hot days</em></p>
+<p><em>Arrive soon now</em></p>
+<p><em>Sun ri-ses earlier</em></p>
+<p><em>Sun sets later in the evening</em></p>
+<p><em>Warm nights</em></p>
+<p>Now, let's look at the syllable structure line by line.</p>
+<p><em>Hot days (2 syllables)</em></p>
+<p><em>Arr-ive soon now (4 syllables)</em></p>
+<p><em>Sun rises ear-li-er (6 syllables)</em></p>
+<p><em>Sun sets la-ter in the eve-ning (8 syllables)</em></p>
+<p><em>Warm nights (2 syllables)</em></p>
+<p>If you understand syllables well, you can include a <strong>rhyme</strong> or two within the cinquain poem.</p>
+<p><strong>Writing tips and ideas</strong></p>
+<p>Now, you have the structure for two kinds of poems created by using syllables, haiku and a cinquain. Haiku have three lines. All the lines add up to 17 syllables, divided up into 5-7-5. A cinquain has five lines and a total of 22 syllables. Each line has an even number of syllables, increasing by two until the last line.</p>
+<p>Now, start <strong>brainstorming</strong> ideas for your own poem. Write about what you know. Get outside and take a walk; let nature or your surroundings <strong>inspire</strong> you.</p>
+<p>Once you have an idea, you can jump right in with counting syllables. Or you can write your idea in a paragraph form or a list, and then fit it to the structure of either a cinquain or a haiku.</p>
+<p>Send your poems to <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a><u>.</u></p>
+<p>Or share your poems in the comments below!</p>
+<p>We love reading what you send! We will select a few to give feedback on next week!</p>
+<p>I'm Faith Pirlo. And I'm Dan Novak.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>syllable</strong> – <em>n</em>. any one of the parts into which a word is naturally divided when it is pronounced</p>
+<p><strong>vowel</strong> – <em>n</em>. a letter (such as a, e, i, o, u, and sometimes y in English) that makes a specific sound</p>
+<p><strong>clap</strong> – <em>n</em>. to hit the palms of your hands together usually more than once</p>
+<p><strong>guinea pig</strong> <em>–</em> <em>n</em>. a small furry animal, or rodent, that is often kept as a pet</p>
+<p><strong>rhyme </strong>– <em>n. </em>one of two or more words or phrases that end in the same sounds</p>
+<p><strong>brainstorm</strong> – <em>v.</em> to think of many ideas</p>
+<p><strong>inspire </strong>–v. to get an idea about what to do or create from a person or something you see or experience</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

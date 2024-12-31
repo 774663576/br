@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国新冠肺炎病例日增10万 达到6个月高点 </title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国新冠肺炎病例日增10万 达到6个月高点 " name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202108/u-s-covid-19-cases-hit-six-month-high-at-over-100-000.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国新冠肺炎病例日增10万 达到6个月高点 </h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202108/u-s-covid-19-cases-hit-six-month-high-at-over-100-000.mp3" id="mp3"></a>
+<a href="/static/lrc/u-s-covid-19-cases-hit-six-month-high-at-over-100-000.lrc" id="lrc"></a>
+<a href="u-s-covid--cases-hit-six-month-high-at-over---87371.html" id="CnPage" target="_blank"></a>
+<a href="belarusian-sprinter-says-she-defected-on-family-fears-about-safety-87370.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The United States has reached a six-month high for new COVID-19 cases.<br/>
+美国新冠肺炎新增病例已经达到6个月高位。
+<p>Reuters news agency reports that more than 100,000 new infections were recorded on Wednesday.<br/>
+路透社报道称，周三录得超过10万例新增感染病例。</p>
+<p>Information from the U.S. Centers for Disease Control and Prevention, or the CDC, shows that the seven-day average of new cases is near 90,000. That number represents a sharp increase in less than one month. The seven-day average provides the clearest picture of rising cases. Some states report infections one or two times a week.<br/>
+来自美国疾控预防中心的信息显示，7天平均新增病例接近9万例。这一数字代表了新增病例在不到一个月时间内的急剧增长。7天平均值提供了病例增长的最清晰画面。有些州每周报告感染的次数是一到两次。</p>
+<p>Top U.S. infectious disease expert Dr. Anthony Fauci said on Wednesday that in the coming weeks, cases could increase to 200,000 each day. Experts blame the Delta variant of the coronavirus for the rise in infections.<br/>
+美国顶级传染病专家安东尼·福奇博士周三表示，未来几周的每日新增病例可能会增长到20万例。专家将感染的增长归咎于新冠病毒的德尔塔变种。</p>
+<p>Fauci told McClatchy, a Washington-based news agency, that if another variant appears that is equally infectious but more severe, "then we could really be in trouble." He said, "People who are not getting vaccinated mistakenly think it's only about them. But it isn't. It's about everybody else, also."<br/>
+福奇对总部位于华盛顿的新闻机构麦克拉奇表示，如果出现另一种具有同等传染性但是更加严重的病毒变种，那么我们可能就真的有麻烦了。他说：“未接种人群错误地认为这只跟他们自己有关。但是事实并非如此。这也跟其他人有关。”</p>
+<p>The CDC has found that 83 percent of all new cases reported in the United States are the Delta variant. The version of the virus was first found in India.<br/>
+美国疾控预防中心发现，美国报告的新增病例中有83%是德尔塔变种。这种版本的病毒最初是在印度发现的。</p>
+<p>Vaccination percentages are not the same across the U.S. A high of 76 percent of people in Vermont have received at least one of two needed injections. The lowest percentage is about 40 percent in Mississippi.<br/>
+美国各地的疫苗接种率并不相同。佛蒙特州高达76%的人群至少接种了两剂疫苗中的一剂。密西西比州的接种率最低，约为40%。</p>
+<p>Officials with the administration of President Joe Biden said unvaccinated people represent nearly 97 precent of severe cases.<br/>
+拜登政府官员表示，未接种疫苗者占到了重症的近97%。</p>
+<p>The administration's health officials said the number of deaths has increased sharply over the past week. They report an average of 377 deaths per day.<br/>
+政府卫生官员表示，过去一周死亡人数急剧增长。他们每天平均报告了377例死亡病例。</p>
+<p>Southern states have some of the nation's lowest vaccination numbers. They are reporting the most COVID-19 cases and hospitalizations. Reuters says Florida, Texas and Louisiana were reporting the highest total number of new cases over the last week. And hospitals in Florida and Louisiana are having high numbers of COVID patients occupying hospital beds.<br/>
+南部各州的疫苗接种人数是全国最低的。这些州报告的新冠肺炎病例和住院人数也是最多的。路透社表示，佛罗里达州、德克萨斯州和路易斯安那州上周报告的新增病例总数是最高的。佛罗里达州和路易斯安那州的医院有大量新冠肺炎患者占据床位。</p>
+<p>Biden on Tuesday urged Republican leaders in Florida and Texas to follow public health guidelines on the pandemic or "get out of the way." Those two states have around a third of all new U.S. COVID-19 cases.<br/>
+拜登周二督促佛罗里达州和德克萨斯州的共和党领导人遵循有关大流行的公共卫生指南，否则就让贤。这两个州约占美国所有新增新冠肺炎病例的三分之一。</p>
+<p>New York City will require proof of vaccination at restaurants, gyms and other businesses to try and stop the spread of the virus. City officials said around 60 percent of all New Yorkers have received at least one COVID-19 vaccine shot. Some areas, mainly poor communities, have much lower vaccination numbers.<br/>
+纽约市将要求在餐馆、健身房以及其它经营场所提供接种证明，以试图阻止病毒的传播。市政府官员表示，大约60%的纽约人至少接种了一剂新冠肺炎疫苗。一些地区的疫苗接种率要低得多，主要是贫困地区。</p>
+<p>Some private companies are requiring vaccines for employees and customers.<br/>
+一些私营企业要求员工和客户接种疫苗。</p>
+<p>The New York Times reported on Tuesday that the U.S. Food and Drug Administration plans to give full approval for the Pfizer COVID vaccine by early September. This could push more Americans to get vaccinated by reducing their fears about the safety of the shot.<br/>
+《纽约时报》周二报道称，美国食品和药品管理局计划在9月初之前全面批准辉瑞的新冠肺炎疫苗。这可以通过降低美国人对接种安全性的担忧，来推动更多美国人接种疫苗。</p>
+<p>Currently, all available vaccines in the United States are approved for emergency use only.<br/>
+目前美国所有可用疫苗仅被批准用于紧急情况。</p>
+<p>I'm Gregory Stachel.<br/>
+我是格雷戈里·斯塔切尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US COVID-19 Cases Hit Six-Month High at Over 100,000]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States has reached a six-month high for new COVID-19 cases.
+[00:08.76]Reuters news agency reports that more than
+[00:13.00]100,000 new infections were recorded on Wednesday.
+[00:19.60]Information from the U.S. Centers for Disease Control and Prevention,
+[00:26.72]or the CDC, shows that the seven-day average of new cases is near 90,000.
+[00:37.20]That number represents a sharp increase in less than one month.
+[00:44.76]The seven-day average provides the clearest picture of rising cases.
+[00:52.48]Some states report infections one or two times a week.
+[00:59.00]Top U.S. infectious disease expert Dr. Anthony Fauci
+[01:05.12]said on Wednesday that in the coming weeks,
+[01:08.96]cases could increase to 200,000 each day.
+[01:15.08]Experts blame the Delta variant of the coronavirus for the rise in infections.
+[01:23.56]Fauci told McClatchy, a Washington-based news agency,
+[01:29.08]that if another variant appears that is equally infectious but more severe,
+[01:36.36]"then we could really be in trouble."
+[01:40.00]He said, "People who are not getting vaccinated
+[01:44.52]mistakenly think it's only about them.
+[01:48.16]But it isn't. It's about everybody else, also."
+[01:54.88]The CDC has found that 83 percent of all new cases
+[02:01.16]reported in the United States are the Delta variant.
+[02:07.00]The version of the virus was first found in India.
+[02:12.92]Vaccination percentages are not the same across the U.S.
+[02:19.88]A high of 76 percent of people in Vermont
+[02:24.80]have received at least one of two needed injections.
+[02:30.68]The lowest percentage is about 40 percent in Mississippi.
+[02:37.20]Officials with the administration of President Joe Biden
+[02:42.60]said unvaccinated people represent nearly 97 precent of severe cases.
+[02:51.88]The administration's health officials said the number of deaths
+[02:57.48]has increased sharply over the past week.
+[03:02.28]They report an average of 377 deaths per day.
+[03:09.68]Southern states have some of the nation's
+[03:12.88]lowest vaccination numbers.
+[03:17.04]They are reporting the most COVID-19 cases and hospitalizations.
+[03:25.08]Reuters says Florida, Texas and Louisiana
+[03:30.80]were reporting the highest total number of new cases over the last week.
+[03:38.28]And hospitals in Florida and Louisiana
+[03:42.32]are having high numbers of COVID patients occupying hospital beds.
+[03:49.92]Biden on Tuesday urged Republican leaders in Florida and Texas
+[03:55.92]to follow public health guidelines on the pandemic or "get out of the way."
+[04:04.32]Those two states have around a third of all new U.S. COVID-19 cases.
+[04:13.64]New York City will require proof of vaccination at restaurants,
+[04:19.88]gyms and other businesses to try and stop the spread of the virus.
+[04:27.64]City officials said around 60 percent of all New Yorkers
+[04:33.88]have received at least one COVID-19 vaccine shot.
+[04:40.28]Some areas, mainly poor communities,
+[04:43.88]have much lower vaccination numbers.
+[04:48.28]Some private companies are requiring vaccines
+[04:52.56]for employees and customers.
+[04:56.40]The New York Times reported on Tuesday
+[04:59.68]that the U.S. Food and Drug Administration plans to give full approval
+[05:06.64]for the Pfizer COVID vaccine by early September.
+[05:12.36]This could push more Americans to get vaccinated
+[05:16.92]by reducing their fears about the safety of the shot.
+[05:22.72]Currently, all available vaccines in the United States
+[05:27.80]are approved for emergency use only.
+[05:32.80]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

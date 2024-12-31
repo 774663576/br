@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Is It Real or Bogus?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Is It Real or Bogus?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/is-it-real-or-bogus.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Is It Real or Bogus?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/is-it-real-or-bogus.mp3" id="mp3"></a>
+<a href="/static/lrc/is-it-real-or-bogus.lrc" id="lrc"></a>
+<a href="beyones-newest-record-dives-into-country-music-history-92498.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">06 April 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>You can trust that we are actually Voice of America Learning English. We are the real deal. We are <strong>authentic</strong>.</p>
+<p>In other words, we are not <strong>bogus</strong>.</p><div class="contentImage"><img alt="FILE - A man looks at a polished lab-grown diamond at Greenlab Diamonds, in Surat, India, Monday, Feb. 5, 2024. Diamonds, whether lab grown or natural, are chemically identical and entirely made out of carbon. (AP Photo/Ajit Solanki)" src="https://files.21voa.com/gdb/01000000-0a00-0242-f135-08dc2e3ec352_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A man looks at a polished lab-grown diamond at Greenlab Diamonds, in Surat, India, Monday, Feb. 5, 2024. Diamonds, whether lab grown or natural, are chemically identical and entirely made out of carbon. (AP Photo/Ajit Solanki)</span></div>
+<p><u>Bogus</u> is an adjective that means <u>fake</u> or <u><strong>phony</strong></u>. Something bogus is <u>not <strong>genuine</strong></u>. It is a <strong><u>fraud</u>. </strong>It's fraudulent.</p>
+<p>For example, the man's huge diamond ring was bogus. He told everyone it was a real diamond. But actually, it was just a piece of glass.</p>
+<p><u>Bogus</u> can describe something that is a <u>lie.</u></p>
+<p>If something like an explanation or reason is <u>bogus</u>, it's <u>not true</u>. For example, an employee might call her employer to say she needs a sick day off from work. But during the call, her boss hears loud, live music in the background. The employee was clearly at a music show. Her reason for not being at work was <u>bogus</u>.</p>
+<p>We could also say the employee's excuse <u><strong>did not hold water</strong></u>. Her excuse for missing work sounded <u>bogus</u>. It was <u>not believable</u>. It <u>didn't hold water</u>.</p>
+<p>Experts at the online dictionary Merriam-Webster explain that <u>bogus</u> began as a noun. In the early 19th century in the U.S., a <u>bogus</u> was a machine that made <u><strong>counterfeit</strong></u>, or <u>fake</u>, money.</p>
+<p>Here's a fun fact: You can call <u>bogus</u>, <u>counterfeit</u> money <u>funny money</u>.</p>
+<p>Here is another word related to <u>bogus</u> – <u>sham</u>. <u>Sham</u>, a noun, describes a <u>fake</u>, <u>made-up</u> situation. We use <u>shams</u> to cover up the truth.</p>
+<p>Let's hear some of these terms used in a short story.</p>
+<p>Two roommates work together at a bank. One day, they decide to steal all the gold and jewelry held in the bank's safe. So, they plot. They plan it out. First, they need an alibi. Where can they be while the robbery is actually happening? They create a <u>bogus</u> alibi. They tell police that at the time of the robbery, they were together at a volunteer event, cleaning up a local park by the town's river.</p>
+<p>But after checking out their alibi, police brought the two in for questioning. Then detectives searched their shared apartment and found all the gold and jewels from the bank robbery.</p>
+<p>What made the police suspect them? Can you guess what detectives found at the river park that proved their alibi was a <u>sham</u>? A dirty park and river! They both had a huge amount of trash! Clearly, no clean-up event had ever taken place.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>______________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>authentic </strong><em>– adj.</em><strong> </strong>not false or imitation : real, actual</p>
+<p><strong>bogus </strong><em>– adj. </em>not genuine</p>
+<p><strong>phony </strong><em>– adj. </em>not genuine or real : intended to deceive or mislead</p>
+<p><strong>genuine </strong><em>– adj. </em>not pretended : sincere, honest</p>
+<p><strong>fraud </strong><em>– n. </em>an act of deceiving or misrepresenting : trick</p>
+<p><strong>did not hold water </strong><em>– idiom </em>:<strong> </strong>to not be or not appear to be true, verifiable, or able to be supported by facts</p>
+<p><strong>counterfeit </strong><em>– adj. </em>made in imitation of something else with intent to deceive</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Is It Real or Bogus?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]And now, Words and Their Stories,
+[00:11.68]from VOA Learning English.
+[00:18.56]You can trust that we are actually
+[00:22.04]Voice of America Learning English.
+[00:25.00]We are the real deal. We are authentic.
+[00:29.80]In other words, we are not bogus.
+[00:34.76]Bogus is an adjective that means fake or phony.
+[00:40.00]Something bogus is not genuine.
+[00:43.96]It is a fraud. It's fraudulent.
+[00:48.64]For example, the man's huge diamond ring was bogus.
+[00:53.64]He told everyone it was a real diamond.
+[00:57.20]But actually, it was just a piece of glass.
+[01:02.32]Bogus can describe something that is a lie.
+[01:07.20]If something like an explanation
+[01:10.12]or reason is bogus, it's not true.
+[01:14.80]For example, an employee might call her employer
+[01:18.52]to say she needs a sick day off from work.
+[01:22.36]But during the call, her boss hears loud,
+[01:26.64]live music in the background.
+[01:29.76]The employee was clearly at a music show.
+[01:33.60]Her reason for not being at work was bogus.
+[01:38.96]We could also say the employee's excuse did not hold water.
+[01:44.56]Her excuse for missing work sounded bogus.
+[01:48.48]It was not believable. It didn't hold water.
+[01:54.32]Experts at the online dictionary Merriam-Webster explain
+[01:58.92]that bogus began as a noun.
+[02:03.24]In the early 19th century in the U.S.,
+[02:06.40]a bogus was a machine
+[02:09.00]that made counterfeit, or fake, money.
+[02:13.76]Here's a fun fact: You can call bogus,
+[02:16.96]counterfeit money funny money.
+[02:20.84]Here is another word related to bogus – sham.
+[02:26.52]Sham, a noun, describes a fake, made-up situation.
+[02:32.24]We use shams to cover up the truth.
+[02:37.20]Let's hear some of these terms used in a short story.
+[02:43.40]Two roommates work together at a bank.
+[02:47.00]One day, they decide to steal all the gold and jewelry
+[02:51.76]held in the bank's safe.
+[02:54.04]So, they plot. They plan it out.
+[02:57.56]First, they need an alibi.
+[03:01.08]Where can they be while the robbery is actually happening?
+[03:06.64]They create a bogus alibi.
+[03:10.92]They tell police that at the time of the robbery,
+[03:14.52]they were together at a volunteer event,
+[03:18.16]cleaning up a local park by the town's river.
+[03:23.16]But after checking out their alibi,
+[03:25.92]police brought the two in for questioning.
+[03:29.84]Then detectives searched their shared apartment
+[03:33.00]and found all the gold and jewels from the bank robbery.
+[03:38.56]What made the police suspect them?
+[03:41.12]Can you guess what detectives found at the river park
+[03:45.96]that proved their alibi was a sham?
+[03:50.36]A dirty park and river!
+[03:53.04]They both had a huge amount of trash!
+[03:56.48]Clearly, no clean-up event had ever taken place.
+[04:01.52]And that's all the time
+[04:03.68]we have for this Words and Their Stories.
+[04:06.44]Until next time ...
+[04:08.12]I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

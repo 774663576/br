@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - When Do You 'Go Against the Grain'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, When Do You 'Go Against the Grain'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/when-do-you-go-against-the-grain.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>When Do You 'Go Against the Grain'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/when-do-you-go-against-the-grain.mp3" id="mp3"></a>
+<a href="using-just-and-only-92394.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">16 March 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Have you ever looked closely at a piece of wood? If you have, you might have noticed its beautiful grain.</p>
+<p>When talking about wood, grain describes the appearance of cell fibers in the wood. A wood's grain is important when choosing the right sort of wood for a project. Different kinds of wood have different grains, which affect their appearance, strength, and usefulness.</p><div class="contentImage"><img alt="FILE - In this picture taken on August 19, 2023, a worker crafts a Kashmiri willow wood cricket bat at a factory in Kashmir's Sangam village. (Photo by Tauseef MUSTAFA / AFP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-f6d2-08dbbe55a392_w268_r1.jpg"/><br/><span class="imagecaption">FILE - In this picture taken on August 19, 2023, a worker crafts a Kashmiri willow wood cricket bat at a factory in Kashmir's Sangam village. (Photo by Tauseef MUSTAFA / AFP)</span></div>
+<p>Paying attention to a wood's grain helps you to know how to work with it. For example, if you are cutting a wood <strong>board</strong> with the grain, you would use a tool called a rip saw. If you are cutting across the grain, you would use a crosscut saw.</p>
+<p>Cutting against the grain is more difficult. If you work against the wood grain, you might tear out pieces of wood or even damage your tools.</p>
+<p>And that brings us to our expression: <u>to go against the grain.</u></p>
+<p>If you go against the grain, you do something differently from what is normal or usual.</p>
+<p>An idea or action that goes against the grain is difficult to do or accept. Usually, it goes against a person's ideals, beliefs, or principles.</p>
+<p>If an idea or action goes against the grain, it is the opposite of what you believe is right or normal. You might find it difficult to accept. In some situations, it takes courage to go against the grain of what others are saying or doing and stand up for what you believe in.</p>
+<p>Let's say a friend of yours is offered a sales job. To do the job well, he must <strong>convince</strong> people to buy things they don't need. He is a very honest man. So, for him this job goes against the grain.</p>
+<p>To go against the grain can also mean to do things differently from others. Sometimes we want to go against the grain. We don't want to do things the way everyone else does. Artists often try to go against the grain and ignore the common, popular <strong>trends </strong>of the day.</p>
+<p>Now, let's hear the expression used between two friends.</p>
+<p><em>A: Did you hear about Jenny taking that corporate banking job? </em></p>
+<p><em>B: I did! I'm really happy for her. </em></p>
+<p><em>A: Happy? You must be kidding. Jenny is an artist. In college, we used to protest against big banks.</em></p>
+<p><em>B: I know we did. But life is different now. We're older and have bills to pay. And I think Jenny wants to send her little sister to college. </em></p>
+<p><em>A: I know. But a corporate job? Jenny? It just goes against the grain for her. </em></p>
+<p><em>B: Look, we need to support our friend. Anything less would go against the grain for me.</em></p>
+<p>And that's the end of this <em>Words and Their Stories</em>.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this story for VOA Learning English. </em></p>
+<p>________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>board</strong> –n. a flat piece of wood used for building things</p>
+<p><strong>convince </strong>–v. to persuade a person to do or believe something</p>
+<p><strong>trend </strong>–n. the way things are going; a general direction of change</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

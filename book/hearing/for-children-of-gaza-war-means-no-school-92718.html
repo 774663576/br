@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - For Children of Gaza, War Means No School</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, For Children of Gaza, War Means No School" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/for-children-of-gaza-war-means-no-school.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>For Children of Gaza, War Means No School</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/for-children-of-gaza-war-means-no-school.mp3" id="mp3"></a>
+<a href="coin-collection-to-be-sold--years-after-owner-s-death-92712.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">21 May 2024</span><br/>
+<p>Atef Al-Buhaisi is a 6-year-old from the Palestinian territory of Gaza. He once dreamed of a career building houses. Now, all he wants is to return to school.</p>
+<p>In Israel's war with Hamas, Atef's home has been bombed, his teacher killed and his school in Nuseirat made into a refuge for displaced people. He lives in a crowded tent with his family in Deir al-Balah in central Gaza.</p>
+<p>The war started last October. It was Israel's answer to the Hamas attack on October 7. The terrorists killed some 1,200 people and took 250 hostages from southern Israel.</p><div class="contentImage"><img alt="Children attend an activity at a makeshift class in Deir al Balah, on Sunday, April 21, 2024. (AP Photo/Abdel Kareen Hana)" src="https://files.21voa.com/gdb/01000000-0aff-0242-7ff9-08dc790582c9_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Children attend an activity at a makeshift class in Deir al Balah, on Sunday, April 21, 2024. (AP Photo/Abdel Kareen Hana)</span></div>
+<p>Since the start of the war, all of Gaza's schools have closed, leaving hundreds of thousands of students like Atef without <strong>formal</strong> schooling or a safe place to spend their days. Aid groups are working to keep children off the streets and their minds centered on something other than the war.</p>
+<p>"What we've lost most is the future of our children and their education," said Irada Ismael, Atef's grandmother. "Houses and walls are rebuilt, money can be earned again...but how do I <strong>compensate</strong> for (his) education?"</p>
+<p><strong>Gaza faces a humanitarian crisis</strong></p>
+<p>Aid groups say about 80 percent of Gaza's population has been driven from their homes. Much of Gaza is damaged or destroyed, including nearly 90 percent of school buildings.</p>
+<p>The Gaza Health Ministry, which is controlled by Hamas, says more than 35,000 Palestinians, including civilians and fighters, have been killed in the war.</p>
+<p>And the head of the U.N. World Food Program said a "full-blown <strong>famine</strong>" is already underway in the north.</p>
+<p>Children are among the most severely affected. The U.N. estimates some 19,000 children have been <strong>orphaned</strong> and nearly a third under the age of two face <strong>malnutrition</strong>.</p>
+<p>In emergencies, education is less important than safety, health and sanitation, education experts say. But the effects are lasting.</p>
+<p>Before the war, Gaza was home to more than 625,000 students and some 20,000 teachers, the U.N. says. In other conflicts, aid groups can create safe spaces for children in neighboring countries. Poland has been used for shelter and schooling for Ukrainians during the war there, for example.</p>
+<p>That is not possible in Gaza, a highly populated area locked between the sea, Israel and Egypt. Since October 7, Palestinians from Gaza have not been permitted to cross into Israel. Egypt has let a small number of Palestinians leave.</p>
+<p>Tess Ingram is with the children and education organization UNICEF. She told the Associated Press, "It's very hard to provide them with certain services, such as mental health and psychosocial support or consistent education and learning."</p>
+<p><strong>Aid groups try to help</strong></p>
+<p>Aid groups hope classes will start by September. But even if a cease-fire deal is reached, much of Gaza must be cleared of mines. And rebuilding schools could take years.</p>
+<p>In the meantime, aid groups are providing activities like games, drawing, and art. The activities are not a formal education but provide children with a sense of normalcy. Even then, supporters say, their attention often turns to the war. Atef's grandmother sees him draw pictures only of tents, planes and missiles.</p>
+<p>Finding free space is among the biggest difficulties. Some volunteers use the outdoors, do their best inside tents where people live, or find a room in homes still standing.</p>
+<p>This month, UNICEF had planned to build at least 50 tents for some 6,000 children from preschool to grade 12 to provide some informal schooling. But UNICEF says those plans could be disrupted by Israel's operation there.</p>
+<p>Lack of schooling can cause psychological impacts. It disrupts daily life and, combined with conflict, makes children more likely to experience <strong>anxiety</strong>, said Jesus Miguel Perez Cazorla. He is a mental health expert with the International Committee of the Red Cross.</p>
+<p>Children in conflicts are also at increased risk of forced labor, sexual violence, <strong>trafficking</strong> and <strong>recruitment</strong> by criminal and armed groups, experts warn.</p>
+<p>Samantha Nutt is with War Child USA, a group that supports children and families in war zones. She said the children are in danger of being recruited by Hamas and other militant groups. The constant violence makes children believe that they "want to take action against the groups they consider responsible," she said.</p>
+<p>Palestinian parents say they have seen more children on the streets trying to earn money for their families. Some try to find small ways to teach their children. But many say the kids are too distracted, with the world around them at war.</p>
+<p>Sabreen al-Khatib is a mother whose family was displaced to Deir al-Balah from Gaza City. She said it is especially hard for the many who have seen relatives die.</p>
+<p>"When you speak in front of children," al-Khatib said, "what do you think he is thinking? Will he think about education? Or about himself, how will he die?"</p>
+<p>I'm Dan Novak.</p>
+<p>And I'm Gena Bennett.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press. </em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpFirst"><strong>formal </strong><em>— adj. </em> requiring or using serious and proper clothes and manners</p>
+<p class="CxSpMiddle"><strong>compensate </strong><em>— v. </em>to provide something good as a balance against something bad or undesirable</p>
+<p class="CxSpMiddle"><strong>famine </strong><em>— n. </em>a situation in which many people do not have enough food to eat</p>
+<p class="CxSpMiddle"><strong>orphan </strong><em>— n. </em>a child whose parents are dead</p>
+<p class="CxSpMiddle"><strong>malnutrition </strong><em>— n. </em>the unhealthy condition that results from not eating enough food or not eating enough healthy food</p>
+<p class="CxSpMiddle"><strong>anxiety </strong><em>— n. </em>fear or nervousness about what might happen</p>
+<p class="CxSpMiddle"><strong>traffic </strong><em>— v. </em>to buy or sell something especially illegally</p>
+<p class="CxSpMiddle"><strong>recruit </strong><em>— v. </em>to find suitable people and get them to join a company, an organization, the armed forces, etc.</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

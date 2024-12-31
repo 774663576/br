@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Artists in Lebanon Keep Creating During Conflict</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Artists in Lebanon Keep Creating During Conflict" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/artists-in-lebanon-keep-creating-during-conflict.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Artists in Lebanon Keep Creating During Conflict</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/artists-in-lebanon-keep-creating-during-conflict.mp3" id="mp3"></a>
+<a href="how-to-keep-tropical-plants-through-the-winter-93160.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">19 November, 2024</span><br/>
+<p>Charbel Samuel Aoun is a working artist in the Middle Eastern nation of Lebanon. As the Israeli military launches a deadly attack against the militant group Hezbollah in his home country, Aoun asks, "Does art still have a place in such a crisis?"</p>
+<p>Lebanon has long played an important part in the Arab world's artistic community. It has been a center for arts, music and theater, combining traditional and modern influences.</p>
+<p>Now, Lebanese artists are using their work as a way to express the anger and loss they feel after a year-long Israeli offensive that has killed more than 3,200 people, most of them since September.</p><div class="contentImage"><img alt="Displaced and refugee children attend an event where Lebanese singer Joy Fayad and musician Oliver Maalouf perform, amid the ongoing hostilities between Hezbollah and Israeli forces, in Dbayeh, Lebanon November 9, 2024. (REUTERS/Emilie Madi)" src="https://files.21voa.com/gdb/d925dcf6-f7da-4827-b44f-3a6759bf569e_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Displaced and refugee children attend an event where Lebanese singer Joy Fayad and musician Oliver Maalouf perform, amid the ongoing hostilities between Hezbollah and Israeli forces, in Dbayeh, Lebanon November 9, 2024. (REUTERS/Emilie Madi)</span></div>
+<p>Aoun's works of art are directly connected to the conflicts Lebanon has seen. In 2013, he began gathering dust from Syrian refugee camps in Lebanon to create a series of paintings before moving on to explore other materials.</p>
+<p>Now, he says the darkness and hopelessness of the war and the waste left behind by Israel's intense bombing campaign have renewed his desire to create art from dust.</p>
+<p>"You either stop everything or keep going with the little that still has meaning," he said.</p>
+<p>Two of his <strong>exhibitions</strong> have been canceled due to the war. While he once made money from selling art, he now also relies on selling honey from his <strong>beehives</strong>, which he first set up as a project to create art from <strong>beeswax</strong>.</p>
+<p>"I can no longer rely on the art market," he said.</p>
+<p><strong>No demand for art</strong></p>
+<p>Exhibition spaces across Beirut have closed in recent months. Their owners told Reuters there is no demand to buy art at this time. Even Lebanon's famous Sursock Museum has stored its collections underground.</p>
+<p>Lebanese singer and musician Joy Fayad has also struggled with the emotional cost of the conflict. It has made it difficult for her to perform for months.</p>
+<p>"It limited my creativity; it was like I <strong>shut down</strong>. I couldn't give to others, nor to myself," Fayad, 36, said.</p>
+<p>Instead, she threw her energy into songwriting. One line in a new song reads: "You are from the <strong>downtrodden</strong> people, whose word has been silenced, and by their weapons, you are paying the price with your blood."</p>
+<p>She recently began performing again, singing for displaced and refugee children in Lebanon at an event north of Beirut.</p>
+<p>"They're changing the atmosphere, having fun after such a difficult period," she said, especially for those who became used to the sound of bombs instead of music.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Emilie Madi and Riham Alkousaa </em><em>reported this story for Reuters.</em><em> Jill Robbins adapted it for Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>exhibition</strong> –<em> n</em>. an event at which objects (such as works of art) are put out in a public space for people to look at : a public show of something</p>
+<p><strong>beehive</strong> – <em>n</em>. a nest for bees</p>
+<p><strong>beeswax </strong>– <em>n</em>. wax made by bees that is used for making candles and other products</p>
+<p><strong>shut down </strong>– <em>phrasal verb (informal.)</em> to cause (an opponent) to be unsuccessful, unable to score, or function</p>
+<p><strong>downtrodden – </strong><em>adj.</em> without hope because of being treated badly by powerful people, governments, or the like</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

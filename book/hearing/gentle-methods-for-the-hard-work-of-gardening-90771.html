@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Gentle Methods for the Hard Work of Gardening</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Gentle Methods for the Hard Work of Gardening" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/gentle-methods-for-the-hard-work-of-gardening.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Gentle Methods for the Hard Work of Gardening</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/gentle-methods-for-the-hard-work-of-gardening.mp3" id="mp3"></a>
+<a href="/static/lrc/gentle-methods-for-the-hard-work-of-gardening.lrc" id="lrc"></a>
+<a href="companies-use-ai-chips-to-run-quantum-based-programs-90770.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Caty Weaver</span><br/>
+<span class="datetime">24 April 2023</span><br/>
+<p>Gardening requires a lot of physical labor. The activity can extend from light exercise to heavy labor. All that bending, lifting, digging, carrying and moving burns <strong>calories</strong> and builds muscle.</p>
+<p>But it can also injure the body. A gardener's back can start to hurt and so can their knees. Even the strongest and healthiest of gardeners can hurt themselves. For people who are less physically fit or who have health conditions that limit movement or cause pain, gardening may seem impossible.</p>
+<p>But there are ways to grow plants that are gentle on the body says expert Jessica Damiano. She recently provided some advice on the subject in a report for the<em> </em>Associated Press.</p><div class="contentImage"><img alt="This image provided by Gardener's Supply Company shows a woman gardening in a raised bed while seated on a Deluxe Tractor Scoot. (Gardeners.com via AP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-026d-08db40ed0fdc_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This image provided by Gardener's Supply Company shows a woman gardening in a raised bed while seated on a Deluxe Tractor Scoot. (Gardeners.com via AP)</span></div>
+<p>Damiano said she uses heating <strong>pads</strong> on her neck and lower back for about five minutes before starting to garden. This helps to prepare her muscles for work. A few minutes of gentle stretching helps, too.</p>
+<p>Try to collect all the tools you will need before settling in to your labor. It is also a good idea to store the heaviest equipment on waist-height shelves for the easiest and safest removal and return.</p>
+<p>Taking simple care in the way you lift and carry the objects you need can prevent injury. Remember to bend at the knees when lifting bags of <strong>mulch</strong>. You can stand with your feet as far apart as your shoulders to keep your balance. If bending at all is too difficult, or if you garden while seated, grow plants in raised beds that are as tall as your chair or the middle part of your body. You also can grow plants in <strong>towers</strong> or on <strong>trellises</strong>.</p>
+<p>Use<strong> wheelbarrows</strong> to transport heavy supplies. It is easy to overestimate your ability to carry heavy loads. The result can lead to injury. When you carry weight on your own, hold heavy objects to your chest, keeping your back as straight as possible. Plant containers can be very heavy. It is best to set containers where you want them before you fill them.</p>
+<p>Damiano's flower garden contains mostly <strong>perennials</strong>. She likes them better than annuals, which need replanting every year. That lessens her work – and bending – a great deal. Plus, perennials, which return year after year, usually cost more at first but, over time, save money because you are not buying new annuals every spring.</p>
+<p>Move around on a garden seat with wheels. You also can use pads to protect your knees. If you have hand pain or difficulty holding onto things, many tools now come with improved <strong>grips</strong>. You can also update your existing tools with grips and wraps made to fit them.</p>
+<p>Most importantly, take it slow and easy. Limit gardening periods to between 60 and 90 minutes.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>The Associated Press reported this story. Caty Weaver adapted it for VOA Learning English. </em></p>
+<p>__________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>calorie</strong><strong> </strong><em>–n. </em>a measure of heat used to show how much energy a food will produce in the body</p>
+<p><strong>pad </strong>–n. a flat thin device that is soft used to protect bones from injury or to hold heat or cold as a treatment</p>
+<p><strong>mulch</strong> <em>–n.</em> small pieces of organic material that are put on the ground around plants to improve their growth and suppress unwanted plants</p>
+<p><strong>tower </strong><em>--</em><em>n</em><em>.</em> a raised structure</p>
+<p><strong>trelli</strong><strong>s </strong><em>–</em><em>–n</em><em>. </em>a light structure usually of wood that supports climbing plants<em> </em></p>
+<p><strong>wheelbarrow </strong><em>–n. </em>a garden device with a wheel that is used to move heavy things like dirt</p>
+<p><strong>perennial </strong><em>–n. </em>a plant that grows for many years</p>
+<p><strong>grip </strong><em>–n. </em>the part of a tool that your hand holds in order to control it</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Gentle Methods for the Hard Work of Gardening]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Gardening requires a lot of physical labor.
+[00:06.20]The activity can extend
+[00:08.80]from light exercise to heavy labor.
+[00:14.48]All that bending, lifting, digging, carrying
+[00:20.08]and moving burns calories and builds muscle.
+[00:26.64]But it can also injure the body.
+[00:30.28]A gardener's back can start to hurt
+[00:34.08]and so can their knees.
+[00:37.76]Even the strongest and healthiest
+[00:40.80]of gardeners can hurt themselves.
+[00:44.40]For people who are less physically fit
+[00:48.12]or who have health conditions
+[00:51.04]that limit movement or cause pain,
+[00:54.24]gardening may seem impossible.
+[00:57.52]But there are ways to grow plants
+[01:01.44]that are gentle on the body
+[01:04.00]says expert Jessica Damiano.
+[01:07.28]She recently provided
+[01:10.24]some advice on the subject
+[01:12.60]in a report for the Associated Press.
+[01:16.32]Damiano said she uses
+[01:19.60]heating pads on her neck and lower back
+[01:23.32]for about five minutes
+[01:26.20]before starting to garden.
+[01:29.80]This helps to prepare her muscles for work.
+[01:35.00]A few minutes of gentle stretching helps, too.
+[01:40.32]Try to collect all the tools you will need
+[01:44.24]before settling in to your labor.
+[01:48.36]It is also a good idea
+[01:51.00]to store the heaviest equipment
+[01:54.00]on waist-height shelves
+[01:56.56]for the easiest and safest removal and return.
+[02:02.68]Taking simple care in the way you lift
+[02:06.36]and carry the objects you need
+[02:09.48]can prevent injury.
+[02:12.52]Remember to bend at the knees
+[02:15.72]when lifting bags of mulch.
+[02:18.76]You can stand with your feet
+[02:21.68]as far apart as your shoulders
+[02:24.88]to keep your balance.
+[02:27.92]If bending at all is too difficult,
+[02:31.16]or if you garden while seated,
+[02:34.68]grow plants in raised beds
+[02:38.00]that are as tall as your chair
+[02:40.52]or the middle part of your body.
+[02:44.44]You also can grow plants in towers or on trellises.
+[02:50.12]Use wheelbarrows to transport heavy supplies.
+[02:55.40]It is easy to overestimate
+[02:59.76]your ability to carry heavy loads.
+[03:03.64]The result can lead to injury.
+[03:07.88]When you carry weight on your own,
+[03:10.92]hold heavy objects to your chest,
+[03:14.52]keeping your back as straight as possible.
+[03:19.08]Plant containers can be very heavy.
+[03:22.00]It is best to set containers
+[03:25.20]where you want them before you fill them.
+[03:29.92]Damiano's flower garden
+[03:31.96]contains mostly perennials.
+[03:35.04]She likes them better than annuals,
+[03:38.60]which need replanting every year.
+[03:41.64]That lessens her work –
+[03:44.40]and bending – a great deal.
+[03:48.36]Plus, perennials, which return
+[03:51.96]year after year,
+[03:54.04]usually cost more at first but,
+[03:57.84]over time, save money
+[04:00.64]because you are not buying
+[04:02.88]new annuals every spring.
+[04:06.60]Move around on a garden seat with wheels.
+[04:11.00]You also can use pads to protect your knees.
+[04:15.28]If you have hand pain
+[04:18.36]or difficulty holding onto things,
+[04:21.48]many tools now come with improved grips.
+[04:26.56]You can also update your existing tools
+[04:30.76]with grips and wraps made to fit them.
+[04:35.64]Most importantly, take it slow and easy.
+[04:40.32]Limit gardening periods
+[04:42.68]to between 60 and 90 minutes.
+[04:48.08]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

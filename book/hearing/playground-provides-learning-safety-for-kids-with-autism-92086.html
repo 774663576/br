@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Playground Provides Learning, Safety for Kids with Autism</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Playground Provides Learning, Safety for Kids with Autism" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/playground-provides-learning-safety-for-kids-with-autism.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Playground Provides Learning, Safety for Kids with Autism</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/playground-provides-learning-safety-for-kids-with-autism.mp3" id="mp3"></a>
+<a href="british-judges-get-permission-to-use-ai-to-help-with-writing-92082.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">16 January 2024</span><br/>
+<p>At first look, the playground at the Children's Guild-Transformation Academy in Baltimore, Maryland, looks like any other. It has swings, slides, and places for children to climb and crawl.</p>
+<p>But the playground is not just a place for fun. It is also a place where students can learn, grow and gain independence. Everything — from the kind of surface it sits on, to the color of its sitting areas, to the placement of the surrounding fence — is specifically designed for kids with autism.</p>
+<p>Mark Rapaport is the managing director of autism services at the Transformation Academy. He told VOA Learning English the school accepts students aged 5 to 21 with autism <strong>spectrum</strong> disorder (ASD) and are lower-functioning.</p><div class="contentImage"><img alt="The inclusive playground at Transformation Academy in Baltimore, Maryland. In the background is a xylophone and drums where children can play music. (Dan Novak/VOA)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-db7b-08dc16179c13_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">The inclusive playground at Transformation Academy in Baltimore, Maryland. In the background is a xylophone and drums where children can play music. (Dan Novak/VOA)</span></div>
+<p>"None of our kids will ever drive," Rapaport said. "None of our kids will ever live fully independently ... None of our kids graduate high school."</p>
+<p>
+Rapaport said the goal of Transformation Academy is to make the students as independent as possible in an effort to help them prepare for adult life. The school aims to provide help with developing communication and social skills, as well as <strong>practical</strong> abilities like cleaning or cooking.</p>
+<p>"And learning through play is a big deal," Rapaport said. "The classroom is great. But it's [things like play] that's at the heart of the mission, which is building independence and getting them to be able to go into the adult world."</p>
+<p>The playground, designed by Maryland company Sparks@Play, using structures manufactured by Landscape Structures, Inc., took months to develop, said Dan Hack. He works for Sparks@Play and helped lead the playground's design. Hack said he and others spent weeks getting to know the students and understanding their needs before any building was started. The design process involved physical <strong>therapists</strong>, <strong>occupational</strong> <strong>therapists</strong>, and other specialists. The $500,000 project was funded with support from the state of Maryland and the nonprofit Orokawa Foundation.</p>
+<p>Parts of the playground that seem small are very important for children with autism and other disabilities. The surrounding fence extends into a wooded area to make it seem more open. And the ground under the play areas is made of soft, but solid materials to support students using wheelchairs or <strong>crutches</strong>.</p>
+<p>Instead of just one slide, there are two sitting side-by-side. That way, parents or teachers with older, larger students can go down the slide together with the kids. A spinning structure called the We-Go-Round has a place for kids with wheelchairs so they can also have fun.</p>
+<p>The playground's designers say a number of sensory elements are also included to help the students. Children with autism often have Sensory Processing Disorder, which makes them very sensitive to certain sounds or <strong>textures</strong>.</p>
+<p>The benches on the outside of the playground look simple from far away, but are "one of our most inclusive sensory" elements, Hack said. They have many different colors that bring about feelings of calm and curiosity. They are also made with smooth material that can be felt and moved. The academy's Rapaport said if a child starts to feel uneasy, they can sit down and feel the bench, which can help them <strong>relax</strong>.</p>
+<p>There are also musical bells and large <strong>xylophones </strong>that produce calming sounds. An enclosed structure provides a place of peace and quiet if a student needs a break from play.</p>
+<p>One of the most important designs, says Rapaport, is a tower that can spray water on multiple children. This can be an important way for older children with autism to get over their fears of water, which for them can be overstimulating.</p>
+<p>"Imagine you have a child that won't take a shower," Rapaport said. "Now we can have kids go outside and they're standing under a sprayer and they're loving it. Why? Because they're watching other kids do it."</p>
+<p>Like the shower, much of the equipment is designed to persuade students to interact with each other, even though they might usually like playing alone. A swing set is designed to permit two kids to swing at the same time, for example.</p>
+<p>Celia Galion's daughter Deborah is a 14-year-old who attends Transformation Academy. Deborah has a condition called tuberous sclerosis, which causes seizures, and which brought on her autism at a young age.</p>
+<p>"Deborah is a very sweet child," Galion said. "She likes playing. She loves hugs. She's very <strong>affectionate</strong> and she likes to be loud. And so being outside is great."</p>
+<p>Galion said it has been four or five years since she has taken her daughter to a playground. She had resisted taking Deborah because other kids could be mean and she felt like many playgrounds were not safe.</p>
+<p>But Galion said the new playground at Transformation Academy permits "children to feel like they have a little bit of freedom." They can play "without having to necessarily have somebody standing right over them to make sure that they're safe...it's really, really great for them."</p>
+<p>Rapaport said the school plans to open up the playground for everyone in the autism community, even if they do not attend Transformation Academy.</p>
+<p>Sparks@Play's Hack said he thinks the playground can help autistic children of all ages develop their independence as they move into adulthood.</p>
+<p>"Being able to learn how to <strong>collaborate</strong> and work with other people and use your imagination and try things that you wouldn't have tried otherwise ... shapes you into a much more <strong>confident</strong> and well-abled adult," Hack said.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p class="CxSpMiddle"><em>___________________________________________________</em></p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>spectrum </strong><em>— n. </em>a complete range of different opinions, people, etc.</p>
+<p class="CxSpMiddle"><strong>practical </strong><em>— adj.</em> skilled at manual tasks</p>
+<p class="CxSpMiddle"><strong>therapist </strong><em>— n. </em>a person trained in methods of treating illnesses especially without the use of drugs or surgery</p>
+<p class="CxSpMiddle"><strong>occupational therapy </strong><em>— n. </em>treatment that helps people who have physical or mental problems learn to do the activities of daily life</p>
+<p class="CxSpMiddle"><strong>crutches </strong><em>— n. </em>a long stick with a padded piece at the top that fits under a person's arm</p>
+<p class="CxSpMiddle"><strong>texture </strong><em>— n. </em>the way that something feels when you touch it</p>
+<p class="CxSpMiddle"><strong>relax </strong><em>— v. </em>to stop feeling nervous or worried</p>
+<p class="CxSpMiddle"><strong>xylophone </strong><em>— n. </em>a musical instrument that has a set of wooden bars of different lengths that are hit with hammers</p>
+<p class="CxSpMiddle"><strong>affectionate </strong><em>— adj. </em>feeling or showing love and affection</p>
+<p class="CxSpMiddle"><strong>collaborate </strong><em>— v. </em>to work with another person or group in order to achieve or do something</p>
+<p class="CxSpMiddle"><strong>confident </strong><em>— adj. </em>having a feeling or belief that you can do something well or succeed at something</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

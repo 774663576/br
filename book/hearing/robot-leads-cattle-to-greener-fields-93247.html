@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Robot Leads Cattle to Greener Fields</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Robot Leads Cattle to Greener Fields" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/robot-leads-cattle-to-greener-fields.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Robot Leads Cattle to Greener Fields</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/robot-leads-cattle-to-greener-fields.mp3" id="mp3"></a>
+<a href="at-venezuela-s-hospital-for-soft-toys-old-toys-find-new-life-93246.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">22 December, 2024</span><br/>
+<p>Researchers in Australia are using a robot powered by artificial intelligence (AI) to improve the way farmers raise cattle.</p>
+<p>The robot has four wheels and is painted red.</p>
+<p>Researchers have named the robot cow SwagBot. It can drive by itself and move cows from one field to another based on the condition of the soil and plant life.</p><div class="contentImage"><img alt="University of Sydney's autonomous robot 'SwagBot' moves around a field in Allynbrook, Australia, November 22, 2024. (REUTERS/Cordelia Hsu)
+" src="https://files.21voa.com/gdb/600f9823-e6f4-40d9-8e2f-41b32f51e8bd_w268_r1.jpg"/><br/><span class="imagecaption">University of Sydney's autonomous robot 'SwagBot' moves around a field in Allynbrook, Australia, November 22, 2024. (REUTERS/Cordelia Hsu)
+</span></div>
+<p>Researchers at the University of Sydney in Australia said SwagBot is becoming the world's first “smart cow.” They believe it can make cattle farming more <strong>efficient</strong> and put less pressure on the environment.</p>
+<p>Swagbot was first launched in 2016. At that time, it could only move around fields where cattle <strong>graze</strong>. Over time, scientists have added sensors and AI systems to the robot.</p>
+<p>These systems help SwagBot judge the health, type, and thickness of grasses and plants in fields and to observe the health of the cattle.</p>
+<p>The robot uses this information to move cattle to the best areas for grazing. The goal is to move cattle to a new grazing area before they have damaged the grass in a particular field. This can prevent damage to the soil. The robot can also send the information back to farmers.</p>
+<p>Salah Sukkarieh is a professor of robotics and intelligent systems at the University of Sydney. His team made SwagBot. He said that once cattle feel at ease near the robot, they follow it around.</p>
+<p>"You want to move the animals to the right part of the <strong>pasture</strong> where there is good protein, good <strong>carbs</strong>," he said. Sukkarieh added that it is important to move the cattle easily and without fences.</p>
+<p>Australia is one of the world's biggest exporters of beef. It has around 30 million cattle spread across large areas that are often dry. As a result, some pastures are of low quality and do not have a lot of grass.</p>
+<p>Farmers carefully <strong>assess</strong> how many animals their land can support. However, many farmers have little control over where the animals graze within large areas of land. Overgrazing can lead to poor soil that supports less plant and animal life.</p>
+<p>Erin O'Neill is a part-time farmer who watched a recent demonstration of the robot in a field north of Sydney. She said the robot can help farmers get detailed information about the current condition of their fields.</p>
+<p>She said the robot can tell farmers “what bits of pasture are most nutritious, particularly if you've got cattle like we do that are pregnant.” O'Neill added that pregnant cattle need high-quality pastures to aid them through pregnancy.</p>
+<p>SwagBot is still in development. It is part of a growing movement in agriculture towards robotics. Farming experts hope robots can make production more efficient. Robots could also reduce the need for workers in places, like Australia, where finding workers in areas with a low population can be difficult.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Cordelia Hsu wrote this story for Reuters news agency. Andrew Smith adapted it for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>efficient </strong>–adj. something that does what it is supposed to do using the least resources possible</p>
+<p><strong>graze </strong>–v. when certain animals, such as cattle, eat grass in a field</p>
+<p><strong>pasture </strong>–n. a field used for feeding animals like cattle, sheep, goats, or other grazing animals</p>
+<p><strong>assess </strong>–v. to take in information in the aim of making a judgement or determination about it</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

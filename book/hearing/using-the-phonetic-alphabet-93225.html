@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Using the Phonetic Alphabet</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Using the Phonetic Alphabet" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/using-the-phonetic-alphabet.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Using the Phonetic Alphabet</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/using-the-phonetic-alphabet.mp3" id="mp3"></a>
+<a href="study-ancient-americans-depended-heavily-on-mammoth-for-food-93223.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">13 December, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Mouhammed in Egypt about using the phonetic alphabet.</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/d81a33a8-a0ed-4bc3-8954-e67593f8e401_w268_r1.jpg"/></div>
+<p>I want to ask about the most important sources through which I can learn to improve the [pronunciation] of English letters, [for] trying to master the American accent.</p>
+<p>Thank you,</p>
+<p>Mouhammed</p>
+<p><strong>Answer</strong></p>
+<p>I'm happy to answer this question, Mouhammed.</p>
+<p><strong>Understanding phonemes and the phonetic alphabet</strong></p>
+<p>You can use the phonetic alphabet to help you know each sound of American English. Let's start by looking at what the phonetic alphabet is.</p>
+<p>Each separate sound we make when we talk is called a phoneme. For example, the word “cat” has three phonemes: /k/, /<i>&amp;#</i>230;/, /t/ --“cat.”</p>
+<p>For every phoneme we say, in any language, we can show that phoneme by using a special symbol, or sign. Those symbols are what make The International Phonetic Alphabet, or IPA. Notice that in the example with “cat,” only the phonetic symbol for the letter “t” looks the same as the English letter for that sound.</p>
+<p>For many phonemes, the phonetic symbol does not look the same as the letters of the English alphabet that make the sound of the phonemes. Consider the word “need,” for example. It is spelled N-E-E-D but the phonetic symbol signifying the vowel looks like the English letter “i.”</p>
+<p><strong>Using the phonetic alphabet</strong></p>
+<p>How can you use the phonetic alphabet? Try to identify the phonemes that are difficult for you. For example, small differences between some vowel sounds in American English may be difficult for some non-native speakers to hear. Consider the following example:</p>
+<p><em>bit bet</em></p>
+<p>Did you clearly hear the difference between the two words? Hearing the sounds more clearly can help you pronounce them.</p>
+<p>The <a class="wsw__a" href="https://www.vocabulary.com/resources/ipa-pronunciation/">IPA Pronunciation Guide</a> on the website Vocabulary.com has an audio element so you can listen to the sound of each symbol. It also provides example words that contain the sound of each symbol. So, you can use the guide to practice hearing and saying any phoneme in American English.</p>
+<p>The VOA Learning English video series <em>How to Pronounce </em>has many lessons that use IPA symbols to help learners practice the sounds of American English. The 21 lessons <a class="wsw__a" href="https://www.21voa.com/a/7120228.html">“Games with Vowel Sounds”</a> and the <a class="wsw__a" href="https://www.21voa.com/a/7070516.html" target="_blank">"Listening Practice”</a> lessons are good places to start.</p>
+<p>On the VOA Learning English website, you can play a short piece of audio and listen for phonemes you want to <strong>practice</strong>. You can hear words pronounced clearly and look at the way English spelling represents the phonemes you hear.</p>
+<p>For our readers and listeners, what are your questions about American English? We want to hear from you! Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>. And please let us know where you are from, too.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

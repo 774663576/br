@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯总统普京决定不驱逐美国外交人员</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 俄罗斯总统普京决定不驱逐美国外交人员" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201612/russia-president-no-expulsions-to-answer-us-punishments.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯总统普京决定不驱逐美国外交人员</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201612/russia-president-no-expulsions-to-answer-us-punishments.mp3" id="mp3"></a>
+<a href="/static/lrc/russia-president-no-expulsions-to-answer-us-punishments.lrc" id="lrc"></a>
+<a href="russia-president-no-expulsions-to-answer-us-punishments-73268.html" id="CnPage" target="_blank"></a>
+<a href="chicago-working-to-reduce-gun-violence-emanuel-brennan-center-73253.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Russian President Vladimir Putin said Friday that he has decided not to expel American diplomats from his country.<br/>俄罗斯总统普京周五表示，他已经决定，俄罗斯不会驱逐美国外交官。 
+<p>Russia's foreign minister had suggested expelling United States diplomats and other measures to answer U.S. sanctions against Russia.<br/>俄罗斯外长曾建议他驱逐美国外交官以及采取其它措施作为对美国制裁俄罗斯的回应。</p>
+<p>On Thursday, President Barack Obama ordered 35 Russians to be expelled from the United States and other measures.<br/>周四，美国总统奥巴马下令驱逐35名俄罗斯人，并采取了其它措施。</p>
+<p>The moves came after U.S. intelligence agencies said Russia hacked Democratic Party computers and released stolen emails. The agencies said this was done to interfere with the U.S. presidential election.<br/>此举是在美国情报机构称俄罗斯黑入民主党电脑并泄漏被盗电子邮件之后发生的。美国情报机构称俄罗斯此举是为了干预美国总统选举。</p>
+<p>Putin said Russia "has reasons" to take action against the U.S. But he said he will wait to "plan out further steps" based on the policies of the incoming administration. Republican Donald Trump will replace Democrat Barack Obama as president on January 20.<br/>普京表示，俄罗斯“有理由”对美国采取行动。但他表示，他将会根据美国即将上台的新政府的政策来规划进一步行动。共和党人川普将在1月20日取代奥巴马成为美国总统。</p>
+<p>The Russian officials were ordered to leave the country within 72 hours. In addition, Obama ordered the closing of two Russian properties inside the U.S. He also ordered sanctions against nine Russian individuals, companies and agencies, including the Russian intelligence service.<br/>这些俄罗斯官员被命令在72小时内离开美国。此外，奥巴马下令关闭了俄罗斯在美国境内的两处建筑物。他还下令对9名俄罗斯个人、相关公司以及包括俄罗斯情报局在内的机构实施制裁。</p>
+<p>"All Americans should be alarmed by Russia's actions," Obama said in a statement. He said the "theft" of computer emails and other data, and their release through WikiLeaks, were done to "interfere" with the 2016 U.S. election.<br/>奥巴马在声明中表示，“所有美国人都应该对俄罗斯的行为感到震惊。”他说，盗窃电子邮件及其它计算机数据并通过维基解密散布出去，是为了干预2016年美国大选。</p>
+<p>A senior Obama administration official said the United States believes Russia "will continue to interfere" with elections in other countries" and in future U.S. elections.<br/>奥巴马政府的一位高级官员表示，美国认为俄罗斯“还会继续干预”其它国家的选举以及美国未来的选举。</p>
+<p>Trump also released a statement after Obama's announcement. He said, "It's time for our country to move on to bigger and better things."<br/>川普在奥巴马之后也发表了声明。他说，“美国是时候向前走，关心更大和更有意义的事情了。”</p>
+<p>Trump added: "Nevertheless, in the interest of our country and its great people, I will meet with leaders of the intelligence community next week in order to be updated on the facts of this situation."<br/>川普补充说，“不过，为了我们国家和我们伟大人民的利益，下周我将会见情报界领袖，以便了解事态真相。”</p>
+<p>When Trump becomes president, he could move to cancel the sanctions ordered by Obama. But he might find opposition from Republicans in Congress who have called for punishments against Putin and his government.<br/>当川普成为美国总统之后，他可以采取行动取消奥巴马出台的制裁。但他在国会可能会遇到那些呼吁惩罚普京及其政府的共和党人的反对。</p>
+<p>Putin's decision not to take action against the new U.S. sanctions came as a surprise. Just hours before Putin's announcement, Russian Foreign Minister Sergey Lavrov suggested Russia would remove 31 American diplomats and take other action.<br/>普京决定不回应美国新的制裁是一大惊喜。在普京发表声明的几个小时之前，俄罗斯外长拉夫罗夫建议俄罗斯驱逐35名美国外交官，并采取其它行动。</p>
+<p>Putin said he decided against any actions -- for now.<br/>普京表示，目前他决定不采取任何行动。</p>
+<p>"The Russian diplomats returning home will spend the New Year holidays with their relatives and dear ones," Putin said in a statement. "We will not create problems for U.S. diplomats. We will not expel anybody."<br/>普京在声明中表示，“回国的俄罗斯外交人员将会同他们的亲人一起度过新年假期。我们不会给美国外交人员制造麻烦，不会驱逐任何人。”</p>
+<p>Putin said he is inviting all children of U.S. diplomats to holiday parties at the Kremlin.<br/>普京表示，他邀请所有（驻俄罗斯）美国外交人员子女到克里姆林宫参加节日派对。</p>
+<p>Dmitry Trenin is director of the Carnegie Moscow Center. Trenin said Putin's decision not to act against the U.S. sanctions appears to be an "investment" in the possibility of better relations with President-elect Donald Trump. Trenin made his comment on Twitter.<br/>特伦宁是卡内基莫斯科中心的负责人。特伦宁表示，普京决定对美国制裁不作回应，似乎是“下注”俄罗斯同候任总统川普的关系可能会更好。特伦宁在推特上作出了上述评论。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳森·埃文斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Russia’s President: No Expulsions to Answer US Punishments]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.12]Russian President Vladimir Putin said Friday
+[00:04.32]that he has decided not to expel American diplomats from his country.
+[00:11.36]Russia's foreign minister had suggested expelling United States diplomats
+[00:17.44]and other measures to answer U.S. sanctions against Russia.
+[00:23.80]On Thursday, President Barack Obama ordered 35 Russians to be expelled
+[00:31.48]from the United States and other measures.
+[00:35.88]The moves came after U.S. intelligence agencies
+[00:40.96]said Russia hacked Democratic Party computers and released stolen emails.
+[00:48.92]The agencies said this was done to interfere with the U.S. presidential election.
+[00:57.20]Putin said Russia "has reasons" to take action against the U.S.
+[01:04.56]But he said he will wait to "plan out further steps"
+[01:09.00]based on the policies of the incoming administration.
+[01:14.44]Republican Donald Trump will replace Democrat Barack Obama as president on January 20.
+[01:22.80]The Russian officials were ordered to leave the country within 72 hours.
+[01:29.52]In addition, Obama ordered the closing of two Russian properties inside the U.S.
+[01:37.20]He also ordered sanctions against nine Russian individuals,
+[01:43.20]companies and agencies, including the Russian intelligence service.
+[01:50.24]"All Americans should be alarmed by Russia's actions," Obama said in a statement.
+[01:57.28]He said the "theft" of computer emails and other data,
+[02:02.56]and their release through WikiLeaks,
+[02:05.60]were done to "interfere" with the 2016 U.S. election.
+[02:11.84]A senior Obama administration official said the United States believes
+[02:17.52]Russia "will continue to interfere" with elections in other countries" and in future U.S. elections.
+[02:27.20]Trump also released a statement after Obama's announcement.
+[02:32.44]He said, "It's time for our country to move on to bigger and better things."
+[02:39.80]Trump added: "Nevertheless, in the interest of our country and its great people,
+[02:47.28]I will meet with leaders of the intelligence community next week
+[02:51.52]in order to be updated on the facts of this situation."
+[02:56.32]When Trump becomes president, he could move to cancel the sanctions ordered by Obama.
+[03:04.52]But he might find opposition from Republicans in Congress
+[03:09.00]who have called for punishments against Putin and his government.
+[03:13.80]Putin's decision not to take action against the new U.S. sanctions came as a surprise.
+[03:21.88]Just hours before Putin's announcement,  Russian Foreign Minister Sergey Lavrov
+[03:28.28]suggested Russia would remove 31 American diplomats and take other action.
+[03:35.40]Putin said he decided against any actions -- for now.
+[03:41.52]"The Russian diplomats returning home will spend the New Year holidays
+[03:47.32]with their relatives and dear ones," Putin said in a statement.
+[03:52.20]"We will not create problems for U.S. diplomats.
+[03:57.04]We will not expel anybody."
+[04:00.56]Putin said he is inviting all children of U.S. diplomats to holiday parties at the Kremlin.
+[04:09.24]Dmitry Trenin is director of the Carnegie Moscow Center.
+[04:14.28]Trenin said Putin's decision not to act against the U.S. sanctions
+[04:20.48]appears to be an "investment" in the possibility of better relations with President-elect Donald Trump.
+[04:29.16]Trenin made his comment on Twitter.
+[04:32.72]I'm Jonathan Evans.
+[04:34.24]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

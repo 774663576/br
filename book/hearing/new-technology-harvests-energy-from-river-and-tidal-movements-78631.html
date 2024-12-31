@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Technology Harvests Energy from River and Tidal Movement</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, New Technology Harvests Energy from River and Tidal Movement" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201804/new-technology-harvests-energy-from-river-and-tidal-movements.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Technology Harvests Energy from River and Tidal Movement</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201804/new-technology-harvests-energy-from-river-and-tidal-movements.mp3" id="mp3"></a>
+<a href="saudi-arabia-now-permits-women-to-ride-bicycles-78623.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Phil Dierking</span><br/>
+<span class="datetime">14 April, 2018</span><br/>
+<p>A number of companies have used the wind and sun to produce energy. Now, one company is using the force of flowing rivers and ocean currents.</p>
+<p>The company is based in the U.S. state of Maine. It is called the Ocean Renewable Power Company, or ORPC. The company recently presented the new technology at an energy conference near Washington, DC.</p>
+<p>Christopher Sauer is the chief executive officer and co-creator of ORPC. He says the technology was designed for small, rural communities that do not have easy access to power sources.</p>
+<div class="contentImage"><img alt="ORPC's generator being positioned in a river in Alaska." src="https://files.21voa.com/gdb/00E92759-0874-4F16-9F71-3524B41B5D5F_cx0_cy0_cw84_w268_r1.png"/><br/>
+<span class="imagecaption">ORPC's generator being positioned in a river in Alaska.</span></div>
+<p><strong>Taking energy from water movement</strong></p>
+<p>The ORPC technology is an energy generator which can be put under water, called RivGen. It works in a series of steps. First, the generator is put in the middle of a steel <strong>cage</strong>. The cage goes on top of a wide boat with a flat bottom called a pontoon. Wheels – or, turbines – are attached to each side of the generator.</p>
+<p>Once the pontoon boat is fixed to one place, it is flooded with water. The pontoon, cage, and generator all sink to the bottom of the river. There, the river current turns the wheels and creates as much as 50 kilowatts of power.</p>
+<p>CEO Christopher Sauer says the generator is not very tall, so it can work in water areas that are not very deep. Other companies are not able to work in shallow water, he adds. </p>
+<p>And, Sauer says the turbines are safe for the animals that live in the river.</p>
+<p>"At the peak of <strong>salmon </strong>season, we had almost two million fish pass by this thing but at the end of all of that, we did not have a single fish injury that we knew about," he said.</p>
+<p>Sauer notes that another feature of the technology are "crossflow turbines" They permit the turbines to move in the same direction, no matter what way the water is flowing.</p>
+<p>Sauer says the turbines' shape permits the generator to harvest power from tidal currents in the ocean. The company's ocean turbine is called TidGen. It can create up to 600 kilowatts of electricity,<del cite="mailto:Kelly%20J%20Kelly" datetime="2018-04-06T11:00">.</del> enough to power a small settlement.</p>
+<p>Right now, the amount of power TidGen can harvest changes as the strength of the tide goes up and down. But ORPC workers are trying to make the power <strong>output</strong> steady. In time, they want TidGen power to be part of the main energy <strong>grid</strong>. </p>
+<p>CEO Christopher Sauer estimates ORPC's current price is about 50 cents per kilowatt-hour. That price does not make the ORPC system competitive with natural gas. However, for small rural communities, <strong>diesel</strong> energy can cost more than $1 per hour. In these situations, energy from flowing water could be more economical.</p>
+<p>I'm Phil Dierking.</p>
+<p><em>George Putic reported this story for VOAnews.com. Phil Dierking adapted it for VOA Learning English. Kelly Jean Kelly was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p><em>Do you think this kind of energy could be useful for small rural communities? We want to hear from you. Write to us in the Comments Section or on 51VOA.COM. </em></p>
+<p><em>_________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>cage </strong><em>- n.</em><strong> </strong>a box made of wire or metal bars in which people keep animals or birds</p>
+<p><strong>diesel </strong><em>- n.</em><strong> </strong>any liquid fuel used in diesel engines, whose fuel ignition takes place, without any spark, as a result of compression of the inlet air mixture and then injection</p>
+<p><strong>generator </strong><em>- n.</em><strong> </strong>something that produces something</p>
+<p><strong>grid </strong><em>- n.</em><strong> </strong>a metal frame with bars running across it that is used to cover an opening</p>
+<p><strong>pontoon </strong><em>- n.</em><strong> </strong>a large hollow container filled with air that is used to make a structure (such as a boat, airplane, or bridge) float on top of water</p>
+<p><strong>solar </strong><em>- adj.</em><strong> </strong>of or relating to the sun</p>
+<p><strong>tidal </strong><em>- adj.</em><strong> </strong>of or relating to tides</p>
+<p><strong>turbines</strong><em> - n.</em><strong> </strong>an engine that has a part with blades that are caused to spin by pressure from water, steam, or air</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

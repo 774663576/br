@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Remembering Chita Rivera</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Remembering Chita Rivera" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/remembering-chita-rivera.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Remembering Chita Rivera</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/remembering-chita-rivera.mp3" id="mp3"></a>
+<a href="/static/lrc/remembering-chita-rivera.lrc" id="lrc"></a>
+<a href="women-to-take-center-stage-at-the-grammys-92174.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Caty Weaver</span><br/>
+<span class="datetime">02 February 2024</span><br/>
+<p>Groundbreaking American performer Chita Rivera died on January 30 in New York. She was 91 years old.</p>
+<p>The famed dancer, singer and actor won many awards and honors in her long career on Broadway and beyond. Her work also broke through ethnic and racial barriers in American entertainment, helping to shape a path for Latin performers.</p>
+<p>Her daughter, Lisa Mordente, announced her mother's death. She said Rivera died after a brief sickness.</p><div class="contentImage"><img alt="FILE - In this Aug. 2, 2015 file photo, Chita Rivera performs during the Chita Rivera: A Lot of Livin' to Do segment of the PBS 2015 Summer TCA Tour held at the Beverly Hilton Hotel in Beverly Hills, California. (Photo by Richard Shotwell/Invision/AP)" src="https://files.21voa.com/gdb/3d5d4547-28a2-4dba-bdfb-007572369914_w268_r1.jpg"/><br/><span class="imagecaption">FILE - In this Aug. 2, 2015 file photo, Chita Rivera performs during the "Chita Rivera: A Lot of Livin' to Do" segment of the PBS 2015 Summer TCA Tour held at the Beverly Hilton Hotel in Beverly Hills, California. (Photo by Richard Shotwell/Invision/AP)</span></div>
+<p>Rivera first gained wide notice in 1957 as Anita in the <strong>original</strong> production of the musical play <em>West Side Story</em>. She was still dancing on New York's Broadway stages a half-century later in 2015's <em>The Visit</em>.</p>
+<p>"I wouldn't know what to do if I wasn't moving or telling a story to you or singing a song," she told the <em>Associated Press</em> at the time. "That's the spirit of my life, and I'm really so lucky to be able to do what I love, even at this time in my life."</p>
+<p>Dolores Conchita Figueroa del Rivero was born January 23, 1933, in Washington, D.C. Her Puerto Rican father, Pedro del Rivero, was a musician who played in the United States Navy Band. He died when Chita was seven. Her mother Katherine was of Scottish and Italian ancestry.</p>
+<p>Chita studied dance as a young girl and was accepted to a highly respected school for ballet. She was 17 when she won her first part in a musical.</p>
+<p>"She was a true Broadway <strong>legend</strong>," playwright Paul Rudnick said on social media service X. "She always <strong>delivered</strong> and audiences adored her. The moment she stepped onstage, the world became more exciting and <strong>glorious</strong>."</p>
+<p>Rivera rose from <strong>chorus line</strong> performer to star. Along the way, she worked with many of Broadway's other greatest playmakers, including Jerome Robbins, Leonard Bernstein, Bob Fosse, and Harold Prince.</p>
+<p>She won two Tonys, the highest award for live theater in the United States. Her first came in 1984 with the production <em>The Rink</em>. She won again in 1993 for the play <em>Kiss of the Spider Woman</em>. An <em>Associated Press</em> theater critic wrote at the time that Rivera was "more than a musical theater star. She's a force of nature...."</p>
+<p>The second Tony was an especially sweet victory for the star. Just five years earlier, Rivera had been in a serious car accident that crushed her right leg. It could have ended her career. After months of physical <strong>therapy</strong> to regain her dancing skills, she returned to the stage singing and dancing as energetically as ever.</p>
+<p>She told the <em>AP</em>: "It never entered my mind that I wouldn't dance again. Never. I can't explain to you why. It's hard work getting back but that's what I'm doing."</p>
+<p>When accepting a Special Tony Award for Lifetime Achievement in 2018, Rivera said "I wouldn't trade my life in the theater for anything, because theater is life."</p>
+<p>In August 2009, U.S. President Barack Obama honored Rivera with the Presidential Medal of Freedom, the highest civilian award of the United States. At the presentation of the medal, Rivera put her hand over her heart and shook her head in wonderment.</p>
+<p>Rivera was married to dancer Tony Mordente from 1957 until 1966. Their daughter Lisa also became a performer and has appeared on Broadway.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>The Associated Press reported this story. Caty Weaver adapted it for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>original </strong><em>– n. </em>not copied or imitated from something else; the first</p>
+<p><strong>legend </strong><em>– n. </em>a person or thing that inspires legends; someone widely respected and praised for certain skills or successes</p>
+<p><strong>deliver </strong><em>– v. </em>to produce the promised, desired, or expected results</p>
+<p><strong>glorious </strong><em>– adj. </em>extremely good;<em> </em>wonderful</p>
+<p><strong>chorus line </strong><em><strong>– </strong>n. </em>a group of dancers and singers supporting the featured players in a musical comedy or revue</p>
+<p><strong>therapy </strong><em>– n. </em>medical treatment of impairment, injury, disease, or disorder</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Remembering Chita Rivera]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Groundbreaking American performer Chita Rivera
+[00:04.92]died on January 30 in New York.
+[00:09.84]She was 91 years old.
+[00:13.28]The famed dancer, singer and actor
+[00:17.64]won many awards and honors
+[00:20.72]in her long career on Broadway and beyond.
+[00:26.24]Her work also broke through
+[00:28.64]ethnic and racial barriers in American entertainment,
+[00:33.44]helping to shape a path for Latin performers.
+[00:38.56]Her daughter, Lisa Mordente,
+[00:41.12]announced her mother's death.
+[00:43.68]She said Rivera died after a brief sickness.
+[00:49.84]Rivera first gained wide notice
+[00:52.76]in 1957 as Anita
+[00:56.92]in the original production
+[00:59.08]of the musical play West Side Story.
+[01:03.56]She was still dancing
+[01:05.60]on New York's Broadway stages
+[01:08.20]a half-century later in 2015's The Visit.
+[01:13.68]"I wouldn't know what to do
+[01:16.68]if I wasn't moving or telling a story to you
+[01:20.60]or singing a song,"
+[01:22.40]she told the Associated Press at the time.
+[01:27.04]"That's the spirit of my life,
+[01:29.68]and I'm really so lucky
+[01:32.20]to be able to do what I love,
+[01:34.88]even at this time in my life."
+[01:39.00]Dolores Conchita Figueroa del Rivero
+[01:42.76]was born January 23, 1933,
+[01:47.68]in Washington, D.C.
+[01:49.96]Her Puerto Rican father, Pedro del Rivero,
+[01:54.44]was a musician who played
+[01:56.92]in the United States Navy Band.
+[02:00.32]He died when Chita was seven.
+[02:03.36]Her mother Katherine
+[02:05.44]was of Scottish and Italian ancestry.
+[02:09.84]Chita studied dance as a young girl
+[02:12.72]and was accepted
+[02:14.12]to a highly respected school for ballet.
+[02:17.72]She was 17 when she won her first part in a musical.
+[02:24.64]"She was a true Broadway legend,"
+[02:27.68]playwright Paul Rudnick
+[02:29.36]said on social media service X.
+[02:32.68]"She always delivered and audiences adored her.
+[02:37.76]The moment she stepped onstage,
+[02:40.76]the world became more exciting and glorious."
+[02:46.20]Rivera rose from chorus line performer to star.
+[02:52.08]Along the way, she worked with many
+[02:55.12]of Broadway's other greatest playmakers,
+[02:58.60]including Jerome Robbins,
+[03:01.08]Leonard Bernstein, Bob Fosse, and Harold Prince.
+[03:06.12]She won two Tonys,
+[03:08.76]the highest award for live theater in the United States.
+[03:14.24]Her first came in 1984
+[03:17.76]with the production The Rink.
+[03:20.36]She won again in 1993
+[03:23.92]for the play Kiss of the Spider Woman.
+[03:27.92]An Associated Press theater critic
+[03:31.00]wrote at the time that Rivera was
+[03:34.60]"more than a musical theater star.
+[03:37.64]She's a force of nature...."
+[03:41.04]The second Tony was
+[03:43.36]an especially sweet victory for the star.
+[03:47.92]Just five years earlier,
+[03:50.28]Rivera had been in a serious car accident
+[03:53.96]that crushed her right leg.
+[03:57.68]It could have ended her career.
+[04:00.12]After months of physical therapy
+[04:03.28]to regain her dancing skills,
+[04:05.84]she returned to the stage
+[04:08.36]singing and dancing as energetically as ever.
+[04:13.56]She told the AP: "It never entered my mind
+[04:17.84]that I wouldn't dance again. Never.
+[04:20.84]I can't explain to you why.
+[04:23.16]It's hard work getting back
+[04:25.76]but that's what I'm doing."
+[04:28.64]When accepting a Special Tony Award
+[04:31.52]for Lifetime Achievement in 2018,
+[04:35.48]Rivera said "I wouldn't trade
+[04:38.52]my life in the theater for anything,
+[04:41.68]because theater is life."
+[04:45.56]In August 2009, U.S. President Barack Obama
+[04:51.48]honored Rivera with the Presidential Medal of Freedom,
+[04:55.88]the highest civilian award of the United States.
+[05:00.24]At the presentation of the medal,
+[05:03.12]Rivera put her hand over her heart
+[05:06.28]and shook her head in wonderment.
+[05:10.12]Rivera was married to dancer Tony Mordente
+[05:14.48]from 1957 until 1966.
+[05:19.28]Their daughter Lisa also became a performer
+[05:23.72]and has appeared on Broadway.
+[05:27.32]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

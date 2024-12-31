@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Hanukkah Is Celebrated around the World</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, How Hanukkah Is Celebrated around the World" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/how-hanukkah-is-celebrated-around-the-world.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Hanukkah Is Celebrated around the World</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/how-hanukkah-is-celebrated-around-the-world.mp3" id="mp3"></a>
+<a href="/static/lrc/how-hanukkah-is-celebrated-around-the-world.lrc" id="lrc"></a>
+<a href="scientists--would-be-warmest-year-on-record-91904.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">07 December 2023</span><br/>
+<p>Hanukkah (also written as Chanukah) is Judaism's "<strong>festival</strong> of lights." On eight straight nights, Jews come together with family and friends at the end of daylight to light one additional <strong>candle</strong> in the menorah.</p>
+<p>A menorah is a lamp or candle holder used in Jewish religious ceremonies. It usually has eight branches, with a ninth place for the candle called shamash from which all the others are lit.</p>
+<p>In Hebrew, Hanukkah means "<strong>dedication</strong>."</p><div class="contentImage"><img alt="FILE - An Ultra-Orthodox Jewish man stands in front of a menorah on the third eve of Hanukkah, at the Western Wall, Judaism's holiest site in Jerusalem's old city on December 13, 2009. (AP Photo/Sebastian Scheiner, File)" src="https://files.21voa.com/gdb/91867a88-114c-467a-a11f-6be7ffeb1480_cx0_cy1_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - An Ultra-Orthodox Jewish man stands in front of a menorah on the third eve of Hanukkah, at the Western Wall, Judaism's holiest site in Jerusalem's old city on December 13, 2009. (AP Photo/Sebastian Scheiner, File)</span></div>
+<p>The holiday marks the rededication of the Temple in Jerusalem about 2500 years ago. That was the time a small group of Jewish fighters took it back from occupying foreign forces. The fighters found a very small supply of oil in the religious building, or temple, and used it to keep a menorah lit for eight days. Their practice of lighting a nightly candle and cooking foods like potato pancakes called latkes, serve to remember the event.</p>
+<p><strong>When is Hanukkah 2023?</strong></p>
+<p>The dates of the holiday are based on the Hebrew month of Kislev, which usually falls sometime in November or December in the Gregorian calendar.</p>
+<p>This year, Hanukkah is being celebrated from December 7 through December 15.</p>
+<p><strong>Do Hanukkah celebrations differ?</strong></p>
+<p>There are different branches of Judaism, like Reform, Conservative and Orthodox. But they all celebrate the holiday by bringing light into the darkness and remembering that even a small and unlikely-to-succeed effort can make great change.</p>
+<p>The Talmud is Judaism's central religious book. Within it, there is a dispute over the order of lighting. But even with that dispute, most start with one candle and increase the lighting by one more candle each night while saying religious <strong>blessings</strong>.</p>
+<p>The candles are added from right to left, but lit from left to right on the menorah, thus always starting with the newest light.</p>
+<p>The tradition calls for candles with a real<strong> flame</strong>. But some also use electric ones in public areas, such as in hospitals, for safety reasons.</p>
+<p><strong>How is Hanukkah celebrated?</strong></p>
+<p>A menorah is lit in each household and traditionally is placed where it can be seen from the outside, such as a doorway or near a window. It represents the spreading of God's light to all nations.</p>
+<p>The lighting of menorahs in city streets and public areas, like parks or areas of interest, has become more common in recent years in countries around the world.</p>
+<p>In addition to menorah lightings, giving money to those in need and social works are also part of the celebration for many. This comes out of the belief that the Jewish people are called by God to help make the world better for all.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Giovanna Dell'Orto</em><em> reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>festival </strong>– <em>n</em>. a special time or event when people gather to celebrate something</p>
+<p><strong>candle </strong>– <em>n</em>. wax that has been formed into a stick or another shape and has a string in the middle that can be burned</p>
+<p><strong>dedication </strong>– <em>v</em>. to officially make (something) a place for honoring or remembering a person or event</p>
+<p><strong>blessing </strong>– <em>n</em>.<strong> </strong>a short prayer</p>
+<p><strong>flame </strong>– <em>n</em>. the hot, glowing gas that can be seen when a fire is burning</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How Hanukkah Is Celebrated around the World]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Hanukkah is Judaism's "festival of lights."
+[00:06.60]On eight straight nights, Jews come together
+[00:11.04]with family and friends at the end of daylight
+[00:15.44]to light one additional candle in the menorah.
+[00:20.80]A menorah is a lamp or candle holder
+[00:24.68]used in Jewish religious ceremonies.
+[00:28.68]It usually has eight branches,
+[00:32.16]with a ninth place for the candle called shamash
+[00:36.60]from which all the others are lit.
+[00:41.52]In Hebrew, Hanukkah means "dedication."
+[00:46.80]The holiday marks the rededication
+[00:49.92]of the Temple in Jerusalem about 2500 years ago.
+[00:56.36]That was the time a small group of Jewish fighters
+[01:00.72]took it back from occupying foreign forces.
+[01:05.52]The fighters found a very small supply of oil
+[01:09.64]in the religious building, or temple,
+[01:12.96]and used it to keep a menorah lit for eight days.
+[01:19.08]Their practice of lighting a nightly candle
+[01:23.16]and cooking foods like potato pancakes
+[01:27.12]called latkes, serve to remember the event.
+[01:31.76]The dates of the holiday
+[01:33.72]are based on the Hebrew month of Kislev,
+[01:37.40]which usually falls sometime in November
+[01:41.56]or December in the Gregorian calendar.
+[01:45.88]This year, Hanukkah is being celebrated
+[01:49.68]from December 7 through December 15.
+[01:55.24]There are different branches of Judaism,
+[01:58.48]like Reform, Conservative and Orthodox.
+[02:03.24]But they all celebrate the holiday
+[02:07.20]by bringing light into the darkness
+[02:10.84]and remembering that even a small
+[02:14.80]and unlikely-to-succeed effort
+[02:18.52]can make great change.
+[02:21.84]The Talmud is Judaism's central religious book.
+[02:27.12]Within it, there is a dispute
+[02:30.36]over the order of lighting.
+[02:33.52]But even with that dispute,
+[02:36.64]most start with one candle
+[02:39.96]and increase the lighting
+[02:42.24]by one more candle each night
+[02:45.44]while saying religious blessings.
+[02:49.32]The candles are added from right to left,
+[02:52.96]but lit from left to right on the menorah,
+[02:57.24]thus always starting with the newest light.
+[03:02.36]The tradition calls for candles with a real flame.
+[03:07.20]But some also use electric ones in public areas,
+[03:12.68]such as in hospitals, for safety reasons.
+[03:17.36]A menorah is lit in each household
+[03:21.64]and traditionallyis placed
+[03:24.76]where it can be seen from the outside,
+[03:28.20]such as a doorway or near a window.
+[03:32.92]It represents the spreading of God's light to all nations.
+[03:39.44]The lighting of menorahs in city streets
+[03:42.72]and public areas, like parks or areas of interest,
+[03:48.24]has become more common in recent years
+[03:51.88]in countries around the world.
+[03:55.52]In addition to menorah lightings,
+[03:58.72]giving money to those in need and social works
+[04:03.76]are also part of the celebration for many.
+[04:07.80]This comes out of the belief
+[04:11.08]that the Jewish people are called by God
+[04:14.80]to help make the world better for all.
+[04:19.44]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

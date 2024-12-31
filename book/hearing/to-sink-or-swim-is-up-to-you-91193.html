@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'To Sink or Swim' Is Up to You</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'To Sink or Swim' Is Up to You" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/to-sink-or-swim-is-up-to-you.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'To Sink or Swim' Is Up to You</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/to-sink-or-swim-is-up-to-you.mp3" id="mp3"></a>
+<a href="/static/lrc/to-sink-or-swim-is-up-to-you.lrc" id="lrc"></a>
+<a href="know-the-signs-of-heat-stroke-91189.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">15 July 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give examples, notes on usage, and sometimes we use them in short stories.</p>
+<p>Today we talk a great about a great activity to keep healthy and cool. In hot weather, there is nothing better than swimming in cool water. Swimming is a great way to beat the heat and get exercise.</p><div class="contentImage"><img alt="FILE - Lauren Metzler prepares for a swim at Manly Cove Beach in Sydney, Australia, Thursday, May 26, 2022. Mermaid does not have to worry about sink or swim. (AP Photo/Mark Baker)" src="https://files.21voa.com/gdb/fb1b64cf-8105-4011-84f6-c3acdee9bfc7_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Lauren Metzler prepares for a swim at Manly Cove Beach in Sydney, Australia, Thursday, May 26, 2022. Mermaid does not have to worry about sink or swim. (AP Photo/Mark Baker)</span></div>
+<p>But swimming is not only for fun. Knowing how to swim can save your life. If you do not know how to swim, you could sink in the water. And it can happen fast. So, today we talk about the <strong>idiom</strong> <u>to sink or swim</u>.</p>
+<p><strong>Sink or</strong> <strong>swim</strong></p>
+<p>To <u>sink or swim</u> means you either quickly succeed at something or quickly fail.</p>
+<p>To <u>sink or swim</u> suggests that you will either succeed or fail based on your own skills. Others may have taught you or helped you to prepare for something. But, the final responsibility is yours. So, we use this idiom to describe a high-pressure situation where your success or survival depends on your ability to perform.</p>
+<p>We sometimes pair the idiom <u>sink or swim</u> with the expression to be <u>thrown into the deep end</u> -- as in the deep part of a <strong>pool</strong>. A parent, teacher, or coach could throw a child into the deep end to see if the child will sink or swim, although it is not likely. Usually, it means to put someone in a situation to see how they do.</p>
+<p>For example, let's say you have been preparing for an English test for many weeks. If you pass it, you may be able to get a better position at your job. You had a great teacher who helped you. But on test day, it's sink or swim. Success if up to you.</p>
+<p><u>Sink or swim</u> can also describe a situation where you must succeed quickly or you will fail fully. There is no <strong>middle ground</strong>. It is a win or lose situation.</p>
+<p>In these situations, we can also say, "<u>it's now or never."</u> This means the time to prove yourself is ... now. You will not have another chance. All your preparation has come to this moment ... whatever that moment is. You need to <u>rise to the <strong>occasion</strong></u>.</p>
+<p><u>Sink or swim</u> situations can also be called <u>make or break </u>events. They can either make you better. Or they can break you. If the situation is very serious and the risks are very great, you can also say <u>do or die</u>. You either take action or you will definitely fail.</p>
+<p>Luckily learning English is not a <u>do or die</u> situation. And VOA Learning English will be here to help you grow your English skills -- so you can swim, instead of sink, in the test pool!</p>
+<p>And that's all the time we have for <em>Words and Their Stories</em>.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>idiom </strong>–<em>n. </em>an expression that cannot be understood from the meanings of its separate words but must be learned as a whole</p>
+<p><strong>pool</strong> –<em>n. </em>a swimming pool : a small deep body of water</p>
+<p><strong>middle ground </strong>–<em>n. </em> standpoint or area midway between extreme or opposing positions, options, or objectives</p>
+<p><strong>occasion </strong>–<em>n. </em>a need that arises : a time at which something happens</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'To Sink or Swim' Is Up to You]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.72]And now, Words and Their Stories, from VOA Learning English.
+[00:14.96]On this program,
+[00:21.24]we explore words and expressions in the English language.
+[00:25.72]We give examples, notes on usage,
+[00:29.16]and sometimes we use them in short stories.
+[00:34.12]Today we talk a great about a great activity to keep healthy and cool.
+[00:41.04]In hot weather, there is nothing better than swimming in cool water.
+[00:46.84]Swimming is a great way to beat the heat and get exercise.
+[00:53.00]But swimming is not only for fun.
+[00:56.48]Knowing how to swim can save your life.
+[01:00.60]If you do not know how to swim, you could sink in the water.
+[01:05.08]And it can happen fast.
+[01:07.44]So, today we talk about the idiom to sink or swim.
+[01:13.68]To sink or swim means
+[01:16.08]you either quickly succeed at something or quickly fail.
+[01:21.96]To sink or swim suggests
+[01:24.64]that you will either succeed or fail based on your own skills.
+[01:30.32]Others may have taught you or helped you to prepare for something.
+[01:34.92]But, the final responsibility is yours.
+[01:40.76]So, we use this idiom to describe a high-pressure situation
+[01:45.92]where your success or survival depends on your ability to perform.
+[01:53.20]We sometimes pair the idiom sink or swim
+[01:56.88]with the expression to be thrown into the deep end --
+[02:01.00]as in the deep part of a pool.
+[02:05.16]A parent, teacher, or coach could throw a child into the deep end
+[02:09.88]to see if the child will sink or swim,
+[02:13.12]although it is not likely.
+[02:16.60]Usually, it means to put someone in a situation to see how they do.
+[02:23.08]For example, let's say you have been preparing
+[02:26.76]for an English test for many weeks.
+[02:29.88]If you pass it, you may be able to get a better position at your job.
+[02:36.48]You had a great teacher who helped you.
+[02:39.08]But on test day, it's sink or swim.
+[02:43.20]Success if up to you.
+[02:47.00]Sink or swim can also describe a situation
+[02:50.40]where you must succeed quickly or you will fail fully.
+[02:54.96]There is no middle ground. It is a win or lose situation.
+[03:02.52]In these situations, we can also say, "it's now or never."
+[03:07.96]This means the time to prove yourself is ... now.
+[03:12.56]You will not have another chance.
+[03:16.44]All your preparation has come to this moment ...
+[03:19.64]whatever that moment is. You need to rise to the occasion.
+[03:26.76]Sink or swim situations can also be called make or break events.
+[03:32.64]They can either make you better. Or they can break you.
+[03:38.36]If the situation is very serious and the risks are very great,
+[03:43.76]you can also say do or die.
+[03:47.40]You either take action or you will definitely fail.
+[03:53.32]Luckily learning English is not a do or die situation.
+[03:57.80]And VOA Learning English will be here to help you grow your English skills --
+[04:03.44]so you can swim, instead of sink, in the test pool!
+[04:09.08]And that's all the time we have for Words and Their Stories.
+[04:13.60]Until next time ... I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

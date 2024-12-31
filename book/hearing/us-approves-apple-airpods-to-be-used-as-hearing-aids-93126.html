@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - US Approves Apple AirPods to Be Used as Hearing Aids</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, US Approves Apple AirPods to Be Used as Hearing Aids" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/us-approves-apple-airpods-to-be-used-as-hearing-aids.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>US Approves Apple AirPods to Be Used as Hearing Aids</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/us-approves-apple-airpods-to-be-used-as-hearing-aids.mp3" id="mp3"></a>
+<a href="mpox-cases-in-drc-might-be-decreasing-93125.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">06 November, 2024</span><br/>
+<p>The American government has approved the use of Apple AirPods as hearing aids.</p>
+<p>The United States Food and Drug Administration (FDA) recently <a class="wsw__a" href="https://www.fda.gov/news-events/press-announcements/fda-authorizes-first-over-counter-hearing-aid-software">announced</a> it had approved new hearing aid software created for some AirPods devices. An Apple software release this week launched the system on the devices.</p>
+<p>Apple <a class="wsw__a" href="https://www.apple.com/airpods-pro/hearing-">said</a> its AirPods Pro 2 are equipped with the software. The company added that the design will permit users to turn their AirPods into a medical-strength hearing aid device.</p><div class="contentImage"><img alt="A pair of Apple AirPods Pro 2 are displayed on a table at Brooklyn College's audiology clinic in New York on Oct. 22, 2024. (AP Photo/Mary Conlon)" src="https://files.21voa.com/gdb/925df86d-5516-4a8a-b44d-b1094805cd10_cx0_cy6_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A pair of Apple AirPods Pro 2 are displayed on a table at Brooklyn College's audiology clinic in New York on Oct. 22, 2024. (AP Photo/Mary Conlon)</span></div>
+<p>The system aims to increase <strong>specific</strong> sounds in real-time, including parts of speech and elements within a users' environment. Apple says another goal of its software release is to get more people to try hearing aids.</p>
+<p>An estimated 30 million Americans – about 1 in 8 Americans over the age of 12 — have hearing loss in both ears. Millions could see improvements from hearing aids. But most have never tried them, the National Institute on Deafness and Other Communication Disorders says.</p>
+<p>Many others have tried assistive devices, but choose not to use them. The reasons include high cost, poor quality, poor fit, how the devices look or other reasons. But in recent years, there has been a push in the U.S. to get more people to try them.</p>
+<p>In 2022, federal rules changed to permit some kinds of hearing aids to be sold without a doctor's order, or <strong>prescription</strong>. Such moves aimed to bring better and less costly models to patients.</p>
+<p>The highest-quality hearing aids can cost from $1,000 to $2,500, or even more. But some over-the-counter models sell for between $400 and $500, said Elizabeth Stangl, a hearing expert at the University of Iowa. She spoke to The Associated Press.</p>
+<p>Stangl said some of the less costly models are only effective at raising sound levels. But they lack the personal settings and noise blocking tools that can make hearing aids most helpful. AirPods cost $249 on Apple's website, and sometimes less from other sellers.</p>
+<p>The launch of the software is part of a series of health tools Apple has released over the years. Most of them were built for the Apple Watch. <a class="wsw__a" href="https://www.apple.com/healthcare/apple-watch/">These include</a> several tools for checking heart and oxygen levels.</p>
+<p>Apple's software release also includes built-in tests to help users find out if they have hearing loss and, if so, how severe it is. Those who do have hearing loss can then set specific <strong>amplification</strong> levels.</p>
+<p>Experts say there are other, similar headphone devices on the market that could also be used to increase sound levels for people with hearing loss. But many agree the AirPods addition is a good one, largely because of the way it could help normalize hearing aids for the public.</p>
+<p>Barbara Kelley is the director of the Hearing Loss Association of America. She told the AP that AirPods are considered “<strong>mainstream</strong>” and already widely used. This could get people to try the devices if they have been resistant to the look of traditional hearing aids.</p>
+<p>Kelley noted that many health conditions have been linked to hearing loss. These include <strong>depression</strong>, <strong>dementia</strong> and greater risk of falls. The majority of people with hearing loss are over age 60, but it can affect younger people as well, including those who suffered a hearing damaging event.</p>
+<p>“Everything we do, all our relationships, whether it's personal or in our work life, involve hearing <strong>conversation</strong>,” Kelley said. “We're finding now that the sooner that people can pay attention to their hearing health, the better.”</p>
+<p>The University of Iowa's Stangl noted the AirPods solution does come with possible issues some people may not like. Fit and comfort during long use might be one of these. And while other hearing aids are built to last through a whole day or more, she said the <strong>battery </strong>life of the AirPods does not permit for that. She also said that wearing AirPods might send a message to others that the person does not want to be <strong>disturbed</strong> or spoken to.</p>
+<p>“But we're hoping that more people will try it and realize, ‘Yeah, these do help,'” Stangl said.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, Reuters, Agence France-Press and Apple.</em></p>
+<p><strong>_____________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>specific </strong><em>– </em><em>adj.</em><strong> </strong>restricted to a particular individual, situation, effect, or reaction</p>
+<p><strong>amplify </strong><em>– v.</em> to make louder</p>
+<p><strong>mainstream </strong><em>– adj. </em>the beliefs or way of living accepted by most<em> </em>people</p>
+<p><strong>dementia </strong><em>– n.</em> a mental illness suffered especially by older people</p>
+<p><strong>conversation </strong><em>– n. </em>a discussion between two or more people</p>
+<p><strong>battery </strong><em>– n. </em>a device that chemically stores electricity so it can be used as direct current in electrical circuits such as computers and motors</p>
+<p><strong>disturb </strong><em>– v.</em> to interrupt what someone is doing</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

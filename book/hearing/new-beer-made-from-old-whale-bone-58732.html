@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Beer Made From Old Bone</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Economics Report, New Beer Made From Old Bone" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201409/new-beer-made-from-old-whale-bone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Beer Made From Old Bone</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201409/new-beer-made-from-old-whale-bone.mp3" id="mp3"></a>
+<a href="apple-u-album-giveaway-backfire-58719.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">24 September, 2014</span><br/>
+<p></p>
+<p>The United States is currently experiencing a beer making movement. Many beer drinkers these days are no longer happy with mainstream beer sold in every store, on every street.</p>
+<p>They want something different – something unusual.</p>
+<p>To satisfy this taste for strange beer, many small, or <strong>micro</strong>, brewers are trying anything they can to stand out from the crowd – to be different. Some are even making their beer with ingredients that are old -- really, really old. Like 35 million years old.</p>
+<p>A <strong>brewery</strong>, a place that makes beer, in the Washington D.C. area has joined with a couple of scientists to make a beer with a most unusual <strong>ingredient</strong>. The beer is made using bacteria from a 35-million-year-old bone. That bacteria, to be exact, is called <strong>yeast</strong>.</p>
+<p><a href="http://www.lostrhino.com/" target="_blank">Lost Rhino Brewing Company</a> in Ashburn, Virginia is the company making this new, very unusual beer. </p>
+<p><strong>Biology, paleontology and beer?</strong></p>
+<p>This beer is the <strong>brainchild</strong> of Jason Osborne. Jason is a non-professional, or amateur, paleontologist. For fun, he explores old bones, or fossils, in his free time. He was exploring a swamp in the U.S. state of Virginia when he found a 35-million-year-old- fossilized whale bone.</p>
+<p>And that's when his <strong>brainchild</strong> was born.</p>
+<p>He thought, why not combine all the things he loves most - – biology, paleontology and beer? So, he took a sample, an example, of the yeast from this really old whale bone. Yeast is the most important ingredient for making beer. And voila! Here it is! A new beer is born. </p>
+<p><strong>"</strong>So the idea was conceived, it was basically a brainchild idea of mine to mix molecular biology, paleontology, and beer together. It's three things that I love."</p>
+<p>Jason Osborne got help from his microbiologist friend Jasper Akerboom. Mr. Akerboom studies very small life forms and works as a brewing scientist at Lost Rhino. He says at first, he was not sure this was going to work. But, like a good scientist, he decided to experiment.</p>
+<p>"We took out 20 samples from all kinds of fossilized materials. This was all done in Calvert Marine Museum in Maryland. And one of the samples started to <strong>ferment</strong>."</p>
+<p>The result was surprising.</p>
+<p>"It tastes very good. It tastes very fruity, very earthy. It is very dry."</p>
+<p>So the brewers decided to brew a larger amount for buyers.</p>
+<p><strong>Taking a calculated risk</strong></p>
+<p>Favio Garcia is also an owner of Lost Rhino. He says the brewery stays innovative by debuting, or introducing, a new kind of beer every couple of weeks. He also says you have to take risks to make progress. But he admits that the risks he takes are <strong>calculated risks</strong>. He weighs the good with the bad before going forward. </p>
+<p>"Well, we have 16 beers on tap right now. You have to take a risk to move forward. So it is a <strong>calculated risk</strong>. But we are happy to take it and create something new and interesting with it."</p>
+<p>The new beer is called Bone Dusters Paleo Ale.</p>
+<p>"When people are cleaning the fossils, they dust the sand off the bone. And we thought it would be a cool name to give it." (Jasper Ackerboom)</p>
+<p>The brewers offered it to the public at a special event at Lost Rhino's drinking room. The debut went well. People buying the beer, the customers, said great things about the taste of Bone Dusters Paleo Ale. </p>
+<p>"It is fantastic. It is a pretty courageous move to strike that yeast and kind of develop some[thing] unique."</p>
+<p>"I am not usually a <strong>yeasty</strong>, hoppy beer drinker. But it is really good."</p>
+<p>"It is not over hopped; there is not much competing with yeast for flavor. So it really comes through. It's very drinkable."</p>
+<p>Mr. Garcia hopes new ideas, or <strong>innovations</strong>, like this will help Lost Rhino compete in the growing local beer movement.</p>
+<p>The brewers at Lost Rhino do not just talk about the importance of science. They put their money where their mouths are. Lost Rhino will give part of the profits made from the sale of Bone Dusters beer to science programs at schools that are lacking money. </p>
+<p>I'm Anna Matteo.</p>
+<p></p>
+<p><em>June Soh reported this story. Anna Matteo wrote it for Learning English and Jeri Watson edited it.</em></p>
+<p><em>_______________________________________________________________</em></p>
+<h2><strong>Words in this Story</strong></h2>
+<p></p>
+<p><strong>ingredient</strong> - <em>(n.)</em> one of the things that are used to make a food, product, etc.</p>
+<p><strong>brainchild - </strong><em>(n.) </em>an idea, plan, or creation of one person</p>
+<p><strong>amateur</strong> – <em>(adj.)</em> a person who does something (such as a sport or hobby) for pleasure and not as a job</p>
+<p><strong>yeast</strong> – <em>(n.)</em> a type of fungus that is used in making alcoholic drinks (such as beer and wine)</p>
+<p><strong>ferment</strong> – <em>(v.)</em> to go through a chemical change that results in the production of alcohol</p>
+<p><strong>brew </strong><em>(v.)</em> to make beer, ale, coffee, tea, et cetera; <strong>brewery </strong><em>(n.)</em> a place where beer is made</p>
+<p><strong>debut</strong> – <em>(n.) </em>first appearance in public</p>
+<p><strong>calculated risk </strong><em>(n.) </em>an undertaking or the actual or possible product of an undertaking whose chance of failure has been previously estimated</p>
+<p><strong>innovation</strong> - <em>(n.) </em>a new idea, device, or method</p>
+<p></p>
+<p><em>Now it's your turn to use these Words in this Story. In the comments section, write a sentence using one of these words and we will provide feedback on your use of vocabulary and grammar. </em><em>Or simply share your thoughts on this example of a creative, problem-solving scientist.</em></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 世卫组织明确疾病通过空气传播的定义</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 世卫组织明确疾病通过空气传播的定义" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/who-clarifies-what-it-means-for-a-disease-to-spread-through-the-air.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>世卫组织明确疾病通过空气传播的定义</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/who-clarifies-what-it-means-for-a-disease-to-spread-through-the-air.mp3" id="mp3"></a>
+<a href="/static/lrc/who-clarifies-what-it-means-for-a-disease-to-spread-through-the-air.lrc" id="lrc"></a>
+<a href="who-clarifies-what-it-means-for-a-disease-to-spread-through-the-air-92600.html" id="CnPage" target="_blank"></a>
+<a href="lawmakers-aim-to-bar-restrictions-on-books-at-public-libraries-92597.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>International health experts have agreed on a new definition of what it means for a disease to spread "through the air."<br/>
+国际卫生专家就疾病“通过空气”传播的含义达成了新的定义。</p>
+<p>The agreement came after the World Health Organization (WHO) cooperated with hundreds of international health experts to explain or clarify the meaning. The WHO said the technical document it issued was the first step towards finding better methods to prevent airborne disease spread.<br/>
+该协议是在世界卫生组织与数百名国际卫生专家合作解释或澄清其含义后达成的。世界卫生组织表示，它发布的技术文件是寻找更好方法防止空气传播疾病的第一步。</p>
+<p>The document says the term "through the air" can be used for infectious diseases in which the main spread involves a pathogen traveling through the air or being suspended in the air. The experts said this is similar to the official description of "waterborne" diseases.<br/>
+该文件称，“通过空气”一词可用于那些主要传播方式涉及病原体通过空气传播或悬浮在空气中传染病。专家们表示，这与官方对“通过水传播”疾病的描述相似。</p>
+<p>The WHO's new explanation is an effort to avoid public misunderstandings about how some diseases can be passed through the air or are "airborne."<br/>
+世界卫生组织的新解释是为了避免公众对某些疾病如何通过空气传播产生误解。</p>
+<p>Such misunderstandings happened during the COVID-19 pandemic. The WHO was criticized by many scientists during the early days of COVID-19 in 2020. They accused the U.N. health agency of failing to warn the public early on that the virus could spread through the air.<br/>
+这种误解发生在新冠肺炎大流行期间。世界卫生组织在2020年新冠肺炎早期受到许多科学家的批评。他们指责这家联合国卫生机构没有尽早警告公众病毒可能通过空气传播。</p>
+<p>The scientists said this led to too much public guidance centered on handwashing and similar measures to prevent the spread of COVID-19. They said this guidance ignored other measures, such as looking at the spread of viruses through ventilation systems.<br/>
+科学家们表示，这导致了过多以洗手和类似措施为中心防止新冠肺炎传播的公众指导。他们说，这一指导意见忽视了其他措施，例如关注病毒通过通风系统的传播。</p>
+<p>By July 2020, the agency said there was "evidence emerging" of airborne spread. Soumya Swaminathan was WHO chief scientist during the start of the COVID-19 pandemic. Swaminathan began a process to agree on a new definition for airborne disease spread. She later said she thinks the agency should have been more forceful in that message "much earlier."<br/>
+到2020年7月，该机构表示，有“证据表明”病毒通过空气传播。苏米娅·斯瓦米纳坦在新冠肺炎大流行开始时是世界卫生组织首席科学家。斯瓦米纳坦开始就空气传播疾病的新定义达成一致。她后来表示，她认为该机构应该“更早”发出更有力的信息。</p>
+<p>Swaminathan's successor, Jeremy Farrar, recently told Reuters news agency the new definition was about more than COVID-19. He added that at the beginning of the pandemic there was a lack of available evidence. He said experts including the WHO had acted in "good faith." At the time, he headed the Wellcome Trust charity and advised the British government on COVID-19.<br/>
+斯瓦米纳坦的继任者杰里米·法拉尔最近告诉路透社，这一新的定义不仅仅是关于新冠肺炎。他补充说，在新冠疫情开始时缺乏可用的证据。他说，包括世界卫生组织在内的专家们的行动是“善意的”。当时，他领导了惠康信托慈善机构，并就新冠肺炎向英国政府提供建议。</p>
+<p>
+Farrar said the new definition would permit discussions to begin about issues such as ventilation in different kinds of buildings including hospitals and schools. He compared the issue to the realization that blood-borne viruses, like HIV or hepatitis B, could be spread by medics not wearing gloves.<br/>
+法拉尔表示，新的定义将允许开始讨论包括医院和学校在内的不同类型建筑的通风等问题。他将这个问题比作意识到如艾滋病毒或乙型肝炎等血液传播的病毒可以通过未戴手套的医护人员传播。</p>
+<p>"When I started out, medical students, nurses, doctors, none of us wore gloves to take blood," Farrar said. "Now it is unthinkable that you wouldn't wear gloves. But that came because everyone agreed on what the issue was, they agreed on the terminology... The change, in practice, came later," he added.<br/>
+法拉尔说：“当我刚开始从业的时候，医学生、护士、医生，我们都没有戴手套采血。”他补充道：“现在不戴手套是不可想象的。但这发生在人们就此问题达成一致之后……实际上，这种变化来得较晚。”</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:WHO Clarifies What It Means for Disease to Spread ‘Through the Air’]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]International health experts
+[00:02.40]have agreed on a new definition
+[00:05.56]of what it means for a disease
+[00:08.72]to spread "through the air."
+[00:10.88]The agreement came after
+[00:14.08]the World Health Organization (WHO)
+[00:17.88]cooperated with hundreds of international health experts
+[00:23.08]to explain or clarify the meaning.
+[00:26.60]The WHO said the technical document it issued
+[00:32.00]was the first step towards finding better methods
+[00:36.44]to prevent airborne disease spread.
+[00:41.48]The document says the term "through the air"
+[00:45.36]can be used for infectious diseases
+[00:48.64]in which the main spread  involves a pathogen
+[00:52.80]traveling through the air or being suspended in the air.
+[00:57.68]The experts said this is similar
+[01:00.92]to the official description
+[01:03.04]of "waterborne" diseases.
+[01:06.04]The WHO's new explanation
+[01:09.60]is an effort to avoid public misunderstandings
+[01:13.64]about how some diseases
+[01:15.96]can be passed through the air or are "airborne."
+[01:20.52]Such misunderstandings happened
+[01:23.88]during the COVID-19 pandemic.
+[01:27.12]The WHO was criticized by many scientists
+[01:32.24]during the early days of COVID-19 in 2020.
+[01:37.36]They accused the U.N. health agency
+[01:41.16]of failing to warn the public early on
+[01:44.52]that the virus could spread through the air.
+[01:47.96]The scientists said this led
+[01:51.20]to too much public guidance
+[01:53.72]centered on handwashing and similar measures
+[01:57.84]to prevent the spread of COVID-19.
+[02:00.96]They said this guidance ignored other measures,
+[02:05.16]such as looking at the spread of viruses
+[02:08.48]through ventilation systems.
+[02:11.32]By July 2020, the agency said
+[02:15.56]there was "evidence emerging" of airborne spread.
+[02:19.88]Soumya Swaminathan was WHO chief scientist
+[02:26.32]during the start of the COVID-19 pandemic.
+[02:30.68]Swaminathan began a process
+[02:33.72]to agree on a new definition
+[02:36.16]for airborne disease spread.
+[02:38.84]She later said she thinks the agency
+[02:42.40]should have been more forceful
+[02:44.60]in that message "much earlier."
+[02:47.80]Swaminathan's successor, Jeremy Farrar,
+[02:51.88]recently told Reuters news agency
+[02:55.04]the new definition was about more than COVID-19.
+[02:59.84]He added that at the beginning of the pandemic
+[03:03.72]there was a lack of available evidence.
+[03:06.72]He said experts including the WHO
+[03:11.00]had acted in "good faith."
+[03:13.40]At the time, he headed the Wellcome Trust charity
+[03:18.76]and advised the British government on COVID-19.
+[03:23.44]Farrar said the new definition
+[03:26.28]would permit discussions to begin
+[03:29.00]about issues such as ventilation
+[03:32.20]in different kinds of buildings
+[03:34.80]including hospitals and schools.
+[03:38.28]He compared the issue to the realization
+[03:41.44]that blood-borne viruses,
+[03:43.84]like HIV or hepatitis B,
+[03:46.96]could be spread by medics not wearing gloves.
+[03:51.12]"When I started out, medical students, nurses,
+[03:55.76]doctors, none of us wore gloves to take blood," Farrar said.
+[04:01.36]"Now it is unthinkable that you wouldn't wear gloves.
+[04:05.40]But that came because
+[04:06.92]everyone agreed on what the issue was,
+[04:10.12]they agreed on the terminology...
+[04:12.80]The change, in practice, came later," he added.
+[04:18.24]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

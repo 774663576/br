@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - ‘One-in-a-Billion’ Dinosaur Discovery</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, ‘One-in-a-Billion’ Dinosaur Discovery" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201705/one-in-a-billion-dinosaur-find.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>‘One-in-a-Billion’ Dinosaur Discovery</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201705/one-in-a-billion-dinosaur-find.mp3" id="mp3"></a>
+<a href="africans-deported-75230.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anne Ball</span><br/>
+<span class="datetime">21 May, 2017</span><br/>
+<p>About 110 million years ago, a large plant-eating dinosaur covered with sharp points walked the land. Called a nodosaur, it is now the best example of its kind ever found.</p>
+<p>This new species of dinosaur is being called a one-in-a-billion discovery.</p>
+<div class="contentImage"><img (credit:="" alberta,="" alt="The " at="" canada.="" dinosaur="" display="" drumheller,="" in="" museum="" museum)?="" on="" one-in-a-billion?="" preserved="" royal="" src="https://files.21voa.com/gdb/23D03BD4-08FB-4498-BF7B-BA45BF077CB1_w268_r0.jpg" the="" tyrrell=""/><br/>
+<span class="imagecaption">The "One-in-a-Billion" preserved dinosaur on display at the Royal Tyrrell Museum in Drumheller, Alberta, Canada. (Credit: Royal Tyrrell Museum)</span></div>
+<p>
+<p>Recently it was put on display at Canada's <a class="underline" href="http://www.tyrrellmuseum.com/">Royal Tyrrell Museum</a> in Drummheller, Alberta.</p>
+<p>The museum worked with the U.S. National Geographic Society to research the nodosaur. The <a class="underline" href="http://www.natgeo.com/nodosaur">National Geographic magazine</a> June issue featured the dinosaur. </p>
+<p>This is "an incredibly <strong>unique specimen,</strong>" says Caleb Brown, the museum's lead researcher on the nodosaur. He says it is so well preserved, with skin and <strong>armor</strong>, and it is three-dimensional — that means it was not flattened after it died.</p>
+<p>"It's the closest thing that you'll ever get to looking at a living dinosaur. If you are really lucky you'll have small bits of skin preserved and you really have to use your imagination to <strong>figure out</strong> what they would have looked like in life. In this case you don't need a lot of imagination, what you see in front of you is what the animal looked like while it was alive."</p>
+<p>Researcher Mark Mitchell spent five and a half years, about 7,000 hours, carefully uncovering the nodosaur from the rock around it.</p>
+<p>Looking at its head, one can see where the eye once was. Brown says the animal looks like it has some <strong>personality.</strong></p>
+<p>"When you are looking at it, it looks like it is looking back at you. And that's because of how well preserved it is. Even though the eye is not preserved anymore."</p>
+<p>But it has been a long time since this animal was alive. It lived in the Cretaceous period, when dinosaurs ruled the world. At that time, the cold place where it was found in Canada was more like Florida today-- warm and humid and probably close to water.</p>
+<p>Scientists think it was swept out to sea and was buried in one piece in the soft muddy bottom. It was covered in <strong>sediment</strong> that later turned into stone.</p>
+<p>Over time it was covered by more layers and lay undisturbed until March 21, 2011. That was when Shawn Funk was working at a mine in Fort McMurray, Alberta. His machine hit something much harder, and colored differently, than the rock around it. There were black, brown and orange pieces.</p>
+<p>Funk had found the fossilized remains of the nodosaur—a creature that was 5 and a half meters long and weighed almost 1,400 kilograms.The orange pieces were part of the bony armor that protected the animal from attack.</p>
+<p>Researchers were only able to recover part of the creature, from the nose to the hips.</p>
+<p><strong>What they do know</strong></p>
+<p>So, what do scientists know about the nodosaur?</p>
+<p>"This was not an intelligent animal, it would be kind of a slow <strong>lumbering</strong> beast. Heavily armored and probably had slow reaction times."</p>
+<p>The nodosaur, Brown says, was covered in armor to protect it from attackers. It had two half-a-meter long spikes, or sharp pieces, coming out from its shoulders. It was wide and had short legs, which made it low to the ground.</p>
+<p>"So you have to kind of imagine a <strong>spiny</strong> four-legged tank and that's basically what this animal was. It would walk around on the landscape. It was an <strong>herbivore</strong>, so it would have been eating plants. It didn't do a lot of chewing, the teeth weren't overly <strong>efficient</strong>."</p>
+<p>That means the creature processed much of its food in its stomach, just like cows do today.</p>
+<p>Inside the nodosaur's stomach there were different colored small sized balls. Researchers think these are what the animal was eating when it died. They will study their chemical and light properties to find out what they are.</p>
+<p><strong>What they do not know</strong></p>
+<p>They do not know if it was male or female. They think it was an adult, but they do not know how old it was when it died. If it made a sound, they do not know what it would have been.</p>
+<p>While chemical studies were done on the nodasaur, the results have not been made public yet. Brown says that will happen soon, when their study is published.</p>
+<p>Meanwhile people have been reacting to the pictures. Brown says some have been emotional; they cannot believe they are finally seeing this very real dinosaur.</p>
+<p>I'm Anne Ball.</p>
+<p><em>Anne Ball wrote this story for Learning English. Hai Do was the editor. We want to hear from you. Write to us in the Comments Section and visit us <a class="underline" href="http://www.21voa.com/">on 51VOA.COM</a>. </em></p>
+<p>_______________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>unique </strong><em>– adj.</em> used to say that something or someone is unlike anything or anyone else</p>
+<p><strong>specimen </strong><em>– n.</em> something (such as an animal or plant) collected as an example of a particular kind of thing</p>
+<p><strong>armor </strong><em>– n.</em> a hard covering that protects something (such as a vehicle or an animal)</p>
+<p><strong>figure out </strong><em>– phrasal v.</em> to understand or find (something, such as a reason or a solution) by thinking</p>
+<p><strong>personality </strong><em>– n.</em> the set of emotional qualities, ways of behaving, etc., that makes a person different from other people</p>
+<p><strong>sediment </strong><em>– n.</em> material that sinks to the bottom of a liquid</p>
+<p><strong>lumbering </strong><em>– v.</em> to move in a slow or awkward way</p>
+<p><strong>spiny </strong><em>– adj.</em> having or covered with many sharp, pointed parts</p>
+<p><strong>herbivore </strong><em>– n.</em> an animal that only eats plants</p>
+<p><strong>efficient </strong><em>– adj.</em> capable of producing desired results without wasting materials, time, or energy</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

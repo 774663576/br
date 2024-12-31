@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - NASA Wants Faster Clock for Moon</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, NASA Wants Faster Clock for Moon" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/nasa-wants-faster-clock-for-moon.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>NASA Wants Faster Clock for Moon</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/nasa-wants-faster-clock-for-moon.mp3" id="mp3"></a>
+<a href="/static/lrc/nasa-wants-faster-clock-for-moon.lrc" id="lrc"></a>
+<a href="as-climate-changes-herders-feed-reindeer-92503.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">07 April 2024</span><br/>
+<p>The American space agency NASA says it wants to come up with an out-of-this-world way to follow time on its own clock for the moon.</p>
+<p>It would not be connected to the different time zones found on Earth. The moon clock would have an entirely different time for the moon.</p><div class="contentImage"><img alt="FILE - The moon rises behind the Home Place clock tower in Prattville, Ala., Saturday, June 22, 2013. (AP Photo/Dave Martin, File)" src="https://files.21voa.com/gdb/00f5ffb1-81f7-40b1-9a9c-17196c8ac9c2_w268_r1.jpg"/><br/><span class="imagecaption">FILE - The moon rises behind the Home Place clock tower in Prattville, Ala., Saturday, June 22, 2013. (AP Photo/Dave Martin, File)</span></div>
+<p>That is because there is less gravity on the moon. So, time moves a little bit quicker compared to Earth. It moves about 58.7 microseconds faster every day.</p>
+<p>White House officials recently told NASA and other federal agencies to work with international agencies to come up with a time system for the moon.</p>
+<p>Kevin Coggins is NASA's top communications and <strong>navigation</strong> official. He said, "An atomic clock on the moon will <strong>tick</strong> at a different rate than a clock on Earth."</p>
+<p>The last time NASA sent astronauts to the moon, the astronauts wore <strong>watches</strong>. But back then, timing was not important as it is now with computers, satellites, and communication systems, he said. And he added that those microseconds make a difference when high tech systems work together.</p>
+<p>Last year, the European Space Agency said scientists needs to come up with a single time for the moon, where a day lasts 29.5 Earth days.</p>
+<p>The International Space Station is in low Earth orbit. It will continue to use coordinated universal time, or UTC.</p>
+<p>NASA must decide where the new space time starts. Even Earth's time speeds up and slows down, requiring a unit of time called leap seconds.</p>
+<p>The U.S. government wants NASA to come up with a proposal for the time system by the end of this year. It hopes NASA will have a final plan by the end of 2026.</p>
+<p>NASA is aiming to send astronauts around the moon in September of 2025 and land people on the moon one year later.</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Seth Borenstein reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>navigation </strong><em>– n.</em> the act, activity, or process of finding the way to get to a place when you are traveling in a ship, airplane, or car</p>
+<p><strong>tick </strong><em>– v. </em>to continue to work or function in a normal way</p>
+<p><strong>watch </strong><em>– n.</em> a device that shows what time it is and that you wear on your wrist or carry in a pocket</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:NASA Wants Faster Clock for Moon]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The American space agency NASA
+[00:04.36]says it wants to come up
+[00:07.16]with an out-of-this-world way
+[00:10.76]to follow time on its own clock for the moon.
+[00:16.08]It would not be connected
+[00:18.08]to the different time zones found on Earth.
+[00:22.64]The moon clock would have an
+[00:25.24]entirely different time for the moon.
+[00:29.20]That is because there is less gravity on the moon.
+[00:34.28]So, time moves a little bit quicker compared to Earth.
+[00:39.56]It moves about 58.7 microseconds faster every day.
+[00:47.72]White House officials recently told NASA
+[00:51.56]and other federal agencies
+[00:54.48]to work with international agencies
+[00:58.08]to come up with a time system for the moon.
+[01:03.00]Kevin Coggins is NASA's top communications
+[01:07.60]and navigation official.
+[01:11.20]He said, "An atomic clock on the moon
+[01:15.40]will tick at a different rate
+[01:17.88]than a clock on Earth."
+[01:21.08]The last time NASA sent astronauts to the moon,
+[01:25.32]the astronauts wore watches.
+[01:28.36]But back then, timing was not important
+[01:32.72]as it is now with computers, satellites,
+[01:36.76]and communication systems, he said.
+[01:41.40]And he added that those microseconds
+[01:44.48]make a difference when high tech systems work together.
+[01:50.56]Last year, the European Space Agency
+[01:54.48]said scientists needs to come up
+[01:57.84]with a single time for the moon,
+[02:00.68]where a day lasts 29.5 Earth days.
+[02:06.76]The International Space Station is in low Earth orbit.
+[02:12.80]It will continue to use
+[02:14.84]coordinated universal time, or UTC.
+[02:20.24]NASA must decide where the new space time starts.
+[02:25.48]Even Earth's time speeds up and slows down,
+[02:29.44]requiring a unit of time called leap seconds.
+[02:33.88]The U.S. government wants NASA to come up with a proposal
+[02:40.28]for the time system by the end of this year.
+[02:45.20]It hopes NASA will have a final plan
+[02:48.56]by the end of 2026.
+[02:52.64]NASA is aiming to send astronauts
+[02:55.68]around the moon in September of 2025
+[03:00.44]and land people on the moon one year later.
+[03:05.56]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

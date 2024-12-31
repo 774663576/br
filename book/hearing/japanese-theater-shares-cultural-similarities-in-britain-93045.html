@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Japanese Theater Shares Cultural Similarities in Britain</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Japanese Theater Shares Cultural Similarities in Britain" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/japanese-theater-shares-cultural-similarities-in-britain.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Japanese Theater Shares Cultural Similarities in Britain</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/japanese-theater-shares-cultural-similarities-in-britain.mp3" id="mp3"></a>
+<a href="two-americans-win-nobel-prize-in-medicine-for-microrna-discovery-93044.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">07 October, 2024</span><br/>
+<p>A playhouse in London, Britain and a theater from Osaka, Japan, are working together to prove cultural differences between the two countries are only on the surface.</p>
+<p>London's Charing Cross Theatre and Osaka's Umeda Arts Theater first worked together on a performance in 2019. After a break caused by the pandemic, they are jointly <strong>staging</strong> two plays in London this month. The plays are rooted in Japanese culture and deal with secretive relationships, but the concerns are universal.</p>
+<p>Actor Susan Momoko Hingley spoke of Japan's export of culture, including films and television series. She told the Reuters news agency, "It's really about getting great stories from all sorts of different cultures to Britain and to the West."</p><div class="contentImage"><img (umeda="" 2024.="" 27,="" alt="Actors Susan Momoko Hingley and Mark Takeshi Ota perform in the production of " arts="" britain,="" handout="" in="" london,="" mark="" one="" reuters)"="" senior="" september="" small="" src="https://files.21voa.com/gdb/97f2e708-09d8-4469-b08f-9ba0d885327d_cx0_cy5_cw0_w268_r1.jpg" step"="" theater="" via=""/><br/><span class="imagecaption">Actors Susan Momoko Hingley and Mark Takeshi Ota perform in the production of "One Small Step" in London, Britain, September 27, 2024. (Umeda Arts Theater/ Mark Senior/Handout via REUTERS)</span></div>
+<p>She stars in <em>One Small Step,</em> written by Takuya Kato. It tells the story of a couple working for a company that is colonizing the moon. The plot becomes more complex with the news the woman is pregnant. It raises concerns <strong>audiences</strong> almost anywhere can relate to about motherhood, career and inequality between men and women.</p>
+<p><strong>All about equality</strong></p>
+<p>Kato, who is also the play's director, said, "In terms of equity, I think nowadays many people often say that we are <strong>striving</strong> for fairness within companies, within societies and between individuals."</p>
+<p>"But I think it is something that we understand with our heads but might not necessarily <strong>grasp</strong> it with our hearts,” he added.</p>
+<p>The London production, Kato said, gave new life to his play "at the <strong>intersection</strong> of two different cultures." He noted that for Japanese creative industries, the market within Japan may not be enough to support them. Working with companies in other countries helps the theater companies and expands knowledge of the culture.</p>
+<p>"If we don't grow the part of coproductions, which we have traditionally struggled with, it would be difficult to survive as both an industry and culture in the future," he said.</p>
+<p><strong>Second play to come</strong></p>
+<p>Following <em>One Small Step</em>, which runs until October 9, Charing Cross Theatre will host <em>Tattooer </em>later in the month. The play, by another Japanese writer, Takuya Kaneshima, tells the story of a tattoo artist.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Marie-Louise Gumuchian and Barbara Lewis </em><em>reported this story for Reuters.</em><em> Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>stage</strong> – <em>v</em>. to produce (a play, performance, etc.) on a stage</p>
+<p><strong>audience</strong> – <em>n.</em> the people who watch, read, or listen to something</p>
+<p><strong>strive</strong> – <em>v.</em> to try very hard to do or achieve something</p>
+<p><strong>grasp</strong> – <em>v.</em> to understand (something that is complicated or difficult)</p>
+<p><strong>intersection</strong> –<em> n.</em> the place or point where two or more things come together</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

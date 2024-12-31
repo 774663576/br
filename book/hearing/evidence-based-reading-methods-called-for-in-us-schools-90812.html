@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Evidence-based Reading Methods Called for in US Schools</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Evidence-based Reading Methods Called for in US Schools" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/evidence-based-reading-methods-called-for-in-us-schools.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Evidence-based Reading Methods Called for in US Schools</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/evidence-based-reading-methods-called-for-in-us-schools.mp3" id="mp3"></a>
+<a href="plant-a-tree-that-will-last-for-many-years-90808.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">02 May 2023</span><br/>
+<p>There has long been a debate among experts about how best to teach children to read in the United States. The debate involves two methods for teaching words: learning words as a whole, or breaking words down into their basic sounds.</p>
+<p>Recently, however, many are starting to favor what they call the "science of reading." The goal is to use methods that many years of research have shown to be effective to teach children to read.</p>
+<p>The science of reading idea is helpful for struggling readers, but schools and teacher training programs have been slow to use it.</p><div class="contentImage"><img alt="Michael Crowder, 11, reads during an after-school literacy program in Atlanta on Thursday, April 6, 2023. (AP Photo/Alex Slitz)" src="https://files.21voa.com/gdb/b9666113-bf82-44a0-851a-624ba7c9fc2e_cx0_cy6_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Michael Crowder, 11, reads during an after-school literacy program in Atlanta on Thursday, April 6, 2023. (AP Photo/Alex Slitz)</span></div>
+<p>A push to teach all students in this way is gaining ground as schools look for ways to help students who fell behind in school during the pandemic.</p>
+<p><strong>History of teaching reading</strong></p>
+<p>The other method involved<strong> phonics</strong>. Phonics teaches how sounds work in combination to form words and parts of words.</p>
+<p>Supporters of this method argue that students need detailed lessons about the building blocks of language. That means spending lots of time learning letter sounds and ways to combine them into words.</p>
+<p>In 2000, a governmental group, the National Reading Panel, released findings of its research on methods for teaching children how to read. It said phonics was important, along with several related methods.</p>
+<p>However, what came to be used after this study was known as "balanced <strong>literacy.</strong>" It borrowed from both phonics and whole literacy methods. Its goal was to get children to read books they enjoyed as quickly as possible.</p>
+<p>Michael Kamil is a professor of education at Stanford University who sat on the national reading panel. He said, "It wasn't a true compromise." The method often led to students learning how to <strong>guess</strong> words, instead of how to say them correctly.</p>
+<p>Now, schools are putting more attention on phonics and other elements of the science of reading to help with poor reading performance. Makers of schoolbooks are adding more phonics, and schools are ending some popular programs that lacked the method.</p>
+<p><strong>What is the science of reading?</strong></p>
+<p>The science of reading uses research from many fields that relate to how a child's brain learns to read. In practice, the method calls for schools to focus on the building blocks of words.</p>
+<p>Students no longer memorize word spellings. Instead, they learn the elements that make up a word. For example, with the word "unhappy," students would learn how "un-" changes the meaning of the base word "happy."</p>
+<p><strong>Why does it matter?</strong></p>
+<p>For some children, television shows like <em>Sesame Street</em> and parents reading to them is enough. But 30 to 40 percent of children will need more teaching that is part of the science of reading, said Timothy Shanahan. He is a professor at the University of Illinois at Chicago.</p>
+<p>Other children fall somewhere in between. "They're going to learn to read," said Shanahan who also was one of the members of the 2000 panel and the former director of reading for Chicago Public Schools. "They're just not going to read as well as they could be or should be."</p>
+<p>Colleges of education are often still teaching balanced literacy, even with concerns about its effectiveness. That means new teachers have little experience in using what are being called evidence-backed teaching methods.</p>
+<p>Shanahan said that means parents often have to help their children learn to read, paying for one-on-one teaching or workbooks. Extra help can be costly, and it adds to the lack of equality in education.</p>
+<p>As a result, some <strong>chapters</strong> of the NAACP, a civil rights group, are pushing for the science of reading to be used in schools. They say learning how to read is a civil rights issue.</p>
+<p><strong>What should parents do?</strong></p>
+<p>Amelia Malone is a director at the National Center for Learning Disabilities in Washington. She said parents must read to their children. If not, she suggests helping teachers when they ask for it and pushing evidence-based methods in their children's schools.</p>
+<p>"Parents can be part of the solution," she said, "if we educate them on why this is kind of the movement we need."</p>
+<p>I'm Gregory Stachel. And I'm Anna Mateo.</p>
+<p><em>Heather Hollingsworth reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>focus </strong>– <em>v. </em>to cause (something, such as attention) to be directed at something specific</p>
+<p><strong>phonics </strong>– <em>n. </em>a method of teaching people to read and pronounce words by learning the sounds of letters, letter groups, and syllables</p>
+<p><strong>literacy </strong>– <em>n. </em>the ability to read and write</p>
+<p><strong>guess </strong>– <em>v. </em>to form an opinion or give an answer about something when you do not know much or anything about it</p>
+<p><strong>chapter </strong><em>– n.</em> a group of people in a certain area who make up a division of a large, national organization</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

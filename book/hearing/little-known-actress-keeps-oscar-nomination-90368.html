@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Little-known Actress Keeps Oscar Nomination</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Little-known Actress Keeps Oscar Nomination" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/little-known-actress-keeps-oscar-nomination.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Little-known Actress Keeps Oscar Nomination</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/little-known-actress-keeps-oscar-nomination.mp3" id="mp3"></a>
+<a href="/static/lrc/little-known-actress-keeps-oscar-nomination.lrc" id="lrc"></a>
+<a href="pope-offers-message-of-peace-in-visit-to-drc-south-sudan-90363.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">01 February 2023</span><br/>
+<p>Andrea Riseborough is a respected actress from Britain, but she is not especially famous. She was recently nominated for an Academy Award, or Oscar, for her work in a movie called <em>To Leslie</em>.</p>
+<p>Many people wondered how she received the nomination over other actresses. <em>To Leslie</em> only sold $27,000 worth of tickets when it came out in 2022.</p>
+<p>It turns out that Riseborough has many famous friends who campaigned for her. Famous actors including Kate Winslet, Jennifer Aniston and Gwyneth Paltrow put on events where they showed Riseborough's film. The director of <em>To Leslie</em> called Academy Award voters to ask them to support his film.</p><div class="contentImage"><img alt="This image released by Momentum Pictures shows Andrea Riseborough in a scene from To Leslie. (Momentum Pictures via AP)" src="https://files.21voa.com/gdb/800f0000-c0a8-0242-b4a6-08db048a2ff0_cx7_cy0_cw75_w268_r1.jpg"/><br/><span class="imagecaption">This image released by Momentum Pictures shows Andrea Riseborough in a scene from "To Leslie." (Momentum Pictures via AP)</span></div>
+<p>Other famous actors made posts on social media supporting the movie.</p>
+<p>People who follow the Academy Awards wondered if that kind of campaigning was permitted. Bill Kramer is the leader of the organization that gives the awards. He said the group investigated Riseborough's campaign and decided the nomination should not be taken away.</p>
+<p>"However," he said, "we did discover some social media and outreach campaigning <strong>tactics</strong> that caused concern." Kramer is having discussions about the campaigning methods with the people behind them.</p>
+<p>Movie studios <strong>promote</strong> the movies they think should be considered for the Oscars for many months ahead of voting. But Kramer said the direct communication with voters was concerning.</p>
+<p>He said parts of the campaigning rules "must be <strong>clarified</strong>" and the changes will come after this year's awards. The awards ceremony is on March 12.</p>
+<p>Critics said the direct communication with voters is evidence that it is more helpful to be friends with powerful people than to give a possibly winning performance. Some critics believed that two Black actresses – Viola Davis of <em>The Woman King</em> and Danielle Deadwyler of <em>Till</em> – should have gotten nominations over Riseborough.</p>
+<p>Along with Riseborough, the nominees for Best Actress are Cate Blanchett for <em>Tar</em>, Michelle Williams for <em>The Fablemans</em>, Ana de Armas for <em>Blonde</em>, and Michelle Yeoh for <em>Everything Everywhere All at Once</em>.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for VOA Learning English based on a report by the Associated Press.</em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>tactic </strong>–n. a plan or strategy</p>
+<p><strong>promote </strong>–v. to speak positively about an idea</p>
+<p><strong>clarify </strong>–v. to explain or make clear</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Little-known Actress Keeps Oscar Nomination]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Andrea Riseborough is a respected actress from Britain,
+[00:03.72]but she is not especially famous.
+[00:06.80]She was recently nominated for an Academy Award, or Oscar,
+[00:12.68]for her work in a movie called To Leslie.
+[00:16.36]Many people wondered how she received
+[00:19.60]the nomination over other actresses.
+[00:22.32]To Leslie only sold $27,000 worth of tickets
+[00:27.92]when it came out in 2022.
+[00:31.84]It turns out that Riseborough has many famous friends
+[00:35.76]who campaigned for her.
+[00:38.00]Famous actors including Kate Winslet,
+[00:41.04]Jennifer Aniston and Gwyneth Paltrow
+[00:43.80]put on events where they showed Riseborough's film.
+[00:48.32]The director of To Leslie called Academy Award voters
+[00:51.96]to ask them to support his film.
+[00:55.68]Other famous actors made posts
+[00:57.96]on social media supporting the movie.
+[01:01.96]People who follow the Academy Awards wondered
+[01:05.48]if that kind of campaigning was permitted.
+[01:09.40]Bill Kramer is the leader of the organization that gives the awards.
+[01:14.72]He said the group investigated Riseborough's campaign
+[01:19.16]and decided the nomination should not be taken away.
+[01:25.00]"However," he said, "we did discover some social media
+[01:29.60]and outreach campaigning tactics that caused concern."
+[01:35.68]Kramer is having discussions
+[01:37.64]about the campaigning methods with the people behind them.
+[01:42.52]Movie studios promote the movies
+[01:45.12]they think should be considered for the Oscars
+[01:48.52]for many months ahead of voting.
+[01:51.44]But Kramer said the direct communication
+[01:55.04]with voters was concerning.
+[01:59.44]He said parts of the campaigning rules "must be clarified"
+[02:04.20]and the changes will come after this year's awards.
+[02:08.52]The awards ceremony is on March 12.
+[02:13.60]Critics said the direct communication with voters
+[02:17.72]is evidence that it is more helpful
+[02:21.04]to be friends with powerful people
+[02:23.84]than to give a possibly winning performance.
+[02:29.92]Some critics believed that two Black actresses
+[02:34.12]– Viola Davis of The Woman King
+[02:36.80]and Danielle Deadwyler of Till
+[02:40.20]– should have gotten nominations over Riseborough.
+[02:44.20]Along with Riseborough,
+[02:46.00]the nominees for Best Actress are Cate Blanchett for Tar,
+[02:51.00]Michelle Williams for The Fablemans,
+[02:55.24]Ana de Armas for Blonde,
+[02:57.84]and Michelle Yeoh for Everything Everywhere All at Once.
+[03:04.84]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 欧洲央行采取行动促进经济</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 欧洲央行采取行动促进经济" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/eu-central-bank-moves-to-help-ecomony.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>欧洲央行采取行动促进经济</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/eu-central-bank-moves-to-help-ecomony.mp3" id="mp3"></a>
+<a href="/static/lrc/eu-central-bank-moves-to-help-ecomony.lrc" id="lrc"></a>
+<a href="eu-central-bank-moves-to-help-ecomony-68458.html" id="CnPage" target="_blank"></a>
+<a href="ever-feel-like-you-ll-die-of-a-broken-heart-68437.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The European Central Bank released a new round of measures to stimulate the economy, including lowering interest rates more.<br/>欧洲央行公布了新一轮经济刺激措施，包括进一步降低利率。</p>
+<p>The financial moves announced Thursday are the latest efforts to lift the economy of the 19-country bloc that uses the euro.<br/>周四公布的这一财政举措是欧元19国集团提振经济的最新努力。</p>
+<p>The European Central Bank, or ECB, cut all three of its main interest rates. The bank also increased its monthly financial asset-buying program.<br/>欧洲央行下调了所有三种主要利率。该行还扩大了每月的金融资产购买计划。</p>
+<p>Officials at the ECB hope banks will lend more money to businesses and consumers to help the region's economy.<br/>欧洲央行官员希望各个银行向企业和消费者提供更多贷款以促进该地区的经济。</p>
+<p>The eurozone economy has had low economic growth for many years. Growth was 0.3 percent in the last three months of 2015.<br/>欧元区经济多年来一直维持低增长。2015年最后一季度的增长率只有0.3%。</p>
+<p>The ECB's cuts to three main interest rates it controls take effect on March 16. The rate for deposits with the central bank was cut further to negative 0.4 percent.<br/>欧洲央行下调其控制的三项主要利率将于3月16日生效。欧洲央行存款利率进一步下调到-0.4%。</p>
+<p>The negative interest rate means that depositors pay the bank instead of receiving interest payments. The unusual measure is meant to encourage banks to lend money rather than keep it with the central bank.<br/>负利率意味着存款人向银行付费而不是获得利息。这种反常举措是为了鼓励各家银行出借资金，而不是将资金存到央行。</p>
+<p>The ECB also said it would increase the purchase of bonds from 60 billion euros each month to 80 billion euros. The move puts more money into financial institutions that hold the bonds, putting more money into the Eurozone economy.<br/>欧洲央行还表示将把债券购买计划从每月600亿欧元扩大到800亿欧元。此举将向持有债券的金融机构投入更多资金，向欧元区经济投入更多资金。</p>
+<p>The measures are similar to tactics that the U.S. central bank used to boost the American economy during the 2008-2009 world financial crisis.<br/>该措施和美国央行2008到2009年世界金融危机期间采用的提振美国经济的策略类似。</p>
+<p>Since then, the U.S. economy has recovered. The unemployment rate now stands at 4.9 percent. However, central bank policymakers are dissatisfied with economic growth. Many workers are still looking for better-paying, full-time jobs rather than the part-time work they accepted.<br/>此后，美国经济取得复苏。美国目前的失业率为4.9%。然而，美国央行决策者对经济增长并不满意。许多工人还在寻找更高薪的全职工作，而不是他们所接受的兼职工作。</p>
+<p>However, slowing growth in China, the second-biggest global economy, is blamed for erratic stock market prices around the world. Chinese Premier Li Keqiang recently said China's expected economic growth will be between 6.5 and 7 percent.<br/>然而，全球第二大经济体中国的经济增长放缓造成世界各地股市价格不稳定。中国总理李克强目前表示，中国的经济增长预期在6.5%到7%之间。</p>
+<p>In the Eurozone, the jobless rate is down from its 2013 peak of 12.1 percent, but was still at 10.3 percent in January.<br/>在欧元区，失业率正从2013年12.1%的高位回落，但是1月份仍然达到了10.3%。</p>
+<p>European Central Bank president Mario Draghi said the bank's new measures show "that we are not out of ammunition."<br/>欧洲央行行长德拉吉表示，该行的最新举措表明，我们不缺弹药。</p>
+<p>He said, "Rates will stay low, very low, for a long period of time and well past the horizon of our purchases" of assets.<br/>他说，“利率将在很长一段时间内保持非常低的水平，并且远远超出了我们购买资产的范围。”</p>
+<p>But he added, "Taking into account the support of our measures to growth and inflation, we don't anticipate that it will be necessary to reduce rates further."<br/>但他补充道，”考虑到我们采取的措施对增长和通货膨胀的支持，我们认为没必要进一步降低利率。“</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.40]The European Central Bank released a new round of measures to stimulate the economy,
+[00:07.96]including lowering interest rates more.
+[00:12.64]The financial moves announced Thursday are the latest efforts
+[00:17.00]to lift the economy of the 19-country bloc that uses the euro.
+[00:23.80]The European Central Bank, or ECB,
+[00:28.40]cut all three of its main interest rates.
+[00:32.20]The bank also increased its monthly financial asset-buying program.
+[00:38.44]Officials at the ECB hope banks will lend more money to businesses
+[00:45.04]and consumers to help the region's economy.
+[00:50.16]The eurozone economy has had low economic growth for many years.
+[00:56.40]Growth was 0.3 percent in the last three months of 2015.
+[01:03.56]The ECB's cuts to three main interest rates it controls take effect on March 16.
+[01:12.40]The rate for deposits with the central bank was cut further to negative 0.4 percent.
+[01:20.42]The negative interest rate means that depositors pay the bank instead of receiving interest payments.
+[01:29.52]The unusual measure is meant to encourage banks to lend money
+[01:34.80]rather than keep it with the central bank.
+[01:39.32]The ECB also said it would increase the purchase of bonds
+[01:44.64]from 60 billion euros each month to 80 billion euros.
+[01:50.00]The move puts more money into financial institutions that hold the bonds,
+[01:56.40]putting more money into the Eurozone economy.
+[02:01.44]The measures are similar to tactics
+[02:04.40]that the U.S. central bank used to boost the American economy
+[02:09.60]during the 2008-2009 world financial crisis.
+[02:15.64]Since then, the U.S. economy has recovered.
+[02:20.68]The unemployment rate now stands at 4.9 percent.
+[02:25.92]However, central bank policymakers are dissatisfied with economic growth.
+[02:32.64]Many workers are still looking for better-paying,
+[02:37.00]full-time jobs rather than the part-time work they accepted.
+[02:42.80]However, slowing growth in China, the second-biggest global economy,
+[02:49.08]is blamed for erratic stock market prices around the world.
+[02:54.32]Chinese Premier Li Keqiang recently said
+[02:58.88]China's expected economic growth will be between 6.5 and 7 percent.
+[03:08.00]In the Eurozone, the jobless rate is down from its 2013 peak of 12.1 percent,
+[03:16.68]but was still at 10.3 percent in January.
+[03:21.12]European Central Bank president Mario Draghi
+[03:25.92]said the bank's new measures show "that we are not out of ammunition."
+[03:31.80]He said, "Rates will stay low, very low, for a long period of time
+[03:37.96]and well past the horizon of our purchases" of assets.
+[03:43.08]But he added, "Taking into account the support of our measures to growth and inflation,
+[03:50.96]we don't anticipate that it will be necessary to reduce rates further."
+[03:58.68]I'm Mario Ritter.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

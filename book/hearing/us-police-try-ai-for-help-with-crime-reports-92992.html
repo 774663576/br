@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - US Police Try AI for Help with Crime Reports</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, US Police Try AI for Help with Crime Reports" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/us-police-try-ai-for-help-with-crime-reports.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>US Police Try AI for Help with Crime Reports</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/us-police-try-ai-for-help-with-crime-reports.mp3" id="mp3"></a>
+<a href="how-to-move-an-elephant-92991.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By VOA</span><br/><span class="datetime">18 September, 2024</span><br/>
+<p>Some police departments in the United States are experimenting with artificial intelligence (AI) tools to help them produce incident reports. Police officers who have tried the AI chatbots praise the technology as a time-saver.</p>
+<p>Yet some government lawyers, legal experts, and others have expressed concerns about the AI-produced reports.</p>
+<p><strong>A “game changer” </strong></p><div class="contentImage"><img alt="Captain Jason Bussert demonstrates Draft One, an AI powered software that creates police reports from body cam audio, at Oklahoma City police headquarters on Friday, May 31, 2024 in Oklahoma City, Oklahoma. (AP Photo/Nick Oxford)" src="https://files.21voa.com/gdb/903e495e-f879-485b-a0ae-b93d4ba04e06_w268_r1.jpg"/><br/><span class="imagecaption">Captain Jason Bussert demonstrates Draft One, an AI powered software that creates police reports from body cam audio, at Oklahoma City police headquarters on Friday, May 31, 2024 in Oklahoma City, Oklahoma. (AP Photo/Nick Oxford)</span></div>
+<p>One chatbot police are testing uses the same technology as ChatGPT. The company that sells it, Axon, is best known for developing the electroshock weapon called the Taser. It is also the leading supplier of body cameras in the U.S.</p>
+<p>Matt Gilmore is a police officer in Oklahoma's capital, Oklahoma City. He describes the AI chatbot as a “game changer” for police work.</p>
+<p>Recently, Gilmore and his police dog, Gunner, searched for a group of suspects for almost an hour. In the past, after completing a search, the officer would spend another 30 to 45 minutes writing up a report about the incident. But this time he used AI.</p>
+<p>The tool considered all the sounds and radio talk recorded by the microphone attached to Gilmore's body camera. Then it produced a report.</p>
+<p>The process took eight seconds.</p>
+<p>“It was a better report than I could have ever written, and it was 100 percent accurate. It flowed better,” Gilmore said. The report even documented an event he did not remember: Another officer identifying the color of the car from which the suspects fled.</p>
+<p>The new AI product is called Draft One. Axon's founder and CEO Rick Smith said it received the “most positive reaction” of any tool the company has offered.</p>
+<p>“They become police officers because they want to do police work, and spending half their day doing data entry is just a <strong>tedious</strong> part of the job that they hate,” Smith said.</p>
+<p>But he also noted legal and ethical concerns about the tool.</p>
+<p>He said government lawyers prosecuting criminal cases want to be sure that police officers are responsible for writing their reports. Sometimes, officers are called to testify in court about cases they worked on.</p>
+<p><strong>Prosecutors</strong> “never want to get an officer on the stand who says, well, ‘The AI wrote that, I didn't,'” Smith said.</p>
+<p><strong>AI technology concerns</strong></p>
+<p>AI technology is not new to police agencies. American police already use such tools to read license plates, identify suspects' faces, recognize the sounds of gunshots, and predict where crimes will happen.</p>
+<p>In Oklahoma City, police showed the tool to local prosecutors before using it for criminal cases. The lawyers advised the police to be careful with the tool. For now, it is used only for minor incident reports that do not lead to arrests.</p>
+<p>“So no arrests, no <strong>felonies</strong>, no violent crimes,” said Oklahoma City police Captain Jason Bussert, the head of information technology for the 1,170-officer department.</p>
+<p>Police in the city of Lafayette, Indiana, have a different policy on the new tool. Police Chief Scott Galloway told the Associated Press that officers can use Draft One for every incident. He said the tool is very popular with the city force. It began using the tool earlier this year.</p>
+<p>Police in Fort Collins, Colorado, are also permitted to use the AI tool on any kind of report. However, the head of the force's technology department said the tool does not work well in very noisy parts of the city.</p>
+<p>Axon will not say how many police departments are using Draft One. Other companies including Policereports.ai and Truleo offer similar tools. Experts and police officials expect AI-generated reports to become more common in the coming months and years.</p>
+<p>Some experts and observers are calling for public discussion about the use of AI tools to write police reports. Chatbots that use AI technology are not mistake-free. Sometimes these chatbots can produce false information.</p>
+<p>That issue worries Andrew Ferguson, a law professor at American University.</p>
+<p>“I am concerned that <strong>automation</strong> and the ease of the technology would cause police officers to be sort of less careful with their writing,” he said..</p>
+<p>Ferguson said a police report is important in determining whether an officer's suspicion supports “someone's loss of liberty.” It is sometimes the only testimony a judge sees in a court case, particularly for minor crimes known as misdemeanors.</p>
+<p>Human-created police reports also have problems, Ferguson noted. He said it is not yet known which kind of report writer, human or AI, is more dependable.</p>
+<p>I'm John Russell.</p>
+<p><em>Sean Murphy and Matt O'Brien reported on this story for the Associated Press. </em></p>
+<p>___________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>prosecutor</strong> <em>– n. </em>an attorney who conducts proceedings in a court on behalf of the government</p>
+<p><strong>tedious</strong> <em>– adj.</em> tiresome, boring</p>
+<p><strong>felony </strong><em>– n.</em> a serious crime for which the punishment in federal law may be death or imprisonment for more than one year</p>
+<p><strong>automation</strong> <em>– n.</em> automatically controlled operation of a process, or system by electronic devices that take the place of human labor</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

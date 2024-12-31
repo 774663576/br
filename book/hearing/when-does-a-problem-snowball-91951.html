@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - When Does a Problem 'Snowball'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, When Does a Problem 'Snowball'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/when-does-a-problem-snowball.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>When Does a Problem 'Snowball'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/when-does-a-problem-snowball.mp3" id="mp3"></a>
+<a href="/static/lrc/when-does-a-problem-snowball.lrc" id="lrc"></a>
+<a href="what-led-to-the-resignation-of-an-ivy-league-president-91950.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">16 December 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>If you live in a part of the world that is experiencing winter right now, it might be snowing.</p>
+<p>But even if you do not live in a snowy <strong>climate</strong>, try to image cold, snowy weather. Imagine having a snowball fight with your friends. A snowball is, of course, a ball of snow. But not all snow makes good snowballs. If the snow is too light and dry, it will not hold together. It is <strong>powdery</strong>. Wetter snow makes for great snowballs. You can pack it into a tight ball, which is great for throwing.</p><div class="contentImage"><img alt="FILE - Snowballs fly during a snowball fight organized by the DC Snowball Fight Association, on the National Mall in the snow, Monday, Jan. 3, 2022, in Washington. (AP Photo/Alex Brandon)" src="https://files.21voa.com/gdb/E81E4789-5EA7-4E37-9AAE-5573AD054F7B_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Snowballs fly during a snowball fight organized by the DC Snowball Fight Association, on the National Mall in the snow, Monday, Jan. 3, 2022, in Washington. (AP Photo/Alex Brandon)</span></div>
+<p>A snowball might hurt a bit, but it would not cause a lot of damage. But imagine that snowball rolling down a hill. As it rolls, it picks up more and more snow. It gets bigger and bigger until it crashes into something and causes damage!</p>
+<p>And that gives us "snowball" as a verb.</p>
+<p>Dictionary.com defines the verb "snowball" as becoming "larger, greater, more <strong>intense</strong>..." very quickly.</p>
+<p>If something like a project, campaign, or business snowballs, its progress rapidly increases and grows. For example, after a photographer posted a picture on Instagram of a m<i><i>onkey</i></i> protecting a human baby, her followers snowballed to over 1 million within a week!</p>
+<p>However, when we use this expression the ending results are usually not good. Something that snowballs in a bad way <u>goes downhill</u> quickly. For example, when we do not take care of small problems, they can snowball into bigger ones.</p>
+<p>Now, let's hear an example using the verb "snowball."</p>
+<p><em>A: I have a friend who lied about knowing sign language on her <strong>r</strong></em><strong><em>e</em></strong><strong><em>sum</em></strong><strong><em>e</em></strong><em>. She thought no one would ask her to actually prove she knew sign language. But her boss asked her to. In fact, he set up a big meeting with the deaf community and assigned her to act as <strong>translator</strong>. She lied about why she could not attend the event. But her boss surprised her with an unplanned meeting. That is when he found out that she did not know how to sign. Her lie on her r</em><em>e</em><em>sum</em><em>e</em><em> quickly snowballed into a workplace drama that got her fired from her job. </em></p>
+<p>Next, let's talk about the expression <u>snowball effect</u>.</p>
+<p>A <u>snowball effect</u> is a situation where one action or event causes many other similar actions or events. And these actions or events grow and grow bigger and more problematic – just like a snowball rolling down a hill.</p>
+<p>A snowball effect is similar to a <u>chain of events</u>. However, with a chain of events, one thing leads to another. But these events do not necessarily intensify or grow bigger.</p>
+<p>And that's the end of this <em>Words and Their Stories</em>. Hopefully, using resources on VOA Learning English is having a snowball effect on your English studies ... in a good way!</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>climate </strong><em>– n. </em>a region with specified weather conditions<strong> </strong></p>
+<p><strong>powdery </strong><em>– adj. </em>resembling or consisting of matter in a finely divided state</p>
+<p><strong>intense </strong><em>– adj. </em>existing in an extreme degree</p>
+<p><strong>r</strong><strong>e</strong><strong>sum</strong><strong>e </strong><em>– n. </em>a short account of one's career and qualifications</p>
+<p><strong>translator </strong><em>– n. </em>to turn into one's own or another language</p>
+<p><em>We want to hear from you. Do you have a similar expressions in your language? Our comment policy is </em><a class="wsw__a" href="https://www.21voa.com/p/5378.html" target="_blank" title="https://www.21voa.com/p/5378.html"><em>here</em></a><em>.</em></p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:When Does a Problem 'Snowball'?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.84]And now, Words and Their Stories,
+[00:11.68]from VOA Learning English.
+[00:18.60]If you live in a part of the world
+[00:21.36]that is experiencing winter right now,
+[00:24.12]it might be snowing.
+[00:26.76]But even if you do not live in a snowy climate,
+[00:30.88]try to image cold, snowy weather.
+[00:35.08]Imagine having a snowball fight with your friends.
+[00:39.72]A snowball is, of course, a ball of snow.
+[00:44.80]But not all snow makes good snowballs.
+[00:49.36]If the snow is too light and dry,
+[00:52.20]it will not hold together.
+[00:54.68]It is powdery.
+[00:57.96]Wetter snow makes for great snowballs.
+[01:01.32]You can pack it into a tight ball,
+[01:04.72]which is great for throwing.
+[01:08.72]A snowball might hurt a bit,
+[01:11.32]but it would not cause a lot of damage.
+[01:15.60]But imagine that snowball rolling down a hill.
+[01:19.88]As it rolls, it picks up more and more snow.
+[01:24.88]It gets bigger and bigger
+[01:27.48]until it crashes into something and causes damage!
+[01:32.96]And that gives us "snowball" as a verb.
+[01:38.48]Dictionary.com defines the verb "snowball"
+[01:42.44]as becoming "larger, greater,
+[01:45.72]more intense…" very quickly.
+[01:49.80]If something like a project, campaign,
+[01:53.28]or business snowballs,
+[01:56.08]its progress rapidly increases and grows.
+[02:00.88]For example, after a photographer
+[02:03.88]posted a picture on Instagram
+[02:06.44]of a monkey protecting a human baby,
+[02:09.80]her followers snowballed
+[02:12.28]to over 1 million within a week!
+[02:17.00]However, when we use this expression
+[02:20.04]the ending results are usually not good.
+[02:24.68]Something that snowballs in a bad way
+[02:27.80]goes downhill quickly.
+[02:30.96]For example,
+[02:32.28]when we do not take care of small problems,
+[02:35.36]they can snowball into bigger ones.
+[02:39.60]Now, let's hear an example
+[02:41.84]using the verb "snowball."
+[02:45.04]A: I have a friend who lied
+[02:46.56]about knowing sign language on her resume.
+[02:49.40]She thought no one would ask her
+[02:51.20]to actually prove she knew sign language.
+[02:53.76]But her boss asked her to.
+[02:56.24]In fact, he set up a big meeting with the deaf community
+[03:00.04]and assigned her to act as translator.
+[03:02.76]She lied about why she could not attend the event.
+[03:05.76]But her boss surprised her with an unplanned meeting.
+[03:09.32]That is when he found out that she did not know how to sign.
+[03:13.08]Her lie on her resume quickly snowballed
+[03:15.88]into a workplace drama that got her fired from her job.
+[03:19.64]Next, let's talk about the expression snowball effect.
+[03:25.44]A snowball effect is a situation
+[03:29.04]where one action or event causes
+[03:32.52]many other similar actions or events.
+[03:36.80]And these actions or events grow and grow
+[03:40.48]bigger and more problematic
+[03:43.28]– just like a snowball rolling down a hill.
+[03:47.80]A snowball effect is similar to a chain of events.
+[03:52.60]However, with a chain of events,
+[03:55.80]one thing leads to another.
+[03:58.24]But these events do not necessarily
+[04:01.44]intensify or grow bigger.
+[04:05.64]And that's the end of this Words and Their Stories.
+[04:08.92]Hopefully, using resources on VOA Learning English
+[04:14.24]is having a snowball effect
+[04:17.00]on your English studies … in a good way!
+[04:21.04]Until next time, I'm Anna Matteo.
+[04:24.48]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

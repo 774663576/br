@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - War and Peace at the Oscars</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, War and Peace at the Oscars" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/war-and-peace-at-the-oscars.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>War and Peace at the Oscars</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/war-and-peace-at-the-oscars.mp3" id="mp3"></a>
+<a href="scientists-grow-mini-organs-in-cells-from-pregnancy-fluid-92370.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">11 March 2024</span><br/>
+<p>American film <em>Oppenheimer</em> was the big winner at the Academy Awards Sunday in Los Angeles, California. The Academy honored the film about a creator of the atomic bomb with seven Oscars.</p>
+<p>The televised event presented a usual mix of moods and messages. There was a reminder of the recent death in a Russian prison of opposition leader Alexei Navalny. Demonstrators called for a cease-fire in Gaza at a protest outside the Dolby Theatre where the event took place. And there was a bit of election-year politics from ceremony host Jimmy Kimmel.</p>
+<p>But there was also joyful<strong> </strong>fun, as when actor Ryan Gosling performed <em>I'm</em> <em>Just Ken</em>, a nominated song from the film <em>Barbie</em>.</p><div class="contentImage"><img alt="Oppenheimer British film producer Emma Thomas (C) accepts the award for Best Picture onstage during the 96th Annual Academy Awards at the Dolby Theatre in Hollywood, California on March 10, 2024. (Photo by Patrick T. Fallon / AFP)" src="https://files.21voa.com/gdb/bb27ae2e-5806-472f-ba71-e44ac495bcd1_w268_r1.jpg"/><br/><span class="imagecaption">"Oppenheimer" British film producer Emma Thomas (C) accepts the award for Best Picture onstage during the 96th Annual Academy Awards at the Dolby Theatre in Hollywood, California on March 10, 2024. (Photo by Patrick T. Fallon / AFP)</span></div>
+<p>The night, though, belonged not to <em>Barbie</em> but to its partner in the cultural event known as "Barbenheimer."</p>
+<p><em>Oppenheimer's</em> seven wins include the top prize of best picture. Director Christopher Nolan also took home the Oscar for directing while the film's star Cillian Murphy received the best actor award. And <em>Oppenheimer's</em> Robert Downey Jr won the Oscar for best supporting actor. It is his first Academy Award.</p>
+<p>Many of those wins were expected, but the Oscars did hold some surprises. The race for the best actress was considered very close this year. And, Emma Stone looked shocked when her name was called for her performance in the movie, <em>Poor Things</em>.</p>
+<p>Stone won her first Oscar, also for best actress, in 2017 for <em>La La Land</em>.</p>
+<p>Here are some more of the night's notable moments:</p>
+<p>Jimmy Kimmel was hosting the Academy Awards for a fourth time. Late in the show he presented a social media post about the ceremony from former president Donald Trump.</p>
+<p>"Thank you for watching," Kimmel said, adding, "isn't it past your jail time?"</p>
+<p><strong>A call for peace In Ukraine...</strong></p>
+<p><em>Associated Press</em> reporter Mstyslav Chernov, was one of the filmmakers accepting the best documentary Oscar for <em>20 Days in Mariupol</em>. He noted that it was the first Oscar in the history of his country, Ukraine. He said he was honored – but then added: "Probably I will be the first director on this stage to say I wish I'd never made this film." The film is an account of the early days of Russia's invasion of Ukraine in 2022.</p>
+<p>Chernov called on Russia to end the war in Ukraine. "We can make sure that the history record is set straight ... and those who have given their lives, will never be forgotten," he said.</p>
+<p><strong>And in Gaza</strong></p>
+<p>Jonathan Glazer's <em>The Zone of Interest</em> takes place during World War II. It is about the family of a Nazi commandant living next to the Auschwitz death camp. But it was a current war that the writer-director spoke about when accepting his Oscar for best international film.</p>
+<p>"Our film shows where dehumanization leads at its worst," Glazer said, before speaking about the conflict in Gaza. "Right now we stand here as men who <strong>refute</strong> their Jewishness and the Holocaust being hijacked by an occupation which has led to conflict for so many innocent people," he said. "Whether the victims of October the 7th in Israel or the ongoing attack on Gaza, all the victims of this dehumanization, how do we resist?"</p>
+<p><strong>A sad reminder</strong></p>
+<p>"If they decide to kill me, it means that we are incredibly strong." Those words from Navalny, the Russian opposition leader, began the memorial to industry members who died over the year. He was the subject of last year's winning documentary, <em>Navalny</em>. His wife stood on the Oscar stage that night and spoke directly to him: "Alexei, I am dreaming of the day when you will be free and our country will be free," Yulia Navalnaya said.</p>
+<p><strong>Nolan's ‘incredible journey'</strong></p>
+<p>Winning his first directing Oscar, the 53-year-old Nolan noted that <strong>cinema</strong> is just over 100 years old. "Imagine being there 100 years into painting or theater. We don't know where this <strong>incredible journey</strong> is going from here. But to know that you think that I'm a meaningful part of it means the world to me."</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press.</em></p>
+<p><em>______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>refute </strong><em>— v. </em>to say that something is not true</p>
+<p class="CxSpMiddle"><strong>cinema </strong><em>— n. </em>the film industry</p>
+<p class="CxSpMiddle"><strong>incredible </strong><em>— adj. </em> difficult or impossible to believe</p>
+<p class="CxSpMiddle"><strong>journey </strong><em>— n. </em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

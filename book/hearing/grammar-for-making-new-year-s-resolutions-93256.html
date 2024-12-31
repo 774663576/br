@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar for Making New Year’s Resolutions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar for Making New Year’s Resolutions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/grammar-for-making-new-year-s-resolutions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar for Making New Year’s Resolutions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/grammar-for-making-new-year-s-resolutions.mp3" id="mp3"></a>
+<a href="study-around-half-of-us-teens-always-online-93255.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Alice Bryant</span><br/><span class="datetime">26 December, 2024</span><br/>
+<p>
+The New Year can come on different dates for different cultures. Most of the Western world, for example, celebrates it on January 1st.</p>
+<p>But one thing many cultures have in common is the idea of New Year's resolutions. A New Year's resolution is a personal goal to change unwanted behavior, make a life improvement or try something new.</p>
+<p>Popular New Year's resolutions in the United States, for example, include losing weight, improving your finances, volunteering for a <strong>charity</strong> and spending less time on social media.</p><div class="contentImage"><img alt="Grammar for Making New Year's Resolutions" src="https://files.21voa.com/gdb/eb5eec77-0504-472f-9d29-f61837300a69_w268_r1.png"/><br/><span class="imagecaption">Grammar for Making New Year's Resolutions</span></div>
+<p>On today's Everyday Grammar, we will show you how to talk about resolutions in English.</p>
+<p><strong>Asking a question</strong></p>
+<p>First, let's learn how to <em>ask</em> people about their resolutions.</p>
+<p>Listen to a short <strong>conversation</strong>:</p>
+<p><em>Hey there, Jill. Happy New Year! Great to see you.</em></p>
+<p><em>Hi, Jonathan. Happy New Year to you too! How was yours? </em></p>
+<p><em>It was crazy! We went to New York and watched the ball drop in Times Square. Really crowded and loud – but still really fun.</em></p>
+<p><em>Sweet! <u>Do you have any New Year's resolutions</u>?</em></p>
+<p>Jill asked Jonathan about resolutions simply by saying, “Do you have any New Year's resolutions?”</p>
+<p>You can also say, “What are your New Year's resolutions?” to ask about more than one or “What is your New Year's resolution?” to ask about one.</p>
+<p>Now, let's find out how to answer the question.</p>
+<p><strong>Using phrasal verbs</strong></p>
+<p>When we make statements about our resolutions, we often use <strong>phrasal verbs</strong>.</p>
+<p>We can use the phrasal verb “take up” to say that we will start a new activity as a <strong>hobby</strong>.</p>
+<p>Listen to Jill and Jonathan continue their conversation:</p>
+<p><em>Sweet! Do you have any New Year's resolutions?</em></p>
+<p><em>Yes, I do. I plan to <u>take up</u> kickboxing starting next week. I'm excited to finally do it rather than just talk about it! How about you?</em></p>
+<p>Another phrasal verb for resolutions is “give up,” which is to stop doing or using something. We can use this verb to talk about ending bad <strong>habits</strong> or changing a behavior for a time.</p>
+<p>Let's hear Jill respond using the verb “give up”:</p>
+<p><em>How about you?</em></p>
+<p><em>I am <u>giving up</u> sugar for the month of January. Then, for the rest of the year, I'm avoiding soft drinks.</em></p>
+<p><strong><em>Impressive</em></strong><em>! I wish I could join you but kickboxing class starts soon. I'll probably want a sweet snack after class! </em></p>
+<p>Another phrasal verb, “cut out,” has the same basic meaning as “give up.” For example, Jill could say, “I am cutting out sugar for the month of January.”</p>
+<p>But in many situations, we do not need phrasal verbs to talk about resolutions, as you will soon see.</p>
+<p><strong>Using future forms</strong></p>
+<p>Next, let's talk about verb <strong>tenses</strong> and forms. Jonathan talked about his new kickboxing hobby using the verb “plan” followed by the <a class="wsw__a" href="https://www.21voa.com/a/getting-to-know-gerunds-and-infinitives/3111996.html" target="_blank">infinitive</a> verb form and Jill talked about giving up sugar using the <a class="wsw__a" href="https://www.21voa.com/a/everyday-grammar-present-progressive/3255195.html" target="_blank">present continuous</a> verb tense, also called “BE + ing.”</p>
+<p>We can also use the <a class="wsw__a" href="https://www.21voa.com/a/everyday-grammar-fun-with-future-tenses/2935173.html" target="_blank">simple future</a> tenses: one with “will” and the other with “going to.” These tenses are especially useful when the New Year has not come yet.</p>
+<p>Imagine it's the last week of the year and a few people are talking to each other about resolutions: Here are some things you might hear:</p>
+<p><em>In 2020, I'<u>m going to visit</u> my parents every month.</em></p>
+<p><em>By January 1, I <u>will end</u> a few unhealthy friendships.</em></p>
+<p><em>In the new year, I'<u>m going to walk</u> 10,000 steps every day. </em></p>
+<p>When we use simple future tenses to talk about resolutions, we're expressing that we are making a promise to or plan for ourselves. The noun “resolution” comes from the verb “resolve,” which means to make a serious decision to do something.</p>
+<p><strong>Infinitives and gerunds</strong></p>
+<p>You may have noticed that the statements so far today did not actually use the word “resolution.” That is because the subject was already known by the listeners. But it is still perfectly normal to start your statements with, “My New Year's resolution is...” or “My New Year's resolutions are...” An <a class="wsw__a" href="https://www.21voa.com/a/everyday-grammar-gerunds-infinitives/2722827.html" target="_blank">infinitive verb or a gerund</a> must come after these phrases. Here is an example:</p>
+<p><em>My New Year's resolution is <u>to call</u> my sister on video <strong>chat</strong> every week.</em></p>
+<p>The infinitive verb here is “to call.”</p>
+<p>You can also use a gerund, like this:</p>
+<p><em>My New Year's resolution is <u>calling</u> my sister on video chat every week.</em></p>
+<p>Well, that's all for today's program. Tell us about your New Year's resolutions in the comments below.</p>
+<p>Happy New Year!</p>
+<p>I'm Alice Bryant.</p>
+<p><em>Alice Bryant wrote this lesson for Learning English. </em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>charity </strong>– n. an organization that helps people who are poor, sick, or otherwise in need</p>
+<p><strong>conversation </strong>– n. an informal talk involving two people or a small group of people</p>
+<p><strong>phrasal verb</strong> – n. a group of words that functions as a verb and is made up of a verb and a preposition or an adverb, or both</p>
+<p><strong>hobby</strong> – n. an activity that a person does for pleasure when not working</p>
+<p><strong>habit</strong> – n. something that a person does often in a regular and repeated way</p>
+<p><strong>impressive </strong>– adj. deserving attention, admiration, or respect</p>
+<p><strong>tense </strong>– n. a form of a verb that is used to show when an action happened</p>
+<p><strong>chat </strong>– n. a talk held over the internet by people using a computer or phone</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

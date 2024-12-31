@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Talking about Sports Teams</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Talking about Sports Teams" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/talking-about-sports-teams.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Talking about Sports Teams</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/talking-about-sports-teams.mp3" id="mp3"></a>
+<a href="immigrant-workers-help-prevent-economic-troubles-in-us-92562.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">18 April 2024</span><br/>
+<p>In this week's <em>Everyday Grammar</em>, we answer a question from a reader named Sol. Sol asked, "When you make a question about a team such as the Bay Packers, do you say, ‘Are the Bay Packers famous?' or ‘Is the Bay Packers famous?'"</p>
+<p>Sol is talking about the Green Bay Packers. The professional American football team is based in the city of Green Bay, Wisconsin. The team's name, the Packers, comes from a local meat-packing plant where one of the team founders worked.</p>
+<p>Finding the answer to Sol's question will help us learn about different kinds of nouns in American English.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0a00-0242-05e4-08dc5fbedd6b_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>Let's start with the simple answer to Sol's question. We usually use the plural form of the BE verb to talk about a team name that includes a plural noun. Dave Zirin wrote this about the Packers in the <em>New Yorker</em> magazine:</p>
+<p><em>The Packers are owned by the fans.</em></p>
+<p>In this sentence, the third-person plural verb form "are" agrees with the plural noun "Packers."</p>
+<p>When we simply use the word "team," we are using a <strong>collective</strong> noun. A collective noun refers to a number of people. But we usually treat it like a singular noun. Other collective nouns include "audience," "government," "committee" and "staff." That is why you would expect most Americans to say, "His team <em>is</em> playing well this season."</p>
+<p>But English speakers in other countries often treat collective nouns as plural nouns. People in Britain and Ireland, for example, might instead say, "His team <em>are</em> playing well this season."</p>
+<p>Sometimes, Americans talk or write about a sports team without using the team's actual name. Instead, they refer to the team by the city they represent. Here is an example of what we mean from Wikipedia:</p>
+<p><em>Green Bay is the third-oldest team in the National Football League.</em></p>
+<p>The "BE" verb is singular (is) because the city name (Green Bay) is a singular noun.</p>
+<p>We can write the structure like this:</p>
+<p><em>Plural Noun + third-person plural verb form</em></p>
+<p><em>Singular or Collective Noun + third-person singular verb form</em></p>
+<p>Many American sports teams have plural names, like the Kansas City Chiefs, the Detroit Lions and the New England Patriots. These names are all <strong>count nouns</strong>.</p>
+<p>But some teams have names that are <strong>noncount</strong> or <strong>mass</strong> nouns. They include the National Basketball Association's Miami Heat, Orlando Magic and the Oklahoma City Thunder.</p>
+<p>This is where things get a little tricky.</p>
+<p>Let's use the Orlando Magic as an example. The word "magic" is a noncount noun. Magic is a power that lets someone do impossible things by saying special words or performing special actions. When we talk about magic, we use singular verb forms.</p>
+<p>But in the case of the Orlando Magic basketball team, some sports writers treat the noncount noun team name as a plural. For example, the Orlando Magic official website says:</p>
+<p><em>The Orlando Magic are one of only two teams to beat the Chicago Bulls in a playoff series in the 1990s.</em></p>
+<p>Note the use of the third-person plural verb form of BE.</p>
+<p><strong>Soccer (Football) teams in Europe</strong></p>
+<p>Now, let's travel outside of the United States to see how other sports teams are discussed.</p>
+<p>Teams in the Union of European Football Associations (UEFA) are often named after the city that sponsors them. But Real Madrid is a little different. The team got the approval of King Alfonso XIII of Spain in 1920 and can use the Spanish word for "Royal." Sportswriter Manuel Esposito wrote on Soccerfeed:</p>
+<p><em>Real Madrid is known for attracting the world's best players.</em></p>
+<p>The Athletic Club of Bilbao is another UEFA team. In a recent story for ESPN, British reporter Sid Lowe followed the British English preference of making collective nouns plural:</p>
+<p><em>Athletic are a unique club, famously following a policy of playing only with Basque players.</em></p>
+<p><strong>Women's basketball</strong></p>
+<p>Coming back to the United States, a lot of people in the sports world this week are talking about star basketball player Caitlin Clark. During her college career at the University of Iowa, she broke the all-time scoring record for men and women.</p>
+<p>Now, she is going professional. Look at how sportswriters talked about her new professional basketball team.</p>
+<p>On Monday, the Women's National Basketball Association (WNBA) held their yearly event in which teams can pick players for the upcoming season. The WNBA team from the state of Indiana, Indiana Fever, got the chance to pick first.</p>
+<p>Not surprisingly, the team chose Clark. The team's website announced the news like this:</p>
+<p><em>Indiana Fever Select Caitlin Clark with No. 1 Overall Pick in 2024 WNBA Draft</em></p>
+<p>Yet, the WNBA announced it this way:</p>
+<p><em>Indiana Fever Selects Caitlin Clark with First Overall Pick in WNBA Draft 2024</em></p>
+<p>Here is a quiz question for you: If the team name, Indiana Fever, is a collective noun, which sentence is correct, according to American English?</p>
+<p>When you answer, tell us about <em>your</em> favorite sports team. Write a sentence or two using the team's name and let us know if the name is a count noun<strong> </strong>or a collective noun.</p>
+<p>And that's Everyday Grammar.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________________</em></p>
+<h2 class="wsw__h2">Words in this Story</h2>
+<p><strong>collective noun </strong>– <em>n. (grammar)</em> a noun such as 'family' or ' team' that refers to a group of people or things</p>
+<p><strong>noncount or mass noun</strong> – <em>n. (grammar)</em> a noun that does not have a plural form; a noun, as water, electricity, or happiness, that typically refers to an indefinitely divisible substance or an abstract notion, and that in English cannot be used, in such a sense, with the indefinite article or in the plural</p>
+<p><strong>count noun</strong> – <em>n. (grammar)</em> a noun, as apple, table, or birthday, that typically refers to a countable thing and that in English can be used in both the singular and the plural and can be preceded by the indefinite article a or an and by numerals</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

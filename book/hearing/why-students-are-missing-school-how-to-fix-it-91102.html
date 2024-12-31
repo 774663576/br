@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Why Students Are Missing School, How to Fix It</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Why Students Are Missing School, How to Fix It" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/why-students-are-missing-school-how-to-fix-it.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Why Students Are Missing School, How to Fix It</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/why-students-are-missing-school-how-to-fix-it.mp3" id="mp3"></a>
+<a href="company-works-to-save-mexico-city-s-bees-91100.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">27 June 2023</span><br/>
+<p>Education officials and activists are concerned about an increase in the number of American students who are <strong>absent</strong> for many days during the school year.</p>
+<p>Education policy experts call the problem "<strong>chronic</strong> absenteeism." Chronic absenteeism is defined as missing more than 10 percent, or about a total of 18 days, out of the school year. The 18 days do not need to be missed at one time and can be missed for any reason.</p>
+<p>Joshua Childs is a professor of education policy at the University of Texas, Austin. He said in an interview with the American Association for the Advancement of Science that, on average, 7.5 to 8 million students each year are chronically absent from school in the United States. But since the COVID-19 pandemic, that number has increased to at least 10 million a year.</p><div class="contentImage"><img alt="FILE - Students walk outside Upper Darby High School, Wednesday, April 12, 2023, in Drexel Hill, Pennsylvania. (AP Photo/Matt Slocum)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-c095-08db771c5a71_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Students walk outside Upper Darby High School, Wednesday, April 12, 2023, in Drexel Hill, Pennsylvania. (AP Photo/Matt Slocum)</span></div>
+<p>In Los Angeles schools, the second largest school <strong>district</strong> in the country, nearly half of students were considered chronically absent during the 2021-2022 school year. In Chicago, about 45 percent of students were chronically absent.</p>
+<p>Following the pandemic, "chronic absenteeism reached levels never before seen in this community," Los Angeles Unified School District Superintendent Alberto Carvalho told reporters in February.</p>
+<p>Educators say students need to attend school regularly to be successful. Childs said being absent from school hurts students both <strong>academically</strong> and socially.</p>
+<p>"Students who are chronically absent or miss a <strong>significant</strong> amount of school are more likely to drop out and are less likely to graduate from high school," Childs said.</p>
+<p>He added that students who miss a lot of school are less likely to feel connected with the school community and build relationships with other students and teachers.</p>
+<p>The Education Trust is a non-profit education research organization. In a <a class="wsw__a" href="https://edtrust.org/wp-content/uploads/2014/09/5Things_ChronicAbsenteeism_V3.pdf">report</a> published in March, the group said that poor students, students of color, and students who do not speak English at home are the most likely to miss a lot of school. Those students are also more likely to lack the ability to make up for the lost time.</p>
+<p>There are many reasons why students miss a lot of school. Childs said the lung condition of asthma; obesity, or being extremely overweight; and dental problems are the leading physical causes. Since the pandemic, mental health problems also have increased.</p>
+<p>There may also be community and neighborhood problems that play a part in attendance, Childs said. Certain conditions also can affect attendance. These include whether a student has safe transportation to and from school or whether the school itself is a safe environment. Childs added that if families do not feel connected with the school community or do not value education that can add to absenteeism.</p>
+<p>The Education Trust report advised districts to deal with the underlying issues that are keeping students out of school to improve attendance. It said answers require cooperation between students, families and the community.</p>
+<p>Traditionally, students and families have been punished for low attendance. In extreme cases, parents can be sentenced to jail if their children are absent from school too often. But punishing students and families for being absent has "not been shown to improve attendance," and can even make the problem worse, the group's report said.</p>
+<p>In Los Angeles this year, improving attendance was a top issue for the district. The city <strong>hired</strong> workers to visit homes to find students who had been absent to get them back into school. The district also hired more attendance counselors to assist families in getting housing, food, or even transportation. Los Angeles schools superintendent Carvalho told the <em>Philadelphia Inquirer</em> in May that the district had seen a 32 percent decrease in chronic absenteeism.</p>
+<p>The Education Trust said chronic absenteeism is a community problem that should be dealt with using community-based methods.<em> </em></p>
+<p>"Unless school leaders draw upon the knowledge of their students and families, they are unlikely to create effective solutions," the report said.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p><em>______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>absent </strong><em>— adj. </em>to not attend something, such as school, that one is expected to attend</p>
+<p><strong>chronic </strong><em>—</em><em> adj. s</em>omething that happens all the time</p>
+<p><strong>district </strong><em>—</em><em> n. </em>an area defined by a government for a special purpose such as for school administration or for services</p>
+<p><strong>academic </strong><em>—</em><em> adj. </em>related to school, learning or teaching</p>
+<p><strong>significant </strong><em>— adj. </em>enough to have a noticeable or important effect</p>
+<p><strong>hire </strong><em>—<em> </em>v</em>. to give a job to someone; to pay someone to do a job</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

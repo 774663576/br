@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Is Popular in Your Country?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, What Is Popular in Your Country?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/what-is-popular-in-your-country.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Is Popular in Your Country?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/what-is-popular-in-your-country.mp3" id="mp3"></a>
+<a href="humans-seek-connections-with-ai-chatbots-92241.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">15 February 2024</span><br/>
+<p>Think about something that your friends or people you know like.</p>
+<p>Can you bring an image to your mind?</p>
+<p>The image that you are thinking of can serve as a starting point for today's report: the word "popular."</p><div class="contentImage"><img alt="Everyday Grammar " src="https://files.21voa.com/gdb/01000000-0a00-0242-38d2-08dc2dc796f9_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar </span></div>
+<p>In today's Everyday Grammar, we will talk about a useful word that you can use to express all kinds of ideas about what people around you like: actors, celebrations, foods, music — almost anything.</p>
+<p><strong>Popular vs. Population </strong></p>
+<p>We begin our exploration of the word "popular" by clarifying how it is different from the word population.</p>
+<p>Popular and population are closely related words and have somewhat similar spellings. But we should be careful not to mix up the two.</p>
+<p>Popular means many people know about someone or something and that they like the person or thing. Population simply describes a group of people.</p>
+<p>Another way of expressing the idea is this: something might be popular within a population. In other words, something might be popular within a group of people.</p>
+<p>A recent example comes to mind: the Super Bowl. The championship game in American football is a popular event to watch in the United States. A lot of people know about the Super Bowl, watch it, and enjoy it.</p>
+<p>So, we could say the United States has a population of over 300 million people. We could also say the Super Bowl is one of the country's most popular sporting events.</p>
+<p>Another way of describing the difference between the words "population" and "popular" is in terms of grammar. Population is a noun. Popular is an adjective.</p>
+<p>Consider this example. Taylor Swift is a popular musician. Why is Swift popular? Because a large percentage of the population knows about Swift and enjoys the singer's music.</p>
+<p><strong>Practice </strong></p>
+<p>Let's take some time to work with these ideas. Fill in the blank with the correct answer.</p>
+<p><em>Cricket is a ______________ sport in India. </em></p>
+<p>The answer is this: popular.</p>
+<p>We can say that cricket is a popular sport in India.</p>
+<p>Grammar can give us a clue about the answer. The short word "a" very often marks the beginning of a noun <strong>phrase</strong>. If we know that "sport" is a noun, then the missing word is likely to be an adjective.</p>
+<p>Now, consider another question. Fill in the blank with the correct answer.</p>
+<p><em>Vietnam has a _________ of around 100 million people. </em></p>
+<p>The answer is this: population.</p>
+<p>We say that Vietnam has a population of around 100 million people. We can guess that "population" is the correct term because the statement offers the number of all the people in a group — the people who live in Vietnam.</p>
+<p><strong>Write to us </strong></p>
+<p>We began today's lesson by asking you to imagine a person or activity that is liked or enjoyed by many people that you know. In other words, we asked you to imagine something that is popular in your country.</p>
+<p>We end by asking you to write about what you imagined. Write to us a short answer to the following questions:</p>
+<p>What is a popular person, thing, or activity in your country? Why do you think the person, thing, or activity is popular?</p>
+<p>You can write your answer in an email to <a class="wsw__a" href="mailto:learningenglish@voanews.com" target="_blank">learningenglish@voanews.com</a>.</p>
+<p>In a future lesson, we will give <strong>feedback </strong>on some of the writing we receive.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>phrase </strong><em>– n. </em>a group of two or more words that express an idea but do not make up a sentence</p>
+<p><strong>feedback </strong><em>– n.</em> helpful information that is given to someone to say what can be done to improve</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

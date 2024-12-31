@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国灯塔正在被出售或捐赠</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 美国灯塔正在被出售或捐赠" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/us-lighthouses-for-sale-or-being-given-away.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国灯塔正在被出售或捐赠</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/us-lighthouses-for-sale-or-being-given-away.mp3" id="mp3"></a>
+<a href="/static/lrc/us-lighthouses-for-sale-or-being-given-away.lrc" id="lrc"></a>
+<a href="us-lighthouses-for-sale-or-being-given-away-90973.html" id="CnPage" target="_blank"></a>
+<a href="rebuilding-notre-dame-brings-workers-back-to-middle-ages-90971.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The United States is offering ten American lighthouses for new owners.<br/>
+美国正在为十座美国灯塔寻找新主人。</p>
+<p>The lighthouses have stood along ocean and lake coasts for generations to help guide and protect ship and boat travel.<br/>
+这些灯塔世世代代一直矗立在海洋和湖泊沿岸，以帮助引导和保护船舶航行。</p>
+<p>The General Services Administration (GSA) operates the lighthouse release program. It aims to preserve the properties. Most of the buildings are more than 100 years old.<br/>
+美国总务管理局负责这项灯塔转让项目。它旨在保护这些财产。大多数建筑都有100多年历史了。</p>
+<p>Modern technology, including satellites, means lighthouses are no longer required for navigation, said John Kelly of GSA. And while the Coast Guard often keeps aids to navigation at or near the lighthouses, the structures themselves mostly go unused.<br/>
+美国总务管理局的约翰凯利表示，包括卫星在内的现代科技意味着导航不再需要这些灯塔。虽然海岸警卫队通常在灯塔或灯塔附近保留导航辅助设备，但是灯塔本身大多数没什么用。</p>
+<p>Yet the public likes to visit the tall, bright white towers. Many are popular with tourists, and are also subjects of photographs, paintings and other art.<br/>
+然而，公众喜欢参观这些高大、明亮、白色的灯塔。许多灯塔深受游客欢迎，也是照片、绘画和其他艺术的主题。</p>
+<p>The GSA has been changing ownership of lighthouses since Congress passed the National Historic Lighthouse Preservation Act in 2000. About 150 lighthouses have changed ownership, 80 or so given away and another 70 sold. The program has raised more than $10 million.<br/>
+自2000年国会通过《国家历史灯塔保护法》以来，美国总务管理局一直在变更灯塔的所有权。大约有150座灯塔已经易主，80座左右被赠送，另有70座被出售。该项目已经筹集了1000多万美元。</p>
+<p>This year, six lighthouses are being offered at no cost to federal, state, or local government agencies, nonprofits, educational organizations, or other groups. New owners must agree and be able to make repairs and preserve the buildings. They also have to make the lighthouses available to the public for educational, recreational, or cultural purposes.<br/>
+今年有6座灯塔将免费移交给联邦、州或地方政府机构，非营利教育组织或其他团体。新业主必须同意并有能力对这些建筑物进行维修和保护。他们还必须向公众开放灯塔，用于教育、娱乐或文化目的。</p>
+<p>The buildings offered include the 10.4-meter tall Plymouth/Gurnet Light in Massachusetts. The eight-sided wooden structure dates to 1842. But, a lighthouse has been at the site since 1768. The site was the first to employ a woman as lighthouse keeper.<br/>
+这些免费移交的建筑就包括位于马萨诸塞州的10.4米高的普利茅斯/古尔内特灯塔。这座八面木制结构可以追溯到1842年。但是自1768年以来这里就有一座灯塔。这是首座雇用女性担任管理员的灯塔。</p>
+<p>John Kelly's personal favorite of the structures is Warwick Neck Light, in Warwick, Rhode Island. The 15.5-meter-tall lighthouse dates to 1827. It was an important navigation tool for sea travelers making their way to Providence, Rhode Island.<br/>
+凯利个人最喜欢的是位于罗德岛沃里克的沃里克岬灯塔。这座15.5米高的灯塔建于1827年。它是海上旅行者前往罗德岛州普罗维登斯的重要导航工具。</p>
+<p>Other lighthouses being offered at no cost include Lynde Point Lighthouse in Old Saybrook, Connecticut and Erie Harbor North Pier Lighthouse in Pennsylvania.<br/>
+其他免费移交的灯塔包括康涅狄格州老赛布鲁克的林德角灯塔和宾夕法尼亚州伊利港北码头灯塔。</p>
+<p>Nonprofits already care for some of the lighthouses. The groups can request to continue doing so, Kelly said.<br/>
+非营利组织已经在管理其中一些灯塔。凯利说，这些组织可以要求继续管理。</p>
+<p>If a new owner is not found for a lighthouse, it goes on market to be sold for the highest price offered.<br/>
+如果灯塔没有找到新主人，它就会在市场上以价高者得之。</p>
+<p>Four lighthouses are to be sold this year. Cleveland Harbor West Pierhead Light in Ohio is one of them. The 15.5-meter steel tower was built in 1911 and rises above Lake Erie. The property can be reached by boat only but provides an extensive view of Cleveland's skyline.<br/>
+今年将出售四座灯塔。俄亥俄州克利夫兰港西码头灯塔就是其中之一。这座15.5米的钢塔建于1911年，矗立在伊利湖之上。这座灯塔只能乘船抵达，但它可以俯瞰克利夫兰的天际线。</p>
+<p>Some lighthouse owners have made the buildings their private homes and enjoy the unusual living situation.<br/>
+一些灯塔业主将这些建筑作为自己的私人住宅，享受着不同寻常的生活环境。</p>
+<p>The lighthouses "all have their own interesting history," Kelly said.<br/>
+凯利说，这些灯塔“都有自己有趣的历史”。</p>
+<p>I'm Gregory Stachel.<br/>
+我是格利高里·施塔赫尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Lighthouses for Sale or Being Given Away]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States is offering
+[00:02.80]ten American lighthouses for new owners.
+[00:07.40]The lighthouses have stood along ocean and lake coasts
+[00:12.16]for generations to help guide and protect ship and boat travel.
+[00:18.20]The General Services Administration (GSA)
+[00:23.08]operates the lighthouse release program.
+[00:27.36]It aims to preserve the properties.
+[00:30.32]Most of the buildings are more than 100 years old.
+[00:35.64]Modern technology, including satellites,
+[00:39.00]means lighthouses are no longer required
+[00:42.64]for navigation, said John Kelly of GSA.
+[00:47.92]And while the Coast Guard often keeps aids
+[00:51.16]to navigation at or near the lighthouses,
+[00:54.36]the structures themselves mostly go unused.
+[00:59.32]Yet the public likes to visit the tall, bright white towers.
+[01:04.88]Many are popular with tourists,
+[01:07.68]and are also subjects of photographs,
+[01:11.20]paintings and other art.
+[01:14.40]The GSA has been changing ownership of lighthouses
+[01:19.04]since Congress passed the National Historic
+[01:22.72]Lighthouse Preservation Act in 2000.
+[01:27.24]About 150 lighthouses have changed ownership,
+[01:33.32]80 or so given away and another 70 sold.
+[01:39.04]The program has raised more than $10 million.
+[01:44.40]This year, six lighthouses are being offered at no cost
+[01:49.56]to federal, state, or local government agencies,
+[01:54.04]nonprofits, educational organizations, or other groups.
+[02:00.36]New owners must agree and be able to make repairs
+[02:05.08]and preserve the buildings.
+[02:08.16]They also have to make the lighthouses available to the public
+[02:12.80]for educational, recreational, or cultural purposes.
+[02:19.08]The buildings offered include the 10.4-meter tall
+[02:23.84]Plymouth/Gurnet Light in Massachusetts.
+[02:28.44]The eight-sided wooden structure dates to 1842.
+[02:34.04]But, a lighthouse has been at the site since 1768.
+[02:39.48]The site was the first to employ a woman as lighthouse keeper.
+[02:45.36]John Kelly's personal favorite of the structures
+[02:48.48]is Warwick Neck Light, in Warwick, Rhode Island.
+[02:53.84]The 15.5-meter-tall lighthouse dates to 1827.
+[03:00.68]It was an important navigation tool for sea travelers
+[03:05.12]making their way to Providence, Rhode Island.
+[03:09.24]Other lighthouses being offered at no cost include
+[03:13.36]Lynde Point Lighthouse in Old Saybrook,
+[03:18.16]Connecticut and Erie Harbor North Pier Lighthouse in Pennsylvania.
+[03:23.64]Nonprofits already care for some of the lighthouses.
+[03:28.52]The groups can request to continue doing so, Kelly said.
+[03:33.56]If a new owner is not found for a lighthouse,
+[03:36.80]it goes on market to be sold for the highest price offered.
+[03:42.28]Four lighthouses are to be sold this year.
+[03:46.16]Cleveland Harbor West Pierhead Light in Ohio is one of them.
+[03:52.36]The 15.5-meter steel tower was built in 1911
+[03:58.24]and rises above Lake Erie.
+[04:02.16]The property can be reached by boat only
+[04:05.28]but provides an extensive view of Cleveland's skyline.
+[04:11.08]Some lighthouse owners have made the buildings their private homes
+[04:15.80]and enjoy the unusual living situation.
+[04:20.20]The lighthouses "all have their own interesting history," Kelly said.
+[04:25.84]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

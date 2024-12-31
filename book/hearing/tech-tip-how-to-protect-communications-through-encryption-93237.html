@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Tech Tip: How to Protect Communications through Encryption</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Tech Tip: How to Protect Communications through Encryption" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/tech-tip-how-to-protect-communications-through-encryption.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Tech Tip: How to Protect Communications through Encryption</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/tech-tip-how-to-protect-communications-through-encryption.mp3" id="mp3"></a>
+<a href="/static/lrc/tech-tip-how-to-protect-communications-through-encryption.lrc" id="lrc"></a>
+<a href="nasa-s-james-webb-confirms-continued-expansion-of-the-universe-93231.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">18 December, 2024</span><br/>
+<p>U.S. cybersecurity officials are advising people to use <strong>encryption</strong> in their communications after a major <strong>hacking</strong> campaign.</p>
+<p>Federal officials released a list of security suggestions for U.S. telecommunications companies that were targeted.</p>
+<p>The advice includes one suggestion that everyone can use: “Ensure that traffic is end-to-end encrypted to the maximum <strong>extent </strong>possible.”</p><div class="contentImage"><img alt="FILE - An attendee at the Microsoft Ignite conference records an address on Nov. 19, 2024, in Chicago. (AP Photo/Charles Rex Arbogast, File)" src="https://files.21voa.com/gdb/5ab9677b-ca52-4218-b328-45e322bc50da_w268_r1.jpg"/><br/><span class="imagecaption">FILE - An attendee at the Microsoft Ignite conference records an address on Nov. 19, 2024, in Chicago. (AP Photo/Charles Rex Arbogast, File)</span></div>
+<p>End-to-end encryption, also known as E2EE, means that messages are protected so that only the sender and receiver can see them. If anyone else gets the message, all they will see is disordered information that cannot be understood without the <strong>key</strong>.</p>
+<p>Law enforcement officials had until now resisted encryption. This resistance is because the encryption means the technology companies themselves will not be able to look at the messages. In addition, the companies will not be able to respond to law enforcement requests to turn the data over.</p>
+<p>The Associated Press (AP) recently offered some ways that normal people can use for end-to-end encryption :</p>
+<p><strong>Texting </strong></p>
+<p>Officials said the hackers targeted the <strong>metadata</strong> of a large number of people. That included information on the dates, times and <strong>recipients </strong>of calls and <strong>texts</strong>. The hackers also got to see the information from texts from a much smaller number of people.</p>
+<p>If you are an iPhone user, information in text messages that you send to someone else who also has an iPhone will be encrypted end-to-end. Look for the blue text bubbles which mean that the messages are encrypted iMessages.</p>
+<p>The same goes for Android users sending texts through Google Messages. There will be a lock next to the timestamp on each message to show that the encryption is on.</p>
+<p>But there is a weakness. When iPhone and Android users text each other, the messages are encrypted only using Rich Communication Services (RCS). That is a common method for messaging that has replaced the older SMS and MMS methods.</p>
+<p>Apple notes that RCS messages “aren't end-to-end encrypted, which means they're not protected from a third party reading them while they're sent between devices.”</p>
+<p>Samsung, which sells Android smartphones, also indirectly described the issue in a small area at the bottom of a press release last month. Samsung said about RCS, “Encryption only available for Android-to-Android communication.”</p>
+<p><strong>Chat apps </strong></p>
+<p>To avoid getting caught out when exchanging texts, experts recommend using encrypted messaging <strong>apps</strong>.</p>
+<p>Privacy supporters are big fans of Signal, which uses end-to-end encryption on all messages and voice calls. Signal is an app that is run by an independent nonprofit group based in Mountainview, California. It promises never to sell customer data. The group has also made its source code publicly available so that it can be examined by anyone “for security and correctness.”</p>
+<p>Signal's encryption method is so respected that it has been included into competitor WhatsApp.</p>
+<p>End-to-end encryption is also the normal mode for Facebook Messenger, which like WhatsApp is owned by Meta Platforms.</p>
+<p><strong>What about Telegram? </strong></p>
+<p>Telegram is an app that can be used for one-on-one discussions, group chats and broadcast “channels.” But Telegram does not use end-to-end encryption normally. Users have to turn on end-to-end encryption. And Telegram's end-to-end encryption does not work with group chats.</p>
+<p>Cybersecurity experts have warned people against using Telegram for private communications.</p>
+<p><strong>Making calls </strong></p>
+<p>Instead of using your phone to make calls through a wireless cellular network, you can make voice calls with Signal and WhatsApp. Both apps encrypt calls with the same technology that they use to encrypt messages.</p>
+<p>There are other choices. If you have an iPhone, you can use Facetime for calls, while Android owners can use the Google Fi service. Both are end-to-end encrypted.</p>
+<p>However, with all these choices, the person on the other end will also have to have the app.</p>
+<p>WhatsApp and Signal users can choose the privacy setting they want in the settings. Such choices include hiding an IP address during calls to prevent your general location from being guessed.</p>
+<p>I'm John Russell.</p>
+<p><em>Kelvin Chan reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>encryption</strong><em> – n.</em> changing something (such as data) into a code</p>
+<p><strong>hack </strong><em>– v.</em> to gain illegal access to a computer network, computer system, phone, etc.</p>
+<p><strong>extent</strong> <em>– n.</em> a degree, point, or limit to which something goes to</p>
+<p><strong>key</strong><em> –n.</em> information that permits a computer application to un-encrypt a message permitting the receiver to read it</p>
+<p><strong>metadata</strong> <em>-- n.</em> data that gives information about other data</p>
+<p><strong>recipient</strong> <em>– n.</em> someone who receives something</p>
+<p><strong>text (message)</strong> <em>–n.</em> a short message sent through a computer program from one person to another which can contain a written message, links or pictures</p>
+<p><strong>app (application)<em> </em></strong><em>–n.</em> a computer program that is designed to do one task or several linked tasks</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Tech Tip: How to Protect Communications through Encryption]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]U.S. cybersecurity officials
+[00:03.84]are advising people to use encryption
+[00:07.52]in their communications
+[00:09.64]after a major hacking campaign.
+[00:12.60]Federal officials released
+[00:15.32]a list of security suggestions
+[00:18.12]for U.S. telecommunications companies
+[00:21.32]that were targeted.
+[00:22.80]The advice includes one suggestion
+[00:26.60]that everyone can use:
+[00:28.76]"Ensure that traffic is end-to-end encrypted
+[00:33.68]to the maximum extent possible."
+[00:37.04]End-to-end encryption,
+[00:39.76]also known as E2EE,
+[00:43.12]means that messages are protected
+[00:46.48]so that only the sender and receiver can see them.
+[00:51.52]If anyone else gets the message,
+[00:54.28]all they will see is disordered information
+[00:58.72]that cannot be understood without the key.
+[01:02.68]Law enforcement officials
+[01:05.52]had until now resisted encryption.
+[01:09.20]This resistance is because the encryption means
+[01:13.72]the technology companies themselves
+[01:16.80]will not be able to look at the messages.
+[01:21.44]In addition, the companies
+[01:23.76]will not be able to respond
+[01:26.44]to law enforcement requests
+[01:29.20]to turn the data over.
+[01:31.40]The Associated Press (AP)
+[01:35.20]recently offered some ways
+[01:37.56]that normal people can use
+[01:40.40]for end-to-end encryption :
+[01:42.96]Officials said the hackers targeted
+[01:46.20]the metadata of a large number of people.
+[01:50.80]That included information on the dates,
+[01:54.64]times and recipients of calls and texts.
+[02:00.12]The hackers also got to see
+[02:02.48]the information from texts
+[02:05.08]from a much smaller number of people.
+[02:08.60]If you are an iPhone user,
+[02:11.52]information in text messages
+[02:14.36]that you send to someone else
+[02:17.20]who also has an iPhone
+[02:20.56]will be encrypted end-to-end.
+[02:24.32]Look for the blue text bubbles
+[02:27.36]which mean that the messages
+[02:29.60]are encrypted iMessages.
+[02:32.40]The same goes for Android users
+[02:36.28]sending texts through Google Messages.
+[02:39.80]There will be a lock next to the timestamp
+[02:44.24]on each message to show
+[02:46.64]that the encryption is on.
+[02:49.16]But there is a weakness.
+[02:51.92]When iPhone and Android users text each other,
+[02:56.52]the messages are encrypted
+[02:59.12]only using Rich Communication Services (RCS).
+[03:05.16]That is a common method for messaging
+[03:08.68]that has replaced the older SMS
+[03:12.52]and MMS methods.
+[03:15.56]Apple notes that RCS messages
+[03:19.24]"aren't end-to-end encrypted,
+[03:22.36]which means they're not protected
+[03:24.80]from a third party reading them
+[03:27.60]while they're sent between devices."
+[03:30.60]Samsung, which sells Android smartphones,
+[03:35.64]also indirectly described the issue
+[03:39.32]in a small area at the bottom
+[03:42.16]of a press release last month.
+[03:45.16]Samsung said about RCS,
+[03:48.96]"Encryption only available
+[03:51.84]for Android-to-Android communication."
+[03:55.72]To avoid getting caught out when exchanging texts,
+[04:00.08]experts recommend using encrypted messaging apps.
+[04:04.80]Privacy supporters are big fans of Signal,
+[04:09.16]which uses end-to-end encryption
+[04:12.44]on all messages and voice calls.
+[04:16.12]Signal is an app that is run
+[04:19.16]by an independent nonprofit group
+[04:22.48]based in Mountainview, California.
+[04:26.12]It promises never to sell customer data.
+[04:31.08]The group has also made its source code
+[04:34.08]publicly available
+[04:36.08]so that it can be examined by anyone
+[04:39.64]"for security and correctness."
+[04:43.04]Signal's encryption method is so respected
+[04:47.28]that it has been included
+[04:49.56]into competitor WhatsApp.
+[04:52.76]End-to-end encryption
+[04:54.80]is also the normal mode
+[04:57.24]for Facebook Messenger,
+[04:59.44]which like WhatsApp is owned
+[05:02.20]by Meta Platforms.
+[05:04.44]Telegram is an app that can be used
+[05:07.64]for one-on-one discussions,
+[05:10.28]group chats and broadcast "channels."
+[05:14.28]But Telegram does not use
+[05:16.68]end-to-end encryption normally.
+[05:19.68]Users have to turn on end-to-end encryption.
+[05:24.72]And Telegram's end-to-end encryption
+[05:28.76]does not work with group chats.
+[05:31.56]Cybersecurity experts
+[05:34.28]have warned people against using Telegram
+[05:37.64]for private communications.
+[05:40.36]Instead of using your phone
+[05:42.64]to make calls through a wireless cellular network,
+[05:46.92]you can make voice calls with Signal and WhatsApp.
+[05:50.88]Both apps encrypt calls with the same technology
+[05:55.80]that they use to encrypt messages.
+[05:59.20]There are other choices.
+[06:01.96]If you have an iPhone,
+[06:04.44]you can use Facetime for calls,
+[06:07.36]while Android owners can use the Google Fi service.
+[06:12.16]Both are end-to-end encrypted.
+[06:16.68]However, with all these choices,
+[06:19.80]the person on the other end
+[06:22.08]will also have to have the app.
+[06:25.96]WhatsApp and Signal users
+[06:28.48]can choose the privacy setting
+[06:30.80]they want in the settings.
+[06:33.40]Such choices include hiding an IP address during calls
+[06:38.60]to prevent your general location from being guessed.
+[06:43.52]I'm John Russell. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

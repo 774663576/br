@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Museum to Hold Largest Showing of Vermeer's Paintings</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Museum to Hold Largest Showing of Vermeer's Paintings" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/museum-to-hold-largest-showing-of-vermeer-s-paintings.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Museum to Hold Largest Showing of Vermeer's Paintings</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/museum-to-hold-largest-showing-of-vermeer-s-paintings.mp3" id="mp3"></a>
+<a href="/static/lrc/museum-to-hold-largest-showing-of-vermeer-s-paintings.lrc" id="lrc"></a>
+<a href="researchers-testing-air-cleaning-technology-carbon-storage-90406.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">09 February 2023</span><br/>
+<p>The national <strong>museum</strong> of the Netherlands is holding the largest show ever of paintings by Dutch artist Johannes Vermeer.</p>
+<p>The Rijksmuseum is in the capital, Amsterdam. It has placed 28 paintings on exhibit. It says they represent about half of the 17th century artist's body of work.</p>
+<p>Vermeer is known for his expertise at representing light in his paintings. His subject was often common household objects. The artist worked slowly on his paintings and died at the age of 43. He likely never saw so many of his own works together at one time.</p><div class="contentImage"><img alt="Director of Rijksmuseum Amsterdam Taco Dibbits looks at Vermeer's painting 'Mistress and Maid' at an exhibition bringing together 28 works by Dutch painter Johannes Vermeer in Amsterdam, Netherlands February 6, 2023. (REUTERS/Piroschka van de Wouw)" src="https://files.21voa.com/gdb/09320000-0a00-0242-a027-08db0a01c106_cx0_cy1_cw95_w268_r1.jpg"/><br/><span class="imagecaption">Director of Rijksmuseum Amsterdam Taco Dibbits looks at Vermeer's painting 'Mistress and Maid' at an exhibition bringing together 28 works by Dutch painter Johannes Vermeer in Amsterdam, Netherlands February 6, 2023. (REUTERS/Piroschka van de Wouw)</span></div>
+<p>Rijksmuseum director Taco Dibbits said Vermeer had a large family and busy life as an art dealer. Still, he said, the painter was able to create works of quiet beauty.</p>
+<p>"It's this ... complete <strong>focus</strong> and <strong>tranquility</strong> in his paintings that we still love today," Dibbits said.</p>
+<p>The show includes some of Vermeer's most famous works, including Girl With A Pearl Earring (1664) and The Milkmaid (1659). Visitors can also see his two known outdoor paintings and several others of women playing instruments, reading and working.</p>
+<p>"We're really coming closer to Vermeer than we've ever been," said Pieter Roelofs, the Rijksmuseum's Head of Paintings and Sculpture.</p>
+<p>What is "striking" about Vermeer, Roelofs said, "is that in his paintings, it's mostly women who are the protagonists," meaning the main subjects. The expert noted that Vermeer had seven daughters.</p>
+<p>Roelofs said Vermeer's works are more than something a good eye and skilled hand can create. Recent examinations show the Milkmaid was repainted several times.</p>
+<p>Writer Tracy Chevalier attended an event for the show before it opened. She wrote the popular book Girl with a Pearl Earring, a historical <strong>fiction </strong>based on the painting. It later became a movie.</p>
+<p>Chevalier said the show presents Vermeer as a quiet and private man.</p>
+<p>"His paintings are so quiet and there are no children ... he must have <strong>compartmentalized</strong> his life and said 'no, no kids in the studio'."</p>
+<p>Museums in Germany, France, Japan, Britain, Ireland and the United States helped with the public showing, which opens on Friday and runs until June.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell adapted this story for VOA Learning English from reports by Reuters and the Associated Press.</em></p>
+<p><em>_____________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>museum</strong> <em>– n.</em> a building in which interesting and valuable things (such as paintings and sculptures or scientific or historical objects) are collected and shown to the public</p>
+<p><strong>focus </strong><em>– n.</em> a state in which the small details of a picture or image can be clearly seen</p>
+<p><strong>tranquility</strong> <em>– n.</em> the quality or state of being quiet and peaceful</p>
+<p><strong>fiction</strong> <em>– n.</em> something told or written that is not fact; a made-up story</p>
+<p><strong>compartmentalize</strong> <em>– v.</em> to separate (something) into sections or categories</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Museum to Hold Largest Showing of Vermeer's Paintings]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The national museum of the Netherlands
+[00:03.32]is holding the largest show ever
+[00:05.96]of paintings by Dutch artist Johannes Vermeer.
+[00:09.92]The Rijksmuseum is in the capital, Amsterdam.
+[00:14.60]It has placed 28 paintings on exhibit.
+[00:18.16]It says they represent about
+[00:20.96]half of the 17th century artist's body of work.
+[00:25.72]Vermeer is known for his expertise
+[00:28.92]at representing light in his paintings.
+[00:32.44]His subject was often common household objects.
+[00:37.48]The artist worked slowly on his paintings
+[00:40.40]and died at the age of 43.
+[00:44.08]He likely never saw so many of
+[00:46.36]his own works together at one time.
+[00:49.44]Rijksmuseum director Taco Dibbits
+[00:52.68]said Vermeer had a large family
+[00:55.60]and busy life as an art dealer.
+[00:58.36]Still, he said, the painter was able
+[01:01.84]to create works of quiet beauty.
+[01:04.88]"It's this ... complete focus and tranquility in his paintings
+[01:09.92]that we still love today," Dibbits said.
+[01:13.32]The show includes some of Vermeer's most famous works,
+[01:18.08]including Girl With A Pearl Earring (1664) and The Milkmaid (1659).
+[01:26.80]Visitors can also see his two known outdoor paintings
+[01:31.64]and several others of women playing instruments, reading and working.
+[01:37.84]"We're really coming closer to Vermeer than we've ever been,"
+[01:41.84]said Pieter Roelofs, the Rijksmuseum's Head of Paintings and Sculpture.
+[01:47.04]What is "striking" about Vermeer, Roelofs said,
+[01:51.40]"is that in his paintings, it's mostly women who are the protagonists,"
+[01:56.76]meaning the main subjects.
+[01:58.92]The expert noted that Vermeer had seven daughters.
+[02:03.08]Roelofs said Vermeer's works are more than something
+[02:07.36]a good eye and skilled hand can create.
+[02:11.12]Recent examinations show the Milkmaid was repainted several times.
+[02:17.16]Writer Tracy Chevalier attended an event for the show before it opened.
+[02:22.96]She wrote the popular book Girl with a Pearl Earring,
+[02:27.64]a historical fiction based on the painting.
+[02:31.08]It later became a movie.
+[02:33.12]Chevalier said the show presents Vermeer as a quiet and private man.
+[02:39.24]"His paintings are so quiet and there are no children ...
+[02:43.48]he must have compartmentalized his life
+[02:46.76]and said 'no, no kids in the studio'."
+[02:50.96]Museums in Germany, France, Japan, Britain, Ireland
+[02:56.88]and the United States helped with the public showing,
+[03:00.92]which opens on Friday and runs until June.
+[03:05.56]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

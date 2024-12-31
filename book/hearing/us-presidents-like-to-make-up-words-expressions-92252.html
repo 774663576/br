@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - US Presidents Like to Make Up Words, Expressions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, US Presidents Like to Make Up Words, Expressions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/us-presidents-like-to-make-up-words-expressions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>US Presidents Like to Make Up Words, Expressions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/us-presidents-like-to-make-up-words-expressions.mp3" id="mp3"></a>
+<a href="un-says-one-fifth-of-migrating-animals-at-risk-of-extinction-92246.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">17 February 2024</span><br/>
+<p>And now <em>Words and Their Stories</em>, from VOA Learning English.</p>
+<p>The third Monday of February is known as Presidents' Day in the United States. So, for today's <em>Words and Their Stories, </em>we look at some of the famous and not-so-famous presidential words and their stories in history.</p>
+<p>From <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-theodore-roosevelt/3986653.html">Teddy Roosevelt</a>'s <u>lunatic fringe</u> to <a class="wsw__a" href="https://www.21voa.com/a/joe-biden-oldest/7436052.html">Joe Biden</a>'s <u>malarkey</u>, the words and phrases said by U.S. presidents are often as <strong>unique</strong> as the American experience.</p>
+<div class="contentImage"><img alt="FILE - Democratic presidential candidate and former Vice President Joe Biden boards his No Malarkey bus following a campaign stop in Council Bluffs, Iowa on Nov. 30, 2019. (AP Photo/Nati Harnik)" src="https://files.21voa.com/gdb/01000000-0a00-0242-eae6-08dc2e6986f5_cx0_cy1_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">FILE - Democratic presidential candidate and former Vice President Joe Biden boards his "No Malarkey" bus following a campaign stop in Council Bluffs, Iowa on Nov. 30, 2019. (AP Photo/Nati Harnik)</span></div>
+<p>"We're really creating our own institutions through language," said Paul Dickson. He is the writer of <em>Words from the White House: Words and Phrases Coined or Popularized by America's Presidents</em>. If you coin a word or phrase you create it.</p>
+<p><a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-jefferson/3744095.html">Thomas Jefferson</a>, America's 3rd president, is said to have created more than a hundred words. One of the words is <u>authentication</u> – the act of proving or showing something to be true. Another word from Jefferson is <u>Anglomania</u>. It means to have extreme affection for all things English. The ending -mania means to be crazy about something.</p>
+<p><a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-abraham-lincoln/3884227.html">Abraham Lincoln</a>, the country's 16th president, is known for making powerful speeches during the Civil War. One of his best-known phrases, "<u>A house divided</u> against itself cannot stand," is drawn from the Bible.</p>
+<p>Historians note that Teddy Roosevelt, the 26th president, was the first president to use media to connect with the public. And he added several memorable words and phrases to American English.</p>
+<p><strong>Creating slang</strong></p>
+<p>Dickson says, "Teddy Roosevelt creates this huge body of <strong>slang</strong>." The words include <u>pack rat</u>, <u>loose cannon</u>, <u>lunatic fringe</u>, and <u>bully pulpit</u> – among many others.</p>
+<p>A <u>pack rat</u> is someone who collects things that they do not need.</p>
+<p>A <u><a class="wsw__a" href="https://www.21voa.com/a/loose-cannons-are-dangerous/4665046.html" target="_blank">loose cannon</a></u> describes a dangerous and uncontrollable person.</p>
+<p><u>Lunatic fringe</u> describes people whose opinions are extreme and different from many others. And a <u>bully pulpit</u> is an important position, such as the presidency, that provides a chance to instruct, lead, or inspire others.</p>
+<p><strong>Creating slogans</strong></p>
+<p>In addition to slang, some presidents created <strong>slogans</strong>. A slogan is a short phrase used in advertising or political campaigns to get attention.</p>
+<p><u>America First</u> came from <a class="wsw__a" href="https://www.21voa.com/a/americas-president-woodrow-wilson/4001252.html">Woodrow Wilson</a>, the 28th president, in 1915, and not <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-donald-trump/4188923.html">Donald Trump</a>, the 45th.</p>
+<p>The 29th president, <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-warren-harding/4018013.html">Warren Harding</a>, gets credit for coming up with the term <u>Founding Fathers</u>. This describes the creators of the U.S. Constitution.</p>
+<p>Before <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-calvin-coolidge/4027250.html">Calvin Coolidge</a>, the 30th president, no political campaigner had ever called himself a <u>law-and-order</u> candidate. This means they support police efforts and enforcement of laws.</p>
+<p>The 33rd president, <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-harry-truman/4067702.html">Harry Truman</a>, came up with the phrase <u>do-nothing Congress</u>. He is also famous for the saying, <u>If you can't stand the heat, get out of the kitchen</u>.</p>
+<p>Sometimes presidents changed names to better describe their purpose. Dickson says, "It was Franklin D. Roosevelt who changed the name of the ‘Report to Congress' to the <u>State of the Union</u>."</p>
+<p><strong>Critics &amp; criticisms</strong></p>
+<p>However, <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-franklin-roosevelt/4046663.html">Franklin Delano Roosevelt</a>, the 32nd president, brought criticism when he said, "Well, it's pretty <u>iffy</u> as to where the Supreme Court stands on this." <u>Iffy</u> is another way of saying something is uncertain or unknown. His critics felt that the American president should use "<strong>proper</strong>" English.</p>
+<p>In 1961, <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-dwight-eisenhower/4076083.html">Dwight Eisenhower</a>, the 34th president, was praised for using the term <u>military-industrial complex</u> to warn against the powerful alliance of the military, government, and private corporations.</p>
+<p>But then he was criticized for using the word <u>finalize</u> in a speech. By adding -ize, he turned the word "final" into a verb.</p>
+<p>Major papers at the time wrote that it was not "proper English" and called the word "meaningless."</p>
+<p>Dickson says necessity is the reason presidents continue to create new words.</p>
+<p>There was a <u>solid majority</u> from <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-richard-nixon/4107568.html">Richard Nixon</a>, the 37th president. And <a class="wsw__a" href="https://www.21voa.com/a/americas-presidents-barack-obama/4181145.html">Barack Obama</a>, the 44th president, used <u>shovel-ready</u> to describe public work projects that were ready to start immediately.</p>
+<p>When Joe Biden, the 46th president, ran for the White House in 2019, his campaign slogan was <u>no malarkey</u>. <u>Malarkey</u> is believed to be an expression often used by Irish Americans to describe insincere or meaningless talk.</p>
+<p>And that, my friends, is <u>no malarkey.</u> I hope you enjoyed this special presidential <em>Words and Their Stories.</em></p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Dora Mekouar wrote this story for VOA News. Anna Matteo adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>unique </strong><em>– adj.</em><strong> </strong>being the only one of its kind</p>
+<p><strong>slang </strong><em>– n. </em>the special terms or expressions of a particular group or field</p>
+<p><strong>slogan </strong><em>– n. </em>an attention-getting word or phrase used to publicize something (as a campaign or product)</p>
+<p><strong>proper </strong><em>– adj. </em>following the established traditions of refined society and good taste</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

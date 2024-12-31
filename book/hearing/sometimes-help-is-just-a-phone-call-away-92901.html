@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Sometimes Help Is Just 'A Phone Call Away'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Sometimes Help Is Just 'A Phone Call Away'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/sometimes-help-is-just-a-phone-call-away.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Sometimes Help Is Just 'A Phone Call Away'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/sometimes-help-is-just-a-phone-call-away.mp3" id="mp3"></a>
+<a href="/static/lrc/sometimes-help-is-just-a-phone-call-away.lrc" id="lrc"></a>
+<a href="small-farm-animals-are-growing-in-popularity-92899.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">17 August, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On today's show we talk about some expressions that deal with an important device in our lives – our phones.</p>
+<p>With a smartphone, we can connect to the world. In fact, we can say smartphones <u>give us the world at our fingertips</u>.</p><div class="contentImage"><img alt="FILE - U.S. actress Lindsay Lohan speaks on a telephone during a charity day at BGC Partners in the Canary Wharf business district in London, Britain September 12, 2016. (REUTERS/Toby Melville)" src="https://files.21voa.com/gdb/F381F711-449B-40A3-9172-DEDE13989B93_w268_r1.jpg"/><br/><span class="imagecaption">FILE - U.S. actress Lindsay Lohan speaks on a telephone during a charity day at BGC Partners in the Canary Wharf business district in London, Britain September 12, 2016. (REUTERS/Toby Melville)</span></div>
+<p>Needless to say, we use phones to stay in contact with the people in our lives. We use them to reach out to our friends, family, neighbors, and co-workers.</p>
+<p>So, when we tell someone that we are <u>just a phone call away</u>, what we are really telling them is that we are available. We are there for them. We often use this expression to offer help to someone who is in a difficult situation or just in need of a friendly voice.</p>
+<p>For example, let's say my friend is having a hard time with an advanced English course. The assignments are difficult, the material is hard to understand, and his teacher has not been answering his emails. I can say to him, “Look, if you ever need help, <u>I'm just a phone call away</u>. Call anytime!”</p>
+<p>It's good to be available to some people some of the time.</p>
+<p>But maybe not all the time.</p>
+<p>We all have someone in our lives who contacts us too much. They may<u> blow up our phones</u> with a flood of calls and text messages. When <u>your phone blows up</u>, someone is trying to contact you repeatedly.</p>
+<p>Here's an example. Let's say your neighbor, Jana, is having trouble with another neighbor, Jake. And you are in the middle of it. They are both <u>blowing up your phone</u> with calls and texts about their disagreement. You can tell them, “<u>Hold the phone</u>! Just stop! Talk to each other and work out your problems because I've had enough.”</p>
+<p>The expression <u>hold the phone</u> is a way to say “wait” or “stop.” We use it when we hear something surprising or when we have had enough of a situation.</p>
+<p>And it doesn't have to be about phone calls or texts. For example, let's say a friend tells me that my favorite singer is coming to town. I can't believe it! So, I can say, “<u>Hold the phone</u>! Are you serious?” It's like saying, "Hold on a minute!"</p>
+<p>Now, let's go back to your arguing neighbors, Jana and Jake. Let's say they take your advice. They are willing to work out their problems. They try to call each other but the keep missing each other's calls. First Jana calls Jake, but he isn't available. Then Jake calls her back, but now Jana isn't available. They play <u>phone tag</u> like this for days until they finally speak to each other.</p>
+<p><strong>Tag</strong> is a child's game. One person is “it” and must chase and tag, or touch, the other children. So, <u>phone tag</u> is when two people try to contact each other but their calls go unanswered.</p>
+<p>At least Jake and Jana are trying to work out their problems. When it comes to keeping relationships happy in the neighborhood, they are not <u>phoning it in</u>.</p>
+<p>When we <u>phone it in</u>, we don't try our best at something. We don't give our best efforts. For example, some people who lose interest in their jobs might start <u>phoning it in</u>. They stop trying and do not do their best work.</p>
+<p>That's not the case with us here at VOA Learning English. we are not <u>phoning it in</u>. We work hard every day to bring you new learning English content.</p>
+<p>And that's all the time we have for this Words and Their Stories.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p><em>_______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>tag</strong> <em>– n.</em> a game in which the player who is it chases others and tries to touch one of them who then becomes it</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Sometimes Help Is Just 'A Phone Call Away']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:08.36]And now, Words and Their Stories,
+[00:11.88]from VOA Learning English.
+[00:19.20]On today's show we talk about some expressions
+[00:22.88]that deal with an important device
+[00:25.80]in our lives – our phones.
+[00:30.04]With a smartphone,
+[00:31.76]we can connect to the world.
+[00:34.00]In fact, we can say smartphones
+[00:37.56]give us the world at our fingertips.
+[00:41.56]Needless to say, we use phones
+[00:44.04]to stay in contact
+[00:45.60]with the people in our lives.
+[00:47.92]We use them to reach out to our friends,
+[00:51.40]family, neighbors, and co-workers.
+[00:55.68]So, when we tell someone
+[00:57.88]that we are just a phone call away,
+[01:00.96]what we are really telling them
+[01:03.24]is that we are available.
+[01:06.00]We are there for them.
+[01:09.00]We often use this expression to offer help
+[01:12.44]to someone who is in a difficult situation
+[01:16.04]or just in need of a friendly voice.
+[01:20.84]For example, let's say my friend
+[01:24.00]is having a hard time
+[01:25.80]with an advanced English course.
+[01:28.76]The assignments are difficult,
+[01:31.52]the material is hard to understand,
+[01:34.32]and his teacher has not
+[01:36.64]been answering his emails.
+[01:39.40]I can say to him, "Look, if you ever need help,
+[01:43.36]I'm just a phone call away. Call anytime!"
+[01:48.68]It's good to be available
+[01:50.68]to some people some of the time.
+[01:53.40]But maybe not all the time.
+[01:57.36]We all have someone in our lives
+[01:59.88]who contacts us too much.
+[02:03.36]They may blow up our phones
+[02:05.40]with a flood of calls and text messages.
+[02:10.40]When your phone blows up,
+[02:12.28]someone is trying to contact you repeatedly.
+[02:17.40]Here's an example.
+[02:18.96]Let's say your neighbor, Jana,
+[02:21.72]is having trouble with another neighbor, Jake.
+[02:25.60]And you are in the middle of it.
+[02:29.24]They are both blowing up your phone with calls
+[02:32.76]and texts about their disagreement.
+[02:35.64]You can tell them, "Hold the phone! Just stop!
+[02:39.64]Talk to each other and work out your problems
+[02:42.96]because I've had enough."
+[02:46.36]The expression hold the phone
+[02:48.72]is a way to say "wait" or "stop."
+[02:52.68]We use it when we hear something surprising
+[02:56.48]or when we have had enough of a situation.
+[03:01.36]And it doesn't have to be about phone calls or texts.
+[03:05.04]For example, let's say a friend tells me
+[03:09.12]that my favorite singer is coming to town.
+[03:11.96]I can't believe it!
+[03:13.92]So, I can say,
+[03:16.24]"Hold the phone! Are you serious?"
+[03:19.68]It's like saying, "Hold on a minute!"
+[03:22.64]Now, let's go back to your arguing neighbors,
+[03:26.20]Jana and Jake.
+[03:28.60]Let's say they take your advice.
+[03:31.04]They are willing to work out their problems.
+[03:34.56]They try to call each other
+[03:36.60]but the keep missing each other's calls.
+[03:39.96]First Jana calls Jake,
+[03:41.92]but he isn't available.
+[03:44.20]Then Jake calls her back,
+[03:46.04]but now Jana isn't available.
+[03:48.92]They play phone tag like this for days
+[03:52.60]until they finally speak to each other.
+[03:56.44]Tag is a child's game.
+[03:59.36]One person is "it"
+[04:01.72]and must chase and tag,
+[04:04.44]or touch, the other children.
+[04:07.84]So, phone tag is when two people
+[04:10.52]try to contact each other
+[04:12.40]but their calls go unanswered.
+[04:15.60]At least Jake and Jana are trying
+[04:17.88]to work out their problems.
+[04:19.80]When it comes to keeping
+[04:21.68]relationships happy in the neighborhood,
+[04:24.16]they are not phoning it in.
+[04:27.40]When we phone it in,
+[04:29.08]we don't try our best at something.
+[04:31.80]We don't give our best efforts.
+[04:34.72]For example, some people
+[04:37.12]who lose interest in their jobs
+[04:39.16]might start phoning it in.
+[04:41.52]They stop trying and do not do their best work.
+[04:46.20]That's not the case with us here
+[04:48.16]at VOA Learning English.
+[04:50.44]we are not phoning it in.
+[04:52.64]We work hard every day to bring you
+[04:55.52]new learning English content.
+[04:58.32]And that's all the time we have
+[05:00.20]for this Words and Their Stories.
+[05:02.04]Until next time, I'm Anna Matteo.
+[05:05.00]
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

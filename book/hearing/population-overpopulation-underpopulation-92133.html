@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Population, Overpopulation, Underpopulation</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Population, Overpopulation, Underpopulation" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/population-overpopulation-underpopulation.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Population, Overpopulation, Underpopulation</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/population-overpopulation-underpopulation.mp3" id="mp3"></a>
+<a href="croatian-artist-makes-life-size-sculptures-with-matchsticks-92132.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">25 January 2024</span><br/>
+<p>Imagine you want to talk about the people in your country or in the world. In other words, you want to talk about a population.</p>
+<p>How might you do so?</p>
+<p>In today's <em>Everyday Grammar</em>, we will explore the noun "population." You will learn important ideas about the term and how to use it in everyday situations.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-c0a8-0242-396d-08dc1db9d60a_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>Let's start with a visit to the <strong>dictionary</strong>.</p>
+<p><strong>Population vs. populate </strong></p>
+<p>If you look in a dictionary, you might wonder about two words that seem closely related. We have the noun "population" and the verb "populate."</p>
+<p>Is it important to know about the verb "populate," you might ask?</p>
+<p>Google Ngram Viewer permits us to examine words and <strong>phrases </strong>in thousands of books. We can get a good idea of how often individual words and structures are used.</p>
+<p>When we examine the frequency of "population" and compare it to that of "populate," we reach a clear finding: the noun "population" is much more commonly used.</p>
+<p>Another way to understand the idea is this: you are much more likely to hear "population" in everyday situations.</p>
+<p><strong>Countable noun </strong></p>
+<p>Population is a noun meaning the number of people, animals, or other living things of a kind in an area.</p>
+<p>We commonly use "population" as a countable noun. In other words, you can add an –s to the end of "population" to get the plural form "populations."</p>
+<p>So, you might hear or read the singular form "population," as in:</p>
+<p><em>Experts expect the world's population to increase by a very small amount over the next year. </em></p>
+<p>We use the singular form because we are talking about all the people who live in the world – one very large group!</p>
+<p>How might we use the plural form? In this case, we might use other terms to clarify that we are talking about different groups. For example, you might read or hear something like this:</p>
+<p><em>Elderly and overweight populations face greater risk from the illness. </em></p>
+<p>In this case, we use the plural form "populations" because we are talking about all of the members of two separate groups – elderly people and overweight people.</p>
+<p>Now that we have explored the noun "population," we should consider the word in terms of broader language situations.</p>
+<p><strong>Words before and after </strong></p>
+<p>How do we commonly use the word "population" in everyday speech?</p>
+<p>Let's start by examining the most commonly used words that come before and after "population."</p>
+<p>Since "population" is a noun, we might expect that determiners – words that tell us if a noun is general or <strong>specific</strong> – should be commonly used before it.</p>
+<p>Google's Ngram Viewer tell us that the word "the" is the most commonly used word before "population."</p>
+<p>So, you are very likely to hear or read something like this:</p>
+<p><em>Experts said the population declined by 1 percent. </em></p>
+<p>And what about the most commonly used word after the noun "population?"</p>
+<p>We find that the short word "of" is the most common by far.</p>
+<p>So, you are very likely to hear or read something like this:</p>
+<p><em>The population of Japan is aging quickly. </em></p>
+<p><strong>Words connected to population </strong></p>
+<p>Over and under are two words that can be attached to population to form a new single word.</p>
+<p>Overpopulation describes a situation in which there are too many people.</p>
+<p>Underpopulation describes a situation in which there are too few people.</p>
+<p>Importantly, we generally use "overpopulation" and "underpopulation" as noncount nouns. In other words, there is no plural form. We do not add an –s to the end of either word.</p>
+<p>How might you expect these terms to appear in everyday situations? Here are two examples:</p>
+<p><em>Experts predict overpopulation will result in food shortages. </em></p>
+<p><em>Experts predict underpopulation will result in labor shortages. </em></p>
+<p><strong>Questions </strong></p>
+<p>In today's lesson, we explored a useful noun and how to use it in everyday situations.</p>
+<p>We will close our lesson with a call to action. Please answer the following questions in an email to <a class="wsw__a" href="mailto:learningenglish@voanews.com" target="_blank">learningenglish@voanews.com</a></p>
+<p>What is the population like in your country or city? Is the population increasing or decreasing?</p>
+<p>In a future lesson, we can provide feedback on some of the writing that we receive.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p>___________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>dictionary</strong> <em>– n.</em> a reference book that contains words listed in alphabetical order</p>
+<p><strong>phrase<em> </em></strong><em>– n.</em> a word or group of words forming a syntactic constituent with a single grammatical function</p>
+<p><strong>specific</strong> –<em> n.</em> restricted to a particular individual, situation, relation, or effect</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

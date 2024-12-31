@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - South Africa’s ‘Health Train’ Travels to Patients in Need</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, South Africa’s ‘Health Train’ Travels to Patients in Need" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/south-africa-s-health-train-travels-to-patients-in-need.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>South Africa’s ‘Health Train’ Travels to Patients in Need</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/south-africa-s-health-train-travels-to-patients-in-need.mp3" id="mp3"></a>
+<a href="insights-and-thoughts-93016.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">26 September, 2024</span><br/>
+<p>In South Africa, a former passenger train now serves as a traveling medical center to provide health services to people in need.</p>
+<p>The train is known as Phelophepa. In the Sesotho language, this means “good, clean, health.” It travels across South Africa to provide medical care to a mix of patients for whom usual heath care is unavailable or rare.</p>
+<p>The train has been operating since South Africa's government ended its racist system of <strong>apartheid </strong>in the early 1990s. The train carries medical professionals around the country, even to the most rural villages. Officials say the service helps at least 375,000 South Africans each year.</p><div class="contentImage"><img alt="A patient eyes are tested for lenses to be made for a new pair of glasses outside the Phelophepa eye clinic carriage, in Tembisa, east of Johannesburg, South Africa, Thursday, Aug. 22, 2024. (AP Photo/Themba Hadebe)" src="https://files.21voa.com/gdb/a7a36a9e-bcf4-46e9-ae80-d520efe75e9a_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A patient eyes are tested for lenses to be made for a new pair of glasses outside the Phelophepa eye clinic carriage, in Tembisa, east of Johannesburg, South Africa, Thursday, Aug. 22, 2024. (AP Photo/Themba Hadebe)</span></div>
+<p>The care patients receive is separate from the government's main public health care system. That system serves an estimated 84 percent of the population. But government <strong>insurance</strong> plans are too costly for many people to pay for. South Africa is also dealing with an unemployment rate of more than 32 percent.</p>
+<p>The government has taken some steps to help get more of the nation's population covered by public health insurance plans.</p>
+<p>One of those came in May, when South African President Cyril Ramaphosa signed a law creating the country's National Health Insurance Act. The law aims to provide financial assistance to millions of South Africans who do not currently have health insurance. The program gets support from private insurers.</p>
+<p>However, the National Health Insurance Act has been hotly debated. Critics have said government officials have not yet said how much the program will cost or where that money will come from. Economists have predicted the government will have to raise taxes to finance the law. Critics have urged the government to instead fix the country's public healthcare system.</p>
+<p>Thethiwe Mahlangu has used the health train and recently spoke to The Associated Press about her experiences. She said local health clinics in her area – in the township of Tembisa, east of Johannesburg – cannot effectively serve her needs.</p>
+<p>“There we are not treated well,” Mahlangu said. “We are made to sit in the sun for long periods. You can sit there from 7 a.m. until around 4 p.m. when the clinic closes.” She noted that when people ask about such issues, the medical workers say they simply need bigger hospitals.</p>
+<p>When the train began in 1994, many Black people in South Africa still lived in rural villages with little availability to health centers. The time was a period of great change in South Africa. Today, the trains assist the growing populations of the capital, Pretoria, as well as Johannesburg, the country's economic center.</p>
+<p>Shemona Kendiah is the train's manager. She told the AP trains can remain in one place for multiple days to see as many people as possible. Those going to major population centers – like Tembisa, for example – can end up staying up to two weeks. “The major metros are really struggling,” Kendiah said.</p>
+<p>Mahlangu's trip resulted in her getting a new pair of glasses. She was among hundreds of people who received health services from the train on its latest stop.</p>
+<p>Another patient, Jane Mabuza, got a full health examination as well as services for her teeth. She said she hopes the train will be able to reach many more people in other areas. “Here on the train you never hear that anything has been finished,” Mabuza added.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>The Associated Press reported this story. Bryan Lynn adapted the report for VOA Learning English.</em></p>
+<p><strong>__________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>apartheid </strong><em>– n. </em>a political system that existed in South Africa's past in which the white minority enjoyed government power over Black people who were made to live separately</p>
+<p><strong>insurance</strong> <em>– n. </em>an agreement in which you pay a company to cover necessary costs in case there is an accident that causes damage or injuries</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

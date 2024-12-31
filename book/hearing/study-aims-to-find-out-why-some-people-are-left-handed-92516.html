@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Study Aims to Find Out Why Some People Are Left-handed</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Study Aims to Find Out Why Some People Are Left-handed" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/study-aims-to-find-out-why-some-people-are-left-handed.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Study Aims to Find Out Why Some People Are Left-handed</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/study-aims-to-find-out-why-some-people-are-left-handed.mp3" id="mp3"></a>
+<a href="vatican-opposes-sex-change-operations-surrogacy-92512.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">09 April 2024</span><br/>
+<p>What do Lady Gaga, Barack Obama, and Bill Gates have in common – aside from their fame? They are all left-handed.</p>
+<p>But why are 10 percent of people left-handed while most are right-handed?</p>
+<p>Researchers are trying to find out.</p><div class="contentImage"><img alt="FILE - New York Mets' T.J. McFarland (a left-hander) winds up against the San Diego Padres in the sixth inning of a baseball game Sunday, July 9, 2023, in San Diego.(AP Photo/Derrick Tuskan, File)" src="https://files.21voa.com/gdb/362f3ef6-b77c-40d9-88ad-8fdbb90167a1_w268_r1.jpg"/><br/><span class="imagecaption">FILE - New York Mets' T.J. McFarland (a left-hander) winds up against the San Diego Padres in the sixth inning of a baseball game Sunday, July 9, 2023, in San Diego.(AP Photo/Derrick Tuskan, File)</span></div>
+<p>A recent study identified a genetic cause of left-handedness in some people. Researchers found rare variants of a gene involved in controlling the shape of cells. They found the variants to be 2.7 times more common in left-handed people.</p>
+<p>These genetic variants account for possibly 0.1 percent of left-handedness. But the researchers said a gene, called TUBB4B, might play a part in the development of brain asymmetry.</p>
+<p>In most people, the two halves, or hemispheres, of the brain have slightly different structures and are dominant for different activities.</p>
+<p>"For example, most people have left-hemisphere dominance for language, and right-hemisphere dominance for tasks that require directing visual attention to a location in space," said Clyde Francks of the Max Planck Institute for Psycholinguistics in the Netherlands. Francks was the top writer of the study published recently in Nature Communications.</p>
+<p>Francks suggested that for most people, the left side of the brain controls the dominant right hand. "The nerve fibers cross from left-to-right in the lower part of the brain," Francks said. He added, "In left-handers, the right hemisphere is in control of the dominant hand. The question is: what causes the asymmetry of the brain to develop differently in left-handers?"</p>
+<p>TUBB4B controls a protein that gets formed into filaments called microtubules. These microtubules give structure to the insides of cells. The changes in TUBB4B that are more common in left-handers suggest that microtubules are involved in setting up the brain's normal asymmetries, Francks said.</p>
+<p>The two brain hemispheres start to develop differently in the human embryo. Scientists do not know the mechanism that controls this.</p>
+<p>"Rare genetic variants in just a handful of people can pinpoint genes that give clues to developmental mechanisms of brain asymmetry in everyone," Francks added. TUBB4B is an example.</p>
+<p>The study's findings were based on genetic data from more than 350,000 middle-aged to older adults in Britain. It was from the UK Biobank. About 11 percent of the people involved were left-handed.</p>
+<p>For most people, left- or right-handedness might come down to chance. Changes in the levels of some molecules during important times of brain development could influence it, Francks suggested.</p>
+<p>Historically, many cultures disapproved of left-handedness and forced people to become right-handed.</p>
+<p>In English, the word "right" also means "correct" or "proper." And the expression a "left-handed compliment" means that a comment might seem nice but is an insult.</p>
+<p>The levels of left-handedness differ around the world, with lower rates in Africa, Asia and the Middle East compared to Europe and North America, Francks said.</p>
+<p>"This likely reflects suppression of left-handedness in some cultures - making left-handed kids switch to right-handedness, which also used to happen in Europe and North America," Francks added.</p>
+<p>The new findings might have use in the field of mental health. People with schizophrenia are around twice as likely to be left-handed or ambidextrous. People with autism are around three times as likely, Francks said.</p>
+<p>He observed that genes involved in developing the brain in early life might be involved in brain asymmetry and mental health.</p>
+<p>"Our study found suggestive evidence of this, and we have also seen it in previous studies where we looked at more common genetic variants in the population," Francks added.</p>
+<p>I'm John Russell.</p>
+<p><em>Will Dunham reported on this story for Reuters. John Russell adapted it for VOA Learning English. </em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>variant</strong> <em>– n.</em> different in some way from others of the same kind</p>
+<p><strong>asymmetry</strong> <em>– n.</em> having two sides or halves that are not the same</p>
+<p><strong>dominant</strong> <em>–adj. </em>having the most control, strength or ability to influence</p>
+<p><strong>fiber</strong> <em>–n. </em>a long, thin piece of material that has strength to it</p>
+<p><strong>filament</strong> <em>– n.</em> a long thread made of proteins</p>
+<p><strong>mechanism </strong><em>– n.</em> a process or system produces a particular result</p>
+<p><strong>ambidextrous </strong><em>– adj.</em> able to use both hands equally well</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

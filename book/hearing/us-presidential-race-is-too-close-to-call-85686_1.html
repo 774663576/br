@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 川普和拜登在美国大选中选情胶着</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 川普和拜登在美国大选中选情胶着" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202011/us-presidential-race-is-too-close-to-call.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>川普和拜登在美国大选中选情胶着</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202011/us-presidential-race-is-too-close-to-call.mp3" id="mp3"></a>
+<a href="/static/lrc/us-presidential-race-is-too-close-to-call.lrc" id="lrc"></a>
+<a href="us-presidential-race-is-too-close-to-call-85686.html" id="CnPage" target="_blank"></a>
+<a href="turkish-rescuers-pull-young-girl-from-collapsed-building--days-after-earthquake-85683.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Election workers in the United States continue to count votes from the American presidential election held Tuesday. President Donald Trump, the Republican Party candidate, and former Vice President Joe Biden, the Democratic candidate, remain locked in close races in the battleground states.<br/>
+美国的选举工作者还在统计周二举行的美国总统大选的票数。共和党候选人川普和作为民主党候选人的前副总统拜登在“战场州”的选情仍然十分胶着。
+<p>In the North, vote counting continues in the states of Pennsylvania, Michigan, and Wisconsin. On the southeast coast, results are still coming in for Georgia and North Carolina. And the counting continues in the western states of Arizona and Nevada, as well.<br/>
+在美国北部，宾夕法尼亚州、密歇根州和威斯康辛州的计票工作仍在继续。在东南海岸，佐治亚州和北卡罗莱纳州的最终结果还没出来。而在西部的亚利桑那州和内华达州，计票也仍在继续。</p>
+<p>Pennsylvania Governor Tom Wolf, a Democrat, wrote on Twitter, "We still have over 1 million ballots to count in Pennsylvania." He added, "I promised Pennsylvanians that we would count every vote and that's what we're going to do."<br/>
+作为民主党人的宾夕法尼亚州州长汤姆·沃尔夫在推特上写道：“我们宾夕法尼亚州还有超过100万张选票等着统计。”他还说：“我向宾夕法尼亚州人保证，我们将会统计每一票，这就是我们要做的。”</p>
+<p>Biden made a brief appearance in Wilmington, Delaware in the early hours of November 4th. He told supporters the election "ain't over until every vote is counted." He added, "It's not my place or Donald Trump's place to declare who's won this election. That's the decision of the American people."<br/>
+拜登于11月4日凌晨在特拉华州威明顿市短暂露面。他对支持者表示，选举“要在统计所有选票之后才能结束。”他还说：“不是我或者川普来宣布谁赢得了这场选举。这是美国人民的决定。”</p>
+<p>Speaking from the White House, Trump said he had won the election. He called the voting process a "a major fraud," and said, "we will be going to the U.S. Supreme Court."<br/>
+川普在白宫表示，他已经赢得了大选。他称投票过程存在“重大欺诈，”并表示：“我们高法见。”</p>
+<p>Both candidates gained expected victories. Biden has been predicted the winner in states from Virginia up through the East Coast. Other states called as Biden victories include California, on the west coast. Trump was the predicted winner in much of the South, including Alabama, as well as several central states, including Kansas and Missouri.<br/>
+两位候选人都获得了预期的胜利。据预测，拜登将成为从弗吉尼亚州一直到东海岸各州的赢家。认为拜登将获胜的其它州包括西海岸的加利福尼亚州。川普是包括阿拉巴马州在内的南方大部分州以及包括堪萨斯州和密苏里州等几个中部州的预期赢家。</p>
+<p>Election Day is usually the end of the presidential race in the United States. This year, it may just be the beginning.<br/>
+选举日通常是美国总统大选的终点。今年，它可能只是开始。</p>
+<p>More than 100 million voters sent their ballots through the mail or voted early. The record number equates to 73 percent of all voters in the 2016 presidential election. The early votes, however, will take days to count. Each state has its own deadline for confirming election results.<br/>
+超过1亿选民通过邮件投票或是提前投票。这一创纪录的数字相当于2016年总统大选总选民人数的73%。但是提前投票需要数天才能统计出来。每个州都有各自确认选举结果的截止日期。</p>
+<p>Activists from the Republican and Democratic parties have fought about the voting process since well before Election Day. Late on Tuesday, both sides were preparing for possible legal fights over ballots and the process for seating the winner.<br/>
+远在大选日之前，共和党和民主党的活动人士一直在为投票程序而斗争。星期二晚些时候，双方还在筹备就选票以及确认胜选者程序可能发生的法律诉讼。</p>
+<p><strong>What's next?<br/>
+下一步是什么？</strong></p>
+<p>The U.S. presidential election is decided by an Electoral College system and not the popular vote.<br/>
+美国总统大选是由选举团制度，而不是由普选来决定的。</p>
+<p>There are 538 electors in the Electoral College. The winner of the popular vote in a state will win the electors from the state. December 8 is the deadline for the states to choose electors. They will meet on December 14 to vote for president and vice president. A majority of 270 electoral votes is required to elect the president.<br/>
+选举团共有538名选举人。各州普选的赢家将会获得该州所有的选举人票。12月8日是各州选择选举人的截止日期。他们将于12月14日会面，投票选举总统和副总统。当选总统需要获得占多数的270张选举人票。</p>
+<p>There have been five winners of the Electoral College who actually lost the popular vote. They are John Quincy Adams in 1824; Rutherford B. Hayes in 1876; Benjamin Harrison in 1888; George W. Bush in 2000; and Donald J. Trump in 2016.<br/>
+有5位选举团赢家实际上输掉了普选。他们是1824年的约翰·昆西·亚当斯；1876年的拉瑟福德·海斯；1888年的本杰明·哈里森；2000年的小布什和2016年的川普。</p>
+<p>On January 3, 2021, members of the new Congress take office. Three days later, the new Congress will count the electoral votes and officially confirm the winner.<br/>
+2021年1月3日，新的国会议员将会走马上任。3天之后，新国会将对选举人票进行计票，并正式确认最终获胜者。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Trump, Biden Locked in Close US Presidential Race]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Election workers in the United States continue to count votes
+[00:05.72]from the American presidential election held Tuesday.
+[00:10.40]President Donald Trump, the Republican Party candidate,
+[00:14.88]and former Vice President Joe Biden, the Democratic candidate,
+[00:20.00]remain locked in close races in the battleground states.
+[00:25.60]In the North, vote counting continues in the states
+[00:29.52]of Pennsylvania, Michigan, and Wisconsin.
+[00:33.60]On the southeast coast, results are still coming in
+[00:38.40]for Georgia and North Carolina.
+[00:41.48]And the counting continues in the western states
+[00:45.48]of Arizona and Nevada, as well.
+[00:50.04]Pennsylvania Governor Tom Wolf, a Democrat, wrote on Twitter,
+[00:55.44]"We still have over 1 million ballots to count in Pennsylvania."
+[01:01.00]He added, "I promised Pennsylvanians
+[01:05.16]that we would count every vote and that's what we're going to do."
+[01:10.88]Biden made a brief appearance in Wilmington, Delaware
+[01:15.56]in the early hours of November 4th.
+[01:19.08]He told supporters the election "ain't over until every vote is counted."
+[01:26.24]He added, "It's not my place or Donald Trump's place
+[01:31.44]to declare who's won this election.
+[01:35.00]That's the decision of the American people."
+[01:39.36]Speaking from the White House, Trump said he had won the election.
+[01:44.40]He called the voting process a "a major fraud,"
+[01:49.00]and said, "we will be going to the U.S. Supreme Court."
+[01:54.84]Both candidates gained expected victories.
+[01:58.04]Biden has been predicted the winner
+[02:01.24]in states from Virginia up through the East Coast.
+[02:05.84]Other states called as Biden victories
+[02:08.92]include California, on the west coast.
+[02:12.88]Trump was the predicted winner in much of the South, including Alabama,
+[02:18.12]as well as several central states, including Kansas and Missouri.
+[02:24.28]Election Day is usually the end of the presidential race in the United States.
+[02:30.52]This year, it may just be the beginning.
+[02:34.80]More than 100 million voters sent their ballots through the mail or voted early.
+[02:41.76]The record number equates to 73 percent
+[02:46.16]of all voters in the 2016 presidential election.
+[02:52.04]The early votes, however, will take days to count.
+[02:56.20]Each state has its own deadline for confirming election results.
+[03:02.84]Activists from the Republican and Democratic parties
+[03:06.72]have fought about the voting process since well before Election Day.
+[03:12.52]Late on Tuesday, both sides were preparing for possible legal fights
+[03:19.04]over ballots and the process for seating the winner.
+[03:24.36]The U.S. presidential election is decided
+[03:27.96]by an Electoral College system and not the popular vote.
+[03:34.28]There are 538 electors in the Electoral College.
+[03:40.20]The winner of the popular vote in a state
+[03:43.64]will win the electors from the state.
+[03:47.80]December 8 is the deadline for the states to choose electors.
+[03:53.32]They will meet on December 14 to vote for president and vice president.
+[03:59.40]A majority of 270 electoral votes is required to elect the president.
+[04:08.68]There have been five winners of the Electoral College
+[04:12.72]who actually lost the popular vote.
+[04:16.76]They are John Quincy Adams in 1824;
+[04:21.12]Rutherford B. Hayes in 1876;
+[04:25.12]Benjamin Harrison in 1888;
+[04:29.44]George W. Bush in 2000;
+[04:33.00]and Donald J. Trump in 2016.
+[04:37.72]On January 3, 2021, members of the new Congress take office.
+[04:45.28]Three days later, the new Congress will count the electoral votes
+[04:50.56]and officially confirm the winner.
+[04:55.72]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

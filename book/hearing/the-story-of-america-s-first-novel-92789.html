@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - The Story of America’s First Novel</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, The Story of America’s First Novel" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/the-story-of-america-s-first-novel.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>The Story of America’s First Novel</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/the-story-of-america-s-first-novel.mp3" id="mp3"></a>
+<a href="us-farmers-use-tree-from-india-to-produce-proteins-biofuel-92787.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Hai Do</span><br/><span class="datetime">12 July, 2024</span><br/>
+<p>In the winter of 1789, around the time George Washington was elected as the first United States president, a printer quietly published what would become the first American <strong>novel</strong>.</p>
+<p>William Hill Brown wrote the book, called <em>The Power of Sympathy.</em> Isaiah Thomas &amp; Company in Boston, Massachusetts published it <strong>anonymously</strong>.</p>
+<p>Around 100 pages long, <em>The Power of Sympathy</em> is a love story of two young New Englanders. Their relationship ends suddenly and tragically when they learn of a shocking secret. The book is <strong>dedicated</strong> to the “Young Ladies of United Columbia” (the United States).</p><div class="contentImage"><img (penguin="" alt="This image released by Penguin Classics shows the title page of the first edition of the 1789 book " ap)"="" brown.="" by="" classics="" hill="" of="" power="" src="https://files.21voa.com/gdb/01000000-0aff-0242-a117-08dc9f46c4c2_cx0_cy2_cw0_w268_r1.jpg" sympathy"="" the="" via="" william=""/><br/><span class="imagecaption">This image released by Penguin Classics shows the title page of the first edition of the 1789 book "The Power of Sympathy" by William Hill Brown. (Penguin Classics via AP)</span></div>
+<p>Outside of Boston, though, few Americans would have known or cared about <em>The Power of Sympathy</em> as a historical marker.</p>
+<p>David Lawrimore, who teaches at the University of Idaho, has written about early U.S. literature. He said, “If you picked ten <strong>random</strong> citizens, I doubt it would have mattered to any of them.”</p>
+<p>“Most people weren't thinking about the first American novel,” he added.</p>
+<p><strong>What the first American novel was like</strong></p>
+<p><em>The Power of Sympathy</em> is in many ways a sign of its time with its use of letters, religious messages and <strong>formal</strong> language. But the story also includes themes of the worries and hopes of a young country.</p>
+<p>Dana McClain is an assistant professor of English at Holy Family University. McClain noted that Brown was an outspoken Federalist who believed in a strong national government and stable society.</p>
+<p>The letters in <em>The Power of Sympathy</em> include the subjects of class, public outlook and the differences between North and South, as if expecting the Civil War that followed in the 1860s.</p>
+<p>Like many other early American writers, Brown tied the behavior of women to the fate of the larger society. The novel's letters concern the “power of pleasure” and how female <strong>envy</strong> could bring “a flood of <strong>scandal</strong>.” The book compares high moral standards to a “mighty river” that “fertilizes the country through which it passes....”</p>
+<p>A character in the book warns, “Most of the novels with which our female libraries are overrun are built upon a foundation not always placed on strict morality and in the pursuit of objects not always probable or praiseworthy.” The character adds, “(they) appear to me totally unfit to form the minds of women, of friends, or of wives.”</p>
+<p><strong>How it became considered the first</strong></p>
+<p><em>The Power of Sympathy</em> was commonly cited as the first American novel in the 1800s without much debate. Experts then agreed that the honor should belong to the first book written and published in the United States by a writer born and still living in the country.</p>
+<p>These guidelines disqualified several earlier works such as Charlotte Ramsay Lennox's <em>The Life of Harriot Stuart</em> and Thomas Atwood Digges' <em>Adventures of Alonso</em>. Another contender was <em>Father Bombo's Pilgrimage to Mecca </em>which was written around 1770 but was not published until 1975.</p>
+<p>Author Brown was likely born in 1765 in Boston. One of his early published works was a poem about Daniel Shays. Shays led a rebellion of former Revolutionary War soldiers in Massachusetts.</p>
+<p>Brown was not yet 30 when he died in North Carolina, in 1793, from what experts believe was malaria. He never married or had children. After his death, publishers released his play <em>The Treason of Arnold</em> and another novel <em>Ira and Isabella</em>.</p>
+<p>Brown did not gain much fame in his short life. No memorials, historical places, or literary societies have been named after Brown. Even the site of his burial place is a mystery.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Hillel Italie reported this story for The Associated Press. Hai Do adapted the story for Learning English.</em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>novel</strong> - n. a written story usually about imaginary characters and events</p>
+<p><strong>anonymously</strong> - adv. not named or identified</p>
+<p><strong>dedicated</strong> - adj. used only for one particular purpose</p>
+<p><strong>random</strong> - adj. chosen without a particular plan or pattern</p>
+<p><strong>formal</strong> - adj. suitable for official speech and writing</p>
+<p><strong>envy</strong> - n. feeling of wanting to have what someone else have</p>
+<p><strong>scandal</strong> - n. something that is shocking, upsetting and unacceptable</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

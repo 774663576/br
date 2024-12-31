@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Release and Relief</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Release and Relief" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/release-and-relief.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Release and Relief</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/release-and-relief.mp3" id="mp3"></a>
+<a href="talking-about-art-90300.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">20 January 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "release" and "relief."</p>
+<p><strong>Question</strong></p>
+<p>Hello VOA Learning English,</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/06a20000-0aff-0242-2944-08dafa43533a_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>I am Renna. I am glad you saw my email. I want to ask the difference between "release" and "relief."</p>
+<p>Thank you so much,</p>
+<p>Renna</p>
+<p><strong>Answer </strong></p>
+<p>Dear Renna,</p>
+<p>These words are often mistaken because they sound similar.</p>
+<p>Both words come from Latin and old French before making their way into the English language. They have completely different meanings and parts of speech. Let's begin by looking at "release."</p>
+<p><strong>Release</strong></p>
+<p>The word "release" can be either a verb or a noun. As a verb it can take a direct object. "Release" has several meanings.</p>
+<p>The first meaning is to free or let go, especially if limited in some way.</p>
+<p><em>The teacher released the class 15 minutes early.</em></p>
+<p><em>The kidnappers released their hostages when the negotiations ended.</em></p>
+<p>"Release" as verb can also mean to express, especially feelings or ability.</p>
+<p><em>Sarah released many emotions during therapy.</em></p>
+<p><em>The acting class will help release my inner artist.</em></p>
+<p>Lastly, "release" can mean to make available or to publicize.</p>
+<p><em>VOA Learning English has released its new video series, Let's Learn English with Anna online.</em></p>
+<p><em>The White House press office released the president's plan to reach <strong>net-zero emissions</strong> by 2050.</em></p>
+<p>As a noun, a "release" is the action or process of being released.</p>
+<p><em>The activists postponed the fish release when the river level dropped.</em></p>
+<p>Now let's move onto "relief."</p>
+<p><strong>Relief</strong></p>
+<p>"Relief" as a noun is the easing of pain, difficulty or lack.</p>
+<p><em>The only relief for her headache was to lie still in a dark room.</em></p>
+<p><em>It is such a relief to know you're back home safely.</em></p>
+<p><em>The government opened roads so relief, including medicine, could get through to the disaster site.</em></p>
+<p>And lastly, "relief" means a person who takes on the responsibility of others to provide support.</p>
+<p><em>As a relief employee, Pat works at all the local hospitals filling in when a nurse takes leave.</em></p>
+<p><strong>Relief or relieve?</strong></p>
+<p>One important note about the word "relief." "Relief" as a verb is "relieve," which can sometimes be confused as "release." The meanings of "relieve" are connected to those of "relief," but just in the verb or action form.</p>
+<p>For example, to "relieve" means to cause something to be less such as pain or stress.</p>
+<p><em>A visit to the <strong>steam</strong> room relieved her back pain.</em></p>
+<p>"Relieve" can also mean to free someone of a job, duties, a burden, or responsibility, like the relief nurse.</p>
+<p><em>A relief nurse takes over or relieves another nurse of their work.</em></p>
+<p>This meaning of "relieve" is most closely related to "release" as "to make available."</p>
+<p><em>He carried my bags for me, which relieved me.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Renna.</p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>___________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>net-zero </strong><em>–n. </em>a situation in which nothing is gained and nothing is lost</p>
+<p><strong>emissions </strong><em>–n. (often pl.)</em> something that is released, such as a gas or gasses, from a process</p>
+<p><strong>steam </strong>– <em>n.</em> water vapor kept under pressure so as to supply energy for heating, cooking, or mechanical work : – <em>v. </em>to apply steam to</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

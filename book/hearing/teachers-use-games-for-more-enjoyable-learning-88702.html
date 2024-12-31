@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Teachers Use Games for More Enjoyable Learning</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Teachers Use Games for More Enjoyable Learning" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202203/teachers-use-games-for-more-enjoyable-learning.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Teachers Use Games for More Enjoyable Learning</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202203/teachers-use-games-for-more-enjoyable-learning.mp3" id="mp3"></a>
+<a href="/static/lrc/teachers-use-games-for-more-enjoyable-learning.lrc" id="lrc"></a>
+<a href="emotional-night-at-oscars-for-best-actor-winner-will-smith-88700.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">29 March 2022</span><br/>
+<p><a class="wsw__a" href="https://www.21voa.com/a/6425558.html">Wordle</a> has become one of the most popular online games in the United States since it came out last October.</p>
+<p>Players get six chances to <strong>guess</strong> and learn a five-letter word for the day. Many are sharing their game results on social media, adding more interest in the game.</p>
+<p><strong>Gamifying the classroom</strong></p>
+<div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/02280000-0aff-0242-d93c-08da010b9608_w268_r1.png"/><br/>
+<span class="imagecaption"></span></div>
+<p>Creative teachers have long found games could make their classes more enjoyable for students. During the pandemic, many have looked for new ways or games to help their students learn. It is part of a learning theory called "<strong>gamification</strong>" to keep students' interest.</p>
+<p>Beyond Wordle, here are other games that help learners with different subjects.</p>
+<p><strong>Mathematics</strong></p>
+<p>British data scientist Richard Mann of London was talking with his daughter about the popularity of Wordle. He thought there should be a game for people who like mathematics and developed <a class="wsw__a" href="https://nerdlegame.com/">Nerdle</a>. It is a daily game in which a player has six tries to guess a math solution.</p>
+<p>Does it sound familiar? Math teachers note that a Nerdle player uses logic, a careful way of thinking about something, to solve a math problem. It is similar to how a Wordle player applies logic to guess a word.</p>
+<p><strong>Geography</strong></p>
+<p>Do not <strong>confuse</strong> Wordle with <a class="wsw__a" href="https://worldle.teuteuf.fr/">Worldle</a>. There is an extra letter ‘l" in Worldle. French video game developer Antoine Teuf said he invented Worldle in honor of that word game, Wordle.</p>
+<p>Players guess a country based on its shape. They get six tries to guess a country based on information about the country. Teuf first shared the game on January 22. He said there are two million visits a day to the game's page a month later.</p>
+<p><strong>Other games, online services</strong></p>
+<p>Teachers of English see word games as a way for students to learn new words. Other word games include Blooket and Flippity.</p>
+<p>Teachers create quizzes in <a class="wsw__a" href="https://www.blooket.com/">Blooket</a> similar to the kinds of games students play on mobile devices. They can look at results and see areas that students can improve.</p>
+<p>In <a class="wsw__a" href="https://www.flippity.net/">Flippity</a>, teachers can create flash cards, <strong>rewards</strong>, spelling <strong>quizzes</strong>, memory games and word searches from a simple Google <strong>spreadsheet. </strong>It is also a good tool for students to create their own projects.</p>
+<p>There are several online services that teachers could use to "gamify" learning. They include <a class="wsw__a" href="https://kahoot.com/">Kahoot!,</a> <a class="wsw__a" href="https://quizlet.com/">Quizlet</a>, <u><a class="wsw__a" href="https://quizizz.com/">Quizziz</a></u> and <a class="wsw__a" href="https://nearpod.com/">Nearpod</a>. All of them "gamify" learning by creating competition among learners while reviewing the content presented by teachers.</p>
+<p><strong>Teaching without a computer?</strong></p>
+<p>In many places, teachers and students do not have a computer. So, English language teacher Larry Ferlazzo asked them to share their language-learning games. Ferlazzo wrote about them in his <a class="wsw__a" href="https://larryferlazzo.edublogs.org/2011/06/05/the-best-language-learning-games-that-are-not-online/">blog</a>. Here are two of the games that teachers suggested:</p>
+<p><a class="wsw__a" href="https://kelaskubermain.blogspot.com/">Danielle Horne</a> teaches at Helena College in Glen Forrest, Western Australia. She said one of the games that her students love playing is "hot or cold."</p>
+<p>In "hot or cold," students hide something in the classroom while a student, or searcher, is waiting outside. The students then say a word, phrase, or sentence. They get louder when the searcher gets nearer to the object and softer when the searcher is more distant. Horne said to be prepared for quite a bit of noise though!</p>
+<p><a class="wsw__a" href="https://www.111variation.dk/">Eva Pors</a> is a Danish high school teacher. Her students play "questions and answers" to learn new words or vocabulary.</p>
+<p>Pors write words or phrases on small pieces of paper and divides students into groups of four. Within a group, student A picks a piece of paper with a word or phrase on it and asks questions that will make student B say the exact word or phrase on the paper.</p>
+<p>For example, with the word "milk," Student A would ask, "What do you put on your <strong>cereal</strong> in the morning?" Student B has one minute to try to answer as many words or phrases as possible. The other two students in the group will then take over for one minute. And the team with the most correct guesses wins the game.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for Learning English.</em></p>
+<p><em>__________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>guess</strong> – <em>v. </em>to give an answer or opinion about something without having all the facts</p>
+<p><strong>gamification</strong>– <em>n.</em> the practice of making activities more like games in order to make them more interesting or enjoyable:</p>
+<p><strong>confuse</strong> – <em>v.</em>to mix up someone's mind or ideas, or to make something difficult to understand</p>
+<p><strong>reward</strong> – <em>n. </em>something given in exchange for good behavior or good work</p>
+<p><strong>quiz</strong> – <em>n. </em>a game or competition in which you answer questions</p>
+<p><strong>spreadsheet</strong> – <em>n</em>. a computer program that helps make calculations and store information</p>
+<p><strong>cereal</strong> – <em>n. </em>a food that is made from grain and eaten with milk, especially in the morning</p>
+<p><em>What do you think of Wordle and other games like it? Do you play them? We want to hear from you. Write to us in the Comments Section. </em></p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Teachers Use Games for More Enjoyable Learning]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.16]Wordle has become one of the most popular online games
+[00:04.80]in the United States since it came out last October.
+[00:09.92]Players get six chances to guess and learn a five-letter word for the day.
+[00:16.56]Many are sharing their game results on social media,
+[00:20.16]adding more interest in the game.
+[00:23.56]Creative teachers have long found games
+[00:26.16]could make their classes more enjoyable for students.
+[00:30.44]During the pandemic, many have looked for new ways
+[00:34.04]or games to help their students learn.
+[00:37.80]It is part of a learning theory called "gamification"
+[00:41.32]to keep students' interest.
+[00:44.52]Beyond Wordle, here are other games
+[00:47.24]that help learners with different subjects.
+[00:50.80]British data scientist Richard Mann of London
+[00:54.08]was talking with his daughter about the popularity of Wordle.
+[00:57.88]He thought there should be a game for people
+[01:01.28]who like mathematics and developed Nerdle.
+[01:05.64]It is a daily game in which a player
+[01:07.88]has six tries to guess a math solution.
+[01:12.12]Does it sound familiar?
+[01:14.32]Math teachers note that a Nerdle player uses logic,
+[01:19.04]a careful way of thinking about something,
+[01:21.60]to solve a math problem.
+[01:24.64]It is similar to how a Wordle player applies logic to guess a word.
+[01:31.24]Do not confuse Wordle with Worldle.
+[01:35.20]There is an extra letter ‘l" in Worldle.
+[01:40.16]French video game developer Antoine Teuf said he invented Worldle
+[01:45.64]in honor of that word game, Wordle.
+[01:49.84]Players guess a country based on its shape.
+[01:53.08]They get six tries to guess a country
+[01:56.20]based on information about the country.
+[01:59.88]Teuf first shared the game on January 22.
+[02:03.68]He said there are two million visits a day
+[02:07.16]to the game's page a month later.
+[02:10.44]Teachers of English see word games
+[02:12.64]as a way for students to learn new words.
+[02:16.32]Other word games include Blooket and Flippity.
+[02:19.60]Teachers create quizzes in Blooket similar
+[02:23.32]to the kinds of games students play on mobile devices.
+[02:28.24]They can look at results and see areas that students can improve.
+[02:33.60]In Flippity, teachers can create flash cards, rewards,
+[02:38.20]spelling quizzes, memory games and word searches
+[02:41.76]from a simple Google spreadsheet.
+[02:45.44]It is also a good tool for students to create their own projects.
+[02:50.80]There are several online services
+[02:53.00]that teachers could use to "gamify" learning.
+[02:56.96]They include Kahoot!, Quizlet, Quizziz and Nearpod.
+[03:02.64]All of them "gamify" learning by creating competition among learners
+[03:07.24]while reviewing the content presented by teachers.
+[03:11.88]In many places, teachers and students do not have a computer.
+[03:16.92]So, English language teacher Larry Ferlazzo
+[03:20.24]asked them to share their language-learning games.
+[03:24.44]Ferlazzo wrote about them in his blog.
+[03:27.16]Here are two of the games that teachers suggested:
+[03:32.20]Danielle Horne teaches at Helena College in Glen Forrest, Western Australia.
+[03:39.04]She said one of the games that her students love playing is "hot or cold."
+[03:44.64]In "hot or cold," students hide something in the classroom
+[03:48.84]while a student, or searcher, is waiting outside.
+[03:53.44]The students then say a word, phrase, or sentence.
+[03:57.24]They get louder when the searcher gets nearer to the object
+[04:02.56]and softer when the searcher is more distant.
+[04:06.52]Horne said to be prepared for quite a bit of noise though!
+[04:11.72]Eva Pors is a Danish high school teacher.
+[04:15.48]Her students play "questions and answers" to learn new words or vocabulary.
+[04:21.56]Pors write words or phrases on small pieces of paper
+[04:25.92]and divides students into groups of four.
+[04:30.16]Within a group, student A picks a piece of paper with a word or phrase on it
+[04:35.64]and asks questions that will make student B
+[04:38.72]say the exact word or phrase on the paper.
+[04:42.84]For example, with the word "milk," Student A would ask,
+[04:46.72]"What do you put on your cereal in the morning?"
+[04:50.80]Student B has one minute to try to answer
+[04:53.52]as many words or phrases as possible.
+[04:57.12]The other two students in the group
+[04:59.16]will then take over for one minute.
+[05:02.24]And the team with the most correct guesses wins the game.
+[05:07.32]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Japan's Cafés Where People Can Pet Pigs</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Japan's Cafés Where People Can Pet Pigs" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/japan-s-cafes-where-people-can-pet-pigs.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Japan's Cafés Where People Can Pet Pigs</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/japan-s-cafes-where-people-can-pet-pigs.mp3" id="mp3"></a>
+<a href="student-academy-awards-provide-momentum-for-young-filmmakers-92179.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">04 February 2024</span><br/>
+<p>In Japan's big cities, small restaurants that serve coffee, called cafés, are known for starting <strong>trends</strong>. First there were pet cafés, then cat cafés. The latest trend<strong> </strong>in Japan is a café that has pigs.</p>
+<p>"It was wonderful. Very relaxing and enjoyable," said Brad Loomis. He is a software engineer from the city of Pullman, in the U.S. state of Washington. He was talking about his recent visit to Tokyo's Mipig Café with his 21-year-old daughter, Paige.</p>
+<p>On a recent morning in late January, the father and daughter were among many people in the café, smiling and taking <strong>selfies</strong> with the pigs.</p><div class="contentImage"><img alt="Customers play with micro pigs at a mipig cafe on Jan. 24, 2024, in Tokyo. The pigs, a miniature breed, moved about the room, looking for a cozy lap to cuddle up. Customers pay $15 for the first 30 minutes and a reservation is required. (AP Photo/Eugene Hoshiko)" src="https://files.21voa.com/gdb/01000000-0a00-0242-1f5c-08dc236a9911_w268_r1.jpg"/><br/><span class="imagecaption">Customers play with micro pigs at a mipig cafe on Jan. 24, 2024, in Tokyo. The pigs, a miniature breed, moved about the room, looking for a cozy lap to cuddle up. Customers pay $15 for the first 30 minutes and a reservation is required. (AP Photo/Eugene Hoshiko)</span></div>
+<p>The pigs are very small. They move around the room, looking for a comfortable place. They are surprisingly quiet, making little <strong>snorts</strong> now and then. Unlike the<strong> stereotype</strong>, they are very clean and do not smell bad.</p>
+<p>The pigs do not like to be alone. So, this makes them good company for people. <strong>Customers</strong> pay $15 for the first 30 minutes of time with a pig. Customers must contact the café to set a time for the experience.</p>
+<p>"Each pig is <strong>unique</strong>. Each one has his or her own <strong>personality.</strong> You may notice one may be strong-headed, and another may be gentle," said Shiho Kitagawa. She is an executive at Mipig Café. She calls the pigs "buta-san," or "Mr. and Mrs. Pig."</p>
+<p>The Mipig Café in the trendy Harajuku neighborhood. It is among 10 such pig cafes the owner has opened around Japan. The first one opened in Tokyo in 2019. Two more are planned for later this year.</p>
+<p>The animals are known as "micro pigs." Micro means very small. The pigs do not grow to be bigger than a small dog, even when they are fully grown.</p>
+<p>Pig lovers say they make great pets. They can be bought for $1,350 from Mipig. The pigs sold at Mipig have been house-trained and are used to being with people. Micro pig food is also for sale. Mipig says it has sold about 1,300 pigs as pets.</p>
+<p>Foreign visitors to the café said they found out about it on the service Instagram and other social media platforms. The café does not pay for advertising.</p>
+<p>Australian Ben Russell smiled when a pig finally climbed onto him. Although this was the first time he touched a real pig, he said they have always been his favorite animal.</p>
+<p>A visitor from New Zealand, Sophie Mo'unga, was in Japan with her husband and two children. She was very popular with the pigs, with several of them fighting over her.</p>
+<p>"They were <strong>cute," </strong>she said. "I think they were all keeping each other warm."</p>
+<p>The pig café is the latest in a series of coffee shops with animals that have appeared in Japan. There are coffee shops that have owls, hedgehogs, birds, and even snakes.</p>
+<p>Some people have raised questions about whether the animals enjoy the experience as much as humans do.</p>
+<p>"It must be <strong>stressful </strong>to be touched...by a bunch of strangers," said Sachiko Azuma. She is head of Tokyo-based animal rights group called PEACE.</p>
+<p>"The animals have become tools for a money-making business," she said.</p>
+<p>Her group opposes animal experiments and "petting zoos." Azuma said cafés are small and do not provide enough of a natural environment for cats or small pigs. She added that businesses that entrap wildlife are abhorrent, or extremely bad. However, she said she approves of cafés run by shelters that try to find homes for homeless animals.</p>
+<p>Some people believe that such interactions are good for human health.</p>
+<p>Dr. Bruce Kornreich teaches at Cornell University's College of Veterinary Medicine in Ithaca, New York. He said that interacting with animals can reduce headaches and lower a person's blood pressure and risk of <strong>cardiovascular</strong> disease. It can also increase a sense of well-being and help people deal with stress, he said.</p>
+<p>"How they do these things, I'm not sure we know the answer," said Kornreich. He is also part of the Cornell Feline Health Center, which supports the study and well-being of cats.</p>
+<p>He told the Associated Press that there is growing evidence that being around pets can help people both mentally and physically.</p>
+<p>Even with dogs, it is not clear if walking a dog helps its owner's health or being around a friendly animal does. Whatever it is, people seem to be calm and happy around their animals.</p>
+<p>"Very cute and very sleepy," Paige Loomis said of the pigs. "They made me sleepy."</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Yuri Kageyama reported this story in Tokyo for the Associated Press. Anna Matteo adapted it for VOA Learning English. </em></p>
+<p>________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>trend </strong>–n. something new that gets increasingly popular</p>
+<p><strong>selfie </strong>–n. a picture taken of oneself with a mobile phone that is shared on social media</p>
+<p><strong>snort </strong>–n. a short sound made through the nose</p>
+<p><strong>stereotype </strong>–n. a person's idea of what something or someone is, does or looks like which is transferred to all similar things</p>
+<p><strong>customer </strong>–n. a person, or group, that pays for goods or services</p>
+<p><strong>unique </strong>–adj. unlike anything else, one-of-a-kind</p>
+<p><strong>personality </strong>–n. the sum of all qualities that make up a person</p>
+<p><strong>cute </strong>–adj. having a pleasing appearance</p>
+<p><strong>stressful </strong>–adj. causing tension or worry</p>
+<p><strong>cardiovascular </strong>–adj. related to the heart or blood vessels in the body</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

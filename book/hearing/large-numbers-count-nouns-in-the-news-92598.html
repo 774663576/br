@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Large Numbers, Count Nouns in the News</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Large Numbers, Count Nouns in the News" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/large-numbers-count-nouns-in-the-news.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Large Numbers, Count Nouns in the News</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/large-numbers-count-nouns-in-the-news.mp3" id="mp3"></a>
+<a href="what-to-do-if-your-personal-data-has-been-exposed-92591.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">25 April 2024</span><br/>
+<p>We have a question for you. What do countries, economies, mathematics, and the news have in common?</p>
+<p>There are several ways to answer the question. But today we are thinking about this connection: large numbers.</p>
+<p>Large numbers, say, a million and up, appear all the time in everyday situations and especially in news reports. These large numbers come along with a kind of noun known as a <strong>count noun</strong>.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-ad7f-08dc64bdbf36_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>In today's <em>Everyday Grammar</em>, we will learn about the history and usage of large numbers. We will look at some modern examples and then give you a chance to practice writing about large numbers.</p>
+<p>Let's begin our story with the word "million." It has a connection with a thousand, as we will see. But first, we make a trip to the ancient past.</p>
+<p><strong>Definitions and history </strong></p>
+<p>We can clean off the dusty books of history and find clues about the beginnings of "million." We see "mille," <a class="wsw__a" href="https://www.etymonline.com/search?q=million" target="_blank">a Latin word</a> which suggests a thousand.</p>
+<p>We find evidence of "mille" through time. We have the Italian "millione" and "million" in Old French. We find "million" in English, appearing around the late 1300s, with <a class="wsw__a" href="https://www.etymonline.com/search?q=million" target="_blank">the meaning of a thousand thousands</a>.</p>
+<p>"Million" serves as the starting point for even larger numbers to come. We get a "billion," <a class="wsw__a" href="https://www.etymonline.com/search?q=billion" target="_blank">a word that mixes</a> "bi-", a word element that suggests the idea of two, with the word "million."</p>
+<p>Later, we get "trillion," <a class="wsw__a" href="https://www.etymonline.com/search?q=trillion" target="_blank">a word that mixes</a> "tri-," a word element that suggests three, and the word "million."</p>
+<p>The story of large numbers in English is complex. There are so-called long and short-scale systems. But you do not need to worry about such issues. For our purposes, we can use the modern American definitions from <a class="wsw__a" href="https://www.merriam-webster.com/dictionary/million" target="_blank">Merriam Webster</a>.</p>
+<p>We arrive at these definitions: a million is equal to 1,000 times 1,000; a billion is equal to 1,000 times one million; a trillion is equal to 1,000 times one billion.</p>
+<p>The central idea is to define bigger numbers like a million, billion, or trillion based on some relationship with one thousand.</p>
+<p><strong>Usage </strong></p>
+<p>Now that we have some definitions in mind, we can turn to some questions.</p>
+<p>Why might large numbers matter?</p>
+<p>Here is one answer: large numbers – millions, billions, trillions – appear all the time in the news. The large number is often what draws attention or creates interest.</p>
+<p>You might also be wondering how this discussion of large numbers connects to grammar.</p>
+<p>Here, the idea is less about the numbers themselves and more about the things – in this case, the nouns – that the numbers describe. In particular, we use these large numbers to describe count nouns – nouns that we are able to count with numbers.</p>
+<p>And in the news, there are several count nouns commonly used with large numbers: dollars, people, and years.</p>
+<p>Here are a few examples:</p>
+<p><strong>Dollars </strong></p>
+<p>Consider this headline published earlier this year by <a class="wsw__a" href="https://www.21voa.com/a/us-national-debt-hits-record-34-trillion-as-congress-gears-up-for-funding-fight-/7422514.html" target="_blank">VOA News</a>:</p>
+<p><em>US National Debt Hits Record $34 Trillion as Congress <strong>Gears up for</strong> Funding Fight </em></p>
+<p>Here, we have the number, 34 trillion, describing a count noun: dollars. The dollar is the official money of the United States. But news stories in your country might use other kinds of money such as the euro, the peso, and so on.</p>
+<p>News stories about trade, finance, and economies are very likely to contain this structure: large number + the name of the currency.</p>
+<p><strong>Years </strong></p>
+<p>Now consider this section from <a class="wsw__a" href="https://www.21voa.com/a/giant-ocean-reptile-discovered-by-father-daughter/7575809.html" target="_blank">a science story</a> that recently appeared on the VOA Learning English website:</p>
+<p><em>Marine reptiles lived in the world's oceans at the same time that dinosaurs lived on the land. Ichthyosaurs disappeared 90 million years ago. </em></p>
+<p>In this example, we have the large number 90 million describing the count noun "years." Science stories – particularly stories about ancient times and outer space – often center on a point in time long ago. So, keep an eye out for this structure: large number + years (or years ago).</p>
+<p><strong>People </strong></p>
+<p>Finally, let's consider a short example from <a class="wsw__a" href="https://www.21voa.com/a/young-people-s-english-language-skills-decreasing/7427897.html" target="_blank">another VOA Learning English report</a>. The subject this time is an English test. We learn about the number of people who took the test:</p>
+<p><em>The 2023 <a class="wsw__a" href="https://www.ef.edu/epi/" target="_blank">EF English Proficiency Index</a> (EPI) ranks countries and areas by English proficiency. The index is based on test results from 2.2 million people in 113 countries. </em></p>
+<p>Here, we have the number 2.2 million describing the count noun "people."</p>
+<p>Stories about studies, elections, populations, and so on, often involve this structure: large number + people.</p>
+<p><strong>Closing thoughts and call to action </strong></p>
+<p>In today's lesson, we covered a lot of territory. We looked into the past and explored the present. And, we can report that we used about 800 words to present the subject of large numbers and count nouns.</p>
+<p>We will end today's lesson with a call to action. We would like you to link the ideas we have explored with something connected to your country.</p>
+<p>Please write us 1-2 sentences about a large number – million, billion, or trillion – that connects with an event or situation in your country or area. For example, you might write "My country's GDP is around 10 trillion dollars," or "My government spends 100 billion dollars on health care."</p>
+<p>You can send your sentences in an email to <a class="wsw__a" href="mailto:learningenglish@voanews.com" target="_blank">learningenglish@voanews.com</a></p>
+<p>In a future lesson, we will give feedback on some of the messages we receive.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>count noun</strong><em> – n.</em> a noun that forms a plural and is used with a numeral</p>
+<p><strong>gear up for </strong><em>– phrasal verb – </em>to prepare; get ready for</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

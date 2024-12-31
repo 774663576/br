@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Children in South Africa Walk a Long Way to School</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Children in South Africa Walk a Long Way to School" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/children-in-south-africa-walk-a-long-way-to-school.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Children in South Africa Walk a Long Way to School</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/children-in-south-africa-walk-a-long-way-to-school.mp3" id="mp3"></a>
+<a href="thanksgiving-american-tradition--91831.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">22 November 2023</span><br/>
+<p>Fourteen-year-old Luyanda Hlali walks 10 kilometers to school. She lives in the little village of Stratford in South Africa's KwaZulu-Natal <strong>province</strong>.</p>
+<p>There are no school buses. There is only the long road where robbers and bad men can harm her.</p>
+<p>Luyanda is one of tens of thousands of children in South Africa who live a long way from their public school. The communities they live in are mostly rural and poor.</p><div class="contentImage"><img alt="Luyanda Hlali, left, and her friend Mimi Dubazane embark on their routine 2 hour-long walk from the village of Stratford to their school in Dundee, South Africa, Thursday, Oct. 26, 2023. (AP Photo/ Mogomotsi Magome)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-1a20-08dbea9eaef1_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Luyanda Hlali, left, and her friend Mimi Dubazane embark on their routine 2 hour-long walk from the village of Stratford to their school in Dundee, South Africa, Thursday, Oct. 26, 2023. (AP Photo/ Mogomotsi Magome)</span></div>
+<p>Observers say students having to travel long distances to public schools shows the country's inequality when it comes to attending school. It has been nearly 30 years since the nation ended its <strong>apartheid</strong> system and the African National Congress party took power bringing democratic change.</p>
+<p>There is a lack of school transportation paid for by the government.</p>
+<p>Girls face the threat of attack and robberies are common. Parents, local leaders, and activists say the situation increases existing inequalities. The World Bank says South Africa is the most unequal country in the world.</p>
+<p>In KwaZulu-Natal, campaigners and activists are pressing government officials to provide transportation for over 200,000 schoolchildren. The children have to walk three kilometers or more to school.</p>
+<p>President Cyril Ramaphosa's government policy requires officials to provide transportation for the students who have to walk that distance. But school buses are not a concern in an area where unemployment is over 25 percent and people are poor.</p>
+<p>A 2020 Amnesty International report said a child's experience in South Africa "still very much depends on where they are born, how wealthy they are, and the color of their skin."</p>
+<p>South Africa's education system, the report said, "has deep roots in the <strong>legacy</strong> of apartheid, but which are also not being effectively <strong>tackled</strong>" by the government.</p>
+<p>In KwaZulu-Natal, more than 30 percent of the province's 12.4 million people are unemployed. Many say they have to choose between buying food or paying $19 a month for public transportation.</p>
+<p>"Sometimes these children go to school without eating breakfast," said Bongiwe Nhlangothi, Luyanda's grandmother.</p>
+<p>She is the most scared when her grandchildren are traveling.</p>
+<p>"There are drug <strong>addicts</strong> around here, when they come across the children in the early hours of the morning, they rob them of their phones, threaten them with knives and try to rape them," Nhlangothi said.</p>
+<p>A school <strong>principal</strong> in a village about 50 kilometers from the coalmining town of Dundee, told of his struggle to get more school buses approved. The principal said some of the school's female students had been raped by local criminals.</p>
+<p>The school has two old buses, but they can only carry about 65 children. There are more than 400 students at the school. The principal said he fears one of the buses could permanently break down or crash.</p>
+<p>In September 2022, reports said 18 students were killed in the province when their overcrowded minivan crashed on the way to school in the town of Pongola.</p>
+<p>Some parents have decided to pay to have their children to live closer to their schools. But boarding a student is costly and leaves parents without help at home.</p>
+<p>Activist Tebogo Tshesane works for the nonprofit organization Equal Education. He said the campaign for better school transportation across KwaZulu-Natal started back in 2014. It started after students wrote letters because they were walking for up to two hours to school.</p>
+<p>Government information says 1,148 schools in KwaZulu-Natal are on a waiting list for school transportation paid for by the government.</p>
+<p>The provincial department of education did not wish to talk to <em>The Associated Press</em> for this story.</p>
+<p>The answer from the education department is that there is no money, so the children keep walking.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press. </em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>province </strong><em>— n. </em>a large part or division of a country</p>
+<p class="CxSpMiddle"><strong>apartheid </strong><em>— n. </em>the system of racial separation in South Africa which was legal until it was abolished in the early 1990s</p>
+<p class="CxSpMiddle"><strong>legacy </strong><em>— n. </em>what people leave to their children after they die</p>
+<p class="CxSpMiddle"><strong>tackle </strong><em>–v. idiom </em>to deal with</p>
+<p class="CxSpMiddle"><strong>addict </strong>–n. a person who cannot stop taking drugs</p>
+<p class="CxSpMiddle"><strong>principal </strong><em>— n.</em><strong> </strong>the leader of a grade school or secondary school</p>
+<p class="CxSpMiddle"> </p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

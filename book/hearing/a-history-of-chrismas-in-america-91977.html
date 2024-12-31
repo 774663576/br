@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - A History of Christmas in America</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, A History of Christmas in America" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/a-history-of-chrismas-in-america.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>A History of Christmas in America</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/a-history-of-chrismas-in-america.mp3" id="mp3"></a>
+<a href="/static/lrc/a-history-of-chrismas-in-america.lrc" id="lrc"></a>
+<a href="eu-reaches-major-migration-agreement-91974.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">22 December 2023</span><br/>
+<p>From VOA Learning English, I'm Caty Weaver.</p>
+<p>Today, Steve Ember and Shirley Griffith present a special program on Christmas traditions in the United States during the first half of the 19th century.</p><div class="contentImage"><img alt="FILE - Santa Claus drives his reindeer and sleigh float along Central Park West during the Macy's Thanksgiving Day parade, Thursday, Nov. 23, 2023, in New York. (AP Photo/Jeenah Moon)
+" src="https://files.21voa.com/gdb/01000000-c0a8-0242-d7b8-08dbef5b9edb_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Santa Claus drives his reindeer and sleigh float along Central Park West during the Macy's Thanksgiving Day parade, Thursday, Nov. 23, 2023, in New York. (AP Photo/Jeenah Moon)
+</span></div>
+<p>During this period, there was no set way of celebrating the day, which was not yet an official holiday. Communities around the country honored the day in different ways. Some observed Christmas as an important Christian religious day honoring the birth of Jesus. Others celebrated the day with parties, music, drinking and eating. And, some communities did not celebrate the day at all.</p>
+<p>But, it was during this period that Americans began to reinvent the holiday. They combined ancient Christmas traditions from different cultures with modern American influences.</p>
+<p>Here are Steve Ember and Shirley Griffith.</p>
+<p>In 1819, the popular American writer Washington Irving wrote a series of five essays<strong> </strong>published in a book called <em>The Sketchbook of Geoffrey Crayon, Gent</em>.</p>
+<p>The essays describe a wealthy British landowner who invites his farm workers into his home to celebrate Christmas. The landowner recreates a traditional Christmas as it would have been celebrated in the distant past. Irving praised this looking back to ancient traditions. He liked the idea of different levels of <strong>society</strong> coming together to enjoy a<strong> festive</strong> and peaceful holiday. Washington Irving seemed to express concern about the lack of such <strong>unifying </strong>Christmas traditions in modern America.</p>
+<p><strong>Immigrants shape Christmas traditions</strong></p>
+<p>Penne Restad wrote a book <em>Christmas in America: A History</em>. It shows how Americans began to slowly shape Christmas into a unifying national holiday during the first half of the 19th century. She describes how Christmas had different meanings for Americans who came from different cultural and religious backgrounds. Many immigrants brought Christmas traditions from their own countries.</p>
+<p>Religion played a big role in how an American might celebrate the holiday. Calvinist Christians banned the celebration of Christmas. But groups such as Episcopalians and Moravians honored the day with religious services and seasonal <strong>decorations</strong>.</p>
+<p>By mid-century, Christian groups began to ignore their religious differences over the meaning of Christmas and honored the day in special ways.</p>
+<p>Christmas became an important time for families to celebrate at home. More and more Christian Americans also began to follow the European traditions of Christmas trees and giving gifts. Christians believed that the tree represented Jesus and was also a sign of new beginnings. German immigrants brought their tradition of putting lights, sweets and toys on the branches of evergreen trees placed in their homes.</p>
+<p>This tradition of setting up a Christmas tree soon spread to many American homes. So did the <strong>practice</strong> of giving people presents. As these traditions increased in popularity, the modern trade and business linked to Christmas also grew.</p>
+<p><strong>Christmas as a holiday</strong></p>
+<p>As Christmas became more popular, some states declared the day a state holiday. Louisiana was the first state to make the move in 1837. By 1860, 14 other states had followed. It was not until 1870 that President Ulysses Grant made Christmas a federal holiday.</p>
+<p>Americans already knew old Christmas songs that came from England and other areas of Europe. But many new American Christmas songs started to become popular. For example, in eighteen forty-nine, a religious leader from Massachusetts wrote the words to <em>It Came Upon a Midnight Clear</em>.The song <em>J</em><em>ingle Bells </em>appeared seven years later. And, a year later, a religious leader in Williamsport, Pennsylvania wrote the song <em>We Three Kings of Orient Are</em>.</p>
+<p>And of course, no discussion of Christmas would be complete without talking about of one of the holiday's most famous representations, Santa Claus.</p>
+<p>This character is based on the story of Saint Nicholas, a Christian holy person believed to have lived in the third century. Saint Nicholas became known as a protector of children. Different cultures have given him different names. These include Sinterklaas, Kris Kringle and Father Christmas. But for most Americans his most popular name would become Santa Claus.</p>
+<p>In the 19th century, many Dutch immigrants living in the United States celebrated the feast of Saint Nicholas on December 6. Saint Nicholas was especially important to New Yorkers because of their history as a Dutch colony. In 1809, Washington Irving published his <em>History of New York</em>. It lists Saint Nicholas as the patron saint of New Yorkers. He describes the saint wearing a low hat, large pants, and smoking a pipe. Does this description sound familiar?</p>
+<p><em>Write to us in the Comments Section or on 51VOA.COM. </em></p>
+<p><em>_________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>society </strong>- <em>n. </em>people in general thought of as living together in organized communities with shared laws, traditions, and values</p>
+<p><strong>festive</strong> - <em>adj. </em>cheerful and exciting: suited to a celebration or holiday</p>
+<p><strong>unifying</strong> - <em>v. </em> to cause (people or things) to be joined or brought together</p>
+<p><strong>decoration </strong>- <em>n. </em>something that is added to something else to make it more attractive</p>
+<p><strong>practice </strong>- <em>n. </em>something that is done often or regularly</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:A History of Christmas in America]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]From VOA Learning English,
+[00:02.92]I'm Caty Weaver.
+[00:04.84]Today, Steve Ember and Shirley Griffith
+[00:09.24]present a special program
+[00:12.00]on Christmas traditions in the United States
+[00:16.28]during the first half of the 19th century.
+[00:20.84]During this period, there was
+[00:24.32]no set way of celebrating the day,
+[00:28.04]which was not yet an official holiday.
+[00:32.40]Communities around the country
+[00:35.12]honored the day in different ways.
+[00:38.44]Some observed Christmas
+[00:40.72]as an important Christian religious day
+[00:44.52]honoring the birth of Jesus.
+[00:47.92]Others celebrated the day with parties,
+[00:51.32]music, drinking and eating.
+[00:54.44]And, some communities
+[00:57.16]did not celebrate the day at all.
+[01:01.64]But, it was during this period
+[01:04.52]that Americans began to reinvent the holiday.
+[01:09.68]They combined ancient Christmas traditions
+[01:13.28]from different cultures
+[01:14.96]with modern American influences.
+[01:19.32]Here are Steve Ember and Shirley Griffith.
+[01:30.40]In 1819, the popular American writer Washington Irving
+[01:37.04]wrote a series of five essays published in a book
+[01:41.08]called The Sketchbook of Geoffrey Crayon, Gent.
+[01:46.24]The essays describe a wealthy British landowner
+[01:50.28]who invites his farm workers into his home
+[01:53.80]to celebrate Christmas.
+[01:56.68]The landowner recreates a traditional Christmas
+[02:00.76]as it would have been celebrated in the distant past.
+[02:05.20]Irving praised this looking back to ancient traditions.
+[02:10.20]He liked the idea of different levels of society
+[02:14.20]coming together to enjoy a festive and peaceful holiday.
+[02:20.24]Washington Irving seemed to express concern
+[02:24.00]about the lack of such unifying Christmas traditions
+[02:27.60]in modern America.
+[02:30.68]Penne Restad wrote a book
+[02:33.24]Christmas in America: A History.
+[02:36.44]It shows how Americans began
+[02:39.80]to slowly shape Christmas into a unifying national holiday
+[02:45.64]during the first half of the 19th century.
+[02:50.00]She describes how Christmas had different meanings
+[02:53.88]for Americans who came from
+[02:55.92]different cultural and religious backgrounds.
+[02:59.96]Many immigrants brought Christmas traditions
+[03:03.60]from their own countries.
+[03:06.68]Religion played a big role in how an American
+[03:10.60]might celebrate the holiday.
+[03:13.80]Calvinist Christians banned the celebration of Christmas.
+[03:18.56]But groups such as Episcopalians and Moravians
+[03:22.32]honored the day with religious services
+[03:25.24]and seasonal decorations.
+[03:28.52]By mid-century, Christian groups
+[03:31.52]began to ignore their religious differences
+[03:34.64]over the meaning of Christmas
+[03:36.88]and honored the day in special ways.
+[03:49.76]Christmas became an important time
+[03:52.80]for families to celebrate at home.
+[03:56.00]More and more Christian Americans
+[03:59.32]also began to follow the European traditions
+[04:03.04]of Christmas trees and giving gifts.
+[04:07.36]Christians believed that the tree represented Jesus
+[04:11.56]and was also a sign of new beginnings.
+[04:15.80]German immigrants brought their tradition
+[04:18.72]of putting lights, sweets and toys
+[04:22.36]on the branches of evergreen trees placed in their homes.
+[04:28.24]This tradition of setting up a Christmas tree
+[04:31.72]soon spread to many American homes.
+[04:35.96]So did the practice of giving people presents.
+[04:39.88]As these traditions increased in popularity,
+[04:43.76]the modern trade and business
+[04:46.16]linked to Christmas also grew.
+[04:50.48]As Christmas became more popular,
+[04:52.88]some states declared the day a state holiday.
+[04:57.60]Louisiana was the first state
+[05:00.16]to make the move in 1837.
+[05:04.48]By 1860, 14 other states had followed.
+[05:10.24]It was not until 1870 that President Ulysses Grant
+[05:15.32]made Christmas a federal holiday.
+[05:19.88]Americans already knew old Christmas songs
+[05:23.68]that came from England and other areas of Europe.
+[05:28.68]But many new American Christmas songs
+[05:31.68]started to become popular.
+[05:34.00]For example, in eighteen forty-nine,
+[05:38.24]a religious leader from Massachusetts
+[05:40.96]wrote the words to It Came Upon a Midnight Clear.
+[05:46.80]The song Jingle Bells appeared seven years later.
+[05:52.08]And, a year later, a religious leader in Williamsport, Pennsylvania
+[05:57.36]wrote the song We Three Kings of Orient Are.
+[06:10.08]And of course, no discussion of Christmas would be complete
+[06:14.00]without talking about of one of the holiday's
+[06:16.84]most famous representations, Santa Claus.
+[06:20.80]This character is based on the story of Saint Nicholas,
+[06:25.20]a Christian holy person
+[06:27.36]believed to have lived in the third century.
+[06:31.32]Saint Nicholas became known as a protector of children.
+[06:36.28]Different cultures have given him different names.
+[06:43.36]These include Sinterklaas, Kris Kringle and Father Christmas.
+[06:50.28]But for most Americans
+[06:52.40]his most popular name would become Santa Claus.
+[06:58.00]In the 19th century,
+[07:00.00]many Dutch immigrants living in the United States
+[07:04.16]celebrated the feast of Saint Nicholas on December 6.
+[07:09.68]Saint Nicholas was especially important to New Yorkers
+[07:14.04]because of their history as a Dutch colony.
+[07:18.28]In 1809, Washington Irving published his History of New York.
+[07:25.08]It lists Saint Nicholas as the patron saint of New Yorkers.
+[07:31.04]He describes the saint wearing a low hat,
+[07:34.80]large pants, and smoking a pipe.
+[07:39.20]Does this description sound familiar? 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

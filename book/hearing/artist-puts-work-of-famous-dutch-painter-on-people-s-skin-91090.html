@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Artist Puts Work of Famous Dutch Painter on People’s Skin</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Artist Puts Work of Famous Dutch Painter on People’s Skin" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/artist-puts-work-of-famous-dutch-painter-on-people-s-skin.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Artist Puts Work of Famous Dutch Painter on People’s Skin</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/artist-puts-work-of-famous-dutch-painter-on-people-s-skin.mp3" id="mp3"></a>
+<a href="/static/lrc/artist-puts-work-of-famous-dutch-painter-on-people-s-skin.lrc" id="lrc"></a>
+<a href="math-reading-test-scores-continue-to-drop-after-pandemic-91087.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">25 June 2023</span><br/>
+<p>Henk Schiffmacher is a famous Dutch <strong>tattoo</strong> artist. That means he draws pictures in permanent ink on people's skin.</p>
+<p>Recently, he created the design of an elephant on Lilian Rachmaran's back.</p>
+<p>"Highbrow to lowbrow" is how the artist described his latest project. The project involves "inking" artwork by Rembrandt van Rijn onto the skin of visitors to the building the famous Dutch painter once called home.</p><div class="contentImage"><img alt="FILE - Henk Schiffmacher's needle whirrs as he tattoos the lines of am elephant on Lilian Rachmaran's back in Amsterdam, Monday, June 19, 2023. (AP Photo/Peter Dejong)" src="https://files.21voa.com/gdb/f312cee6-2e95-4abe-be27-37ef394c87a7_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Henk Schiffmacher's needle whirrs as he tattoos the lines of am elephant on Lilian Rachmaran's back in Amsterdam, Monday, June 19, 2023. (AP Photo/Peter Dejong)</span></div>
+<p>The Rembrandt House <strong>Museum</strong> has changed one of its rooms into a tattoo area for something it calls, "The Poor Man's Rembrandt." The one-week event involves Schiffmacher and other top Amsterdam tattoo artists.</p>
+<p>For between about $54 and $270, visitors can get their own permanent reminder of Rembrandt.</p>
+<p>Schiffmacher told The Associated Press, "It's a <strong>juxtaposition</strong> — a jump from high to low, from highbrow to lowbrow." He added, "And it's great that these two worlds can visit one another. Actually, it's really one world because it's about art."</p>
+<p>Museum Director Milou Halbesma said the event is a way of bringing new visitors to the historic house and getting people closer to the artist.</p>
+<p>"I think it's a very good...way to have your own Rembrandt," she said.</p>
+<p>The event has already proved a hit. All appointments available online were filled within 10 minutes, she said. However, there are still some spots available for people who walk into the museum and wait their turn.</p>
+<p>Schiffmacher and others have taken some of Rembrandt's drawings and changed them to work for tattooing. For example, the artists make lines thinner, so they do not grow together as the skin of the tattooed person ages.</p>
+<p>The tattoo artists see similarities between their work and the artist's quick drawings — but there is one big difference.</p>
+<p>"The canvas is different," Schiffmacher said. "The canvas can talk to you, move too much, float, even faint. That didn't happen for Rembrandt."</p>
+<p>Rachmaran works at the museum. She was the first person in Schiffmacher's chair.</p>
+<p>She got his version of one of Rembrandt's famous drawings of an Asian elephant. The creature, named Hansken, first arrived in Amsterdam in 1633 on a ship from Ceylon — now Sri Lanka — as a gift for the Prince of Orange.</p>
+<p>Rachmaran said, "I love the animals, they're so spiritual and smart..."</p>
+<p>Speaking about her tattoo, Rachmaran added, "I'm very honored to have one made by Henk himself."</p>
+<p>I'm John Russell.</p>
+<p><em>Mike Corder reported on this story for the Associated Press. John Russell adapted it for VOA Learning English.</em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>tattoo </strong>– n. a picture that is drawn on a person's skin by using a needle and ink</p>
+<p><strong>museum</strong> – n. a building in which interesting and valuable things (such as paintings and sculptures or scientific or historical objects) are collected and shown to the public</p>
+<p><strong>juxtaposition </strong>– n. the act of placing (different things) together in order to create an interesting effect</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Artist Puts Work of Famous Dutch Painter on People’s Skin]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Henk Schiffmacher is a famous Dutch tattoo artist.
+[00:05.56]That means he draws pictures in permanent ink on people's skin.
+[00:11.08]Recently, he created the design of an elephant
+[00:15.68]on Lilian Rachmaran's back.
+[00:18.60]"Highbrow to lowbrow" is how the artist described his latest project.
+[00:25.12]The project involves "inking" artwork by Rembrandt van Rijn
+[00:30.64]onto the skin of visitors
+[00:33.28]to the building the famous Dutch painter once called home.
+[00:38.32]The Rembrandt House Museum has changed one of its rooms
+[00:43.28]into a tattoo area for something it calls,
+[00:47.72]"The Poor Man's Rembrandt."
+[00:50.20]The one-week event involves Schiffmacher
+[00:54.04]and other top Amsterdam tattoo artists.
+[00:58.12]For between about $54 and $270,
+[01:03.84]visitors can get their own permanent reminder of Rembrandt.
+[01:09.28]Schiffmacher told The Associated Press, "It's a juxtaposition —
+[01:14.80]a jump from high to low, from highbrow to lowbrow."
+[01:20.56]He added, "And it's great that these two worlds can visit one another.
+[01:26.00]Actually, it's really one world because it's about art."
+[01:31.28]Museum Director Milou Halbesma
+[01:34.68]said the event is a way of bringing new visitors
+[01:38.64]to the historic house and getting people closer to the artist.
+[01:44.64]"I think it's a very good...way to have your own Rembrandt," she said.
+[01:50.84]The event has already proved a hit.
+[01:54.08]All appointments available online
+[01:57.36]were filled within 10 minutes, she said.
+[02:00.80]However, there are still some spots available
+[02:04.96]for people who walk into the museum and wait their turn.
+[02:10.36]Schiffmacher and others have taken some of Rembrandt's drawings
+[02:15.44]and changed them to work for tattooing.
+[02:19.16]For example, the artists make lines thinner,
+[02:23.24]so they do not grow together as the skin of the tattooed person ages.
+[02:29.88]The tattoo artists see similarities between their work
+[02:34.60]and the artist's quick drawings — but there is one big difference.
+[02:40.44]"The canvas is different," Schiffmacher said.
+[02:44.68]"The canvas can talk to you, move too much, float, even faint.
+[02:50.32]That didn't happen for Rembrandt."
+[02:54.00]Rachmaran works at the museum.
+[02:56.92]She was the first person in Schiffmacher's chair.
+[03:00.68]She got his version of one of Rembrandt's
+[03:04.52]famous drawings of an Asian elephant.
+[03:08.28]The creature, named Hansken, first arrived in Amsterdam
+[03:13.60]in 1633 on a ship from Ceylon —
+[03:18.00]now Sri Lanka — as a gift for the Prince of Orange.
+[03:23.40]Rachmaran said, "I love the animals,
+[03:26.76]they're so spiritual and smart..."
+[03:29.52]Speaking about her tattoo, Rachmaran added,
+[03:33.56]"I'm very honored to have one made by Henk himself."
+[03:38.84]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Work, Sleep Well in a Small Place</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Work, Sleep Well in a Small Place" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/work-sleep-well-in-a-small-place.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Work, Sleep Well in a Small Place</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/work-sleep-well-in-a-small-place.mp3" id="mp3"></a>
+<a href="world-s-largest-3d-printed-community-nears-completion-92885.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">12 August, 2024</span><br/>
+<p>From VOA Learning English, this is the Health &amp; Lifestyle report.</p>
+<p>Working from home in a small apartment is fine during the day. But when nighttime comes, it may be more difficult to turn off work and get a good night's sleep.</p>
+<p>This can be especially difficult in a <strong>studio apartment</strong>. In a studio apartment, the living room, kitchen and sleeping area are all in one room. These kinds of apartments are common in large cities with a high cost of living.</p><div class="contentImage"><img alt="Space-saving Murphy beds, like this one, can be folded into their own frame. And they supply storage. (California Closets via AP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-c59f-08dca8439a94_cx0_cy15_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Space-saving Murphy beds, like this one, can be folded into their own frame. And they supply storage. (California Closets via AP)</span></div>
+<p>With electronics, kitchen items, clothes and books all in one space, it can be hard to create a restful place for sleep.</p>
+<p>Kim Cook, a reporter for the Associated Press, asked sleep experts and <strong>interior design</strong> experts for advice on how to work productively and sleep well in a small one-room area.</p>
+<p><strong>Be honest about how you live </strong></p>
+<p>Everyone needs good sleep to stay healthy.</p>
+<p>“The <strong>primary</strong> rule, maybe the only rule of small space design, is people have to be honest about how they really live,” says Olivia Hosken. She is deputy managing editor of House Beautiful.</p>
+<p>She adds that when you have limited space, you need furniture that works well in the room.</p>
+<p><strong>A good bed is important for good sleep</strong></p>
+<p>She suggests spending money on a high-quality bed. Even better is a high-quality sleep sofa that can double as a bed and couch. She does not suggest big tables or chairs that you may not use.</p>
+<p>Andrea Morris is an interior designer with Lancaster Place Interiors in Wilmington, North Carolina. For studio apartments, she likes wall beds. These can be folded up next to a wall when not in use.</p>
+<p>They are better known as Murphy beds, named after William Murphy. He came up with this idea in 1900 while living in his own studio apartment in San Francisco, California.</p>
+<p><strong>Create a sleep area</strong></p>
+<p>To separate your sleep area from the rest of the apartment, you can purchase a freestanding screen or room divider. And as much as you can, keep your sleep area strictly for sleeping, experts say.</p>
+<p>Jeff Kahn is co-founder of the Chicago-based sleep-research company Rise Science. His company developed a sleep-tracking app called Rise. His suggestion is to “avoid doing work or anything stressful from your bed.” He said that this helps the brain connect your bed with only sleep rather than wakefulness and work.</p>
+<p>However, that is not always possible. If you use your bed during the daytime, you can do small things to keep daytime tasks and sleep separate. Lisa Strauss is a <strong>psychologist</strong> and expert in sleep disorders. She suggests using one side of the bed for reading and the other for sleeping. You can also bring out special blankets and pillows used only for sleeping.</p>
+<p><strong>Freshen the air. Lower the lights. Cut the noise.</strong></p>
+<p>Kahn also suggests keeping a clean, peaceful environment. For starters, he says to make sure the air flow is good.</p>
+<p>“Make sure your space is well <strong>ventilated</strong>, and consider an <strong>air</strong> <strong>purifier</strong>,” says Kahn. He adds that this is especially important if you cook and sleep in the same place.</p>
+<p>Another interior expert is Mia Ingui. She is editor at Spruce, a home design website. She suggests using calming smells like lavender or chamomile at bedtime, to “set the <strong>tone</strong> for restful sleep.”</p>
+<p>Also, be sure that computer, TV, and other electronic screens are turned off. In a small room, these devices are probably a short distance from the bed. Their light at night can affect our internal clocks, or <strong>circadian rhythm</strong>.</p>
+<p>Do not forget about the sounds these devices make. If the buzz of nearby devices, appliances, or street sounds keep you awake, consider a noise machine. Ingui likes the Hatch Restore, a “sunrise lamp” that provides soothing sounds and lights up slowly in the morning. You can also buy noise cancelling curtains. These cut down on outside noises.</p>
+<p><strong>Keep things clean and organized</strong></p>
+<p>Andrea Morris, the home designer, says one thing to avoid when it comes to studio living is leaving beds unmade.</p>
+<p>“It's amazing how much better you feel after a hard day entering a space with a made bed,” she said.</p>
+<p>At night, she suggests putting away electronics. Side tables with plugs and ports for electronics help you store devices and keep things tidy – or organized and clean. This is another example of choosing furniture that has multiple uses.</p>
+<p><strong>Choose multi-use, storable bedding</strong></p>
+<p>If it difficult to control your studio apartment's heating and cooling, Ingui recommends choosing materials for bedding that let the skin breathe. Such materials can keep you cool in warm weather and warm in cooler temperatures.</p>
+<p>She also suggests buying several pieces of bedding that are easy to store rather than big, <strong>bulky</strong> blankets. Studio apartments often do not have a lot of storage.</p>
+<p>With some thoughtful choices, your small space can have the feeling we all want from home life: calm, clean and good for both working and sleeping.</p>
+<p>And that's the Health &amp; Lifestyle report.</p>
+<p>I'm Anna Matteo. And I'm Mario Ritter Jr.</p>
+<p><em>Kim Cook reported this story for The Associated Press from New York City. Anna Matteo adapted it for VOA Learning English.</em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>studio apartment </strong><em>– n. </em>a small apartment consisting typically of a main room, kitchenette, and bathroom</p>
+<p><strong>interior design </strong><em>– n.</em> the art of decorating and furnishing the interior of a building</p>
+<p><strong>primary </strong><em>– adj. </em>of first rank, importance, or value</p>
+<p><strong>psychologist </strong><em>– n. </em>a person who specializes in the study of mind and behavior or in the treatment of mental, emotional, and behavioral disorders</p>
+<p><strong>ventilated </strong><em>– v. </em>to expose to air and especially to a current of fresh air</p>
+<p><strong>air purifier </strong><em>– n. </em>a device that removes contaminating particles (such as dust and pollen) from the air</p>
+<p><strong>tone </strong><em>– n. </em>general character or quality</p>
+<p><strong>circadian rhythm </strong><em>– n. </em>the natural patterns that take place in your body over the course of each 24-hour cycle.</p>
+<p><strong>bulky </strong><em>– adj. </em>large in size or mass</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 科学家构建经过重新设计的生命形式</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 科学家构建经过重新设计的生命形式" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201708/scientists-building-redesigned-life-forms.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>科学家构建经过重新设计的生命形式</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201708/scientists-building-redesigned-life-forms.mp3" id="mp3"></a>
+<a href="/static/lrc/scientists-building-redesigned-life-forms.lrc" id="lrc"></a>
+<a href="scientists-building-redesigned-life-forms-76213.html" id="CnPage" target="_blank"></a>
+<a href="officials-say-afghan-children-are-being-taken-to-pakistani-religious-schools-76203.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>For thousands of years, humans have used yeast for making bread and alcoholic drinks, such as beer. But scientists are now constructing synthetic yeast that can do more than make a sandwich or a drink. The synthetic yeast can be used for medicines, vaccines, and biofuels – among other things.<br/>数千年来，人们都在使用酵母制作面包以及啤酒之类的酒精饮料。但是科学家现在正在构建合成酵母，它不仅仅可以用于制作三明治或饮料，还可以用于药品、疫苗和生物燃料等等。</p>
+<p><strong>What is DNA?<br/>DNA是什么？</strong></p>
+<p>So, how does it work?<br/>那么它是如何工作的呢？</p>
+<p>Yeast, like humans, are living organisms with DNA. DNA is short for deoxyribonucleic acid. On long strings it carries the genetic instructions used in the growth, functioning and reproduction of all living things.<br/>酵母和人类一样都是具有DNA的生物体。DNA是脱氧核糖核酸的缩写。它携带了所有生物体生长、运行以及繁殖的遗传指令。</p>
+<p>Modern science allows researchers to cut and move around the four biological compounds that make up DNA. The compounds are known by the letters A,C, G and T. The yeast genome, or its genetic material map, has more than 10 million of these DNA letters. But that is nothing compared to us: Humans have about three billion.<br/>现代科学使得研究人员可以剪切和移动构成DNA的四种生物化合物。这些化合物以A、C、G、T这些字母简称为人熟知。酵母基因或其遗传物质图谱具有超过1千万个这种生物化合物。但是这跟人类没得比较，人类DNA拥有大约30亿个这种生物化合物。</p>
+<p><strong>Making synthetic yeast<br/>制作合成酵母</strong></p>
+<p>Scientists have long been able to make changes in the DNA code. But now, some scientists are doing something different.<br/>科学家早已能够改变遗传密码。但是一些科学家正在做一些有所不同的事情。</p>
+<p>When you walk into Jef Boeke's lab it smells like bread rising. But his team is not making homemade dough. Instead, they are changing the order of genes in yeast cells.<br/>当你走进杰夫·博伊科（Jef Boeke）的实验室，闻起来就像是在做面包。但是他的团队不是在做生面团。相反，他们正在改变酵母细胞中的基因顺序。</p>
+<p>Boeke manages a team of 11 labs on four continents. He spoke to VOA Learning English about this project.<br/>博伊科管理着一个由四大洲的11个实验室组成的团队。他同美国之音慢速英语频道谈到了这个项目。</p>
+<p>"What we're doing basically is writing that DNA and we also modify it along the way, so we kind of redesign it on a computer, and then it's that modified DNA that we actually put into cells. We swap it in place of the DNA that's already there."<br/>博伊科说：“我们正在做的就是编写DNA，同时我们也在修改它。所以我们就是在电脑上对它进行重新设计，然后将这种修饰过的DNA放入细胞中，用它替换原有的DNA。”</p>
+<p>So far, the scientists have constructed and replaced six of yeast's 16 chromosomes. The new chromosomes have all worked well.<br/>截至目前，这些科学家已经构建并替换了6种酵母的16对染色体。这些新的染色体都运转良好。</p>
+<p>Yeast is already used to produce many other valuable compounds, such as medicines, vaccines and biofuels. By making synthetic yeast, researchers could make different combinations used for different jobs.<br/>酵母已经被用于生产多种其它有价值的化合物，例如药品、疫苗后生物燃料。通过制作合成酵母，研究人员可以制作出不同的化合物用于各种不同的任务。</p>
+<p>For example, one combination may be better for making biofuel, and another for making medicine. These compounds could then be made in large, industrial amounts.<br/>例如， 某种化合物更适合制造生物燃料，另一种适合制药。这些化合物以后可以大批量工业化生产。</p>
+<p>Synthetic yeast could also be used to make bioplastic—a material that, unlike plastic made from petroleum, would be biodegradable. Using this material would help reduce pollution.<br/>合成酵母还可以用于制造生物塑料，这种材料与石油制成的塑料不同，它可以生物降解。使用这种材料将有助于减少污染。</p>
+<p>Boeke says the possible uses for yeast are limited only by one's imagination.<br/>博伊科表示，酵母的潜在用途超出人们的想象。</p>
+<p>"They can be programmed through DNA writing to produce really an almost limitless range of products in terms of molecules or chemical compounds that that can replace things that we currently make from petroleum or other sources and as well as some new materials that don't even exist today."<br/>博伊科说：“它们可以通过DNA编写进行编程，从而在分子或化学化合物方面生产出几乎无限范围的产品。这些产品可以取代我们目前通过石油或其它来源生产的物质，以及一些目前甚至不存在的新材料。”</p>
+<p>So far, scientists have engineered yeast to produce bright colors. The yeast can make artwork, and in the future, may even be used to paint a house.<br/>到目前为止，科学家已经改造过酵母以产生明亮的色彩。这些酵母可以制作艺术品，未来甚至可以用于刷墙。</p>
+<p>But, to be clear, Boeke says, his teams are not creating new life.<br/>但是博伊科表示，需要明确的是，他的团队并非创造新生命。</p>
+<p>"No one's ever created life out of non-living material. All the experiments we do start with pre-existing living cells and we introduced modified DNA into it so that's actually a common misunderstanding that we're creating life. We are not creating life."<br/>博伊科说：“没有人曾经从非生物材料中创造出生命。我们所有的实验都是从现有的活细胞开始，然后引入改造过的DNA。所以实际上人们常常误解我们是在创造生命。我们不是在创造生命。”</p>
+<p><strong>Too much power?<br/>能量太大？</strong></p>
+<p>However, redesigning DNA worries some people. Laurie Zoloth is a bioethicist at Northwestern University. She told the Associated Press (AP) that she is concerned about making organisms with "properties we cannot fully know." She said the work would concern people who believe creating life from scratch would give humans power they should not have.<br/>然而，重新设计DNA引起了一些人的担忧。劳里·佐洛特（Laurie Zoloth）是美国西北大学的生物伦理学家。她对美联社表示，她非常担忧以我们无法充分了解的特性来制造生物体。她说，这项工作让一些人非常担忧，这些人认为从零开始创造生命会赋予人类他们不该有的能力。</p>
+<p>"It is not only a science project," she wrote to AP. "It is an ethical and moral and theological proposal of significant proportions."<br/>她说：“这不仅仅是一个科学项目，它很大程上是一种伦理、道德和神学上的提议。”</p>
+<p>Boeke says he does not think his team is doing anything dangerous. He says he and other scientists always look at the risks, especially when it comes to food safety, or when researchers engineer viruses.<br/>博伊科表示，他不认为自己的团队在做一些危险的事情。他说，他和其他科学家经常考虑到风险，特别是食品安全方面，或是研究人员改造病毒的基因结构。</p>
+<p>Boeke says safety regulations help people who want to work in those areas.<br/>博伊科表示，安全规程帮助了那些想从事该领域的人们。</p>
+<p>Other researchers experimenting with DNA are waiting to see the results of this yeast work.<br/>用DNA做实验的其他研究人员正在观望这种酵母运作的结果。</p>
+<p>June Medford is with the University of Colorado.<br/>朱恩·梅德福德（June Medford）就职于科罗拉多大学。</p>
+<p>"I paid very careful attention to when they say ‘here are the lessons learned,' because if they can't do it in a simple thing like yeast, I will never be able to do it in a plant."<br/>梅德福德说：“当遇到他们说的经验教训时我非常注意，因为如果他们无法在酵母这种简单的生物体中做到，那么我也就永远无法在植物身上做到。”</p>
+<p>But Medford and other DNA researchers will have to wait. Boeke needs at least another year to finish his pioneering project.<br/>但是梅德福德和其他DNA研究人员尚需等待时日。博伊科至少还需要一年才能完成他的这项开创性项目。</p>
+<p>I'm Anne Ball.<br/>我是安妮·波尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Scientists Building Redesigned Life Forms]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]For thousands of years, humans have used yeast
+[00:04.80]for making bread and alcoholic drinks, such as beer.
+[00:10.44]But scientists are now constructing synthetic yeast
+[00:15.56]that can do more than make a sandwich or a drink.
+[00:20.13]The synthetic yeast can be used for medicines,
+[00:25.32]vaccines, and biofuels – among other things.
+[00:30.96]So, how does it work?
+[00:33.60]Yeast, like humans, are living organisms with DNA.
+[00:39.64]DNA is short for deoxyribonucleic acid.
+[00:46.76]On long strings it carries the genetic instructions used in the growth,
+[00:54.16]functioning and reproduction of all living things.
+[01:00.84]Modern science allows researchers to cut
+[01:04.60]and move around the four biological compounds that make up DNA.
+[01:11.56]The compounds are known by the letters A,C, G and T.
+[01:20.00]The yeast genome, or its genetic material map,
+[01:25.20]has more than 10 million of these DNA letters.
+[01:30.88]But that is nothing compared to us:
+[01:34.44]Humans have about three billion.
+[01:39.16]Scientists have long been able to make changes in the DNA code.
+[01:45.44]But now, some scientists are doing something different.
+[01:51.20]When you walk into Jef Boeke's lab it smells like bread rising.
+[01:59.20]But his team is not making homemade dough.
+[02:03.84]Instead, they are changing the order of genes in yeast cells.
+[02:11.56]Boeke manages a team of 11 labs on four continents.
+[02:18.12]He spoke to VOA Learning English about this project.
+[02:24.12]"What we're doing basically is writing that DNA
+[02:30.04]and we also modify it along the way,
+[02:34.46]so we kind of redesign it on a computer,
+[02:37.76]and then it's that modified DNA that we actually put into cells.
+[02:43.62]We swap it in place of the DNA that's already there."
+[02:48.44]So far, the scientists have constructed and replaced six of yeast's 16 chromosomes.
+[02:58.52]The new chromosomes have all worked well.
+[03:03.04]Yeast is already used to produce many other valuable compounds,
+[03:08.76]such as medicines, vaccines and biofuels.
+[03:14.20]By making synthetic yeast,
+[03:17.13]researchers could make different combinations used for different jobs.
+[03:24.08]For example, one combination may be better for making biofuel,
+[03:30.02]and another for making medicine.
+[03:33.88]These compounds could then be made in large, industrial amounts.
+[03:40.68]Synthetic yeast could also be used to make bioplastic
+[03:46.88]—a material that, unlike plastic made from petroleum, would be biodegradable.
+[03:54.64]Using this material would help reduce pollution.
+[04:00.28]Boeke says the possible uses for yeast are limited only by one's imagination.
+[04:10.12]"They can be programmed through DNA writing to produce
+[04:16.40]really an almost limitless range of products
+[04:21.12]in terms of molecules or chemical compounds
+[04:25.28]that that can replace things that we currently make from petroleum or
+[04:32.00]other sources and as well as some new materials
+[04:36.12]that don't even exist today."
+[04:38.76]So far, scientists have engineered yeast to produce bright colors.
+[04:45.44]The yeast can make artwork, and in the future,
+[04:50.12]may even be used to paint a house.
+[04:55.68]But, to be clear, Boeke says, his teams are not creating new life.
+[05:05.04]"No one's ever created life out of non-living material.
+[05:10.92]All the experiments we do start with pre-existing living cells
+[05:16.24]and we introduced modified DNA into it
+[05:20.32]so that's actually a common misunderstanding that we're creating life.
+[05:26.04]We are not creating life."
+[05:28.28]However, redesigning DNA worries some people.
+[05:34.20]Laurie Zoloth is a bioethicist at Northwestern University.
+[05:40.92]She told the Associated Press (AP) that she is concerned
+[05:45.76]about making organisms with "properties we cannot fully know."
+[05:51.15]She said the work would concern people who believe creating life
+[05:58.08]from scratch would give humans power they should not have.
+[06:04.80]"It is not only a science project," she wrote to AP.
+[06:10.16]"It is an ethical and moral and theological proposal of significant proportions."
+[06:19.72]Boeke says he does not think his team is doing anything dangerous.
+[06:26.36]He says he and other scientists always look at the risks,
+[06:31.96]especially when it comes to food safety, or when researchers engineer viruses.
+[06:40.68]Boeke says safety regulations help people who want to work in those areas.
+[06:48.40]Other researchers experimenting with DNA
+[06:52.64]are waiting to see the results of this yeast work.
+[06:57.96]June Medford is with the University of Colorado.
+[07:03.24]"I paid very careful attention to when they say ‘here are the lessons learned,'
+[07:08.48]because if they can't do it in a simple thing like yeast,
+[07:11.07]I will never be able to do it in a plant."
+[07:13.72]But Medford and other DNA researchers will have to wait.
+[07:18.96]Boeke needs at least another year to finish his pioneering project.
+[07:26.47]I'm Anne Ball. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

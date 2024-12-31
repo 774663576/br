@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Light at the End of the Tunnel'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Light at the End of the Tunnel'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/light-at-the-end-of-the-tunnel.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Light at the End of the Tunnel'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/light-at-the-end-of-the-tunnel.mp3" id="mp3"></a>
+<a href="/static/lrc/light-at-the-end-of-the-tunnel.lrc" id="lrc"></a>
+<a href="us-panama-and-colombia-announce-new-campaign-to-stop-illegal-migration-90728.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">15 April 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Tunnels are long passageways that help us get from one point to another. We drive through tunnels. Subways and trains travel through tunnels. We can walk through tunnels and be protected from bad weather.</p>
+<p>Some tunnels are very long. When we drive through them, we must turn on our headlights. If not, we cannot see! If you are afraid of long dark tunnels, having lights is important.</p><div class="contentImage"><img alt="FILE - People walk through a tunnel, a new tourist attraction, at at the Niagara Parks Power Station in Niagara Falls, Ontario, Canada, June 28, 2022. (REUTERS/Carlos Osorio)" src="https://files.21voa.com/gdb/10060000-0aff-0242-38d0-08da59f87039_cx0_cy3_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - People walk through a tunnel, a new tourist attraction, at at the Niagara Parks Power Station in Niagara Falls, Ontario, Canada, June 28, 2022. (REUTERS/Carlos Osorio)</span></div>
+<p>And that gives us this expression – <u>light at the end of the tunnel.</u></p>
+<p>This means to have hope that a bad situation will soon come to an end.</p>
+<p>Imagine you are traveling through a long, dark tunnel. You keep going and going but you only see darkness. Then, finally, you see light up ahead! The end of the tunnel is near!</p>
+<p>We use this expression for any difficult situation or long process. Let's say you are working on a long difficult project. It feels like you will never finish. But then, after a long day of working you finally <u>see the light at the end of the tunnel</u>. There is hope that the project will finally be finished. </p>
+<p>Our other tunnel expression for today is not as hopeful.</p>
+<p>Tunnel vision is an actual condition where your field of vision is limited. You have a <strong>narrow</strong> field of vision resulting in loss of side vision. That is the medical condition.</p>
+<p>As an expression, to have <u>tunnel vision</u> means you are narrow-minded. You have a small or narrow viewpoint on a certain subject. It can also mean that you are single-minded, meaning you are only able to think of one thing.</p>
+<p><u>Tunnel vision</u> is usually not considered a good thing. But sometimes having <u>tunnel vision</u> temporarily helps you to finish something. Used this way, <u>tunnel vision</u> means to be extremely <strong>focused</strong> on something or on a part of something while ignoring other things. So, again, that can be helpful.</p>
+<p>When talking about people who have <u>tunnel vision</u>, we can also say they <u>have blinders on</u>. They are not willing to see certain things. As with <u>tunnel vision</u>, <u>having blinders on</u> can also help you finish something difficult or meet a goal.</p>
+<p>"Tunnel" can also be used a verb. It means to dig or <strong>bore</strong> through something. It is quite an act to tunnel through a mountain when making a tunnel. But you can also dig through things like work. If I tunnel through a pile of documents, it means I was buried in work but worked my way out.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. Until next time.</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story </strong></h2>
+<p><strong>narrow </strong><em>– adj.</em><strong> </strong>of slender width limited in size or scope not broad or open in views or opinions</p>
+<p><strong>focused</strong> <em>– v.</em>to cause to be concentrated</p>
+<p><strong>bore</strong> <em>– v. </em>to make (as a hole shaped like a cylinder) by boring or digging away material</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'Light at the End of the Tunnel']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.64]And now, Words and Their Stories,
+[00:11.48]from VOA Learning English.
+[00:14.56]Tunnels are long passageways
+[00:22.24]that help us get from one point to another.
+[00:26.96]We drive through tunnels.
+[00:29.16]Subways and trains travel through tunnels.
+[00:32.96]We can walk through tunnels
+[00:35.60]and be protected from bad weather.
+[00:39.64]Some tunnels are very long.
+[00:42.48]When we drive through them,
+[00:45.00]we must turn on our headlights.
+[00:47.72]If not, we cannot see!
+[00:51.92]If you are afraid of long dark tunnels,
+[00:55.36]having lights is important.
+[00:59.40]And that gives us this expression –
+[01:02.48]light at the end of the tunnel.
+[01:07.04]This means to have hope
+[01:09.12]that a bad situation
+[01:11.40]will soon come to an end.
+[01:14.80]Imagine you are traveling through a long, dark tunnel.
+[01:19.84]You keep going and going
+[01:22.52]but you only see darkness.
+[01:26.32]Then, finally,
+[01:28.04]you see light up ahead!
+[01:31.16]The end of the tunnel is near!
+[01:34.24]We use this expression
+[01:37.12]for any difficult situation
+[01:39.28]or long process.
+[01:42.72]Let's say you are working on a long difficult project.
+[01:47.04]It feels like you will never finish.
+[01:51.04]But then, after a long day of working
+[01:55.20]you finally see the light at the end of the tunnel.
+[02:00.28]There is hope that the project will finally be finished.
+[02:05.56]Our other tunnel expression for today
+[02:08.48]is not as hopeful.
+[02:11.76]Tunnel vision is an actual condition
+[02:15.16]where your field of vision is limited.
+[02:19.20]You have a narrow field of vision
+[02:21.64]resulting in loss of side vision.
+[02:26.04]That is the medical condition.
+[02:29.32]As an expression,
+[02:31.56]to have tunnel vision means you are narrow-minded.
+[02:36.84]You have a small
+[02:38.36]or narrow viewpoint on a certain subject.
+[02:43.12]It can also mean that you are single-minded,
+[02:46.92]meaning you are only able to think of one thing.
+[02:53.00]Tunnel vision is usually not considered a good thing.
+[02:58.48]But sometimes
+[03:00.32]having tunnel vision temporarily
+[03:03.08]helps you to finish something.
+[03:06.80]Used this way, tunnel vision
+[03:09.68]means to be extremely focused on something
+[03:13.48]or on a part of something
+[03:16.60]while ignoring other things.
+[03:19.92]So, again, that can be helpful.
+[03:24.52]When talking about people who have tunnel vision,
+[03:28.08]we can also say they have blinders on.
+[03:31.72]They are not willing to see certain things.
+[03:36.84]As with tunnel vision,
+[03:38.84]having blinders on can also help you
+[03:42.24]finish something difficult or meet a goal.
+[03:47.52]"Tunnel" can also be used a verb.
+[03:51.00]It means to dig or bore through something.
+[03:56.36]It is quite an act
+[03:58.12]to tunnel through a mountain
+[04:00.16]when making a tunnel.
+[04:02.92]But you can also dig through things like work.
+[04:06.84]If I tunnel through a pile of documents,
+[04:10.56]it means I was buried in work
+[04:13.60]but worked my way out.
+[04:16.48]And that's all the time we have
+[04:19.56]for this Words and Their Stories.
+[04:22.04]Until next time.
+[04:23.68]I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

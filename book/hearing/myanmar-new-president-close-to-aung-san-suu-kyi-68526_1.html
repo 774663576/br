@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 昂山素季密友吴廷觉当选缅甸总统</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 昂山素季密友吴廷觉当选缅甸总统" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/se-myanmar-new-president-close-to-aung-san-suu-kyi.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>昂山素季密友吴廷觉当选缅甸总统</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/se-myanmar-new-president-close-to-aung-san-suu-kyi.mp3" id="mp3"></a>
+<a href="/static/lrc/se-myanmar-new-president-close-to-aung-san-suu-kyi.lrc" id="lrc"></a>
+<a href="myanmar-new-president-close-to-aung-san-suu-kyi-68526.html" id="CnPage" target="_blank"></a>
+<a href="social-media-is-keeping-young-adults-awake-68507.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Myanmar's parliament has elected Htin Kyaw as the country's next president.<br/>缅甸议会推选出吴廷觉作为该国的下一任总统。</p>
+<p>The retired bureaucrat from the National League for Democracy, or NLD, won 360 of the 652 votes in a joint meeting of the legislature.<br/>这位全国民主联盟退休官员在缅甸议会联席会议上赢得了652票中的360票。</p>
+<p>Htin Kyaw is not a member of parliament, but he is a close ally of NLD leader Aung San Suu Kyi. The pro-democracy leader was among the first to vote in Tuesday's historic election.<br/>吴廷觉不是国会议员，但他是全国民主联盟主席昂山素季的密友。昂山素季这位亲民主运动领袖在周二的历史性选举中是第一批投票的议员。</p>
+<p>Aung San Suu Kyi made no comment to reporters after the vote.<br/>昂山素季在投票之后未对记者发表任何言论。</p>
+<p>The Nobel Prize winner is popular with most citizens of Myanmar, also known as Burma. But she is barred by the constitution from becoming president because both of her sons have foreign citizenship.<br/>这位诺贝尔奖获得者深受大多数缅甸人民的喜爱。但是根据宪法规定，因为她的两个儿子拥有外国国籍，她不得成为总统。</p>
+<p>A U.S. State Department official said the constitutional ban did not agree with basic democratic ideas.<br/>美国国务院一位官员表示，宪法禁令和基本的民主理念并不一致。</p>
+<p>"We remain concerned about certain provisions in Burma's constitution that contradict fundamental democratic principles and prevent the people of Burma from voting for the leaders of their choice," said the official.<br/>该官员表示，“我们对缅甸宪法中的若干规定表示关切，这些规定违背了基本的民主原则，妨碍缅甸人民选出他们选择的领导人。”</p>
+<p>"The people of Burma should be able to decide whether and when to amend the country's constitution to alter or remove these provisions."<br/>“缅甸人民应该能够决定是否以及何时修改该国宪法，以修改或删除这些规定。”</p>
+<p>Aung San Suu Kyi has declared she will hold power over the president, whom she has known since primary school.<br/>昂山素季曾经宣布，她的权利将会高于这位她小学时就认识的总统。</p>
+<p>However, the military will remain powerful in the new government because it automatically holds one quarter of the parliamentary seats. The military also will control several important ministries.<br/>然而军方在新政府中仍将非常有影响力。因为军方自动拥有四分之一的议会席位。军方还将将控制几个重要部门。</p>
+<p>Officials tried to prevent reporters from interviewing or videotaping the military's members of parliament as they registered for the joint session.<br/>在议会军方成员在联席会议登记时，有关官员试图阻止记者采访或拍摄这些成员。</p>
+<p>"When the NLD forms a government, we will need to work together with them," an army brigadier general, who declined to give his name, told VOA.<br/>一位拒绝透露名字的缅甸陆军准将对美国之音表示，“在全国民主联盟组建新政府之后，我们需要和他们一起合作。”</p>
+<p>The army's candidate for president, General Myint Swe, who placed second, will become the first vice president. The general, however, remains on a U.S. government blacklist, and Americans are barred with doing business with him.<br/>军方的总统候选人吴敏瑞得票排名第二位，他将出任第一副总统。然而这位将军仍然在美国政府的黑名单上，美国人不得跟他做生意。</p>
+<p>The NLD's Henry Van Thio, a Christian from Chin state, finished third in Tuesday's voting and will become second vice president.<br/>全国民主联盟的亨利·班提育，一位来自钦邦的基督徒，在周二的选举中排名第三，他将成为第二副总统。</p>
+<p>After the vote on Tuesday, lawmakers from both the NLD and the now opposition Union Solidarity and Development Party (USDP) stressed the need to work together.<br/>在周二的选举之后，来自全国民主联盟和如今的反对党巩固与发展党的国会议员强调要共同努力。</p>
+<p>However, analysts and some members of the NLD have expressed concern. They fear the influence of the generals will mean corruption will continue to be a problem in Myanmar.<br/>然而，分析人士以及全国民主联盟的一些成员表达了担忧。他们担心将军们的影响力会意味着腐败仍将是缅甸的一大问题。</p>
+<p>Myanmar is a mainly Buddhist country of more than 55 million people. The country has suffered civil war or ethnic conflict for many of the years since the end of British colonial rule in 1948.<br/>缅甸是一个人口超过5500万，以佛教为主的国家。该国自1948年英国殖民统治之后，遭遇了连年内战或种族冲突。</p>
+<p>There has been progress in negotiating peace deals with different groups since a nominally civilian government took power in 2011. But low-intensity conflicts continue between Myanmar's army and a number of armed ethnic minority groups.<br/>自从2011年名义上的文职政府上台以来，各派在和平协议谈判上取得了一些进展。但是缅甸军方和一些少数民族武装群体之间还存在低强度的冲突。</p>
+<p>The new government will take office on April 1.<br/>新政府将于4月1日就职。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.60]Myanmar's parliament has elected Htin Kyaw as the country's next president.
+[00:07.00]The retired bureaucrat from the National League for Democracy, or NLD,
+[00:12.80]won 360 of the 652 votes in a joint meeting of the legislature.
+[00:21.28]Htin Kyaw is not a member of parliament,
+[00:25.12]but he is a close ally of NLD leader Aung San Suu Kyi.
+[00:31.88]The pro-democracy leader was among the first to vote in Tuesday's historic election.
+[00:40.12]Aung San Suu Kyi made no comment to reporters after the vote.
+[00:45.80]The Nobel Prize winner is popular with most citizens of Myanmar, also known as Burma.
+[00:53.44]But she is barred by the constitution from becoming president
+[00:58.72]because both of her sons have foreign citizenship.
+[01:03.88]A U.S. State Department official said
+[01:07.16]the constitutional ban did not agree with basic democratic ideas.
+[01:13.57]"We remain concerned about certain provisions in Burma's constitution
+[01:19.68]that contradict fundamental democratic principles
+[01:23.60]and prevent the people of Burma
+[01:25.96]from voting for the leaders of their choice," said the official.
+[01:30.68]"The people of Burma should be able to decide whether and when
+[01:36.08]to amend the country's constitution to alter or remove these provisions."
+[01:44.44]Aung San Suu Kyi has declared she will hold power over the president,
+[01:50.56]whom she has known since primary school.
+[01:54.64]However, the military will remain powerful in the new government
+[01:59.72]because it automatically holds one quarter of the parliamentary seats.
+[02:05.68]The military also will control several important ministries.
+[02:12.12]Officials tried to prevent reporters from interviewing or videotaping
+[02:18.24]the military's members of parliament as they registered for the joint session.
+[02:25.00]"When the NLD forms a government,
+[02:27.60]we will need to work together with them,"
+[02:30.56]an army brigadier general, who declined to give his name, told VOA.
+[02:36.92]The army's candidate for president, General Myint Swe,
+[02:42.68]who placed second, will become the first vice president.
+[02:47.64]The general, however, remains on a U.S. government blacklist,
+[02:52.36]and Americans are barred with doing business with him.
+[02:57.20]The NLD's Henry Van Thio, a Christian from Chin state,
+[03:03.40]finished third in Tuesday's voting and will become second vice president.
+[03:10.80]After the vote on Tuesday,
+[03:13.16]lawmakers from both the NLD
+[03:16.00]and the now opposition Union Solidarity and Development Party (USDP)
+[03:21.92]stressed the need to work together.
+[03:26.28]However, analysts and some members of the NLD have expressed concern.
+[03:32.74]They fear the influence of the generals
+[03:35.84]will mean corruption will continue to be a problem in Myanmar.
+[03:41.12]Myanmar is a mainly Buddhist country of more than 55 million people.
+[03:48.72]The country has suffered civil war or ethnic conflict
+[03:52.92]for many of the years since the end of British colonial rule in 1948.
+[04:00.44]There has been progress in negotiating peace deals with different groups
+[04:06.96]since a nominally civilian government took power in 2011.
+[04:14.00]But low-intensity conflicts continue between Myanmar's army
+[04:19.32]and a number of armed ethnic minority groups.
+[04:24.40]The new government will take office on April 1.
+[04:30.00]I'm Mario Ritter.
+[04:32.76]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

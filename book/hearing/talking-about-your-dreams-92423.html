@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Talking about Your Dreams</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Talking about Your Dreams" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/talking-about-your-dreams.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Talking about Your Dreams</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/talking-about-your-dreams.mp3" id="mp3"></a>
+<a href="aid-groups-gaza-haiti-are-facing-famine-92419.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Jill Robbins</span><br/>
+<span class="datetime">21 March 2024</span><br/>
+<p>In an earlier <em>Everyday Grammar</em>, we talked about "Fast Car," a song about young people who had dreams of making their lives better. Then, we asked our readers and listeners to tell us about their own dreams.</p>
+<p>In today's lesson, we will review two answers we received, both from people in their middle years of life, and we give some grammar advice.</p>
+<p><strong>Jairo's dream</strong></p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-dc69-08dc48330aaa_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>First, we want to thank Jairo, a middle-aged man who wrote to us. He said,</p>
+<p><em>"Today everyday grammar topic is about dreams, how can I describe my dream? This is an interesting topic over all for people who already has <strong>certain</strong> age, like me; as well, the time is not longer for following an eternal dream..."</em></p>
+<p>Jairo used an interesting expression to tell us about his age. He said, "people who already has certain age." You might have heard this expression in sentences like:</p>
+<p><em>A person of a certain age needs to be concerned about retirement funds.</em></p>
+<p>Note that the verb "has" is not used, but the preposition "of" is used before "a certain age." As you can guess, this is a <strong>polite</strong> way to describe someone in their 40s, 50s, or 60s. It is often used to talk about women's age without saying how old they are. Sometimes it comes before criticism, so take care in using it.</p>
+<p><strong>Time is growing shorter</strong><strong> </strong></p>
+<p>Jairo said, "the time is not longer for following an eternal dream." We suggest using, "the time is growing shorter" or "there is little time left." Jairo could say,</p>
+<p><em>The time for me to follow my dream is growing shorter.</em></p>
+<p>Jairo continues to tell us about what is now important to meeting his life goals.</p>
+<p><em>"... for that reason I need to be focus on important things, indeed, buy a house, save money for my daughter's scholarship, save money for taking a vacations or save money to be prepare for my retirement time..."</em></p>
+<p>In this statement, Jairo uses "be" before an infinitive verb form two times: "be focus" and "be prepare." We suggest using the adjective form in both:</p>
+<p><em>I need to <u>be focused</u> on important things.</em></p>
+<p><em>I need to save money to <u>be prepared</u> for my retirement.</em></p>
+<p><strong>Kaori's dreams</strong><br/>
+Next, we review a message from Kaori, who is a middle-aged woman in Japan. She begins by saying what she dreamed as a young person, using the expression we heard in the song, "Fast Car" – "to be someone."</p>
+<p><em>"When I was young, I strongly believed I would be someone in the future. I wanted to be the first female Prime Minister in Japan or an executive of the big famous company."</em></p>
+<p>Kaori did earn a job at a company, but then marriage and children and culture forced her to quit working. She says:</p>
+<p><em>"However, I didn't become anyone...I stopped my job and gave up my carrier. Do I regret my decision and my life? No. Not at all.</em></p>
+<p>From the remaining part of Kaori's message, we find she was a success at being a mother, as her two daughters are in college. And she gained a part-time job that helped to pay their school costs when they were younger. The corrections to her message that we suggest are the spelling of "career" and how to say you have quit a job. We can say, "I stopped working," or "I quit working." But Kaori could also say, "I changed jobs," because being a homemaker and mother, although unpaid, is a full-time job. Kaori did all that while holding a part-time job.</p>
+<p>Thinking of how her dream changed over time, Kaori writes:</p>
+<p><em>My past dreams were only thinking, not real. I can say my own dreams have changed everytime. In the future, even if I become old, I hope to find new and enjoyable dreams at anytime.</em></p>
+<p>Two words in this part cause grammatical issues: "everytime" and "anytime." "Every time" should be written as two separate words, but a better way to say this would be:</p>
+<p>I can say my own dreams have changed over the years.</p>
+<p>"Anytime" is an adverb, so it should not appear after the preposition "at." Instead, Kaori could say,</p>
+<p><em>I hope to find new and enjoyable dreams anytime.</em></p>
+<p>Or she could use a different expression:<em> </em></p>
+<p><em>I hope to find new and enjoyable dreams my whole life long.</em></p>
+<p>Thank you, Kaori and Jairo, for writing to us and helping everyone to learn more about how we talk about our dreams. You both showed us that dreams can change over time as our lives become connected with those of others.</p>
+<p>And that's <em>Everyday Grammar</em>!</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for VOA Learning English.</em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>certain </strong>– <em>adj.</em> definite or particular, but not named or specified</p>
+<p><strong>polite </strong>–adj. showing good behavior and consideration for the needs of others</p>
+<p><strong>guess</strong><strong><em> </em></strong><em>– v.</em> to think or suppose</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

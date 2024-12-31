@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Raise a Red Flag</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Raise a Red Flag" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/raise-a-red-flag.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Raise a Red Flag</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/raise-a-red-flag.mp3" id="mp3"></a>
+<a href="designers-turn-to-environment-friendly-materials-90311.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">21 January 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Red is nature's color of warning. Animals and plants with bright red colors are sometimes dangerous for other animals to eat.</p>
+<p>Many Western countries also use red color for warnings. Red lights at train and road crossings warn drivers to stop. Red, as well as yellow, road signs tell people to be careful in dangerous areas.</p>
+<div class="contentImage"><img alt="FILE - A red warning flag flies as palm trees sway in the wind as Hurricane Sally approaches in Gulf Shores, Alabama, U.S., September 15, 2020. (REUTERS/Jonathan Bachman)" src="https://files.21voa.com/gdb/d0e3dbbf-0764-4043-bacc-fd60ac652884_cx0_cy11_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">FILE - A red warning flag flies as palm trees sway in the wind as Hurricane Sally approaches in Gulf Shores, Alabama, U.S., September 15, 2020. (REUTERS/Jonathan Bachman)</span></div>
+<p>And if you see a red flag on an ocean beach, that means the water is too dangerous for swimming.</p>
+<p>That brings us to today's expression: <u>a red flag</u>.</p>
+<p>If we say something is <u>a red flag</u>, that means we think it will likely cause problems or lead to danger. Let's hear how this expression is used in conversation:</p>
+<p>A: <em>Did you know that Mary has a new boyfriend?</em></p>
+<p>B: <em>Yes, but I'm kind of surprised at her choice.</em></p>
+<p>A: <em>Why?</em></p>
+<p>B: <em>Well, he doesn't have a job, for one thing. And he was dismissed from his last two jobs.</em></p>
+<p>A: <em>Ooo. That seems like <u>a red flag</u>.</em></p>
+<p>B: <em>It is <u>a red flag</u>, if you ask me!</em></p>
+<p>In this example, the speakers think the boyfriend's work experience should be a warning to Mary.</p>
+<p>We can also say something is <u>a bad sign</u> to mean the same thing as <u>a red flag</u>.</p>
+<p>Many states in the United States have laws that try to prevent dangerous people from having guns. These laws are commonly called <u>red flag</u> laws.</p>
+<p>When someone expresses concern or a warning over something, we say the person <u>raises a red flag</u>. For example, if people worry that a leader is making bad decisions, they might say those decisions <u>are raising red flags</u>.</p>
+<p>As you can see, we use the expression <u>red flag</u> in many situations.</p>
+<p>We use it mainly to warn about other people's behavior rather than natural dangers.</p>
+<p>Unless you are at the beach. In that case, <u>a red flag</u> means you should stay out of the water!</p>
+<p>See if you can find the use of <u>raise a red flag</u> in <a class="wsw__a" href="https://www.21voa.com/a/at-dubai-airport-eyes-become-travelers-passports/5812009.html">this VOA Learning English article about airport security.</a></p>
+<p>You can also hear more examples of <u>red flag</u> in this <a class="wsw__a" href="https://www.21voa.com/a/3390586.html">English in a Minute video from VOA Learning English</a>.</p>
+<p>Keep learning new expressions with<em> Words and Their Stories</em>!</p>
+<p>Until next time, I'm Andrew Smith.</p>
+<p><em style="font-size: 9pt;">Andrew Smith wrote this story for VOA Learning English. Hai Do was the editor.</em></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

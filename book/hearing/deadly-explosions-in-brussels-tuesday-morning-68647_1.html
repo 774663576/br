@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 伊斯兰国宣称对布鲁塞尔致命爆炸事件负责</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 伊斯兰国宣称对布鲁塞尔致命爆炸事件负责" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/se-deadly-explosions-in-brussels-tuesday-morning.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>伊斯兰国宣称对布鲁塞尔致命爆炸事件负责</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/se-deadly-explosions-in-brussels-tuesday-morning.mp3" id="mp3"></a>
+<a href="/static/lrc/se-deadly-explosions-in-brussels-tuesday-morning.lrc" id="lrc"></a>
+<a href="deadly-explosions-in-brussels-tuesday-morning-68647.html" id="CnPage" target="_blank"></a>
+<a href="is-email-stressing-you-out-68629.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The Islamic State terrorist group claimed responsibility for the attacks at the Brussels airport and metro that killed at least 30 people and injured 130 others.<br/>伊斯兰国恐怖组织宣称对布鲁塞尔机场和地铁站发生的袭击事件负责，此次袭击至少造成30人遇难，还有130人受伤。</p>
+<p>Two bombs exploded at Zaventem airport about 8 in the morning near the Swissport airline passenger area and a Starbucks coffee shop. At least 11 people were killed in the two airport bombings.<br/>早上8点钟左右，两枚炸弹在扎芬特姆机场爆炸，爆炸地点邻近瑞士空港公司民航乘客区以及星巴克咖啡馆。至少有11人在这两起机场爆炸事件中遇难。</p>
+<p>About an hour later, another bomb exploded at the Maelbeek metro station during rush hour. A spokesman for the Brussels Metro system said the explosion on a train killed as many as 20 people and injured 55. The metro station is also near the European Union headquarters.<br/>大约1小时后，另一枚炸弹于高峰时段在马埃勒贝克地铁站爆炸。布鲁塞尔地铁系统发言人表示，发生在地铁上的这次爆炸造成多达20人遇难，以及55人受伤。该地铁站靠近欧盟总部。</p>
+<p>Belgian Prime Minister Charles Michel told reporters "This is a black moment in our country. Everyone please be calm and show solidarity. What we feared has come to pass. Our country has been struck by attacks which are blind, violent and cowardly."<br/>比利时首相查尔斯·米歇尔（Charles Michel）告诉记者，“这是比利时黑暗的一天，大家请保持冷静并团结一致。我们所害怕的事情已经发生了。比利时遭到了盲目、暴力和怯懦的袭击。”</p>
+<p>In a statement, French President Francois Hollande said, "Through the attacks in Brussels, the whole of Europe has been hit." The French prime minister added, "We are at war. We have been subjected for the last few months in Europe to acts of war."<br/>法国总统弗朗索瓦·奥朗德（Francois Hollande）在一份声明中表示，“布鲁塞尔遇袭是整个欧洲遭受打击。”奥朗德补充说，“我们处于战争状态，过去几个月欧洲遭受了战争行为。”</p>
+<p>In Havana, Cuba, President Barack Obama said, "We will do whatever is necessary to support our friend and ally Belgium in bringing to justice those who are responsible. And this is yet another reminder that the world must unite regardless of nationality or race or faith in fighting against the scourge of terrorism."<br/>美国总统奥巴马在古巴的哈瓦那表示，“美国将采取一切必要措施，支持我们的朋友和盟友比利时将罪犯绳之以法。这次事件再次提醒人们，世界必须不分国籍、宗族和信仰，团结起来打击恐怖主义的危害。”</p>
+<p>After the explosions, officials in Belgium closed the airport, metro system, other train stations, schools, shopping areas and museums. They told people who had not already departed for work to stay home. And they told those already at their offices to remain there.<br/>爆炸发生后，比利时官员关闭了机场、地铁系统、其它火车站、学校、购物区以及博物馆。他们吩咐尚未出门上班的人们留在家里，还吩咐已经到办公室的人们呆在原地。</p>
+<p>Belgian officials also released a photo taken from closed circuit TV of three men with luggage carts. They said two of them were the suicide bombers and that the third — dressed in a light-colored coat, black hat and glasses — was at large.<br/>比利时官员还发布了推着行李车的三名男子的照片，这些照片源自闭路电视。他们表示，其中两人是自杀式炸弹袭击者，而第三名穿着浅色外套、戴着黑色帽子和眼镜的男子在逃。</p>
+<p>Police later found a nail-filled bomb, chemical products and an Islamic State flag while searching a house in the Schaerbeek neighborhood.<br/>警方后来在搜查斯哈尔贝克街区的一栋房子时发现了一个填充着钉子的爆炸装置、若干化工产品以及一面伊斯兰国旗帜。</p>
+<p>The attacks happened just days after the arrest of Salah Abdeslam in Brussels. He is accused of being one of the leaders of the deadly Paris terrorist attacks in November. Some experts feared that his supporters would answer his arrest with attacks in Brussels.<br/>这次袭击发生在萨拉赫·阿卜杜勒－萨拉姆（ Salah Abdeslam）在布鲁塞尔被逮捕仅仅数天之后。他被指控是去年11月巴黎发生的致命恐怖袭击事件的领导者之一。一些专家担心，他的支持者会在布鲁塞尔进行袭击作为他被捕的回应。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳斯·埃文斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Islamic State terrorist group claimed responsibility
+[00:04.24]for the attacks at the Brussels airport and metro
+[00:08.56]that killed at least 30 people and injured 130 others.
+[00:15.32]Two bombs exploded at Zaventem airport about 8 in the morning
+[00:21.04]near the Swissport airline passenger area and a Starbucks coffee shop.
+[00:26.36]At least 11 people were killed in the two airport bombings.
+[00:32.24]About an hour later, another bomb exploded
+[00:35.96]at the Maelbeek metro station during rush hour.
+[00:39.72]A spokesman for the Brussels Metro system said
+[00:43.72]the explosion on a train killed as many as 20 people and injured 55.
+[00:51.12]The metro station is also near the European Union headquarters.
+[00:57.04]Belgian Prime Minister Charles Michel told reporters
+[01:01.36]"This is a black moment in our country.
+[01:04.76]Everyone please be calm and show solidarity.
+[01:09.44]What we feared has come to pass.
+[01:12.36]Our country has been struck by attacks
+[01:15.52]which are blind, violent and cowardly."
+[01:19.88]In a statement, French President Francois Hollande said,
+[01:24.92]"Through the attacks in Brussels, the whole of Europe has been hit."
+[01:30.40]The French prime minister added,
+[01:33.00]"We are at war. We have been subjected
+[01:36.40]for the last few months in Europe to acts of war."
+[01:40.74]In Havana, Cuba, President Barack Obama said,
+[01:45.52]"We will do whatever is necessary to support our friend
+[01:49.72]and ally Belgium in bringing to justice those who are responsible.
+[01:55.24]And this is yet another reminder
+[01:57.68]that the world must unite regardless of nationality or race or faith
+[02:03.72]in fighting against the scourge of terrorism."
+[02:07.56]After the explosions, officials in Belgium closed the airport,
+[02:12.76]metro system, other train stations, schools, shopping areas and museums.
+[02:20.28]They told people who had not already departed for work to stay home.
+[02:26.00]And they told those already at their offices to remain there.
+[02:31.28]Belgian officials also released a photo taken from closed circuit TV
+[02:37.40]of three men with luggage carts.
+[02:40.96]They said two of them were the suicide bombers
+[02:44.64]and that the third — dressed in a light-colored coat,
+[02:48.72]black hat and glasses — was at large.
+[02:52.72]Police later found a nail-filled bomb,
+[02:56.76]chemical products and an Islamic State flag
+[03:00.88]while searching a house in the Schaerbeek neighborhood.
+[03:04.76]The attacks happened just days after the arrest of Salah Abdeslam in Brussels.
+[03:11.52]He is accused of being one of the leaders
+[03:14.28]of the deadly Paris terrorist attacks in November.
+[03:18.47]Some experts feared that his supporters
+[03:22.00]would answer his arrest with attacks in Brussels.
+[03:25.96]I'm Jonathan Evans.
+[03:27.84]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

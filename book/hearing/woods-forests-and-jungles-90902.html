@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Woods, Forests and Jungles</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Woods, Forests and Jungles" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/woods-forests-and-jungles.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Woods, Forests and Jungles</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/woods-forests-and-jungles.mp3" id="mp3"></a>
+<a href="doctors-report-success-using-radiation-to-treat-irregular-heartbeat-90901.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">19 May 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question about the difference between "woods," "forests," and "jungles."</p>
+<p><strong>Question:</strong></p>
+<p>Hello Teacher!</p><div class="contentImage"><img alt="Ask a Teacher: Woods, Forests and Jungles" src="https://files.21voa.com/gdb/01000000-0aff-0242-45c3-08db561ba423_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Woods, Forests and Jungles</span></div>
+<p>This is Sumaira from Pakistan.</p>
+<p>I have been listening to the podcast since August 2022. I am so glad that it helps me to improve my listening skills.</p>
+<p>I want to ask you about the difference between the words "woods," "forest" and "jungle."</p>
+<p>Thanks,</p>
+<p>Sumaira</p>
+<p><strong>Answer </strong></p>
+<p>Thanks for writing to us, Sumaira. I love this question because I grew up playing in the woods a lot as a child.</p>
+<p>Let's start with the word "woods"</p>
+<p><strong>Woods</strong></p>
+<p>Woods are areas covered with tall growing trees. They are smaller than a forest. The word appears in the singular form, "a wood," especially in British English.</p>
+<p>The main difference between "woods" and a "forest" is the size of the land area and the amount of ground fully covered by trees called the canopy. There are several definitions for a forest. The U.S. National Vegetation Classification system <strong>classifies</strong> a forest as having 60 to 100 percent of the land covered by the tree canopy. The same system says "woods" are classified as having only 25 to 60 percent of the land covered by the tree canopy. A wood can be small so long as it is bigger than a grouping of trees.</p>
+<p><strong>Forests</strong></p>
+<p>A "forest" is a larger area where tall trees grow close together largely covering the ground below. There are three main kinds of forests found around the world.</p>
+<p>The first are <strong>temperate</strong> deciduous forests. Deciduous means that the trees' leaves turn different colors and fall off each year. These forests exist where the climate has four seasons and the temperature changes throughout the year.</p>
+<p>Many forests in Europe, the United States and parts of Canada are temperate deciduous forests. Animals that you would find in these forests include bears, deer, squirrels, owls and snakes.</p>
+<p><strong>Boreal</strong> forests are found in colder climates that often have freezing temperatures. They are found in places around the Baltic Sea, Siberia, Northern Canada and Alaska. Animals you would find in a boreal forest include reindeer, moose, Artic hares, wolves and wolverines.</p>
+<p><strong>Tropical</strong> forests are found near the <strong>equator</strong> in warmer, more humid climates. These forests experience two seasons, a rainy season and a dry season. In some tropical forests, the trees' leaves will fall off in the dry season just like deciduous forests. Tropical forests are found in places like India, Northern Australia, parts of Mexico and Bolivia and and in northwestern South America, on the Pacific Coast.</p>
+<p>This brings us to our next word, which is "jungle."</p>
+<p><strong>Jungle</strong></p>
+<p>The word "jungle" is a common term, not a scientific one, for forests found in the tropics. They are very dense and have a lot of undergrowth which means many of the plants and <strong>vegetation </strong>grow close to the ground. This undergrowth becomes <strong>tangled</strong> together and is extremely difficult to walk through.</p>
+<p>Animals you would find in a tropical jungle include primates like gorillas and m<i><i>onkey</i></i>s; birds like parrots; and reptiles like tropical snakes and lizards.</p>
+<p>Sometimes the word "jungle" is used to describe a rainforest. But a rainforest is another kind of forest. It has high rainfall throughout much of the year. The largest tropical rainforest is the Amazon Rainforest in South America. There are also temperate rainforests in the Pacific Northwest in the United States.</p>
+<p>Please let us know if these explanations and examples have helped you, Sumaira.</p>
+<p>What question do you have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>__________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>classify </strong><em>– v.</em> to organize things into groups by their type, size, or qualities</p>
+<p><strong>temperate</strong> <em>– adj.</em> moderate climate that lacks extremes</p>
+<p><strong>boreal </strong>– <em>adj</em>. of or relating to northern areas and regions</p>
+<p><strong>tropical </strong><em>– adj. </em>of or occurring in the tropics</p>
+<p><strong>equator</strong> <em>– n.</em> an imaginary line drawn around the earth equally distant from both poles, the parallel of latitude</p>
+<p><strong>vegetation </strong>– <em>n.</em> plants in general: plants that cover a particular area</p>
+<p><strong>tangle </strong><em>- v.</em> to become or cause (something) to become twisted together</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

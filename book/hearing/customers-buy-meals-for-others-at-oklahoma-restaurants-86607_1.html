@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄克拉荷马州餐厅顾客为他人买单</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 俄克拉荷马州餐厅顾客为他人买单" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202104/customers-buy-meals-for-others-at-oklahoma-restaurants.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄克拉荷马州餐厅顾客为他人买单</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202104/customers-buy-meals-for-others-at-oklahoma-restaurants.mp3" id="mp3"></a>
+<a href="/static/lrc/customers-buy-meals-for-others-at-oklahoma-restaurants.lrc" id="lrc"></a>
+<a href="customers-buy-meals-for-others-at-oklahoma-restaurants-86607.html" id="CnPage" target="_blank"></a>
+<a href="study-long-periods-in-space-can-shrink-the-heart-86605.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">In the small town of Miami in the central U.S. state of Oklahoma, people do not have as much money as they used to. Many lost their jobs because of the COVID-19 pandemic. Some are even homeless.<br/>
+在美国中部俄克拉荷马州的迈阿密小镇，人们不像以前那么有钱。许多人由于新冠肺炎大流行而失业。有些人甚至无家可归。
+<p>At two restaurants – Zack's Café and The Dawg House – customers are now doing their part to help others. When they are ready to pay for their meals, they can add another food item.<br/>
+在扎克咖啡馆和热狗屋这两家餐厅，顾客们现在正在尽自己的一份力量来帮助他人。当他们吃完准备买单时，他们可以再点些其它食物。</p>
+<p>On the walls in each restaurant are receipts for the donated meals. A receipt is a paper showing what has been purchased. Someone who is hungry can come in, choose a receipt, sit down and have something to eat.<br/>
+这两家餐厅的墙上都是捐献食物的收据。收据是显示已购买商品的单据。饿了的人可以进来，挑一张收据，坐下来吃点东西。</p>
+<p>Jennifer White owns The Dawg House, which opened last September. She sells hot dogs with extra items like meat, cheese, and bacon. She started the idea of the giving wall during the pandemic. Within eight hours, she said she had a wall filled with receipts.<br/>
+珍妮弗·怀特是去年9月开业的热狗屋的老板。她的店卖热狗，里面放了肉、奶酪和培根等东西。大流行期间她想出了捐赠墙这个想法。她说，不到8个小时，墙上就已经贴满了收据。</p>
+<p>The Dawg House only has eight tables, so not that many people can visit at one time. But in six months, customers have purchased 600 extra meals. Some who had no money at the time took down the receipts to eat and then returned to pay for more meals so someone else could eat. Others would buy their own meal and then pay for another 10 or 50.<br/>
+热狗屋只有8张桌子，因此不能同时接待太多人用餐。但是在6个月里，顾客们额外购买了600份饭。有些人当时没钱，进来拿收据吃饭，然后又回来买了更多饭让别人吃。还有些人会自己买单后另外再买下10或50份饭。</p>
+<p>"That says a lot about how amazing our community is," White said.<br/>
+怀特表示：“这说明我们的社会是多么让人惊喜。”</p>
+<p>Lasay Castellano recently left Zack's Café to return to school. She said the restaurant serves about 600 people a day. And she has been putting up the receipts for two months.<br/>
+拉塞·卡斯特里亚诺最近离开了扎克咖啡馆回到了学校。她说，这家餐厅每天大约有600人用餐。她这两个月一直在张贴收据。</p>
+<p>"We have a lot of homeless people here," she said. "We're having a hard time keeping the receipts on the wall."<br/>
+她说：“我们这里有很多人无家可归。我们很难把收据维持在墙上。”</p>
+<p>The town of Miami has not just been hurt by the health crisis. Two large snowstorms in February forced many people without homes into hotels. However, the town is beginning to return to normal activities. The area's casinos have reopened and restaurants now welcome people for in-person meals.<br/>
+迈阿密小镇不只是受到了这场健康危机的打击。2月份发生的两场大雪灾迫使很多无家可归的人住进了旅馆。但是这个小镇正开始恢复正常活动。该地区的赌场已经重新开放，餐厅现在也开始迎来人们用餐。</p>
+<p>White remembered when two parents came in with their children recently. She said, "They seemed like they had a lot going on and got to sit for an hour and a half or so to just have a meal, have fun and laugh, and not worry about how much they were having to spend."<br/>
+怀特回忆起最近有一对父母带着孩子进来。她说：“他们似乎经历了很多，进来坐了一个半小时就为了吃一顿饭，他们笑啊闹啊，而不用担心要花多少钱。”</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Customers Buy Meals for Others at Oklahoma Restaurants]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]In the small town of Miami in the central U.S. state of Oklahoma,
+[00:06.40]people do not have as much money as they used to.
+[00:10.56]Many lost their jobs because of the COVID-19 pandemic.
+[00:15.36]Some are even homeless.
+[00:18.68]At two restaurants – Zack’s Café and The Dawg House
+[00:24.60]– customers are now doing their part to help others.
+[00:30.12]When they are ready to pay for their meals,
+[00:33.04]they can add another food item.
+[00:36.72]On the walls in each restaurant are receipts for the donated meals.
+[00:42.20]A receipt is a paper showing what has been purchased.
+[00:47.48]Someone who is hungry can come in, choose a receipt,
+[00:53.24]sit down and have something to eat.
+[00:57.20]Jennifer White owns The Dawg House, which opened last September.
+[01:03.36]She sells hot dogs with extra items like meat, cheese, and bacon.
+[01:10.80]She started the idea of the giving wall during the pandemic.
+[01:15.84]Within eight hours, she said she had a wall filled with receipts.
+[01:23.56]The Dawg House only has eight tables,
+[01:27.20]so not that many people can visit at one time.
+[01:30.96]But in six months, customers have purchased 600 extra meals.
+[01:39.16]Some who had no money at the time
+[01:42.32]took down the receipts to eat and then returned
+[01:47.80]to pay for more meals so someone else could eat.
+[01:53.08]Others would buy their own meal and then pay for another 10 or 50.
+[02:01.08]“That says a lot about how amazing our community is,” White said.
+[02:09.72]Lasay Castellano recently left Zack’s Café to return to school.
+[02:17.20]She said the restaurant serves about 600 people a day.
+[02:22.68]And she has been putting up the receipts for two months.
+[02:28.60]“We have a lot of homeless people here,” she said.
+[02:31.68]“We’re having a hard time keeping the receipts on the wall.”
+[02:37.32]The town of Miami has not just been hurt by the health crisis.
+[02:42.40]Two large snowstorms in February
+[02:45.84]forced many people without homes into hotels.
+[02:50.76]However, the town is beginning to return to normal activities.
+[02:57.24]The area’s casinos have reopened
+[03:00.68]and restaurants now welcome people for in-person meals.
+[03:06.04]White remembered when two parents
+[03:08.12]came in with their children recently.
+[03:10.48]She said, “They seemed like they had a lot going on
+[03:15.16]and got to sit for an hour and a half or so
+[03:18.68]to just have a meal, have fun and laugh,
+[03:22.00]and not worry about how much they were having to spend.”
+[03:26.68]I’m Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

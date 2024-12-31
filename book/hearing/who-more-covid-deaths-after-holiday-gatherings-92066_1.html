@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 世卫组织称节日后新冠肺炎死亡人数增长</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 世卫组织称节日后新冠肺炎死亡人数增长" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/who-more-covid-deaths-after-holiday-gatherings.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>世卫组织称节日后新冠肺炎死亡人数增长</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/who-more-covid-deaths-after-holiday-gatherings.mp3" id="mp3"></a>
+<a href="/static/lrc/who-more-covid-deaths-after-holiday-gatherings.lrc" id="lrc"></a>
+<a href="who-more-covid-deaths-after-holiday-gatherings-92066.html" id="CnPage" target="_blank"></a>
+<a href="new-computer-keyboards-to-have-ai-key-92059.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The World Health Organization (WHO) says holiday gatherings and the spread of a new COVID-19 variant led to increased hospitalizations and deaths last month.<br/>
+世界卫生组织表示，节日聚会和一种新冠肺炎新变种的传播导致上个月住院人数和死亡人数增加。</p>
+<p>WHO Director-General Tedros Adhanom Ghebreyesus said Wednesday that nearly 10,000 deaths were reported in December. He added that hospitalizations during the month jumped 42 percent in nearly 50 countries.<br/>
+世界卫生组织总干事谭德塞周三表示，12月报告了近1万例死亡病例。他补充说，该月近50个国家的住院人数增加了42%。</p>
+<p>Tedros said, "Although 10,000 deaths a month is far less than the peak of the pandemic, this level of preventable deaths is not acceptable."<br/>
+谭德塞说：“尽管每月1万人死亡远低于疫情高峰期，但这种可预防的死亡水平是不可接受的。”</p>
+<p>Tedros said it was "certain" that cases of COVID-19 were increasing in other places that have not been reporting case numbers.<br/>
+谭德塞表示，“可以肯定”的是，在其他没有报告病例数的地方，新冠肺炎病例也在增加。</p>
+<p>Tedros said the JN.1 variant is now the most common in the world. Since it is an Omicron variant, current vaccines should still provide some protection. Health officials in the U.S. say there is no evidence that JN.1 causes more severe disease than recent variants.<br/>
+谭德塞说，JN.1变种目前是世界上最常见的。由于它是奥密克戎变异株，目前的疫苗应该仍能提供一些保护。美国卫生官员表示，没有证据表明JN.1变种会导致比近期变种更严重的疾病。</p>
+<p>In the United States, the Centers for Disease Control and Prevention (CDC) reports that there have been at least 110,000 hospitalizations and 6,500 deaths from the flu since October.<br/>
+美国疾控与预防中心报告称，自10月以来，美国至少有11万人因流感住院，6500人死亡。</p>
+<p>The agency added that COVID-19 illnesses were not increasing as quickly flu illnesses. Still, COVID-19 is putting more people in the hospital than the flu.<br/>
+该机构补充说，新冠肺炎疾病的增长速度没有流感疾病那么快。尽管如此，新冠肺炎住院人数仍多于流感。</p>
+<p>Maria Van Kerkhove is the technical lead at WHO for COVID-19. She said there is an increase in respiratory diseases around the world due to COVID-19, flu and pneumonia.<br/>
+玛丽亚·范·科克霍夫是世界卫生组织新冠肺炎方面的技术负责人。她说，由于新冠肺炎、流感和肺炎，世界各地的呼吸道疾病有所增长。</p>
+<p>"We expect those trends to continue into January through the winter months in the northern hemisphere," Van Kerkhove said. She added there have also been increases in COVID-19 in the southern hemisphere, where it is now summer.<br/>
+范·科克霍夫说：“我们预计这些趋势将持续到北半球的整个冬季。”她补充说，新冠肺炎在南半球也有所增加，那里现在是夏天。</p>
+<p>WHO officials suggest that people get vaccinated, wear face coverings, and make sure air can move in and out of indoor areas.<br/>
+世界卫生组织官员建议人们接种疫苗，戴口罩，并确保室内区域空气流通。</p>
+<p>Michael Ryan is the head of emergencies at the WHO. He said, "The vaccines may not stop you from being infected, but the vaccines are certainly reducing significantly your chance of being hospitalized or dying."<br/>
+迈克尔·瑞安是世界卫生组织紧急情况负责人。他说：“疫苗可能无法阻止你被感染，但疫苗肯定会显著降低住院或死亡的几率。”</p>
+<p>I'm Ashley Thompson.<br/>
+我是阿什利·汤普森。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:WHO: More COVID Deaths after Holiday Gatherings]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The World Health Organization (WHO)
+[00:03.96]says holiday gatherings
+[00:06.48]and the spread of a new COVID-19 variant
+[00:10.28]led to increased hospitalizations
+[00:13.88]and deaths last month.
+[00:16.28]WHO Director-General Tedros Adhanom Ghebreyesus
+[00:22.08]said Wednesday that nearly 10,000 deaths
+[00:25.80]were reported in December.
+[00:28.00]He added that hospitalizations during the month
+[00:31.64]jumped 42 percent in nearly 50 countries.
+[00:35.88]Tedros said, "Although 10,000 deaths a month
+[00:40.68]is far less than the peak of the pandemic,
+[00:44.32]this level of preventable deaths is not acceptable."
+[00:48.52]Tedros said it was "certain" that cases of COVID-19
+[00:53.64]were increasing in other places
+[00:56.04]that have not been reporting case numbers.
+[00:59.52]Tedros said the JN.1 variant
+[01:02.76]is now the most common in the world.
+[01:05.64]Since it is an Omicron variant, current vaccines
+[01:10.40]should still provide some protection.
+[01:12.96]Health officials in the U.S. say
+[01:16.20]there is no evidence that JN.1
+[01:19.00]causes more severe disease than recent variants.
+[01:23.96]In the United States, the Centers
+[01:26.32]for Disease Control and Prevention (CDC)
+[01:30.56]reports that there have been
+[01:32.64]at least 110,000 hospitalizations
+[01:36.96]and 6,500 deaths from the flu since October.
+[01:43.64]The agency added that COVID-19 illnesses
+[01:47.12]were not increasing as quickly flu illnesses.
+[01:51.76]Still, COVID-19 is putting more people
+[01:55.72]in the hospital than the flu.
+[01:59.36]Maria Van Kerkhove is the technical lead
+[02:02.76]at WHO for COVID-19.
+[02:06.00]She said there is an increase
+[02:08.76]in respiratory diseases around the world
+[02:11.92]due to COVID-19, flu and pneumonia.
+[02:16.64]"We expect those trends to continue into January
+[02:20.92]through the winter months
+[02:22.44]in the northern hemisphere," Van Kerkhove said.
+[02:25.96]She added there have also been increases in COVID-19
+[02:30.40]in the southern hemisphere, where it is now summer.
+[02:35.48]WHO officials suggest that people get vaccinated,
+[02:40.44]wear face coverings, and make sure
+[02:43.68]air can move in and out of indoor areas.
+[02:47.20]Michael Ryan is the head of emergencies at the WHO.
+[02:52.72]He said, "The vaccines may not stop you from being infected,
+[02:57.84]but the vaccines are certainly reducing significantly
+[03:02.28]your chance of being hospitalized or dying."
+[03:06.40]I'm Ashley Thompson. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

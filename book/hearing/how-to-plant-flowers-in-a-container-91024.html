@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Plant Flowers in a Container</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How to Plant Flowers in a Container" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/how-to-plant-flowers-in-a-container.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Plant Flowers in a Container</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/how-to-plant-flowers-in-a-container.mp3" id="mp3"></a>
+<a href="astronomers-observe-most-distant-organic-molecules-in-universe-91023.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">12 June 2023</span><br/>
+<p>In her latest gardening story, Jessica Damiano tells of going to a gardening store in search of only one plant.</p>
+<p>The store did not have the plant that the <em>Associated Press</em> writer wanted. But it had many containers of pretty flowers.</p>
+<p>Instead of leaving with nothing, Damiano came home with many flowers.</p><div class="contentImage"><img alt="This photo provided by Jessica Damiano shows a professionally planted container on display at Hicks Nurseries in Old Westbury, NY. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/f9843390-a497-4a5b-a5d9-93ce8e0d4ff6_cx0_cy12_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This photo provided by Jessica Damiano shows a professionally planted container on display at Hicks Nurseries in Old Westbury, NY. (Jessica Damiano via AP)</span></div>
+<p>She called the flowers "eye candy." Damiano also called the purchase "an <strong>impulse</strong> buy."</p>
+<p>Eye candy is something you might see in a store window. It could be a pretty, but costly, piece of clothing that makes you decide to go inside to just look around. The next thing you know, you have tried on the clothing and decided to wear it home. That is an example of an impulse buy.</p>
+<p>In Damiano's case, she decided to purchase flowers at the garden store and bring them home.</p>
+<p>She said she could not resist all the eye candy.</p>
+<p>Sometimes when she visits the garden store, she will see a pre-planted container filled with pretty flowers. These can be very costly, but she knows the flowers have been planted by an expert and they should keep growing well when she gets them home.</p>
+<p>But this time, Damiano wrote, she decided to take the flowers home in small containers and plant them on her own.</p>
+<p>She called the project of buying flowers and planting them in a container, such as a pot, at home, "easy, fun and money-saving." The process can be <strong>rewarding</strong> and fill you with <strong>pride</strong> as you look at your work all season.</p>
+<p>Damiano said some people think you can buy flowers and plant them any way you want. But she said there are important rules you need to follow to make sure the flowers continue to grow.</p>
+<p>First, she said, make sure you know how large the flowers will get when they are fully grown. That way you can place them in your pot or container correctly.</p>
+<p>It is also a good idea to make sure all the flowers in the same container have the same water and sunlight needs.</p>
+<p>Once you have a container and your flowers in mind, be sure to make some holes in the container so water can flow out.</p>
+<p>Be sure to choose the correct soil for young plants and flowers. It is not a good idea to take soil directly from your garden. That soil is not likely to be good for the roots of the young plants. Softer soil that is sold in bags at garden stores is the right kind of soil to use. The young roots are able to grow and spread more easily.</p>
+<p>If you do not have pre-made soil, you can make your own by combining natural materials like peat moss, coconut fiber or rice hulls with compost and a mineral called vermiculite. The vermiculite holds on to water and nutrients. Once you combine all three, you should have healthy soil for young plants.</p>
+<p>The next thing you need is some fertilizer that will help the young plants and flowers grow. Fertilizer is a growing aid.</p>
+<p>If you know the following English words – <strong>thrillers</strong>, fillers, and spillers, Damiano said, you can remember which kinds of flowers to plant.</p>
+<p>Thrillers, she explained, are tall plants that catch people's attention. They should be planted first and in the center of the container. Fillers are shorter plants that should go around the taller plant. Spillers are plants similar to vines that will grow out of the container and "spill" over the edges. They should grow just inside the edge of the container.</p>
+<p>Be sure to pay a lot of attention to plants that you put in containers. They grow differently from plants in the ground. The roots of garden plants can spread out to reach deep nutrients and water in the soil. Plants in containers cannot do that. Be sure to check them two times a day and water them often, especially when it is hot and dry. Do not forget to add fertilizer, either. Also, plants in containers need nutrients more often.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by Jessica Damiano of The Associated Press.</em></p>
+<p>____________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>impulse </strong> – <em>n</em>. a sudden urge to do something</p>
+<p><strong>rewarding </strong><em>– adj.</em><em> </em>giving a good feeling or a feeling of satisfaction</p>
+<p><strong>pride</strong> <em>– n. </em>feeling very good about something you have done</p>
+<p><strong>thrill </strong><em>– n.</em> a feeling of excitement or enjoyment</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Google Announces Solution to a Big Problem in Quantum Computing</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Google Announces Solution to a Big Problem in Quantum Computing" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/google-announces-solution-to-a-big-problem-in-quantum-computing.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Google Announces Solution to a Big Problem in Quantum Computing</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/google-announces-solution-to-a-big-problem-in-quantum-computing.mp3" id="mp3"></a>
+<a href="/static/lrc/google-announces-solution-to-a-big-problem-in-quantum-computing.lrc" id="lrc"></a>
+<a href="for-words-of-the-year-brat-brain-rot-polarization-93227.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">15 December, 2024</span><br/>
+<p>Google recently said that it had solved a major problem in supercomputing with a new generation of processor called Willow.</p>
+<p>Along with other technology companies such as Microsoft and International Business Machines (IBM), Google, whose parent company is Alphabet, is working on <strong>quantum</strong> computing. The new development promises to increase computing speeds while limiting mistakes, or errors, which are a problem with quantum computing systems.</p>
+<p>Scientists at the company's Santa Barbara, California quantum laboratory announced they had at least partly solved the error problem on December 9. On the same day, the scientific publication <em>Nature </em>published their paper on error correction.</p><div class="contentImage"><img (handout="" 2024.="" 6,="" alt="A person shows Google Quantum AI's " by="" chip,="" december="" handout="" in="" obtained="" on="" photo="" reuters="" reuters)"="" src="https://files.21voa.com/gdb/b9e503d9-3cc7-4766-8a3b-8507989df74c_w268_r1.jpg" this="" undated="" via="" willow"=""/><br/><span class="imagecaption">A person shows Google Quantum AI's "Willow" chip, in this undated handout photo obtained by Reuters on December 6, 2024. (Handout via REUTERS)</span></div>
+<p>Google said that the Willow processor carried out a <strong>computation</strong> in under five minutes that would have taken a fast supercomputer longer than the current age of the universe to complete.</p>
+<p>The work of the Google researchers, however, does not have any <strong>commercial</strong> uses yet. But Google hopes quantum computers will one day solve problems in medicine, battery chemistry and artificial intelligence (AI) that today's computers cannot solve.</p>
+<p><strong>The Willow chip</strong></p>
+<p>The Willow processor, or chip, runs on units of data called “quantum bits” or “qubits” for short. Qubits permit fast computing but can easily create errors. Google researchers have a theory that qubits might be affected by subatomic particles from events in space.</p>
+<p>As more qubits are placed onto a chip, however, the errors can increase to make the chip no better than today's usual computer chips. As a result, scientists have been working on quantum error-correction since the 1990s.</p>
+<p>Hartmut Neven, who leads Google's Quantum AI group, said that Willow has 105 qubits.</p>
+<p>In the paper recently published in <em>Nature</em>, Google researchers said they have found a way to connect the Willow chip's qubits so that error rates go down as the number of qubits goes up. Neven also said Willow can correct errors in “real time.” That is an important step toward making quantum computers useful.</p>
+<p>"We are past the break even point," Neven told Reuters. In a blog post, he said it was an unmistakable sign that “error correction is improving overall.”</p>
+<p>In 2019, IBM challenged the claim that Google's quantum chip solved a problem that would take a normal computer 10,000 years to complete. IBM said the problem could be solved in two-and-a-half days using different <strong>assumptions</strong> about computer system design.</p>
+<p>Google said in its blog post that it considered some of those concerns in its newest estimates. Even under the best conditions, Google said a computer of today would still take a billion years to get the same results as its latest chip.</p>
+<p>Some of Google's competitors are producing chips with more qubits than Willow. But Anthony Megrant, who is also with Google Quantum AI, told Reuters that Google is trying to make the most dependable qubits possible.</p>
+<p>Google produced its earlier chips in a shared building at the University of California, Santa Barbara. But for the Willow chips, Google built its own special laboratory. Megrant said that the new lab will speed up the process of making future chips.</p>
+<p>One major problem is that quantum chips must be kept at low temperatures in machines that can produce extremely low temperatures called cryostats. The new laboratory permits the researchers to work more quickly.</p>
+<p>"If we have a good idea, we want somebody on the team to be able to...get into that clean room and into one of these cryostats as fast as possible, so we can get lots of <strong>cycles</strong> of learning," Megrant said.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Stephen Nellis</em> <em>reported this story for Reuters news agency. Jill Robbins adapted it for Learning English with additional information from Google and Nature. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>quantum</strong> – <em>adj</em>. of, relating to, or using the principles of quantum theory</p>
+<p><strong>computation </strong><em>–n</em>. an operation carried out by a computing device that is mathematical and digital in nature</p>
+<p><strong>commercial </strong>–adj. related to business activity</p>
+<p><strong>assumption </strong>–n. one of the basic conditions that is accepted in making a computation, but which might not exist in reality</p>
+<p><strong>cycle </strong>– <em>n.</em> a repeating series of events or actions</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Google Announces Solution to a Big Problem in Quantum Computing]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.84]Google recently said that it had solved
+[00:04.96]a major problem in supercomputing
+[00:07.84]with a new generation of processor called Willow.
+[00:12.80]Along with other technology companies
+[00:15.60]such as Microsoft
+[00:17.04]and International Business Machines (IBM),
+[00:21.00]Google, whose parent company is Alphabet,
+[00:25.00]is working on quantum computing.
+[00:28.68]The new development promises
+[00:30.56]to increase computing speeds
+[00:32.56]while limiting mistakes, or errors,
+[00:35.12]which are a problem
+[00:36.08]with quantum computing systems.
+[00:39.40]Scientists at the company's
+[00:40.84]Santa Barbara, California quantum laboratory
+[00:44.32]announced they had at least partly solved
+[00:47.32]the error problem on December 9.
+[00:50.96]On the same day, the scientific publication Nature
+[00:55.24]published their paper on error correction.
+[00:59.32]Google said that the Willow processor
+[01:01.96]carried out a computation in under five minutes
+[01:05.36]that would have taken a fast supercomputer
+[01:08.92]longer than the current age of the universe to complete.
+[01:13.68]The work of the Google researchers, however,
+[01:16.24]does not have any commercial uses yet.
+[01:20.16]But Google hopes quantum computers
+[01:22.80]will one day solve problems in medicine,
+[01:25.64]battery chemistry
+[01:27.60]and artificial intelligence (AI)
+[01:30.76]that today's computers cannot solve.
+[01:34.76]The Willow processor, or chip,
+[01:36.92]runs on units of data called "quantum bits"
+[01:39.96]or "qubits" for short.
+[01:43.68]Qubits permit fast computing
+[01:45.96]but can easily create errors.
+[01:49.32]Google researchers have a theory that qubits
+[01:52.40]might be affected by subatomic particles
+[01:55.32]from events in space.
+[01:58.16]As more qubits are placed onto a chip, however,
+[02:01.56]the errors can increase to make the chip
+[02:04.24]no better than today's usual computer chips.
+[02:08.32]As a result, scientists have been working
+[02:10.92]on quantum error-correction since the 1990s.
+[02:15.80]Hartmut Neven,
+[02:17.08]who leads Google's Quantum AI group,
+[02:19.92]said that Willow has 105 qubits.
+[02:24.92]In the paper recently published in Nature,
+[02:27.72]Google researchers said
+[02:29.56]they have found a way to connect
+[02:31.88]the Willow chip's qubits
+[02:33.76]so that error rates go down
+[02:35.96]as the number of qubits goes up.
+[02:39.68]Neven also said Willow
+[02:41.68]can correct errors in "real time."
+[02:44.36]That is an important step
+[02:46.48]toward making quantum computers useful.
+[02:50.32]"We are past the break even point,"
+[02:52.56]Neven told Reuters.
+[02:55.08]In a blog post,
+[02:56.96]he said it was an unmistakable sign
+[02:58.80]that "error correction is improving overall."
+[03:02.80]In 2019, IBM challenged the claim
+[03:06.24]that Google's quantum chip
+[03:07.80]solved a problem that would take a normal computer
+[03:10.92]10,000 years to complete.
+[03:14.12]IBM said the problem could be solved
+[03:16.60]in two-and-a-half days
+[03:18.08]using different assumptions
+[03:19.76]about computer system design.
+[03:22.96]Google said in its blog post
+[03:25.08]that it considered some of those concerns
+[03:28.08]in its newest estimates.
+[03:31.12]Even under the best conditions, Google said
+[03:34.48]a computer of today would still take a billion years
+[03:39.48]to get the same results as its latest chip.
+[03:44.92]Some of Google's competitors
+[03:46.80]are producing chips with more qubits than Willow.
+[03:51.12]But Anthony Megrant,
+[03:52.76]who is also with Google Quantum AI,
+[03:56.00]told Reuters that Google is trying to make
+[03:59.00]the most dependable qubits possible.
+[04:02.64]Google produced its earlier chips
+[04:04.80]in a shared building at the University of
+[04:07.20]California, Santa Barbara.
+[04:10.36]But for the Willow chips,
+[04:12.24]Google built its own special laboratory.
+[04:15.96]Megrant said that the new lab
+[04:18.52]will speed up the process of making future chips.
+[04:23.96]One major problem is that quantum chips
+[04:26.68]must be kept at low temperatures
+[04:29.40]in machines that can produce
+[04:31.52]extremely low temperatures called cryostats.
+[04:36.52]The new laboratory permits the researchers
+[04:39.12]to work more quickly.
+[04:41.60]"If we have a good idea,
+[04:43.52]we want somebody on the team
+[04:45.64]to be able to...get into that clean room
+[04:48.80]and into one of these cryostats
+[04:51.28]as fast as possible,
+[04:53.12]so we can get lots of cycles of learning," Megrant said.
+[04:58.24]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

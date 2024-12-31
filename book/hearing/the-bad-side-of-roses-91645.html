@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - The Bad Side of Roses</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, The Bad Side of Roses" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202310/the-bad-side-of-roses.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>The Bad Side of Roses</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202310/the-bad-side-of-roses.mp3" id="mp3"></a>
+<a href="/static/lrc/the-bad-side-of-roses.lrc" id="lrc"></a>
+<a href="as-tensions-rise-canadian-colleges-confirm-indian-students-welcome-91644.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">14 October 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On today's program, let's talk about flowers; but not just any flowers -- roses.</p>
+<p>Who doesn't love a beautiful, sweet-smelling rose? The ancient Greeks and Romans connected roses with Aphrodite and Venus, the goddess of love. In modern times, you give a red rose to your true love and a yellow one to your true friend.</p><div class="contentImage"><img alt="FILE - Paola Orsero of Alassio, Italy smells a rose at the Royal Horticultural Society's Chelsea Flower Show in London, Britain May 19, 2015. (REUTERS/Suzanne Plunkett)" src="https://files.21voa.com/gdb/59DFC099-9D3B-4726-9285-3E2B18BCD87C_cx0_cy3_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Paola Orsero of Alassio, Italy smells a rose at the Royal Horticultural Society's Chelsea Flower Show in London, Britain May 19, 2015. (REUTERS/Suzanne Plunkett)</span></div>
+<p>But roses also have a bad side -- thorns.</p>
+<p>A thorn is the very sharp part of some woody plants, like blackberry bushes and roses. A <strong>prick</strong> from a thorn is painful and can cause you to bleed. So, a rose has both beauty and pain.</p>
+<p>That is where the saying <u>every rose has its thorns</u> comes from. It means that rarely is something completely good. Even a very pleasant thing, event, or situation can have a bad or unpleasant side. You also could say, <u>there's no rose without a thorn</u>.</p>
+<p>Actually, there are some kinds of roses without thorns. But let's not <strong>go down that garden path</strong> and just stay with our expression for today.</p>
+<p>Now, here is an example of how to use the expression, <u>every rose has its thorns</u>.</p>
+<p>Let's say you were on a game show and won a new car and a trip to Mexico. You are very excited but then find out that you must pay taxes on all the winnings. As you get ready to pay the big tax bill, you could say: "Well, <u>every rose has its thorns</u>."</p>
+<p>"Thorn" has another meaning. It can also be something or someone that bothers you. A<u> thorn in your side</u> is a small problem, not a serious one. After all, thorns cause pain, but they are not going to kill you.</p>
+<p>A friend who always borrows money from you could become <u>a thorn in your side</u>. She is <strong>annoying</strong> but not a serious problem. But what if her money troubles led to bigger problems for her?</p>
+<p>Let's say she cannot pay her bills, and she is in danger of losing her home. In that situation, we can say she has made for herself <u>a bed of thorns</u>. This expression describes a painful, difficult, or unpleasant situation.</p>
+<p>On the other hand, if she finds a way to make a lot of money, and she can pay off her <strong>debt</strong>, we can say she is now <u>sleeping in a bed of roses</u>. That is a really pleasant place to be.</p>
+<p>Sometimes though, we use <u>a bed of roses</u> in a <strong>negative</strong> form to describe an unpleasant situation, like in this example:</p>
+<p><em>A: Hey, how's everything going? A couple of months ago you told me you were struggling to pay your bills. </em></p>
+<p><em>B: I was totally <strong>broke</strong>. I had no money at all.</em></p>
+<p><em>A: That sounds really stressful. </em></p>
+<p><em>A: It was <u>no bed of roses</u>; I can tell you that! I can't tell you how happy I am to be out of debt!</em></p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. We hope that your English studies have not become <u>a thorn in your side</u>. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>prick </strong><em>– v.</em><strong> </strong>to pierce slightly with a sharp point</p>
+<p><strong>go down that garden path </strong><em>- idiom</em><strong> </strong>to cause (someone) to go, think, or proceed wrongly</p>
+<p><strong>annoying </strong><em>– v. </em>causing irritation</p>
+<p><strong>debt </strong><em>– v. </em>something owed</p>
+<p><strong>negative </strong><em>– v. </em>marked by denial, prohibition, or refusal</p>
+<p><strong>broke </strong><em>– v. </em>having no money</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:The Bad Side of Roses]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.68]And now, Words and Their Stories,
+[00:11.08]from VOA Learning English.
+[00:18.64]On today's program, let's talk about flowers;
+[00:22.64]but not just any flowers -- roses.
+[00:27.40]Who doesn't love a beautiful, sweet-smelling rose?
+[00:32.80]The ancient Greeks and Romans connected roses
+[00:36.72]with Aphrodite and Venus, the goddess of love.
+[00:42.12]In modern times, you give a red rose to your true love
+[00:47.56]and a yellow one to your true friend.
+[00:52.20]But roses also have a bad side -- thorns.
+[00:58.08]A thorn is the very sharp part of some woody plants,
+[01:03.04]like blackberry bushes and roses.
+[01:08.20]A prick from a thorn is painful
+[01:11.48]and can cause you to bleed.
+[01:13.96]So, a rose has both beauty and pain.
+[01:19.60]That is where the saying
+[01:21.64]every rose has its thorns comes from.
+[01:26.40]It means that rarely is something completely good.
+[01:31.76]Even a very pleasant thing, event, or situation
+[01:36.48]can have a bad or unpleasant side.
+[01:41.24]You also could say, there's no rose without a thorn.
+[01:47.52]Actually, there are some kinds of roses without thorns.
+[01:52.44]But let's not go down that garden path
+[01:55.48]and just stay with our expression for today.
+[01:59.80]Now, here is an example of how to use the expression,
+[02:04.28]every rose has its thorns.
+[02:07.96]Let's say you were on a game show
+[02:10.48]and won a new car and a trip to Mexico.
+[02:15.12]You are very excited but then find out
+[02:19.08]that you must pay taxes on all the winnings.
+[02:24.68]As you get ready to pay the big tax bill,
+[02:27.68]you could say: "Well, every rose has its thorns."
+[02:33.72]"Thorn" has another meaning.
+[02:36.40]It can also be something or someone that bothers you.
+[02:42.68]A thorn in your side is a small problem,
+[02:46.84]not a serious one.
+[02:49.08]After all, thorns cause pain,
+[02:52.44]but they are not going to kill you.
+[02:56.04]A friend who always borrows money from you
+[02:59.96]could become a thorn in your side.
+[03:03.04]She is annoying but not a serious problem.
+[03:08.52]But what if her money troubles
+[03:10.68]led to bigger problems for her?
+[03:14.56]Let's say she cannot pay her bills,
+[03:17.48]and she is in danger of losing her home.
+[03:21.20]In that situation, we can say
+[03:24.72]she has made for herself a bed of thorns.
+[03:29.40]This expression describes a painful,
+[03:32.76]difficult, or unpleasant situation.
+[03:37.16]On the other hand,
+[03:39.16]if she finds a way to make a lot of money,
+[03:42.96]and she can pay off her debt,
+[03:45.40]we can say she is now
+[03:47.80]sleeping in a bed of roses.
+[03:50.72]That is a really pleasant place to be.
+[03:55.36]Sometimes though, we use a bed of roses
+[03:58.92]in a negative form to describe
+[04:01.92]an unpleasant situation, like in this example:
+[04:06.52]A: Hey, how's everything going?
+[04:10.12]A couple of months ago you told me
+[04:12.64]you were struggling to pay your bills.
+[04:15.16]B: I was totally broke. I had no money at all.
+[04:21.28]A: That sounds really stressful.
+[04:23.40]A: It was no bed of roses; I can tell you that!
+[04:27.20]I can't tell you how happy I am to be out of debt!
+[04:32.96]And that's all the time we have for this Words and Their Stories.
+[04:37.08]We hope that your English studies
+[04:39.08]have not become a thorn in your side.
+[04:42.72]Until next time ... I'm Anna Matteo.
+[04:46.20]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

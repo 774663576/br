@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Do You Stay 'In Shape'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, How Do You Stay 'In Shape'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202310/how-do-you-stay-in-shape.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Do You Stay 'In Shape'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202310/how-do-you-stay-in-shape.mp3" id="mp3"></a>
+<a href="/static/lrc/how-do-you-stay-in-shape.lrc" id="lrc"></a>
+<a href="universities-work-to-protect-american-wine-grapes-from-wildfire-smoke-91610.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">07 October 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give you definitions, examples, and notes on usage.</p>
+<p>Today, we talk about <strong>fitness</strong> and exercise. <u>Keeping in shape</u> is a common expression for staying physically fit!</p><div class="contentImage"><img alt="FILE - People exercise inside Warren Hills cemetery in Harare, Zimbabwe, November 24 ,2022. (REUTERS/Philimon Bulawayo)" src="https://files.21voa.com/gdb/03370000-0aff-0242-02cc-08dad585c86c_cx0_cy3_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - People exercise inside Warren Hills cemetery in Harare, Zimbabwe, November 24 ,2022. (REUTERS/Philimon Bulawayo)</span></div>
+<p>What sort of exercise do you enjoy? How do you get in shape? If you are already in shape, how do you stay in shape?</p>
+<p>I used to walk a lot for work and that kept me in good shape. Five days a week I would walk to the train station, walk to the office and then climb stairs. At lunch, my coworkers and I would take a walk outside. Our office is in a beautiful area of Washington, D.C., surrounded by <strong>museums</strong> and <strong>monuments</strong>. So that adds up to a lot of walking!</p>
+<p>But then, in 2020 like so many others, I started working from home. I became worried that without all that walking, I would quickly get out of shape! So, I made time for more swimming and short walks around my <strong>neighborhood</strong>. Those two kept me in shape.</p>
+<p>Using the word "shape" when talking about fitness and health makes sense. Sometimes, we can describe the human body in terms of size and shape. But we can also use the word "shape" to talk about our projects, our activities, our actions and behaviors.</p>
+<p>So, <u>shape up</u> also means to correct bad behavior. For example, a boss might warn an underperforming employee to <u>shape up</u>. The boss may take this expression one step further. She or he might add a threat by saying <u>shape up or ship out.</u></p>
+<p>Talking about ships, we also describe things that are clean or running smoothly as <u>shipshape</u>. A ship that is orderly and clean runs more smoothly and is safer. Remember, on a ship, you can be very far away from help. So, keeping things in good order prevents accidents and big problems.</p>
+<p>So, what happens if a situation or a project was in trouble but is now going well? Well, we can say <u>things are shaping up</u>. If it's not going well, we can say the project is in <u>bad shape</u>.</p>
+<p>Now, let's hear two friends use some of these expressions.</p>
+<p><em>A: Hey, how's the project going?</em></p>
+<p><em>B: It's going well. Everything is <u>shipshape</u> now.</em></p>
+<p><em>A: What do you mean ‘now'?</em></p>
+<p><em>B: Well, last week we ran into some trouble. An employee <strong>wasn't pulling his weight</strong> and things weren't getting done. </em></p>
+<p><em>A: What did you do?</em></p>
+<p><em>B: I told him, "<u>Shape up or ship out</u>." </em></p>
+<p><em>A: That's pretty <strong>harsh</strong>! </em></p>
+<p><em>B: Maybe, but he <u>shaped up</u>. Now he's a valuable member of the team. I think he was overworked and dealing with some personal issues.</em></p>
+<p><em>A: We all run into trouble sometimes. Hey, talking about being overworked ... let's take a break in a bit. I need a walk!</em></p>
+<p><em>B: Sounds good. The project is in good shape. But I have to make sure I stay in good shape too!</em></p>
+<p>And that's the end of this <em>Words and Their Stories</em>. We hope you enjoyed learning some "shape" expressions and verbal phrases.</p>
+<p>Practice using them the next time you want to talk about getting or staying physically fit.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>fitness </strong><em>–n.</em> physical health and strength</p>
+<p><strong>museum </strong><em>–n.</em> a building where interesting or valuable things are collected, shown to the public, or studied</p>
+<p><strong>monument </strong><em>–n.</em> a building, artwork or place dedicated to the memory of a person or event</p>
+<p><strong>neighborhood </strong><em>–n. </em>the people living near one another</p>
+<p><strong>to pull your weight </strong><em>–idiom</em> to do a fair share of work</p>
+<p><strong>harsh </strong><em>–adj.</em> something that is unpleasant or difficult to accept</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How Do You Stay 'In Shape'?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:08.60]And now, Words and Their Stories,
+[00:11.04]from VOA Learning English.
+[00:18.92]On this program,
+[00:20.36]we explore words and expressions
+[00:22.48]in the English language.
+[00:24.64]We give you definitions,
+[00:26.84]examples, and notes on usage.
+[00:31.44]Today, we talk about fitness and exercise.
+[00:36.68]Keeping in shape is a common expression
+[00:40.04]for staying physically fit!
+[00:43.48]What sort of exercise do you enjoy?
+[00:46.48]How do you get in shape?
+[00:49.04]If you are already in shape,
+[00:51.80]how do you stay in shape?
+[00:55.48]I used to walk a lot for work
+[00:58.12]and that kept me in good shape.
+[01:01.24]Five days a week I would walk to the train station,
+[01:04.76]walk to the office and then climb stairs.
+[01:08.32]At lunch, my coworkers and I would take a walk outside.
+[01:13.40]Our office is in a beautiful area of Washington, D.C.,
+[01:18.44]surrounded by museums and monuments.
+[01:23.08]So that adds up to a lot of walking!
+[01:27.44]But then, in 2020 like so many others,
+[01:31.00]I started working from home.
+[01:33.56]I became worried that without all that walking,
+[01:37.08]I would quickly get out of shape!
+[01:39.32]So, I made time for more swimming
+[01:43.00]and short walks around my neighborhood.
+[01:46.80]Those two kept me in shape.
+[01:49.60]Using the word "shape"
+[01:51.56]when talking about fitness and health makes sense.
+[01:55.68]Sometimes, we can describe the human body
+[01:59.32]in terms of size and shape.
+[02:03.04]But we can also use the word "shape"
+[02:05.76]to talk about our projects,
+[02:08.44]our activities, our actions and behaviors.
+[02:12.52]So, shape up also means to correct bad behavior.
+[02:18.64]For example, a boss might warn
+[02:21.72]an underperforming employee to shape up.
+[02:26.08]The boss may take this expression one step further.
+[02:30.00]She or he might add a threat
+[02:32.56]by saying shape up or ship out.
+[02:37.16]Talking about ships,
+[02:38.88]we also describe things that are clean
+[02:41.96]or running smoothly as shipshape.
+[02:45.92]A ship that is orderly and clean
+[02:48.24]runs more smoothly and is safer.
+[02:52.08]Remember, on a ship, you can be very far away from help.
+[02:56.68]So, keeping things in good order
+[02:59.56]prevents accidents and big problems.
+[03:04.28]So, what happens if a situation
+[03:07.56]or a project was in trouble but is now going well?
+[03:12.72]Well, we can say things are shaping up.
+[03:17.76]If it's not going well,
+[03:19.60]we can say the project is in bad shape.
+[03:24.12]Now, let's hear two friends use some of these expressions.
+[03:30.04]A: Hey, how's the project going?
+[03:33.00]B: It's going well. Everything is shipshape now.
+[03:38.20]A: What do you mean ‘now'?
+[03:41.76]B: Well, last week we ran into some trouble.
+[03:45.72]An employee wasn't pulling his weight
+[03:49.48]and things weren't getting done.
+[03:52.00]A: What did you do?
+[03:54.40]B: I told him, "Shape up or ship out."
+[03:57.76]A: That's pretty harsh!
+[03:59.96]B: Maybe, but he shaped up.
+[04:02.56]Now he's a valuable member of the team.
+[04:06.00]I think he was overworked
+[04:08.56]and dealing with some personal issues.
+[04:12.48]A: We all run into trouble sometimes.
+[04:15.24]Hey, talking about being overworked ...
+[04:18.96]let's take a break in a bit. I need a walk!
+[04:23.40]B: Sounds good. The project is in good shape.
+[04:26.56]But I have to make sure I stay in good shape too!
+[04:32.72]And that's the end of this Words and Their Stories.
+[04:35.72]We hope you enjoyed learning
+[04:37.68]some "shape" expressions and verbal phrases.
+[04:41.88]Practice using them the next time
+[04:44.32]you want to talk about getting
+[04:46.52]or staying physically fit.
+[04:49.20]Until next time ...
+[04:51.12]I'm Anna Matteo.
+[04:52.56]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

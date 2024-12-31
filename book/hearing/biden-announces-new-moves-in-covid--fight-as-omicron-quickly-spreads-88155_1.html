@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 随着奥密克戎蔓延，拜登宣布对抗新冠新举措</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 随着奥密克戎蔓延，拜登宣布对抗新冠新举措" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202112/biden-announces-new-moves-in-covid-19-fight-as-omicron-quickly-spreads.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>随着奥密克戎蔓延，拜登宣布对抗新冠新举措</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202112/biden-announces-new-moves-in-covid-19-fight-as-omicron-quickly-spreads.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-announces-new-moves-in-covid-19-fight-as-omicron-quickly-spreads.lrc" id="lrc"></a>
+<a href="biden-announces-new-moves-in-covid--fight-as-omicron-quickly-spreads-88155.html" id="CnPage" target="_blank"></a>
+<a href="city-gardens-educate-create-community-88153.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">American President Joe Biden said his administration plans to provide 500 million COVID-19 tests to the United States at no cost to users.<br/>
+美国总统乔·拜登表示，政府计划向美国用户免费提供5亿份免费核酸检测。
+<p>Speaking at the White House, Biden described several efforts to support hospitals, to increase testing and to increase the availability of vaccines. The president's message comes as the world is struggling to contain yet another version of the new coronavirus, the Omicron variant.<br/>
+拜登在白宫发表讲话时谈到了支援医院、加大检测及疫苗供应的多项措施。拜登发布信息时，正值全球努力遏制另一种版本的新冠病毒，即奥密克戎变种。</p>
+<p>Biden pushed Americans to get additional COVID-19 vaccine injections known as booster shots. He said he was not planning on shutdowns or severe restrictions like those seen earlier in the pandemic.<br/>
+拜登督促美国人接种疫苗加强针。他声称不打算像大流行前期一样实施封闭或严格限制措施。</p>
+<p>"We know a lot more today than we did in March 2020," he said. "We're ready, we'll get through this."<br/>
+他说：“我们现在比2020年3月有了更多了解。我们做好了准备，我们会度过难关。”</p>
+<p>Biden said vaccination efforts will be increased and he urged Americans who are not vaccinated to get the shot. "400,000 Americans died of COVID this calendar year – almost all were unvaccinated," Biden said.<br/>
+拜登表示将会加大疫苗接种力度，并督促未接种疫苗的美国人接种。拜登表示：“今年以来有40万美国人死于新冠病毒，几乎所有死者都没有接种疫苗。”</p>
+<p><strong>Efforts to support hospitals<br/>
+支援医院的措施</strong></p>
+<p>The president said the government will establish additional testing sites. There are about 20,000 operating now in the U.S. The government will use the Defense Production Act to order manufacturers to make more tests, Biden said.<br/>
+拜登表示，政府将建立更多检测点。拜登表示，美国目前约有2万检测点。政府将动用《国防生产法》下令厂商生产更多检测试剂。</p>
+<p>Biden administration officials say they are working with Google to help people find testing sites through online searches.<br/>
+拜登政府官员表示，他们正在跟谷歌公司合作，帮助人们通过网络搜索功能找到检测点。</p>
+<p>The president also said the government will send 1,000 medically skilled troops to hospitals overloaded with COVID-19 cases. Federal medical workers are immediately going to the hard-hit states of Michigan, Indiana, Wisconsin, Arizona, New Hampshire and Vermont. There are also plans to give hospitals more medical and protective equipment from the national supply.<br/>
+拜登还表示，政府将向新冠病例超员的医院派遣1000名有医疗经验的士兵。联邦医务人员将立即前往受灾严重的密歇根州、印第安纳州、威斯康星州、亚利桑那州、新罕布什尔州和佛蒙特州。政府还计划从国家储备中为医院提供更多医疗和防护设备。</p>
+<p>The Federal Emergency Management Agency, or FEMA, will send hundreds of medical vehicles and medical teams to hospitals. The aim is that, if one hospital fills up, patients can be moved to open beds in other hospitals.<br/>
+联邦紧急事务管理局将向医院派遣数百辆医疗车辆和医疗队。目的是，如果有医院人满为患，则可以将患者转移到其它医院的开放床位。</p>
+<p>The Centers for Disease Control, or CDC, says 204 million people in the United States are fully vaccinated. That amounts to 61 percent of the population. Only about 60 million of the fully vaccinated have received booster shots, the CDC reports.<br/>
+美国疾控中心表示，美国有2.04亿人完全接种了疫苗。这相当于全部人口的61%。美国疾控中心报告称，只有大约6千万人接种了加强针。</p>
+<p>About 50 million Americans have not gotten any vaccine. Biden said they have a responsibility to get vaccinated.<br/>
+大约5000万美国人没有接种任何疫苗。拜登表示他们有责任接种疫苗。</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Announces New Moves In COVID-19 Fight, as Omicron Quickly Spreads]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.88]American President Joe Biden said his administration
+[00:06.72]plans to provide 500 million COVID-19 tests
+[00:11.84]to the United States at no cost to users.
+[00:17.24]Speaking at the White House,
+[00:19.08]Biden described several efforts to support hospitals,
+[00:23.04]to increase testing and to increase the availability of vaccines.
+[00:29.84]The president’s message comes as the world is struggling
+[00:33.48]to contain yet another version of the new coronavirus,
+[00:37.88]the Omicron variant.
+[00:40.68]Biden pushed Americansto get additional COVID-19
+[00:45.04]vaccine injections known as booster shots.
+[00:49.96]He said he was not planning on shutdowns or severe restrictions
+[00:54.88]like those seen earlier in the pandemic.
+[00:59.00]"We know a lot more today than we did in March 2020," he said.
+[01:04.80]"We're ready, we'll get through this."
+[01:08.12]Biden said vaccination efforts will be increased
+[01:12.20]and he urged Americans who are not vaccinated to get the shot.
+[01:17.76]“400,000 Americans died of COVID this calendar year
+[01:23.56]– almost all were unvaccinated,” Biden said.
+[01:27.48]The president said the government will establish additional testing sites.
+[01:34.28]There are about 20,000 operating now in the U.S.
+[01:39.40]The government will use the Defense Production Act
+[01:42.80]to order manufacturers to make more tests, Biden said.
+[01:48.00]Biden administration officials say they are working with Google
+[01:52.52]to help people find testing sites through online searches.
+[01:57.52]The president also said the government will send 1,000 medically skilled troops
+[02:03.00]to hospitals overloaded with COVID-19 cases.
+[02:08.16]Federal medical workers are immediately going to the hard-hit states
+[02:13.04]of Michigan, Indiana, Wisconsin, Arizona, New Hampshire and Vermont.
+[02:20.72]There are also plans to give hospitals
+[02:23.52]more medical and protective equipment from the national supply.
+[02:28.64]The Federal Emergency Management Agency, or FEMA,
+[02:32.76]will send hundreds of medical vehicles and medical teams to hospitals.
+[02:38.44]The aim is that, if one hospital fills up,
+[02:41.96]patients can be moved to open beds in other hospitals.
+[02:46.72]The Centers for Disease Control, or CDC,
+[02:50.32]says 204 million people in the United States are fully vaccinated.
+[02:56.60]That amounts to 61 percent of the population.
+[03:00.96]Only about 60 million of the fully vaccinated
+[03:05.08]have received booster shots, the CDC reports.
+[03:09.88]About 50 million Americans have not gotten any vaccine.
+[03:14.40]Biden said they have a responsibility to get vaccinated.
+[03:19.48]I’m Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

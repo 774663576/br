@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 秘鲁宣称全球最长寿者现年124岁</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 秘鲁宣称全球最长寿者现年124岁" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/peru-claims-world-s-oldest-person-ever-at-age-124.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>秘鲁宣称全球最长寿者现年124岁</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/peru-claims-world-s-oldest-person-ever-at-age-124.mp3" id="mp3"></a>
+<a href="/static/lrc/peru-claims-world-s-oldest-person-ever-at-age-124.lrc" id="lrc"></a>
+<a href="peru-claims-world-s-oldest-person-ever-at-age--92523.html" id="CnPage" target="_blank"></a>
+<a href="openai-introduces-voice-cloning-tool-but-waits-for-public-release-92522.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Peru's Andes Mountains might be home to the oldest person ever to have lived — at the age of 124.<br/>
+秘鲁的安第斯山脉可能是有史以来最年长者的家园，他现年124岁。</p>
+<p>The South American country's government has claimed that a man named Marcelino Abad Tolentino from the central area of Huánuco was born in 1900. If the claim is true, he would be the oldest, independently verified human on earth.<br/>
+这个南美国家的政府声称，一位名为马塞利诺·阿巴德·托伦蒂诺的男子出生于1900年，他来自胡努科中部地区。如果这一说法属实，他将是地球上经过独立证实的最年长人类。</p>
+<p>Officials said in a statement that Abad "developed a healthy way of life and inner peace, reflected in his good health and friendly personality." As a result, they said, "This allowed him, with resilience and skill, to overcome 12 decades of life and on April 5th he just blew out 124 candles."<br/>
+官员们在一份声明中表示，阿巴德“养成了健康的生活方式和内心的平静，这反映在他的好身体和好个性上。”他们表示，因此，“这让他凭借韧性和技巧战胜了一百二十多年的岁月，4月5日，他刚刚过完了124岁生日。”</p>
+<p>Peruvian officials say they are helping Abad to contact Guinness World Records for independent verification.<br/>
+秘鲁官员表示，他们正在帮助阿巴德联系吉尼斯世界纪录进行独立验证。</p>
+<p>In a statement, the organization told Reuters, "Guinness World Records receives many applications from individuals who claim to be the oldest living person." Verifying the claim would involve official documents and other evidence being carefully studied by a team of experts to "prove their achievement beyond doubt."<br/>
+该组织在一份声明中告诉路透社，“吉尼斯世界纪录收到了许多自称是在世最年长者的申请。”验证这一说法需要官方文件和其他证据，经过专家团队的仔细研究，以“毫无疑问地证明他们的成就”。</p>
+<p>Guinness World Records currently lists Britain's John Tinniswood, a 111-year-old as the oldest living man. The organization lists 117-year-old Maria Branyas Morera of Spain as the old living woman.<br/>
+吉尼斯世界纪录目前将英国111岁的约翰·廷尼斯伍德列为在世最年长的男性。该组织将西班牙117岁的玛丽亚·布兰亚斯·莫雷拉列为在世最年长女性。</p>
+<p>As for the oldest living person ever, that record belongs to Jeanne Louise Calment of France. She was born on February 21, 1875, and died on August 4, 1997, after living 122 years and 164 days.<br/>
+至于有史以来最长寿的人，这一记录属于法国的珍妮·路易丝·卡尔蒙特。她出生于1875年2月21日，在活了122岁零164天后，于1997年8月4日去世。</p>
+<p>Abad was born in the small town of Chaglla. He lived quietly until the Peruvian government identified him in 2019 and provided him with a pension.<br/>
+阿巴德出生在小镇查格拉。他一直过着平静的生活，直到2019年秘鲁政府确认了他的身份并为他提供了养老金。</p>
+<p>Abad says his secrets to living a long life include a diet rich in fruits and lamb meat. He also likes to chew coca leaves, a tradition in Peru's Andean communities. The information comes from the pension program that Abad is a part of.<br/>
+阿巴德说，他长寿的秘诀包括富含水果和羊肉的饮食。他还喜欢咀嚼古柯叶，这是秘鲁安第斯社区的传统。这些信息来自阿巴德参与的养老金计划。</p>
+<p>On April 5, Abad celebrated his 124th birthday with a cake bearing his likeness at a home for senior citizens where he now lives.<br/>
+4月5日，阿巴德在他现在居住的一个老年人之家用印有他肖像的蛋糕庆祝了他的124岁生日。</p>
+<p>I'm Mario Ritter, Jr.<br/>
+我是小马里奥·里特。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Peru Claims World’s Oldest Person Ever at Age 124]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.12]Peru's Andes Mountains might be home
+[00:05.04]to the oldest person ever to have lived —
+[00:08.76]at the age of 124.
+[00:13.04]The South American country's government
+[00:16.00]has claimed that a man named Marcelino Abad Tolentino
+[00:23.20]from the central area of Huánuco was born in 1900.
+[00:30.04]If the claim is true,
+[00:32.68]he would be the oldest,
+[00:34.56]independently verified human on earth.
+[00:40.16]Officials said in a statement
+[00:42.96]that Abad "developed a healthy way of life
+[00:47.60]and inner peace, reflected in his good health
+[00:51.48]and friendly personality."
+[00:55.68]As a result, they said, "This allowed him,
+[00:59.60]with resilience and skill,
+[01:02.40]to overcome 12 decades of life
+[01:06.28]and on April 5th he just blew out 124 candles."
+[01:13.52]Peruvian officials say they are helping Abad to contact
+[01:19.40]Guinness World Records for independent verification.
+[01:26.16]In a statement, the organization told Reuters,
+[01:31.00]"Guinness World Records receives
+[01:34.36]many applications from individuals
+[01:38.04]who claim to be the oldest living person."
+[01:42.76]Verifying the claim would involve official documents
+[01:47.72]and other evidence being carefully studied
+[01:51.80]by a team of experts
+[01:54.28]to "prove their achievement beyond doubt."
+[01:59.64]Guinness World Records currently lists
+[02:03.44]Britain's John Tinniswood, a 111-year-old
+[02:09.32]as the oldest living man.
+[02:12.64]The organization lists 117-year-old
+[02:17.64]Maria Branyas Morera of Spain
+[02:21.68]as the old living woman.
+[02:24.48]As for the oldest living person ever,
+[02:28.60]that record belongs to Jeanne Louise Calment of France.
+[02:35.72]She was born on February 21, 1875,
+[02:42.76]and died on August 4, 1997,
+[02:48.00]after living 122 years and 164 days.
+[02:56.16]Abad was born in the small town of Chaglla.
+[03:01.44]He lived quietly until the Peruvian government
+[03:05.76]identified him in 2019 and provided him with a pension.
+[03:12.84]Abad says his secrets to living a long life include
+[03:19.04]a diet rich in fruits and lamb meat.
+[03:23.36]He also likes to chew coca leaves,
+[03:27.80]a tradition in Peru's Andean communities.
+[03:33.68]The information comes from the pension program
+[03:37.80]that Abad is a part of.
+[03:41.40]On April 5, Abad celebrated
+[03:44.68]his 124th birthday with a cake
+[03:49.08]bearing his likeness at a home for senior citizens
+[03:53.96]where he now lives.
+[03:57.48]I'm Mario Ritter, Jr. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

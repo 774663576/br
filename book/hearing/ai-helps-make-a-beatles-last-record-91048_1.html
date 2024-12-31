@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 人工智能技术帮助甲壳虫乐队发最后一张唱片</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 人工智能技术帮助甲壳虫乐队发最后一张唱片" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/ai-helps-make-a-beatles-last-record.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>人工智能技术帮助甲壳虫乐队发最后一张唱片</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/ai-helps-make-a-beatles-last-record.mp3" id="mp3"></a>
+<a href="/static/lrc/ai-helps-make-a-beatles-last-record.lrc" id="lrc"></a>
+<a href="ai-helps-make-a-beatles-last-record-91048.html" id="CnPage" target="_blank"></a>
+<a href="why-are-thousands-of-subreddits-going-dark-91046.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Beatles' cofounder Paul McCartney said this week that artificial intelligence (AI) has recaptured the voice of former Beatles member John Lennon from old recordings. Lennon was murdered in 1980.<br/>
+甲壳虫乐队的联合创始人保罗·麦卡特尼本周表示，人工智能技术从一份旧录音中提取了前甲壳虫乐队成员约翰·列侬的声音。列侬在1980年被谋杀。</p>
+<p>Music that includes Lennon's voice from the past will become what McCartney calls "the last Beatles record."<br/>
+包含列侬过去声音的音乐将成为麦卡特尼所谓的“甲壳虫乐队最后的唱片”。</p>
+<p>The 80 year-old artist spoke to the BBC. He said the AI technology was used to separate the band members' voices from background sounds in an old recording. Film director Peter Jackson was making a documentary series about the band at the time. The series, The Beatles: Get Back, came out in 2021.<br/>
+这位80岁的艺术家接受了BBC的采访。他说，人工智能技术用于将这位乐队成员在一份旧录音中的声音与背景声音分开。电影导演彼得·杰克逊当时正在制作有关该乐队的纪录片。纪录片《甲壳虫乐队：回归》于2021年问世。</p>
+<p>McCartney told BBC radio that Jackson was able to separate Lennon's voice from the musical sounds in the recording. "He could separate them with AI, he'd tell the machine ‘That's a voice, this is a guitar, lose the guitar'."<br/>
+麦卡特尼对BBC表示，杰克逊能够将列侬的声音与录音中的伴奏分开。“他可以利用人工智能将它们分开，他会告诉机器，这是歌声，这是吉他声，消掉吉他声。”</p>
+<p>He added, "We were able to take John's voice and get it pure through this AI so then we could mix the record as you would do."<br/>
+他还表示：“我们能够通过这种人工智能提取列侬的声音并使其清晰，这样我们就可以如你所做的那样去混录唱片。”</p>
+<p>McCartney did not identify the name of the demo song that Jackson used for the process. But the BBC and others said it was likely to be an unfinished 1978 love song by Lennon called Now and Then. The demo was included on a cassette with the words "For Paul." The BBC reported that McCartney had gotten the cassette from Lennon's wife, Yoko Ono.<br/>
+麦卡特尼并没有告知杰克逊用于该过程的小样名称。但是BBC以及其他人表示，它很可能是列侬1978年未完成的一首情歌《今与昔》。这首小样被收入了一盒写有“给保罗”字样的录音带上。BBC报告称，麦卡特尼从列侬的遗孀小野洋子那里获得了这盒录音带。</p>
+<p>McCartney described AI technology as "kind of scary but exciting."<br/>
+麦卡特尼称人工智能技术“有点可怕但又令人兴奋。”</p>
+<p>Last year, the same technology permitted McCartney to sing a virtual duet with Lennon. The performance took place at the Glastonbury Festival in Britain.<br/>
+去年，同样是这种技术，让麦卡特尼能和列侬一起隔空演唱二重奏。这次表演是在英国的格拉斯顿伯里音乐节上。</p>
+<p>Holly Herndon is an artist with a doctorate in composition from Stanford University in California. She used AI machine technology on her last album, 2019's Proto. She suggested that the Beatles' recording was likely created using a process called "source separation."<br/>
+霍莉·赫恩登是一位拥有加州斯坦福大学作曲博士学位的艺术家。 她在上一张专辑《 2019年的原型》中采用了人工智能机器技术。 她暗示甲壳虫乐队的录音可能是使用一种被称为“音源分离”的过程创建的。</p>
+<p>"Source separation has become easier to do with machine learning," Herndon said. The process lets a user take a voice from a recording and isolate it so that it can be paired with new music, she explained.<br/>
+赫恩登说：“通过机器学习，音源分离变得更容易。” 她解释说，该过程使用户可以从录音中单独提取出声音，以便它可以与新音乐搭配。</p>
+<p>That differs from a deepfake vocal. "A deepfake is an entirely new vocal line," she said. It comes from a machine learning model trained on old vocal lines, Herndon said.<br/>
+这与深度伪造的声音不同。 她说：“深度伪造是一条全新的人声。” 赫恩登说，它产自接受过旧声音训练的机器学习模型。</p>
+<p>McCartney is set to open a show later this month at the National Portrait Gallery in London of his private photographs. He took them took during the early days of the Beatles at the start of "Beatlemania," when the band rose to worldwide fame.<br/>
+麦卡特尼将于本月晚些时候在伦敦的国家肖像画廊用他的私人照片举办一场展览。 他在甲壳虫乐队早期的“披头士狂热”初期拍摄了这些照片，当时这支乐队在全球声名鹊起。</p>
+<p>The show is called Eyes of the Storm. It includes more than 250 photos McCartney took between 1963 and 1964. They include pictures of Ringo Starr, George Harrison and Lennon, as well as Beatles manager Brian Epstein.<br/>
+这场展览名为《风暴之眼》。它包括了麦卡肯尼在1963年到1964年期间拍摄的250多张照片。其中包括林戈·斯塔尔、乔治·哈里森、列侬以及披头士乐队经理布莱恩·爱泼斯坦的肖像。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦弗。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:AI Helps Make a Beatles ‘Last Record’]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Beatles' cofounder Paul McCartney said this week
+[00:05.92]that artificial intelligence (AI) has recaptured the voice
+[00:11.20]of former Beatles member John Lennon from old recordings.
+[00:17.88]Lennon was murdered in 1980.
+[00:21.24]Music that includes Lennon's voice from the past
+[00:26.56]will become what McCartney calls "the last Beatles record."
+[00:33.24]The 80 year-old artist spoke to the BBC.
+[00:37.72]He said the AI technology was used to separate
+[00:43.28]the band members' voices from background sounds in an old recording.
+[00:51.04]Film director Peter Jackson was making a documentary series
+[00:56.64]about the band at the time.
+[00:59.96]The series, The Beatles: Get Back, came out in 2021.
+[01:06.72]McCartney told BBC radio
+[01:09.92]that Jackson was able to separate Lennon's voice
+[01:14.68]from the musical sounds in the recording.
+[01:18.64]"He could separate them with AI,
+[01:21.56]he'd tell the machine ‘That's a voice, this is a guitar, lose the guitar'."
+[01:28.40]He added, "We were able to take John's voice
+[01:33.52]and get it pure through this AI
+[01:37.20]so then we could mix the record as you would do.
+[01:42.64]McCartney did not identify the name of the demo song
+[01:47.84]that Jackson used for the process.
+[01:51.40]But the BBC and others said it was likely to be an unfinished
+[01:58.48]1978 love song by Lennon called Now and Then.
+[02:05.48]The demo was included on a cassette with the words "For Paul."
+[02:11.88]The BBC reported that McCartney had gotten the cassette
+[02:16.52]from Lennon's wife, Yoko Ono.
+[02:20.20]McCartney described AI technology as
+[02:24.00]"kind of scary but exciting."
+[02:27.92]Last year, the same technology permitted McCartney
+[02:32.88]to sing a virtual duet with Lennon.
+[02:37.20]The performance took place at the Glastonbury Festival in Britain.
+[02:43.64]Holly Herndon is an artist with a doctorate in composition
+[02:48.56]from Stanford University in California.
+[02:52.96]She used AI machine technology on her last album, 2019's Proto.
+[03:01.36]She suggested that the Beatles' recording
+[03:04.92]was likely created using a process called "source separation."
+[03:12.20]"Source separation has become easier
+[03:15.44]to do with machine learning," Herndon said.
+[03:19.00]The process lets a user take a voice from a recording and isolate it
+[03:26.08]so that it can be paired with new music, she explained.
+[03:31.80]That differs from a deepfake vocal.
+[03:36.60]"A deepfake is an entirely new vocal line," she said.
+[03:42.32]It comes from a machine learning model
+[03:46.48]trained on old vocal lines, Herndon said.
+[03:51.08]McCartney is set to open a show later this month
+[03:56.56]at the National Portrait Gallery in London of his private photographs.
+[04:03.20]He took them took during the early days of the Beatles
+[04:07.48]at the start of "Beatlemania,"
+[04:10.36]when the band rose to worldwide fame.
+[04:14.16]The show is called Eyes of the Storm.
+[04:18.84]It includes more than 250 photos
+[04:23.52]McCartney took between 1963 and 1964.
+[04:30.12]They include pictures of Ringo Starr, George Harrison and Lennon,
+[04:37.28]as well as Beatles manager Brian Epstein.
+[04:43.28]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

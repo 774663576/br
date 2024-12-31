@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Designers Turn to Environment-friendly Materials</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Designers Turn to Environment-friendly Materials" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/designers-turn-to-environment-friendly-materials.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Designers Turn to Environment-friendly Materials</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/designers-turn-to-environment-friendly-materials.mp3" id="mp3"></a>
+<a href="us-schools-start-legal-actions-against-social-media-companies-90310.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">21 January 2023</span><br/>
+<p>Designers are increasingly using different kinds of materials to produce products that do not harm the environment.</p>
+<p>Reused plastic bottles, wood, plant fiber, and even seaweed are being used in place of traditional materials for household goods and clothing.</p>
+<p><strong>Unusual materials</strong></p><div class="contentImage"><img alt="This combination of photos released by NEA Studio shows a chandelier made from dried algae from designer Nina Edwards Ankers. (NEA Studio via AP)" src="https://files.21voa.com/gdb/09410000-0a00-0242-15f2-08daf58089d6_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This combination of photos released by NEA Studio shows a chandelier made from dried algae from designer Nina Edwards Ankers. (NEA Studio via AP)</span></div>
+<p>Nina Edwards Anker's <strong>sconces</strong> and <strong>chandeliers</strong> look like ancient pieces of paper placed around electronic lights known as LEDs.</p>
+<p>But a closer look shows that they are made of algae.</p>
+<p>Anker came up with the idea while working on a <strong>doctoral </strong>research project at the Oslo School of Architecture and Design.</p>
+<p>Anker chose not to hide the dried algae. "From the beginning, we wanted to keep the <strong>integrity</strong> of the material, and display its <strong>unique</strong> properties," Anker said.</p>
+<p>She is one of many designers thinking about traditional materials. She wants to find ways to mix design ideas with production and supply methods that do not use up resources.</p>
+<p><strong>A show for new materials in Germany</strong></p>
+<p>Heimtextil is an international trade show, or fair, for new <strong>textiles</strong> in Frankfurt, Germany. This year's fair placed attention on making new products that came from reused materials.</p>
+<p>Olaf Schmidt is Heimtextil's vice president of textiles and textile technology.</p>
+<p>"We'll see companies demonstrating how inorganic materials like nylon, plastic and metal can be reused – for example, carpet tiles that can be <strong>dismantled</strong> at the end of their life and used as a raw material for new tiles," he said.</p>
+<p>He added, "And there's seaweed, used to produce <strong>acoustic mats</strong> and panels that provide great <strong>insulation</strong>, are fire-resistant and regulate humidity well...At the end of their life, the panels can be shredded and reused."</p>
+<p><strong>Fashion</strong> industry expert Veronika Lipar described the field's most important change – a move to sustainability. She said, "The industry is trying to minimize its" effect "on the environment and no longer be the biggest polluter."</p>
+<p><strong>Many companies using other materials</strong></p>
+<p>Patagonia, North Face and Timberland are among the companies now using natural materials to produce goods.</p>
+<p>Italian company Frumat has developed a plant-based leather made from the waste created by apple juice makers.</p>
+<p>Two Mexican developers, Adrian Lopez Velarde and Marte Cazarez, have created a leather they call "Desserto" using nopal cactus leaves. Cactus plants are of interest to new material developers because they can live in hot climates and poor soil.</p>
+<p>Pinatex helps support farms in the Philippines by using waste from the pineapple harvest to create material that is sold to makers of shoes, clothing and other products.</p>
+<p>And Bolt Threads, a company based in California, created Mylo, a <strong>mycelium</strong>-based leather that is used by companies like Adidas, Lululemon and designer Stella McCartney.</p>
+<p>I'm John Russell.</p>
+<p><em>Kim Cook reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>sconce </strong><em>– n.</em> an object that is attached to a wall and that holds a candle or an electric light</p>
+<p><strong>chandelier</strong> <em>– n.</em> a large, decorated light that hangs from a ceiling and has branches for holding many light bulbs or candles</p>
+<p><strong>doctoral </strong><em>–adj.</em> related to the highest degree given by a university</p>
+<p><strong>integrity</strong><em> – n.</em> the state of being complete or whole</p>
+<p><strong>unique </strong><em>– adj. </em>used to say that something or someone is unlike anything or anyone else</p>
+<p><strong>textile </strong><em>– n.</em> a material that is woven or knit</p>
+<p><strong>dismantle</strong> <em>–v.</em> to take an object apart or to break something down</p>
+<p><strong>acoustic </strong><em>– adj.</em> of or relating to sound or to the sense of hearing</p>
+<p><strong>mat </strong><em>– n.</em> a small piece of material used to cover the floor or ground</p>
+<p><strong>fashion</strong> <em>–n. </em>related to the industry of making things that people wear</p>
+<p><strong>insulation</strong> <em>– n.</em> a material or substance that is used to stop heat, electricity, or sound from going into or out of something : a material that insulates something</p>
+<p><strong>mycelium</strong> <em>– n.</em> a group of fungal threads</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

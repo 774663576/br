@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 随着新冠病毒蔓延，服务业人员担心工资没有着落</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 随着新冠病毒蔓延，服务业人员担心工资没有着落" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202003/as-coronavirus-spreads-service-workers-worry-about-wages.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>随着新冠病毒蔓延，服务业人员担心工资没有着落</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202003/as-coronavirus-spreads-service-workers-worry-about-wages.mp3" id="mp3"></a>
+<a href="/static/lrc/as-coronavirus-spreads-service-workers-worry-about-wages.lrc" id="lrc"></a>
+<a href="as-coronavirus-spreads-service-workers-worry-about-wages-84085.html" id="CnPage" target="_blank"></a>
+<a href="harvey-weinstein-sentenced-to--years-in-prison-for-sex-crimes-84081.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The spread of the new coronavirus is affecting the work and pay of people around the world.<br/>
+新冠病毒的蔓延开始影响世界各地人民的就业和收入。
+<p>A delivery driver in Britain worries about getting sick from the people who sign for their purchases each day.<br/>
+英国的一名送货司机成天担心会被收件人传染。</p>
+<p>And a server at a restaurant in the American state of Missouri washes his hands more often and simply hopes for the best.<br/>
+美国密苏里州一家餐馆的服务员更是频繁洗手，只是希望能够获得最好的结果。</p>
+<p>Some professionals can work from home or call in sick if they experience signs of COVID-19, the disease the virus causes. But that is not possible for service workers who often come into contact with the public. Their situation is made worse by limited or non-existent sick leave and health insurance.<br/>
+一些专业人士可以在家里工作，或是在出现新冠肺炎迹象时请病假。但是这对经常接触公众的服务人员来说是不可能的。有限或是不存在的病假和健康保险使得他们的处境更为恶劣。</p>
+<p>"The recommendations on what people should be doing to protect themselves really gives a sharp indication of the divide between white collar and blue collar workers," said Shannon Liss-Reardon, a workers rights lawyer in Boston, Massachusetts.<br/>
+马萨诸塞州波士顿市工人权益律师香农·里斯里尔顿表示：“关于人们应该采取何等措施保护自己的建议确实清楚地表明了白领和蓝领工人之间的鸿沟。”</p>
+<p>White-collar jobs are those that take place in an office or other professional environment. Blue-collar jobs are those that require a person to perform more physical labor of some kind.<br/>
+白领工作是指在办公室或其它专业环境中进行的工作。蓝领工作是指需要个人从事某种体力劳动的工作。</p>
+<p>In the United States, about 27 percent of non-government workers do not get paid sick leave, the Bureau of Labor Statistics says. There is no federal sick leave policy in the United States, but 12 of the 50 states as well as Washington D.C. require employers to offer paid sick leave. And, employers with 50 or more employees are required to offer health insurance. That protection is not extended to part-time or independent workers.<br/>
+美国劳工统计局表示，美国大约27%的非政府雇员没有带薪病假。美国没有联邦病假政策，但是在美国50个州中，有12个州以及华盛顿特区要求雇主提供带薪病假。并且，拥有50名及以上员工的雇主还必须提供健康保险。这项保护并没有覆盖兼职或是自由工作者。</p>
+<p>Some Democratic lawmakers have proposed legislation to deal with the issue. It would require employers to let workers earn seven days of paid sick leave. It would also provide an additional 14 days of paid sick leave in the event of a public health emergency, including the current one.<br/>
+一些民主党已经提议立法来解决该问题。它将要求雇主给员工提供7天带薪病假。如果发生公共卫生紧急状况（包括当前的紧急状况），雇主还将提供额外14天带薪病假。</p>
+<p>On Monday, President Donald Trump said he was seeking help for hourly-wage workers to make sure they will not miss a paycheck.<br/>
+川普总统周一表示，他正在寻求帮助时薪工人，以确保他们能拿到薪水。</p>
+<p><strong>‘What we face daily'<br/>
+我们每天面对什么</strong></p>
+<p>In Britain, delivery driver Ed Cross worries about catching the virus from the machine he gives to people to sign for their goods.<br/>
+英国送货司机埃德·克罗斯担心会通过人们签收货物的机器染上病毒。</p>
+<p>"People have coughed on their hand and then got hold of my machine," said Cross, who is 53 years old. That is what "we face daily," he said.<br/>
+现年53岁的克罗斯表示：“人们手捂着嘴咳嗽，然后又拿起我的机器，这就是我们每天都要面对的。”</p>
+<p>The British government last week made it easier to collect sick pay. It also is working on changes to help millions of non-permanent workers like Cross who do not meet conditions for receiving sick pay. And, the company he works for has announced a financial deal to help workers if they need to restrict themselves to home.<br/>
+英国政府上周简化了病假工资的领取。它还在进行改革，以帮助数百万像克罗斯这样不符合领取病假工资的临时工。并且，克罗斯所工作的公司宣布了一项财务协议，以帮助需要居家隔离的员工。</p>
+<p>The new virus spread has shown huge holes in health care coverage at a time when people may need it most. Most European countries and Canada have universal healthcare systems. But the United States has a mix of public and private insurance.<br/>
+这种新病毒的蔓延展示了医疗保障在人们在最需要时所存在的巨大漏洞。大多数欧洲国家和加拿大都有全民医保制度。但是美国是公共保险和私营保险结合。</p>
+<p>Joey Ingham works at a restaurant in Kansas City, Missouri. He does not have health insurance. The restaurant is popular with business travelers, he says.<br/>
+乔伊·英厄姆在密苏里州堪萨斯城的一家餐厅工作。他没有医保。他说，这家餐厅深受商务旅客的欢迎。</p>
+<p>"If I wasn't able to come into work, it would be hard to make ends meet," said Ingham. If he felt sick, he said, he would probably talk to a supervisor about what to do.<br/>
+英厄姆表示：“如果不上班，我将很难维持生计。”他说，如果他患病，他可能会与主管讨论怎么办。</p>
+<p>In France, people have the right not to work and get full pay when they consider their workplaces to be dangerous. Some service workers there have stayed home for a short period because of infection concerns. Workers at the Louvre Museum in Paris refused to work for two days. They returned to work only after officials there announced new virus-fighting measures.<br/>
+在法国，当人们认为自己的工作场所存在危险时，他们有权拒绝工作并获得全薪。由于担心感染，法国一些服务人员已经在家里呆了一小段时间。巴黎罗浮宫博物馆的工作人员罢工两天了。他们拒绝上班，除非当地官员宣布新的抗病毒措施。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·琳恩。</p>
+<p>And I'm Caty Weaver.<br/>
+我是卡蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:As Coronavirus Spreads, Service Workers Worry about Wages]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The spread of the new coronavirus is affecting the work and pay of people around the world.
+[00:11.32]A delivery driver in Britain worries about getting sick from the people who sign for their purchases each day.
+[00:21.84]And a server at a restaurant in the American state of Missouri washes his hands more often and simply hopes for the best.
+[00:34.20]Some professionals can work from home or call in sick if they experience signs of COVID-19, the disease the virus causes.
+[00:46.24]But that is not possible for service workers who often come into contact with the public.
+[00:54.72]Their situation is made worse by limited or non-existent sick leave and health insurance.
+[01:04.64]"The recommendations on what people should be doing to protect themselves
+[01:10.12]really gives a sharp indication of the divide between white collar and blue collar workers,"
+[01:18.20]said Shannon Liss-Reardon, a workers rights lawyer in Boston, Massachusetts.
+[01:25.44]White-collar jobs are those that take place in an office or other professional environment.
+[01:33.68]Blue-collar jobs are those that require a person to perform more physical labor of some kind.
+[01:42.80]In the United States, about 27 percent of non-government workers
+[01:49.04]do not get paid sick leave, the Bureau of Labor Statistics says.
+[01:56.56]There is no federal sick leave policy in the United States,
+[02:01.60]but 12 of the 50 states as well as Washington D.C. require employers to offer paid sick leave.
+[02:12.96]And, employers with 50 or more employees are required to offer health insurance.
+[02:21.20]That protection is not extended to part-time or independent workers.
+[02:29.12]Some Democratic lawmakers have proposed legislation to deal with the issue.
+[02:36.68]It would require employers to let workers earn seven days of paid sick leave.
+[02:44.52]It would also provide an additional 14 days of paid sick leave
+[02:50.40]in the event of a public health emergency, including the current one.
+[02:57.80]On Monday, President Donald Trump said he was seeking help
+[03:02.76]for hourly-wage workers to make sure they will not miss a paycheck.
+[03:09.64]In Britain, delivery driver Ed Cross worries about catching the virus
+[03:15.60]from the machine he gives to people to sign for their goods.
+[03:21.68]"People have coughed on their hand and then got hold of my machine," said Cross, who is 53 years old.
+[03:31.24]That is what "we face daily," he said.
+[03:36.36]The British government last week made it easier to collect sick pay.
+[03:42.60]It also is working on changes to help millions of non-permanent workers like Cross
+[03:50.92]who do not meet conditions for receiving sick pay.
+[03:56.32]And, the company he works for has announced a financial deal
+[04:01.44]to help workers if they need to restrict themselves to home.
+[04:08.08]The new virus spread has shown huge holes in health care coverage at a time when people may need it most.
+[04:19.64]Most European countries and Canada have universal healthcare systems.
+[04:26.44]But the United States has a mix of public and private insurance.
+[04:34.24]Joey Ingham works at a restaurant in Kansas City, Missouri.
+[04:39.44]He does not have health insurance.
+[04:42.64]The restaurant is popular with business travelers, he says.
+[04:48.96]"If I wasn't able to come into work, it would be hard to make ends meet," said Ingham.
+[04:57.04]If he felt sick, he said, he would probably talk to a supervisor about what to do.
+[05:05.40]In France, people have the right not to work and get full pay when they consider their workplaces to be dangerous.
+[05:16.12]Some service workers there have stayed home for a short period because of infection concerns.
+[05:24.84]Workers at the Louvre Museum in Paris refused to work for two days.
+[05:32.92]They returned to work only after officials there announced new virus-fighting measures.
+[05:40.92]I'm Bryan Lynn.
+[05:43.48]And I'm Caty Weaver.
+[05:45.28]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

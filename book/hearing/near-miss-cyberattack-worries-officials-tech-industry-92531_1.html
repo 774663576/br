@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 开源软件未遂漏洞震惊业界</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 开源软件未遂漏洞震惊业界" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/near-miss-cyberattack-worries-officials-tech-industry.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>开源软件未遂漏洞震惊业界</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/near-miss-cyberattack-worries-officials-tech-industry.mp3" id="mp3"></a>
+<a href="/static/lrc/near-miss-cyberattack-worries-officials-tech-industry.lrc" id="lrc"></a>
+<a href="near-miss-cyberattack-worries-officials-tech-industry-92531.html" id="CnPage" target="_blank"></a>
+<a href="in-a-neighborhood-in-tokyo-artistic-toilets-get-attention-92530.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>German software developer Andres Freund was running performance tests last month when he noticed strange behavior in a little-known program. He decided to look into it. What he found frightened those in the software world and drew attention from tech executives and government officials.<br/>
+德国软件开发人员安德烈斯·弗罗因德上个月在进行性能测试时，注意到一个不知名的程序出现了奇怪的行为。他决定调查一下。他的发现吓坏了软件界人士，并引起了科技行业高管和政府官员的注意。</p>
+<p>Freund works for Microsoft in California. He discovered that the latest version of the open-source software program XZ Utils had been sabotaged by one of its developers. The action could have created a secret door to millions of servers across the internet.<br/>
+弗罗因德在加利福尼亚的微软公司工作。他发现开源软件程序XZ Utils的最新版本被其一名开发者破坏了。这一行为可能为互联网上数百万台服务器打开了一扇暗门。</p>
+<p>Freund noticed the change before the latest version of XZ became widely used. His observation, security experts say, helped save the world from a digital security crisis.<br/>
+弗罗因德在最新版本的XZ被广泛使用之前就注意到了这一变化。安全专家表示，他的观察帮助了将世界从数字安全危机中拯救出来。</p>
+<p>The near-miss has re-centered attention on the safety of open-source software. Open-source software is free. Volunteers often maintain the programs. Their openness means they serve as the foundation for the internet economy.<br/>
+这次未遂事件将人们的注意力重新集中在开源软件的安全性上。开源软件是免费的。通常由志愿者维护这些项目。它们的开放性意味着它们是互联网经济的基础。</p>
+<p>Many such projects depend on a small number of unpaid volunteers working on fixes and improvements.<br/>
+许多此类项目依赖于少数无偿志愿者进行修复和改进。</p>
+<p>XZ is a collection of file compression tools for the Linux operating system. It was long maintained by a single person, Lasse Collin.<br/>
+XZ是用于Linux操作系统的文件压缩工具的集合。它由拉斯·科林这一个人长期维护。</p>
+<p>But in a message published in June 2022, Collin said he was dealing with mental health issues. He suggested he was working privately with a new developer named Jia Tan.<br/>
+但在2022年6月发布的一条消息中，科林称其正在治疗心理健康问题。他暗示自己正在与一位名叫Jia Tan的新开发人员私下合作。</p>
+<p>Update logs available through the open-source software site Github show that Tan's role quickly expanded. By 2023 the logs show Tan was using his code in XZ. It is a sign that he had won a trusted role in the project.<br/>
+通过开源软件网站Github提供的更新日志显示，Tan的角色迅速扩大。到2023年，日志显示Tan在XZ中使用了他的代码。这表明他在这个项目中赢得了一个值得信赖的角色。</p>
+<p>But cybersecurity experts who have studied the logs say that Tan was only acting like a helpful volunteer. Over the next few months, they say, Tan introduced a nearly invisible backdoor into XZ.<br/>
+但研究过这些日志的网络安全专家表示，Tan只是装成一个乐于助人的志愿者。他们说，在接下来的几个月里，Tan为XZ引入了一个几乎隐形的后门。</p>
+<p>Tan did not return messages sent to his email account. Reuters has been unable to find out who Tan is, where he is, or who he was working for. But many people who have examined his updates believe Tan is a pseudonym for an expert hacker or a group of hackers. Experts say Tan was likely working for a powerful intelligence service.<br/>
+Tan没有回复发送到他的电子邮件帐户的信息。路透社一直无法找到Tan是谁，他在哪里，或者他为谁工作。但许多查看过他的最新消息的人士认为，Tan是一名专业黑客或一群黑客的化名。专家表示，Tan很可能为一个强大的情报机构工作。</p>
+<p>Tan could easily have gotten away with the actions if Freund had not noticed something unusual. He noticed the latest version of XZ sometimes using an unexpected amount of processing power on the system he was testing.<br/>
+若弗洛伊德并没有注意到异常，Tan的行为会很容易取得成功。他注意到最新版本的XZ有时会在他正在测试的系统上使用出乎意料的处理能力。</p>
+<p>Microsoft did not make Freund available for an interview. But in publicly available emails and posts to social media, Freund said a series of easy-to-miss clues led him to discover the backdoor.<br/>
+微软没有让弗罗因德接受采访。但弗罗因德在社交媒体上公开的电子邮件和帖子中表示，一系列容易被遗漏的线索让他发现了这个后门。</p>
+<p>The find "really required a lot of coincidences," Freund said on the social network Mastodon.<br/>
+弗罗因德在社交网络Mastodon上说，这一发现“确实需要很多巧合”。</p>
+<p>Among those in the open-source community, the discovery has been concerning. The volunteers who maintain the software that supports the internet are used to the idea of little pay or recognition. But the idea that they were now being hunted by well-resourced spies pretending to be volunteers was "incredibly intimidating," said Omkhar Arasaratnam. He is with the Open Source Security Foundation.<br/>
+在开源社区中，这一发现令人担忧。维护那些支撑互联网的软件的志愿者已经习惯了几乎没有报酬或认可的想法。Omkhar Arasaratnam说，但他们现在被资源充足的伪装成志愿者的间谍“捕猎”的想法“令人难以置信地恐惧”。他在开源安全基金会工作。</p>
+<p>For government officials, the incident has raised concerns about how to protect open-source software. Assistant National Cyber Director Anjana Rajan told the online news organization Politico that "there's a lot of conversations that we need to have about what we do next" to protect open-source code.<br/>
+对于政府官员来说，这一事件引发了人们对如何保护开源软件的担忧。美国国家网络局助理局长安贾娜·拉詹对在线新闻机构Politico表示，“我们需要就下一步要做什么进行很多对话”，以保护开源代码。</p>
+<p>Whatever the solution, almost everyone agrees the XZ incident shows that something must change.<br/>
+无论解决方案是什么，几乎所有人都同意XZ事件表明开源社区必须有所改变。</p>
+<p>"We got unreasonably lucky here," said Freund in another Mastodon post. "We can't just bank on that going forward."<br/>
+弗罗因德在Mastodon的另一篇帖子中说：“我们在这方面运气太好了。我们不能指望一直好运下去。”
+</p>
+<p>I'm Dan Novak.<br/>
+我是丹·诺瓦克。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Near-miss Cyberattack Worries Officials, Tech Industry]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]German software developer Andres Freund
+[00:03.48]was running performance tests last month
+[00:06.68]when he noticed strange behavior
+[00:08.96]in a little-known program.
+[00:10.76]He decided to look into it.
+[00:13.36]What he found frightened those in the software world
+[00:17.24]and drew attention from tech executives
+[00:20.28]and government officials.
+[00:23.16]Freund works for Microsoft in California.
+[00:26.56]He discovered that the latest version of
+[00:29.56]the open-source software program XZ Utils
+[00:33.72]had been sabotaged by one of its developers.
+[00:37.24]The action could have created a secret door
+[00:40.36]to millions of servers across the internet.
+[00:44.96]Freund noticed the change
+[00:46.84]before the latest version of XZ became widely used.
+[00:51.60]His observation, security experts say,
+[00:55.00]helped save the world from a digital security crisis.
+[01:00.48]The near-miss has re-centered attention
+[01:03.20]on the safety of open-source software.
+[01:06.36]Open-source software is free.
+[01:09.80]Volunteers often maintain the programs.
+[01:13.44]Their openness means they serve
+[01:16.04]as the foundation for the internet economy.
+[01:20.84]Many such projects depend on
+[01:23.16]a small number of unpaid volunteers
+[01:26.24]working on fixes and improvements.
+[01:30.28]XZ is a collection of file compression tools
+[01:34.48]for the Linux operating system.
+[01:37.32]It was long maintained by a single person, Lasse Collin.
+[01:43.48]But in a message published in June 2022,
+[01:47.40]Collin said he was dealing with mental health issues.
+[01:50.96]He suggested he was working privately
+[01:53.80]with a new developer named Jia Tan.
+[01:58.12]Update logs available through the open-source
+[02:01.08]software site Github
+[02:02.84]show that Tan's role quickly expanded.
+[02:07.28]By 2023 the logs show Tan was using his code in XZ.
+[02:13.12]It is a sign that he had won a trusted role in the project.
+[02:18.52]But cybersecurity experts who have studied the logs
+[02:22.20]say that Tan was only acting like a helpful volunteer.
+[02:26.52]Over the next few months, they say,
+[02:29.20]Tan introduced a nearly invisible backdoor into XZ.
+[02:34.72]Tan did not return messages sent to his email account.
+[02:38.80]Reuters has been unable to find out who Tan is,
+[02:42.60]where he is, or who he was working for.
+[02:45.88]But many people who have examined his updates
+[02:49.68]believe Tan is a pseudonym
+[02:51.96]for an expert hacker or a group of hackers.
+[02:55.28]Experts say Tan was likely working for
+[02:58.48]a powerful intelligence service.
+[03:02.76]Tan could easily have gotten away with the actions
+[03:06.36]if Freund had not noticed something unusual.
+[03:09.96]He noticed the latest version of XZ
+[03:13.60]sometimes using an unexpected amount
+[03:16.36]of processing power on the system he was testing.
+[03:21.44]Microsoft did not make Freund available for an interview.
+[03:25.64]But in publicly available emails and posts to social media,
+[03:30.72]Freund said a series of easy-to-miss clues
+[03:34.28]led him to discover the backdoor.
+[03:38.28]The find "really required a lot of coincidences,"
+[03:41.88]Freund said on the social network Mastodon.
+[03:46.64]Among those in the open-source community,
+[03:49.20]the discovery has been concerning.
+[03:51.88]The volunteers who maintain the software
+[03:54.76]that supports the internet
+[03:56.40]are used to the idea of little pay or recognition.
+[04:00.44]But the idea that they were now being hunted
+[04:03.60]by well-resourced spies pretending to be volunteers
+[04:07.68]was "incredibly intimidating," said Omkhar Arasaratnam.
+[04:12.56]He is with the Open Source Security Foundation.
+[04:17.88]For government officials, the incident has raised concerns
+[04:21.48]about how to protect open-source software.
+[04:25.64]Assistant National Cyber Director Anjana Rajan
+[04:29.52]told the online news organization Politico
+[04:33.00]that "there's a lot of conversations
+[04:35.40]that we need to have about what we do next"
+[04:37.96]to protect open-source code.
+[04:41.56]Whatever the solution, almost everyone agrees
+[04:45.00]the XZ incident shows that something must change.
+[04:49.96]"We got unreasonably lucky here,"
+[04:52.32]said Freund in another Mastodon post.
+[04:55.44]"We can't just bank on that going forward."
+[04:59.44]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

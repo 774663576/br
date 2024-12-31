@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Poisonous Plants Look Like Safe Ones</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Poisonous Plants Look Like Safe Ones" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/poisonous-plants-look-like-safe-ones.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Poisonous Plants Look Like Safe Ones</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/poisonous-plants-look-like-safe-ones.mp3" id="mp3"></a>
+<a href="spacex-crew-returns-to-earth-after-first-private-spacewalks-92985.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">16 September, 2024</span><br/>
+<p>From VOA Learning English, this is the <em>Health &amp; Lifestyle Report</em>.</p>
+<p>Actor Alicia Silverstone worried fans on social media recently. While on a trip to England, she posted a TikTok video of herself tasting a poisonous berry she found along a sidewalk.</p>
+<p>Silverstone, who appeared in the 1995 movie <em>Clueless</em>, said she thought the fruit was a tomato. But when she bit into it and found that it had an unusual taste, she realized that it was not the common food.</p><div class="contentImage"><img alt="FILE - An employee touches the flower of a Datura Stramonium plant, part of the nightshade family, at The Royal Botanic Gardens in London, Monday, Sept. 22, 2014. The nightshade family is known to have toxins in fruit or in stems and leaves.(AP Photo/Kirsty Wigglesworth, File)" src="https://files.21voa.com/gdb/4bc3b83a-7259-440e-870a-fa7c6e0171be_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - An employee touches the flower of a Datura Stramonium plant, part of the nightshade family, at The Royal Botanic Gardens in London, Monday, Sept. 22, 2014. The nightshade family is known to have toxins in fruit or in stems and leaves.(AP Photo/Kirsty Wigglesworth, File)</span></div>
+<p>Plant expert, Jessica Damiano, recently wrote about poisonous plants that look like common foods for the Associated Press.</p>
+<p>She said the fruit that looked like a tomato appears to have been a Jerusalem cherry.</p>
+<p>Often sold as a houseplant, all parts of the Jerusalem cherry are poisonous. The American Society for the Prevention of Cruelty to Animals says the plant is not only harmful to humans but also to dogs, cats and horses.<strong> </strong>Eating large amounts can be deadly. Silverstone was lucky because she did not swallow the berries.</p>
+<p>She is also lucky because the berries were reddish orange. This means they were <strong>ripe</strong>. While all parts of the Jerusalem cherry are poisonous, the plant's unripe berries can be especially dangerous. They can cause problems with the central nervous and gastrointestinal systems. <strong>Symptoms</strong> from eating the fruit include mental <strong>confusion</strong>, stomach pain, high body temperature, <strong>vomiting</strong>, <strong>paralysis</strong> and more.</p>
+<p>The Jerusalem cherry is a member of the nightshade family. It is in the same family of plants that includes tomatoes, eggplants, peppers, potatoes and tomatillos. Although the fruits of those crops are safe to eat, their leaves are <strong>toxic</strong>.</p>
+<p><strong>Other toxic lookalikes</strong></p>
+<p>The Jerusalem cherry is not the only toxic plant that looks like a safe one.</p>
+<p>The poisonous Carolina horsenettle fruit also looks like a tomato. However, its common name is a <strong>dead giveaway</strong> that it is dangerous. It is called devil's tomato. It is also known as devil's potato to add to the confusion.</p>
+<p>Other members of the nightshade family are poisonous in different ways. For example, a plant named deadly nightshade, or belladonna, is so toxic that it was used as a murder weapon in Europe during the Middle Ages, a time more than 500 years ago. Its berries, however, could be mistaken for blueberries.</p>
+<p>Pokeweed and Virginia creeper fruits also look like blueberries, and both can be deadly if eaten.</p>
+<p>Lilies are toxic, but they look like <strong>edible</strong> wild onion or garlic grasses, especially when they first come out of the ground.</p>
+<p>Edible wild onion and garlic grasses have other toxic lookalikes, too -- including a plant sometimes called death camas. These plants grow in lawns and wild areas in the spring, and they are a common cause of livestock poisoning. They are dangerous for humans, too.</p>
+<p>Toxic carrot and parsley lookalikes can also make you sick. Wild parsnip has flowers like a carrot and leaves like parsley. Simply touching it can cause a skin problem called photodermatitis. It causes sun sensitivity that can last for a year. Poison hemlock looks similar but is much larger. Eating that plant can lead to breathing problems.</p>
+<p>Creeping buttercup looks like flat-leaf parsley. It is an <strong>invasive</strong> plant that can cause severe stomach pain, vomiting, diarrhea, and heart problems.</p>
+<p>And the deadly Canadian moonseed can be <strong>confused </strong>with wild grape. However, its taste is so <strong>bitter</strong> that you would likely spit it out before swallowing it. This is a good thing because eating it can lead to death.</p>
+<p>If you think you have swallowed a toxic plant by mistake, contact a poison control center in your area or your doctor. There is additional information on the website <a class="wsw__a" href="http://www.poison.org">poison.org</a>.</p>
+<p>Damiano advises to use common sense with plants you find in the wild. If you are not completely sure that something is food, do not eat it.</p>
+<p>And that's the <em>Health &amp; Lifestyle</em> report. I'm Anna Matteo.</p>
+<p><em>Jessica Damiano reported this story for The Associated Press from New York City. Anna Matteo adapted it for VOA Learning English.</em></p>
+<p><em>___________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>ripe</strong> <em>–adj. </em>fully developed; ready for harvest</p>
+<p><strong>symptom<em> </em></strong><em>–n. </em>the sign that disease is present or that something is wrong with a person's health</p>
+<p><strong>confusion </strong><em>–n. </em>being unable to think clearly : <strong>confuse </strong><em>-v.</em></p>
+<p><strong>vomiting </strong><em>–n. </em>the condition of expelling what is in your stomach through your mouth<strong> : vomit </strong><em>-v.</em></p>
+<p><strong>paralysis </strong><em>–n. </em>the loss of the ability to move one's muscles</p>
+<p><strong>toxic </strong><em>–adj.</em> poisonous</p>
+<p><strong>dead giveaway </strong>–idiom a fact or detail that makes the true nature of something impossible to ignore</p>
+<p><strong>edible </strong><em>–adj. </em>fit and safe to be eaten</p>
+<p><strong>invasive </strong><em>–adj. </em>tending to spread especially in a quick or aggressive manner: such as</p>
+<p><strong>bitter </strong><em>–adj.</em> one of the major tastes that people have which is very unpleasant to most people</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

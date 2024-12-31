@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Japan Celebrates Historic Emmy Award Wins for 'Shogun'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Japan Celebrates Historic Emmy Award Wins for 'Shogun'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/japan-celebrates-historic-emmy-award-wins-for-shogun.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Japan Celebrates Historic Emmy Award Wins for 'Shogun'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/japan-celebrates-historic-emmy-award-wins-for-shogun.mp3" id="mp3"></a>
+<a href="the-debate-will-ai-take-away-many-human-jobs-92983.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By VOA<br/>
+<span class="datetime">16 September, 2024</span><br/>
+</span>
+<p>Japan is celebrating the record-breaking Emmy Award wins of the American television series <em>Shogun</em>. Many Japanese, however, say they have not watched the series.</p>
+<p><em>Shogun </em>is<em> </em>a historical <strong>fiction</strong> that explores the country's warring <strong>dynasties</strong> in the <strong>feudal</strong> period. It crushed all-time records at the television awards ceremony on Sunday in Los Angeles, California. The series won 18 Emmys in all. And it became the first non-English-language winner of the highly sought award for best <strong>drama</strong> series.</p>
+<p>Lead actor Hiroyuki Sanada, who played Lord Toranaga, became the first Japanese man to win an Emmy for acting. Anna Sawai became the first woman of Asian ancestry to win an Emmy for acting. She played Lady Mariko.</p>
+<div class="contentImage"><img alt="Some of the cast and crew of 'Shogun,' winner of the Emmy for Outstanding Drama Series pose in the press room during the 76th Emmy Awards in Los Angeles, California, on September 15, 2024. (Photo by Robyn Beck/AFP)" src="https://files.21voa.com/gdb/74636940-18ed-49a9-884d-7b10be9781b1_w268_r1.jpg"/><br/>
+<span class="imagecaption">Some of the cast and crew of 'Shogun,' winner of the Emmy for Outstanding Drama Series pose in the press room during the 76th Emmy Awards in Los Angeles, California, on September 15, 2024. (Photo by Robyn Beck/AFP)</span></div>
+<p>"As a Japanese, I'm happy Sanada won," Kiyoko Kanda, a 70-year-old retiree, told the news group Agence France-Presse in Tokyo. "He worked so hard since he moved to Los Angeles," she said. But she admitted that she has only watched the show's <strong>trailer</strong>.</p>
+<p><strong>'Groundbreaking' realism key to ‘Shogun' success</strong></p>
+<p><em>Shogun</em> is available only on Disney's streaming platform, which is relatively new in Japan.</p>
+<p>"I want to watch it. I'm curious to know how Japan is <strong>portrayed</strong>," Kanda said.</p>
+<p>Otsuka, who chose not to give her first name, said she, too, has not watched the show. "But I saw the news and I'm happy he won."</p>
+<p>The 63-year-old Sanada began acting at the age of five in Tokyo. He moved to Los Angeles after appearing in <em>Last Samurai</em> in 2003.</p>
+<p>Yusuke Takizawa, age 41, also saw only the trailer for <em>Shogun</em>. But he said he could tell the show was a high-quality production.</p>
+<p>"I was impressed by the high-spirited acting, the attention to detail and the film technology," Takizawa told AFP outside Osaka Castle, a major historical site where some of the story is set.</p>
+<p>"I think many young people will want to try their hand in Hollywood after watching Sanada," he said.</p>
+<p><strong>From page to film, again...</strong></p>
+<p>Shogun was adapted from a popular 1975 book of the same name by writer James Clavell. The series, filmed in Canada, tells the story of Lord Toranaga, who fights for his life against his enemies alongside Mariko and British sailor John Blackthorne.</p>
+<p>A first television production of Shogun came out in 1980 and centered on Blackthorne.</p>
+<p>The new <em>Shogun</em> is not. It also breaks away from years of prejudiced representations of Japan in Western entertainment media. Notably, the 2024 production is mostly in Japanese, not English.</p>
+<p>Sanada, who also co-produced the series, is credited with bringing a new level of cultural and historical understanding to <em>Shogun</em>.</p>
+<p>I'm Caty Weaver.</p>
+<p>_____________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fiction</strong><em>– n.</em> something invented by the imagination</p>
+<p><strong>dynasty</strong> <em>– n. </em>a powerful group or family that maintains its position for a considerable time</p>
+<p><strong>feudal </strong><em>– adj.</em> of, or relating to, the system of political organization prevailing in Europe from the 9th to about the 15th centuries having as its basis the relation of lord to vassal</p>
+<p><strong>drama </strong><em>– n.</em> a movie or television production with characteristics (such as conflict) of a serious play</p>
+<p><strong>trailer </strong><em>– n.</em> a chosen group of scenes that are shown to advertise a movie</p>
+<p><strong>portray </strong><em>– v. </em>to play the role of</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

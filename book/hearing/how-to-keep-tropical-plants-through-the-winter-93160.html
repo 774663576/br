@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Keep Tropical Plants Through the Winter</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How to Keep Tropical Plants Through the Winter" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/how-to-keep-tropical-plants-through-the-winter.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Keep Tropical Plants Through the Winter</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/how-to-keep-tropical-plants-through-the-winter.mp3" id="mp3"></a>
+<a href="south-korean-team-develops-wheels-that-climb-over-barriers-93159.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">18 November, 2024</span><br/>
+<p>Are you dreaming of a vacation to a warm place next to the sea?</p>
+<p>You may be thinking of sitting under a palm tree, or next to a banana plant. Or you may dream of walking on a faraway island in the <strong>tropics</strong> surrounded by colorful flowers such as birds of paradise and cannas.</p>
+<p>Tropical plants make us feel like we are in warm places with a pleasing climate. In cold climates, these plants can grow outside during the summer. But they suffer in cold weather.</p><div class="contentImage"><img alt="FILE - This 2006 image provided by Chris Petersen shows an orange canna plant in bloom at Landcraft Environmentals in Mattituck, N.Y. (Chris Petersen via AP)" src="https://files.21voa.com/gdb/10886dcf-65f9-49ce-8041-a11e0a1fa2c0_cx0_cy12_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - This 2006 image provided by Chris Petersen shows an orange canna plant in bloom at Landcraft Environmentals in Mattituck, N.Y. (Chris Petersen via AP)</span></div>
+<p>The gardening expert for the Associated Press, Jessica Damiano, says most people in the United States have to treat tropical plants like annuals because they do not survive cold winters. An annual plant is one that dies after one growing season.</p>
+<p>Following her guidelines you will find out how to save both tropical plants and money. You also can make future summers at home feel like an <strong>exotic</strong> getaway.</p>
+<p><strong>Colocasia</strong></p>
+<p>If you bought <strong>potted</strong> elephant ear plants, also called Colocasia, cannas or caladiums, bring the pots inside instead of putting them into the waste collection. Place them near a sunny window, water often and fertilize as directed with ordinary houseplant fertilizer at half strength.</p>
+<p>If the plants are too big for the house or have been planted in the garden, leave them outdoors until the first <strong>frost</strong> turns their leaves brown. Then cut the plants down to 15 centimeters tall and dig them up.</p>
+<p>Rinse and separate their roots, which might have small, rounded parts, and let them dry completely. Then prepare a box with some air holes and peat moss to store the roots. Place the box or container in a cool, dark place.</p>
+<p>Examine them once a month, adding water if they seem to be drying out, and throw out any rotten pieces. Plant outdoors and fertilize when the soil has warmed up to 16 degrees Celsius in spring. You also can start them indoors in potting mix one month earlier. Set them by your sunniest window or under grow lights, keeping the soil a little wet.</p>
+<p><strong>Potted hibiscus and angel trumpets</strong></p>
+<p>Gardeners should also bring potted hibiscus and angel trumpets, also known as Brugmansia, indoors before the first frost. Treat them as houseplants by placing them next to a sunny window during winter. These plants may lose their leaves, but they will come back in the spring.</p>
+<p>If there is no room for the plants in your living space, you can help them get through winter by storing pots at six to seven degrees Celsius. Examine them twice a month and water them very lightly when the soil feels dry at finger depth.</p>
+<p>Before moving them outdoors, place the plants in a warm, sunny spot. Lightly <strong>prune </strong>them, water and fertilize the plants about one month before it is safe to move them back outdoors.</p>
+<p><strong>Banana plants</strong></p>
+<p>Potted banana plants should be cut down to soil level when the first frost browns their leaves. Store the containers in a dark place at roughly six to seven degrees Celsius. Look at the soil monthly, watering very lightly only when completely dry. Growth will begin again in spring but keep the plants indoors until the danger of frost has passed. Fertilize and resume regular watering.</p>
+<p>Do not cut back bananas that are growing in the ground in the fall. Just dig them up and contain their roots in a plastic waste bag. Store them as you would a potted banana plant. Cut them down to 15 centimeters in spring and plant them in the garden after the danger of frost has passed.</p>
+<p>Then, put the money you would have spent on new plants toward a water container, a firepit or tropical fruit juice. You can then sit back and enjoy your tropical backyard <strong>oasis</strong>.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jessica Damiano reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>tropics</strong> <em>– n.</em> the part of the world that is near the equator where the weather is very warm</p>
+<p><strong>exotic</strong> – <em>adj.</em> of a plant or animal - not living or growing naturally in a particular area: from another part of the world</p>
+<p><strong>potted </strong><em>– adj. </em>grown in a pot, a round container usually made out of clay, ceramic or plastic</p>
+<p><strong>frost</strong> – <em>n. </em>a thin layer of ice that forms on the ground, on grass, etc., when the air becomes cold</p>
+<p><strong>prune</strong> – <em>v. </em>to cut off some of the branches of (a tree or bush) so that it will grow better or look better</p>
+<p><strong>oasis</strong> – <em>n</em>. an area in a desert where there is water and plants</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

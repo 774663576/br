@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Learning Prepositions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Learning Prepositions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/learning-prepositions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Learning Prepositions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/learning-prepositions.mp3" id="mp3"></a>
+<a href="baby-hippo-in-thailand-gets-official-song-for-worldwide-fans-93171.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">22 November, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Kelvin in Ghana about the usage of prepositions in English.</p>
+<p><strong>Question</strong></p>
+<p>Dear teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/47edc4e2-745b-439f-a1c9-24dda264089d_w268_r1.jpg"/></div>
+<p>Please, I would like to know more about prepositions.</p>
+<p>Thank you,</p>
+<p>Kelvin</p>
+<p><strong>Answer</strong></p>
+<p>I'm happy to answer this question, Kelvin.</p>
+<p>Prepositions are those small words that give additional information about nouns, such as direction, time, location, and possession.</p>
+<p>We can put prepositions into two large groups. In the first group, prepositions tell us about direction, location, time, and relations between people or things. These details are what people first learn when they study prepositions in English. Just a few examples of location and time include:</p>
+<p><em><u>on</u> the table.</em></p>
+<p><em><u>under</u></em><em> the table.</em></p>
+<p><em><u>by</u> nine <u>in the</u> morning.</em></p>
+<p><em><u>at</u></em><em> night.</em></p>
+<p>Some examples that show relations between people include:</p>
+<p><em>A friend <u>of</u> mine.</em></p>
+<p><em>I worked <u>with</u> him. </em></p>
+<p><em>I did it <u>for</u> you.</em></p>
+<p><strong>Prepositions in common expressions</strong></p>
+<p>The second large group includes common expressions where the preposition sometimes has a less exact meaning. That is why knowing which preposition to use with these expressions becomes more difficult.</p>
+<p>Consider the following two examples. The first is used in British English, the second in American English:</p>
+<p><em>This house is <u>different to</u> the one I used to live in.</em></p>
+<p><em>This house is <u>different from</u> the one I used to live in. </em></p>
+<p>The two examples mean the same thing. And there is no clear reason why we should use one preposition instead of the other.</p>
+<p>Here is another expression where we use one preposition instead of another. We often say:</p>
+<p><em>The news took me <u>by</u> surprise.</em></p>
+<p>But we never say:</p>
+<p><em>The news took me <u>with</u> surprise.</em></p>
+<p>However, notice that changing the preposition “by” to the preposition “with” does not appear to change the meaning of this expression.</p>
+<p>To someone learning English, one preposition might seem as good a choice as any other for this expression. That is why it is easy to make mistakes and sometimes difficult to remember the correct preposition to use.</p>
+<p>So, how can you remember what preposition to use with such expressions?</p>
+<ul>
+<li>Do not try to learn the expression separately from the preposition, and then go back and put the preposition in your memory.</li>
+<li>Instead, try to hear and remember the entire expression as one phrase instead of several words.</li>
+<li>Just as we put numbers into groups of three or four to remember phone numbers, try to think of an expression and its preposition together as one group.</li>
+</ul>
+<p>For our readers and listeners, what are your questions about American English? We'd like to hear from you. Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>. And please include where you are from in your email, too.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

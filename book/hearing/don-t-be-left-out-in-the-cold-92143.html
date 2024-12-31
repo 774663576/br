@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Snow Day? Don't Be 'Left Out in the Cold'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Snow Day? Don't Be 'Left Out in the Cold'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/don-t-be-left-out-in-the-cold.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Snow Day? Don't Be 'Left Out in the Cold'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/don-t-be-left-out-in-the-cold.mp3" id="mp3"></a>
+<a href="scientists-map-largest-deep-sea-coral-reef-off-us-atlantic-coast-92138.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">27 January 2024</span><br/>
+<p>And now, <em>Words and Their Stories</em>, from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give definitions, examples, notes on usage, and sometimes we use them in short conversations.</p>
+<p>In a recent science report<a class="wsw__a" href="https://www.21voa.com/a/while-us-freezes-much-of-the-world-experiences-record-heat/7445844.html"> we explained</a> about a weather system called the polar vortex. It caused a <u>snowball effect</u> on extreme weather around the world. The event led to record-high temperatures in many parts of the world. But much of North America had to deal with extreme cold. Some areas recorded temperatures as low as minus 20 degrees Celsius.</p><div class="contentImage"><img alt="FILE - Mist from the Great Falls has created a frozen wonderland around the waterfalls in Paterson, New Jersey, Jan. 18, 2024. (AP Photo/Ted Shaffrey)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-f776-08dc1a7fc685_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Mist from the Great Falls has created a frozen wonderland around the waterfalls in Paterson, New Jersey, Jan. 18, 2024. (AP Photo/Ted Shaffrey)</span></div>
+<p>In an earlier Words and Their Stories program, we explained how to use the expression <a class="wsw__a" href="https://www.21voa.com/a/when-does-a-problem-snowball-/7398657.html">snowball effect</a> to describe a situation where one action or event causes many other similar actions or events.</p>
+<p>Are you thinking that there must be many more English expressions related to snow, ice, and cold weather? You are right! The term "snowball effect" is just the <u>tip of the iceberg</u>!</p>
+<p>Or, to put it another way, we have many more expressions in American English related to the cold weather. So, today we will explore some winter words and expressions.</p>
+<p>In the <u>dead of winter</u>, many people like to skate on frozen lakes. But watch out! You don't want to <u>skate on thin ice</u>. That is dangerous. If it breaks you could fall into the cold, dark water below. You could even drown.</p>
+<p>So, the expression <u>skating on thin ice</u> serves as a warning. For example, if a friend is always late to work, you might tell him he is <u>skating on thin ice</u> with his employer.</p>
+<p>But, you might not want to say anything to your friend. Maybe it is none of your business when your friend arrives at work. So, you decide to <u>put your warning on ice.</u></p>
+<p>To <u>put something on ice</u> means to suspend action on something – a temporary halt. In fact, today a co-worker asked me to <u>put my project on ice</u>, so I would have time to help her with today's lesson.</p>
+<p>When we put food on ice we <strong>preserve</strong> its quality for a time. We can wait to eat it later and it will still be good.</p>
+<p>What about when we <u>break the ice</u>, though? That sounds dangerous, right? However, it just means reaching out personally to a stranger. Like in this example:</p>
+<p><em>A: Hi Matt. Have you met our new teacher, Jennifer?</em></p>
+<p><em>B: No. Not yet.</em></p>
+<p><em>A: Why don't you <u>break the ice</u> and <strong>introduce</strong> yourself this afternoon?</em></p>
+<p><em>B: I certainly will.</em></p>
+<p>Ice is not all we might face in winter. Sometimes the snow is so deep we cannot even get out of the house. At those times, you might say there is a <u>snowball's chance in hell</u> I'm leaving home today.</p>
+<p>Hell is fiery and extremely hot. A snowball has no chance at survival there. So, the expression describes something that is impossible.</p>
+<p>Now that we are stuck inside the house, we say we are <u>snowbound</u> or <u>snowed under</u>. And we often use <u>snowed under</u> to describe a situation in which we have too much work to do.</p>
+<p>American children usually love a <u>snow day</u>! That phrase is used to mean schools are closed. Students might spend the day outdoors throwing <u>snowballs</u> or building a <u>snowman</u>. Or maybe they stay inside, covered up in a warm blanket next to a hot fire, <u>snug as a bug in a rug</u>.</p>
+<p>We use the expression <u>snug as a bug in a rug</u> to describe a soft, warm and safe position or situation.</p>
+<p>Sounds like a great place to be, especially during a snow storm. I mean, no one wants to be <u>left out in the cold</u>. That can really hurt, physically and emotionally!</p>
+<p>Sometimes we use this phrase, <u>left out in the cold</u>, when someone has rejected or forgotten us.</p>
+<p>We will never leave English learners <u>out in the cold</u>, to be sure! Especially not in <u>the dead of winter!</u></p>
+<p>And that's <em>Words and Their Stories</em>.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Hai Do wrote this lesson for VOA Learning English.</em></p>
+<p>__________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>preserve</strong> - v. to keep something in its original state or in good condition</p>
+<p><strong>introduce</strong> - v. to make someone known to someone else</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

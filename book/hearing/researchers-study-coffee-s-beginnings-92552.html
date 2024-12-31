@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Researchers Study Coffee’s Beginnings</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Researchers Study Coffee’s Beginnings" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/researchers-study-coffee-s-beginnings.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Researchers Study Coffee’s Beginnings</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/researchers-study-coffee-s-beginnings.mp3" id="mp3"></a>
+<a href="scientists-coral-bleaching-happens-around-the-world-92551.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">17 April 2024</span><br/>
+<p>The coffee you had this morning could have its beginnings some 600,000 years ago.</p>
+<p>Using genes from coffee plants from around the world, researchers built a <strong>family tree</strong> for the world's most popular kind of coffee. Scientists call it Coffea arabica. Coffee lovers know it simply as "arabica."</p>
+<p>The researchers recently published a new study about coffee. They found that the <strong>species</strong> appeared around 600,000 years ago. The plant was likely the result of natural<strong> breeding </strong>of two other coffee species.</p><div class="contentImage"><img alt="FILE - Arabica coffee cherries are seen on tree at a plantation near Pangalengan, West Java, Indonesia May 9, 2018. (REUTERS/Darren Whiteside)" src="https://files.21voa.com/gdb/710f34e5-2162-488c-9942-dae3b6271b64_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Arabica coffee cherries are seen on tree at a plantation near Pangalengan, West Java, Indonesia May 9, 2018. (REUTERS/Darren Whiteside)</span></div>
+<p>Victor Albert of the University at Buffalo was a co-leader of the study. He said the plant likely developed without the help of humans.</p>
+<p>Wild coffee plants likely started in Ethiopia. But they are thought to have been first <strong>roasted</strong> and <strong>brewed</strong> in Yemen starting in the 1400s. In the 1600s, Indian monk Baba Budan is said to have taken seven raw coffee beans back to his homeland from Yemen, laying the beginnings for coffee's worldwide takeover.</p>
+<p>Arabica coffee, loved for its smooth and sweet flavor, now makes up 60 to 70 percent of the global coffee market. The rest of the market is made up of robusta, a stronger and more bitter-tasting coffee made from one of arabica's parents, Coffea canephora.</p>
+<p>To learn about arabica coffee's past, researchers studied the genetic information, or genomes, of C. canephora and another parent plant called Coffea eugenioides. They also studied more than 30 different arabica plants.</p>
+<p>One of the plants was a <strong>sample</strong> from the 1700s provided by the Natural History Museum in London. The Swedish naturalist Carl Linnaeus used that plant to give coffee its scientific name.</p>
+<p>The study appeared recently in the publication Nature Genetics. Researchers from Nestlé, a big Swiss food company which owns several coffee brands, helped with the study.</p>
+<p>The arabica plant's population changed over thousands of years before humans began growing it. The arabica plants did well during warm, wet periods and suffered through dry ones. These difficult times created what scientists call "population bottlenecks," when only a small number of genetically similar plants survived.</p>
+<p>Today, these genetic similarities mean arabica coffee plants are more likely to be hurt by diseases like coffee leaf rust, which causes costly losses every year. The researchers explored the makeup of one arabica variety that is resistant to coffee leaf rust. They are interested in parts of its<strong> genetic code</strong> that could help protect the plant.</p>
+<p>The study clarifies how arabica came to be and gives clues that could help protect the crop, said Fabian Echeverria of Texas A&amp;M University. Echeverria was not involved with the research.</p>
+<p>Exploring arabica's past and present could help give information about how to keep coffee plants healthy – ensuring morning cups of coffee into the future.</p>
+<p>I'm John Russell.</p>
+<p><em>Adithi Ramakrishnan reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>__________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>family tree </strong><em>–n</em>. a drawing that shows ancestors and offspring of a living thing</p>
+<p><strong>species</strong> <em>– n.</em> a group of plants that are similar and can produce young animals or plants</p>
+<p><strong>breeding</strong> <em>–n.</em> producing offspring</p>
+<p><strong>roast </strong><em>– v.</em> to cook with dry heat in an oven or over a fire</p>
+<p><strong>brew </strong><em>– v.</em> to make coffee</p>
+<p><strong>sample</strong><em> – n.</em> a small amount of something that gives you information about the thing it was taken from</p>
+<p><strong>genetic code </strong>–<em>n.</em> the series of genetic substances that can be identified by scientists and linked to genetic qualities in species and individuals</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拉斯维加斯新年前夕结婚人数创纪录</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 拉斯维加斯新年前夕结婚人数创纪录" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/las-vegas-could-set-record-for-marriages-on-new-year-s-eve.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拉斯维加斯新年前夕结婚人数创纪录</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/las-vegas-could-set-record-for-marriages-on-new-year-s-eve.mp3" id="mp3"></a>
+<a href="/static/lrc/las-vegas-could-set-record-for-marriages-on-new-year-s-eve.lrc" id="lrc"></a>
+<a href="las-vegas-could-set-record-for-marriages-on-new-year-s-eve-91995.html" id="CnPage" target="_blank"></a>
+<a href="california-permits-turning-wastewater-to-drinking-water-91992.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>For better or for worse, the number of couples getting married in the city of Las Vegas, Nevada, on New Year's Eve could set a record.<br/>
+不管是好是坏，内华达州拉斯维加斯市新年前夕结婚的夫妇数量都可能创下纪录。</p>
+<p>That is because the date 12/31/23 is known in the Las Vegas wedding industry as a "specialty date." The Las Vegas Review-Journal reported that the repeating number pattern of 1-2-3 1-2-3 is very popular.<br/>
+这是因为2023年12月31日（12/31/23）这天在拉斯维加斯婚礼行业被称为“特色日期”。《拉斯维加斯评论杂志》报道称，1-2-3 1-2-3的重复数型非常受欢迎。</p>
+<p>What makes it even more special is that the date falls on a holiday famous for big celebrations.<br/>
+更特别的是，这一天恰逢一个以大型庆祝活动闻名的节日。</p>
+<p>"It's a double whammy," said Melody Willis-Williams, president of Vegas Weddings, which owns several wedding venues. "Anytime you get these specialty dates, they're always hugely popular. But tie that in with New Year's Eve and it's a showstopper."<br/>
+“这是双重冲击，”拉斯维加斯婚礼公司总裁梅洛迪·威利斯-威廉姆斯说，该公司拥有多个婚礼场地。“每当遇到这些特色日期时，它们总是非常受欢迎。但把它与新年前夕联系起来，它就会引人注目。”</p>
+<p>Las Vegas is famous for fast marriage ceremonies, and many marriages take place there every year.<br/>
+拉斯维加斯以快速举行婚礼而闻名，每年都有许多婚礼在那里举行。</p>
+<p>The number to beat on New Year's Eve is 4,492. That is the single-day record for marriages in Las Vegas set on July 7, 2007. The second-most popular specialty wedding date on record with the county's marriage bureau is November 11, 2011, when 3,125 couples married.<br/>
+新年前夕要打败的数字是4492。这是拉斯维加斯2007年7月7日创下的单日结婚记录。2011年11月11日是该县婚姻局有记录以来第二受欢迎的特色婚礼日期，当时有3125对新人结婚。</p>
+<p>Since 2018, somewhere between 450 and 550 marriage ceremonies take place each year in Las Vegas on New Year's Eve, the Review-Journal reported.<br/>
+据《拉斯维加斯评论杂志》报道，自2018年以来，拉斯维加斯每年新年前夕都会举行450至550场婚礼。</p>
+<p>This year, the company Vegas Weddings is fully booked for midnight at all its venues, including a church in downtown Las Vegas.<br/>
+今年，拉斯维加斯婚礼公司的所有场地，包括拉斯维加斯市中心一座教堂在内午夜时段都被预订一空。</p>
+<p>Willis-Williams said her company expects to marry more than 120 couples on New Year's Eve. Five of those couples will marry as the clock is counting down to midnight.<br/>
+威利斯-威廉姆斯说，她的公司预计在新年前夕将有120多对新人结婚。其中五对将在新年倒计时的时候结婚。</p>
+<p>Clark County Clerk Lynn Marie Goya said couples married on a specialty date in Las Vegas have described them as "magic dates" that are easy to remember.<br/>
+克拉克县办事员林恩·玛丽·戈雅说，在拉斯维加斯特色日期结婚的夫妇将它们称为非常容易记住的神奇日期。</p>
+<p>"I think the celebration that has a group dynamic is really appealing," Goya said. "When everyone is in line and they're all getting married and excited about being in love, it just enhances their own experience."<br/>
+戈雅说：“我认为具有团体活力的庆祝活动真的很有吸引力。当每个人排着队，他们都将结婚，并对陷入爱河感到兴奋时，这只会增强他们自己的体验。”</p>
+<p>I'm Dan Novak.<br/>
+我是丹·诺瓦克。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Las Vegas Could Set Record for Marriages on New Year’s Eve]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]For better or for worse,
+[00:02.28]the number of couples getting married
+[00:04.56]in the city of Las Vegas, Nevada,
+[00:07.24]on New Year's Eve could set a record.
+[00:11.48]That is because the date 12/31/23
+[00:15.56]is known in the Las Vegas wedding industry
+[00:18.88]as a "specialty date."
+[00:21.16]The Las Vegas Review-Journal reported
+[00:24.72]that the repeating number pattern
+[00:26.76]of 1-2-3 1-2-3 is very popular.
+[00:32.32]What makes it even more special is that the date
+[00:35.68]falls on a holiday famous for big celebrations.
+[00:40.68]"It's a double whammy," said Melody Willis-Williams,
+[00:44.56]president of Vegas Weddings,
+[00:47.16]which owns several wedding venues.
+[00:49.92]"Anytime you get these specialty dates,
+[00:53.36]they're always hugely popular.
+[00:55.68]But tie that in with New Year's Eve
+[00:58.08]and it's a showstopper."
+[01:01.44]Las Vegas is famous for fast marriage ceremonies,
+[01:05.56]and many marriages take place there every year.
+[01:09.92]The number to beat on New Year's Eve is 4,492.
+[01:15.80]That is the single-day record
+[01:18.12]for marriages in Las Vegas set on July 7, 2007.
+[01:24.24]The second-most popular specialty wedding date
+[01:27.44]on record with the county's marriage bureau
+[01:30.60]is November 11, 2011,
+[01:33.68]when 3,125 couples married.
+[01:39.44]Since 2018, somewhere
+[01:41.48]between 450 and 550 marriage ceremonies
+[01:46.36]take place each year in Las Vegas on New Year's Eve,
+[01:50.16]the Review-Journal reported.
+[01:53.48]This year, the company Vegas Weddings
+[01:56.52]is fully booked for midnight at all its venues,
+[02:00.32]including a church in downtown Las Vegas.
+[02:04.76]Willis-Williams said her company expects
+[02:07.68]to marry more than 120 couples on New Year's Eve.
+[02:12.88]Five of those couples will marry
+[02:15.36]as the clock is counting down to midnight.
+[02:19.88]Clark County Clerk Lynn Marie Goya
+[02:22.84]said couples married on a specialty date in Las Vegas
+[02:27.32]have described them as "magic dates"
+[02:30.20]that are easy to remember.
+[02:33.08]"I think the celebration that has a group dynamic
+[02:36.28]is really appealing," Goya said.
+[02:38.92]"When everyone is in line and they're all getting married
+[02:42.60]and excited about being in love,
+[02:44.96]it just enhances their own experience."
+[02:48.80]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

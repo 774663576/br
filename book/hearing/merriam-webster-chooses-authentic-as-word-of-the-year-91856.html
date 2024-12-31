@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Merriam-Webster Chooses ‘Authentic’ as Word of the Year</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Merriam-Webster Chooses ‘Authentic’ as Word of the Year" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/merriam-webster-chooses-authentic-as-word-of-the-year.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Merriam-Webster Chooses ‘Authentic’ as Word of the Year</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/merriam-webster-chooses-authentic-as-word-of-the-year.mp3" id="mp3"></a>
+<a href="deal-reached-to-extend-cease-fire-in-israel-hamas-war-91855.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">27 November 2023</span><br/>
+<p>The <strong>dictionary</strong> company <em>Merriam-Webster</em> chose the word "authentic" as its word of the year for 2023.</p>
+<p>Something that is authentic is real or true.</p>
+<p>The publisher celebrated its 20th anniversary of choosing a word of the year on Monday. Speaking to <em>The Associated Press,</em> or AP, dictionary editor Peter Sokolowski said the world is in a "crisis of authenticity" in 2023. "What we realize," he said, "is that when we question authenticity, we value it even more."</p><div class="contentImage"><img (ap="" alt="FILE - A Merriam-Webster dictionary sits atop their citation files at the dictionary publisher's offices on Dec. 9, 2014, in Springfield, Mass. Merriam-Webster's word of the year for 2023 is " authentic."="" file)"="" photo="" savoia,="" src="https://files.21voa.com/gdb/32ea75dd-2180-4c01-8c34-4a9ae45c8b33_w268_r1.jpg" stephan=""/><br/><span class="imagecaption">FILE - A Merriam-Webster dictionary sits atop their citation files at the dictionary publisher's offices on Dec. 9, 2014, in Springfield, Mass. Merriam-Webster's word of the year for 2023 is "authentic." (AP Photo/Stephan Savoia, File)</span></div>
+<p>Sokolowski said the word is often looked up on <em>Merriam-Webster</em>'s website, but in 2023 it was searched for even more than usual.</p>
+<p>He noted that authentic is an important word in a world where artificial intelligence software permits people to create "deepfakes" or false videos that look real.</p>
+<p>Often, Sokolowski said, words become "words of the year" because searches <strong>match</strong> world events. However, this year, there was a general increased interest in the word "authentic."</p>
+<p>The AP noted that authenticity was a popular subject for discussion in 2023. People such as Taylor Swift and Prince Harry looked for authenticity in their performances and writing. Even businessman Elon Musk discussed authenticity at an event in February when he urged company leaders and politicians to operate their own social media accounts in order to "speak authentically."</p>
+<p>Authenticity is important in education, Sokolowski said. He said we are in a time when students can use artificial intelligence tools such as ChatGPT to complete writing assignments to avoid work.</p>
+<p>"We don't always trust what we see anymore," he said.</p>
+<p>The dictionary includes a number of descriptions to help people understand the word's meaning. It notes something that is authentic is "not false," "true to one's own <strong>personality</strong>," and "something made or done the same way as an <strong>original</strong>."</p>
+<p><strong>How the word is picked</strong></p>
+<p>Merriam-Webster says it filters out some common search words such as "effect" and "affect" that are always among the top searches. The online word game "Wordle" also increases searches for some words as players check letters and words before they play them.</p>
+<p>Some other possible words for 2023 included "X" after Musk changed the name of the social media service formerly known as Twitter. Others include "EGOT" after the actress Viola Davis won a Grammy award and "elemental" after Pixar released a new movie in June.</p>
+<p>However, the company settled on authentic one year after choosing "gaslighting." Gaslighting is a word that is used to discuss the act of misleading someone over a long period of time. In a way, it is the opposite of authentic.</p>
+<p><strong>Other popular words</strong></p>
+<p>Other words that were popular in 2023 but did not win "word of the year" included "rizz," a slang word that has to do with charm or appeal. It is a shortened form of the word charisma.</p>
+<p>"Implode" became a popular search in 2023 after a vessel used for undersea exploration was lost in June. Experts say the Titan vessel likely imploded or broke apart because of the high water pressure in the deep sea.</p>
+<p>"Coronation" was looked up often in May when Charles III was crowned King of England.</p>
+<p>"Kibbutz" is a word that came up in recent weeks after the terror group Hamas attacked the Israeli "communal farms or settlements" near Gaza on October 7.</p>
+<p>You can visit Merriam-Webster's <a class="wsw__a" href="https://www.merriam-webster.com/wordplay/word-of-the-year">website</a> to look at more words that did not quite <strong>make the cut</strong> to become "word of the year."</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on The Associated Press story.</em></p>
+<p>____________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>dictionary </strong>–n. a book that contains definitions of words in a language</p>
+<p><strong>match </strong>–v. to have two things that are related to each other or are linked in some way</p>
+<p><strong>personality </strong>–n. the qualities that make a person who they are</p>
+<p><strong>original </strong>–adj. something that is produced for the first time and is not a copy of something else</p>
+<p><strong>make the cut </strong>–v. (phrasal) to continue to the next level of a competition; to do enough to continue</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

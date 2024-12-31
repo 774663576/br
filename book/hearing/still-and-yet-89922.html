@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Still and Yet</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Still and Yet" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/still-and-yet.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Still and Yet</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/still-and-yet.mp3" id="mp3"></a>
+<a href="unbeknownst-and-til-in-a-taylor-swift-song-89917.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">04 November 2022</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "still" and "yet."</p>
+<p><strong>Question:</strong></p>
+<p>Dear teacher,</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/00040000-0aff-0242-283b-08dabdbe4910_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>I am delighted to write you this email. I am hoping that I will get some good explanations about using similar words such as "still" and "yet."</p>
+<p>Looking forward to reading the answer!</p>
+<p>Thank you,</p>
+<p>Arios from the Democratic Republic of Congo.</p>
+<p><strong>Answer </strong></p>
+<p>Dear Arios,</p>
+<p>Thank you for writing to us. We <em>still</em> have not covered this subject.</p>
+<p>"Still" and "yet" have very different meanings and uses, <em>yet</em> in some situations, they can be used in the same way.</p>
+<p>Let us begin by looking at "still."</p>
+<p><strong>Still</strong></p>
+<p>Although "still" can be an adjective, noun or verb, we often use it as an adverb. As an adverb, "still" describes an action that began in the past and continues into the present. We often use it before the base verb.</p>
+<p>For example,</p>
+<p>She still talks with her college friends years later.</p>
+<p>I have been eating all day, but I'm still hungry!</p>
+<p>Using "still" in <strong>negative</strong> statements means that the action should change, but it has not.</p>
+<p>I still haven't finished cleaning. There is just too much to do.</p>
+<p>Let's move on to "yet."</p>
+<p><strong>Yet</strong></p>
+<p>"Yet" can be either an adverb or a conjunction, which links two <strong>clauses</strong> together.</p>
+<p>As an adverb "yet" refers to an action that has not happened but is expected. Someone might be waiting for it to happen. We often use it with negative statements.</p>
+<p>As a conjunction "yet" means "but at the same time."</p>
+<p>Let us look at a few examples:</p>
+<p>You want to get the project done, yet you also want to be fair with everyone involved.</p>
+<p>They aimed to honor the establishment of the policy, yet it had many shortcomings that left members unsure.</p>
+<p>Both of these sentences contain two clauses involving action that is taking place at the same time.</p>
+<p>Other uses as a conjunction can show difference:</p>
+<p>The sun is out, yet it is very cold.</p>
+<p>"Yet" is used to create a <strong>contrast</strong> and combine the clauses into one sentence.</p>
+<p>"Yet" can also be used as an adverb:</p>
+<p>I have yet to receive my package.</p>
+<p>In this case, the person is waiting for their package to arrive.</p>
+<p>Have you made dinner yet, Faith?</p>
+<p>No, I haven't. I've been too busy working.</p>
+<p>"Yet" is often used at the end of the statement or question.</p>
+<p><strong>Yet and still</strong></p>
+<p>Both "yet' and "still" can be used in the same way when talking about situations in the past using negative statements that continue into the present.</p>
+<p>He still has not returned my phone call.</p>
+<p>He has not returned my phone call yet.</p>
+<p>Note that "still" goes before the verb and "yet" is at the end of the sentence.</p>
+<p>Some native speakers notice a slightly different <strong>tone</strong> when saying these words aloud. If "still" is used, this could be a sign of being upset or<strong> impatient</strong> with the situation, especially if "still" is <strong>emphasized</strong> while speaking. As in:</p>
+<p>He <em>still</em> has not returned my phone call.</p>
+<p><em>Please let us know if these explanations have helped you, </em>Arios<strong>!</strong></p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>________________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>negative</strong> – <em>n.</em> a word or statement that means "no" or that expresses a denial or refusal</p>
+<p><strong>clause</strong> – <em>n</em>. grammar: a part of a sentence that has its own subject and verb</p>
+<p><strong>contrast </strong>–<em>n</em>. a difference between things or the act of comparing two things to show their differences</p>
+<p><strong>tone </strong><em>– n. </em>a quality, feeling, or attitude expressed by the words that someone uses in speaking or writing</p>
+<p><strong>impatient </strong><em>–</em> <em>adj. </em>not willing to wait for something or someone; not patient</p>
+<p><strong>emphasize </strong>–<em>v</em>. to place special attention to something or add urgency to something said</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

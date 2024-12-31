@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Create Many Activities from One Video</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, How to Create Many Activities from One Video" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/how-to-create-many-activities-from-one-video.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Create Many Activities from One Video</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/how-to-create-many-activities-from-one-video.mp3" id="mp3"></a>
+<a href="disturbing-vs-irritating-90480.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo and Jill Robbins</span><br/>
+<span class="datetime">25 February 2023</span><br/>
+<p>Teachers often use videos to give students a break from the usual classroom activities. Learners use videos, too, to improve their listening and speaking skills.</p>
+<p>In this week's Education Tips, we look at how one of our videos can be the start of a full English lesson. We will look at the video for <a class="wsw__a" href="https://www.21voa.com/a/lets-learn-english-level-2-lesson-11-the-big-snow/4102755.html">The Big Snow</a>, Lesson 11 of Let's Learn English Level 2.</p>
+<p>In this lesson, Anna and Pete are reporting on a snowstorm, or <strong>blizzard</strong>. Anna loves to talk about weather. Pete is unhappy because he is working on a weekend. The video teaches the present perfect and past perfect verb tenses.</p>
+<p>In recent workshops with English teachers in Ukraine, VOA Learning English <strong>instructors</strong> asked the teachers to <strong>brainstorm</strong> ideas for activities they could create with this video.</p>
+<p>The teachers came up with about 40 ideas. They range from activities centered on grammar to activities that cover the subject of weather.</p>
+<p>Here are some examples of classroom activities for before, during and after watching the video:</p>
+<p><strong>Before watching</strong></p>
+<ul>
+<li>Students list the words they know for kinds of weather and prepare to listen for weather words in the video</li>
+<li>The teacher describes the video's <strong>plot</strong>, then students predict what will happen if Pete and Anna must stay at work all weekend</li>
+<li>Students talk about their personal experiences with major storms or describe storms they have read about in books or seen in movies.</li>
+</ul>
+<p><strong>While watching</strong></p>
+<ul>
+<li>Listen for weather words in the video and write them down or circle them on the printed text of the lesson</li>
+<li>The teacher stops the video and, with an image showing on the screen, asks students to do an activity:
+  <ul>
+<li>Guess what happens next</li>
+<li>Describe what the <strong>characters</strong> are wearing in the image</li>
+<li>Ask questions about what has happened so far</li>
+<li>Give an actor in the video advice</li>
+<li>Talk about which actor is their favorite</li>
+<li>Describe the setting</li>
+<li>Describe the feelings of the people in the video</li>
+</ul>
+</li>
+</ul>
+<p><strong>After watching</strong></p>
+<ul>
+<li>Students <strong>summarize</strong> the story in writing or talk about it in small groups</li>
+<li>Students identify problems and solutions in the story</li>
+<li>Students act out their favorite scene from the video or act out the story with a different kind of weather event</li>
+<li>Teacher or students write true/false statements about the story to check understanding</li>
+<li>Students think of different ways the story could end. Then they write the different ending and act it out in small groups</li>
+<li>Students think of other names for a big storm that might happen where they live</li>
+<li>Student groups make lists of supplies they would need in case of a natural disaster: foods, equipment, clothing</li>
+<li>Students play a game with a paper "<strong>snowball</strong>" (information below)*</li>
+</ul>
+<p>As you can see from this list, there are plenty of ideas for giving students the chance to speak, write, read, and listen while enjoying a short, humorous video.</p>
+<p>If you want to see more ideas, each Let's Learn English video comes with a lesson plan that you can download. For the snowstorm video, one activity sheet asks students to use the present perfect and past perfect tense to think of questions and answers using "snow words."</p>
+<p>Another activity sheet gives students weather information from around the world and asks them to give a <strong>weather forecast</strong> like the ones you can see on television.</p>
+<p>We are sure you can think of other ways to use this video in learning or teaching English. Write to us in the comments if you want to share your own ideas.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Anna Matteo and Jill Robbins wrote this lesson for Learning English in collaboration with English teachers from Ukraine in our Go English workshop.</em></p>
+<p>* <strong>Snowball game</strong> – write sentences with the new words or grammatical structures on sheets of paper. Form each into a ball. Play music and have students throw the balls around the room to each other. When the music stops, the person holding a snowball opens it and responds to the question or explains the new word.</p>
+<p>_______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>blizzard </strong>– <em>n. </em>a very heavy snowstorm with strong winds.</p>
+<p><strong>instructor</strong> – <em>n.</em> a person who instructs or a teacher</p>
+<p><strong>brainstorm</strong> – <em>v.</em> to think of many ideas</p>
+<p><strong>character </strong>– <em>n.</em> a person represented in a play, film, story, or the like</p>
+<p><strong>plot</strong> – <em>n. </em>the arrangement of the incidents in a play, novel, narrative poem, or the like</p>
+<p><strong>summarize</strong> – <em>v.</em> to make a summary of or state briefly</p>
+<p><strong>(weather) forecast</strong> – <em>n</em>. a weather forecast is a statement saying what the weather will be like the next day or for the next few days.</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

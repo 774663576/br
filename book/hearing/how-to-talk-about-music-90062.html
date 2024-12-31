@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Talk about Music</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, How to Talk about Music" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/how-to-talk-about-music.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Talk about Music</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/how-to-talk-about-music.mp3" id="mp3"></a>
+<a href="/static/lrc/how-to-talk-about-music.lrc" id="lrc"></a>
+<a href="south-korea-in-population-crisis-as-many-stop-having-babies-90061.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">01 December 2022</span><br/>
+<p>Imagine that you hear music on the radio or on your phone. Maybe you like the sounds; maybe you do not.</p>
+<p>But how should you describe the music? What kinds of terms and structures should you use in a discussion?</p>
+<p>In today's Everyday Grammar, we will explore how you can talk about music. You will learn about sentence patterns, adjectives, and adjectival prepositional <strong>phrases</strong>.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/03370000-0aff-0242-dfce-08dad39e1d99_cx2_cy1_cw97_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>Let's start with some important terms and ideas.</p>
+<p><strong>Sentence patterns, adjectives</strong></p>
+<p>Sentences often fall into patterns – usual, repeated structures. One of the structures commonly used to describe music is as follows:</p>
+<p><em>Subject – linking verb – adjective (or subject complement)</em></p>
+<p>Consider this example:</p>
+<p><em>The music sounds nice.</em></p>
+<p>The subject is "the music," the linking verb is "sounds," and the adjective is "nice."</p>
+<p>The adjective is sometimes called the subject complement, meaning it completes the verb and <strong>modifies</strong> or describes the subject.</p>
+<p>Common linking verbs used to describe music include "be" and "sound."</p>
+<p>For example, a person might say:</p>
+<p><em>This music is wild!</em></p>
+<p>Or</p>
+<p><em>This music is boring.</em></p>
+<p>In both cases, adjectives such as "wild" or "boring" play an important part in the sentence. They describe how the speaker feels about the music. Some adjectives have a negative meaning. Boring means uninteresting, tiresome. If a person says that the music is boring, they are suggesting that they do not like the music.</p>
+<p>Other common adjectives used to describe music include loud, soft, smooth, harsh, fast, and slow.</p>
+<p><strong>Effects</strong></p>
+<p>We can also describe the effects that music has on us. In this case, we can use adjectives such as "relaxing," "calming," "exciting," "moving," or "<strong>touching</strong>."</p>
+<p>For example:</p>
+<p><em>This music is relaxing.</em></p>
+<p>Or</p>
+<p><em>This song is very touching.</em></p>
+<p><strong>Phrases</strong></p>
+<p>Sometimes English speakers replace an adjective with a kind of phrase known as an adjectival prepositional phrase. These phrases – sometimes <strong>idiomatic </strong>expressions – name or describe something about the subject.</p>
+<p>For example, you might say:</p>
+<p><em>The violin sounds out of tune.</em></p>
+<p>Or</p>
+<p><em>The singer is out of his mind.</em></p>
+<p>The former example – the one about the violin - uses the phrase "out of tune," meaning not having the correct pitch or intonation.</p>
+<p>The latter example – the one about the singer – uses the phrase "out of his mind," meaning that the singer has lost control of his mind or went insane.</p>
+<p><strong>Practice</strong></p>
+<p>Let's take some time to work with these ideas.</p>
+<p>Choose a linking verb to connect the noun "song" and the adjective "smooth."</p>
+<p>Pause the audio to consider your answer.</p>
+<p>Here is one possible answer:</p>
+<p><em>This song is smooth.</em></p>
+<p>Now describe a singer's voice by using the expression "out of this world," meaning extremely impressive or enjoyable.</p>
+<p>Pause the audio to consider your answer.</p>
+<p>Here are two possible answers:</p>
+<p><em>Her voice is out of this world!</em></p>
+<p>Or</p>
+<p><em>His voice is out of this world!</em></p>
+<p><strong>Closing thoughts</strong></p>
+<p>The next time you listen to music, ask yourself the following questions: How would you use what you have learned today to describe the music you are listening to?</p>
+<p>Are there other words or structures that you should use to describe the music?</p>
+<p>Asking yourself these kinds of questions can improve more than just your English skill. These questions could also deepen your enjoyment of the music itself.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English.</em></p>
+<p>__________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>phrase</strong><em> – n. </em>a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>modify</strong><em> – v. grammar:</em> to limit or describe the meaning of (a word or group of words)</p>
+<p><strong>touching </strong><em>– adj.</em> having a strong emotional effect : causing feelings of sadness or sympathy</p>
+<p><strong>idiomatic</strong><em> – adj.</em> describes an expression that cannot be understood from the meanings of its separate words but that has a separate meaning of its own</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How to Talk about Music]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Imagine that you hear music on the radio or on your phone.
+[00:05.12]Maybe you like the sounds; maybe you do not.
+[00:09.56]But how should you describe the music?
+[00:12.84]What kinds of terms and structures
+[00:15.32]should you use in a discussion?
+[00:17.84]In today's Everyday Grammar,
+[00:20.44]we will explore how you can talk about music.
+[00:23.88]You will learn about sentence patterns, adjectives,
+[00:28.24]and adjectival prepositional phrases.
+[00:31.84]Let's start with some important terms and ideas.
+[00:37.12]Sentences often fall into patterns
+[00:40.64]– usual, repeated structures.
+[00:43.44]One of the structures commonly used
+[00:46.64]to describe music is as follows:
+[00:50.44]Subject – linking verb – adjective (or subject complement)
+[00:56.48]Consider this example:
+[00:59.64]The music sounds nice.
+[01:02.00]The subject is "the music,"
+[01:04.96]the linking verb is "sounds,"
+[01:08.16]and the adjective is "nice."
+[01:11.68]The adjective is sometimes called the subject complement,
+[01:15.80]meaning it completes the verb
+[01:18.00]and modifies or describes the subject.
+[01:21.52]Common linking verbs used to describe music
+[01:25.80]include "be" and "sound."
+[01:29.20]For example, a person might say:
+[01:33.00]This music is wild!
+[01:34.92]Or
+[01:36.44]This music is boring.
+[01:39.24]In both cases, adjectives such as "wild" or "boring"
+[01:44.12]play an important part in the sentence.
+[01:47.24]They describe how the speaker feels about the music.
+[01:51.60]Some adjectives have a negative meaning.
+[01:55.44]Boring means uninteresting, tiresome.
+[01:58.72]If a person says that the music is boring,
+[02:02.44]they are suggesting that they do not like the music.
+[02:06.04]Other common adjectives used to describe music
+[02:10.20]include loud, soft, smooth, harsh, fast, and slow.
+[02:19.20]We can also describe the effects that music has on us.
+[02:23.96]In this case, we can use adjectives such as "relaxing,"
+[02:29.00]"calming," "exciting," "moving," or "touching."
+[02:34.72]For example:
+[02:36.48]This music is relaxing.
+[02:38.88]Or
+[02:40.32]This song is very touching.
+[02:42.72]Sometimes English speakers replace an adjective
+[02:46.56]with a kind of phrase known as an adjectival prepositional phrase.
+[02:51.60]These phrases – sometimes idiomatic expressions
+[02:55.64]– name or describe something about the subject.
+[02:59.16]For example, you might say:
+[03:02.08]The violin sounds out of tune.
+[03:05.48]Or
+[03:07.12]The singer is out of his mind.
+[03:10.80]The former example – the one about the violin
+[03:14.52]- uses the phrase "out of tune,"
+[03:17.24]meaning not having the correct pitch or intonation.
+[03:21.16]The latter example – the one about the singer
+[03:25.32]– uses the phrase "out of his mind,"
+[03:28.28]meaning that the singer has lost control of his mind
+[03:31.88]or went insane.
+[03:33.96]Let's take some time to work with these ideas.
+[03:37.40]Choose a linking verb to connect the noun "song"
+[03:41.32]and the adjective "smooth."
+[03:43.84]Pause the audio to consider your answer.
+[03:48.36]Here is one possible answer:
+[03:51.12]This song is smooth.
+[03:54.40]Now describe a singer's voice
+[03:57.04]by using the expression "out of this world,"
+[04:00.40]meaning extremely impressive or enjoyable.
+[04:04.28]Pause the audio to consider your answer.
+[04:08.16]Here are two possible answers:
+[04:10.76]Her voice is out of this world!
+[04:13.84]Or
+[04:15.56]His voice is out of this world!
+[04:19.04]The next time you listen to music,
+[04:21.28]ask yourself the following questions:
+[04:24.40]How would you use what you have learned today
+[04:27.96]to describe the music you are listening to?
+[04:30.60]Are there other words or structures
+[04:33.12]that you should use to describe the music?
+[04:36.28]Asking yourself these kinds of questions
+[04:39.48]can improve more than just your English skill.
+[04:42.84]These questions could also
+[04:45.56]deepen your enjoyment of the music itself.
+[04:48.44]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

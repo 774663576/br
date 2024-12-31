@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - The Debate: Will AI Take Away Many Human Jobs?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, The Debate: Will AI Take Away Many Human Jobs?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/the-debate-will-ai-take-away-many-human-jobs.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>The Debate: Will AI Take Away Many Human Jobs?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/the-debate-will-ai-take-away-many-human-jobs.mp3" id="mp3"></a>
+<a href="brazilian-dog-excels-at-footvolley-92982.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">15 September, 2024</span><br/>
+<p>ChatGPT and other <strong>generative AI</strong> tools have raised concerns that<strong> chatbots</strong> will replace many kinds of workers. Writers, <strong>editors</strong>, and <strong>customer </strong>service representatives are among the jobs that could be affected.</p>
+<p>But some people are suggesting that AI might not reduce jobs as many people fear. Instead, the technology might turn out to be more like the technological developments of the past, such as the steam engine, electricity or the internet.</p>
+<p>Supporters reason that AI might destroy some jobs while creating others. They also say that the technology will probably make workers more productive, <strong>benefiting</strong> themselves, their employers and the economy.</p><div class="contentImage"><img alt="FILE - Customer Experience Representatives Stanley Solis, center, and other representatives take calls at an Alorica center, Monday, Aug. 19, 2024, in San Antonio. (AP Photo/Eric Gay)" src="https://files.21voa.com/gdb/18d6a3ea-2fc1-49ed-b3be-f62d22e81241_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Customer Experience Representatives Stanley Solis, center, and other representatives take calls at an Alorica center, Monday, Aug. 19, 2024, in San Antonio. (AP Photo/Eric Gay)</span></div>
+<p><strong>Looking for lessons from history </strong></p>
+<p>Nick Bunker is an economist at the Indeed Hiring Lab, part of a job search website. He said he thinks AI “will affect many, many jobs — maybe every job indirectly” to some degree.</p>
+<p>Bunker added that he does not believe the technology is going to lead to a lot of unemployment. “We have seen other big technological events in our history, and those didn't lead to a large rise in unemployment. Technology destroys but also creates. There will be new jobs that come about,” he said.</p>
+<p>Artificial intelligence gives machines the ability to perform tasks once thought to require human intelligence. The basic technology has existed in early versions for many years.</p>
+<p>Some reports say it began with a problem-solving computer program called Logic Theorist. The program was developed in the 1950s at what is now Carnegie Mellon University in Pittsburgh, Pennsylvania. More recent examples include voice assistants like Apple's Siri, Amazon's Alexa, or IBM's chess-playing computer, Deep Blue, which defeated then-world champion Garry Kasparov in 1997.</p>
+<p><strong>Predictions and current evidence </strong></p>
+<p>Sam Altman is the chief of OpenAI, the creator of ChatGPT. Altman said in a discussion at the Massachusetts Institute of Technology (MIT) in May that he believes, “AI is going to eliminate a lot of current jobs, and this is going to change the way that a lot of current jobs function.''</p>
+<p>Some people say that AI chatbots are not replacing human workers in a widespread way. Challenger, Gray &amp; Christmas, a company that tracks job cuts, said it has yet to see much evidence of job losses caused by AI.</p>
+<p>However, the fear that AI is a threat to some kinds of jobs has a basis in reality.</p>
+<p>Suumit Shah is an Indian business owner who announced last year that he had replaced 90 percent of his customer support workers with a chatbot named Lina. Shah's company, Dukaan, helps customers set up e-commerce sites to sell goods online. Shah said the average amount of time it took to answer a customer's question shrank from 1 minute, 44 seconds to “instant.” The chatbot also cut the time needed to resolve problems from more than two hours to just over three minutes.</p>
+<p>A 2023 study by researchers at Princeton University, the University of Pennsylvania and New York University identified jobs most exposed to AI models. The jobs included telemarketers and teachers of English and foreign languages. But being affected by AI does not necessarily mean losing your job to it. AI can free people to do more creative jobs.</p>
+<p>The Swedish company IKEA introduced a customer-service chatbot in 2021 to deal with simple questions. Instead of cutting jobs, IKEA kept 8,500 customer-service workers to advise buyers on interior design and to deal with complex customer calls.</p>
+<p>Chatbots can also make workers more efficient. Erik Brynjolfsson of Stanford University, Danielle Li and Lindsey Raymond of MIT studied 5,200 customer-support agents at a large company. The agents used a generative AI-based assistant. The AI tool provided valuable suggestions. It also supplied links to useful company documents.</p>
+<p>The researchers found that those who used the chatbot were 14 percent more productive than workers who did not use the chatbot. The workers who used AI took more calls and completed them faster. The biggest productivity gains — 34 percent — came from the least-experienced, least-skilled workers.</p>
+<p>Alorica is a company in Irvine, California, that runs customer-service centers around the world. The company has introduced an artificial intelligence translation tool that lets its representatives communicate with customers who speak any of 200 different languages and 75 dialects.</p>
+<p>The Real-time Voice Language Translation tool also lets customers and Alorica agents speak and hear each other in their own languages.</p>
+<p>“It allows (Alorica reps) to handle every call they get,” said Rene Paiz, a vice president of customer service. Paiz added, “I don't have to hire externally' just to find someone who speaks a specific language.</p>
+<p>Alorica said it is not cutting jobs. It continues to seek new employees who are comfortable with new technology.</p>
+<p>“We are still actively hiring,'' Paiz says. “We have a lot that needs to be done out there.''</p>
+<p>I'm John Russell.</p>
+<p>And I'm Ashley Thompson.</p>
+<p><em>Paul Wiseman reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>_________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>generative AI</strong> <em>– n. </em>artificial intelligence that is capable of generating new material (such as images or writing)</p>
+<p><strong>chatbot </strong><em>– n.</em> a program that is designed to carry out a discussion with human beings</p>
+<p><strong>editor</strong><em> –n.</em> a person who prepares writing, so it is ready for publication</p>
+<p><strong>customer</strong> <em>–n.</em> a person or group that pays for goods or services</p>
+<p><strong>benefit </strong><em>– v.</em> to produce good or helpful results or effects</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Harlem Celebrates Its Rebirth after 50 Years</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Harlem Celebrates Its Rebirth after 50 Years" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/harlem-celebrates-its-rebirth-after-50-years.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Harlem Celebrates Its Rebirth after 50 Years</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/harlem-celebrates-its-rebirth-after-50-years.mp3" id="mp3"></a>
+<a href="/static/lrc/harlem-celebrates-its-rebirth-after-50-years.lrc" id="lrc"></a>
+<a href="astronomy-group-joins-effort-to-establish-time-zone-on-the-moon-92916.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">23 August, 2024</span><br/>
+<p>In the 1970s, a lack of community investment resulted in a large number of people leaving Harlem, a well-known New York City neighborhood in northern Manhattan.</p>
+<p>Nearly 50,000 people, about a third of the area's population, left to escape violence, crime and poor living conditions. Among those who left was LeeSandra Moore's mother who moved to the state of Virginia. “It was a <strong>scary</strong> time,” said Moore, now 52 and still living in Harlem. “I couldn't blame her for that.”</p>
+<p>Those who stayed were mostly poor, Black families. They lived through unrest that followed the 1964 killing of an unarmed Black teenager and the killings of Black leader Malcolm X in 1965 and Rev. Martin Luther King Jr. in 1968.</p><div class="contentImage"><img alt="A man walks past a mural in the Harlem neighborhood of New York, Thursday, Aug. 15, 2024. (AP Photo/Pamela Smith)" src="https://files.21voa.com/gdb/01000000-0aff-0242-f84f-08dcc20d5b18_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A man walks past a mural in the Harlem neighborhood of New York, Thursday, Aug. 15, 2024. (AP Photo/Pamela Smith)</span></div>
+<p>News reports described Harlem as a “sinking ship.”</p>
+<p>Percy Sutton was president of the local Manhattan government at the time. As the city's highest-<strong>ranking</strong> Black official, he knew Harlem needed a lift and started a <strong>festival</strong> called Harlem Day in 1974.</p>
+<p>Sutton called up elected officials. He gathered actors, like Sidney Poitier and Ruby Dee, entertainers, including Tito Puente and Max Roach, and the poet Maya Angelou to celebrate the first Harlem Day. It honored Harlem's history and shows how the neighborhood became known as "Black Mecca” or the center of Black arts, culture and businesses.</p>
+<p>“It was such a successful day,” said Lloyd Williams — one of Harlem Day's co-founders and the current president of the Greater Harlem Chamber of Commerce — that it became a week-long yearly event called Harlem Week.</p>
+<p><strong>The festival's 50th year</strong></p>
+<p>This year, Harlem Week celebrated its 50th anniversary with 18 days filled with free programming.</p>
+<p>The celebration included food, Broadway performances, an Apollo Hour, and a tribute to entertainer Harry Belafonte. It offered financial education and career training, and for children, back-to-school backpacks.</p>
+<p>One important part of Harlem Week was an effort to deal with Harlem's long-standing health crises. Medical volunteers checked blood pressure and tested for cancer and diabetes. People learned about drug use, HIV/AIDS and healthy aging.</p>
+<p>Rev. Al Sharpton leads the National Action Network in Harlem. He said, "Harlem Week has been the <strong>constant</strong> line through the last 50 years of America's most historic Black neighborhood."</p>
+<p>Organizers and people say Harlem Week has brought new life to the area. The once-deserted neighborhood is now home to restored buildings, new businesses, and immigrants. The streets are filled with jazz, reggae, R&amp;B, and gospel music traditions.</p>
+<p><strong>Big stores vs. small shops</strong></p>
+<p>Moore, the Harlem native whose mother moved to Virginia, watched as big national stores moved in. Sometimes they took the place of local shops and made rents go up. "Some of that is okay, but what about the small business where you can get that great sandwich?" she asked. Moore wants people to eat less fast food, so she teaches healthy eating and cooking to young local students.</p>
+<p>At Harlem Week, Moore represented GirlTrek, a national movement of Black women supporting health through walking. She said, "I feel like I should have left a long time ago, but something about Harlem draws me back to it."</p>
+<p>Moore continued, "Harlem is my beginning. Harlem is my future. Harlem is a huge part of what makes me who I am."</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Ryan Doan-Nguyen reported this story for the Associated Press.</em><em> Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>scary</strong>- <em>adj</em>. causing fear</p>
+<p><strong>rank </strong>– <em>v</em>. to place (someone or something) in a particular position among a group of people or things that are being judged according to quality, ability, size, etc.</p>
+<p><strong>festival - </strong><em>n</em>. a special time or event when people gather to celebrate something</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Harlem Celebrates Its Rebirth after 50 Years]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:02.28]In the 1970s,
+[00:04.00]a lack of community investment
+[00:06.72]resulted in a large number of people
+[00:09.08]leaving Harlem, a well-known
+[00:11.32]New York City neighborhood in northern Manhattan.
+[00:15.00]Nearly 50,000 people,
+[00:17.00]about a third of the area's population,
+[00:19.96]left to escape violence,
+[00:22.20]crime and poor living conditions.
+[00:25.64]Among those who left
+[00:26.88]was LeeSandra Moore's mother
+[00:29.12]who moved to the state of Virginia.
+[00:32.20]"It was a scary time," said Moore,
+[00:34.76]now 52 and still living in Harlem.
+[00:37.76]"I couldn't blame her for that."
+[00:41.08]Those who stayed were mostly poor, Black families.
+[00:44.72]They lived through unrest that followed
+[00:47.32]the 1964 killing of an unarmed Black teenager
+[00:51.44]and the killings of Black leader Malcolm X in 1965
+[00:56.00]and Rev. Martin Luther King Jr. in 1968.
+[01:01.00]News reports described Harlem as a "sinking ship."
+[01:05.56]Percy Sutton was president
+[01:07.68]of the local Manhattan government at the time.
+[01:10.96]As the city's highest-ranking Black official,
+[01:13.76]he knew Harlem needed a lift
+[01:16.16]and started a festival called Harlem Day in 1974.
+[01:21.96]Sutton called up elected officials.
+[01:24.28]He gathered actors,
+[01:25.76]like Sidney Poitier and Ruby Dee,
+[01:28.28]entertainers, including Tito Puente and Max Roach,
+[01:32.12]and the poet Maya Angelou
+[01:34.52]to celebrate the first Harlem Day.
+[01:38.08]It honored Harlem's history
+[01:40.20]and shows how the neighborhood
+[01:41.64]became known as "Black Mecca"
+[01:43.84]or the center of Black arts,
+[01:45.96]culture and businesses.
+[01:48.72]"It was such a successful day," said Lloyd Williams
+[01:52.28]— one of Harlem Day's co-founders
+[01:54.80]and the current president
+[01:56.36]of the Greater Harlem Chamber of Commerce
+[01:58.68]— that it became a week-long yearly event
+[02:01.96]called Harlem Week.
+[02:04.24]This year, Harlem Week
+[02:05.84]celebrated its 50th anniversary
+[02:08.40]with 18 days filled with free programming.
+[02:12.64]The celebration included food,
+[02:14.84]Broadway performances, an Apollo Hour,
+[02:18.32]and a tribute to entertainer Harry Belafonte.
+[02:22.68]It offered financial education and career training,
+[02:26.04]and for children, back-to-school backpacks.
+[02:30.32]One important part of Harlem Week was an effort
+[02:33.96]to deal with Harlem's long-standing health crises.
+[02:38.40]Medical volunteers checked blood pressure
+[02:41.36]and tested for cancer and diabetes.
+[02:44.88]People learned about drug use,
+[02:46.84]HIV/AIDS and healthy aging.
+[02:50.68]Rev. Al Sharpton
+[02:52.24]leads the National Action Network in Harlem.
+[02:56.04]He said, "Harlem Week has been the constant line
+[02:59.56]through the last 50 years
+[03:01.24]of America's most historic Black neighborhood."
+[03:05.12]Organizers and people say Harlem Week
+[03:08.20]has brought new life to the area.
+[03:11.52]The once-deserted neighborhood
+[03:13.44]is now home to restored buildings,
+[03:15.96]new businesses, and immigrants.
+[03:19.12]The streets are filled with jazz, reggae,
+[03:22.00]R&amp;B, and gospel music traditions.
+[03:26.00]Moore, the Harlem native
+[03:27.92]whose mother moved to Virginia,
+[03:30.16]watched as big national stores moved in.
+[03:33.88]Sometimes they took the place of local shops
+[03:36.40]and made rents go up.
+[03:39.36]"Some of that is okay,
+[03:40.96]but what about the small business
+[03:42.76]where you can get that great sandwich?" she asked.
+[03:46.68]Moore wants people to eat less fast food,
+[03:49.52]so she teaches healthy eating
+[03:51.40]and cooking to young local students.
+[03:54.52]At Harlem Week, Moore represented GirlTrek,
+[03:57.84]a national movement of Black women
+[04:00.28]supporting health through walking.
+[04:03.44]She said, "I feel like I should have left a long time ago,
+[04:06.56]but something about Harlem draws me back to it."
+[04:10.52]Moore continued, "Harlem is my beginning.
+[04:13.52]Harlem is my future.
+[04:15.32]Harlem is a huge part of what makes me who I am."
+[04:19.80]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

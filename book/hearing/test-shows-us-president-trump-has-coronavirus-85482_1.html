@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国总统川普及第一夫人感染新冠肺炎</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国总统川普及第一夫人感染新冠肺炎" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202010/test-shows-us-president-trump-has-coronavirus.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国总统川普及第一夫人感染新冠肺炎</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202010/test-shows-us-president-trump-has-coronavirus.mp3" id="mp3"></a>
+<a href="/static/lrc/test-shows-us-president-trump-has-coronavirus.lrc" id="lrc"></a>
+<a href="test-shows-us-president-trump-has-coronavirus-85482.html" id="CnPage" target="_blank"></a>
+<a href="take-and-get-85481.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">United States President Donald Trump has "mild symptoms" of COVID-19 after announcing Friday that tests showed that he and his wife Melania have the coronavirus.<br/>
+美国总统川普周五宣布，经过检测他和妻子梅拉尼娅感染了新冠病毒，此后川普出现了新冠肺炎的“轻微症状。”
+<p>Trump wrote on Twitter early Friday, "Tonight, @FLOTUS and I tested positive for COVID-19. We will begin our quarantine and recovery process immediately. We will get through this TOGETHER!" The White House also released a letter from the president's physician to confirm that they both tested positive for the virus.<br/>
+川普在周五的推特上写道：“我和梅拉尼娅新冠检测呈阳性。我们将立即开始我们的隔离和康复过程。我们会一起渡过难关！”白宫还发布了总统医生的一封信，确认两人病毒检测呈阳性。</p>
+<p>Speaking to reporters on Friday morning, White House chief of staff Mark Meadows said, "The President does have mild symptoms," and that he "will remain on the job."<br/>
+白宫办公厅主任马克·梅多斯周五早上对记者表示，“川普总统确实出现了轻微症状”，他“将继续履行总统职务。”</p>
+<p><strong>The virus threat to health<br/>
+新冠病毒对健康的威胁</strong></p>
+<p>So far, more than 7 million Americans have been infected with the new coronavirus. The deaths of more than 208,000 people in the U.S. have been tied to the virus. That is more than any other country.<br/>
+到目前为止，已有超过700万美国人感染了新冠病毒。在美国有20.8万人因为这种病毒而死亡。这比其它任何国家都多。</p>
+<p>Trump has pushed for schools and businesses to re-open. He also held campaign events attended by many people who did not wear face coverings or practice social distancing.<br/>
+川普已经督促学校和企业重新开放。他还举办了多场竞选活动，许多没有戴口罩或保持社交距离的人士参与了这些活动。</p>
+<p>Just hours earlier on Thursday, the president said in a pre-recorded message to the Al Smith Dinner, "I just want to say that the end of the pandemic is in sight, and next year will be one of the greatest years in the history of our country."<br/>
+就在几个小时的周四 ，川普总统在预先录制给阿尔弗雷德·史密斯基金会晚宴的消息中表示：“我只想说这场大流行已经结束，明年将是美国历史上最伟大的一年。”</p>
+<p>During Tuesday night's debate against former Vice President Joe Biden, he said, "I don't wear masks like him."<br/>
+川普在周二晚上与前副总统乔·拜登的辩论中表示：“我不像他那样戴口罩。”</p>
+<p>In a tweet Friday morning, Biden said he and his wife Jill "send our thoughts to President Trump and First Lady Melania Trump for a swift recovery. Biden added, "I'm happy to report that Jill and I have tested negative for COVID." And he reminded people to "wear a mask, keep social distance, and wash your hand."<br/>
+拜登在周五早上的推文中表示，他和妻子吉尔向特朗普总统和第一夫人梅拉尼娅致意，希望他们早日康复。拜登还说：“很高兴告诉大家，我和吉尔新冠肺炎检测均为阴性。”他还提醒人们“戴口罩、保持社交距离并勤洗手。”</p>
+<p>World leaders including Russian President Vladimir Putin, British Prime Minister Boris Johnson and German Chancellor Angela Merkel offered their best wishes.<br/>
+包括俄罗斯总统普京，英国首相约翰逊和德国总理默克尔在内的世界各国领导人都表达了他们的良好祝愿。</p>
+<p><strong>Threat to the government<br/>
+对政府的威胁</strong></p>
+<p>The president's announcement raised concerns about administration officials. The White House has required daily testing for the president's top assistants. Anyone in close contact with the president or vice president is also tested every day, including news reporters.<br/>
+川普总统的宣告引发了人们对政府官员的担忧。白宫要求对总统的高级助手每日检测。包括新闻记者在内，跟总统或副总统密切接触的人士也每天都会进行检测。</p>
+<p>Vice President Mike Pence is next in line for the presidency. Tests on Friday showed that he did not have the virus. He "remains in good health," his spokesman said.<br/>
+副总统迈克·彭斯是总统职位的第一继任人选。周五的检测表明他没有感染这种病毒。彭斯的发言人称他健康状况良好。</p>
+<p>Many administration officials were undergoing tests. And the White House Medical Unit was getting information on people who came in contact with the president.<br/>
+许多政府官员都正在接受检测。白宫医疗部门正在获取跟总统有接触的人士的信息。</p>
+<p>Before Trump announced he had the virus, the administration said an assistant, Hope Hicks, had tested positive.<br/>
+在川普宣布自己感染病毒之前，川普政府称总统的一位助手霍普·希克斯病毒检测呈阳性。</p>
+<p>Hicks had been with Trump at Tuesday's presidential debate in Cleveland, along with members of the Trump family. An administration official told the Associated Press that Hicks began feeling mild symptoms during the plane ride home from a campaign event in Minnesota on Wednesday. She was kept apart from other passengers, the person said.<br/>
+希克斯同川普以及川普家人一起参加了周二在克利夫兰举行的总统大选辩论。一位政府官员对美联社表示，希克斯周三在明尼苏达州的竞选活动后乘飞机返回时开始出现轻微症状。这位知情人士表示，她被与其它乘客分开了。</p>
+<p>It is unclear where the Trumps and Hicks may have caught the virus. But speaking to Fox News, Trump seemed to suggest it may have been spread by someone in the military or law enforcement in greetings.<br/>
+目前尚不清楚川普和希克斯可能在哪里感染了这种病毒。但是川普在接受福克斯新闻采访时，似乎暗示可能是军方或执法部门的某人在打招呼时传染的。</p>
+<p>Trump is not the first world leader to test positive for the virus. Brazilian President Jair Bolsonaro and Britain's Boris Johnson also got COVID-19. The prime minister spent a week in the hospital but has since recovered.<br/>
+川普并非首位病毒检测阳性的世界领导人。巴西总统嘉尔·博尔索纳罗和英国首相约翰逊也感染了新冠肺炎。约翰逊在医院住了一个星期后康复。</p>
+<p>I'm Jonathan Evans.<br/>
+我是乔纳森·埃文斯。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US President Trump Has COVID-19, Heads to Hospital]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]United States President Donald Trump has "mild symptoms" of COVID-19
+[00:06.40]after announcing Friday that tests showed
+[00:09.72]that he and his wife Melania have the coronavirus.
+[00:15.32]Trump wrote on Twitter early Friday,
+[00:18.80]"Tonight, @FLOTUS and I tested positive for COVID-19.
+[00:24.44]We will begin our quarantine and recovery process immediately.
+[00:29.76]We will get through this TOGETHER!"
+[00:33.88]The White House also released a letter from the president's physician
+[00:38.24]to confirm that they both tested positive for the virus.
+[00:44.32]Speaking to reporters on Friday morning,
+[00:47.56]White House chief of staff Mark Meadows said,
+[00:50.84]"The President does have mild symptoms,"
+[00:54.40]and that he "will remain on the job."
+[00:58.88]So far, more than 7 million Americans have been infected
+[01:03.76]with the new coronavirus.
+[01:06.76]The deaths of more than 208,000 people
+[01:11.04]in the U.S. have been tied to the virus.
+[01:14.64]That is more than any other country.
+[01:19.88]Trump has pushed for schools and businesses to re-open.
+[01:25.32]He also held campaign events attended by many people
+[01:29.76]who did not wear face coverings or practice social distancing.
+[01:36.00]Just hours earlier on Thursday,
+[01:39.12]the president said in a pre-recorded message to the Al Smith Dinner,
+[01:44.24]"I just want to say that the end of the pandemic is in sight,
+[01:49.00]and next year will be one of the greatest years
+[01:52.52]in the history of our country."
+[01:56.36]During Tuesday night's debate against former Vice President Joe Biden,
+[02:01.48]he said, "I don't wear masks like him."
+[02:05.84]In a tweet Friday morning, Biden said he and his wife Jill
+[02:11.56]"send our thoughts to President Trump
+[02:14.12]and First Lady Melania Trump for a swift recovery.
+[02:18.60]Biden added, "I'm happy to report
+[02:22.28]that Jill and I have tested negative for COVID."
+[02:27.56]And he reminded people to "wear a mask,
+[02:31.04]keep social distance, and wash your hand."
+[02:35.68]World leaders including Russian President Vladimir Putin,
+[02:40.36]British Prime Minister Boris Johnson
+[02:43.12]and German Chancellor Angela Merkel offered their best wishes.
+[02:49.80]The president's announcement raised concerns about administration officials.
+[02:55.80]The White House has required daily testing for the president's top assistants.
+[03:02.64]Anyone in close contact with the president
+[03:06.52]or vice president is also tested every day, including news reporters.
+[03:14.56]Vice President Mike Pence is next in line for the presidency.
+[03:20.44]Tests on Friday showed that he did not have the virus.
+[03:25.60]He "remains in good health," his spokesman said.
+[03:30.48]Many administration officials were undergoing tests.
+[03:34.84]And the White House Medical Unit was getting information
+[03:38.40]on people who came in contact with the president.
+[03:43.40]Before Trump announced he had the virus,
+[03:46.04]the administration said an assistant, Hope Hicks, had tested positive.
+[03:53.52]Hicks had been with Trump at Tuesday's presidential debate in Cleveland,
+[03:58.80]along with members of the Trump family.
+[04:03.16]An administration official told the Associated Press
+[04:07.00]that Hicks began feeling mild symptoms during the plane ride home
+[04:12.04]from a campaign event in Minnesota on Wednesday.
+[04:16.96]She was kept apart from other passengers, the person said.
+[04:23.36]It is unclear where the Trumps and Hicks may have caught the virus.
+[04:28.64]But speaking to Fox News, Trump seemed to suggest
+[04:33.56]it may have been spread by someone in the military
+[04:36.84]or law enforcement in greetings.
+[04:40.12]Trump is not the first world leader to test positive for the virus.
+[04:46.52]Brazilian President Jair Bolsonaro
+[04:49.40]and Britain's Boris Johnson also got COVID-19.
+[04:55.52]The prime minister spent a week in the hospital but has since recovered.
+[05:01.88]I'm Jonathan Evans. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

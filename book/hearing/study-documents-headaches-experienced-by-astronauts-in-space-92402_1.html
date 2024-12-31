@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 宇航员在太空中出现头痛</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 宇航员在太空中出现头痛" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/study-documents-headaches-experienced-by-astronauts-in-space.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>宇航员在太空中出现头痛</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/study-documents-headaches-experienced-by-astronauts-in-space.mp3" id="mp3"></a>
+<a href="/static/lrc/study-documents-headaches-experienced-by-astronauts-in-space.lrc" id="lrc"></a>
+<a href="study-documents-headaches-experienced-by-astronauts-in-space-92402.html" id="CnPage" target="_blank"></a>
+<a href="north-america-prepares-for--total-solar-eclipse-92401.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Research in the growing field of space medicine has identified many ways in which zero-gravity and other conditions can affect the human body. Now, a new study finds that astronauts are more likely to experience headaches in space than previously known.<br/>
+太空医学领域的研究已经确定了零重力和其他条件对人体产生影响的多种方式。现在，一项新的研究发现，宇航员在太空中比以前更容易出现头痛。</p>
+<p>The study involved 24 astronauts from the U.S., European and Japanese space agencies. They all traveled aboard the International Space Station for up to 26 weeks. All but two of them reported experiencing headaches in space.<br/>
+这项研究涉及来自美国、欧洲和日本航天机构的24名宇航员。他们都在国际空间站上旅行了长达26周。除两人外，其他人都报告在太空中出现头痛。</p>
+<p>Headaches struck a larger number of astronauts than the scientists had expected. The headaches continued even after the crew had been in space long enough for the body to adjust. The process takes place in the first two weeks in space.<br/>
+头痛困扰的宇航员人数超过了科学家们的预期。即使乘员在太空中停留了足够让身体适应的时间，头痛仍在继续。这个过程发生在太空的前两周。</p>
+<p>The headaches during the early period often presented similarly to migraines. Those experienced later in space travel presented more like a tension headache, the study found.<br/>
+早期的头痛通常与偏头痛相似。研究发现，太空旅行者后期经历的更像是一种紧张性的头痛。</p>
+<p>Neurologist WPJ van Oosterhout of Zaans Medical Center and the Leiden University Medical Center in the Netherlands was lead author of the study. He said the research suggests different processes "are involved for the early headache episodes - the first one to two weeks in space - versus later headache episodes."<br/>
+荷兰Zaans医学中心和莱顿大学医学中心的神经学家WPJ·范·奥斯特霍特是这项研究的主要作者。他说，研究表明，“在太空前一到两周出现的早期头痛发作与后期头痛发作涉及不同的过程。”</p>
+<p>The study was published this week in the journal Neurology.<br/>
+这项研究发表在本周的《神经病学》杂志上。</p>
+<p>"In the first week, the body has to adapt to the lack of gravity, known as space adaptation syndrome. This phenomenon is similar to motion sickness, and can cause nausea, vomiting and dizziness, and headaches," Van Oosterhout said. "The later headaches could result from ... more fluid accumulating in the upper part of the body and head...."<br/>
+范·奥斯特霍特说：“在第一周，身体必须适应重力不足，这被称为空间适应综合征。这种现象类似于晕动病，会导致恶心、呕吐、头晕和头痛。后来的头痛可能是由于更多液体积聚在身体上部和头部。”</p>
+<p>Migraines experienced on Earth are often throbbing, and last four to seven hours, along with symptoms like nausea, vomiting and sensitivity to light and sound, Van Oosterhout said. Tension headaches on Earth usually are a dull pain felt over the whole head, he said.<br/>
+范·奥斯特霍特说，地球上经历的偏头痛通常是有规律性抽痛，它会持续四到七个小时，伴有恶心、呕吐、对光和声音敏感等症状。他说，紧张性头痛在地球上通常是一种感觉到整个头部的隐隐作痛。</p>
+<p>The astronauts, 23 men and one woman, had an average age of about 47. They visited the International Space Station for missions that took place from November 2011 to June 2018. A total of 378 headaches were reported by 22 of the 24 astronauts during a total of 3,596 days in orbit. None of the 24 reported headaches in the three months after returning to Earth. None had ever had migraines before their time in space and none had a history of usual headache attacks.<br/>
+这些包括23男1女的宇航员的平均年龄约47岁。2011年11月至2018年6月，他们访问了国际空间站执行任务。24名宇航员中的22人在总共3596天的轨道任务中总共报告了378次头痛。这24人在返回地球后的三个月内都没有报告头痛。在进入太空之前，没有人患过偏头痛，也没有人有常见的头痛发作史。</p>
+<p>Documented effects of space travel include bone and muscle weakening, or atrophy, changes in the brain, cardiovascular system and immune system. Astronauts have also experienced effects on the inner ear and a condition involving the eyes. The risk of cancer from high radiation levels in space is another concern.<br/>
+有文献记载的太空旅行的影响包括骨骼和肌肉减弱或萎缩、大脑、心血管系统和免疫系统的变化。宇航员还经历了内耳和眼睛的影响。太空中高辐射水平导致癌症的风险是另一个令人担忧的问题。</p>
+<p>Experts are unsure how much of a barrier these effects might have on human space travel over long periods, like trips to Mars or beyond.<br/>
+专家们不确定这些影响对人类长期太空旅行（如火星或更远的地方）可能会产生多大的影响。</p>
+<p>"The honest answer is that we don't know the effects of long-duration space travel - possibly years - on the human body," Van Oosterhout said, adding, this "is a clear task for the field of space medicine."<br/>
+范·奥斯特霍特说：“老实说，我们不知道可能几年的长时间太空旅行对人体的影响。”他补充道，这“是太空医学领域的一项明确任务。”</p>
+<p>I'm Dan Novak.<br/>
+我是丹·诺瓦克。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Study Documents Headaches Experienced by Astronauts in Space]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Research in the growing field of space medicine
+[00:04.36]has identified many ways
+[00:06.64]in which zero-gravity and other conditions
+[00:09.84]can affect the human body.
+[00:12.40]Now, a new study finds that astronauts
+[00:16.20]are more likely to experience headaches in space
+[00:19.68]than previously known.
+[00:22.52]The study involved 24 astronauts from the U.S.,
+[00:26.68]European and Japanese space agencies.
+[00:30.56]They all traveled aboard the International Space Station
+[00:34.44]for up to 26 weeks.
+[00:36.96]All but two of them
+[00:38.84]reported experiencing headaches in space.
+[00:43.16]Headaches struck a larger number of astronauts
+[00:46.32]than the scientists had expected.
+[00:48.88]The headaches continued
+[00:51.12]even after the crew had been in space
+[00:53.32]long enough for the body to adjust.
+[00:56.52]The process takes place
+[00:58.20]in the first two weeks in space.
+[01:02.12]The headaches during the early period
+[01:04.60]often presented similarly to migraines.
+[01:08.64]Those experienced later in space travel
+[01:11.76]presented more like a tension headache, the study found.
+[01:16.48]Neurologist WPJ van Oosterhout of Zaans Medical Center
+[01:21.88]and the Leiden University Medical Center in the Netherlands
+[01:25.72]was lead author of the study.
+[01:28.24]He said the research suggests different processes
+[01:32.60]"are involved for the early headache episodes
+[01:35.72]- the first one to two weeks in space
+[01:38.68]- versus later headache episodes."
+[01:41.32]The study was published this week in the journal Neurology.
+[01:46.76]"In the first week, the body has to adapt to the lack of gravity,
+[01:50.84]known as space adaptation syndrome.
+[01:53.84]This phenomenon is similar to motion sickness,
+[01:57.60]and can cause nausea, vomiting and dizziness,
+[02:01.32]and headaches," Van Oosterhout said.
+[02:04.08]"The later headaches could result
+[02:06.52]from ... more fluid accumulating
+[02:08.56]in the upper part of the body and head...."
+[02:12.68]Migraines experienced on Earth are often throbbing,
+[02:16.48]and last four to seven hours,
+[02:19.12]along with symptoms like nausea,
+[02:21.52]vomiting and sensitivity to light and sound,
+[02:25.04]Van Oosterhout said.
+[02:26.92]Tension headaches on Earth usually are a dull pain
+[02:30.96]felt over the whole head, he said.
+[02:35.48]The astronauts, 23 men and one woman,
+[02:38.68]had an average age of about 47.
+[02:41.88]They visited the International Space Station for missions
+[02:45.68]that took place from November 2011 to June 2018.
+[02:51.00]A total of 378 headaches were reported
+[02:54.96]by 22 of the 24 astronauts
+[02:57.92]during a total of 3,596 days in orbit.
+[03:02.92]None of the 24 reported headaches
+[03:05.92]in the three months after returning to Earth.
+[03:08.84]None had ever had migraines before their time in space
+[03:13.00]and none had a history of usual headache attacks.
+[03:17.84]Documented effects of space travel
+[03:20.24]include bone and muscle weakening, or atrophy,
+[03:23.60]changes in the brain,
+[03:25.32]cardiovascular system and immune system.
+[03:29.48]Astronauts have also
+[03:31.08]experienced effects on the inner ear
+[03:33.32]and a condition involving the eyes.
+[03:36.60]The risk of cancer from
+[03:37.92]high radiation levels in space is another concern.
+[03:43.84]Experts are unsure how much of a barrier these effects
+[03:47.48]might have on human space travel over long periods,
+[03:51.04]like trips to Mars or beyond.
+[03:54.36]"The honest answer is that
+[03:56.04]we don't know the effects of long-duration space travel
+[03:59.20]- possibly years - on the human body," Van Oosterhout said,
+[04:03.56]adding, this "is a clear task for the field of space medicine."
+[04:07.80]I'm Dan Novak.
+[04:09.05]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

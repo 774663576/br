@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 莫桑比克发现残骸或来自马航370航班</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 莫桑比克发现残骸或来自马航370航班" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/debris-may-be-from-malaysian-plane.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>莫桑比克发现残骸或来自马航370航班</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/debris-may-be-from-malaysian-plane.mp3" id="mp3"></a>
+<a href="/static/lrc/debris-may-be-from-malaysian-plane.lrc" id="lrc"></a>
+<a href="debris-may-be-from-malaysian-plane-68367.html" id="CnPage" target="_blank"></a>
+<a href="google-self-driving-car-crashes-into-bus-68333.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>A piece of metal from missing Malaysia Airways Flight 370 may have been found in Mozambique.<br/>一块可能来自失踪的马航370航班的金属在莫桑比克被发现。</p>
+<p>The metal is white and about one meter long. It is being sent to Australia for testing.<br/>该金属为白色，长约1米。它已经被送往澳大利亚进行检测。</p>
+<p>The Australian agency supervising the search for the plane will examine the metal to determine where it came from.<br/>主持这架飞机搜寻工作的澳大利亚机构将检测这块金属以确定它来自何处。</p>
+<p>An American beachcomber found the piece of metal and brought it to authorities in Mozambique.<br/>一位美国寻宝者发现了这块金属，并把它带给莫桑比克当局。</p>
+<p>The piece of metal, or debris, may be from an airplane part called a horizontal stabilizer. It is printed with the words "no step" and has a code on it that makes experts think it is from a Boeing 777. That is the same kind of plane that disappeared in 2014 with 239 people on board.<br/>这块金属或残骸可能来自飞机的水平安定面。它的上面印着no step(请勿踩压)，并且上面有代码，使得专家认为它来自于波音777飞机。这和2014年载着239人失踪的马航370航班是同一种机型。</p>
+<p>Computer models predicted that debris could wash-up in Mozambique.<br/>计算机模型预测飞机残骸会在莫桑比克被冲上岸。</p>
+<p>If the metal turns out to be from Flight 370, it will be the second confirmed piece of debris from the plane. A piece of the wing, called a flaperon, was found on a French island in the Indian Ocean last summer.<br/>如果这块残骸被证实来自370航班，这将是第二块被证实来自该飞机的残骸。去年夏天，飞机上一块被称之为襟副翼的机翼在印度洋的一个法国岛屿被发现。</p>
+<p>The man who found the debris is from the state of Washington. He travels around looking for pieces of the plane. He said he traveled to a number of countries looking for parts of Flight 370.<br/>发现这块残骸的男子来自于华盛顿州。他四处寻找飞机碎片。他说，他去过很多国家寻找370航班的零部件。</p>
+<p>The transport minister in Malaysia did not want to get too excited about the discovery. He asked people to wait for more information.<br/>马来西亚交通部长对这一发现不想表现太兴奋。他要求人们等待更多信息。</p>
+<p>He says there will be a search if the piece of metal turns out to be from the Malaysian plane.<br/>他说，如果这块金属被证实来自这架马来西亚飞机，就会展开一场搜索。</p>
+<p>On March 8, the Malaysian authorities will release more information about the new debris and the search. March 8 is the two-year anniversary of the plane's disappearance.<br/>3月8日，马来西亚当局将发布更多有关这块新残骸和搜索的信息。3月8日也是这架飞机失踪两周年。</p>
+<p>The plane was going to Beijing from Kuala Lumpur before it went off course over the Indian Ocean.<br/>这架飞机当时是从吉隆坡前往北京，之后在印度洋失踪。</p>
+<p>I'm Anna Mateo.<br/>我是安娜·马特奥。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.28]A piece of metal from missing Malaysia Airways Flight 370
+[00:05.12]may have been found in Mozambique.
+[00:08.92]The metal is white and about one meter long.
+[00:13.80]It is being sent to Australia for testing.
+[00:17.72]The Australian agency supervising the search for the plane
+[00:22.00]will examine the metal to determine where it came from.
+[00:27.36]An American beachcomber found the piece of metal
+[00:31.32]and brought it to authorities in Mozambique.
+[00:35.00]The piece of metal, or debris,
+[00:37.68]may be from an airplane part called a horizontal stabilizer.
+[00:44.24]It is printed with the words "no step"
+[00:47.40]and has a code on it that makes experts think it is from a Boeing 777.
+[00:54.68]That is the same kind of plane that disappeared in 2014
+[00:59.36]with 239 people on board.
+[01:02.88]Computer models predicted that debris could wash-up in Mozambique.
+[01:08.48]If the metal turns out to be from Flight 370,
+[01:12.84]it will be the second confirmed piece of debris from the plane.
+[01:18.08]A piece of the wing, called a flaperon,
+[01:21.68]was found on a French island in the Indian Ocean last summer.
+[01:26.60]The man who found the debris is from the state of Washington.
+[01:31.32]He travels around looking for pieces of the plane.
+[01:35.32]He said he traveled to a number of countries
+[01:38.40]looking for parts of Flight 370.
+[01:43.12]The transport minister in Malaysia
+[01:45.48]did not want to get too excited about the discovery.
+[01:50.28]He asked people to wait for more information.
+[01:55.80]He says there will be a search
+[01:58.24]if the piece of metal turns out to be from the Malaysian plane.
+[02:04.20]On March 8, the Malaysian authorities will release more information
+[02:09.04]about the new debris and the search.
+[02:12.20]March 8 is the two-year anniversary of the plane's disappearance.
+[02:17.60]The plane was going to Beijing from Kuala Lumpur
+[02:21.64]before it went off course over the Indian Ocean.
+[02:25.12]I'm Anna Mateo.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

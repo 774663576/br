@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reaching the 'Tipping Point'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Reaching the 'Tipping Point'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/reaching-the-tipping-point.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reaching the 'Tipping Point'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/reaching-the-tipping-point.mp3" id="mp3"></a>
+<a href="speaking-fluently-92918.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">24 August, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Today we talk about an important time in a movement or experience. It is the moment when something cannot be stopped. There is a <strong>momentum</strong> or force pushing something forward or making it more known or popular.</p>
+<p>One term for that kind of moment is <u>tipping point</u>.</p><div class="contentImage"><img alt="FILE - Some experts say deforestation in the Amazon is reaching a tipping point. This sky view shows deforestation near a forest on the border between Amazonia and Cerrado in Nova Xavantina, Mato Grosso state, Brazil on July 28, 2021. (REUTERS/Amanda Perobelli)" src="https://files.21voa.com/gdb/80650000-c0a8-0242-e8ec-08dabf375251_cx10_cy11_cw89_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Some experts say deforestation in the Amazon is reaching a tipping point. This sky view shows deforestation near a forest on the border between Amazonia and Cerrado in Nova Xavantina, Mato Grosso state, Brazil on July 28, 2021. (REUTERS/Amanda Perobelli)</span></div>
+<p>The online dictionary <em>Merriam-Webster</em> defines <u>tipping point</u> as “the critical point in a situation, process, or system beyond which a <strong>significant</strong> and often unstoppable effect or change takes place.”</p>
+<p>The<u> tipping point</u> can also be the time at which a change or an effect cannot be stopped.</p>
+<p>For example, some scientists believe Earth may have passed the <u>tipping point</u> in global warming. Efforts taken now will not prevent environmental disaster. It is too late to stop the damage. In other words, <u>that ship has sailed</u>. When something reaches a <u>tipping point</u> it is too late to turn back. It is a <u>point of no return</u>.</p>
+<p>Here is another definition. The online <em>Cambridge Dictionary</em> defines the <u>tipping point</u> as “a time during an activity or process when an important decision has to be made or when a situation changes completely.”</p>
+<p>Used this way, we often say we reach, <strong>approach</strong>, or near a tipping point. Here are some examples:</p>
+<p><em>In class, the students' anger toward their teacher reached a <u>tipping point.</u> She had again given them a test on a subject she hadn't taught.</em></p>
+<p><em>Prices at the food store are nearing a <u>tipping point</u>. If they go much higher, people will just shop elsewhere. </em></p>
+<p>Malcolm Gladwell wrote about the subject in his book <em>Tipping Point</em> published in 2002. He describes <u>tipping point</u> this way: “<u>The tipping point</u> is that magic moment when an idea, <strong>trend</strong>, or social behavior crosses a <strong>threshold</strong>, tips, and spreads like wildfire.”</p>
+<p>For example, you could say, “The writer's best-selling second book was the <u>tipping point </u>in her career. Now, everything she publishes is popular!”</p>
+<p>And that's the end of this <em>Words and Their Stories</em>.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>momentum </strong><em>– n.</em><strong> </strong>strength or force gained by motion or by a series of events</p>
+<p><strong>significant</strong> <em>– adj. </em>having much importance</p>
+<p><strong>approach </strong><em>– v. </em>to draw closer to</p>
+<p><strong>trend </strong><em>– n. </em>a current style or preference</p>
+<p><strong>threshold </strong><em>– n. </em>the place or point of entering or beginning</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

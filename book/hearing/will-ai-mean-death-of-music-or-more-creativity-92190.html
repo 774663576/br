@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Will AI Mean Death of Music or More Creativity?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Will AI Mean Death of Music or More Creativity?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/will-ai-mean-death-of-music-or-more-creativity.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Will AI Mean Death of Music or More Creativity?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/will-ai-mean-death-of-music-or-more-creativity.mp3" id="mp3"></a>
+<a href="us-schools-use-surveillance-to-catch-students-vaping-92189.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">06 February 2024</span><br/>
+<p>Inside a recording room at Queen Mary University of London, several researchers are working with new artificial intelligence (AI) tools. Their aim is to develop what they call the "new virtual worlds" of music.</p>
+<p>Andrea Martonelli and Max Graf are among more than 30 doctoral students working with Mathieu Barthet, a senior lecturer in Digital Media. They are exploring the possibilities of computational creativity and generative AI. Generative AI is a term that describes technology tools designed to operate at human levels.</p>
+<p>Together, the researchers have set up a futuristic studio where music meets <strong>cutting-edge</strong> technology.</p><div class="contentImage"><img alt="Andrea Martelloni, a PhD Student at the Queen Mary University of London, demonstrates the 'HITar', an AI-powered augmented guitar, at the 2024 National Association of Music Merchants (NAMM) trade show in Anaheim, California, U.S., January 25, 2024. (REUTERS/Jorge Garcia)" src="https://files.21voa.com/gdb/4e9464e8-4152-4a42-811a-d76326390477_w268_r1.jpg"/><br/><span class="imagecaption">Andrea Martelloni, a PhD Student at the Queen Mary University of London, demonstrates the 'HITar', an AI-powered augmented guitar, at the 2024 National Association of Music Merchants (NAMM) trade show in Anaheim, California, U.S., January 25, 2024. (REUTERS/Jorge Garcia)</span></div>
+<p>Graf showed off a virtual instrument to reporters with the Reuters news agency. Graf calls the instrument Netz. Netz is played through an augmented-reality headset. Augmented-reality equipment combines the real world with computer-created content. The device Graf uses follows body movements to create musical sounds like notes and chords.</p>
+<p>Martonelli played a HITar, a <strong>guitar</strong> with AI sensors added to it. The sensors can read his movements to create percussive, or drum-like, sounds. These sounds cannot be made with a normal guitar.</p>
+<p>AI can be found in music-making dating back to the 1950s. But recent progress in generative AI has led to divided opinions on the technology.</p>
+<p>Generative AI grew in popularity last year thanks to the ChatGPT language system. Generative AI can create new sounds, words for music or entire songs on its own. But artists usually use simpler AI to add to their sound.</p>
+<p>British musician YUNGBLUD said he believes AI can help his music go "to another direction."</p>
+<p>Other musicians worry that the technology could go too far. Amy Love plays in the English rock group Nova Twins. She said she is not in favor of music that includes artificially generated voices of actual artists. She said she feels the same way about using dead artists' voices in songs.</p>
+<p>In November, the Beatles released the song "Now and Then." It is considered the group's last song and includes the voice of Beatles musician John Lennon, who died in 1980. Lennon's voice sounds were taken from an old recording and re-created with AI.</p>
+<p>New York City-based entertainment company Warner Music said in November it was partnering with the <strong>estate </strong>of the late French singer Edith Piaf to re-create her voice using AI.</p>
+<p>Many experts say AI raises legal and ethical concerns. But <strong>guidelines</strong> on generative AI are still only in their early stage.</p>
+<p>Barthet said, "I think AI can have its place in the music production<strong> chain</strong>." But he added that is only possible if the technology is guided in the right way and if there are rules in place to make sure that musicians keep some amount of control.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Alessandro Parodi, Olivier Sorgho and Matt Stock reported this story for Reuters. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>__________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cutting-edge </strong>– <em>n</em>. the newest and most advanced area of activity in an art or science</p>
+<p><strong>guitar </strong>– <em>n</em>. a musical instrument that is held against the front of your body and that has usually six strings which are played with your fingers or with a pick</p>
+<p><strong>estate </strong><em>– n. </em>the things left by someone who has died</p>
+<p><strong>guideline </strong><em>– n.</em> a rule or instruction that shows or tells how something should be done</p>
+<p><strong>chain </strong><em>– n. </em>a series of connected things or people</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

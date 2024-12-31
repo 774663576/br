@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 贝佐斯成为全球首位千亿富豪</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 贝佐斯成为全球首位千亿富豪" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201803/jeff-bezos-first-100-billion-dollar-man.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>贝佐斯成为全球首位千亿富豪</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201803/jeff-bezos-first-100-billion-dollar-man.mp3" id="mp3"></a>
+<a href="/static/lrc/jeff-bezos-first-100-billion-dollar-man.lrc" id="lrc"></a>
+<a href="jeff-bezos-first--billion-dollar-man-78266.html" id="CnPage" target="_blank"></a>
+<a href="george-washingtons-tree-brought-down-by-strong-winds-78257.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Over the past 12 months, an American businessman became the world's first 100-billion-dollar man. But Donald Trump's wealth sank during his first year as president of the United States.<br/>在过去的一年里，一位美国商人成为了全球首位千亿富翁。但是川普的资产在他担任美国总统的第一年里反而缩水了。 
+<p>Those are just two findings from Forbes magazine's latest report on the wealth of the world's richest people.<br/>这只是《福布斯》杂志全球富豪报告中的两项结论。</p>
+<p>The report, released on Tuesday, says the world now has 2,208 billionaires. They have a combined wealth of $9.1 trillion, an increase of 18 percent compared to one year earlier.<br/>周二发布的这份报告称全球目前拥有2208位亿万富翁。他们的资产总和达到了9.1万亿美元，与去年相比增长了18％。</p>
+<p>Forbes says Jeff Bezos is now the richest person on the planet. Most of his wealth comes from shares of stock in Amazon, the e-commerce company. Amazon shares rose 59 percent during the past year.<br/>《福布斯》杂志称杰夫·贝佐斯（Jeff Bezos）目前是全球首富。他的大部分资产来自于亚马逊电子商务公司的持股。亚马逊公司的股价在过去一年上涨了59%。</p>
+<p>As of February 9, 2018, Bezos' wealth stood at $112 billion, up from about $73 billion last year. The increase was enough to overtake American Bill Gates, who helped to set up Microsoft Corporation.<br/>截至2018年2月9日，贝佐斯的资产达到了1120亿美元，高于去年的730亿美元左右。这一增长足以超越帮助成立了微软公司的美国人比尔·盖茨(Bill Gates)。</p>
+<p>Gates finished second on Forbes' list with $90 billion. Another American -- businessman and investor Warren Buffett -- is now in third place, with $84 billion.<br/>盖茨以900亿美元资产排在福布斯榜单第二位。另一位美国商人和投资家沃伦·巴菲特（Warren Buffett）以840亿美元资产排在第三位。</p>
+<p>Both Gates, age 62, and Buffett, 87, have said they plan to give away most of their wealth while Bezos, 54, has not said much.<br/>62岁的盖茨和87岁的巴菲特都表示他们计划捐出自己大部分的财产。而54岁的贝佐斯则没有过多透露。</p>
+<p>The fourth richest person is Bernard Arnault of France. He owns the luxury goods company LVMH. His wealth is valued at $72 billion.<br/>榜单上第四位富豪是法国的伯纳德·阿尔诺（Bernard Arnault）。他拥有奢侈品公司路易威登集团（LVMH）。他的资产价值720亿美元。</p>
+<p>Most of the top 20 billionaires on the list have ties to technology companies. They include Mark Zuckerberg of Facebook, Larry Ellison of Oracle, as well as Larry Page and Sergey Brin of Google.<br/>榜单前20位亿万富豪中的大多数人跟科技公司有关。他们包括脸谱网的马克·扎克伯格（Mark Zuckerberg），甲骨文公司的拉里·埃里森（Larry Ellison）以及谷歌公司的拉里·佩奇（Larry Page）和谢尔盖·布林（Sergey Brin）。</p>
+<p>Two businessmen from China made Forbes' top 20 for the first time. Ma Huateng of Tencent is in 17th place with $45.3 billion. Jack Ma of Alibaba is in 20th place with $39 billion.<br/>中国首次有两名商人进入了福布斯榜单前20名。腾讯公司的马化腾以453亿美元排在第17位，阿里巴巴集团的马云以390亿美元排在第20位。</p>
+<p>The world's youngest billionaire is Alexandra Andresen of Norway. She is 21 years old. Her wealth of $1.4 billion came from a family-owned investment company.<br/>全球最年轻的亿万富豪是挪威的亚历山德拉·安德森（Alexandra Andresen）。她现年21岁，她的14亿美元资产来自于家族投资公司。</p>
+<p>At the age of 99, Chang Yun Chung of Singapore is the world's oldest billionaire. He founded an international shipping company with two second-hand vessels. He is now worth $1.9 billion, and the company has a fleet of 155 vessels.<br/>新加坡的张允中 (Chang Yun Chung)以99岁的高龄成为全球最年长的亿万富豪。他以两艘二手船起家创立了一家国际航运公司。他目前的资产为19亿美元，该公司目前拥有155艘船只。</p>
+<p>There are 259 new faces in the latest list of billionaires. China has the most new faces with 89. The United States is next with 18. But the U.S. still has more billionaires than any country: 585, in all. And greater China, including the mainland, Hong Kong, Macau and Taiwan, has 476.<br/>最新的亿万富豪榜单中出现了259位新面孔。中国有最多的89位新面孔，美国以18位新面孔排名次席。但是美国有585位亿万富豪，人数超过了其它任何国家。而包括中国大陆、香港、澳门、台湾地区在内的大中华区有476位亿万富豪。</p>
+<p>Most of the world's billionaires added to their wealth last year because of rising stock markets. But the magazine noted that President Donald Trump's wealth actually dropped about $400 million, to $3.1 billion, during his first year in office.<br/>由于股市上涨，去年大多数亿万富豪的资产有所增长。但是该杂志指出，川普总统的资产在他上任首年期间实际上反而下降了大约4亿美元，降到了31亿美元。</p>
+<p>The decline left him as the world's 766th richest person, down from 544 on Forbes' list last year.<br/>这使得他从去年全球富豪榜单的第544位掉到了第766位。</p>
+<p>I'm Dorothy Gundy.<br/>我是多萝西·甘地。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Jeff Bezos: the World's First 100-Billion-Dollar-Man]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]Over the past 12 months, an American businessman
+[00:04.48]became the world's first 100-billion-dollar man.
+[00:11.52]But Donald Trump's wealth sank during his first year
+[00:16.56]as president of the United States.
+[00:20.52]Those are just two findings from Forbes magazine's latest report
+[00:26.64]on the wealth of the world's richest people.
+[00:31.44]The report, released on Tuesday,
+[00:34.72]says the world now has 2,208 billionaires.
+[00:41.84]They have a combined wealth of $9.1 trillion,
+[00:48.04]an increase of 18 percent compared to one year earlier.
+[00:55.68]Forbes says Jeff Bezos is now the richest person on the planet.
+[01:03.08]Most of his wealth comes from shares of stock in Amazon,
+[01:08.28]the e-commerce company.
+[01:10.64]Amazon shares rose 59 percent during the past year.
+[01:17.32]As of February 9, 2018, Bezos' wealth stood at $112 billion,
+[01:27.64]up from about $73 billion last year.
+[01:34.36]The increase was enough to overtake American Bill Gates,
+[01:39.52]who helped to set up Microsoft Corporation.
+[01:44.60]Gates finished second on Forbes' list with $90 billion.
+[01:51.72]Another American -- businessman and investor Warren Buffett
+[01:57.20]-- is now in third place, with $84 billion.
+[02:03.80]Both Gates, age 62, and Buffett, 87,
+[02:09.64]have said they plan to give away most of their wealth
+[02:14.12]while Bezos, 54, has not said much.
+[02:19.12]The fourth richest person is Bernard Arnault of France.
+[02:25.04]He owns the luxury goods company LVMH.
+[02:30.76]His wealth is valued at $72 billion.
+[02:36.72]Most of the top 20 billionaires on the list have ties to technology companies.
+[02:44.56]They include Mark Zuckerberg of Facebook, Larry Ellison of Oracle,
+[02:52.12]as well as Larry Page and Sergey Brin of Google.
+[02:57.64]Two businessmen from China made Forbes' top 20 for the first time.
+[03:03.76]Ma Huateng of Tencent is in 17th place with $45.3 billion.
+[03:13.12]Jack Ma of Alibaba is in 20th place with $39 billion.
+[03:21.88]The world's youngest billionaire is Alexandra Andresen of Norway.
+[03:28.92]She is 21 years old.
+[03:32.52]Her wealth of $1.4 billion came from a family-owned investment company.
+[03:41.76]At the age of 99, Chang Yun Chung of Singapore is the world's oldest billionaire.
+[03:50.80]He founded an international shipping company with two second-hand vessels.
+[03:58.44]He is now worth $1.9 billion, and the company has a fleet of 155 vessels.
+[04:09.92]There are 259 new faces in the latest list of billionaires.
+[04:17.16]China has the most new faces with 89.
+[04:22.48]The United States is next with 18.
+[04:27.44]But the U.S. still has more billionaires than any country: 585, in all.
+[04:37.07]And greater China, including the mainland, Hong Kong, Macau and Taiwan, has 476.
+[04:49.68]Most of the world's billionaires added to their wealth last year because of rising stock markets.
+[04:57.72]But the magazine noted that President Donald Trump's wealth
+[05:02.76]actually dropped about $400 million, to $3.1 billion, during his first year in office.
+[05:13.84]The decline left him as the world's 766th richest person,
+[05:21.16]down from 544 on Forbes' list last year.
+[05:27.70]I'm Dorothy Gundy.
+[05:30.24]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登感染新冠 目前症状轻微</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登感染新冠 目前症状轻微" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202207/biden-tests-positive-for-covid-has-mild-symptoms.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登感染新冠 目前症状轻微</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202207/biden-tests-positive-for-covid-has-mild-symptoms.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-tests-positive-for-covid-has-mild-symptoms.lrc" id="lrc"></a>
+<a href="biden-tests-positive-for-covid-has-mild-symptoms-89365.html" id="CnPage" target="_blank"></a>
+<a href="who-to-release-first-malaria-vaccine-in-africa-89364.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>American President Joe Biden tested positive for COVID-19 on Thursday. Administration officials say Biden is experiencing "very mild symptoms" and will continue his duties.<br/>
+美国总统拜登周四新冠病毒检测呈阳性。政府官员表示，拜登的症状非常轻微，他将会继续履行职责。</p>
+<p>White House Press Secretary Karine Jean-Pierre said Biden has begun taking Paxlovid. The antiviral drug is designed to reduce the severity of the disease. She added that Biden has been in contact with administration staff by phone and will take part in his planned meetings at the White House on the "phone and Zoom from the residence."<br/>
+白宫新闻秘书卡琳·让-皮埃尔表示，拜登已经开始服用 Paxlovid。这种抗病毒药物旨在降低疾病的严重程度。她还表示，拜登一直通过电话与政府工作人员联系，并将从住处通过手机和视频会议软件出席在白宫举行的原定会议。</p>
+<p>Biden is 79 years old. He is fully vaccinated. He received two shots of the Pfizer vaccine shortly before taking office in January 2021. The president received two more shots, called boosters, last September and in March of this year.<br/>
+拜登现年79岁。他完全接种了疫苗。他在2021年1月上任前不久接种了两针辉瑞疫苗。这位总统在去年9月和今年3月又接种了两针加强针。</p>
+<p>Jean-Pierre said Biden had last tested negative on Tuesday, and he will stay isolated until he tests negative again. "He's doing fine," she said. "He's feeling good."<br/>
+让-皮埃尔表示，拜登上一次检测呈阴性是在周二，他将保持隔离，直到再次检测呈阴性。她说：“他表现很好，身体感觉也很棒。”</p>
+<p>Biden had planned to visit Pennsylvania on Thursday and spend a long weekend in Delaware. Those events are canceled.<br/>
+拜登原计划周四访问宾夕法尼亚州，并在特拉华州度过一个长周末。这些活动都被取消。</p>
+<p>First lady Jill Biden spoke to reporters as she arrived at a school in Detroit, Michigan on Thursday. She said she had just gotten off the phone with her husband. The first lady, who was wearing a face covering, said she tested negative earlier in the day.<br/>
+周四，第一夫人吉尔在抵达密歇根州底特律的一所学校时对记者发表了讲话。她称自己刚与丈夫通了电话。戴着口罩的第一夫人表示，她当天早些时候的病毒检测结果为阴性。</p>
+<p>For two and a half years, Biden has been able to avoid the virus that has spread around the world. Several world leaders, including former U.S. President Donald Trump, British Prime Minister Boris Johnson and French President Emmanuel Macron, have all gotten the virus.<br/>
+两年半以来，拜登都躲过了这种已经在世界范围内传播的病毒。包括美国前总统川普、英国首相约翰逊以及法国总统马克龙在内的几位世界领导人都感染过这种病毒。</p>
+<p>The virus and its variants have also infected U.S. Vice President Kamala Harris, as well as Cabinet members, White House staff and lawmakers.<br/>
+该病毒及其变种还感染了美国副总统卡马拉·哈里斯，以及内阁成员、白宫工作人员以及国会议员。</p>
+<p>The Biden administration has worked to protect the president from COVID-19. All visitors and staff are required to be vaccinated or submit to daily tests. People expected to be near Biden are tested daily.<br/>
+拜登政府一直在努力保护总统不要感染新冠肺炎。所有访客和工作人员都必须接种疫苗或接受每次检测。预计会出现在拜登身边的人士每天都会接受检测。</p>
+<p>The president, however, has increasingly stepped up his travel and has returned to holding large indoor events where not everyone is tested.<br/>
+然而，总统越来越多地加大了他的行程，并重新开始举办并非人人都接受检测的大型室内活动。</p>
+<p>In his State of the Union speech at the Capitol on March 1, Biden said it was safe for most Americans to resume their normal pre-pandemic activities. "Tonight, I can say we are moving forward safely, back to more normal routines," the president said. "It's time for Americans to get back to work and fill our great downtowns again."<br/>
+拜登3月1日在国会大厦发表国情咨文时表示，大多数美国人可以安全地恢复大流行前的正常活动。拜登表示：“今晚我可以表态，我们正在安全地前行，回到更正常的生活，美国人是时候重返工作岗位，并再次挤满我们的闹市。”</p>
+<p>Speaking to more than 2,600 people at the White House Correspondents' Association dinner on April 30, Biden talked about the risks of holding large events. "I know there are questions about whether we should gather here tonight because of COVID," he said. "Well, we're here to show the country that we're getting through this pandemic."<br/>
+拜登在4月30日的白宫记者协会晚宴上对2600多人发表了讲话，他谈到了举行大型活动的风险。他说：“我知道，因为新冠疫情，有人质疑我们今晚是否应该在这里相聚。我们在这里是为了显示这个国家正在度过这场大流行病。”</p>
+<p>In recent weeks, U.S. officials have again urged Americans to be careful with the fast-spreading Omicron sub-variants, or versions of the disease. The U.S. Centers for Disease Control and Prevention reported that the country still has on average 126,000 new cases of COVID-19 daily. The virus is causing an average of 353 deaths a day in the United States.<br/>
+最近几周，美国官员再次督促民众对传播很快的奥密克戎亚变体保持谨慎。美国疾控和预防中心报告称，美国平均每天仍有12.6万例新冠肺炎新增病例。这种病毒平均每天在美国造成353人死亡。</p>
+<p>The health agency said COVID-19 vaccines reduce the risk of severe illness and death from the disease. It says booster shots, which Biden had received, can help older and other at-risk people.<br/>
+该卫生机构表示，新冠肺炎疫苗可以降低重症和死亡的风险。它说，拜登所接种的加强针可以帮助老年人和其它风险人群。</p>
+<p>Dr. Anthony Fauci is the nation's top infectious disease expert. He said on July 12 that COVID-19 "is a reality that we need to deal with." But he added, "We should not let it disrupt our lives."<br/>
+福奇博士是美国顶级传染病专家。他在7月12日表示，新冠肺炎“是我们需要应对的现实”。但他还表示：“我们不应该让它打乱我们的生活。”</p>
+<p>I'm Ashley Thompson.<br/>
+我是阿什利·汤普森。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Tests Positive for COVID, Has 'Mild Symptoms']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]American President Joe Biden tested positive
+[00:05.44]for COVID-19 on Thursday.
+[00:08.56]Administration officials say Biden is experiencing
+[00:13.88]"very mild symptoms" and will continue his duties.
+[00:19.64]White House Press Secretary Karine Jean-Pierre
+[00:24.08]said Biden has begun taking Paxlovid.
+[00:27.96]The antiviral drug is designed to reduce the severity of the disease.
+[00:34.36]She added that Biden has been in contact
+[00:38.92]with administration staff by phone
+[00:42.44]and will take part in his planned meetings at the White House
+[00:46.68]on the "phone and Zoom from the residence."
+[00:52.16]Biden is 79 years old.
+[00:55.60]He is fully vaccinated.
+[00:58.04]He received two shots of the Pfizer vaccine
+[01:01.68]shortly before taking office in January 2021.
+[01:07.08]The president received two more shots, called boosters,
+[01:12.28]last September and in March of this year.
+[01:17.28]Jean-Pierre said Biden had last tested negative on Tuesday,
+[01:22.48]and he will stay isolated until he tests negative again.
+[01:27.32]"He's doing fine," she said. "He's feeling good."
+[01:32.84]Biden had planned to visit Pennsylvania on Thursday
+[01:36.92]and spend a long weekend in Delaware.
+[01:41.20]Those events are canceled.
+[01:44.16]First lady Jill Biden spoke to reporters
+[01:47.72]as she arrived at a school in Detroit, Michigan on Thursday.
+[01:52.32]She said she had just gotten off the phone with her husband.
+[01:57.32]The first lady, who was wearing a face covering,
+[02:01.12]said she tested negative earlier in the day.
+[02:05.60]For two and a half years, Biden has been able
+[02:09.48]to avoid the virus that has spread around the world.
+[02:13.40]Several world leaders, including former U.S. President Donald Trump,
+[02:19.60]British Prime Minister Boris Johnson
+[02:22.64]and French President Emmanuel Macron, have all gotten the virus.
+[02:28.36]The virus and its variants have also infected
+[02:32.48]U.S. Vice President Kamala Harris,
+[02:35.32]as well as Cabinet members, White House staff and lawmakers.
+[02:40.52]The Biden administration has worked
+[02:43.40]to protect the president from COVID-19.
+[02:46.28]All visitors and staff are required
+[02:49.68]to be vaccinated or submit to daily tests.
+[02:53.72]People expected to be near Biden are tested daily.
+[02:58.24]The president, however, has increasingly stepped up his travel
+[03:03.56]and has returned to holding large indoor events
+[03:07.60]where not everyone is tested.
+[03:10.64]In his State of the Union speech at the Capitol on March 1,
+[03:15.36]Biden said it was safe for most Americans
+[03:19.44]to resume their normal pre-pandemic activities.
+[03:23.96]"Tonight, I can say we are moving forward safely,
+[03:27.60]back to more normal routines," the president said.
+[03:31.92]"It's time for Americans to get back to work
+[03:36.00]and fill our great downtowns again."
+[03:40.84]Speaking to more than 2,600 people
+[03:44.52]at the White House Correspondents' Association dinner on April 30,
+[03:50.12]Biden talked about the risks of holding large events.
+[03:55.00]"I know there are questions about whether we should
+[03:58.36]gather here tonight because of COVID," he said.
+[04:02.52]"Well, we're here to show the country
+[04:05.72]that we're getting through this pandemic."
+[04:10.00]In recent weeks, U.S. officials have again urged Americans
+[04:15.36]to be careful with the fast-spreading Omicron sub-variants,
+[04:20.48]or versions of the disease.
+[04:22.96]The U.S. Centers for Disease Control and Prevention reported that
+[04:28.48]the country still has on average 126,000 new cases of COVID-19 daily.
+[04:38.00]The virus is causing an average of 353 deaths a day in the United States.
+[04:44.88]The health agency said COVID-19 vaccines
+[04:48.76]reduce the risk of severe illness and death from the disease.
+[04:53.76]It says booster shots, which Biden had received,
+[04:58.04]can help older and other at-risk people.
+[05:02.32]Dr. Anthony Fauci is the nation's top infectious disease expert.
+[05:08.32]He said on July 12 that COVID-19
+[05:12.04]"is a reality that we need to deal with."
+[05:15.68]But he added, "We should not let it disrupt our lives."
+[05:21.52]I'm Ashley Thompson.
+[05:23.36]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

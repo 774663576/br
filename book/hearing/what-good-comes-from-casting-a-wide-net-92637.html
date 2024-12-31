@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Good Comes from 'Casting a Wide Net'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, What Good Comes from 'Casting a Wide Net'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/what-good-comes-from-casting-a-wide-net.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Good Comes from 'Casting a Wide Net'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/what-good-comes-from-casting-a-wide-net.mp3" id="mp3"></a>
+<a href="restaurant-showing-only-women-s-sports-to-expand-in-us-92630.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">04 May 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Sometimes in life, you may want to have as many choices as possible. For example, let's say you need a new job. You want to <u>look far and wide.</u> You do not want to limit your <strong>options</strong>. In this situation, you may want to <strong>cast</strong> a wide <strong>net</strong>.</p>
+<p><u>Casting a wide net</u> means to search a very wide area.</p><div class="contentImage"><img alt="FILE - People pull a large net of fish off the coast of Chuao, Venezuela, June 7, 2023. (AP Photo/Matias Delacroix)" src="https://files.21voa.com/gdb/01000000-0aff-0242-f8d2-08dc00ae9fe7_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - People pull a large net of fish off the coast of Chuao, Venezuela, June 7, 2023. (AP Photo/Matias Delacroix)</span></div>
+<p>To cast a wide net is an expression that probably comes from fishing. For some types of fishing, you attach a <strong>hook</strong> to a line on a fishing pole. Then you cast the hook into the water. This will only catch one fish. However, casting a net into the water can catch many fish!</p>
+<p>When you cast a wide net, you might search a wider area, or you might aim to catch something bigger. For example, if someone looks for a partner, he might cast a wide net by searching — the world. He might be willing to move anywhere. He would have no limits to where he might go.</p>
+<p>People who cast a wide net want to have many choices or options. They <strong>broaden </strong>their search or widen the qualities they are willing to accept.</p>
+<p>There are many related expressions that describe similar ideas. One is to <u>cast your net wide</u>. Others include considering all options or exploring all opportunities.</p>
+<p>Casting a wide net also means you <u>leave no stone unturned.</u> You look thoroughly. You <u>search high and low</u> for what you want.</p>
+<p>Now, let's hear this expression used in two discussions. The first is at work:</p>
+<p><em>A: So, how's the search going for a web designer?</em></p>
+<p><em>B: Surprisingly, it's going slowly. So far, only five applicants have responded to the job announcement.</em></p>
+<p><em>A: Five? In this job market, I thought resumes would have been pouring in.</em></p>
+<p><em>B: Well, I only sent the job advertisement to one employment agency.</em></p>
+<p><em>A: That's not enough! We need to cast a really wide net this time. </em></p>
+<p><em>B: Right. I'm on it. I'll be casting a really wide net today!</em></p>
+<p>Now, let's hear two friends use the same expression:</p>
+<p><em>A: So, how is your online dating search going?</em></p>
+<p><em>B: Not well. It's difficult to find the perfect partner. </em></p>
+<p><em>A: Well, no one is perfect. What qualities are you looking for?</em></p>
+<p><em>B: I'm looking for a person who is tall, 1.9 meters or taller, with a good job but not in politics or acting. And they must have a master's degree. </em></p>
+<p><em>A: Hmmm ... the height and job <strong>criteria</strong> might be a bit limiting. </em></p>
+<p><em>B: Oh, I'm not done. They must also live within 10 kilometers of me, love dogs ... big dogs, and they can't be a smoker. Oh, they must be active outdoors but especially with water skiing and rock climbing. Oh, and they must be a vegetarian.</em></p>
+<p><em>A: I think if you want to meet more people and have more options, you may want to cast a wider net. </em></p>
+<p><em>B: Maybe you're right. I know. I'll take off the dog criteria. If they like cats ... I guess that's okay. </em></p>
+<p>Do you have a similar expression in your language? Let us know in the comments section. Or send us an email at LearningEnglish@VOANews.com</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>option </strong>–n. one of at least two choices<strong> </strong></p>
+<p><strong>cast </strong>–v. to throw using a wide motion or a stick or rod to widen the path of the object being thrown</p>
+<p><strong>net </strong>–n. a large number of connected lines used to catch fish</p>
+<p><strong>hook </strong>–n. a curved piece of metal used to catch fish</p>
+<p><strong>broaden </strong>–v. to make something wide or more spread out</p>
+<p><strong>criteria </strong>–n. a standard on which a judgment or decision may be based</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar for a Gift-giving Season</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar for a Gift-giving Season" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/grammar-for-a-gift-giving-season.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar for a Gift-giving Season</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/grammar-for-a-gift-giving-season.mp3" id="mp3"></a>
+<a href="mobile-app-helps-people-seeking-money-from-strangers-91940.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">14 December 2023</span><br/>
+<p>We are entering a major gift-giving season in the United States. People purchase goods and services for their loved ones, friends, coworkers, and others.</p>
+<p>But how do we talk about giving gifts? How do we use subjects, verbs, and objects to describe gift giving?</p>
+<p>Those questions will be the subject of today's Everyday Grammar.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-0d3b-08dbfcbb1c81_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>Let's start with some important terms and ideas.</p>
+<p><strong>Elements </strong></p>
+<p>In <a class="wsw__a" href="https://www.21voa.com/a/grammar-for-giving-gifts/7377191.html" target="_blank">a recent Everyday Grammar lesson</a>, we explored questions about gifts – asking what others might want in terms of a gift.</p>
+<p>In today's lesson, we will talk about statements we might make after we purchase the gift.</p>
+<p>Before we continue with the lesson, we need to identify the key elements of a sentence.</p>
+<p>The simplest way to divide a sentence is into two parts: the subject and the <strong>predicate</strong>.</p>
+<p>The subject is generally a noun, noun phrase, or pronoun.</p>
+<p>The predicate, on the other hand, says something about the subject. The predicate contains a verb, objects, indirect objects, and so on.</p>
+<p>Now that we have our basic building blocks of language, we should explore how to put them together.</p>
+<p><strong>Putting elements together </strong></p>
+<p>We will start with the predicate. Why? Because the predicate is central to today's lesson.</p>
+<p>The language we use in the predicate to describe a gift purchase often falls into a simple <strong>pattern</strong>: transitive verb + noun <strong>phrase</strong> 1+noun phrase 2.</p>
+<p>A transitive verb is one that takes a direct object. A direct object is the receiver of the verb's action.</p>
+<p>So, in the pattern we just learned about, we can say that the transitive verb takes a noun phrase that acts like the direct object.</p>
+<p>Finally, we might have a second noun phrase that acts like the indirect object – the person who receives the direct object.</p>
+<p>Please note that the direct object does not always appear directly next to the verb, as we will see.</p>
+<p>Some examples will clarify this explanation.</p>
+<p><strong>Examples </strong></p>
+<p>When we talk about gift giving, we often use three transitive verbs: get, buy, and give.</p>
+<p>The direct object is the gift. The indirect object is the person receiving the gift.</p>
+<p>So, let's imagine we have a friend named Mary. We might say the following about Mary's gift-giving decision:</p>
+<p><em>Mary got her son a book.</em></p>
+<p>In our example, the subject is Mary. The predicate is "got her son a book."</p>
+<p>The direct object is "a book." What did Mary get? She got a book. Who is going to receive the book? Her son. In this case, "her son" is the indirect object.</p>
+<p>So, in the sentence "Mary got her son a book," we can say that the structure is subject + transitive verb + noun phrase 1 + noun phrase 2.</p>
+<p>Here are two other examples. Let's use the transitive verbs "buy" and "give":</p>
+<p><em>Jonathan bought his mother a sweater.</em></p>
+<p><em>Felicia gave her friend a painting.</em></p>
+<p>All of these examples are in their past forms. But we can also use these verbs in other forms as well.</p>
+<p><strong>Practice </strong></p>
+<p>Let's take some time to work with these ideas. Create a sentence using the following elements:</p>
+<p>The subject is "My father."</p>
+<p>The predicate consists of the verb "get," the noun phrase "a <strong>vase</strong>," and the noun phrase "my mother."</p>
+<p>Pause the audio to consider your answer.</p>
+<p>Here is one possible answer:</p>
+<p><em>My father got my mother a vase.</em></p>
+<p>The order of the sentence is subject + transitive verb + indirect object + direct object.</p>
+<p><strong>Closing thoughts </strong></p>
+<p>Today we explored one pattern we often use to describe gift giving. To be clear: we use other patterns as well.</p>
+<p>One of these makes use of the prepositions "to" and "for." But that will have to be the subject of a future lesson.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>predicate</strong><em> – n. grammar:</em> the part of a sentence that expresses what is said about the subject</p>
+<p><strong>pattern</strong><em> – n.</em> the regular and repeated way in which something happens</p>
+<p><strong>phrase</strong> <em>– n.</em> a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>vase</strong> <em>– n.</em> a container that is used for holding flowers or for decoration</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

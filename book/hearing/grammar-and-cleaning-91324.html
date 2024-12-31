@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar and Cleaning</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar and Cleaning" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/grammar-and-cleaning.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar and Cleaning</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/grammar-and-cleaning.mp3" id="mp3"></a>
+<a href="schools-lost-track-of-homeless-kids-during-pandemic-91321.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">10 August 2023</span><br/>
+<p>Whether you enjoy it or not, cleaning is an activity that all of us have to do from time to time.</p>
+<p>As a result, we should explore how to talk about it.</p>
+<p>In this <em>Everyday Grammar</em>, you will learn about different kinds of verbs we use to talk about cleaning.</p><div class="contentImage"><img alt="Everyday Grammar" src="https://files.21voa.com/gdb/01000000-0aff-0242-0037-08db99bfc675_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar</span></div>
+<p><strong>Group of verbs </strong></p>
+<p>Let's start with the verb "clean."</p>
+<p>We can think of "clean" as a kind of general term for many activities. For example, a person might say:</p>
+<p><em>"I am cleaning my house."</em></p>
+<p>Aside from "clean," we can use a number of more exact verbs. For example, we have "sweep," "vacuum," "wash," and "dust."</p>
+<p>Let's explore each of these in turn.</p>
+<p>We use the verb "sweep" when we remove dust or dirt with a <strong>broom</strong>.<br/>
+We use "vacuum" when we clean something with a special device known as a vacuum cleaner.</p>
+<p>We use "wash" when we clean something with water and soap.</p>
+<p>We use "dust" when we make something clean by wiping the surface, often with cloth.</p>
+<p>So, we have a group of verbs. "Clean" is the widest in meaning; the others describe more exact activities - "sweep," "vacuum," "dust," and so on.</p>
+<p><strong>Important </strong></p>
+<p>You might be asking yourself how this discussion connects with grammar.</p>
+<p>The question leads us to an important point. We have a group of verbs. These verbs are interesting because all of them can be used in a transitive or an intransitive sense.</p>
+<p>Transitive means to take a direct object. Intransitive means to not take a direct object.</p>
+<p>What this means is that the verbs we have explored – clean, sweep, dust, and so on - have some sense of flexibility in how they can be used.</p>
+<p>Let's clarify.</p>
+<p>Think back to the sentence you heard earlier:</p>
+<p><em>"I am cleaning my house."</em></p>
+<p>In the example, we have the subject, "I," the present progressive form "am cleaning," and the object, "my house." In this sentence, we can say that the verb "clean" is followed by an object.</p>
+<p>But we could also say:</p>
+<p><em>"I am cleaning."</em></p>
+<p>In this example, we do not have an object.</p>
+<p>Now, let us take some of the other verbs we explored earlier. They all follow the same general idea.</p>
+<p>The verb "sweep" might be used with an object, as in:</p>
+<p><em>"She swept the floor."</em></p>
+<p>Or without an object, as in:</p>
+<p><em>"She swept."</em></p>
+<p>The same idea is true of "vacuum," where a person might say:</p>
+<p><em>"I vacuumed the living room."</em></p>
+<p>Or</p>
+<p><em>"I vacuumed."</em></p>
+<p>The main difference between the statements is in the amount of shared information. If the speaker and listener both know what is being discussed, then the object is not necessary. If the listener does not know what is being discussed, then the speaker might need to include the object.</p>
+<p><strong>Practice </strong></p>
+<p>Let's take some time to work with these ideas.</p>
+<p>Make a sentence using the present progressive form of the verb "dust." Be sure to use the object, "the <strong>bookshelf</strong>."</p>
+<p>Pause the audio to consider your answer.</p>
+<p>Here is one answer:</p>
+<p><em>"I am dusting the bookshelf."</em></p>
+<p><strong>Closing thoughts </strong></p>
+<p>Today, you learned a few basic ideas that are important for talking about cleaning. You learned some related verbs and how to use them with or without an object. The next step will be to develop more complex sentences that involve adverbs and prepositions. But that will have to be the subject of a future report.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<h2 class="wsw__h2"><strong>_________________________________</strong></h2>
+<h2 class="wsw__h2">Words in The Story</h2>
+<p><strong>broom </strong><em>– n.</em> a brush that has a long handle and that is used for sweeping floors</p>
+<p><strong>bookshelf</strong><em> – n.</em> a shelf that is used for books</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Where Do You Live?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Where Do You Live?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/where-do-you-live.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Where Do You Live?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/where-do-you-live.mp3" id="mp3"></a>
+<a href="stone-age-tool-discovery-raises-questions-about-who-used-them-90439.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">16 February 2023</span><br/>
+<p>Imagine a person asking you about where you live. How do you<strong> respond</strong>? How do you give details or more information?</p>
+<p>In today's<em> Everyday Grammar,</em> we will explore ways to talk about where you live. You will learn about questions, answers, and different situations where such discussions might be important.</p>
+<p>Let's start with some useful terms and ideas.</p><div class="contentImage"><img alt="Everyday Grammar " src="https://files.21voa.com/gdb/01000000-0aff-0242-1bdc-08db0ea0dcf1_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar </span></div>
+<p><strong>Asking questions and giving answers</strong></p>
+<p>Imagine a person asks you the following question:</p>
+<p><em>Where do you live?</em></p>
+<p>Let's break the question into its individual parts. We have the question word "where." Then we have the helping verb "do." Finally, we have the subject and main verb "you live."</p>
+<p>The kind of answer you give will depend on the situation in which the question is asked. For example, if a friend at school asks that question, they might only want to know the neighborhood or general area where you live. So, for example, a person in New York might give the following answer:</p>
+<p><em>I live in Queens.</em></p>
+<p>Or</p>
+<p><em>I live in Brooklyn.</em></p>
+<p>A person in Cairo might say,</p>
+<p><em>I live in Agouza.</em></p>
+<p>Or</p>
+<p><em>I live in Shubra.</em></p>
+<p>Note that we used the following structure for all of these statements:</p>
+<p><em>subject + live + in + the name of the neighborhood</em></p>
+<p><strong>Giving details</strong></p>
+<p>It is possible that the person might ask for more information or details. For example, imagine the following exchange with a friend at school or work:</p>
+<p><em>Where do you live?</em></p>
+<p><em>I live in Brooklyn.</em></p>
+<p><em>Really? My brother lives there too. Where in Brooklyn?</em></p>
+<p>There are a few nice ways to respond to this kind of question. Your response can involve the prepositions "by" or "near," as in:</p>
+<p><em>I live by Prospect Park.</em></p>
+<p>Or</p>
+<p><em>I live near Prospect Park</em></p>
+<p>Or</p>
+<p><em>I live near the <strong>intersection</strong> of Bedford Avenue and Lincoln Road.</em></p>
+<p>These answers involve important locations – a famous park, an intersection. There are, of course, other ways to give details about where you live.</p>
+<p><strong>Specific information</strong></p>
+<p>So far, we have explored how you might talk about where you live in a friendly, everyday sort of situation. But what should you do if the request is <strong>specific</strong>? So for example, official documents or situations often require an exact address instead of a general description.</p>
+<p>So, an official might ask you, "What is your name and address?"</p>
+<p>In this case, you could provide your name and the address of where you live. For example, an American person might say:</p>
+<p><em>My name is John.</em></p>
+<p><em>My address is 1234 Maple Street, Pleasantville, Alaska, 51099</em></p>
+<p>Note that the general way of giving an address in the United States is as follows:</p>
+<p><em>number street, city, state, zip code</em></p>
+<p><strong>Practice</strong></p>
+<p>Let's take some time to work with these ideas. Ask a friend about where they live. Pause the audio to consider your answer.</p>
+<p>Here is the answer:</p>
+<p><em>Where do you live?</em></p>
+<p>Now imagine a friend asks you about where you live. Use the name of the neighborhood "Manhattan" in your answer.</p>
+<p>Pause the audio to consider your answer.</p>
+<p>Here is one possible answer:</p>
+<p><em>I live in Manhattan.</em></p>
+<p>Now imagine that someone asks the following:</p>
+<p><em>Where in Manhattan do you live?</em></p>
+<p>Use the noun "Penn Station" in your answer. Pause the audio to consider your answer.</p>
+<p>Here are two possible answers:</p>
+<p><em>I live near Penn Station.</em></p>
+<p><em>I live by Penn Station.</em></p>
+<p><strong>Closing thoughts</strong></p>
+<p>In today's report, we learned about some ways to talk about where you live.</p>
+<p>You learned about the importance of question words such as "where." You also learned about the importance of short words such as "in," "by" and "near," as well as how nouns play an important part in talking about locations.</p>
+<p>The next time you talk about where you live, we hope that you are able to use some of what you have learned today.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p><em>________________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in The Story</strong></h2>
+<p><strong>respond </strong><em>– v. </em>to say something as an answer to a question</p>
+<p><strong>intersection</strong> <em>– n. </em>the place or point where two or more things come together</p>
+<p><strong>specific </strong><em>– adj.</em> clearly and exactly presented or stated : precise or exact</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Food Flavors Coming to Stores</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, New Food Flavors Coming to Stores" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/new-food-flavors-coming-to-stores.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Food Flavors Coming to Stores</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/new-food-flavors-coming-to-stores.mp3" id="mp3"></a>
+<a href="/static/lrc/new-food-flavors-coming-to-stores.lrc" id="lrc"></a>
+<a href="conflict-hurts-mali-s-tourism-industry-92732.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">24 May 2024</span><br/>
+<p>In New York, Van Leeuwen Ice Cream brings people in with classic <strong>flavors</strong> like vanilla and pistachio. But, sometimes, the ice cream maker adds what it calls a "<strong>shock</strong> flavor," like Hidden Valley Ranch or pizza, to the treat.</p>
+<p>Recently, chocolate maker Hershey added pink lemonade, a summer drink flavor, to its candy Kit Kats. And Frito-Lay introduced potato chips that taste like strawberries with a little bit of bacon.</p>
+<p>Not to be outdone, Britain's food company Little Moons produced fish-and-chip mochi ice cream flavor while Walkers celebrated the holidays with a potato chip flavor of Brussels sprouts.</p><div class="contentImage"><img alt="Ben Van Leeuwen scoops Kraft Mac &amp; Cheese flavored ice cream Wednesday, May 15, 2024, in the Brooklyn borough of New York. (AP Photo/Frank Franklin II)" src="https://files.21voa.com/gdb/f195ee67-0812-4794-9267-9e6810f9c67f_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Ben Van Leeuwen scoops Kraft Mac &amp; Cheese flavored ice cream Wednesday, May 15, 2024, in the Brooklyn borough of New York. (AP Photo/Frank Franklin II)</span></div>
+<p>Usually, these flavor combinations are introduced for a limited time. But sometimes the flavors are so popular that they become permanent additions. That is what happened with Frito-Lay's Flamin' Hot Dill Pickle chips in 2019.</p>
+<p>While it would be easy to say the new and surprising flavors are produced to get attention on social media, experts say there is more to the story.</p>
+<p>They say food companies are reacting to people's changing and expanding tastes while also trying to stay current and win over space in stores.</p>
+<p>Kristen Braun works for Chicago-based food and drink company Mondelez International. She says people now want more than just one flavor and "companies are finding the freedom to explore a little bit more and get more creative."</p>
+<p>Mondelez plans to release Sour Patch Kids Oreos – a kind of sweet vanilla cream-filled cookies combined with sour candies. The flavor is one of more than ten different Oreo flavors being sold this year for a limited time of nine weeks.</p>
+<p>Mark Lang teaches food marketing at the University of Tampa in Florida. He said that manufacturers and their suppliers have increased their ability to create such products. That has made it easier for them to experiment and put out limited <strong>editions</strong> more often.</p>
+<p>Kyle Shadix is a research <strong>chef</strong> for the drink company PepsiCo. He said members of Generation Z, born between 1997 and 2012, are also fueling new ideas.</p>
+<p>Shadix is currently experimenting with Mexican, Korean and Japanese flavors. "Gen Z is going to drive us faster. We're going to start to see even more exploration quicker than in the past because they're just so open to it."</p>
+<p>Experimenting with new flavors can increase sales in several ways. Sometimes they bring in new buyers to a product. And sometimes they also influence buyers to pick up more of the <strong>original</strong> flavor.</p>
+<p>Russell Zwanka is director of the food marketing program at Western Michigan University. He said, "Sour Patch Oreos sound interesting, but nobody wants to risk buying Oreos that don't taste good, so people buy both."</p>
+<p>When companies combine products, they are trying to build a link in people's minds. For example, Lang said when Pepsi combined its drink with Peeps candy flavor, it sent a message that Pepsi is current and fun.</p>
+<p>But new flavor combinations do not always work.</p>
+<p>Ben Van Leeuwen, the founder of the ice cream company bearing his name, said he could not eat more than a few bites of his company's Hidden Valley Ranch ice cream. It contained onion and garlic powders. And the "shock flavor" did not become a permanent part of his company's offerings because of their lower "eat-ability," he said.</p>
+<p>But Lang thinks the more time people spend in restaurants or trying out new foods, the more they seek out unusual flavors.</p>
+<p>He said as humans, "We like to experiment."</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Dee-Ann Durbin reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>shock </strong><em>– adj. </em>used to describe something that surprises and usually upsets people</p>
+<p><strong>flavor </strong><em>– n. </em>the quality of something that you can taste</p>
+<p><strong>edition </strong><em>– n. </em>a particular version of a product</p>
+<p><strong>chef </strong><em>– n. </em>a professional cook who usually is in charge of a kitchen in a restaurant</p>
+<p><strong>original </strong><em>– adj. </em>happening or existing first or at the beginning</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New Food Flavors Coming to Stores]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]In New York, Van Leeuwen Ice Cream
+[00:03.68]brings people in with classic flavors
+[00:07.36]like vanilla and pistachio.
+[00:10.36]But, sometimes, the ice cream maker adds
+[00:14.20]what it calls a "shock flavor,"
+[00:17.12]like Hidden Valley Ranch
+[00:19.60]or pizza, to the treat.
+[00:22.60]Recently, chocolate maker Hershey
+[00:25.60]added pink lemonade,
+[00:27.84]a summer drink flavor,
+[00:30.24]to its candy Kit Kats.
+[00:33.16]And Frito-Lay introduced potato chips
+[00:37.04]that taste like strawberries
+[00:39.48]with a little bit of bacon.
+[00:42.76]Not to be outdone,
+[00:44.64]Britain's food company Little Moons
+[00:48.12]produced fish-and-chip mochi ice cream flavor
+[00:52.28]while Walkers celebrated the holidays
+[00:56.32]with a potato chip flavor of Brussels sprouts.
+[01:01.44]Usually, these flavor combinations
+[01:04.48]are introduced for a limited time.
+[01:07.68]But sometimes the flavors are so popular
+[01:11.92]that they become permanent additions.
+[01:15.84]That is what happened with Frito-Lay's
+[01:18.96]Flamin' Hot Dill Pickle chips in 2019.
+[01:24.64]While it would be easy to say
+[01:27.08]the new and surprising flavors are produced
+[01:30.88]to get attention on social media,
+[01:34.08]experts say there is more to the story.
+[01:38.92]They say food companies are reacting
+[01:41.80]to people's changing and expanding tastes
+[01:45.52]while also trying to stay current
+[01:48.68]and win over space in stores.
+[01:52.48]Kristen Braun works for Chicago-based
+[01:55.60]food and drink company Mondelez International.
+[02:00.92]She says people now want more than just one flavor
+[02:05.32]and "companies are finding the freedom
+[02:08.04]to explore a little bit more and get more creative."
+[02:13.60]Mondelez plans to release Sour Patch Kids Oreos
+[02:18.68]– a kind of sweet vanilla cream-filled cookies
+[02:22.52]combined with sour candies.
+[02:26.12]The flavor is one of more than
+[02:28.76]ten different Oreo flavors being sold this year
+[02:33.12]for a limited time of nine weeks.
+[02:37.24]Mark Lang teaches food marketing
+[02:40.24]at the University of Tampa in Florida.
+[02:44.20]He said that manufacturers and their suppliers
+[02:49.20]have increased their ability to create such products.
+[02:54.40]That has made it easier for them to experiment
+[02:58.40]and put out limited editions more often.
+[03:03.00]Kyle Shadix is a research chef
+[03:06.16]for the drink company PepsiCo.
+[03:08.84]He said members of Generation Z,
+[03:13.20]born between 1997 and 2012,
+[03:18.00]are also fueling new ideas.
+[03:21.72]Shadix is currently experimenting
+[03:24.76]with Mexican, Korean and Japanese flavors.
+[03:30.16]"Gen Z is going to drive us faster.
+[03:33.52]We're going to start to see
+[03:35.72]even more exploration quicker than in the past
+[03:39.92]because they're just so open to it."
+[03:43.52]Experimenting with new flavors
+[03:46.08]can increase sales in several ways.
+[03:50.20]Sometimes they bring in new buyers to a product.
+[03:54.00]And sometimes they also influence buyers
+[03:58.00]to pick up more of the original flavor.
+[04:01.60]Russell Zwanka is director
+[04:04.68]of the food marketing program
+[04:07.12]at Western Michigan University.
+[04:10.08]He said, "Sour Patch Oreos sound interesting,
+[04:15.28]but nobody wants to risk buying Oreos
+[04:18.24]that don't taste good, so people buy both."
+[04:22.48]When companies combine products,
+[04:24.88]they are trying to build a link in people's minds.
+[04:28.72]For example, Lang said when Pepsi
+[04:32.12]combined its drink with Peeps candy flavor,
+[04:35.68]it sent a message that Pepsi is current and fun.
+[04:39.72]But new flavor combinations do not always work.
+[04:45.00]Ben Van Leeuwen, the founder of
+[04:47.48]the ice cream company bearing his name,
+[04:50.28]said he could not eat more than
+[04:52.68]a few bites of his company's
+[04:54.96]Hidden Valley Ranch ice cream.
+[04:57.40]It contained onion and garlic powders.
+[05:01.88]And the "shock flavor" did not become
+[05:04.84]a permanent part of his company's offerings
+[05:08.16]because of their lower "eat-ability," he said.
+[05:13.00]But Lang thinks the more time
+[05:15.64]people spend in restaurants
+[05:17.56]or trying out new foods,
+[05:19.84]the more they seek out unusual flavors.
+[05:24.04]He said as humans, "We like to experiment."
+[05:27.84]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

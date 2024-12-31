@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 战乱损害马里的旅游业</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 战乱损害马里的旅游业" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/conflict-hurts-mali-s-tourism-industry.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>战乱损害马里的旅游业</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/conflict-hurts-mali-s-tourism-industry.mp3" id="mp3"></a>
+<a href="/static/lrc/conflict-hurts-mali-s-tourism-industry.lrc" id="lrc"></a>
+<a href="conflict-hurts-mali-s-tourism-industry-92732.html" id="CnPage" target="_blank"></a>
+<a href="microsoft-announces-new-pcs-with-built-in-ai-92729.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Kola Bah used to earn money as a guide in Mali's historic city of Djenné, once a center of Islamic learning.<br/>
+科拉·巴赫曾在马里历史名城杰内当导游赚钱，杰内曾是伊斯兰学术中心。</p>
+<p>The city is known for its large Grand Mosque of Djenné. The religious center has been on the UNESCO World Heritage in Danger list since 2016.<br/>
+这座城市以其巨大的杰内大清真寺而闻名。自2016年以来，该宗教中心一直被联合国教科文组织列入世界濒危遗产名录。</p>
+<p>The world's largest mud-brick building used to draw tens of thousands of visitors to central Mali every year. Now, the structure is threatened by conflict between rebels, government forces and other groups.<br/>
+这座世界上最大的砖土建筑过去每年吸引数以万计的游客来到马里中部。现在，该建筑受到叛军、政府军和其他组织之间冲突的威胁。</p>
+<p>Bah says the money he used to earn was enough to support his family, which now includes nine children, and to pay for a small group of cattle.<br/>
+巴赫说，他以前赚的钱足以养活他的家庭（现在这个家庭有九个孩子），还可以养一小群牛。</p>
+<p>But now, few visitors come to the city. Bah has been largely out of work. When he needs money, he sells some of his cattle.<br/>
+但现在，很少有游客来这座城市。巴赫基本上处于失业状态。当他需要钱时，他会卖掉一些牛。</p>
+<p><span style="font-weight: bold;">Grand Mosque<br/>
+大清真寺</span></p>
+<p>Djenné is one of the oldest towns in sub-Saharan Africa. It has served as a market center and an important link in the trans-Saharan gold trade. Almost 2,000 of its traditional houses still survive in the old town.<br/>
+杰内是撒哈拉以南非洲最古老的城镇之一。它一直是跨撒哈拉黄金贸易的市场中心和重要纽带。近2000栋传统房屋仍保留在老城区。</p>
+<p>The Grand Mosque, built in 1907 on the area of an older mosque dating back to the 13th century, is worked on every year by local people. The work is a ritual that brings together the entire city. The large, earth-colored structure requires a new layer of mud before the rainy season starts.<br/>
+建于1907年的大清真寺坐落在一座可追溯到13世纪的古老清真寺的原址上，当地人每年都在修建。这项工作是一种将整个城市聚集在一起的仪式。这个巨大的土色建筑在雨季开始前需要覆盖一层新泥。</p>
+<p>Women are responsible for carrying water from the nearby river to mix with clay and rice hulls. This mixture is the mud used to cover the wall of the structure. Adding a new layer of mud is a job for men. The joyful ritual is a source of pride for a city that has fallen on hard times, uniting people of all ages.<br/>
+妇女负责从附近的河里运水，将粘土和稻壳混合。这种混合物就是用来覆盖建筑物墙壁的泥浆。覆盖一层新泥是男人的工作。对于一座经历了艰难时期的城市来说，这种欢乐的仪式是一种骄傲，它将各个年龄段的人们团结在一起。</p>
+<p>Bamouyi Trao Traoré is one of Djenné's lead builders. He said they worked as a team from the very start. This year's wall covering took place earlier in the month.<br/>
+巴莫阿依·特拉奥·特拉奥雷是杰内大清真寺的主要建设者之一。他说他们从一开始就是一个团队。今年的墙面覆盖工作在本月早些时候进行。</p>
+<p>"Each one of us goes to a certain spot to supervise," he said. "This is how we do it until the whole thing is done. We organize ourselves, we supervise the younger ones."<br/>
+他说：“我们每个人都会去某个地方监督。我们就是这样做的，直到全部完工。我们自我组织起来，我们监督年轻人。”</p>
+<p><span style="font-weight: bold;">Conflict and the future<br/>
+冲突与未来</span></p>
+<p>Mali's conflict broke out following a coup in 2012. Militant groups took control of important northern cities. A French-led military operation pushed them out of the city centers the following year, but the success was short-lived.<br/>
+马里的冲突在2012年政变后爆发。激进组织控制了北方重要城市。第二年，一场由法国领导的军事行动将他们赶出了市中心，但这场胜利维持没多久。</p>
+<p>The militants regrouped and launched attacks on the Malian military, as well as the United Nations, French and other forces in the country. The militants publicly stated their connection to al-Qaida and the Islamic State group.<br/>
+武装分子重新集结，对马里军方以及该国境内的联合国、法国等部队发动袭击。武装分子公开表示他们与基地组织以及伊斯兰国组织有联系。</p>
+<p>Sidi Keita is the director of Mali's national tourism agency in the capital of Bamako. Keita said the drop in tourism was sharp following the violence.<br/>
+西迪·凯塔是马里首都巴马科国家旅游局局长。凯塔表示，暴力事件发生后，旅游业急剧下降。</p>
+<p>"It was really a popular destination," he said, describing tens of thousands of visitors a year and adding that today, tourists are rare in Mali.<br/>
+“这里曾是一个颇受欢迎的旅游目的地，”他描述每年有数以万计的游客，并补充说，如今马里的游客很少。</p>
+<p>Despite being one of Africa's top gold producers, Mali ranks among the least developed nations in the world, with almost half of its 22 million people living below the national poverty line. Without tourism, few means are left for Malians to make a living.<br/>
+尽管马里是非洲最大的黄金生产国之一，但它是世界上最不发达国家之一，其2200万人口中有近一半生活在国家贫困线以下。没有旅游业，马里人几乎没有谋生手段。</p>
+<p>Anger over what many Malians call "the crisis" is rising. The country also saw two more coups since 2020, during a wave of political instability in West and Central Africa.<br/>
+对许多马里人称之为“危机”的愤怒情绪正在上升。在西非和中非的政治不稳定浪潮中，该国自2020年以来又发生了两次政变。</p>
+<p>Moussa Moriba Diakité is head of Djenne's cultural office, which works to save the city's heritage. Diakité said there are other difficulties beyond security — including illegal digs and waste disposal in the city.<br/>
+穆萨·莫里巴·迪亚基特是杰内文化办公室的负责人，该办公室致力于保护这座城市的遗产。迪亚基特说，除了安全之外，还有其他困难，包括城内的非法挖掘和废物处理。</p>
+<p>He said the office is trying to send a message that security is not as bad as it seems. The office also hopes to get more young people involved in the mud-covering ritual, to help the new generation recognize its importance.<br/>
+他说，该办公室正试图传递一个信息，即安全并不像看上去那么糟糕。该办公室还希望让更多的年轻人参与到覆泥仪式中来，帮助新一代认识到它的重要性。</p>
+<p>"It's not easy to get people to understand the benefits of preserving cultural heritage right away," he said.<br/>
+他说：“要让人们立即了解保护文化遗产的好处并不容易。”</p>
+<p>I'm John Russell.<br/>
+我是约翰·拉塞尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Conflict Hurts Mali's Tourism Industry]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Kola Bah used to earn money as a guide
+[00:04.64]in Mali's historic city of Djenné,
+[00:08.40]once a center of Islamic learning.
+[00:11.88]The city is known
+[00:13.96]for its large Grand Mosque of Djenné.
+[00:17.48]The religious center has been
+[00:20.00]on the UNESCO World Heritage in Danger list
+[00:24.28]since 2016.
+[00:26.52]The world's largest mud-brick building
+[00:30.08]used to draw tens of thousands of visitors
+[00:34.20]to central Mali every year.
+[00:37.32]Now, the structure is threatened
+[00:40.76]by conflict between rebels,
+[00:43.36]government forces and other groups.
+[00:46.76]Bah says the money he used to earn
+[00:50.48]was enough to support his family,
+[00:53.32]which now includes nine children,
+[00:56.76]and to pay for a small group of cattle.
+[01:01.28]But now, few visitors come to the city.
+[01:05.52]Bah has been largely out of work.
+[01:09.24]When he needs money,
+[01:10.80]he sells some of his cattle.
+[01:14.48]Djenné is one of the oldest towns
+[01:17.76]in sub-Saharan Africa.
+[01:19.88]It has served as a market center
+[01:23.40]and an important link
+[01:25.64]in the trans-Saharan gold trade.
+[01:28.96]Almost 2,000 of its traditional houses
+[01:33.76]still survive in the old town.
+[01:37.96]The Grand Mosque, built in 1907
+[01:42.32]on the area of an older mosque
+[01:45.12]dating back to the 13th century,
+[01:48.16]is worked on every year by local people.
+[01:52.08]The work is a ritual
+[01:54.64]that brings together the entire city.
+[01:58.92]The large, earth-colored structure
+[02:01.56]requires a new layer of mud
+[02:04.52]before the rainy season starts.
+[02:07.44]Women are responsible
+[02:09.96]for carrying water from the nearby river
+[02:13.76]to mix with clay and rice hulls.
+[02:17.56]This mixture is the mud used
+[02:20.60]to cover the wall of the structure.
+[02:23.64]Adding a new layer of mud
+[02:26.32]is a job for men.
+[02:28.44]The joyful ritual
+[02:30.76]is a source of pride for a city
+[02:33.80]that has fallen on hard times,
+[02:36.92]uniting people of all ages.
+[02:39.76]Bamouyi Trao Traoré
+[02:42.24]is one of Djenné's lead builders.
+[02:45.44]He said they worked
+[02:47.44]as a team from the very start.
+[02:50.08]This year's wall covering
+[02:53.00]took place earlier in the month.
+[02:56.32]"Each one of us goes to a certain spot
+[02:59.56]to supervise," he said.
+[03:01.96]"This is how we do it
+[03:04.00]until the whole thing is done.
+[03:06.68]We organize ourselves,
+[03:08.92]we supervise the younger ones."
+[03:12.08]Mali's conflict broke out
+[03:14.60]following a coup in 2012.
+[03:17.48]Militant groups took control
+[03:20.28]of important northern cities.
+[03:22.92]A French-led military operation
+[03:26.12]pushed them out of the city centers
+[03:29.16]the following year,
+[03:30.80]but the success was short-lived.
+[03:34.00]The militants regrouped
+[03:36.40]and launched attacks
+[03:38.12]on the Malian military,
+[03:40.40]as well as the United Nations,
+[03:42.96]French and other forces in the country.
+[03:46.80]The militants publicly stated
+[03:49.16]their connection to al-Qaida
+[03:51.60]and the Islamic State group.
+[03:54.72]Sidi Keita is the director
+[03:57.08]of Mali's national tourism agency
+[04:00.20]in the capital of Bamako.
+[04:03.28]Keita said the drop in tourism was sharp
+[04:07.00]following the violence.
+[04:09.08]"It was really a popular destination," he said,
+[04:13.60]describing tens of thousands of visitors a year
+[04:17.96]and adding that today, tourists are rare in Mali.
+[04:23.68]Despite being one of Africa's top gold producers,
+[04:28.04]Mali ranks among
+[04:29.72]the least developed nations in the world,
+[04:32.84]with almost half of its 22 million people
+[04:36.72]living below the national poverty line.
+[04:40.80]Without tourism, few means are left
+[04:44.36]for Malians to make a living.
+[04:47.88]Anger over what many Malians
+[04:50.48]call "the crisis" is rising.
+[04:53.56]The country also saw two more coups
+[04:56.84]since 2020,
+[04:58.60]during a wave of political instability
+[05:02.04]in West and Central Africa.
+[05:05.76]Moussa Moriba Diakité
+[05:08.04]is head of Djenne's cultural office,
+[05:11.16]which works to save the city's heritage.
+[05:15.16]Diakité said there are
+[05:17.28]other difficulties beyond security
+[05:20.44]— including illegal digs
+[05:22.76]and waste disposal in the city.
+[05:26.36]He said the office is trying to send a message
+[05:29.96]that security is not as bad as it seems.
+[05:34.16]The office also hopes
+[05:36.44]to get more young people involved
+[05:39.28]in the mud-covering ritual,
+[05:41.64]to help the new generation
+[05:43.72]recognize its importance.
+[05:46.20]"It's not easy to get people
+[05:49.28]to understand the benefits
+[05:51.64]of preserving cultural heritage right away," he said.
+[05:57.48]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

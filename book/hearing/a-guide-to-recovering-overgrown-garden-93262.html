@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - A Guide to Recovering Overgrown Garden</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, A Guide to Recovering Overgrown Garden" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/a-guide-to-recovering-overgrown-garden.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>A Guide to Recovering Overgrown Garden</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/a-guide-to-recovering-overgrown-garden.mp3" id="mp3"></a>
+<a href="top-technology-stories-of-2024-93261.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">29 December, 2024</span><br/>
+<p>What is the best way to repair an overgrown <strong>garden</strong>?</p>
+<p>Garden expert for the Associated Press Jessica Damiano believes she knows the answer.</p>
+<p>Here are some of her suggestions for making big improvements. Planning in the autumn and winter months can help you see something much more beautiful next winter:</p><div class="contentImage"><img alt="This May 2023 image provided by Jessica Damiano shows a neglected, overgrown property on Long Island, New York. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/1154133e-0c4a-4403-ba45-0462282d41c4_w268_r1.jpg"/><br/><span class="imagecaption">This May 2023 image provided by Jessica Damiano shows a neglected, overgrown property on Long Island, New York. (Jessica Damiano via AP)</span></div>
+<p><strong>Decide what to clear away</strong></p>
+<p>First, take a notebook with you and walk around the garden. Look carefully at each part. Try to decide which plants can be saved, which to throw away, and which ones require attention. Make a list as soon as you can.</p>
+<p>Dead plants, <strong>weeds</strong> and invasive plants should be first to go. If the weather permits, dig them out, removing as much of their root systems as possible. Otherwise, wait until spring to do this before planting.</p>
+<p>Next, remove and give away healthy plants that you do not want. Online groups and neighborhood web pages are places to find people to receive the plants. Many people will even be willing to do the digging if it means getting a free plant.</p>
+<p>If the garden is full of plants, shrubs, trees and vines that have grown wild, you might need to use a <strong>chainsaw</strong> or heavy machine.</p>
+<p><strong>Define any new beds</strong></p>
+<p>If there are a lot of weeds or if you want to create new garden beds, you can cover the existing <strong>vegetation</strong> rather than dig it up. Decide the size and shape of the area you want to make into a new bed.</p>
+<p>Cover that area with <strong>cardboard</strong> or lots of newspaper. Put about seven centimeters of <strong>compost</strong> and five centimeters of <strong>mulch</strong> on top of it. You can start in the autumn and leave it there over the winter until planting time in the spring.</p>
+<p>When it is time to plant, cut holes in the cardboard or paper big enough for the roots of your plants. The covering over the ground will keep most weeds from growing. Some weeds may break through and require pulling or more cardboard, Damiano said.</p>
+<p><strong>How and when to prune</strong></p>
+<p>Healthy but overgrown or unproductive deciduous <strong>shrubs</strong> can be brought back to life by <strong>pruning</strong>. “Deciduous” means that the plants lose their leaves during the winter season. The best time to prune many plants is when their branches are bare in late winter.</p>
+<p>Choosing a pruning method will require weighing appearance against the time it will take to recover. The fastest and most severe method would be to cut the whole plant down just above ground level. Although extreme, many shrubs can deal with this form of pruning and will <strong>bounce back</strong> stronger.</p>
+<p>If keeping the plant looking normal is important, prune each branch or stem individually at uneven heights. It is also possible to cut back one-third of the plant's branches each year for three years. That method would have the least severe effect but requires the most patience.</p>
+<p>Evergreen trees and shrubs should only undergo light pruning such as the shortening of individual branches. Take care to avoid pruning too much or creating holes in evergreen plants and trees. With the exception of yews, they do not regrow from such damage.</p>
+<p><strong>Looking to the dirt</strong></p>
+<p>Now that you have taken care of pruning, turn your attention to the soil.</p>
+<p>Test the soil's pH, or its acidity level. Do this to make sure the soil is good for the plants you plan to add. Test <strong>kits</strong> are available at local garden stores and online. In the United States, a cooperative extension service might provide soil testing and soil-amendment advice for a small cost. Cooperative extension services are part of a Department of Agriculture system that includes some universities. It aims to help farmers and people interested in plants.</p>
+<p>If the soil is hard, break it up with a machine or hand tools. Finally, spread five to seven centimeters of compost over the area. As it breaks down, nutrients will work their way into the soil.</p>
+<p><strong>Planting considerations</strong></p>
+<p>After completing these steps, it will be time to plant your new garden. Choose new trees, shrubs or <strong>perennials</strong>, that will not grow wildly. Dig holes as deep as their roots but two times as wide and space them out to their expected full-grown sizes. Native plants are good because they need little added water or special care.</p>
+<p>Plant groundcover – short, spreading plants – to cover the ground and keep weeds from growing and the soil from drying out. It might take one or two years, but a step-by-step approach will make gardening a joy again.</p>
+<p>And, perhaps best of all, you will see something beautiful when you look outside from your home.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jessica Damiano reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>garden</strong> <em>– n.</em> a plot of ground where herbs, fruits, flowers, or vegetables are grown</p>
+<p><strong>weed </strong><em>–n.</em> an undesirable plant that grows grow thickly and crowds out more desirable plants</p>
+<p><strong>chain saw </strong><em>– n.</em> a tool with sharp metal teeth that cuts through wood</p>
+<p><strong>vegetation </strong><em>–n.</em> <strong> </strong>plant life or total plant cover (as of an area)</p>
+<p><strong>cardboard</strong> <em>– n.</em> a material made from cellulose fiber (as wood pulp) like paper but usually thicker</p>
+<p><strong>compost</strong> <em>– n.</em> <strong> </strong>a mixture that consists largely of decayed organic matter and is used for fertilizing and conditioning land</p>
+<p><strong>mulch </strong><em>– n.</em> a covering (as of straw or sawdust) spread over the ground to protect the roots of plants from heat, cold, or evaporation, prevent soil loss, control weeds, enrich the soil, or keep fruit (as strawberries) clean</p>
+<p><strong>shrub</strong> <em>– n.</em> a woody plant that has several stems and is smaller than most trees</p>
+<p><strong>prune </strong><em>– v. </em>to cut off the parts of a woody plant that are dead or not wanted</p>
+<p><strong>bounce back </strong><em>–v. (phrasal)</em> to return quickly to a normal condition after a difficult situation or event</p>
+<p><strong>kit </strong><em>–n.</em> a set of tools or supplies</p>
+<p><strong>perennial </strong><em>– n.</em> a plant that lives for several years usually with new leafy growth produced from the base each year</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

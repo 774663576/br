@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Do Not Hurry to ‘Spring Clean’ Garden</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Do Not Hurry to ‘Spring Clean’ Garden" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/do-not-hurry-to-spring-clean-garden.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Do Not Hurry to ‘Spring Clean’ Garden</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/do-not-hurry-to-spring-clean-garden.mp3" id="mp3"></a>
+<a href="older-americans-in-government-program-struggle-to-buy-the-basics-90628.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">27 March 2023</span><br/>
+<p>From VOA Learning English, this is the Health &amp; Lifestyle Report.</p>
+<p>For half the world, spring has begun. Temperatures are warming and daylight lasts longer. People who like to <strong>garden</strong> may be ready to get their hands dirty and start clearing the ground for new plantings. But garden experts warn -- not too fast.</p>
+<p>Jessica Damiano is one such expert. She says that removing plant matter too early can disturb important insects not ready for the cool early spring temperatures.</p><div class="contentImage"><img alt="This path in the White House Kitchen Garden is lined with mulch, Washington, D.C., October 5, 2016. (AP/Manuel Balce Ceneta)" src="https://files.21voa.com/gdb/01000000-0aff-0242-83e7-08db2b11f15b_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This path in the White House Kitchen Garden is lined with mulch, Washington, D.C., October 5, 2016. (AP/Manuel Balce Ceneta)</span></div>
+<p>In the fall, Damiano explains, she skips cleanup. She lets plant matter remain on the ground. It serves as shelter for insects over winter.</p>
+<p>In early spring, those insects are still sleeping. Removing the plant matter before the insects begin their life cycles would mean removing them from your garden. Fewer insects mean less food for birds and fewer flowers and vegetables for the gardener.</p>
+<p>Damiano says experts do not all agree on the best time to start cleaning the ground and garden area in the spring. But they usually agree to wait until the temperatures are regularly above 10 degrees Celsius. That is when sleeping insects "wake up." Some experts define "regularly" as at least five days in a row. Damiano says she usually waits seven nights.</p>
+<p>However, even then, she says to keep the plant matter on the ground for another week or so before removing it from your property. This gives any insects that are still "sleeping" enough time to wake up.</p>
+<p>Early cleaning of a garden is often followed by early <strong>mulching</strong>. Applying mulch makes the garden look neat and clean. But Damiano reminds us that soil and plants are not just for show. They are part of a living <strong>ecosystem</strong>.</p>
+<p>Mulch is an important part of a healthy garden. It keeps soil wet, limits the growth of weeds, and helps keep soil temperatures even. But timing is important.</p>
+<p>Mulching before the soil has warmed enough will keep in the cold and slow the reawakening of the plants. This can also limit their growth. And if the soil is wet, early mulching can lead to mold, mildew, and fungal diseases.</p>
+<p>Before applying mulch, wait until it is safe to plant <strong>annuals </strong>and warm-season vegetables in your area. For Damiano in New York state, that means waiting until the end of May.</p>
+<p>Timing is also important for <strong>fertilizing</strong>.</p>
+<p>For grasses, Damiano says not to fertilize until mid to late spring. At this time, grass has left <strong>dormancy</strong> and begins active growth.</p>
+<p>Fertilizing too early will not help grasses grow. In fact, it can hurt the grass.</p>
+<p>Grasses that are fertilized in early spring cannot fully make use of those nutrients in the fertilizer. They may start growing when they should be spending their energy on root development. Strong roots are necessary to help grasses survive hot summer weather.</p>
+<p>Also, fertilizer that cannot be used by a dormant or partly dormant plant threatens the environment as it goes through soil and into groundwater. For that reason, in parts of the United States, people are not permitted to fertilizer too early.</p>
+<p>And because it does not help the grass, fertilizing too early is simply a waste of money.</p>
+<p>What about early blooming flowers?</p>
+<p>Tulips and daffodils are two early <strong>blooming </strong>flowers. After they or any spring <strong>bulb </strong>has bloomed, the leaves continue to produce energy for the following year's bulb. Damiano says it okay to remove stems. But she says to remove the leaves only after they have turned yellow.</p>
+<p>For those who do not want to wait to garden, Damiano does have an early spring task. Now is a good time to repot houseplants.</p>
+<p>Move them into the next-size pot — no more than 5 centimeters wider than their current container. And give them a bit of fertilizer. As the season's longer days cause them to restart active growth, this extra nutrition will help.</p>
+<p>And that's the Health &amp; Lifestyle Report. I'm Anna Matteo.</p>
+<p><em>Jessica Damiano writes regular gardening columns for The Associated Press. She publishes the award-winning Weekly Dirt Newsletter. Sign up here for weekly gardening tips and advice.</em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>garden </strong><em>– n.</em><strong> </strong>a plot of ground where herbs, fruits, flowers, or vegetables are grown</p>
+<p><strong>mulch </strong><em>– n. </em>a covering (as of straw or sawdust) spread over the ground to protect the roots of plants from heat, cold, or evaporation, prevent soil loss, control weeds, or enrich the soil</p>
+<p><strong>ecosystem </strong><em>– n. </em>a system made up of an ecological community of living things interacting with their environment especially under natural conditions</p>
+<p><strong>annual </strong><em>– n. </em>something that lasts one year or season <em>specifically</em> <strong>: </strong>a plant that completes its life cycle in one growing season</p>
+<p><strong>fertilizer </strong><em>– n. </em>a substance (as manure or a chemical) used to make soil produce larger or more plant life</p>
+<p><strong>dormant </strong><em>– adj.</em><strong> </strong>not active but capable of becoming active<strong> </strong>:<strong> dormancy</strong> <em>– n. </em>state of not being active</p>
+<p><strong>blooming </strong><em>– v. </em>having blooms unfolding : flowering</p>
+<p><strong>bulb </strong><em>– n. </em>an underground resting stage of a plant (as an onion or tulip) consisting of a short stem base bearing one or more buds enclosed in overlapping leaves</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

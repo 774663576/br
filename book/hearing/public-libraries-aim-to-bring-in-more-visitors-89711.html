@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Public Libraries Aim to Bring in More Visitors</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Public Libraries Aim to Bring in More Visitors" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202209/public-libraries-aim-to-bring-in-more-visitors.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Public Libraries Aim to Bring in More Visitors</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202209/public-libraries-aim-to-bring-in-more-visitors.mp3" id="mp3"></a>
+<a href="/static/lrc/public-libraries-aim-to-bring-in-more-visitors.lrc" id="lrc"></a>
+<a href="parachuting-keeps--year-old-bosnian-man-fit-89710.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">27 September 2022</span><br/>
+<p>A public library in Boston has a place for serving alcoholic, book-themed drinks. A library in Maryland has a basketball court steps away. Another in Delaware has a room for teenagers to play video games.</p>
+<p>Public libraries around the United States are changing what it means to be a library. Instead of just being places for books, they have become community centers.</p>
+<p>"The days of basically being a book <strong>repository</strong>...are over. They are long gone," said Lea Rosell. She is director of the Lewes Public Library in the state of Delaware. "We have one quiet room <strong>designated</strong> in this library. I think that goes to show that things are changing."</p><div class="contentImage"><img alt="The children's section of the Wheaton Library in Maryland offers early reading materials and computers for children's learning games. (Dan Novak/VOA)" src="https://files.21voa.com/gdb/0c520000-0aff-0242-a1a7-08da9ff9a9e0_cx0_cy4_cw99_w268_r1.jpg"/><br/><span class="imagecaption">The children's section of the Wheaton Library in Maryland offers early reading materials and computers for children's learning games. (Dan Novak/VOA)</span></div>
+<p>Lewes opened its new library in 2016. Rosell said the newer and larger building has been able to attract new visitors and has permitted the library to hold more events. This month, the library held events like discussions about books and current events, movie showings, poetry writing workshops, and Spanish-language discussions. Rosell said one of the most popular events for children this year was when a nature center brought in several <strong>reptiles</strong>.</p>
+<p>The Lewes library also has a special room for teenagers, with books aimed at teens and young adults. In the Teen Tech Suite, they can use things like 3-D printers and virtual reality <strong>goggles</strong>.</p>
+<p>Delaware Libraries also has a program to mail a free book to families with young children each month. The goal is provide children with a large book collection in their home without having to pay for it themselves.</p>
+<p>In some communities, libraries are where people <strong>access</strong> social services. Rossell said that the library in Lewes and other libraries across the state can "fill the <strong>gaps</strong>" in community services. She said that because Delaware is a low-tax state, it does not have many community centers.</p>
+<p>Maria McCauley is the president of the Public Library Association and the director of public libraries in Cambridge, Massachusetts.</p>
+<p>"There's so much to the library experience that public libraries are offering now," she said. "It is often about <strong>enriching</strong> people's lives in a variety of ways. And it might be about learning a particular skill. It might be about just learning about an idea or an issue that's happening, or it might be about enjoying a performance."</p>
+<p>Wheaton, Maryland's, new public library opened in 2019 and is attached to a community recreation center. Library director Anita Vasallo said the combined building has gotten new visitors. For example, she said teenagers who use the recreation center's basketball court will "step into the library to see what's going on." There are also special spaces in the library for children to do their homework.</p>
+<p>McCauley said many libraries across the country have been built next to other services. In Cambridge, she said on one city <strong>block</strong> there is a library, a school, a community center, and an athletics center.</p>
+<p>Wheaton is in Montgomery County, Maryland, one of the <a class="wsw__a" href="https://www.usnews.com/news/health-news/slideshows/the-15-most-diverse-counties-in-the-us?slide=5">most</a> <strong>diverse</strong> counties in the United States. The county's school system <a class="wsw__a" href="https://www.montgomeryschoolsmd.org/about/statistics.aspx">has</a> students from more than 164 countries speaking 184 languages. The diversity of the community drives much of the library's programming.</p>
+<p>For English learners, the library holds weekly conversation clubs, where people can talk in English in an informal setting. The library also holds job fairs and partners with local organizations to help families get health insurance. People who cannot afford to buy their own laptop computers can borrow one from the library.</p>
+<p>The American Library Association <a class="wsw__a" href="https://www.ala.org/tools/libfactsheets/alalibraryfactsheet06">found</a> that across the country, 76 percent of libraries help visitors use government programs and services. About 73 percent help people apply for jobs.</p>
+<p>"We really want libraries to be community <strong>hubs</strong>," Vasallo said. "That's what they're meant to be."</p>
+<p>The Wheaton and Lewes libraries have book stores where visitors can buy new and used books, often from the library's collection. The money raised goes back to supporting the libraries.</p>
+<p>Wheaton's library also has a café. Boston's historic Public Library has a tea room and bar with drinks like "Tequila Mockingbird" and "Of Milk and Men."</p>
+<p>"The idea of a library as a kind of a silent place where you come and do your research and think deep thoughts — it's not really what we do," Vasallo said. "Libraries can be very lively places that can be noisy. They should be full of life."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p><em>______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>repository </strong><em>— n.</em> a place where a large amount of something is stored</p>
+<p><strong>designate </strong><em>— v. </em>to choose for a specific purpose or use</p>
+<p><strong>reptile </strong><em>— n. </em>a cold-blooded animal that lays eggs and has a hard body covering</p>
+<p><strong>goggle </strong><em>— n. </em>special eye glasses that fit close to the face</p>
+<p><strong>access </strong><em>— v. </em>to be able to get into or to use</p>
+<p><strong>gap </strong>–n. a space between were one thing stops and another begins</p>
+<p><strong>enrich </strong><em>— v. </em>to improve the quality of something</p>
+<p><strong>diverse </strong><em>— adj. </em>involving many different kinds or groups of things</p>
+<p><strong>block </strong>–n. an area of land surrounded by four streets in a city or town</p>
+<p><strong>hub </strong><em>— n. </em>a central or most active place</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Public Libraries Aim to Bring in More Visitors]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A public library in Boston
+[00:02.56]has a place for serving alcoholic, book-themed drinks.
+[00:06.68]A library in Maryland has a basketball court steps away.
+[00:12.36]Another in Delaware has a room for teenagers to play video games.
+[00:18.08]Public libraries around the United States
+[00:21.28]are changing what it means to be a library.
+[00:24.28]Instead of just being places for books,
+[00:27.44]they have become community centers.
+[00:31.44]"The days of basically being a book repository...are over.
+[00:35.36]They are long gone," said Lea Rosell.
+[00:39.00]She is director of the Lewes Public Library in the state of Delaware.
+[00:44.76]"We have one quiet room designated in this library.
+[00:48.52]I think that goes to show that things are changing."
+[00:54.24]Lewes opened its new library in 2016.
+[00:57.44]Rosell said the newer and larger building
+[01:01.28]has been able to attract new visitors
+[01:03.76]and has permitted the library to hold more events.
+[01:08.04]This month, the library held events like discussions about books
+[01:12.24]and current events, movie showings,
+[01:15.48]poetry writing workshops, and Spanish-language discussions.
+[01:20.28]Rosell said one of the most popular events for children this year
+[01:24.84]was when a nature center brought in several reptiles.
+[01:30.56]The Lewes library also has a special room for teenagers,
+[01:34.64]with books aimed at teens and young adults.
+[01:38.24]In the Teen Tech Suite, they can use things
+[01:41.92]like 3-D printers and virtual reality goggles.
+[01:46.88]Delaware Libraries also has a program
+[01:49.92]to mail a free book to families with young children each month.
+[01:54.04]The goal is provide children with a large book collection
+[01:58.28]in their home without having to pay for it themselves.
+[02:03.00]In some communities, libraries are where people access social services.
+[02:08.32]Rossell said that the library in Lewes
+[02:11.60]and other libraries across the state
+[02:14.16]can "fill the gaps" in community services.
+[02:17.52]She said that because Delaware is a low-tax state,
+[02:21.16]it does not have many community centers.
+[02:25.20]Maria McCauley is the president of the Public Library Association
+[02:29.84]and the director of public libraries in Cambridge, Massachusetts.
+[02:35.48]"There's so much to the library experience
+[02:38.52]that public libraries are offering now," she said.
+[02:41.96]"It is often about enriching people's lives in a variety of ways.
+[02:46.64]And it might be about learning a particular skill.
+[02:50.36]It might be about just learning about an idea
+[02:53.60]or an issue that's happening,
+[02:55.44]or it might be about enjoying a performance."
+[03:00.28]Wheaton, Maryland's, new public library opened in 2019
+[03:04.40]and is attached to a community recreation center.
+[03:08.84]Library director Anita Vasallo
+[03:11.68]said the combined building has gotten new visitors.
+[03:15.72]For example, she said teenagers
+[03:18.96]who use the recreation center's basketball court
+[03:21.80]will "step into the library to see what's going on."
+[03:25.76]There are also special spaces in the library
+[03:28.96]for children to do their homework.
+[03:32.52]McCauley said many libraries across the country
+[03:35.88]have been built next to other services.
+[03:39.20]In Cambridge, she said on one city block there is a library,
+[03:43.64]a school, a community center, and an athletics center.
+[03:49.76]Wheaton is in Montgomery County, Maryland,
+[03:52.40]one of the most diverse counties in the United States.
+[03:56.72]The county's school system has students
+[03:59.72]from more than 164 countries speaking 184 languages.
+[04:04.92]The diversity of the community
+[04:07.24]drives much of the library's programming.
+[04:10.96]For English learners, the library holds weekly conversation clubs,
+[04:15.84]where people can talk in English in an informal setting.
+[04:20.16]The library also holds job fairs
+[04:22.88]and partners with local organizations
+[04:25.72]to help families get health insurance.
+[04:28.84]People who cannot afford to buy their own laptop computers
+[04:32.68]can borrow one from the library.
+[04:36.36]The American Library Association found that across the country,
+[04:41.08]76 percent of libraries help visitors use government programs and services.
+[04:47.36]About 73 percent help people apply for jobs.
+[04:53.52]"We really want libraries to be community hubs," Vasallo said.
+[04:58.28]"That's what they're meant to be."
+[05:01.12]The Wheaton and Lewes libraries have book stores
+[05:04.56]where visitors can buy new and used books,
+[05:07.68]often from the library's collection.
+[05:10.80]The money raised goes back to supporting the libraries.
+[05:14.88]Wheaton's library also has a café.
+[05:18.36]Boston's historic Public Library has a tea room and bar
+[05:23.24]with drinks like "Tequila Mockingbird" and "Of Milk and Men."
+[05:29.00]"The idea of a library as a kind of a silent place
+[05:33.00]where you come and do your research and think deep thoughts
+[05:36.96]— it's not really what we do," Vasallo said.
+[05:41.12]"Libraries can be very lively places that can be noisy.
+[05:45.24]They should be full of life."
+[05:48.00]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

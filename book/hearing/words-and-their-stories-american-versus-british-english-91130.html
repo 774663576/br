@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - American English vs. British English</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, American English vs. British English" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/words-and-their-stories-american-versus-british-english.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>American English vs. British English</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/words-and-their-stories-american-versus-british-english.mp3" id="mp3"></a>
+<a href="study-pumping-groundwater-has-changed-how-earth-turns-91128.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">03 July 2023</span><br/>
+<p>
+Now the VOA Learning English program Words and Their Stories!</p>
+<p>The fourth of July is Independence Day in the United States. On that day, we celebrate the decision by early American leaders to declare independence from Britain.</p>
+<p>While people in both England and the U.S. speak English, the two types of English can be very different.</p><div class="contentImage"><img alt="Six Differences Between British and American English" src="https://files.21voa.com/gdb/a928d7d0-302f-4142-ae34-5165d88610ab_tv_w268_r1.jpg"/><br/><span class="imagecaption">Six Differences Between British and American English</span></div>
+<p>First, there are differences in spelling. The British like the letter "u" and have kept it in many words. Americans have dropped it. Somewhere in our language history, we decided that "labor," "color" and "favorite" were just fine without the "u" next to the "o."</p>
+<p>But our differences go beyond spelling. Sometimes, we use different words entirely.</p>
+<p>Here, we live in <strong>apartments</strong> with <strong>elevators</strong>. Over there, they live in <strong>flats</strong> with <strong>lifts</strong>.</p>
+<p>We put <strong>diapers</strong> on our babies and push them in <strong>strollers</strong>. The British love their babies just as much as we do, but they use <strong>nappies</strong> and <strong>prams</strong> instead.</p>
+<p>We power our cars with gas. They use petrol.</p>
+<p>And, if we need to look in our car's dark <strong>trunk</strong> for something, we use a <strong>flashlight</strong>. They would use a <strong>torch</strong> to search their dark <strong>boot</strong>.</p>
+<p>Then there are idioms. Some British and American idioms have the same meaning, but use different words. For example, in the U.S. if you want to add your opinion to a conversation, you <strong>put in your two cents</strong>. In the U.K., they <strong>put in their tuppence (or two pence) worth</strong>. Makes sense. They have pence and we don't.</p>
+<p>Another example is the idiom about discussing the same issue again and again, especially if it cannot be resolved.</p>
+<p>We say, <strong>"Don't beat a dead horse</strong>!" The British, on the other hand, advise against <strong>flogging </strong>one. And, if you are keeping secrets in the United States, you have <strong>skeletons in the closet</strong>. In Great Britain, your skeletons would be hiding in a <strong>cupboard</strong>.</p>
+<p>But the real fun begins when we start exploring idioms and expressions that are unique to each country.</p>
+<p>Let's start with "Bob's your uncle." To an American ear, that is a weird expression. And it has nothing to do with any relative you may or may not have named Bob. It is just a way to finish a set of simple instructions.</p>
+<p>What is the equivalent -- the different but equal saying -- in the U.S.? Americans might say, "<strong>and there you have it!"</strong> Or sometimes, more <strong>dramatic</strong> people will say, "<strong>Ta-da!"</strong></p>
+<p>For example, imagine you are explaining to someone how to use your new fancy, coffee maker.</p>
+<p>You explain: "First, you <strong>grind</strong> the beans. Then you put them in the side container and pour water in the main container. Push the button and ten minutes later -- ta-da! -- you have a pot of coffee!</p>
+<p>Sometimes over a fresh pot of coffee, you may want to have a long talk with a friend. You might even throw in a little <strong>gossip</strong>. We call that a <strong>chat, </strong>or if it's a short conversation, <strong>chit-chat</strong>. The British would call it a "chin-wag."</p>
+<p>If a British person says, "I've got the hump," we might think they are sick and need to see a doctor. But in fact, when Brits say they have a hump, it means they are mildly annoyed or upset. In the U.S., some informal ways to say we are upset are "<strong>I'm</strong> <strong>ticked off</strong>" or "<strong>I'm miffed</strong>."</p>
+<p>Now, when Americans are really surprised by something, we can say we <strong>"are at a loss for words</strong>." Or more informally, we simply say we are "<strong>shocked" </strong>or "<strong>blown away</strong>."</p>
+<p>Across the Atlantic in the U.K., they are "gobsmacked." In the U.S., we don't get <strong>smacked</strong> by <strong>gobs</strong>. Ever.</p>
+<p>Finally, a familiar word used by both countries but in different ways is "<strong>cheers</strong>." We use the word over drinks when we are wishing someone good health or congratulating an accomplishment. The British use "cheers" to mean "thank you." For that, we Americans say, "Thank you!"</p>
+<p>Now, we don't expect you to pick sides. Both American and British English have their strong points. But thanks for listening to Words and Their Stories, a program that teaches American English.</p>
+<p>I'm Anna Matteo.</p>
+<p>Cheers! I mean, thanks.</p>
+<p><em>Anna Matteo wrote this for VOA Learning English. Kelly Jean Kelly was the editor. </em></p>
+<p>___________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>apartment </strong><em>– n. </em>a usually rented room or set of rooms that is part of a building and is used as a place to live (British = <strong>flat</strong>)</p>
+<p><strong>elevator </strong><em>– n. </em>a machine used for carrying people and things to different levels in a building (British = <strong>lift</strong>)</p>
+<p><strong>diaper</strong> <em>– n. </em>a piece of cloth or other material that is placed between a baby's legs and fastened around the waist to hold body waste (British = <strong>nappies</strong>)</p>
+<p><strong>stroller </strong><em>– n. </em>a small carriage with four wheels that a baby or small child can ride in while someone pushes it (British = <strong>prams</strong>)</p>
+<p><strong>trunk </strong><em>– n. </em>the enclosed space in the rear of an automobile for carrying articles (British = <strong>boot</strong>)</p>
+<p><strong>flashlight </strong><em>– n. </em>a small electric light that can be carried in your hand and that runs on batteries (British = <strong>torch</strong>)</p>
+<p><strong>flog </strong><em>– v. </em>to beat or whip (someone) severely</p>
+<p><strong>smack </strong><em>– v. </em>to strike so as to produce a smack</p>
+<p><strong>gob </strong><em>– n. </em>lump : a large amount</p>
+<p><strong>skeleton </strong><em>– n. </em>the structure of bones that supports the body of a person or animal</p>
+<p><strong>closet </strong><em>– n. </em>a usually small room that is used for storing things (such as clothing, towels, or dishes) (British = <strong>cupboard)</strong></p>
+<p><strong>fancy</strong> <em>– adj. </em>pricey and fashionable</p>
+<p><strong>grind </strong><em>– v. </em>to crush or break (something) into very small pieces by rubbing it against a rough surface or using a special machine</p>
+<p><strong>gossip </strong> <em>– n.</em> information about the behavior and personal lives of other people</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

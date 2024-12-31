@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Avoid Plagiarism</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, How to Avoid Plagiarism" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/how-to-avoid-plagiarism.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Avoid Plagiarism</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/how-to-avoid-plagiarism.mp3" id="mp3"></a>
+<a href="still-and-yet-89922.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith and Jill Robbins</span><br/>
+<span class="datetime">05 November 2022</span><br/>
+<p>In the digital age, it has become easy for students to find and copy published material. But copying another person's writing without giving them credit can get students into big trouble.</p>
+<p>Copying another person's writing without giving them credit is called plagiarism.</p>
+<p>Dictionary publisher Merriam-Webster says the word <a class="wsw__a" href="https://www.merriam-webster.com/dictionary/plagiarism#other-words">"plagiarism"</a> comes from the Latin word <em>plagiarius</em>. It means "kidnapper." But now we use it to describe someone who steals words rather than children.</p><div class="contentImage"><img alt="FILE - Adjunct English professor for J. Sargent Reynolds Community College, J. Gabriel Scala, collects papers from her students at her class at the school in Richmond, Va., Wednesday April , 24, 2013. (AP Photo/Steve Helber)" src="https://files.21voa.com/gdb/D1009B70-FFC1-4FB8-88B1-ADCD3B99241E_cx0_cy3_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Adjunct English professor for J. Sargent Reynolds Community College, J. Gabriel Scala, collects papers from her students at her class at the school in Richmond, Va., Wednesday April , 24, 2013. (AP Photo/Steve Helber)</span></div>
+<p>In the United States and other Western countries, universities have rules for avoiding plagiarism. But learning to correctly follow these rules can be difficult for some international students.</p>
+<p><strong>Intellectual property </strong></p>
+<p>Why do universities and publishers care so much about copying even very small parts of someone's writing?</p>
+<p>American <a class="wsw__a" href="https://www.copyright.gov/what-is-copyright/">copyright law</a> protects <strong>original</strong> works of <strong>authorship</strong> including books, movies, music, images and artworks. It also extends protection to computer software and architecture. The owner can sell the work or permit others to use it.</p>
+<p>The idea is that copyright helps society make progress. If people can make money by owning their creations, called intellectual property, then more people will want to create original works.</p>
+<p>The law permits the unlicensed use of copyrighted works, called <a class="wsw__a" href="https://www.copyright.gov/fair-use/">fair use</a>, for activities including criticism, comment, news reporting, education and research. However, there are some limitations.</p>
+<p>In education, students can include a very small part of copyrighted works in their writing and research if they provide credit, or <strong>citation</strong>, to the original creators.</p>
+<p>Many universities, such as Harvard, even urge students to give credit to information or sources of ideas they get from conversations with professors or other students. Harvard even warns students about copying themselves. That is, they cannot hand in the same work for more than one class without the permission of their instructors.</p>
+<p>A failure to do so is considered plagiarizing.</p>
+<p><strong>How can professors know if a student is plagiarizing?</strong></p>
+<p>Just as it is easy to copy, it is also easy for professors to know if a student has plagiarized.</p>
+<p>First, there are computer programs that compare students' papers to large databases of published writing. The programs can identify whether students have copied published writing. Second, if English is not a student's first language, a professor might recognize a change in vocabulary and writing <strong>style</strong>. This could bring more attention to the student's paper.</p>
+<p>The punishment for plagiarism can vary. Professors could simply warn a student not to do it again, lower their <strong>grade</strong>, or they may fail the student in that class. In more extreme cases, a student may be temporarily banned or expelled from school.</p>
+<p><strong>Cultural differences </strong></p>
+<p>Some international students in the U.S. struggle to avoid plagiarism and learn the rules of citation. Part of the difficulty is due to cultural differences.</p>
+<p>Some cultures do not have a long historical and legal tradition of protecting intellectual property. In these cultures, knowledge has been considered something common to everyone, without ownership. In others, copying is seen as showing respect for the writing and thinking of experts rather than themselves.</p>
+<p>If English is not a student's first language, sometimes, finding words to express complex ideas could be difficult. Thus, copying becomes the way the students try to express their ideas.</p>
+<p>Steven Horowitz is a professor of Legal English at Georgetown Law in Washington, D.C. In an email to VOA Learning English, he said, "I've talked with students from Middle East cultures who have explained to me that they often are not expected to cite because a lot of things they <strong>quote</strong> are so familiar to everyone that there is no need or expectation of citing."</p>
+<p>Horowitz said, "I know on occasion some international students will use quoted text... because they feel like their own words can't <strong>do justice</strong> <strong>to </strong>the meaning in the quoted text and feel like it's not their place to suggest <strong>alternative text</strong>."</p>
+<p>"It's often a challenge to explain to international students the need for citation even in sentences when you don't use quoted text," he added.</p>
+<p><strong>Tools to avoid plagiarism </strong></p>
+<p>There are free tools to make citations easier for students and to avoid plagiarism. <a class="wsw__a" href="https://www.zotero.org/">Zotero</a> is a free, open-source program that helps organize all the research a student may use. For example, it can automatically create citations and combine them into a list. The <a class="wsw__a" href="https://owl.purdue.edu/owl/purdue_owl.html">Purdue Online Writing Lab</a>, or Purdue OWL for short, is another free resource.</p>
+<p>Many universities also have writing centers where students can learn the citation rules. And another way for students to learn how to avoid plagiarism is to read published papers and pay careful attention to how information is presented. Students should observe when and how citations are used. This can help them learn the rules of citations.</p>
+<p>Finally, remember that in educational, or academic, writing, it is better to cite too much than too little.</p>
+<p>I'm Andrew Smith.</p>
+<p>And I'm Jill Robbins.</p>
+<p><em>Andrew Smith and Jill Robbins wrote this story for VOA Learning English. </em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>original</strong> <em>-adj. </em>never having been done or created before, not a copy of something else</p>
+<p><strong>authorship </strong><em>-n. </em>indicating that a person is the creator of a work</p>
+<p><strong>citation </strong><em>-n. </em>an indication of a source or reference from which words or ideas have been copied</p>
+<p><strong>style </strong><em>-n. </em>a particular design or pattern or way of doing things</p>
+<p><strong>grade </strong><em>-n. </em>a score or rank teachers assign to students for their coursework, such as a percentage or letter ranking</p>
+<p><strong>quote </strong><em>-n. </em>a copy of the exact words someone has written or spoken</p>
+<p><strong>do justice</strong> <strong>to </strong><em>-v. </em>give enough respect to or fully explain</p>
+<p><strong>alternative text </strong><em>-n. </em>other words used to express the same idea</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

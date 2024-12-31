@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 伦敦国际金融中心位置不保</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 伦敦国际金融中心位置不保" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201608/london-financial-brexit-european-union-britain-eu-.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>伦敦国际金融中心位置不保</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201608/london-financial-brexit-european-union-britain-eu-.mp3" id="mp3"></a>
+<a href="/static/lrc/london-financial-brexit-european-union-britain-eu-.lrc" id="lrc"></a>
+<a href="london-financial-brexit-european-union-britain-eu--70836.html" id="CnPage" target="_blank"></a>
+<a href="health-and-lifestyle-early-bedtime-for-young-children-cut-obesity-risk-70821.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Almost one-fourth of Britain's national income is earned in and around the city of London. Much of the money comes from international businesses based there.<br/>英国全国近四分之一的收入来自于伦敦及其周边。其中大部分收入来自于总部设在伦敦的国际企业。</p>
+<p>But the British vote to leave the European Union means London could lose its place as Europe's leading business center.<br/>但是英国公投脱欧意味着伦敦可能失去其作为欧洲重要商业中心的地位。</p>
+<p>As part of the European Union, Britain has rights to sell its services without tariffs in many countries across the continent. The EU currently has 28 member states, and it serves a market of 500 million people.<br/>作为欧盟的一部分，英国有权在欧洲大陆许多国家免关税销售其（金融）服务。欧盟目前有28个成员国，并服务于这个具有5亿人口的市场。</p>
+<p>But when Britain officially leaves the bloc, London-based businesses will likely lose their tax-free access to the single EU market. As a result, some banks have already said they may move their operations to the European mainland.<br/>但是当英国正式离开欧盟时，总部设在伦敦的企业将有可能失去欧盟单一市场的免税准入权。因此，一些银行已经表示，他们可能会将业务转移到欧盟本土。</p>
+<p>David Slater is with the company London &amp; Partners. Its goal is to strengthen London's image overseas and help London-based businesses work with foreign partners.<br/>大卫·斯莱特（David Slater）就职于伦敦发展促进署。该公司的目标是提升伦敦的海外形象并帮助总部设在伦敦的企业与外国伙伴合作。</p>
+<p>Slater says the new government in Britain must negotiate for businesses to have continued access to the single market.<br/>斯莱特表示，英国新政府必须谈判，让企业能够继续有权进入欧盟单一市场。</p>
+<p>But some European leaders say Britain cannot have special economic ties with the European Union without permitting freedom of movement. They say people from EU member states should have the right to come freely to Britain.<br/>但是一些欧洲领导人表示，英国不允许自由迁徙，就不能与欧盟有特殊经济联系。他们表示，欧盟成员国国民应该有自由前往英国的权利。</p>
+<p>Concern over immigration was the main issue that drove the "Leave" campaign to victory in Britain's Brexit vote.<br/>移民问题正是造成英国脱欧运动在公投中获胜的主要因素。</p>
+<p><strong>What city will take London's place?<br/>谁将取代伦敦？</strong></p>
+<p>With the possibility that London will lose its special ties to the EU market, other cities are eyeing its position as Europe's leading financial center. The list of cities that want to replace London includes Paris, Berlin and Amsterdam.<br/>随着伦敦有可能失去它与欧盟市场的特殊关系，其它城市都对伦敦作为欧洲重要金融中心的位置虎视眈眈。希望取代伦敦的城市包括巴黎、柏林和阿姆斯特丹。</p>
+<p>In France, government officials recently spoke of "rolling out the red carpet" to businesses fleeing Brexit. They promised to make taxes for French expatriates the most favorable in Europe. The word "expatriate" is used to describe people who live outside their home country.<br/>法国政府官员最近谈到要“铺设红地毯”欢迎因为英国脱欧而出逃的公司。他们承诺让外侨享受欧洲最优惠的税收政策。外侨是指居住在他国的人们。</p>
+<p>In Berlin, people see a chance to expand the city's technology industry. Berlin is already Europe's second biggest tech city after London. And, the prices for housing and offices are much less costly there.<br/>柏林人们看到了扩大该市技术产业的机会。柏林已经是伦敦之后的欧洲第二大高科技城市。而且这里的住宅和写字楼价格更加便宜。</p>
+<p>Lukas Kampfmann is with a business called Factory Berlin. The group is home to high-tech companies, including the music website Soundcloud.<br/>卢卡斯·坎普夫曼（Lukas Kampfmann）就职于一家名为柏林工厂（Factory Berlin）的企业，这里是包括音乐网站Soundcloud在内的高科技公司的所在地。</p>
+<p>"With Brexit, London has more or less taken itself out of the race," Kampfmann said. "And we do believe that over time the advantage of Berlin will grow and more tech start-ups will come to Berlin."<br/>坎普夫曼说：“英国脱欧了，伦敦就多多少少自己退出了竞争。而且我们确信，随着时间推移，柏林的优势会越来越大，更多科技初创公司将会落户柏林。”</p>
+<p>Then there is Amsterdam, in the Netherlands. The New York Times newspaper recently rated Amsterdam as best placed to steal London's position. The paper noted that Amsterdam has international connections, an English-speaking population and appeal for expatriates.<br/>再有就是荷兰的阿姆斯特丹。《纽约时报》最近将阿姆斯特丹评为取代伦敦地位的最佳人选。该报指出，阿姆斯特丹具有全球关系、说英语的人口以及对外侨的吸引力。</p>
+<p>But London's supporters still say their city will remain number one.<br/>但是伦敦的支持者仍然称这里仍将是头号城市。</p>
+<p>David Slater of London &amp; Partners says the reason is because the businesspeople working in London want to stay there.<br/>伦敦发展促进署的斯莱特表示，原因是在伦敦工作的商界人士想要留在这里。</p>
+<p>I'm Mehrnoush Karimian-Ainsworth.<br/>我是Mehrnoush Karimian-Ainsworth。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.72]Almost one-fourth of Britain's national income
+[00:05.00]is earned in and around the city of London.
+[00:09.32]Much of the money comes from international businesses based there.
+[00:16.00]But the British vote to leave the European Union
+[00:20.56]means London could lose its place as Europe's leading business center.
+[00:27.24]As part of the European Union,  Britain has rights to sell its services
+[00:33.24]without tariffs in many countries across the continent.
+[00:37.88]The EU currently has 28 member states,
+[00:43.29]and it serves a market of 500 million people.
+[00:48.28]But when Britain officially leaves the bloc, London-based businesses
+[00:53.36]will likely lose their tax-free access to the single EU market.
+[00:59.52]As a result, some banks have already said
+[01:04.24]they may move their operations to the European mainland.
+[01:09.20]David Slater is with the company London &amp; Partners.
+[01:14.96]Its goal is to strengthen London's image overseas
+[01:19.16]and help London-based businesses work with foreign partners.
+[01:24.36]Slater says the new government in Britain must negotiate
+[01:29.68]for businesses to have continued access to the single market.
+[01:34.84]But some European leaders say
+[01:37.76]Britain cannot have special economic ties with the European Union
+[01:42.76]without permitting freedom of movement.
+[01:46.44]They say people from EU member states
+[01:50.20]should have the right to come freely to Britain.
+[01:53.80]Concern over immigration was the main issue
+[01:58.30]that drove the "Leave" campaign to victory in Britain's Brexit vote.
+[02:03.52]With the possibility that London will lose its special ties to the EU market,
+[02:09.68]other cities are eyeing its position as Europe's leading financial center.
+[02:16.24]The list of cities that want to replace London includes Paris, Berlin and Amsterdam.
+[02:24.72]In France, government officials recently spoke of
+[02:29.60]"rolling out the red carpet" to businesses fleeing Brexit.
+[02:35.24]They promised to make taxes for French expatriates the most favorable in Europe.
+[02:42.52]The word "expatriate" is used to describe people who live outside their home country.
+[02:49.76]In Berlin, people see a chance to expand the city's technology industry.
+[02:56.12]Berlin is already Europe's second biggest tech city after London.
+[03:03.32]And, the prices for housing and offices are much less costly there.
+[03:08.76]Lukas Kampfmann is with a business called Factory Berlin.
+[03:15.48]The group is home to high-tech companies,
+[03:18.56]including the music website Soundcloud.
+[03:22.64]"With Brexit, London has more or less taken itself out of the race," Kampfmann said.
+[03:30.32]"And we do believe that over time the advantage of Berlin will grow
+[03:36.16]and more tech start-ups will come to Berlin."
+[03:40.76]Then there is Amsterdam, in the Netherlands.
+[03:44.84]The New York Times newspaper recently rated Amsterdam
+[03:49.60]as best placed to steal London's position.
+[03:53.80]The paper noted that Amsterdam has international connections,
+[03:58.44]an English-speaking population and appeal for expatriates.
+[04:04.68]But London's supporters still say their city will remain number one.
+[04:10.52]David Slater of London &amp; Partners says the reason is
+[04:14.80]because the businesspeople working in London want to stay there.
+[04:20.92]I'm Mehrnoush Karimian-Ainsworth.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

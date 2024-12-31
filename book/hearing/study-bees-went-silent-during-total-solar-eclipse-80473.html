@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Study: Bees Went Silent During Total Solar Eclipse</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Study: Bees Went Silent During Total Solar Eclipse" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201810/study-bees-went-silent-during-total-solar-eclipse.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Study: Bees Went Silent During Total Solar Eclipse</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201810/study-bees-went-silent-during-total-solar-eclipse.mp3" id="mp3"></a>
+<a href="history-matthew-bible-80472.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">14 October, 2018</span><br/>
+<p>On August 21, 2017, millions of people across America stopped what they were doing to observe <a class="wsw__a" href="https://www.21voa.com/a/people-across-america-view-historic-total-solar-eclipse/3994760.html">a total solar eclipse</a>.</p>
+<p>But a new study suggests humans were not the only living beings who took a break from their usual activities during this historic event.</p>
+<p>A total solar eclipse happens when the sun, moon and Earth perfectly line up. Last year's total solar eclipse was the first one in 99 years to pass over parts of the whole United States.</p>
+<div class="contentImage"><img alt="A crowd gathers in front of the Hollywood sign at the Griffith Observatory to watch the solar eclipse in Los Angeles on Monday, Aug. 21, 2017. (AP Photo/Richard Vogel)" src="https://files.21voa.com/gdb/72B301A4-5E51-4622-BAFC-864EE3331658_w268_r1.jpg"/><br/><span class="imagecaption">A crowd gathers in front of the Hollywood sign at the Griffith Observatory to watch the solar eclipse in Los Angeles on Monday, Aug. 21, 2017. (AP Photo/Richard Vogel)</span></div>
+<p>The new study found that bees went silent when within the path of totality of the solar eclipse. The results were <a class="wsw__a" href="https://academic.oup.com/aesa/advance-article/doi/10.1093/aesa/say035/5123345">recently published</a> in the <em><a class="wsw__a" href="https://academic.oup.com/aesa">Annals of the Entomological Society of America</a></em>.</p>
+<p>The research was led by Candace Galen, a professor of biological sciences at the University of Missouri. She found there was a lot of interest leading up to the eclipse by people wondering how different animals might behave.</p>
+<p>"It seemed as if everyone and their dog was asking me what animals would do during a total eclipse," Galen <a class="wsw__a" href="https://www.eurekalert.org/pub_releases/2018-10/esoa-abf100418.php">said</a> in a statement.</p>
+<p>Scientists had previously observed behavioral reactions in some animals during solar eclipses. These have included some forms of sea life, birds, antelope and cattle. But very few studies specifically examined the behavior of insects during a solar eclipse, and none had dealt with bees.</p>
+<p><a class="wsw__a" href="https://www.21voa.com/a/citizen-scientists-seek-solutions-to-western-american-bumblebee-s-problems/4448932.html" target="_blank">Bees</a> are important <a class="wsw__a" href="https://www.21voa.com/a/bees-protect-crops-from-wild-elephants-in-india/4224485.html" target="_blank">for the growth of wild and agricultural plants</a>. They help spread the substances that make it possible for flowers to reproduce through the process known as <strong>pollination</strong>.</p>
+<p>Before the eclipse, Galen and her team had been field testing a system to examine bee pollination activities. The system used listening devices placed in nature to measure <strong>buzzing</strong> sounds. The buzzing is caused by movements in the bees' wing muscles during flight.</p>
+<p>Galen said she thought "it seemed like a perfect fit" to use those same methods to look at bee behaviors during an eclipse.</p>
+<p>The researchers organized a team of about 400 citizen scientists and elementary schoolchildren in different areas of the country to help with the experiment. The teams were deployed to areas in three U.S. states – Oregon, Idaho and Missouri. The three states represent different kinds of <strong>geology</strong> and climate.</p>
+<p>Very small microphones were hidden among the natural environment to capture buzzing sounds as bees flew from flower to flower. In some areas, light and temperature information was also collected.</p>
+<p>The sounds were then examined to measure the level of activity before, during and after the solar eclipse. In recordings taken during the totality part of the eclipse, researchers heard almost complete silence. "Only one buzz <strong>interrupted</strong> the quiet," the study said.</p>
+<p>However, during partial <strong>stages</strong> of the eclipse, 90 percent of the microphones recorded buzzing. This meant there was still widespread bee activity before and after the total solar eclipse. The researchers said there was some slowing of activity immediately before and after totality.</p>
+<p>Changes in light affect the bee's ability to see and find food sources and carry out pollination activities. Drops in temperature make it difficult for them to keep their bodies warm enough to fly.</p>
+<p>Galen said results of the study were in keeping with normal bee behavior. Bees commonly fly more slowly when the sun goes down and return to their colonies at night. But what did surprise researchers was how quickly the bees went silent during totality.</p>
+<p>"We had not expected that the change would be so <strong>abrupt</strong>, that bees would continue flying up until totality and only then stop, completely," Galen said. "It was like 'lights out' at summer camp! That surprised us."</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English. Hai Do was the editor.</em></p>
+<p><em>We want to hear from you. Write to us in the Comments section, and <a class="wsw__a" href="http://www.21voa.com" target="_blank">visit 51VOA.COM</a>.</em></p>
+<p><strong>________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>pollination </strong>– <em>n.</em> the process of moving a very fine dust that is produced by a plant for reproduction to another plant</p>
+<p><strong>buzzing </strong>– <em>n.</em> the sound a bee makes when it flies</p>
+<p><strong>geology </strong>– <em>n.</em> the study of rocks and soil and the physical structure of the earth</p>
+<p><strong>interrupt </strong>– <em>v.</em> to stop an action or activity, usually for a short period of time</p>
+<p><strong>stage </strong>– <em>n.</em> a period of development in a process</p>
+<p><strong>abrupt </strong>– <em>adj.</em> sudden and not expected</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

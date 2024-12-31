@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 弗洛伊德案中4名警察面临联邦指控</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 弗洛伊德案中4名警察面临联邦指控" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202105/four-former-police-officers-in-floyd-case-face-federal-charges.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>弗洛伊德案中4名警察面临联邦指控</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202105/four-former-police-officers-in-floyd-case-face-federal-charges.mp3" id="mp3"></a>
+<a href="/static/lrc/four-former-police-officers-in-floyd-case-face-federal-charges.lrc" id="lrc"></a>
+<a href="four-former-police-officers-in-floyd-case-face-federal-charges-86822.html" id="CnPage" target="_blank"></a>
+<a href="broadway-prepares-to-reopen-in-fall-86821.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Four former police officers involved in the arrest of George Floyd in Minneapolis, Minnesota last year are to face a federal civil rights trial.<br/>
+去年在明尼苏达州明尼阿波利斯市逮捕乔治·弗洛伊德的4名前警察将面临一场联邦民事权利审判。
+<p>A federal grand jury has decided to bring charges against the four accusing them of violating George Floyd's constitutional rights. A grand jury is a group of citizens who study evidence to decide if there should be a trial in a legal case. The decision was made public Friday.<br/>
+一家联邦大陪审团已经决定对这4人提起诉讼，指控他们侵犯了弗洛伊德的宪法权利。大陪审团是一群公民，他们对证据进行研究，以确定是否应该进行审判。该裁决于周五被公之于众。</p>
+<p>Floyd died after officers restrained him on the ground during his arrest on May 25, 2020. During the arrest, Floyd repeatedly said he could not breathe in an incident which was filmed and shown all over the world.<br/>
+弗洛伊德于2020年5月25日在被逮捕过程中被警察控制在地面后死亡。在这次逮捕过程中，弗洛伊德一再声称自己无法呼吸，这起事件被拍下并公诸于世。</p>
+<p><strong>The charges<br/>
+指控</strong></p>
+<p>Derek Chauvin is charged with violating Floyd's right to be free from unreasonable seizure and excessive force.<br/>
+德里克·肖万被控侵犯了弗洛伊德不受无故拘押和过度武力的权利。</p>
+<p>Tou Thao and J. Alexander Keung are also charged with violating Floyd's right to be free from unreasonable seizure. The charging document alleges that the two did not try to stop Chauvin as he put a knee on Floyd's neck.<br/>
+邵杜和亚历山大·库恩也被指控侵犯了弗洛伊德不受无故拘押的权利。控罪文件指出，当肖万跪在弗洛伊德的脖子上时，这两人并没有试图阻止他。</p>
+<p>All four officers, Chauvin, Keung, Thao, and Thomas Lane, are charged with failure to provide Floyd with medical care.<br/>
+所有这4名警察，包括肖万、库恩、邵以及托马斯·莱恩都被指控未能向弗洛伊德提供医疗救助。</p>
+<p>Chauvin is also charged in connection with the arrest and restraint of a 14-year-old boy in 2017.<br/>
+肖万还被指控与2017年逮捕和制服一位14岁男孩的案件有关。</p>
+<p>Three of the former officers, Lane, Thao and Keung, appeared before the U.S. District Court in Minneapolis through a video link. Chauvin was not part of the court appearance.<br/>
+莱恩、邵和库恩这3名前警察通过视频出席了明尼阿波利斯地方法院的审判。肖万并未出庭。</p>
+<p>In April, a court in Minneapolis found Chauvin guilty of murder and manslaughter charges brought by the state of Minnesota. He is being held in a high security prison in the state as he waits for his sentence to be decided by a judge.<br/>
+今年4月份，明尼阿波利斯市的一家法院裁定肖万犯下了明尼苏达州提起的谋杀和过失杀人罪名。他被关押在该州的一处重刑犯监狱等待法官宣判。</p>
+<p>The three former officers named by the federal grand jury also face state charges in a trial planned for August. They are free after paying a bond to ensure that they appear for trial.<br/>
+这3名被联邦大陪审团指控的前警察还将在定于8月进行的一场审判中面临州指控。他们在支付保证金确保他们会出庭后被释放。</p>
+<p><strong>The incident<br/>
+事件</strong></p>
+<p>The charges are the result of the arrest of Floyd last year. The officers stopped Floyd after he was accused of trying to use false money at a store and acting unusually. Court evidence states that Floyd resisted being arrested.<br/>
+这些审判源于去年弗洛伊德被逮捕。在弗洛伊德被指控试图在商店使用假币并且行为异常之后，这些警察拦住了他。法院证据表明弗洛伊德拒捕。</p>
+<p>Chauvin then restrained Floyd on the ground with his knee on Floyd's neck for more than nine minutes. State lawyers say that Kueng placed his knee on Floyd's back and Lane held down Floyd's legs during the arrest. The state lawyers also say Thao held a gathering crowd back and prevented them from intervening in the arrest.<br/>
+然后肖万把弗洛伊德控制在地面上，并跪在他的脖子上，时间超过9分钟。州律师表示，在逮捕过程中，库恩将他的膝盖跪在了弗洛伊德的背上，而莱恩压住了弗洛伊德的腿。州律师还表示，邵让围观群众退后，并阻止他们干预这次逮捕。</p>
+<p>Eric Nelson, Chauvin's lawyer argued during his murder trial that the former officer acted reasonably in the situation. He said that Floyd died of existing health problems and was using drugs at the time. He also requested a new trial for Chauvin noting several issues. Among the issues was that the judge did not move the trial to another place although the incident caused violent protests in Minneapolis.<br/>
+肖万的律师埃里克·纳尔逊在他的谋杀案审判中辩称，这位前警察在这种情况下采取了合理的行动。他说，弗洛伊德的死因是既有健康问题，并且当时使用了毒品。他还要求对肖万重新进行审判，并指出了几个问题。其中一个问题是，尽管这起事件在明尼阿波利斯引发了暴力抗议，但是法官并未将这起案件移交至其它地方审判。</p>
+<p>Floyd's arrest was captured on video by many people who gathered around the arrest. The incident brought public anger and protests, both peaceful and violent, across the country against police use of force and racial inequality.<br/>
+弗洛伊德的逮捕过程被许多围观这起事件的群众拍下。该事件在全美范围内引发了公众的愤怒，以及反对警察使用暴力和种族不平等的抗议，这些抗议活动既有和平抗议，也有暴力抗议。</p>
+<p>I'm Mario Ritter, Jr.<br/>
+我是小马里奥·里特。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Four Former Police Officers in Floyd Case Face Federal Charges]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Four former police officers involved
+[00:03.84]in the arrest of George Floyd in Minneapolis, Minnesota last year
+[00:09.08]are to face a federal civil rights trial.
+[00:13.44]A federal grand jury has decided to bring charges against the four
+[00:19.00]accusing them of violating George Floyd's constitutional rights.
+[00:25.52]A grand jury is a group of citizens
+[00:28.72]who study evidence to decide if there should be a trial in a legal case.
+[00:36.12]The decision was made public Friday.
+[00:40.92]Floyd died after officers restrained him on the ground
+[00:46.28]during his arrest on May 25, 2020.
+[00:51.44]During the arrest, Floyd repeatedly said he could not breathe
+[00:56.92]in an incident which was filmed and shown all over the world.
+[01:03.24]Derek Chauvin is charged with violating Floyd's right
+[01:07.96]to be free from unreasonable seizure and excessive force.
+[01:14.08]Tou Thao and J. Alexander Keung are also charged
+[01:20.20]with violating Floyd's right to be free from unreasonable seizure.
+[01:26.32]The charging document alleges that the two
+[01:30.32]did not try to stop Chauvin as he put a knee on Floyd's neck.
+[01:37.16]All four officers, Chauvin, Keung, Thao, and Thomas Lane,
+[01:43.60]are charged with failure to provide Floyd with medical care.
+[01:50.80]Chauvin is also charged in connection with the arrest
+[01:55.12]and restraint of a 14-year-old boy in 2017.
+[02:03.28]Three of the former officers, Lane, Thao and Keung,
+[02:08.12]appeared before the U.S. District Court in Minneapolis
+[02:12.72]through a video link.
+[02:14.80]Chauvin was not part of the court appearance.
+[02:20.20]In April, a court in Minneapolis found Chauvin guilty of murder
+[02:25.84]and manslaughter charges brought by the state of Minnesota.
+[02:32.40]He is being held in a high security prison in the state
+[02:37.20]as he waits for his sentence to be decided by a judge.
+[02:43.24]The three former officers named by the federal grand jury
+[02:48.36]also face state charges in a trial planned for August.
+[02:53.96]They are free after paying a bond to ensure that they appear for trial.
+[03:02.52]The charges are the result of the arrest of Floyd last year.
+[03:07.68]The officers stopped Floyd after he was accused of trying
+[03:12.76]to use false money at a store and acting unusually.
+[03:19.92]Court evidence states that Floyd resisted being arrested.
+[03:25.80]Chauvin then restrained Floyd on the ground
+[03:28.88]with his knee on Floyd's neck for more than nine minutes.
+[03:34.92]State lawyers say that Kueng placed his knee on Floyd's back
+[03:40.44]and Lane held down Floyd's legs during the arrest.
+[03:46.68]The state lawyers also say Thao held a gathering crowd back
+[03:53.08]and prevented them from intervening in the arrest.
+[03:57.92]Eric Nelson, Chauvin's lawyer argued during his murder trial
+[04:03.72]that the former officer acted reasonably in the situation.
+[04:09.68]He said that Floyd died of existing health problems
+[04:14.80]and was using drugs at the time.
+[04:19.08]He also requested a new trial for Chauvin noting several issues.
+[04:26.52]Among the issues was that the judge did not move the trial to another place
+[04:33.08]although the incident caused violent protests in Minneapolis.
+[04:40.12]Floyd's arrest was captured on video by many people
+[04:44.84]who gathered around the arrest.
+[04:48.76]The incident brought public anger and protests, both peaceful and violent,
+[04:55.36]across the country against police use of force and racial inequality.
+[05:04.52]I'm Mario Ritter, Jr. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Much Do You Know about Quantifiers?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, How Much Do You Know about Quantifiers?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/how-much-do-you-know-about-quantifiers.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Much Do You Know about Quantifiers?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/how-much-do-you-know-about-quantifiers.mp3" id="mp3"></a>
+<a href="moving-homeless-people-to-shelter-is-not-easy-93035.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Adam Brock</span><br/><span class="datetime">03 October, 2024</span><br/>
+<p>For VOA Learning English, this is <em>Everyday Grammar</em>.</p>
+<p>Today we are going to talk about different ways of expressing quantity in English.</p>
+<p>A <strong>quantifier </strong>is a word or number that shows an amount or number. You probably already know how to use common quantifiers like <em>much</em> and<em> many</em>. For example:</p><div class="contentImage"><img src="https://files.21voa.com/gdb/80470000-c0a8-0242-8421-08daad1f2a99_cx2_cy0_cw97_w100_r1.png"/></div>
+<p><em>How many apples would you like?</em></p>
+<p><em>How much fruit would you like?</em></p>
+<p>The quantifier<em> many</em> is used before <em>apples</em>, which is a <strong>count noun</strong>. <em>Much</em> is used before <em>fruit</em>, a <strong>noncount noun</strong>.</p>
+<p>Make sure you understand the difference between <strong>count nouns </strong>and <strong>noncount nouns </strong>before you study quantifiers. You can learn about count and noncount nouns in <a class="wsw__a" href="/preview/en-US-LEARN/a/3193621.html">last week's episode of Everyday Grammar</a>.</p>
+<p>Quantifiers are adjectives and adjective phrases that go before nouns. They give information about <em>how much</em> or <em>how many</em> of an item you are talking about. Some quantifiers, like <em>many,</em> go only before count nouns. Others, like <em>much,</em> go only before noncount nouns. And a few quantifiers can go before count or noncount nouns.</p>
+<p><strong>Quantifiers only used with count nouns</strong></p>
+<p><em>One, each </em>and<em> every</em> are examples of count noun quantifiers.</p>
+<p>Here are some examples:</p>
+<p><em>One movie that I enjoy is “The Godfather.”</em></p>
+<p><em>Each child is special.</em></p>
+<p><em>Every member of the country club is rich.</em></p>
+<p>With plural count nouns, just add <em>of the</em> between the quantifier and the noun it describes.</p>
+<p><em>One of the boys is from China.</em></p>
+<p><em>Each of the cars has air conditioning.</em></p>
+<p><em>Every one of the students is smart.</em></p>
+<p>Notice that <em>boys, cars</em> and<em> students</em> are plural nouns. But the verbs that follow them are singular. In most situations, <em>one, each and every</em> make the subject singular, even if the subject contains a plural noun.</p>
+<p>This tricky rule confuses native speakers and English learners alike.</p>
+<p>There are a few quantifiers related to the number <em>two</em>. You can say <em>I have two shoes</em>, <em>I have a couple of shoes, I have both shoes, </em>and<em> I have a pair of shoes</em>.</p>
+<p>If you have more than two countable items, you can use <em>several, a few, many </em>and<em> a number of</em>.</p>
+<p><em>I have several <strong>assignments</strong> due this week.</em></p>
+<p><em>There are a few Thai restaurants in my town.</em></p>
+<p><em>There are many ways to practice English.</em></p>
+<p><em>A number of the cars are imported.</em></p>
+<p><strong>Quantifiers only used with noncount nouns</strong></p>
+<p>Now let's move on to quantifiers that only work with noncount nouns: <em>a little, much </em>and<em> a great deal of</em>. Here are some examples:</p>
+<p><em>Could you loan me a little money?</em></p>
+<p><em>The old woman has much wisdom to share.</em></p>
+<p><em>There is a great deal of oil in Saudi Arabia.</em></p>
+<p><em>Little</em> can go before a count noun if it is used as an adjective. For example, “The little boy is playing.” In this example,<em> little</em> does not refer to a number or quantity; it refers to the size of the boy.</p>
+<p><strong>Quantifiers used with both count and noncount nouns</strong></p>
+<p>There are several “safe” quantifiers that can go with both count and noncount nouns. <em>Some</em> is the most popular. <em>Most, plenty of, all </em>and <em>any </em>are other <strong>options</strong>. Listen for the quantifiers in these examples:</p>
+<p><em>He cut some wood. (noncount noun)</em></p>
+<p><em>Most Americans speak English. (count noun)</em></p>
+<p><em>I have plenty of money. (noncount noun)</em></p>
+<p><em>All children are special. (count noun)</em></p>
+<p><em>Do you have any coffee? (noncount noun)</em></p>
+<p>To refer to the<strong> absence </strong>or <strong>lack of</strong> something, simply use <em>no</em> before a count or noncount noun.</p>
+<p><em>There was no rice left. (noncount noun)</em></p>
+<p><em>There were no books in the library. (count noun)</em></p>
+<p><em>She had no love for her ex-husband. (noncount noun)</em></p>
+<p><em>No, when used as a quantifier, has the same meaning as zero.</em></p>
+<p><em>Lots </em>and<em> a lot of</em> are very popular quantifiers — maybe too popular. Some English teachers do not like them. They think that <em>lots </em>and<em> a lot of</em> are overused and <strong>unsophisticated</strong>. You should avoid <em>lots </em>and<em> a lot of</em> in formal writing. Native speakers usually shorten <em>a lot of </em>to<em> “</em>a lotta” in casual speech.</p>
+<p><strong>Few/a few vs. little/a little</strong></p>
+<p>Listen carefully to these two sentences:</p>
+<p><em>I have a few friends.</em></p>
+<p><em>I have few friends</em>.</p>
+<p>What is the difference? The first sentence contains the article <em>a</em>. This little word makes a big difference in meaning.</p>
+<p><em>I have a few friends</em> <strong>focuses</strong> on a positive idea. The speaker is satisfied with the number of friends he has. The second sentence, <em>I have few friends</em>, focuses on a <strong>negative</strong> idea, his lack of friends. The speaker wishes he had more friends.</p>
+<p>It might help to think of<em> few</em> as a half-empty glass of water. <em>A few</em> is like a half-filled glass of water. The amount of water is the same. But the speaker's attitude about the amount of water is different. <em>Few </em>and<em> a few</em> are only used before count nouns.</p>
+<p>The same <strong>positive</strong>-negative <strong>distinction </strong>applies to <em>a little </em>and<em> little</em>. Use <em>little</em> and<em> a little</em> before noncount nouns.</p>
+<p><em>I have a little money means the speaker has some money.</em></p>
+<p><em>I have little money means the speaker does not have enough money.</em></p>
+<p>Speaking of <em>little</em>, we have <em>little</em> time left for today's program. We hope you learned a few tips about how to use quantifiers.</p>
+<p>I'm Jill Robbins.</p>
+<p>And I'm John Russell.</p>
+<p><em>Adam Brock wrote this lesson for VOA Learning English. </em></p>
+<p>__________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>quantifier</strong> – <em>grammatical term.</em> a determiner or pronoun indicative of quantity (e.g., all, both )</p>
+<p><strong>count noun</strong> - <em>grammatical term. </em>a noun that can form a plural and, in the singular, can be used with the indefinite article</p>
+<p><strong>noncount noun</strong> - <em>grammatical term. </em>a noun (such as “sand” or “butter”) that refers to something that cannot be counted<em> </em></p>
+<p><strong>options </strong>– <em>n.</em> choices</p>
+<p><strong>assignment </strong> - <em>n.</em> a job or duty that is given to someone : a task someone is required to do</p>
+<p><strong>absence </strong>– <em>n.</em> a state or condition in which something expected, wanted, or looked for is not present or does not exist : a state or condition in which something is absent</p>
+<p><strong>unsophisticated</strong> - <em>adj</em>. not complicated or highly developed; basic</p>
+<p><strong>focus</strong> – <em>v.</em> to direct your attention or effort at something specific</p>
+<p><strong>negative </strong> -<em> adj</em>. harmful or bad : not wanted</p>
+<p><strong>positive </strong>– <em>adj.</em> good or useful</p>
+<p><strong>distinction</strong> – <em>n.</em> the quality that makes a person or thing special or different</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

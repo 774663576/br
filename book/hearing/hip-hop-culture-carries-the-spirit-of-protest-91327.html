@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Hip-hop Culture Carries the Spirit of Protest</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Hip-hop Culture Carries the Spirit of Protest" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/hip-hop-culture-carries-the-spirit-of-protest.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Hip-hop Culture Carries the Spirit of Protest</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/hip-hop-culture-carries-the-spirit-of-protest.mp3" id="mp3"></a>
+<a href="/static/lrc/hip-hop-culture-carries-the-spirit-of-protest.lrc" id="lrc"></a>
+<a href="dna-of-enslaved-iron-workers-gives-light-to-african-american-history-91322.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">11 August 2023</span><br/>
+<p>The signs of hip-hop's influence are everywhere. American rapper and music producer Pharrell Williams recently became a creative director for the French <strong>fashion</strong> company Louis Vuitton. Other hip hop stars, including Dr. Dre, Diddy and Jay-Z, started billion-dollar fashion, lifestyle and music companies.</p>
+<p>But it did not start out that way.</p>
+<p>Hip-hop started 50 years ago as an escape from the poverty and violence in the Bronx area of New York City. The music and style appealed to Black and Latino <strong>teenagers</strong>. As hip-hop spread throughout New York, so did the culture.</p><div class="contentImage"><img alt="FILE - Breakdancer Victor Montalvo, 27, of Kissimmee, Fla., performs in New York City on June 22, 2021. (AP Photo/Ted Shaffrey)" src="https://files.21voa.com/gdb/01000000-0aff-0242-93b6-08db9a7553d9_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Breakdancer Victor Montalvo, 27, of Kissimmee, Fla., performs in New York City on June 22, 2021. (AP Photo/Ted Shaffrey)</span></div>
+<p>People often mix up hip-hop with rap. Rap is a musical style that combines quick <strong>recitation</strong> of <strong>rhymes</strong> with musical beats. But hip-hop is more than just music. It is a culture, and rap music is one part of it. Hip-hop also includes other activities, like breakdancing, <strong>disc</strong>-<strong>jockeying</strong> and <strong>graffiti</strong> art.</p>
+<p>In his 1993 song <em>Hip Hop vs. Rap</em>, KRS-One <a class="wsw__a" href="https://www.youtube.com/watch?v=YRkoHiOiPcc">said</a>: "Rap is something you do. Hip hop is something you live."</p>
+<p>In the early days of hip-hop, playing music on the streets or turning a basketball court into a dance floor may have seemed like a simple invitation to have fun and party. But it actually was an answer to social and economic injustice in poor neighborhoods. It was a way to show joy and imagination even without resources and wealth.</p>
+<p>As hip-hop and rap music grew into a force in American culture, entertainers used it to speak to their personal realities. In 1982, in the song <em>The Message</em>, Grandmaster Flash and the Furious Five denounced poverty and a lack of investment in Black communities. Several years later, Tupac Shakur railed against police violence in the song <em>Changes</em>.</p>
+<p>Today, hip-hop's influence on music and other industries is so widespread that experts say it becomes difficult to measure. Writer Zack O'Malley Greenburg estimates that hip-hop's five wealthiest artists were collectively worth nearly $4 billion in 2022.</p>
+<p>There is also hip-hop's influence on protest, resistance and political dissent around the world. From the Arab Spring and the Palestinian freedom fight to feminism and class struggles, rap music is a popular expression for calls to action. Music videos produced by artists in Africa, Europe, Asia and South America often include breakdancers, graffiti and other elements of hip-hop.</p>
+<p>In 2016, former U.S. President Barack Obama answered questions about human rights and free expression during a visit to Vietnam. One question came from Suboi, a female rapper known as Vietnam's "Queen of Hip-Hop." She said she struggled against the Vietnamese stereotype that rap and hip-hop music are not a good form of expression for Asian women.</p>
+<p>"Let's be honest, sometimes art is dangerous and that's why governments sometimes get nervous about art," Obama said. "But one of the things that I truly believe is that if you try to suppress the arts, then I think you're suppressing the deepest dreams and aspirations of a people."</p>
+<p>American civil rights leader Rev. Al Sharpton was 18 years old when hip-hop took off in his native New York. He said rap music fueled the movement that has shaped much of his public life. Now 68 years old, Sharpton said he believes hip-hop culture was part of what made it possible for the United States to elect its first Black president in 2008.</p>
+<p>"Hip-hop took the <strong>chains</strong> off us and said, ‘No, we're gonna say it our way, " Sharpton said, "It was that freedom. It was that raw, non-watered down kind of expression."</p>
+<p>I'm Caty Weaver.</p>
+<p><em>Hai Do adapted this story for Learning English based on reporting from The Associated Press.</em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>fashion</strong> - n. the business of creating and selling new styles of clothes</p>
+<p><strong>teenager</strong> - n. someone between 13 and 19 years old</p>
+<p><strong>recitation</strong> - n. the act of describing or listing many things in a series</p>
+<p><strong>rhyme</strong> - n. words or phrases that end in the same sound</p>
+<p><strong>disc jockey</strong> - n. a person who plays recorded music on radio, at a party or a night club</p>
+<p><strong>graffiti</strong> - n. pictures or words drawn on a wall</p>
+<p><strong>chain</strong> - n. metal links or rings usually used to attach to a prisoner</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Hip-hop Culture Carries the Spirit of Protest]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.48]The signs of hip-hop's influence are everywhere.
+[00:06.28]American rapper and music producer Pharrell Williams
+[00:11.20]recently became a creative director
+[00:14.68]for the French fashion company Louis Vuitton.
+[00:19.56]Other hip hop stars, including Dr. Dre,
+[00:24.00]Diddy and Jay-Z, started billion-dollar fashion,
+[00:29.52]lifestyle and music companies.
+[00:33.56]But it did not start out that way.
+[00:37.12]Hip-hop started 50 years ago
+[00:40.40]as an escape from the poverty and violence
+[00:44.48]in the Bronx area of New York City.
+[00:48.88]The music and style
+[00:51.16]appealed to Black and Latino teenagers.
+[00:56.04]As hip-hop spread throughout New York,
+[00:59.20]so did the culture.
+[01:02.16]People often mix up hip-hop with rap.
+[01:06.20]Rap is a musical style that combines
+[01:10.04]quick recitation of rhymes  with musical beats.
+[01:15.72]But hip-hop is more than just music.
+[01:20.12]It is a culture,
+[01:21.84]and rap music is one part of it.
+[01:26.32]Hip-hop also includes other activities,
+[01:29.96]like breakdancing, disc-jockeying and graffiti art.
+[01:36.12]In his 1993 song Hip Hop vs. Rap,
+[01:40.96]KRS-One said:
+[01:43.56]"Rap is something you do.
+[01:46.12]Hip hop is something you live."
+[01:50.40]In the early days of hip-hop,
+[01:52.72]playing music on the streets
+[01:55.12]or turning a basketball court into a dance floor
+[01:59.44]may have seemed like a simple invitation
+[02:02.80]to have fun and party.
+[02:05.76]But it actually was an answer
+[02:08.40]to social and economic injustice
+[02:11.52]in poor neighborhoods.
+[02:14.20]It was a way to show joy and imagination
+[02:18.40]even without resources and wealth.
+[02:23.04]As hip-hop and rap music
+[02:25.56]grew into a force in American culture,
+[02:29.28]entertainers used it to speak to their personal realities.
+[02:34.00]In 1982, in the song The Message,
+[02:39.80]Grandmaster Flash and the Furious Five
+[02:43.24]denounced poverty and a lack of investment
+[02:46.84]in Black communities.
+[02:49.40]Several years later, Tupac Shakur
+[02:52.76]railed against police violence in the song Changes.
+[02:58.48]Today, hip-hop's influence on music
+[03:01.96]and other industries is so widespread
+[03:06.00]that experts say it becomes difficult to measure.
+[03:11.36]Writer Zack O'Malley Greenburg
+[03:14.04]estimates that hip-hop's five wealthiest artists
+[03:18.72]were collectively worth nearly $4 billion in 2022.
+[03:26.48]There is also hip-hop's influence on protest,
+[03:30.32]resistance and political dissent around the world.
+[03:36.08]From the Arab Spring and the Palestinian freedom fight
+[03:40.36]to feminism and class struggles,
+[03:43.96]rap music is a popular expression for calls to action.
+[03:49.88]Music videos produced by artists in Africa,
+[03:54.28]Europe, Asia and South America often
+[03:58.72]include breakdancers, graffiti
+[04:02.20]and other elements of hip-hop.
+[04:05.80]In 2016, former U.S. President Barack Obama
+[04:11.24]answered questions about human rights
+[04:14.72]and free expression during a visit to Vietnam.
+[04:20.12]One question came from Suboi,
+[04:23.20]a female rapper known as Vietnam's "Queen of Hip-Hop."
+[04:29.64]She said she struggled against
+[04:32.36]the Vietnamese stereotype
+[04:34.80]that rap and hip-hop music
+[04:37.28]are not a good form of expression for Asian women.
+[04:42.96]"Let's be honest, sometimes art is dangerous
+[04:46.56]and that's why governments
+[04:48.36]sometimes get nervous about art," Obama said.
+[04:52.56]"But one of the things that I truly believe
+[04:56.24]is that if you try to suppress the arts,
+[04:59.48]then I think you're suppressing the deepest dreams
+[05:03.32]and aspirations of a people."
+[05:07.28]American civil rights leader Rev. Al Sharpton
+[05:11.68]was 18 years old
+[05:13.84]when hip-hop took off in his native New York.
+[05:18.16]He said rap music fueled the movement
+[05:22.12]that has shaped much of his public life.
+[05:26.44]Now 68 years old, Sharpton said
+[05:30.84]he believes hip-hop culture
+[05:33.20]was part of what made it possible
+[05:36.24]for the United States to elect
+[05:38.88]its first Black president in 2008.
+[05:44.48]"Hip-hop took the chains off us and said,
+[05:48.28]‘No, we're gonna say it our way, "
+[05:51.04]Sharpton said, "It was that freedom.
+[05:55.16]It was that raw,
+[05:57.16]non-watered down kind of expression."
+[06:01.84]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

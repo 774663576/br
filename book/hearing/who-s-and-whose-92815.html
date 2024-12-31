@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Who’s and Whose</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Who’s and Whose" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/who-s-and-whose.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Who’s and Whose</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/who-s-and-whose.mp3" id="mp3"></a>
+<a href="church-bells-in-spanish-town-ring-out-a-return-to-tradition-92814.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">19 July, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Mei Jen in China about the usage of two words that sound the same.</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/01000000-0a00-0242-8d3b-08dca12051c6_w268_r1.png"/></div>
+<p>I have some question(s) about the words <em>whose </em>and <em>who's</em>. I sometimes have confusion when I hear. I am not always sure what word I am hearing. Can you please share with me your advice?</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing to us Mei Jen. I'm happy to answer this question.</p>
+<p>The easiest way to know which word you are hearing is to listen for the words that follow it.</p>
+<p><strong>Who's</strong></p>
+<p>We contract, or join together, the two words <em>who is</em> to make the contraction “who's.” Often, the next word you hear after “who's” is a verb, as in these examples:</p>
+<p><em>Who's going to help us?</em></p>
+<p><em>Who's making all that noise?</em></p>
+<p><em>Who's using this computer?</em></p>
+<p>Sometimes, you will hear a prepositional phrase or a noun phrase after the contraction “who's.”</p>
+<p><em>Who's in the office today?</em></p>
+<p><em>Who's the director of that film?</em></p>
+<p>Last, we can contract the word “who” with the verb “has." So, the sentence “Who has already seen this film?” sounds like this:</p>
+<p><em>Who's already seen this film?</em></p>
+<p><strong>Whose</strong></p>
+<p>Now, let's look at the possessive “whose," spelled w-h-o-s-e.</p>
+<p>We use it to ask about who owns or has something. So, you should listen for a noun after the pronoun “whose," or you can listen for the adjectives “this,” “that,” “these,” or “those.”</p>
+<p>For example, if we see a book on a desk and we do not know who owns it, we can ask either of the following questions:</p>
+<p><em>Whose book is this?</em></p>
+<p><em>Whose book is that?</em></p>
+<p>You can hear the noun “book,” and you can also hear the adjectives “this” and “that” at the end of the question.</p>
+<p>We use the word “this” if we are close to the book. If we are farther away from the book, we use the word “that.”</p>
+<p>We use the adjectives “these” and “those” for plural things.</p>
+<p><em>Whose shoes are these?</em></p>
+<p><em>Whose bags are those?</em></p>
+<p>We can also place the contraction “who's” and the possessive “whose” at the beginning of a noun clause. The noun clause begins after the main verb of the sentence, as in these examples:</p>
+<p><em>I want to know who's going to drive the bus.</em></p>
+<p><em>I want to know whose idea this was. </em></p>
+<p>You can learn more about the possessive “whose,” including its use in relative clauses, in this Everyday Grammar on <a class="wsw__a" href="https://www.21voa.com/a/everyday-grammar-the-mysterious-word-whose-/4479936.html">The Mysterious Word ‘Whose'</a>.</p>
+<p>We hope today's lesson is helpful, Mei Jen.</p>
+<p>For our readers and listeners, do you have a question about American English? Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.<em> </em></p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

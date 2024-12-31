@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - Facebook用户数量超过中国人口</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, Facebook用户数量超过中国人口" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201504/facebook-has-more-users-than-china-population.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Facebook用户数量超过中国人口</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201504/facebook-has-more-users-than-china-population.mp3" id="mp3"></a>
+<a href="/static/lrc/facebook-has-more-users-than-china-population.lrc" id="lrc"></a>
+<a href="facebook-has-more-users-than-china-population-62553.html" id="CnPage" target="_blank"></a>
+<a href="april--english-language-day-62538.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The social network Facebook reported that it now has 1.44 billion monthly active users (MAU) worldwide. That is 50 million more users than the population of China and over 188 million more than India's population.<br/>社交网络Facebook报告称其目前在全球范围内拥有14.4亿月度活跃用户，其用户数量比中国人口高出5千万，比印度人口高出1.88亿。</p>
+<p>Facebook also reported that 75 percent of its users access the site via mobile devices as of March 2015.<br/>Facebook还报告称，截至2015年3月，75%的用户是通过移动设备访问该网站。</p>
+<p>Despite its growing user base and accessibility via smartphones and tablets, Facebook's income dropped 13 percent over year-ago levels to $933 million.<br/>尽管其用户群和通过智能手机及平板电脑访问的可用性不断增长，Facebook的收入比去年同期水平下降13%，收入下降至9.33亿美元。</p>
+<p>That is likely a result of several factors, analysts say.<br/>分析师表示，这可能源于多个因素。</p>
+<p>Over the last year Facebook has spent money to buy the photo-sharing Instagram app. It launched "Messenger" for users to communicate directly and added videos to the site to compete with YouTube.<br/>在过去一年，Facebook耗资收购了图片分享应用程序Instagram，还推出了Messenger让用户直接沟通，并且在网站上增加了视频服务与YouTube竞争。</p>
+<p>Additionally, more than half of Facebook's revenue comes from nations other than the United States. For example, it is very popular in Indonesia. The recent rise in the value of the U.S. dollar may have cut into Facebook's overall profits.<br/>此外，Facebook一半以上的营收来自于美国以外的国家。例如，它在印尼很受欢迎。近期美元价值上涨可能削弱了Facebook的整体利润。</p>
+<p>In a statement to the media, Facebook co-founder and CEO Mark Zuckerberg called its quarterly report "a good quarter and a good start to the year."<br/>Facebook联合创始人兼CEO马克·扎克伯格（Mark Zuckerberg）在一份面向媒体的声明中称Facebook的季度报告是“良好的一季，也是一年的良好开局”。</p>
+<p>Facebook launched to the public in December 2004 but had little growth in its first four years. Social media strategist Ben Foster calculates that Facebook has seen explosive growth since April of 2009.<br/>Facebook于2004年12月面向公众推出，但是其在最初四年增长甚微。社交媒体策略分析师本·福斯特（Ben Foster）认为Facebook从2009年4月开始爆炸性增长。</p>
+<p>"The strong growth in Mobile MAUs tells me that Facebook is becoming the first thing people go to on their mobile device," Foster told VOA via email. "If this trend continues, Facebook could easily become the primary source of traffic for publishers and companies. This could change the digital landscape for content, as the content we prefer to consume on mobile is quite different than content we prefer on a browser."<br/>福斯特通过电子邮件对美国之音表示，“移动端月度活跃用户的强劲增长提示我们，Facebook正成为人们在移动设备上的首选。如果这种趋势继续下去，Facebook就能轻易成为广告发布者和各个公司的主要流量来源。这可能会改变内容的数字景观，因为我们在手机上选择阅读的内容同我们在浏览器上选择的完全不同。”</p>
+<p>Much of Facebook's revenue comes from sales of ads that are tailored for users based on their Facebook activities and friends.<br/>Facebook大部分收入来自基于用户的Facebook活跃内容和朋友圈，为用户量身定做的广告的销售。</p>
+<p>Earlier this year in March, the European Court of Justice – the EU's highest-such court – heard a complaint against Facebook. The social media site allegedly passed data from European users to the U.S. National Security Agency. This violates EU privacy protections.<br/>今年三月，作为欧盟最高法庭的欧洲法院对一起针对Facebook的诉讼进行了听证。据传这家社交媒体网站将欧洲用户数据传给了美国国家安全局。这范围了欧盟的隐私保护政策。</p>
+<p>Despite privacy concerns, analyst Foster says the numbers suggest people actually like the product, and the number of users will grow.<br/>尽管存在这些隐私问题，分析师福斯特表示，各项数字表明人们真正喜欢该产品，用户数量还会继续增长。</p>
+<p>"For Facebook's reach, if they are the best at delivering content, then they will continue to get more users which will continue the cycle," he said.<br/>他说，“对于Facebook的未来，如果它们是内容分发上的最佳人选，它们就能获得更多用户并周而复始。”</p>
+<p>I'm Jim Tedder.<br/>我是吉姆·特德（Jim Tedder）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Facebook Has More Users than Population of China]
+[ar:Jim Tedder]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]The social network Facebook reported 
+[00:03.58]that it now has 1.44 billion monthly active users (MAU) worldwide. 
+[00:09.40]That is 50 million more users than the population of China 
+[00:14.31]and over 188 million more than India's population.
+[00:19.54]Facebook also reported that 75 percent of its users
+[00:25.19]access the site via mobile devices as of March 2015.
+[00:30.81]Despite its growing user base 
+[00:33.35]and accessibility via smartphones and tablets, 
+[00:37.54]Facebook's income dropped 13 percent 
+[00:40.88]over year-ago levels to $933 million.
+[00:45.56]That is likely a result of several factors, analysts say.
+[00:50.80]Over the last year Facebook has spent money 
+[00:54.43]to buy the photo-sharing Instagram app. 
+[00:57.62]It launched "Messenger" for users to communicate directly 
+[01:02.05]and added videos to the site to compete with YouTube.
+[01:05.99]Additionally, more than half of Facebook's revenue 
+[01:10.14]comes from nations other than the United States. 
+[01:13.38]For example, it is very popular in Indonesia. 
+[01:17.26]The recent rise in the value of the U.S. dollar 
+[01:20.84]may have cut into Facebook's overall profits.
+[01:24.24]In a statement to the media, 
+[01:26.63]Facebook co-founder and CEO Mark Zuckerberg 
+[01:30.56]called its quarterly report 
+[01:32.70]"a good quarter and a good start to the year."
+[01:35.99]Facebook launched to the public in December 2004 
+[01:40.73]but had little growth in its first four years. 
+[01:43.97]Social media strategist Ben Foster calculates 
+[01:49.09]that Facebook has seen explosive growth since April of 2009.
+[01:54.43]"The strong growth in Mobile MAUs tells me 
+[01:59.01]that Facebook is becoming the first thing 
+[02:01.60]people go to on their mobile device,
+[02:04.04]" Foster told VOA via email. "
+[02:07.08]If this trend continues, 
+[02:09.17]Facebook could easily become the primary source 
+[02:12.75]of traffic for publishers and companies. 
+[02:15.44]This could change the digital landscape for content, 
+[02:19.28]as the content we prefer to consume on mobile 
+[02:22.66]is quite different than content we prefer on a browser."
+[02:26.84]Much of Facebook's revenue comes from sales of ads 
+[02:32.12]that are tailored for users based on their Facebook activities and friends.
+[02:37.79]Earlier this year in March, the European Court of Justice – 
+[02:42.87]the EU's highest-such court – heard a complaint against Facebook. 
+[02:48.00]The social media site allegedly passed data 
+[02:52.18]from European users to the U.S. National Security Agency. 
+[02:56.61]This violates EU privacy protections.
+[03:01.04]Despite privacy concerns, 
+[03:03.83]analyst Foster says the numbers suggest people actually like the product, 
+[03:10.01]and the number of users will grow.
+[03:12.76]"For Facebook's reach, if they are the best at delivering content, 
+[03:18.33]then they will continue to get more users which will continue the cycle," he said.
+[03:23.13]I'm Jim Tedder.
+[03:25.83]更多听力请访问51voa.com
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Is It Harris' or Harris's?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Is It Harris' or Harris's?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/is-it-harris-or-harris-s.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Is It Harris' or Harris's?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/is-it-harris-or-harris-s.mp3" id="mp3"></a>
+<a href="australia-moves-forward-with-major-renewable-energy-project-92914.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Hai Do</span><br/><span class="datetime">22 August, 2024</span><br/>
+<p>The battle for the White House is set as Vice President Kamala Harris officially accepts the Democratic Party nomination on Thursday to run against former President Donald Trump, the Republican nominee.</p>
+<p>However, another fight is just starting among grammar <strong>nerds</strong> over where to put the possessive <strong>apostrophe</strong> after her name. Is it <u>Harris'</u> or <u>Harris's</u>?</p>
+<p>Eric Turkewitz, a New York lawyer, called the debate <a class="wsw__a" href="https://x.com/Turkewitz/status/1820814762336227836">“apostrophe hell”</a> on the social media website X. It has since received more than 2 million views.</p><div class="contentImage"><img src="https://files.21voa.com/gdb/01000000-c0a8-0242-a3ab-08dcc1fcf821_w268_r1.png"/></div>
+<p>The <em>Associated Press Stylebook</em> says, “Use only an apostrophe” for singular proper names ending in the letter “s,” such as Dickens' book, Hercules' labors, or Jesus' life. So, for Harris, it is Harris, followed by an apostrophe, as in “<u>Harris'</u> policy.”</p>
+<p>The <em>AP Stylebook</em> is widely used as the <strong>standard</strong> by American news organizations. But not everyone agrees.</p>
+<p>Three large U.S. newspapers, <em>The New York Times</em>, <em>The Washington Post,</em> and <em>The Wall Street Journal</em> all use Harris, followed by an apostrophe and the letter “s,” as in “<u>Harris's</u> policy.”</p>
+<p>Adding to the <strong>confusion</strong>, they all agree that the singular possessive for Harris' running mate, Minnesota Governor Tim Walz, is <u>Walz's</u>. As for plural possessive, it is <u>Harrises'</u> as in <u>Harrises'</u> family home and <u>Walzes'</u> as in <u>Walzes'</u> cats.</p>
+<p>Benjamin Dreyer is a retired <strong>editor</strong> who worked for the publisher Random House. He wrote <em>Dreyer's English: An Utterly Correct Guide to Clarity and Style</em>. He told the AP there is widespread agreement that <u>Walz's</u> is correct. But many flooded him with questions about what to do with the apostrophe after Harris.</p>
+<p>Add the apostrophe and the letter “s,” Dryer said. “To set the 's is just simpler, and then you can take your valuable brain cells and apply them to more important things.”</p>
+<p><strong>Not so fast!</strong></p>
+<p>The American dictionary publisher Merriam-Webster <a class="wsw__a" href="https://x.com/MerriamWebster/status/1820874029202284562">joined the debate</a> with this reminder: “For names that end in an s or z sound, you can either add -'s or just an apostrophe. Going with -'s is the more common choice: the car that belongs to Jones → Jones's car or Jones' car.”</p>
+<p>Amanda Barrett is AP's vice president for news standards and inclusion. She said, while the AP style has <strong>evolved</strong> over the years, there are no plans to change the guidance on the possessive apostrophe “s.”</p>
+<p>Barrett added, “We do know that the <strong>conversation</strong> is out there and people make different choices when it comes to grammar, and that's all fine. Everyone makes a choice that works best for them.”</p>
+<p>Timothy Pulju teaches linguistics at Dartmouth College in New Hampshire. He said that until the 17th or 18th <strong>century</strong>, the possessive of proper names ending in the letter “s” - such as Jesus or Moses - often was simply the name itself with no apostrophe or additional “s.” Eventually, the apostrophe (Jesus' or Moses') was added to mark the possession although the pronunciation remained the same.</p>
+<p>“That became kind of the standard that I was taught and <strong>adhere</strong> to, even though <strong>in retrospect</strong>, I don't think it's a great standard,” he said.</p>
+<p>Pulju expects most people will use the apostrophe followed by the letter “s” form over time. “As long as people are communicating successfully, we say language is doing what it's supposed to be doing,” he said. “If you can read it whichever way it's written, then it seems like it's working for people...”</p>
+<p>Michael Dukakis of Massachusetts was the last U.S. presidential candidate whose name ended with the letter “s.” Dukakis told the AP that he does not remember any similar discussion when he was the Democratic nominee. But he agrees with the AP.</p>
+<p>“It sounds to me like it would be s, apostrophe, and that's it,” he said.</p>
+<p>If Harris wins in November, she would become the fourth U.S. president with a last name ending in the letter “s” and the first since Rutherford B. Hayes, who was elected in 1876.</p>
+<p>The Harris campaign has yet to take a clear position. Press releases issued by the campaign talked about “Harris's positive vision,” and “Harris' seventh trip to Nevada.”</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Holly Ramer reported this story for the Associated Press. Hai Do adapted it for VOA Learning English with additional sources. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>nerd</strong><strong> </strong>–n. people who are very interested in the technical details of a subject that most people cannot relate to</p>
+<p><strong>apostrophe</strong> <em>–n. </em>a punctuation mark that has several uses including its use with an “s,” to show the possessive form of a noun</p>
+<p><strong>standard</strong> <em>–n.</em> a level of quality or normal practice that is acceptable or desirable</p>
+<p><strong>confusion </strong>–n. a state of not understanding or not knowing what to do</p>
+<p><strong>editor </strong>–n. a person whose job it is to review written work, make changes and correct mistakes</p>
+<p><strong>evolve </strong>–v. to change over time</p>
+<p><strong>conversation </strong>–n. a discussion between people that is somewhat informal</p>
+<p><strong>century </strong>–n. a period of one hundred years (example: the 1900s are known as the 20<sup>th</sup> century)</p>
+<p><strong>adhere </strong>–v. to keep close to</p>
+<p><strong>in retrospect </strong>–phrase to look back in time or to think about the past</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

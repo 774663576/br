@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 西点军校直播打开近200年历史的时光胶囊</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 西点军校直播打开近200年历史的时光胶囊" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/west-point-time-capsule-contains-more-than-just-dirt.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>西点军校直播打开近200年历史的时光胶囊</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/west-point-time-capsule-contains-more-than-just-dirt.mp3" id="mp3"></a>
+<a href="/static/lrc/west-point-time-capsule-contains-more-than-just-dirt.lrc" id="lrc"></a>
+<a href="west-point-time-capsule-contains-more-than-just-dirt-91452.html" id="CnPage" target="_blank"></a>
+<a href="artists-fight-back-against-ai-using-their-work-91451.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Officials at the U.S. Military Academy West Point in New York state recently opened a time capsule that is 195 years old live on the internet.<br/>
+纽约州西点军校官员最近通过网上直播打开了一个有195年历史的时间胶囊。</p>
+<p>The event on August 28 caused disappointment because the container appeared to contain nothing more than dirt. But West Point officials said last Wednesday that the box did contain hidden treasure after all.<br/>
+8月28日的这次活动让人们失望，因为盒子里似乎除了泥土什么都没有。但西点军校官员上周三表示，这个盒子里确实藏着宝藏。</p>
+<p>A time capsule is a container that is filled with objects and buried or hidden. The capsule is meant to be opened by people living many years in the future.<br/>
+时间胶囊是指装满物体并被掩埋或藏起来的容器。这个容器将被生活在多年之后的人们打开。</p>
+<p>The lead box is believed to have been put in place by West Point military students. It was discovered inside the base of a memorial to Revolutionary War hero Thaddeus Kosciuszko.<br/>
+据信，这个铅盒是西点军校学生放置的。它是在独立战争英雄撒迪乌斯·科希丘什科纪念碑的基座内发现的。</p>
+<p>The capsule contained six silver American coins dating from 1795 and 1828 and a medal, West Point said in a news release. The ceremonial opening of the box happened at the military school in New York state.<br/>
+西点军校在一份新闻稿中表示，这个容器内装有六枚1795年至1828年的美国银币和一枚奖章。开箱仪式在这所位于纽约州的军校举行。</p>
+<p>Speaking of the event, West Point archeologist Paul Hudson said: "When I first found these, I thought, man, you know, it would have been great to have found these on stage." After the opening, he took the box back to his laboratory and began carefully looking through the remains.<br/>
+西点军校考古学家保罗·哈德森在谈到这次活动时表示：“当我找到这些东西时，我想，要是能在台上（直播时）发现它们就好了。”打开盒子后，他把盒子带回了实验室，然后开始仔细查看残留物。</p>
+<p>He said he then found the edge of a coin in the dust inside the box. "I thought, well that's OK. That's something, that's a start," Hudson said.<br/>
+他称自己随后在盒子里的灰尘中发现了一枚硬币的边缘。哈德森说：“我想，好吧，没关系。这是一个开始。”。</p>
+<p>He said he felt let down like everyone else by the lack of results from the live opening. The crowd that gathered at the U.S. Military Academy hoped to see historical military objects or documents when experts opened the top and pointed a camera inside.<br/>
+他说，对于在直播打开时没有发现，他和其他人一样感到失望。聚集在这所美国军事学院的人群希望在专家打开盒盖并将相机对准内部时能够看到历史军事物品或文件。</p>
+<p>It was probably better to remove the coins and medal in a controlled setting, added Hudson. He still plans to study the remains for possible answers to what else might be inside.<br/>
+哈德森补充道，最好在可控的环境中移去硬币和奖牌。他仍然计划研究这些残留物，以期找到答案，弄清楚里面可能还有什么。</p>
+<p>It appears that moisture and possibly dirt entered the box through a damaged edge. The conditions could have destroyed materials like paper or wood.<br/>
+看上去水汽和泥土是通过损坏的边缘进入了盒子。这种情况可能会破坏纸张或木材等材料。</p>
+<p>What did survive was a five-cent coin from the year 1795, an 1800 Liberty Dollar, an 1818 25-cent coin, 10-cent, and 1-cent coins from 1827, and an 1828 50-cent coin. There was also a medal remembering the Erie Canal from 1826.<br/>
+残留下来的是一枚1795年的5美分硬币、一枚1800年的自由银币、一枚1818年的25美分硬币、1827年的10美分硬币和1美分硬币各一枚，以及一枚1828年的50美分硬币。还有一枚纪念1826年伊利运河的奖章。</p>
+<p>The discoveries seem to confirm school officials' theory that the box was put in place by military students in 1828 or 1829. The monument to Kosciuszko, which included a statue of him, was completed at about that time.<br/>
+这些发现似乎证实了学校官员推测的盒子是1828年或1829年由军校学生安放的。科希丘什科纪念碑，包括他的雕像，大约是在那个时候造好的。</p>
+<p>A group of five military students, or cadets, was involved in the ceremony dedicating the monument. One of them was U.S. Civil War general Robert E. Lee who graduated in 1829.<br/>
+一个由五名军校学员组成的小组参与了纪念碑的落成仪式。其中一位是1829年毕业的美国内战将领罗伯特·E·李。</p>
+<p>Kosciuszko had designed wartime fortifications for the Continental Army at West Point during the Revolutionary War. He died in 1817. The statue of Kosciuszko was added to the monument in 1913.<br/>
+科希丘什科在独立战争期间为大陆军在西点军校设计了战时防御工事。他于1817年去世。科希丘什科的雕像于1913年被添加到纪念碑中。</p>
+<p>The historical preservation and research of the time capsule will continue.<br/>
+对时间胶囊的历史保存和分析将继续进行。</p>
+<p>"I think there's more that we can learn from this," Hudson said.<br/>
+哈德森说：“我认为我们可以从中学到更多东西。”</p>
+<p>I'm Gregory Stachel.<br/>
+我是格雷戈里·施塔赫尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:West Point Time Capsule Contains More Than Just Dirt]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Officials at the U.S. Military Academy
+[00:04.48]West Point in New York state
+[00:07.84]recently opened a time capsule
+[00:11.24]that is 195 years old live on the internet.
+[00:18.64]The event on August 28 caused disappointment
+[00:23.88]because the container appeared to contain
+[00:27.36]nothing more than dirt.
+[00:30.76]But West Point officials said last Wednesday
+[00:35.04]that the box did contain hidden treasure after all.
+[00:40.84]A time capsule is a container
+[00:43.80]that is filled with objects and buried or hidden.
+[00:49.04]The capsule is meant to be opened by people
+[00:52.68]living many years in the future.
+[00:56.80]The lead box is believed to have been put in place
+[01:01.44]by West Point military students.
+[01:05.88]It was discovered inside the base of a memorial
+[01:10.40]to Revolutionary War hero Thaddeus Kosciuszko.
+[01:17.16]The capsule contained six silver American coins
+[01:21.56]dating from 1795 and 1828 and a medal,
+[01:28.04]West Point said in a news release.
+[01:32.48]The ceremonial opening of the box
+[01:35.60]happened at the military school in New York state.
+[01:41.36]Speaking of the event, West Point archeologist Paul Hudson said:
+[01:47.72]"When I first found these, I thought, man,
+[01:51.76]you know, it would have been great to have found these on stage."
+[01:57.68]After the opening, he took the box back to his laboratory
+[02:03.00]and began carefully looking through the remains.
+[02:07.92]He said he then found the edge of a coin
+[02:11.36]in the dust inside the box.
+[02:14.96]"I thought, well that's OK.
+[02:17.84]That's something, that's a start," Hudson said.
+[02:22.56]He said he felt let down like everyone else
+[02:26.32]by the lack of results from the live opening.
+[02:30.72]The crowd that gathered at the U.S. Military Academy
+[02:35.16]hoped to see historical military objects
+[02:38.80]or documents when experts opened the top
+[02:42.48]and pointed a camera inside.
+[02:46.40]It was probably better to remove the coins
+[02:50.12]and medal in a controlled setting, added Hudson.
+[02:54.40]He still plans to study the remains
+[02:57.20]for possible answers to what else might be inside.
+[03:02.40]It appears that moisture and possibly dirt
+[03:06.04]entered the box through a damaged edge.
+[03:10.36]The conditions could have destroyed materials like paper or wood.
+[03:16.20]What did survive was a five-cent coin from the year 1795,
+[03:21.80]an 1800 Liberty Dollar,
+[03:24.80]an 1818 25-cent coin,
+[03:28.80]10-cent, and 1-cent coins from 1827,
+[03:33.96]and an 1828 50-cent coin.
+[03:39.36]There was also a medal remembering the Erie Canal from 1826.
+[03:46.56]The discoveries seem to confirm school officials' theory
+[03:50.80]that the box was put in place by military students in 1828 or 1829.
+[03:59.52]The monument to Kosciuszko,
+[04:02.40]which included a statue of him,
+[04:05.00]was completed at about that time.
+[04:08.92]A group of five military students, or cadets,
+[04:11.80]was involved in the ceremony dedicating the monument.
+[04:17.96]One of them was U.S. Civil War general Robert E. Lee
+[04:23.00]who graduated in 1829.
+[04:27.56]Kosciuszko had designed wartime fortifications
+[04:31.80]for the Continental Army at West Point
+[04:35.00]during the Revolutionary War.
+[04:38.56]He died in 1817.
+[04:41.80]The statue of Kosciuszko was added to the monument in 1913.
+[04:49.80]The historical preservation
+[04:51.92]and research of the time capsule will continue.
+[04:56.80]"I think there's more that we can learn from this," Hudson said.
+[05:02.88]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 联合国报告：年轻女孩仍然面临性别不平等</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 联合国报告：年轻女孩仍然面临性别不平等" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201612/un-report-most-10-year-old-girls-have-fewed-chances-at-success-than-boys.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>联合国报告：年轻女孩仍然面临性别不平等</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201612/un-report-most-10-year-old-girls-have-fewed-chances-at-success-than-boys.mp3" id="mp3"></a>
+<a href="/static/lrc/un-report-most-10-year-old-girls-have-fewed-chances-at-success-than-boys.lrc" id="lrc"></a>
+<a href="un-report-most--year-old-girls-have-fewed-chances-at-success-than-boys-72962.html" id="CnPage" target="_blank"></a>
+<a href="german-chancellor-angela-merkel-calls-for-ban-on-full-face-burqas-72948.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">A new United Nations report says a lack of education for girls in developing countries may be partly to blame for a rise in poverty worldwide.<br/>联合国一份新的报告表示，发展中国家女孩缺乏教育可能是全球贫困加剧的部分原因。
+<p>The U.N. released its 2016 State of the World Population Report last week in Jordan's capital, Amman. The writers examine the well-being of 10-year-old girls as signs of success or failure of a country's development.<br/>联合国在约旦首都安曼发布了《2016年全球人口状况报告》。报告撰写者考察了10岁女孩的福祉作为该国发展成功或失败的标志。</p>
+<p>The report says most of the world's 10-year-old children live in developing countries. In many areas, girls face barriers to good education, healthcare and safety. The report points to problems with continued gender inequality among half of the world's young population.<br/>报告称，全球大部分10岁儿童生活在发展中国家。在很多地区，女孩在良好教育、医疗保健和安全问题上面临着重重障碍。报告指出，在全球一半年轻人口之中仍然存在着性别不平等的问题。</p>
+<p>On the day of the report's release, a group of students sang about gender equality at a press conference in Amman. The students take classes at the city's Princess Alia School for Girls.<br/>在报告发布当日，一群学生在安曼的新闻发布会上唱到了性别不平等。这些学生在该市的阿里亚公主女子学校上学。</p>
+<p>The report says 89 percent of the world's 125 million 10-year-olds live in developing countries. It also says 35 million 10-year-old girls live in countries said to be very unequal on issues of gender.<br/>该报告称，全球1.25亿的10岁人口中有89%居住在发展中国家。报告还称，有3500万10岁女孩居住在那些据说在性别问题上非常不平等的国家。</p>
+<p>Princess Basma Bint Talal is a Goodwill Ambassador for the U.N. Population Fund. She told reporters, "In some parts of the world, a 10-year-old girl looks forward to her horizons opening up" so she can reach her goals. But in other places, "she is up against closed doors."<br/>巴斯马·贝特·塔拉勒（Basma Bint Talal）公主是联合国人口基金会的亲善大使。她对记者表示，“在世界上的一些地方，10岁女孩期望着她们开阔眼界”，这样她就能实现目标。但是在一些地方，“她面对着大门紧闭”。</p>
+<p>Princess Basma said that girls' chances for success are limited when their futures are decided by other people or their environment. Some barriers can threaten their safety and social or economic growth.<br/>巴斯马公主表示，当女孩们的未来由其他人或她们处环境所决定，她们的成功机会就有限。一些障碍会威胁到她们的安全，以及社会或经济增长。</p>
+<p>Ten-year-old girls in many poor countries face the risk of being married off. More than 60 million girls are not in school. They do twice as much work around the home as boys their age, and they serve as unpaid laborers more than boys do.<br/>很多贫穷国家的10岁女孩面临着出嫁的风险。超过6千万女孩失学。她们干的家务活是同龄男孩的两倍，而且比男孩更多地作为免费劳动力。</p>
+<p>Every 10 minutes, an adolescent girl dies of violence. Many of them are infected with HIV, the virus that causes AIDS, as a result of rape. Suicide is the second largest cause of death for young girls.<br/>每10分钟就有一名少女死于暴力。她们中很多人因为被强奸而感染了艾滋病毒。自杀是年轻女孩死亡的第二大原因。</p>
+<p>Jordan's Princess Basma said, "Let us remember that we are all responsible. Let us remember that our every word and deed, positive or negative, can affect the road a girl travels" from this turning point in her life. She continued, "This is what will shape her role in society, which is to say our society, and our world."<br/>约旦的巴斯马公主表示，“我们要记住，我们都有责任。我们要记住，我们每一句话和行为，不管是积极还是消极的，都会影响一个女孩在这个人生转折点之后要走的道路。”她还说，“这将会塑造她在我们这个社会和我们这个世界中的角色。”</p>
+<p>The U.N. report says that investment in the health, education and empowerment of 10-year-old girls can triple a girl's lifetime earnings.<br/>这份联合国报告表示，对10岁女孩的健康、教育和赋权进行投资可以让女孩的终生收入翻三倍。</p>
+<p>Daniel Baker is the humanitarian coordinator for the U.N. Population Fund's office in Amman.<br/>丹尼尔·贝克（Daniel Baker）是联合国人口基金会驻安曼办事处的人道主义协调员。</p>
+<p>"Failing to invest in girls is nothing less than planned poverty. Unless we invest in girls, we're planning to have a poorer future."<br/>他说，“不投资于女孩等同于意图贫困。除非我们对女孩们投资，否则我们就是意图未来更穷。”</p>
+<p>This is a point that cannot be noted enough, he said.<br/>他说，这是一个未得到充分重视的问题。</p>
+<p>The report closes with the message that doing damage to girls is harmful not only to their communities, but to humanity as a whole.<br/>该报告最后写道，伤害女孩不仅对她们的社区有害，而且对整个人类都有害。</p>
+<p>I'm Alice Bryant.<br/>我是艾丽斯·布赖恩特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:UN Report: Young Girls Still Face Gender Inequality]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.16]A new United Nations report says
+[00:03.51]a lack of education for girls in developing countries
+[00:08.56]may be partly to blame for a rise in poverty worldwide.
+[00:15.00]The U.N. released its 2016 State of the World Population Report
+[00:20.52]last week in Jordan's capital, Amman.
+[00:25.36]The writers examine the well-being of 10-year-old girls
+[00:29.88]as signs of success or failure of a country's development.
+[00:35.44]The report says most of the world's 10-year-old children
+[00:40.60]live in developing countries.
+[00:43.40]In many areas, girls face barriers to good education, healthcare and safety.
+[00:51.92]The report points to problems with continued gender inequality
+[00:57.88]among half of the world's young population.
+[01:02.36]On the day of the report's release,
+[01:05.08]a group of students sang about gender equality at a press conference in Amman.
+[01:12.24]The students take classes at the city's Princess Alia School for Girls.
+[01:19.40]The report says 89 percent of the world's 125 million 10-year-olds live in developing countries.
+[01:28.56]It also says 35 million 10-year-old girls
+[01:33.48]live in countries said to be very unequal on issues of gender.
+[01:39.32]Princess Basma Bint Talal is a Goodwill Ambassador for the U.N. Population Fund.
+[01:48.76]She told reporters, "In some parts of the world,
+[01:52.80]a 10-year-old girl looks forward to her horizons opening up" so she can reach her goals.
+[01:59.80]But in other places, "she is up against closed doors."
+[02:05.92]Princess Basma said that girls' chances for success
+[02:10.32]are limited when their futures are decided by other people or their environment.
+[02:18.24]Some barriers can threaten their safety and social or economic growth.
+[02:25.40]Ten-year-old girls in many poor countries face the risk of being married off.
+[02:32.60]More than 60 million girls are not in school.
+[02:37.08]They do twice as much work around the home as boys their age,
+[02:42.16]and they serve as unpaid laborers more than boys do.
+[02:47.56]Every 10 minutes, an adolescent girl dies of violence.
+[02:52.48]Many of them are infected with HIV, the virus that causes AIDS, as a result of rape.
+[03:01.52]Suicide is the second largest cause of death for young girls.
+[03:07.00]Jordan's Princess Basma said, "Let us remember that we are all responsible.
+[03:14.80]Let us remember that our every word and deed, positive or negative,
+[03:20.36]can affect the road a girl travels" from this turning point in her life.
+[03:26.64]She continued, "This is what will shape her role in society,
+[03:31.28]which is to say our society, and our world."
+[03:35.52]The U.N. report says that investment in the health, education
+[03:41.16]and empowerment of 10-year-old girls can triple a girl's lifetime earnings.
+[03:49.40]Daniel Baker is the humanitarian coordinator
+[03:53.33]for the U.N. Population Fund's office in Amman.
+[03:57.57]"Failing to invest in girls is nothing less than planned poverty.
+[04:04.18]Unless we invest in girls, we're planning to have a poorer future."
+[04:10.20]This is a point that cannot be noted enough, he said.
+[04:15.04]The report closes with the message that doing damage to girls
+[04:20.72]is harmful not only to their communities, but to humanity as a whole.
+[04:27.20]I'm Alice Bryant.
+[04:29.24]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

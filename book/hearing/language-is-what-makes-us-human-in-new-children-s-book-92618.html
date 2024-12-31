@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Language Is 'What Makes Us Human' in New Children's Book</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Language Is 'What Makes Us Human' in New Children's Book" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/language-is-what-makes-us-human-in-new-children-s-book.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Language Is 'What Makes Us Human' in New Children's Book</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/language-is-what-makes-us-human-in-new-children-s-book.mp3" id="mp3"></a>
+<a href="officials-citizens-struggling-with-high-heat-in-southeast-asia-92615.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">30 April 2024</span><br/>
+<p>See if you know the answer to this <strong>riddle</strong>:</p>
+<p>"I have been around for a very long time. Longer than toys, dogs, or anyone you know.</p>
+<p>"My roots go back many centuries. Some of them even longer."</p><div class="contentImage"><img alt="What Makes Us Human is written as a riddle, and is meant to show the value of language. Here characters are saying Hello in many different ways." src="https://files.21voa.com/gdb/01000000-0aff-0242-1389-08dc630fcfe6_w268_r1.jpg"/><br/><span class="imagecaption">"What Makes Us Human" is written as a riddle, and is meant to show the value of language. Here characters are saying "Hello" in many different ways.</span></div>
+<p>"I can connect you to the past, the present and the future. I make you human."</p>
+<p>Can you guess what I am?</p>
+<p>The answer is language.</p>
+<p>Children's <strong>author</strong> Victor D.O. Santos asks readers that question in his book, <em>What Makes Us Human</em>. Each page on the book provides a clue to the riddle's final answer. Artist Anna Forlati illustrated the book.</p>
+<p>Santos told <em>VOA Learning English</em> that the book is about the value of language. It is also meant to bring more attention to the world's native languages.</p>
+<p>Native and <strong>indigenous</strong> languages are disappearing quickly. The United Nations Educational, Scientific and Cultural Organization (UNESCO) estimates that 40 percent of the world's 7,000 languages may disappear by the year 2100.</p>
+<p>Santos, who is also an educator and <strong>linguist</strong>, has studied indigenous languages in his native country, Brazil.</p>
+<p>He said that his new book brings "attention to the fact that many languages are disappearing ... (and ) this linguistic <strong>heritage</strong> that we have in the world is slipping through the cracks."</p>
+<p>The United Nations has named the years between 2022 and 2032 as the International Decade of Indigenous Languages. UNESCO says the declaration is meant to bring worldwide "attention on the critical situation of many indigenous languages." It also says it is meant to provide more resources to protect and <strong>revitalize</strong> such languages.</p>
+<p>Santos said UNESCO offered to partner with him and help expand the book's reach. The book has already been licensed into 22 different languages. That includes versions in Mapundungun, a language spoken by the Mapuche people in Chile and Argentina, and into Hn<i>&amp;#</i>228;h<i>&amp;#&lt;/I&gt;241;u, a language spoken by the Otomí people in Mexico. Santos said the book might soon be published in native Hawaiian as well.&lt;/p&gt;
+
+
+&lt;p&gt;The Chilean government recently published 27,000 copies of the book for public schools, where there is a large percentage of indigenous children.&lt;/p&gt;
+&lt;p&gt;A large number of cultures and languages are represented in the book. Its final page has a drawing of people saying "hello" in many languages. There are characters saying "hello" in common languages like Arabic, English and Spanish. And indigenous languages from the Xavante people in Brazil and the Cherokee people in the United States are also included.&lt;/p&gt;
+&lt;p&gt;Another drawing has different scripts, or writing systems, hidden in trees.&lt;/p&gt;
+
+
+&lt;p&gt;One page has drawings of 12 indigenous groups around the world wearing their traditional clothing. The words to go along with the drawing note the fact that indigenous languages around the world are disappearing: "When one of me disappears, a culture may also disappear. A &lt;strong&gt;unique&lt;/strong&gt; way to view and understand the world. Gone. Forever."&lt;/p&gt;
+&lt;p&gt;Santos said his book "has an adult &lt;strong&gt;layer&lt;/strong&gt; to it. It's not just for kids."&lt;/p&gt;
+&lt;p&gt;One page has a drawing of a parent and child fleeing a conflict or war. Another person is holding a sign that says, "No War." "I can show you love. But also hurt you," the page reads.&lt;/p&gt;
+
+
+&lt;p&gt;Santos said he was thinking about the war in Ukraine for that page. The drawing &lt;strong&gt;referenced&lt;/strong&gt; a Ukrainian reporter who interrupted a Russian state media report while holding that same sign.&lt;/p&gt;
+&lt;p&gt;"What Russia is doing to Ukraine is not just attacking their territory and killing Ukrainians, but it's denying their culture," said Santos, whose wife is Ukrainian and children have been raised speaking the language. "They're &lt;strong&gt;imposing&lt;/strong&gt; the Russian language in the Ukrainian territory."&lt;/p&gt;
+&lt;p&gt;Santos said there are several ways to understand the page's message.&lt;/p&gt;
+&lt;p&gt;"It's to make people aware that words have weight," he said. "Language can be used as a weapon and as a tool. And you can do good, or you can do ill with it."&lt;/p&gt;
+&lt;p&gt;I'm Dan Novak.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Dan Novak wrote this story for VOA Learning English.&lt;/em&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+&lt;p class="CxSpMiddle"&gt;&lt;em&gt;__________________________________________________&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="wsw__h2"&gt;Words in This Story&lt;/h2&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;riddle &lt;/strong&gt;&lt;em&gt;— n. &lt;/em&gt;a difficult question that is asked as a game and that has a surprising or funny answer&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;author &lt;/strong&gt;&lt;em&gt;— n. &lt;/em&gt; a person who has written something&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;indigenous &lt;/strong&gt;&lt;em&gt;— adj. &lt;/em&gt;produced, living, or existing naturally in a particular region or environment&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;linguist &lt;/strong&gt;&lt;em&gt;— adj. &lt;/em&gt;a person who speaks several languages&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;heritage &lt;/strong&gt;&lt;em&gt;— n. &lt;/em&gt;the traditions, achievements, beliefs, etc., that are part of the history of a group or nation — usually singular&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;revitalize &lt;/strong&gt;&lt;em&gt;— v. &lt;/em&gt;to make active, healthy, or energetic again&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;unique &lt;/strong&gt;&lt;em&gt;— adj. &lt;/em&gt;belonging to or connected with only one particular thing, place, or person&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;layer &lt;/strong&gt;&lt;em&gt;— n. &lt;/em&gt;a covering piece of material or a part that lies over or under another&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;reference &lt;/strong&gt;&lt;em&gt;— v. &lt;/em&gt;the act of referring to something or someone&lt;/p&gt;
+&lt;p class="CxSpMiddle"&gt;&lt;strong&gt;impose &lt;/strong&gt;&lt;em&gt;— v. &lt;/em&gt;to establish or create in a forceful or harmful way&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="us-universities-concerned-about-protests-during-graduation-ceremonies-92605.html" target=_blank&gt;US Universities Concerned about Protests During Graduation Ceremonies&lt;/A&gt;   (24/4/27)&lt;/LI&gt;&lt;LI&gt;&lt;A href="lawmakers-aim-to-bar-restrictions-on-books-at-public-libraries-92597.html" target=_blank&gt;Lawmakers Aim to Bar Restrictions on Books at Public Libraries&lt;/A&gt;   (24/4/25)&lt;/LI&gt;&lt;LI&gt;&lt;A href="in-senegal-deaf-students-study-alongside-others-92585.html" target=_blank&gt;In Senegal, Deaf Students Study alongside Others&lt;/A&gt;   (24/4/23)&lt;/LI&gt;&lt;LI&gt;&lt;A href="us-librarians-fear-penalties-prison-over-book-bans-92548.html" target=_blank&gt;US Librarians Fear Penalties, Prison over Book Bans&lt;/A&gt;   (24/4/16)&lt;/LI&gt;&lt;LI&gt;&lt;A href="top-us-colleges-will-cost---or-more-most-students-pay-less-92534.html" target=_blank&gt;Top US Colleges Will Cost $90,000 or More; Most Students Pay Less&lt;/A&gt;   (24/4/13)&lt;/LI&gt;&lt;LI&gt;&lt;A href="officials-air-quality-is-problem-at-us-schools-92517.html" target=_blank&gt;Officials: Air Quality Is Problem at US Schools&lt;/A&gt;   (24/4/9)&lt;/LI&gt;&lt;LI&gt;&lt;A href="what-will-students-tell-colleges-on-their-applications-this-year-92504.html" target=_blank&gt;What Will Students Tell Colleges on Their Applications This Year?&lt;/A&gt;   (24/4/6)&lt;/LI&gt;&lt;LI&gt;&lt;A href="study-free-school-meals-linked-to-reduction-in-childhood-obesity-92484.html" target=_blank&gt;Study: Free School Meals Linked to Reduction in Childhood Obesity&lt;/A&gt;   (24/4/2)&lt;/LI&gt;&lt;LI&gt;&lt;A href="germany-aims-to-increase-educational-choices-for-its-youth-92466.html" target=_blank&gt;Germany Aims to Increase Educational Choices for Its Youth&lt;/A&gt;   (24/3/30)&lt;/LI&gt;&lt;LI&gt;&lt;A href="researchers-books-about-difficult-adult-subjects-make-kids-better-readers-92412.html" target=_blank&gt;Researchers: Books about Difficult, Adult Subjects Make Kids Better Readers&lt;/A&gt;   (24/3/19)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></p></div></div></div></body></body></html>

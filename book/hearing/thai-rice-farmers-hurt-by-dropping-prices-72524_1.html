@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 泰国米农受到米价下跌打击</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 泰国米农受到米价下跌打击" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201611/thai-rice-farmers-hurt-by-dropping-prices.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>泰国米农受到米价下跌打击</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201611/thai-rice-farmers-hurt-by-dropping-prices.mp3" id="mp3"></a>
+<a href="/static/lrc/thai-rice-farmers-hurt-by-dropping-prices.lrc" id="lrc"></a>
+<a href="thai-rice-farmers-hurt-by-dropping-prices-72524.html" id="CnPage" target="_blank"></a>
+<a href="america-elects--live-report-72502.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Rice farmers in Thailand are facing a large drop in income because of the drop in the price of rice throughout Asia.<br/>由于亚洲大米价格下跌，泰国米农面临着收入大幅下降。
+<p>At the same time, costs to grow the crop are increasing. Farmers are not sure who to ask for help. Many of them are struggling this year. Some of them may not even make enough money to pay their production costs.<br/>与此同时，种植农作物的成本却在上涨。农民们不知道该向谁求助。他们中很多人今年都非常艰难，其中一些人甚至可能赚不回成本。</p>
+<p>Experts say the government's rice storage plan is a short-term answer. It is similar to a plan put in place by then-Prime Minister Yingluck Shinawatra. Because of the failure of that plan, the military ousted the prime minister and fined her over $1 billion.<br/>专家表示，泰国政府的大米储藏计划是一种短期解决办法，它类似于当时的英拉总理提出的一个方案。由于那个方案的失败，军方赶走了英拉，并罚了她超过10亿美元。</p>
+<p>Many Thai workers believe the government does not know how to manage the economy. They believe the government is more interested in controlling the country than in helping farmers.<br/>很多泰国工人认为政府不懂如何管理经济。他们认为，政府更感兴趣的是控制这个国家，而不是帮助农民。</p>
+<p>About 40 percent of the Thai workforce has agricultural jobs.<br/>泰国大约40%的劳动力从事农业工作。</p>
+<p>Lung Chai is a rice farmer in Chiang Mai.<br/>Lung Chai是清迈市的一名米农。</p>
+<p>He says the situation has affected all farmers. He says he is losing money, but does not know who to talk to about it. "No one would hear our voice," he said.<br/>他说这种状况影响到了所有农民。他正在赔钱，但是不知道找谁解决。他说，“没人会理会我们。”</p>
+<p>Thailand faces strong competition for rice exports from India and Vietnam. This is partly because of lower pay in neighboring countries and large expected harvests this year.<br/>泰国在大米出口上面临着印度和越南的强力竞争。部分原因是邻国工资更低，并且很大预期今年会丰收。</p>
+<p>A recent study paid for by the Bank of Thailand said Thai farmers should grow crops in addition to rice. It also said farmers should be trained to help predict market changes.<br/>泰国银行最近出资进行的一项调查表示，泰国农民应该种植除稻米之外的其它作物。该报告还称，农民应该接受培训，帮助他们预测市场变化。</p>
+<p>Singhachai Boonyayotin is a senior director of the Bank of Thailand.<br/>Singhachai Boonyayotin是泰国银行的一名高级主管。</p>
+<p>He said Thailand should produce products other than white rice to compete with Vietnam and Cambodia.<br/>他说，泰国应该生产精米以外的产品同越南和柬埔寨竞争。</p>
+<p>Wachirajak Nin-khuntod wanted to help his father who is a rice farmer. He began packaging his crops and selling them on the internet as a way to increase income.<br/>Wachirajak Nin-khuntod希望帮助他作为米农的父亲。他开始把自家农作物包装好在互联网上销售来作为一种增加收入的办法。</p>
+<p>He said, "My parents didn't believe at first that I would be able to sell rice on social media, because most farmers believe we can sell rice to the middleman or rice mill company only."<br/>他说，“我父母最初不相信我能够在社交媒体上卖出大米，因为大多数农民认为我们只能把大米卖给中间商或米厂。</p>
+<p>Now, he says, his parents know that they can sell their own rice without a middleman.<br/>他说，现在他的父母知道他们可以不要中间商自己卖出大米。</p>
+<p>I'm Phil Dierking.<br/>我是Phil Dierking。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Thai Rice Farmers Hurt by Dropping Prices]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.28]Rice farmers in Thailand are facing a large drop in income
+[00:06.16]because of the drop in the price of rice throughout Asia.
+[00:11.76]At the same time, costs to grow the crop are increasing.
+[00:19.01]Farmers are not sure who to ask for help.
+[00:23.84]Many of them are struggling this year.
+[00:28.52]Some of them may not even make enough money
+[00:33.25]to pay their production costs.
+[00:36.48]Experts say the government's rice storage plan is a short-term answer.
+[00:43.28]It is similar to a plan put in place
+[00:47.76]by then-Prime Minister Yingluck Shinawatra.
+[00:52.52]Because of the failure of that plan,
+[00:56.57]the military ousted the prime minister and fined her over $1 billion.
+[01:04.81]Many Thai workers believe the government
+[01:08.84]does not know how to manage the economy.
+[01:12.93]They believe the government is more interested
+[01:18.39]in controlling the country than in helping farmers.
+[01:23.65]About 40 percent of the Thai workforce has agricultural jobs.
+[01:32.16]Lung Chai is a rice farmer in Chiang Mai.
+[01:38.54]He says the situation has affected all farmers.
+[01:45.04]He says he is losing money,
+[01:48.13]but does not know who to talk to about it.
+[01:52.28]"No one would hear our voice," he said.
+[01:56.20]Thailand faces strong competition for rice exports from India and Vietnam.
+[02:04.78]This is partly because of lower pay in neighboring countries
+[02:10.76]and large expected harvests this year.
+[02:15.26]A recent study paid for by the Bank of Thailand
+[02:20.48]said Thai farmers should grow crops in addition to rice.
+[02:27.04]It also said farmers should be trained to help predict market changes.
+[02:34.44]Singhachai Boonyayotin is a senior director of the Bank of Thailand.
+[02:43.28]He said Thailand should produce products other than white rice
+[02:50.53]to compete with Vietnam and Cambodia.
+[02:54.81]Wachirajak Nin-khuntod wanted to help his father who is a rice farmer.
+[03:03.63]He began packaging his crops and selling them on the internet
+[03:09.60]as a way to increase income.
+[03:12.47]He said, "My parents didn't believe at first
+[03:15.16]that I would be able to sell rice on social media,
+[03:18.15]because most farmers believe we can sell rice
+[03:20.96]to the middleman or rice mill company only."
+[03:24.76]Now, he says, his parents know that they
+[03:29.46]can sell their own rice without a middleman.
+[03:34.43]I'm Phil Dierking.
+
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

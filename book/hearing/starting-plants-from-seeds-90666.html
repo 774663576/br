@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Starting Plants from Seeds</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Starting Plants from Seeds" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/starting-plants-from-seeds.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Starting Plants from Seeds</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/starting-plants-from-seeds.mp3" id="mp3"></a>
+<a href="many-depend-on-radio-broadcasts-across-africa-90660.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Mario Ritter, Jr</span><br/>
+<span class="datetime">03 April 2023</span><br/>
+<p>As spring progresses in the northern half of the world, stores are offering <strong>gardeners</strong> many choices for seeds.</p>
+<p>Starting a garden from seeds, rather than buying young plants, is a low-cost way to enjoy many kinds of flowers and food crops.</p>
+<p>Looking<strong> </strong>through <strong>catalogs</strong> that offer mail-order seeds is one way to get them. Choosing seeds from <strong>racks</strong> at local nurseries or garden centers is another way.</p><div class="contentImage"><img alt="This image provided by Jeff Lowenfels shows flats of sweet peas grown from seed, some in recycled egg cartons, on March 23, 2023, in Anchorage, Alaska. (Jeff Lowenfels via AP)" src="https://files.21voa.com/gdb/01000000-0a00-0242-65dd-08db31ff80df_cx0_cy11_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This image provided by Jeff Lowenfels shows flats of sweet peas grown from seed, some in recycled egg cartons, on March 23, 2023, in Anchorage, Alaska. (Jeff Lowenfels via AP)</span></div>
+<p><strong>Starting plants seeds</strong></p>
+<p>Jessica Damiano writes about gardening for the Associated Press. Here is what she says about starting plants from seeds:</p>
+<p>In April, there is enough daylight to start garden seeds without the aid of electric lights. Some seeds can be planted directly in the garden. Others will have to be started in containers inside the home or under a shelter.</p>
+<p>Many people have the opinion that you are not a real gardener unless you start at least one thing you grow from seed.</p>
+<p>You can always buy young plants already growing at the store, but seeds give you the right to say you know how to grow a plant from the beginning. The cost is also far lower.</p>
+<p>In fact, starting seeds is easy. Everything the plant needs to <strong>germinate</strong>, or start growing, is in the seed. All you have to do is put it into soil that is a little wet and not let the soil dry out while the seed does its thing. If there are any special requirements, they are usually printed in the simple directions on the back of every seed container or packet.</p>
+<p>The one thing you might not find in those instructions is the suggestion to put mycorrhizal fungi around larger seeds or to put a little on smaller seeds. You should be able to find these special fungi where you buy seeds.</p>
+<p>Fungi are a form of life that is neither plant nor animal. <strong>Mushrooms</strong> are among their common forms.</p>
+<p>Mycorrhizal fungi are special. They form a <strong>symbiotic</strong> relationship with some plants and help provide water and nutrients to them.</p>
+<p>Many nurseries now carry two kinds. They are called endomycorrhizal and ectomycorrhizal fungi. Annual plants -- ones that grow for one season -- and many garden crops associate with endomycorrhizal fungi.</p>
+<p>Some plants do not need them at all. This includes members of the cole family: cabbages, kohlrabi and kale. Broccoli and cauliflower also do not use fungi. So, you do not need to add it.</p>
+<p>Besides fungi, Damian warns against soaking your seeds in hydrogen peroxide, as some experts often suggest. There are bacteria living on all seeds that are supposed to be there. Peroxide will kill them. The bacteria have developed to help in germination and growth. They also put microorganisms into the soil that work in partnership with many plants.</p>
+<p>Planting big seeds is easy, and it is a good idea to get the assistance of young people to help in the job. Very small seeds, like celery seeds, need a little equipment. Put the tip of a pencil in water and then use it to pick up each seed. It will hold one seed as you put it into its starting container.</p>
+<p>When choosing containers to start plants, Damiano advises against buying new plastic ones. She suggests using any old plastic containers or using newspaper or cardboard. You can use egg containers or anything that is available. But remember to put <strong>drainage</strong> holes in each one. If you do not add holes, water can build up in the bottom and cause the seeds to rot.</p>
+<p>Damiano reminds growers that it would be a <strong>shame</strong> to grow something in a container and then forget what it is called. Write the names of all your seeds on the containers you are growing them in.</p>
+<p>And it is never too early to think about the next growing season. Once you have established plants in your garden, consider letting some "go to seed." This means you are growing them for their seeds, not for crops. That way you will have your own seeds for next year's garden, and you will not have to buy them at all.</p>
+<p>I'm Mario Ritter Jr.</p>
+<p><em>Jessica Damiano reported this story for the Associated Press. Mario Ritter, Jr. adapted it for the VOA Learning English with additional material from the University of Wisconsin and North Carolina State University agricultural extensions. </em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>gardener</strong><em> –n. </em>someone who grows and cares for plants in a garden</p>
+<p><strong>thumb</strong> <em>–v.</em> to turn the pages of a book</p>
+<p><strong>catalog </strong>–n. a book containing pictures and descriptions of things you can buy and how they can be ordered</p>
+<p><strong>rack </strong>–n. a support that holds products for sale in stores</p>
+<p><strong>germinate </strong>–v. the process of a seed starting to become a plant</p>
+<p><strong>symbiotic </strong>–adj. a relationship or link between two organisms which helps both survive</p>
+<p><strong>drainage </strong>–adj. related to something that helps move water away from where it might become a problem or cause damage</p>
+<p><strong>shame </strong>–n. a feeling of unhappiness or guilt</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

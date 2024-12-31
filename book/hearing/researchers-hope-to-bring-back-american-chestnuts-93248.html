@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Researchers Hope to Bring Back American Chestnuts</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Researchers Hope to Bring Back American Chestnuts" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/researchers-hope-to-bring-back-american-chestnuts.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Researchers Hope to Bring Back American Chestnuts</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/researchers-hope-to-bring-back-american-chestnuts.mp3" id="mp3"></a>
+<a href="robot-leads-cattle-to-greener-fields-93247.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">23 December, 2024</span><br/>
+<p><em>“Chestnuts roasting on an open fire,</em></p>
+<p><em>Jack Frost nipping at your nose...”</em></p><div class="contentImage"><img alt="Chestnuts are displayed at a food vendor as a person dressed as Santa Claus offers rides, Thursday, Dec. 12, 2024, in New York. (AP Photo/Alyssa Goodman)" src="https://files.21voa.com/gdb/935a29d6-0549-42a8-be7c-b6dfe073b3e9_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Chestnuts are displayed at a food vendor as a person dressed as Santa Claus offers rides, Thursday, Dec. 12, 2024, in New York. (AP Photo/Alyssa Goodman)</span></div>
+<p>This classic song written by Bob Wells and Mel Tormé in 1944 has long brought to mind the image of Christmas for generations of Americans.</p>
+<p>At one time, the American Chestnut was among the most common and largest trees in the eastern United States. The wood was used to cover the walls of homes and schools. The leaves helped add nutrients to the soil. And men on street corners sold chestnuts cooked on open fire.</p>
+<p>However, in the late 19th century, some East Asian <strong>varieties</strong> of chestnut trees brought to the U.S. carried a <strong>fungus</strong> that killed almost all American chestnuts.</p>
+<p><strong>Efforts to bring back the chestnut</strong></p>
+<p>The American Chestnut Foundation (TACF) is a non-profit organization based in the eastern state of North Carolina. It has been working with researchers for over 30 years to bring the trees back to eastern U.S. forests.</p>
+<p>American chestnuts now exist mostly as huge root systems that grow into small trees. The fungus harms them when the small trees start to develop fully. East Asian varieties, like those that brought the fungus in the first place, are resistant to the fungus.</p>
+<p>Researchers have tried to save American chestnuts by cross-breeding, or mixing, them with one kind of Chinese chestnut that can fight off the fungus. Progress has been slow, however. The trees the researchers have grown could not resist the fungus well enough to become large and healthy trees.</p>
+<p>That is why scientists are now trying to combine two methods: cross-breeding and genetically modifying, or changing, the genes of American chestnut trees. They hope this will improve the tree's ability to resist attack from the fungus.</p>
+<p>But, progress was delayed by a recent mix-up involving two varieties of genetically modified American chestnuts. Scientists at the State University of New York (SUNY) had hoped to get approval for the new seed this year.</p>
+<p><strong>Possible effects of climate change </strong></p>
+<p>A changing climate and warmer temperatures may also make restoring the chestnut difficult in some areas.</p>
+<p>A team at Virginia Tech University published a study this summer about this issue. They looked at projected future climates and then measured the shortest distance the trees would have to move to survive well in a new climate.</p>
+<p>For now, researchers know their work might not be successful in their lifetimes. The process has been slow. And two of the first chestnut <strong>restoration</strong> experts, Bill Powell and Chuck Maynard, both died in the past 13 months.</p>
+<p>Linda McGuigan helped support Powell's and Maynard's research for years at SUNY's College of Environmental Science and Forestry.</p>
+<p>“The project moves on, lives on. And we honor their memory,” McGuigan said. “I want to do something good for the future, for my children.”</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Marina Walling wrote this story for The Associated Press. Andrew Smith adapted it for VOA Learning English. </em></p><p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>variety </strong><em>-n. </em>a kind or type of something</p>
+<p><strong>fungus </strong><em>-n. </em>a mushroom or other plant that has no flowers, leaves, or green coloring</p>
+<p><strong>restoration </strong><em>-n. </em>the bringing back of something to its former condition</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

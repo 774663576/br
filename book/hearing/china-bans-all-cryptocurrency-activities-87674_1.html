@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中国禁止所有加密货币活动</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 中国禁止所有加密货币活动" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202109/china-bans-all-cryptocurrency-activities.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中国禁止所有加密货币活动</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202109/china-bans-all-cryptocurrency-activities.mp3" id="mp3"></a>
+<a href="/static/lrc/china-bans-all-cryptocurrency-activities.lrc" id="lrc"></a>
+<a href="china-bans-all-cryptocurrency-activities-87674.html" id="CnPage" target="_blank"></a>
+<a href="apple-google-raise-concerns-over-removal-of-russian-app-87673.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">China's central bank and government agencies have issued a ban on all financial activities involving Bitcoin and other virtual currencies.<br/>
+中国央行和政府机构已发布禁令，禁止所有涉及比特币以及其它虚拟货币的金融活动。
+<p>The central bank declared in a statement Friday that business dealings related to virtual currency "are all illegal financial activities and are strictly prohibited."<br/>
+央行在周五的一份声明中宣布，与虚拟货币相关的商业交易都是非法金融活动，都被严格禁止。</p>
+<p>The statement said the central bank would work with the other agencies -- including banking, securities and foreign exchange regulators -- in an effort to stop the illegal activity.<br/>
+声明称，央行将和包括银行、证券和外汇监管机构在内的其它机构合作，努力制止这种非法活动。</p>
+<p>It is the first time that multiple Chinese regulators have joined forces to officially ban all activity linked to virtual currencies, also known as cryptocurrencies.<br/>
+这是多家中国监管机构首次联手正式禁止所有与虚拟货币（也称加密货币）相关的活动。</p>
+<p>The central bank said the action was taken because cryptocurrencies -- which include Bitcoin, Ethereum and others -- disrupt the country's financial system. It said such currencies are also used in money-laundering activities and other financial crimes.<br/>
+央行表示，采取这一行动是因为包括比特币、以太坊在内的加密货币扰乱了该国的金融体系。它说这些货币还被用于洗钱活动和其它金融犯罪。</p>
+<p>The news led to Bitcoin falling more than 9 percent, to $41,085 in the hours after the announcement. Ethereum dropped nearly 10 percent to around $2,800.<br/>
+在消息公布几个小时之后，导致比特币下跌9%，至41085美元。以太坊下跌近10%至2800美元左右。</p>
+<p>The Chinese government banned banks from cryptocurrency activity in 2013. But it re-issued the rule again this year, suggesting the government was concerned that virtual currency activities were still going on.<br/>
+中国政府于2013年禁止银行从事加密货币活动。但是今年它又重新发布了这项规定，表明政府担心虚拟货币活动仍在继续。</p>
+<p>Financial experts say the repeated issuing of rules shows how difficult it can be for governments to identify cryptocurrency activities and effectively regulate them.<br/>
+金融专家表示，反复发布规定表明政府甄别加密货币活动并对其进行有效监管有多么困难。</p>
+<p>Friday's statement is the most detailed and wide-ranging yet from the country's most powerful financial regulators.<br/>
+周五的声明是该国最高金融监管机构迄今为止发布的最详细和范围最广的声明。</p>
+<p>Supporters of cryptocurrencies say they permit anonymity and flexibility. But Chinese regulators worry they could weaken the ruling Communist Party's control over the financial system and can help hide criminal activity.<br/>
+加密货币支持者表示，加密货币具有匿名性和灵活性。但是中国监管机构担心他们会削弱政府对金融体系的控制，并有助于掩盖犯罪活动。</p>
+<p>The People's Bank of China is developing an electronic version of the country's yuan for virtual financial activities. This currency could be recorded and controlled by the Chinese government.<br/>
+中国人民银行正在开发用于虚拟金融活动的数字人民币。这种数字货币可以由中国政府记录和控制。</p>
+<p>Regulators in other countries have increasingly warned that cryptocurrencies need greater oversight. In the United States, Gary Gensler, the chairman of the Securities and Exchange Commission, has called for more protection for investors in the cryptocurrency market.<br/>
+其它国家的监管机构也越来越多地警告说，加密货币需要更大监管。在美国方面，美国证券交易委员会主席加里·金斯勒呼吁为加密市场投资者提供更多保护。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:China Bans All Cryptocurrency Activities]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]China's central bank and government agencies
+[00:04.56]have issued a ban on all financial activities
+[00:09.72]involving Bitcoin and other virtual currencies.
+[00:16.68]The central bank declared in a statement Friday
+[00:20.88]that business dealings related to virtual currency
+[00:25.88]"are all illegal financial activities
+[00:29.80]and are strictly prohibited."
+[00:33.84]The statement said the central bank
+[00:37.16]would work with the other agencies -- including banking,
+[00:42.24]securities and foreign exchange regulators
+[00:46.64]-- in an effort to stop the illegal activity.
+[00:51.96]It is the first time that multiple Chinese regulators
+[00:56.64]have joined forces to officially ban all activity
+[01:01.60]linked to virtual currencies, also known as cryptocurrencies.
+[01:09.32]The central bank said the action was taken
+[01:13.32]because cryptocurrencies -- which include Bitcoin,
+[01:18.24]Ethereum and others -- disrupt the country's financial system.
+[01:25.64]It said such currencies are also used
+[01:29.84]in money-laundering activities and other financial crimes.
+[01:36.60]The news led to Bitcoin falling more than 9 percent,
+[01:42.44]to $41,085 in the hours after the announcement.
+[01:50.40]Ethereum dropped nearly 10 percent to around $2,800.
+[01:58.92]The Chinese government banned banks
+[02:02.08]from cryptocurrency activity in 2013.
+[02:07.08]But it re-issued the rule again this year,
+[02:11.40]suggesting the government was concerned
+[02:15.16]that virtual currency activities were still going on.
+[02:21.20]Financial experts say the repeated issuing of rules
+[02:26.44]shows how difficult it can be
+[02:29.92]for governments to identify cryptocurrency activities
+[02:34.68]and effectively regulate them.
+[02:38.76]Friday's statement is the most detailed and wide-ranging yet
+[02:45.16]from the country's most powerful financial regulators.
+[02:51.20]Supporters of cryptocurrencies
+[02:54.32]say they permit anonymity and flexibility.
+[02:59.16]But Chinese regulators worry
+[03:02.44]they could weaken the ruling Communist Party's control
+[03:06.84]over the financial system and can help hide criminal activity.
+[03:13.96]The People's Bank of China is developing an electronic version
+[03:19.52]of the country's yuan for virtual financial activities.
+[03:24.92]This currency could be recorded
+[03:28.20]and controlled by the Chinese government.
+[03:32.68]Regulators in other countries have increasingly warned
+[03:37.44]that cryptocurrencies need greater oversight.
+[03:42.24]In the United States, Gary Gensler,
+[03:45.96]the chairman of the Securities and Exchange Commission,
+[03:50.36]has called for more protection for investors
+[03:54.60]in the cryptocurrency market.
+[03:57.24]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

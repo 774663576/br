@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Hurricane Ian Causes School Closures in Florida</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Hurricane Ian Causes School Closures in Florida" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202210/hurricane-ian-causes-school-closures-in-florida.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Hurricane Ian Causes School Closures in Florida</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202210/hurricane-ian-causes-school-closures-in-florida.mp3" id="mp3"></a>
+<a href="what-does-it-mean-to-push-someone-s-buttons-89771.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">08 October 2022</span><br/>
+<p>Rescue and recovery operations are continuing in areas affected by the storm in southwestern Florida. Several school systems in the area cannot yet say when they will be ready to reopen.</p>
+<p>Some schools are without power and are still examining the damage from Ian. Officials are also trying to find out how many teachers and other employees will not be able to return to work.</p>
+<p>Experts say long-term school shutdowns can have a harmful effect on students.</p><div class="contentImage"><img alt="Residents who rode out the storm arrive at a dock to evacuate by boat in the aftermath of Hurricane Ian on Florida's Pine Island, in Lee County, Sunday, Oct. 2, 2022. (AP Photo/Gerald Herbert, File)" src="https://files.21voa.com/gdb/03990000-0aff-0242-50fe-08daa7aac9fa_w268_r1.jpg"/><br/><span class="imagecaption">Residents who rode out the storm arrive at a dock to evacuate by boat in the aftermath of Hurricane Ian on Florida's Pine Island, in Lee County, Sunday, Oct. 2, 2022. (AP Photo/Gerald Herbert, File)</span></div>
+<p>"In a week or two, we'll have forgotten about Hurricane Ian. But these <strong>districts</strong> and schools and students will be struggling months and years later," said Cassandra R. Davis. She is an assistant professor in the Department of Public Policy at the University of North Carolina.</p>
+<p>Florida's Department of Education said recently that 68 of the state's 75 school districts were open for in-person classes, with two more expected to reopen soon.</p>
+<p>Abbie Tarr Trembley is a mother of four in Sarasota. She told The Associated Press that her youngest child, a 9-year-old boy, asks each day when he can go back to school. "Every morning he's like, ‘Mom, is it a school day? Is it a school day?'" she said. Trembley added, "Every morning, I'm almost in <strong>tears</strong>."</p>
+<p>The hurricane damaged her house and the family lost power for three days. She was thankful the damage was not worse. But she has begun to worry about the effects on her children and their education. Her son already repeated first grade to help him make up for school closures during the COVID-19 pandemic.</p>
+<p>Online learning has increased in recent years for schools dealing with natural disasters and the coronavirus pandemic. But researchers have said studies show that online learning over long periods can be difficult for children.</p>
+<p>The University of North Carolina's Davis has studied how Hurricane Matthew in 2016 and Hurricane Florence in 2018 affected student learning in the southeastern U.S. She said research suggests some elementary students continued to fall behind in school up to two years after a storm. Students who had wealthy parents or were in districts with healthy budgets were more likely to recover faster, the research showed.</p>
+<p>Workers in affected areas are repairing damage inside schools. But for now, officials say flooding on some streets has made it unsafe for students and families to reach the area. School leaders are also trying to find out which teachers and employees will not be able to return when schools reopen.</p>
+<p>Some schools will be closed for up to a week, while others will take longer to reopen.</p>
+<p>Trembley said she had heard that when schools do start back up, classes will take place online. But she hopes that is not the case. "There's no way that I can assist a 9-year-old with schoolwork and continue my job," she said.</p>
+<p>A study found that when Hurricane Katrina hit the southern U.S. in 2005, some students faced displacement for a very long time. In some cases, it took six months for children to be resettled. This led to a drop in test scores in that first year, said Bruce Sacerdote, an economist at Dartmouth College in New Hampshire. He added, "Not only do they have to move their home, but they're even out of school for some time."</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>The Associated Press reported this story. Bryan Lynn adapted the report for VOA Learning English. </em></p>
+<p><strong>__________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>district </strong>– <em>n. </em>an official area that is separated for a particular purpose</p>
+<p><strong>tears </strong>– <em>v. </em>drops of water that come out of a person's eyes when they cry</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

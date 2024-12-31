@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 科学家开发新技术对抗赤潮</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 科学家开发新技术对抗赤潮" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201808/scientists-developing-new-ways-to-fight-red-tide.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>科学家开发新技术对抗赤潮</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201808/scientists-developing-new-ways-to-fight-red-tide.mp3" id="mp3"></a>
+<a href="/static/lrc/scientists-developing-new-ways-to-fight-red-tide.lrc" id="lrc"></a>
+<a href="scientists-developing-new-ways-to-fight-red-tide-79893.html" id="CnPage" target="_blank"></a>
+<a href="rain-cloud-expressions-to-help-you-through-good-bad-79884.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">A leading scientist says researchers in Florida are close to developing a way to control the algae known to cause deadly "red tide." Michael Crosby heads the Mote Marine Laboratory in Sarasota, Florida, a leading research organization.<br/>一位前沿科学家表示，佛罗里达州的研究人员正在开发一项技术，来控制会造成致命“赤潮”的藻类。迈克尔·克罗斯比（Michael Crosby）是佛罗里达州萨拉索塔市莫特海洋实验室的负责人，这是一家领先的研究机构。
+<p>A 10-month-old red tide has been killing ocean life along Florida's southwestern coast. Huge numbers of dead fish have washed up on beaches from the city of Naples up to Tampa. Red tide can cause problems for humans too. Contact with the algae can cause breathing difficulties, burning eyes and skin pain.<br/>一场长达10个月的赤潮一直在扼杀佛罗里达州西南海岸的海洋生物，大量死鱼被冲上了从那不勒斯到坦帕的海滩。赤潮也会给人类带来麻烦，与这种藻类接触会导致呼吸困难、眼睛灼热和皮肤疼痛。</p>
+<p>On Monday, Governor Rick Scott ordered emergency measures to deal with the crisis. Crosby said he welcomed the move, which releases more money and resources to solve the problem.<br/>周一，州长里克·斯科特（Rick Scott）下令采取紧急措施应对危机。克罗斯比表示，他对这一举措表示欢迎，它能释放更多资金和资源来解决该问题。</p>
+<p><strong>Scientists field-testing solutions<br/>科学家现场测试解决方案</strong></p>
+<p>The Florida Fish and Wildlife Conservation Commission suspects the red tide caused the deaths and strandings of hundreds of sea turtles this year. The agency also blames it for at least some of the 68 deaths of manatees. Other sea mammals killed include porpoises.<br/>佛罗里达州鱼类和野生动物保护委员会怀疑赤潮导致了今年数百只海龟的死亡和搁浅。该机构还指责赤潮至少要对68头海牛死亡事件中的部分海牛死亡负责。其它被扼杀的哺乳动物还包括海豚。</p>
+<p>The body of an almost eight-meter-long whale shark also washed up on Sanibel Island, Florida, late last month.<br/>上个月末，一条近8米长的鲸鲨的尸体也被冲上了佛罗里达州萨尼贝尔岛。</p>
+<p>Crosby said, scientists are currently testing a process that would pump red-algae-filled seawater through an ozone-treatment system. Then the purified water would be pumped back into the ocean or waterway.<br/>克罗斯比表示，科学家目前正在测试一种泵送富含赤藻海水通过臭氧处理系统的流程。然后这些净化过的海水将会被泵回到海洋或水道。</p>
+<p>Crosby said the experiments were carried out in huge 25,000-gallon tanks. He said all succeeded in removing the poisonous algae. Crosby said the water chemistry returned to normal within 24 hours.<br/>克罗斯比表示，这些实验是在一些2.5万加仑容量的大罐子里进行的。他说，所有罐子都成功清除了有害的藻类。克罗斯比表示，水化学在24小时内回归正常。</p>
+<p>Scientists also are studying the use of seaweed, parasitic algae and other organisms to fight the red tide.<br/>科学家还在研究利用海藻、寄生藻类以及其它生物来对抗赤潮。</p>
+<p><strong>A ‘bad bloom'<br/>有害繁殖</strong></p>
+<p>Red tides happen almost yearly in Florida. They start in the Gulf of Mexico, where microscopic algae cells called Karenia brevis feed on deep-sea nutrients. Ocean currents carry the algae close to the coast, usually in autumn.<br/>佛罗里达州几乎每年都发生赤潮。它们在墨西哥湾开始繁殖，被称为腰鞭毛藻的微观藻类细胞在那里以深海养分为食。海流通常在秋季将这些藻类带到靠近海岸的地方。</p>
+<p>The current Gulf Coast Florida bloom is the worst in more than ten years. It began last October and has spread across more than 80 kilometers of coastline.<br/>目前佛罗里达州的藻类繁殖是十多年来最严重的。它从去年十月开始繁殖，已经遍布了80多公里长的海岸线。</p>
+<p>"It's a bad bloom," said Richard Stumpf, a scientist who studies red tides for the National Oceanic and Atmospheric Administration (NOAA).<br/>美国国家海洋和大气管理局研究赤潮的科学家理查德·斯坦普夫（Richard Stumpf）表示，“这是有害繁殖。”</p>
+<p>Stumpf said strong northerly winds that normally end red tides failed to form last winter. He said it is not clear why. And he said scientists are not sure if the winds will fail to form again.<br/>斯坦普夫表示，去年冬天未能形成通常会消除赤潮的强劲北风，目前尚不知原因。他还表示，科学家也不确认这类风是否会再次无法形成。</p>
+<p><strong>Natural phenomenon<br/>自然现象</strong></p>
+<p>Scientist Michael Crosby said the red tide happened during the reproductive season for snook. The fish are important for both the environment and economy in Florida. Part of the emergency money ordered by the governor will be used to examine the red tide's effects on that fish.<br/>克罗斯比表示，赤潮发生在锯盖鱼的繁殖季节。这种鱼对佛罗里达州的环境和经济都很重要。州长下令拨款的部分紧急资金将用于调查赤潮对这种鱼的影响。</p>
+<p>I'm Phil Dierking.<br/>我是菲尔·德尔金。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Scientists Developing New Ways to Fight 'Red Tide']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.36]A leading scientist says researchers in Florida
+[00:05.63]are close to developing a way
+[00:08.35]to control the algae known to cause deadly "red tide."
+[00:13.15]Michael Crosby heads the Mote Marine Laboratory
+[00:17.80]in Sarasota, Florida, a leading research organization.
+[00:23.76]A 10-month-old red tide has been killing ocean life
+[00:28.08]along Florida's southwestern coast.
+[00:31.88]Huge numbers of dead fish have washed up on beaches
+[00:36.35]from the city of Naples up to Tampa.
+[00:40.08]Red tide can cause problems for humans too.
+[00:44.92]Contact with the algae can cause breathing difficulties,
+[00:48.96]burning eyes and skin pain.
+[00:52.28]On Monday, Governor Rick Scott
+[00:55.02]ordered emergency measures to deal with the crisis.
+[00:59.04]Crosby said he welcomed the move,
+[01:02.40]which releases more money and resources to solve the problem.
+[01:07.88]The Florida Fish and Wildlife Conservation Commission
+[01:11.88]suspects the red tide caused the deaths
+[01:15.45]and strandings of hundreds of sea turtles this year.
+[01:19.60]The agency also blames it for at least some of the 68 deaths of manatees.
+[01:26.76]Other sea mammals killed include porpoises.
+[01:30.76]The body of an almost eight-meter-long whale shark
+[01:34.80]also washed up on Sanibel Island, Florida, late last month.
+[01:40.10]Crosby said, scientists are currently testing a process
+[01:45.40]that would pump red-algae-filled seawater
+[01:48.56]through an ozone-treatment system.
+[01:51.76]Then the purified water would be pumped back into the ocean or waterway.
+[01:58.92]Crosby said the experiments were carried out in huge 25,000-gallon tanks.
+[02:06.32]He said all succeeded in removing the poisonous algae.
+[02:11.48]Crosby said the water chemistry returned to normal within 24 hours.
+[02:18.60]Scientists also are studying the use of seaweed,
+[02:23.08]parasitic algae and other organisms to fight the red tide.
+[02:28.88]Red tides happen almost yearly in Florida.
+[02:32.72]They start in the Gulf of Mexico, where microscopic algae cells
+[02:38.05]called Karenia brevis feed on deep-sea nutrients.
+[02:44.24]Ocean currents carry the algae close to the coast, usually in autumn.
+[02:50.56]The current Gulf Coast Florida bloom is the worst in more than ten years.
+[02:56.48]It began last October and has spread across
+[03:00.45]more than 80 kilometers of coastline.
+[03:04.40]"It's a bad bloom," said Richard Stumpf, a scientist who studies red tides
+[03:10.64]for the National Oceanic and Atmospheric Administration (NOAA).
+[03:15.48]Stumpf said strong northerly winds
+[03:18.52]that normally end red tides failed to form last winter.
+[03:23.80]He said it is not clear why.
+[03:26.36]And he said scientists are not sure if the winds will fail to form again.
+[03:32.20]Scientist Michael Crosby said the red tide happened
+[03:36.27]during the reproductive season for snook.
+[03:39.84]The fish are important for both the environment and economy in Florida.
+[03:46.08]Part of the emergency money ordered by the governor
+[03:49.72]will be used to examine the red tide's effects on that fish.
+[03:55.08]I'm Phil Dierking. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

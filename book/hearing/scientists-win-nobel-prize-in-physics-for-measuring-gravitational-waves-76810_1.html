@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 科学家因为探测引力波获得诺贝尔物理学奖</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 科学家因为探测引力波获得诺贝尔物理学奖" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201710/scientists-win-nobel-prize-in-physics-for-measuring-gravitational-waves.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>科学家因为探测引力波获得诺贝尔物理学奖</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201710/scientists-win-nobel-prize-in-physics-for-measuring-gravitational-waves.mp3" id="mp3"></a>
+<a href="/static/lrc/scientists-win-nobel-prize-in-physics-for-measuring-gravitational-waves.lrc" id="lrc"></a>
+<a href="scientists-win-nobel-prize-in-physics-for-measuring-gravitational-waves-76810.html" id="CnPage" target="_blank"></a>
+<a href="las-vegas-shooting-76801.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Three scientists have won the 2017 Nobel Prize in Physics for their work in measuring gravitational waves.<br/>三位科学家因为他们在探测引力波方面的成就获得了2017年诺贝尔物理学奖。
+<p>The Royal Swedish Academy of Sciences announced the prize winners on Tuesday.<br/>瑞典皇家科学院于周二宣布了获奖者。</p>
+<p>The scientists are Rainer Weiss of the Massachusetts Institute of Technology, and Barry Barish and Kip Thorne, both of whom work at the California Institute of Technology.<br/>他们分别是麻省理工学院的雷纳·怀斯（Rainer Weiss）以及同在加州理工学院工作的巴里·巴利什（Barry Barish）和基普·索恩（Kip Thorne）。</p>
+<p>The three men were involved in the first actual observation of gravitational waves in September 2015. They are being recognized for a combination of highly developed scientific theory and equipment design.<br/>这三人参与了2015年9月对引力波的首次实际观测。他们因为综合了高度发达的科学理论和设备设计而获奖。</p>
+<p>The German-born Weiss was awarded half of the $1.1 million in prize money. Thorne and Barish will split the other half. The physics prize has been split among two or more winners for the past 25 years.<br/>德国出生的怀斯获得了110万美元奖金中的一半，巴利什和索恩分享另一半奖金。过去25年物理学奖一直被两名或多名获奖者共享。</p>
+<p>About a hundred years ago, Albert Einstein proposed his General Theory of Relativity. It predicted the existence of gravitational waves anytime an object accelerates, or speeds up. His theory changed the way scientists understand the universe. But only recently were the waves seen, proving Einstein was correct.<br/>大约100年前，爱因斯坦提出他的“广义相对论”，预言了引力波在物体加速时的存在。他的理论改变了科学家对宇宙的认识。但是直到最近才观测到引力波，证明了爱因斯坦的正确性。</p>
+<p>Barish told the Associated Press that the Nobel prize is "a win for Einstein, and a very big one."<br/>巴利什对美联社表示，这次诺贝尔奖是“爱因斯坦的一次巨大胜利。”</p>
+<p>Weiss, Barish and Thorne were leaders in the experiments performed at the Laser Interferometer Gravitational-Wave Observatory, or LIGO. They measured very small disturbances the waves make to space and time as they pass through the Earth.<br/>怀斯、巴利什和索恩是激光干涉引力波天文台（简称LIGO）进行的实验的领导者。他们测量到了引力波在穿过地球时对空间和时间造成的细微扰动。</p>
+<p>LIGO measured gravitational waves for the first time about two years ago. Those waves were produced when two "black holes" came together and formed a single, huge black hole.<br/>The two black holes were about 1.3 billion light-years from Earth. A light-year is the distance that light travels in one year: about 9.46 trillion kilometers.<br/>激光干涉引力波天文台大约在2年前首次探测到引力波。这些引力波是两个黑洞合并形成一个更大的黑洞时产生的。这两个黑洞距离地球大约13亿光年。一光年是指光在一年时间内传播的距离，约9.46万亿公里。</p>
+<p>When the discovery of gravitational waves was announced several months later, scientists and other people were astonished.<br/>当发现引力波的消息在几个月后被公布出来时，科学家等人都万分惊讶。</p>
+<p>Weiss said of the physics prize: "I view this more as a thing that recognizes the work of a thousand people."<br/>怀斯谈到了这次荣获物理学奖，他说：“我将此视为对上千人的工作的认可。”</p>
+<p>Weiss has been attempting to detect gravitational waves for many years. He designed a laser-based device in the 1970s to do so.<br/>怀斯多年来一直都在试图探测引力波。上世纪70年代他设计了一种基于激光的设备来做这件事情。</p>
+<p>The Nobel announcement said that Weiss, Thorne and Barish "ensured that four decades of effort led to gravitational waves finally being observed." It noted that Einstein believed gravitational waves could never be measured.<br/>诺贝尔奖公告称，怀斯、索恩和巴利什“确保了引力波在经过40年努力后终于被观测到。”公告还提到，爱因斯坦认为引力波可能永远无法被探测到。</p>
+<p>Thorne told the Associated Press from California shortly after the announcement that "it's a win for the human race as a whole. These gravitational waves will be powerful ways for the human race to explore the universe."<br/>物理学奖公布后不久，索恩在加州对美联社表示：“这是整个人类的胜利。引力波将成为人类探索宇宙的有力手段。”</p>
+<p>Ariel Goobar is with the Royal Swedish Academy of Sciences. He said the winners' work meant "we can study processes which were completely impossible, out of reach to us in the past. The best comparison is when Galileo discovered the telescope, which allowed us to see that Jupiter had moons and all of a sudden we discovered that the universe was much vaster than we used to think about," he added.<br/>瑞典皇家科学院的Ariel Goobar表示，这些获奖者的成就意味着“我们可以研究过去完全不可能的并且我们无法接触到的一些过程。最合适的对比是伽利略发明了望远镜，让我们能够看到木星有卫星，我们突然发现宇宙比我们过去想象的要大得多。”</p>
+<p>Patrick Sutton is an astronomer at Cardiff University in Wales. He told the AP that with the technology the scientists developed "we may even see entirely new objects that we haven't even imagined yet."<br/>帕特里克·萨顿（Patrick Sutton）是威尔士卡迪夫大学的一名天文学家。他对美联社表示，有了这些科学家开发的技术，“我们甚至可能会看到我们过去从未想象过的全新物体。”</p>
+<p>I'm Phil Dierking.<br/>我是菲尔·德尔金。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Scientists Win Nobel Prize in Physics for Measuring Gravitational Waves]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.20]Three scientists have won the 2017 Nobel Prize in Physics
+[00:07.04]for their work in measuring gravitational waves.
+[00:12.00]The Royal Swedish Academy of Sciences announced the prize winners on Tuesday.
+[00:18.72]The scientists are Rainer Weiss of the Massachusetts Institute of Technology,
+[00:24.60]and Barry Barish and Kip Thorne, both of whom work at the California Institute of Technology.
+[00:33.44]The three men were involved in the first actual observation of gravitational waves in September 2015.
+[00:41.83]They are being recognized for a combination of highly developed scientific theory and equipment design.
+[00:51.32]The German-born Weiss was awarded half of the $1.1 million in prize money.
+[00:59.40]Thorne and Barish will split the other half.
+[01:03.28]The physics prize has been split among two or more winners for the past 25 years.
+[01:10.88]About a hundred years ago, Albert Einstein proposed his General Theory of Relativity.
+[01:18.60]It predicted the existence of gravitational waves anytime an object accelerates, or speeds up.
+[01:27.24]His theory changed the way scientists understand the universe.
+[01:32.40]But only recently were the waves seen, proving Einstein was correct.
+[01:39.68]Barish told the Associated Press that the Nobel prize is "a win for Einstein, and a very big one."
+[01:49.32]Weiss, Barish and Thorne were leaders in the experiments performed
+[01:54.68]at the Laser Interferometer Gravitational-Wave Observatory, or LIGO.
+[02:00.80]They measured very small disturbances the waves make to space and time as they pass through the Earth.
+[02:10.48]LIGO measured gravitational waves for the first time about two years ago.
+[02:16.88]Those waves were produced when two "black holes" came together
+[02:21.76]and formed a single, huge black hole.
+[02:26.04]The two black holes were about 1.3 billion light-years from Earth.
+[02:32.56]A light-year is the distance that light travels in one year: about 9.46 trillion kilometers.
+[02:42.88]When the discovery of gravitational waves was announced several months later,
+[02:49.40]scientists and other people were astonished.
+[02:54.40]Weiss said of the physics prize: "I view this more as a thing
+[02:59.76]that recognizes the work of a thousand people."
+[03:04.20]Weiss has been attempting to detect gravitational waves for many years.
+[03:09.84]He designed a laser-based device in the 1970s to do so.
+[03:15.96]The Nobel announcement said that Weiss, Thorne and Barish
+[03:21.44]"ensured that four decades of effort led to gravitational waves finally being observed."
+[03:28.88]It noted that Einstein believed gravitational waves could never be measured.
+[03:35.48]Thorne told the Associated Press from California shortly after the announcement
+[03:40.96]that "it's a win for the human race as a whole.
+[03:45.68]These gravitational waves will be powerful ways for the human race to explore the universe."
+[03:53.68]Ariel Goobar is with the Royal Swedish Academy of Sciences.
+[03:59.12]He said the winners' work meant "we can study processes which were completely impossible,
+[04:06.00]out of reach to us in the past. The best comparison is when Galileo discovered the telescope,
+[04:14.28]which allowed us to see that Jupiter had moons and all of a sudden
+[04:19.36]we discovered that the universe was much vaster than we used to think about," he added.
+[04:25.12]Patrick Sutton is an astronomer at Cardiff University in Wales.
+[04:31.20]He told the AP that with the technology the scientists developed
+[04:36.44]"we may even see entirely new objects that we haven't even imagined yet."
+[04:43.28]I'm Phil Dierking. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

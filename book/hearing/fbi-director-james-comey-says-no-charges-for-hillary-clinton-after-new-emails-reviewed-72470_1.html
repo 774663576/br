@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 联邦调查局称审阅新发现的邮件后维持对希拉里不起诉的决定</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 联邦调查局称审阅新发现的邮件后维持对希拉里不起诉的决定" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201611/fbi-director-james-comey-says-no-charges-for-hillary-clinton-after-new-emails-reviewed.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>联邦调查局称审阅新发现的邮件后维持对希拉里不起诉的决定</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201611/fbi-director-james-comey-says-no-charges-for-hillary-clinton-after-new-emails-reviewed.mp3" id="mp3"></a>
+<a href="/static/lrc/fbi-director-james-comey-says-no-charges-for-hillary-clinton-after-new-emails-reviewed.lrc" id="lrc"></a>
+<a href="fbi-director-james-comey-says-no-charges-for-hillary-clinton-after-new-emails-reviewed-72470.html" id="CnPage" target="_blank"></a>
+<a href="american-voters-will-decide-on-more-than-just-the-presidency-72468.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The Federal Bureau of Investigation says it has studied newly discovered emails in its investigation of U.S. presidential candidate Hillary Clinton.<br/>
+美国联邦调查局表示该局已经仔细检查了对美国总统候选人希拉里·克林顿(Hillary Clinton)的调查中新发现的电子邮件。
+<p>FBI Director James Comey said the new emails did not change the bureau's earlier decision. The FBI again decided that no charges should be brought against Clinton for her use of a personal email server while she was U.S. secretary of state.<br/>
+联邦调查局局长詹姆斯·科米（James Comey）表示，这些新邮件并未改变该局之前的决定。联邦调查局再次决定不会对希拉里在担任国务卿期间使用私人电子邮件服务器提起上诉。</p>
+<p>Comey sent a letter to members of Congress with his findings two days before the U.S. presidential election.<br/>
+科密在总统选举前两天向国会成员发信告知了他的调查结果。</p>
+<p>The FBI launched an investigation in 2015 into Clinton's use of a private email server. Investigators tried to find out if Clinton had sent secret government information through the private server.<br/>
+联邦调查局2015年对希拉里使用私人邮件服务器展开了调查。调查人员试图找出希拉里是否通过该私人服务器发送过政府机密信息。</p>
+<p>The emails were written before she became the Democratic Party's candidate for president.<br/>
+这些邮件是她在成为民主党总统候选人之前所写的。</p>
+<p>In July, Comey announced the FBI investigation had not found enough evidence to charge Clinton with a crime. But he did say the investigation found she had been "extremely careless" in her email practices. <br/>
+科米在今年7月宣布，联邦调查局这次调查没有找到足够证据指控希拉里犯罪。但他确实声称调查发现希拉里在收发邮件上“极度大意”。</p>
+<p>On October 28, Comey sent a letter to Congress stating that the FBI had found a new group of emails that could be important to the investigation. The emails were discovered in a separate investigation involving former Congressman Anthony Weiner, the husband of top Clinton advisor Huma Abedin.<br/>
+10月28日，科米致信国会声明联邦调查局发现了一堆可能对这起调查非常重要的新邮件。这些邮件是在另一起针对前国会议员安东尼·韦纳（Anthony Weiner）的单独调查中发现的，韦纳是希拉里高级顾问胡马·阿比丁（Huma Abedin）的丈夫。</p>
+<p>Comey was criticized by many Democrats and some Republicans for the FBI's decision to make the email investigation public. The decision came as opinion studies showed the presidential race becoming close in the days before the election.<br/>
+科米因为联邦调查局决定公开邮件调查受到了很多民主党人和部分共和党人的批评。这项决定公布时，正值大选前几天民意调查表明总统竞选的选情非常胶着之际。</p>
+<p>The critics argued that the decision could possibly change the minds of voters and influence the outcome of the election. Some also suggested Comey's action may have violated the U.S. Hatch Act, which sets limits on the political activities of federal employees.<br/>
+批评者认为，这项决定可能会改变选民的想法，并影响到选举结果。一些人还暗示，科米的行为可能违反了美国《哈奇法案》，该法案对联邦雇员的政治活动作出了限制。</p>
+<p>In his latest letter, Comey wrote that FBI investigators had reviewed a large number of newly discovered emails since October 28. "Based on our review, we have not changed our conclusions that we expressed in July with respect to Hillary Clinton while she was secretary of state," he wrote.<br/>
+科米在最新一封信中表示，自10月28日起，联邦调查局调查人员已经审查了大量新发现的电子邮件。“根据我们的审查，我们没有改变7月份得出的关于克林顿担任国务卿期间电邮问题的结论。”</p>
+<p>Historically, federal government agencies have attempted not to get involved in politics during election campaigns.<br/>
+联邦政府机构历来在选举期间试图不参与政治。</p>
+<p>The Clinton campaign welcomed Comey's latest decision regarding the investigation. "We were always confident nothing would cause the July decision to be revisited. Now Director Comey has confirmed it," campaign spokesman Brian Fallon said on Twitter. <br/>
+希拉里竞选团队对科米关于调查的最新决定表示欢迎。希拉里竞选发言人布赖恩·法伦（ Brian Fallon）在推特上表示，“我们一直相信没有任何因素会导致7月份的决定被重新审查。现在科米局长确认了这点。”</p>
+<p>Trump reacted by saying Clinton is "being protected by a rigged system." He also questioned how the FBI could have examined all the emails, which reportedly numbered in the hundreds of thousands. "You can't review 650,000 new emails in eight days. You can't do it, folks," Trump told supporters during a rally Sunday. <br/>
+I'm Bryan Lynn.<br/>
+川普回应称，希拉里“受到了一个不公正体制的保护。”他还质疑联邦调查局如何能够检查完所有电子邮件，这些邮件据报道有数十万封。川普在周日的集会上对支持者表示，“联邦调查局不可能在8天内审阅65万封电子邮件。伙计们，这不可能做到。”</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:FBI: No Charges for Clinton After Review of New Emails]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Federal Bureau of Investigation says it has studied newly discovered emails
+[00:08.28]in its investigation of U.S. presidential candidate Hillary Clinton.
+[00:16.32]FBI Director James Comey said the new emails
+[00:21.84]did not change the bureau's earlier decision.
+[00:27.24]The FBI again decided that no charges should be brought
+[00:33.80]against Clinton for her use of a personal email server
+[00:39.72]while she was U.S. secretary of state.
+[00:45.32]Comey sent a letter to members of Congress with his findings
+[00:51.16]two days before the U.S. presidential election.
+[00:57.36]The FBI launched an investigation in 2015
+[01:03.88]into Clinton's use of a private email server
+[01:09.96]. Investigators tried to find out if Clinton
+[01:13.92]had sent secret government information through the private server.
+[01:21.76]The emails were written before she became the Democratic Party's candidate for president.
+[01:32.44]In July, Comey announced the FBI investigation
+[01:37.28]had not found enough evidence to charge Clinton with a crime.
+[01:44.32]But he did say the investigation found
+[01:47.92]she had been "extremely careless" in her email practices.
+[01:56.00]On October 28, Comey sent a letter to Congress
+[02:00.60]stating that the FBI had found a new group of emails
+[02:05.40]that could be important to the investigation.
+[02:10.72]The emails were discovered in a separate investigation
+[02:15.76]involving former Congressman Anthony Weiner,
+[02:20.16]the husband of top Clinton advisor Huma Abedin.
+[02:27.28]Comey was criticized by many Democrats and some Republicans
+[02:33.52]for the FBI's decision to make the email investigation public.
+[02:40.28]The decision came as opinion studies showed the presidential race
+[02:46.76]becoming close in the days before the election.
+[02:51.76]The critics argued that the decision could possibly change the minds of voters
+[02:59.88]and influence the outcome of the election.
+[03:05.80]Some also suggested Comey's action may have violated the U.S. Hatch Act,
+[03:13.92]which sets limits on the political activities of federal employees.
+[03:22.36]In his latest letter, Comey wrote that FBI investigators
+[03:28.16]had reviewed a large number of newly discovered emails since October 28.
+[03:37.12]"Based on our review, we have not changed our conclusions
+[03:42.28]that we expressed in July with respect to Hillary Clinton
+[03:47.52]while she was secretary of state," he wrote.
+[03:52.17]Historically, federal government agencies
+[03:56.84]have attempted not to get involved in politics during election campaigns.
+[04:05.92]The Clinton campaign welcomed Comey's latest decision regarding the investigation.
+[04:15.32]"We were always confident nothing would cause the July decision to be revisited.
+[04:23.76]Now Director Comey has confirmed it," campaign spokesman Brian Fallon said on Twitter.
+[04:34.32]Trump reacted by saying Clinton is "being protected by a rigged system."
+[04:42.76]He also questioned how the FBI could have examined all the emails,
+[04:48.85]which reportedly numbered in the hundreds of thousands.
+[04:55.00]"You can't review 650,000 new emails in eight days.
+[05:02.28]You can't do it, folks," Trump told supporters during a rally Sunday.
+[05:09.35]I'm Bryan Lynn.
+[05:12.12]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

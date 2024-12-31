@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - SpaceX Crew Returns to Earth after First Private Spacewalks</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, SpaceX Crew Returns to Earth after First Private Spacewalks" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/spacex-crew-returns-to-earth-after-first-private-spacewalks.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>SpaceX Crew Returns to Earth after First Private Spacewalks</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/spacex-crew-returns-to-earth-after-first-private-spacewalks.mp3" id="mp3"></a>
+<a href="/static/lrc/spacex-crew-returns-to-earth-after-first-private-spacewalks.lrc" id="lrc"></a>
+<a href="nasa-rocket-confirms-existence-of-earth-s-hidden-electric-field-92981.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">16 September, 2024</span><br/>
+<p>The four-member crew of a private space flight has returned to Earth after a trip that included the first-ever spacewalks by non-professional astronauts.</p>
+<p>American business leader Jared Isaacman organized and paid for the five-day <strong>mission</strong>, called Polaris Dawn. The American company SpaceX was a partner in the operation. It built both the Crew Dragon <strong>capsule</strong> and the Falcon 9 rocket that carried it to space.</p>
+<p>The capsule dropped into the Gulf of Mexico near Florida early Sunday as planned.</p><div class="contentImage"><img alt="This image made from a SpaceX video shows the start of the first private spacewalk led by tech billionaire Jared Isaacman Thursday Sept. 12, 2024. (SpaceX via AP)" src="https://files.21voa.com/gdb/cde8a4a3-9aac-4069-b0a6-831406bbe973_cx5_cy10_cw74_w268_r1.jpg"/><br/><span class="imagecaption">This image made from a SpaceX video shows the start of the first private spacewalk led by tech billionaire Jared Isaacman Thursday Sept. 12, 2024. (SpaceX via AP)</span></div>
+<p>The mission is historic for two reasons. First, Crew Dragon reached a top <strong>altitude</strong> of more than 1,400 kilometers. That was the highest level any crewed mission has reached since the American space agency NASA's Apollo program ended in the early 1970s.</p>
+<p>Second, two crew members completed spacewalks during the mission. Isaacman was first to pop his head out of the Crew Dragon capsule on September 12. He spent about 10 minutes with the top half of his body outside the capsule as the spacecraft orbited hundreds of kilometers above Earth.</p>
+<p>A video camera captured Isaacman saying at the time, "Back at home we all have a lot of work to do. But from here, Earth sure looks like a perfect world."</p>
+<p>SpaceX engineer Sarah Gillis took a turn after Isaacman returned.</p>
+<p>During each spacewalk, the astronauts kept their feet positioned inside the spacecraft. They moved their bodies in several exercises to test their spacesuits.</p>
+<p>Until Polaris Dawn, only government astronauts and cosmonauts in government service had completed spacewalks.</p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>The other Polaris Dawn crewmembers were SpaceX engineer Anna Menon, and Scott Poteet, a retired American Air Force officer. They did not leave the spacecraft. However, they wore the same kind of spacesuits as Isaacman and Gillis. They needed the protection as the capsule environment was depressurized for the space walks.</p>
+<p>Isaacman had said a main goal of the mission would be to test the new spacesuit design in preparation for long-term stays in space. SpaceX has said the suits are equipped with the latest data-gathering instruments, as well as cameras and improved <strong>mobility</strong> systems.</p>
+<p>Before the mission launched, SpaceX said the crew planned to carry out a series of experiments aboard the Crew Dragon capsule. Among these were a test of laser-based satellite communication between the spacecraft and Starlink, SpaceX's internet satellite system. The laser method – which has also been tested by NASA – is designed to greatly increase space communication speeds.</p>
+<p>Many of the experiments dealt with observations of how human health is affected during long space missions. Among these will be tests with special contact lenses containing microelectronics that can continuously identify changes in eye pressure and shape.</p>
+<p>Isaacman is the head of payment processing company Shift4Payments. He has an estimated personal worth of $2 billion. Isaacman has not said publicly how much he paid SpaceX for its service.</p>
+<p>Polaris Dawn is the first of three planned missions under the Polaris program. The second will also use a Dragon capsule, while the third and final is expected to use SpaceX's Starship rocket. SpaceX chief Elon Musk has said his company plans to use Starship to carry future space travelers to the moon and Mars.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, Reuters, Agence France-Presse and SpaceX. </em></p>
+<p><strong>____________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><a class="wsw__a" name="_Int_21MSnzgP"><strong>mission </strong></a><em>– n.</em> an important project or trip, especially involving space travel</p>
+<p><strong>capsule </strong><em>– n. </em>the part of a spacecraft that people live in</p>
+<p><strong>altitude </strong><em>– n. </em>the height of something above sea level</p>
+<p><strong>mobility</strong> <em>– n. </em>the ability to walk and move freely</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:SpaceX Crew Returns to Earth after First Private Spacewalks]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The four-member crew of a private space flight
+[00:04.28]has returned to Earth after a trip
+[00:08.16]that included the first-ever spacewalks
+[00:12.52]by non-professional astronauts.
+[00:15.72]American business leader Jared Isaacman
+[00:19.92]organized and paid for the five-day mission,
+[00:24.24]called Polaris Dawn.
+[00:26.68]The American company SpaceX
+[00:29.68]was a partner in the operation.
+[00:32.72]It built both the Crew Dragon capsule
+[00:37.00]and the Falcon 9 rocket that carried it to space.
+[00:42.28]The capsule dropped into the Gulf of Mexico
+[00:46.44]near Florida early Sunday as planned.
+[00:50.24]The mission is historic for two reasons.
+[00:54.36]First, Crew Dragon reached a top altitude
+[00:58.88]of more than 1,400 kilometers.
+[01:03.00]That was the highest level
+[01:05.96]any crewed mission has reached
+[01:08.68]since the American space agency NASA's
+[01:12.36]Apollo program ended in the early 1970s.
+[01:18.00]Second, two crew members
+[01:20.56]completed spacewalks during the mission.
+[01:23.92]Isaacman was first to pop his head
+[01:27.56]out of the Crew Dragon capsule on September 12.
+[01:32.36]He spent about 10 minutes
+[01:34.88]with the top half of his body
+[01:37.28]outside the capsule as the spacecraft
+[01:40.68]orbited hundreds of kilometers above Earth.
+[01:45.84]A video camera
+[01:47.32]captured Isaacman saying at the time,
+[01:50.56]"Back at home we all have a lot of work to do.
+[01:54.32]But from here,
+[01:56.08]Earth sure looks like a perfect world."
+[01:59.64]SpaceX engineer Sarah Gillis
+[02:03.64]took a turn after Isaacman returned.
+[02:07.40]During each spacewalk, the astronauts
+[02:11.36]kept their feet positioned inside the spacecraft.
+[02:14.96]They moved their bodies in several exercises
+[02:19.60]to test their spacesuits.
+[02:22.64]Until Polaris Dawn,
+[02:24.96]only government astronauts
+[02:27.32]and cosmonauts in government service
+[02:30.60]had completed spacewalks.
+[02:33.20]The other Polaris Dawn crewmembers
+[02:36.76]were SpaceX engineer Anna Menon,
+[02:40.00]and Scott Poteet,
+[02:42.00]a retired American Air Force officer.
+[02:45.80]They did not leave the spacecraft.
+[02:49.08]However, they wore the same kind
+[02:51.68]of spacesuits as Isaacman and Gillis.
+[02:55.28]They needed the protection
+[02:57.72]as the capsule environment
+[02:59.56]was depressurized for the space walks.
+[03:03.88]Isaacman had said a main goal of the mission
+[03:08.08]would be to test the new spacesuit design
+[03:11.76]in preparation for long-term stays in space.
+[03:16.36]SpaceX has said the suits are equipped
+[03:19.88]with the latest data-gathering instruments,
+[03:23.36]as well as cameras and improved mobility systems.
+[03:28.20]Before the mission launched,
+[03:31.00]SpaceX said the crew planned
+[03:33.88]to carry out a series of experiments
+[03:36.76]aboard the Crew Dragon capsule.
+[03:39.48]Among these were a test of laser-based
+[03:43.48]satellite communication
+[03:45.64]between the spacecraft and Starlink,
+[03:49.32]SpaceX's internet satellite system.
+[03:53.08]The laser method
+[03:54.96]– which has also been tested by NASA
+[03:58.36]– is designed to greatly increase
+[04:01.64]space communication speeds.
+[04:04.68]Many of the experiments
+[04:07.36]dealt with observations of
+[04:09.60]how human health is affected
+[04:12.28]during long space missions.
+[04:15.36]Among these will be tests
+[04:17.72]with special contact lenses
+[04:20.52]containing microelectronics
+[04:22.92]that can continuously identify changes
+[04:26.80]in eye pressure and shape.
+[04:30.04]Isaacman is the head of payment
+[04:33.52]processing company Shift4Payments.
+[04:37.16]He has an estimated
+[04:39.24]personal worth of $2 billion.
+[04:42.36]Isaacman has not said publicly
+[04:45.88]how much he paid SpaceX for its service.
+[04:50.28]Polaris Dawn is the first of
+[04:53.80]three planned missions
+[04:55.80]under the Polaris program.
+[04:58.32]The second will also use a Dragon capsule,
+[05:02.40]while the third and final
+[05:04.64]is expected to use
+[05:06.48]SpaceX's Starship rocket.
+[05:09.84]SpaceX chief Elon Musk has said
+[05:14.12]his company plans to use Starship
+[05:17.72]to carry future space travelers
+[05:20.52]to the moon and Mars.
+[05:23.24]I'm Bryan Lynn. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

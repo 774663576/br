@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Expressions That ‘Stop You Cold’</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Expressions That ‘Stop You Cold’" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/expressions-that-stop-you-cold.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Expressions That ‘Stop You Cold’</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/expressions-that-stop-you-cold.mp3" id="mp3"></a>
+<a href="kinds-and-types-93242.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">21 December, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>In many parts of the world, temperatures are dropping for the winter season. But even for those in warm weather, our show on the word “cold” will help your English.</p>
+<p>“Cold” is not just an adjective describing temperature. It can also describe stopping something suddenly and surprisingly. It also means starting or doing something without preparation.</p><div class="contentImage"><img alt="FILE - A person walks in freezing cold temperatures in New York City on January 17, 2024. Temperature highs in the city are expected to hit 25F (-3.9C). (Photo by ANGELA WEISS / AFP)" src="https://files.21voa.com/gdb/46b1f25f-42db-42eb-bcb2-4e3f5147d26d_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A person walks in freezing cold temperatures in New York City on January 17, 2024. Temperature highs in the city are expected to hit 25F (-3.9C). (Photo by ANGELA WEISS / AFP)</span></div>
+<p>These definitions give us several expressions and idioms.</p>
+<p>When someone or something <u>stops cold,</u> it stops completely, suddenly, and perhaps with surprise. For example, I was surprised when my car <u>stopped cold</u> on a recent trip. I had just had it fixed! With this expression, we often say the thing or person being stopped. So, in that example, I could say engine trouble <u>stopped my car cold</u>.</p>
+<p>When we <u>stop (someone) cold,</u> we completely stop them from doing something suddenly or immediately. Here's an example.</p>
+<p><em>The sunset was so beautiful; it <u>stopped me cold</u>. </em></p>
+<p>Sometimes, we add “in my <strong>tracks”</strong> to this expression, such as:</p>
+<p><em>The sunset was so beautiful; it <u>stopped me cold in my tracks</u>.</em></p>
+<p>Other <strong>variations</strong> of this expression include <u>to stop (someone) dead in their tracks</u> and <u>to stop (someone) on a <strong>dime</strong>.</u> They all mean the same thing – something or someone has come to a standstill. And we can use them the same way.</p>
+<p>Now, let's talk about how we use <u>cold</u> in the business world.</p>
+<p>Sometimes, we need to call someone who does not know us, and we do not know them. These are <u>cold calls</u>.</p>
+<p>A <u>cold call</u> can also be a visit to a person or business. And usually we want to sell something. For example, a salesperson may have a <u>cold call</u> list to get new business.</p>
+<p><u>Cold calls</u>, whether on the phone or in-person, are <strong>unsolicited</strong>. This means that no one asked or requested contact.</p>
+<p>In business and also in life, if you <u>come to something cold</u> or <u>come into something cold</u>, you are not prepared. Here is an example:</p>
+<p><em>Last week, I <u>came into the meeting cold</u>. I hadn't read any of the materials. </em></p>
+<p>However, if you <u>come in from the cold</u>, you are in luck. It means you rejoin a group or a normal society again after being outside. We often use this expression to describe someone like a spy who was able <u>to come in from the cold</u> and enjoy a normal life.</p>
+<p><u>Come in from the cold</u> can also be used when someone or something becomes popular, accepted, or active again after being unpopular, unaccepted, and inactive for a time.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>track </strong><em>– n. </em>a mark left by something that has gone by</p>
+<p><strong>variation</strong> <em>– n. </em>a change in form, position, or condition</p>
+<p><strong>dime </strong><em>– n. </em>a coin of the U.S. worth <i>&amp;#</i>185;/<i>&amp;#&lt;/I&gt;8321;&lt;I&gt;&amp;#&lt;/I&gt;8320; dollar&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;unsolicited &lt;/strong&gt;&lt;em&gt;– adj. &lt;/em&gt;not asked for or requested&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="for-words-of-the-year-brat-brain-rot-polarization-93227.html" target=_blank&gt;For Words of the Year: Brat, Brain Rot, Polarization&lt;/A&gt;   (24/12/14)&lt;/LI&gt;&lt;LI&gt;&lt;A href="show-your-hand-other-card-idioms-93212.html" target=_blank&gt;'Show Your Hand', other Card Idioms&lt;/A&gt;   (24/12/7)&lt;/LI&gt;&lt;LI&gt;&lt;A href="what-does-like-gangbusters-mean-93193.html" target=_blank&gt;What Does ‘Like Gangbusters’ Mean?&lt;/A&gt;   (24/11/30)&lt;/LI&gt;&lt;LI&gt;&lt;A href="learn-to-rub-elbows-other-rub-expressions-93174.html" target=_blank&gt;Learn 'Rub Elbows,' Other 'Rub' Expressions&lt;/A&gt;   (24/11/23)&lt;/LI&gt;&lt;LI&gt;&lt;A href="what-does-it-mean-to-hit-pay-dirt-93154.html" target=_blank&gt;What Does It Mean to ‘Hit Pay Dirt'?&lt;/A&gt;   (24/11/16)&lt;/LI&gt;&lt;LI&gt;&lt;A href="have-you-ever-felt-the-long-arm-of-the-law-93131.html" target=_blank&gt;Have You Ever Felt the ‘Long Arm of the Law?’&lt;/A&gt;   (24/11/9)&lt;/LI&gt;&lt;LI&gt;&lt;A href="for-when-you-do-something-wrong-mea-culpa-93115.html" target=_blank&gt;For When You Do Something Wrong: Mea Culpa&lt;/A&gt;   (24/11/2)&lt;/LI&gt;&lt;LI&gt;&lt;A href="exploring-the-butterfly-effect-93098.html" target=_blank&gt;Exploring the 'Butterfly Effect'&lt;/A&gt;   (24/10/26)&lt;/LI&gt;&lt;LI&gt;&lt;A href="expressions-using-our-head-and-shoulders-93078.html" target=_blank&gt;Expressions Using Our Head and Shoulders&lt;/A&gt;   (24/10/19)&lt;/LI&gt;&lt;LI&gt;&lt;A href="when-in-rome-93059.html" target=_blank&gt;When in Rome …&lt;/A&gt;   (24/10/12)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></p></div></div></div></body></body></html>

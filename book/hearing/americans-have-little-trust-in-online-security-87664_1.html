@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国人对网络安全很不信任</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国人对网络安全很不信任" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202109/americans-have-little-trust-in-online-security.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国人对网络安全很不信任</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202109/americans-have-little-trust-in-online-security.mp3" id="mp3"></a>
+<a href="/static/lrc/americans-have-little-trust-in-online-security.lrc" id="lrc"></a>
+<a href="americans-have-little-trust-in-online-security-87664.html" id="CnPage" target="_blank"></a>
+<a href="biden-u-s-will-double-donation-of-covid--vaccines-to-world-87663.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Americans do not believe their personal information is safe online, suggests findings from a new poll. They also are not satisfied with the federal government's efforts to protect such information.<br/>
+一项新的民意调查表明，美国人不相信他们的个人信息在网上是安全的。他们也对联邦政府保护此类信息的措施不是很满意。
+<p>The Associated Press-NORC Center for Public Affairs Research and MeriTalk did the polling. It found that 64 percent of Americans say their social media activity is not secure. About as many have the same safety concerns about online information that shares their physical location. Half of Americans also believe their private text messages are not secure.<br/>
+美联社-NORC公共事务研究中心以及MeriTalk网站进行了这项研究。调查发现，64%的美国人表示他们的社交媒体活动不安全。还有差不多的人对共享其实际位置的网络信息有着相同的安全担忧。一半美国人还认为他们的私人短信并不安全。</p>
+<p>They are not just concerned. They want the federal government to do something about it. Almost 75 percent of Americans say they support creating laws for how companies can collect, use and share personal data.<br/>
+他们不只是担忧。他们希望联邦政府对此有所作为。近75%的美国人表示，他们支持对公司如何收集、使用和共享个人数据制定法律。</p>
+<p>Jennifer Benz is the head of the AP-NORC Center. "What is surprising to me is that there is a great deal of support for more government action to protect data privacy," she said.<br/>
+珍妮弗·本茨是美联社-NORC中心的负责人。她表示：“令我惊讶的是，很多人支持政府采取更多措施保护数据隐私。”</p>
+<p>But after years of failed efforts to create stronger data privacy laws, Americans do not trust the government to fix the problem.<br/>
+但是在经过多年未能出台更强有力的数据隐私法之后，美国人不相信政府会解决这个问题。</p>
+<p>A majority of those who took part in the poll said they have more trust in private companies than the federal government to address security and privacy issues. This comes even after years of hacks of U.S. corporations that shared the personal information of millions of people around the world.<br/>
+大多数参与民意调查的人士表示，在解决安全和隐私问题方面，他们更相信私营公司而不是联邦政府。即便是多年来美国公司被非法入侵导致世界各地数百万人的个人信息被公开之后。</p>
+<p>"I feel there is little to no security whatsoever," said Sarah Blick. She is a professor at Kenyon College in Ohio. Officials at the college told Blick earlier this year that someone had used her identity to seek unemployment insurance money.<br/>
+莎拉·布里克表示：“我觉得几乎没有安全感。”她是俄亥俄州凯尼恩学院的教授。该学院的官员今年早些时候告诉本里克，有人盗用她的身份申请失业保险金。</p>
+<p>Such fraud has greatly increased since the pandemic began.<br/>
+自大流行开始以来，这种欺诈行为大大增加。</p>
+<p>The poll answers showed that about 71 percent of Americans believe that individuals' data privacy should be treated as a national security issue. But only 23 percent are satisfied in the federal government's current efforts.<br/>
+该民意调查结果显示，大约71%的美国人认为个人数据隐私应当被视为国家安全问题。但是只有23%的人对联邦政府目前的措施感到满意。</p>
+<p>Terri Carver is a Republican Party state lawmaker in Colorado and the writer of a data privacy bill that will take effect there in 2023.<br/>
+特莉·卡弗是科罗拉多州的共和党州议员，也是将于2023年生效的一项数据隐私法案的撰写者。</p>
+<p>The law follows similar measures passed in California and Virginia, and gives people the right to find and delete personal information. Colorado's law also permits people to opt out of having their data tracked and sold. Facebook and other companies opposed the bill.<br/>
+该法案效仿加州和弗吉尼亚州通过的类似法案，赋予人们查找和删除个人信息的权利。科罗拉多州的这项法案还允许人们选择不跟踪和出售他们的数据。脸书网等公司反对这项法案。</p>
+<p>"There's great frustration that individuals have that they don't have the tools and the legal support to establish any kind of effective control over their personal data," Carver said.<br/>
+卡弗表示：“社会个体都感到非常沮丧，因为他们没有工具和法律支持建立对其个人数据的任何有效控制。”</p>
+<p>She hopes the efforts by Colorado and other states push Congress to make national protections.<br/>
+她希望科罗拉多州和其它州的措施能够推动国会制定全国性保护措施。</p>
+<p>The poll showed that protecting personal information online is "an area where people do see a direct role in government," Benz said.<br/>
+本茨表示，调查显示保护个人网络信息是人们确实认为政府可以直接发挥作用的一个领域。</p>
+<p>I'm Dan Novak.<br/>
+我是丹·诺瓦克。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Americans Have Little Trust In Online Security]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Americans do not believe their personal information
+[00:04.04]is safe online, suggests findings from a new poll.
+[00:09.28]They also are not satisfied
+[00:12.12]with the federal government's efforts
+[00:14.44]to protect such information.
+[00:17.88]The Associated Press-NORC Center
+[00:21.32]for Public Affairs Research and MeriTalk did the polling.
+[00:27.92]It found that 64 percent of Americans
+[00:31.76]say their social media activity is not secure.
+[00:37.00]About as many have the same safety concerns
+[00:41.20]about online information that shares their physical location.
+[00:47.60]Half of Americans also believe
+[00:50.64]their private text messages are not secure.
+[00:55.36]They are not just concerned.
+[00:57.92]They want the federal government to do something about it.
+[01:02.92]Almost 75 percent of Americans
+[01:06.88]say they support creating laws
+[01:10.28]for how companies can collect, use and share personal data.
+[01:18.04]Jennifer Benz is the head of the AP-NORC Center.
+[01:24.52]"What is surprising to me is that there is a great deal of support
+[01:29.48]for more government action to protect data privacy," she said.
+[01:36.20]But after years of failed efforts to create stronger data privacy laws,
+[01:42.00]Americans do not trust the government to fix the problem.
+[01:47.68]A majority of those who took part in the poll
+[01:51.24]said they have more trust in private companies
+[01:55.40]than the federal government to address security and privacy issues.
+[02:02.60]This comes even after years of hacks of U.S. corporations
+[02:07.32]that shared the personal information of millions of people around the world.
+[02:13.68]"I feel there is little to no security whatsoever," said Sarah Blick.
+[02:20.16]She is a professor at Kenyon College in Ohio.
+[02:25.16]Officials at the college told Blick earlier this year
+[02:29.80]that someone had used her identity
+[02:32.28]to seek unemployment insurance money.
+[02:36.52]Such fraud has greatly increased since the pandemic began.
+[02:42.68]The poll answers showed that about 71 percent of Americans
+[02:47.92]believe that individuals' data privacy
+[02:51.04]should be treated as a national security issue.
+[02:55.76]But only 23 percent are satisfied
+[02:59.08]in the federal government's current efforts.
+[03:03.16]Terri Carver is a Republican Party state lawmaker in Colorado
+[03:09.32]and the writer of a data privacy bill
+[03:12.88]that will take effect there in 2023.
+[03:18.20]The law follows similar measures
+[03:21.12]passed in California and Virginia, and gives people
+[03:25.76]the right to find and delete personal information.
+[03:31.24]Colorado's law also permits people to opt out
+[03:36.00]of having their data tracked and sold.
+[03:39.88]Facebook and other companies opposed the bill.
+[03:44.96]"There's great frustration that individuals have
+[03:49.20]that they don't have the tools and the legal support
+[03:53.12]to establish any kind of effective control
+[03:57.00]over their personal data," Carver said.
+[04:01.60]She hopes the efforts by Colorado and other states
+[04:05.88]push Congress to make national protections.
+[04:10.68]The poll showed that protecting personal information online
+[04:15.32]is "an area where people do see a direct role in government," Benz said.
+[04:23.00]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

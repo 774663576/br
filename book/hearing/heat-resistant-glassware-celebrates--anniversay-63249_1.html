@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 庆祝耐热玻璃器皿诞生100周年</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 庆祝耐热玻璃器皿诞生100周年" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201506/heat-resistant-glassware-celebrates-100-anniversay.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>庆祝耐热玻璃器皿诞生100周年</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201506/heat-resistant-glassware-celebrates-100-anniversay.mp3" id="mp3"></a>
+<a href="/static/lrc/heat-resistant-glassware-celebrates-100-anniversay.lrc" id="lrc"></a>
+<a href="heat-resistant-glassware-celebrates--anniversay-63249.html" id="CnPage" target="_blank"></a>
+<a href="linkedin-education-first-online-test-63213.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">One hundred years ago, a new kind of cookware entered the American market. It was called Pyrex. Today the Pyrex name is well known in the United States. The heat-resistant glass products are still being manufactured. And early Pyrex products are now considered collector's items.<br/>一百年前，一种新型炊具进入了美国市场。它被称之为派莱克斯耐热玻璃（Ryrex）。今天Pyrex这个名称在美国众所周知。这种耐热玻璃产品仍在生产。而早前的耐热产品现在被认为是收藏品。
+<p>Heat-resistant glass was invented in Germany at the end of the 1800s. But the glass was used mostly in lanterns because the lighting produced heat. It also was used in containers for telegraph and telephone batteries.<br/>耐热玻璃是19世纪末在德国发明的。但这种玻璃主要用于灯笼，因为照明会产生热。它还被用于电报和电话所用电池的电池壳。</p>
+<p>The usefulness of heat-resistant glass as cookware was discovered by accident. It started at the Corning Glass Works manufacturing company in New York. A scientist working there gave his wife a battery jar made of borosilicate glass. Borosilicate glass is resistant to heat and very strong.<br/>耐热玻璃作为炊具的实用性是偶然被发现的，最初是在纽约的康宁玻璃工程制造公司。一位在这里工作的科学家送给他妻子一个由硼硅酸盐玻璃制成的电池壳。硼硅酸盐玻璃耐热而且非常坚固。</p>
+<p>Kelley Elliott is with the Corning Museum of Glass. She says the scientist's wife used the jar while cooking, and noted something unusual.<br/>凯利·埃利奥特(Kelley Elliott)就职于康宁玻璃博物馆。她说，这位科学家的妻子在烹饪时用到了这个电池壳，并且注意到一些不寻常的东西。</p>
+<p>"She proceeded to bake a cake, a sponge cake, in this battery jar. And she discovered that the baking was much more efficient, and much more even than baking in ceramic or metal was."<br/>“她用这个电池壳烘培了一个海绵蛋糕，然后发现这样烘培效果更好，甚至比用陶瓷或金属器皿烘焙的效果更好。”</p>
+<p>Ms. Elliott says that when Pyrex products began appearing in U.S. stores in 1915, the cookware quickly became popular.<br/>埃利奥特女士表示，当耐热玻璃产品于1915年开始出现在美国的商店时，这种炊具迅速走红。</p>
+<p>At first, Pyrex dishes were only made of clear glass. But the Corning Glass Works soon started producing dishes in colors. Kate Halasz is the owner of Aunt Katie's Attic, in Scotia, New York. Her store sells vintage household items to cookware collectors. She says the dishes with different colors and designs are popular among collectors.<br/>最初，耐热玻璃盘子都用透明玻璃制作。但是康宁玻璃公司很快开始生产彩色盘子。凯特·豪洛斯（Kate Halasz）是纽约州斯科舍市“凯蒂阿姨的阁楼”的老板。她的店铺向厨具收藏家出售老式家具用品。她说，这种不同颜色和设计的盘子备受收藏家青睐。</p>
+<p>"It's kind of crazy! But the popular patterns are the pinks, the turquoises. The friendship pattern is a pattern that came out in the 70s. That's highly collectible."<br/>“是有点疯狂！但流行的图案是粉色和青绿色。友情图案是70年代生产出来的图案，具有极高的收藏价值。</p>
+<p>Borosilicate glass is also being used for astronomical instruments because the material is not affected by temperature changes. One example is the 5.1 meter telescope mirror at the Mount Palomar Observatory in California.<br/>硼硅酸盐玻璃还被用于天文仪器，因为这种材料不会受气温变化影响。加州帕洛玛山天文台5.1米望远镜的反射镜就是例子之一。</p>
+<p>Pyrex dishes are still being manufactured today by companies that bought the rights to this recognizable brand name.<br/>耐热玻璃餐具今天依然由购买了这个知名品牌授权的公司在生产。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳森·埃文斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Heat-Resistant Glassware Celebrates 100th Anniversary]
+[ar:Jonathan Evans]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]One hundred years ago, 
+[00:01.76]a new kind of cookware entered the American market. 
+[00:05.79]It was called Pyrex. 
+[00:08.45]Today the Pyrex name is well known in the United States. 
+[00:13.27]The heat-resistant glass products are still being manufactured. 
+[00:18.64]And early Pyrex products are now considered collector's items.
+[00:24.23]Heat-resistant glass was invented in Germany 
+[00:27.90]at the end of the 1800s. 
+[00:30.27]But the glass was used mostly in lanterns 
+[00:33.80]because the lighting produced heat. 
+[00:36.79]It also was used in containers for telegraph and telephone batteries.
+[00:42.98]The usefulness of heat-resistant glass 
+[00:45.91]as cookware was discovered by accident. 
+[00:49.04]It started at the Corning Glass Works manufacturing company in New York. 
+[00:54.62]A scientist working there 
+[00:57.19]gave his wife a battery jar made of borosilicate glass. 
+[01:02.07]Borosilicate glass is resistant to heat and very strong.
+[01:07.61]Kelley Elliott is with the Corning Museum of Glass. 
+[01:12.04]She says the scientist's wife used the jar while cooking, 
+[01:17.44]and noted something unusual.
+[01:20.06]"She proceeded to bake a cake, a sponge cake, in this battery jar. 
+[01:25.34]And she discovered that the baking was much more efficient, 
+[01:29.58]and much more even than baking in ceramic or metal was."
+[01:33.35]Ms. Elliott says that when Pyrex products 
+[01:37.21]began appearing in U.S. stores in 1915, 
+[01:40.24]the cookware quickly became popular.
+[01:42.90]At first, Pyrex dishes were only made of clear glass. 
+[01:48.17]But the Corning Glass Works soon started producing dishes in colors. 
+[01:54.16]Kate Halasz is the owner of Aunt Katie's Attic, in Scotia, New York. 
+[02:00.63]Her store sells vintage household items to cookware collectors. 
+[02:06.75]She says the dishes with different colors 
+[02:09.33]and designs are popular among collectors.
+[02:13.07]"It's kind of crazy! 
+[02:15.88]But the popular patterns are the pinks, the turquoises. 
+[02:20.24]The friendship pattern is a pattern that came out in the 70s. 
+[02:24.10]That's highly collectible."
+[02:26.20]Borosilicate glass is also being used for astronomical instruments 
+[02:31.57]because the material is not affected by temperature changes. 
+[02:35.80]One example is the 5.1 meter telescope mirror 
+[02:40.83]at the Mount Palomar Observatory in California.
+[02:44.49]Pyrex dishes are still being manufactured today 
+[02:48.97]by companies that bought the rights to this recognizable brand name.
+[02:54.23]I'm Jonathan Evans.
+[02:56.45]更多听力请访问51voa.com
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

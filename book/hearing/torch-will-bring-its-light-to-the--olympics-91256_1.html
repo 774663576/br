@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 2024年巴黎奥运会火炬亮相</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 2024年巴黎奥运会火炬亮相" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/torch-will-bring-its-light-to-the-2024-olympics.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>2024年巴黎奥运会火炬亮相</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/torch-will-bring-its-light-to-the-2024-olympics.mp3" id="mp3"></a>
+<a href="/static/lrc/torch-will-bring-its-light-to-the-2024-olympics.lrc" id="lrc"></a>
+<a href="torch-will-bring-its-light-to-the--olympics-91256.html" id="CnPage" target="_blank"></a>
+<a href="unrest-in-niger-raises-new-questions-about-security-in-west-africa-91254.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Olympic Games organizers in France presented the 2024 Olympic torch that will light the Summer Games in the country a year from now. In the Olympic torch tradition, many people carry the torch in turn from Greece to the current location of the Games. After it has traveled thousands of kilometers, the torch will light the Olympic cauldron at the Opening Ceremony of the next Olympic Games.<br/>
+法国奥运会组织者展示了2024年奥运火炬，它将在一年后点燃该国夏季奥运会的圣火。在奥运火炬的传统中，许多人轮流将火炬从希腊传递到奥运会当前的举办地。火炬在经过数千公里的传递后，将在下一届奥运会开幕式上点燃奥运圣火。</p>
+<p>French designer Mathieu Lehanneur created the torch, which is 70 centimeters long and made of lightweight steel. Lehanneur said its shape is inspired by the famous Seine river, which flows through Paris. He said the torch is equal from top to bottom and all around the middle, which stands for equality between athletes. The twisting shape of the torch represents peace.<br/>
+法国设计师马修·勒汉纽尔设计了这款火炬，它长70厘米，由轻钢制成。勒汉纽尔表示，火炬形状受到了流经巴黎的著名的塞纳河的启发。他说，火炬从上到下以及中部都是对称的，它象征着着运动员之间的平等。火炬曲线的形状象征着和平。</p>
+<p>The torch was made with lightweight steel. Its lower half copies the movement of the Seine, along which the opening ceremony will take place for over 500,000 viewers.<br/>
+火炬是用轻钢制成的。它的下半部分重现了塞纳河的流动，开幕式将沿着塞纳河举行，届时将有50多万观众观看。</p>
+<p>Lehanneur said he wants the torch to represent the kind of event that Paris 2024 hopes to be. "I wanted to move away from the torch appearing as an object of conquest," Lehanneur said.<br/>
+勒汉纽尔表示，他希望火炬能呈现2024年巴黎奥运会所希望的那种活动。勒汉纽尔表示：“我想摆脱火炬被视为征服对象的形象。”</p>
+<p>He also told reporters that designing the torch was much more technical than he thought it would be. "The magic is not the torch itself, but the flame," Lehanneur said.<br/>
+他还告诉记者，火炬的设计比他想象的更有技术性。勒汉纽尔表示：““神奇的不是火炬本身，而是火焰。”</p>
+<p>The torch will begin burning in Olympia, Greece, where the first Olympics were held, on April 16. The Games will begin in Paris on July 26, 2024.<br/>
+火炬将于明年4月16日在首届奥运会举办地希腊奥林匹亚点燃。这届奥运会将于2024年7月26日在巴黎开幕。</p>
+<p>On May 8, the torch will arrive in the Mediterranean city of Marseille. It will then pass through several important places, which include Strasbourg, the Pantheon in Paris, the Mont Saint-Michel and multiple French territories.<br/>
+明年5月8日，火炬将抵达地中海城市马赛。然后，它将经过几个重要的地方，包括斯特拉斯堡、巴黎万神殿、圣米歇尔山和多处法国领土。</p>
+<p>Tony Estanguet, the Paris 2024 chief, said the torch is "very, very beautiful." He also said it is "...very pure. It's perfectly balanced in the hand."<br/>
+2024年巴黎奥运会主席托尼·埃斯坦盖表示，火炬“非常、非常美丽”。他还表示，火炬“非常纯净。它在手中完美地平衡。”</p>
+<p>I'm Dominic Varela. And I'm Jill Robbins.<br/>
+我是多米尼克·瓦雷拉。我是吉尔·罗宾斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Torch Will Bring its Light to the 2024 Olympics]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Olympic Games organizers in France
+[00:03.12]presented the 2024 Olympic torch
+[00:06.84]that will light the Summer Games in the country a year from now.
+[00:11.60]In the Olympic torch tradition,
+[00:14.32]many people carry the torch in turn
+[00:16.96]from Greece to the current location of the Games.
+[00:21.16]After it has traveled thousands of kilometers,
+[00:24.96]the torch will light the Olympic cauldron
+[00:27.92]at the Opening Ceremony of the next Olympic Games.
+[00:32.28]French designer Mathieu Lehanneur created the torch,
+[00:37.40]which is 70 centimeters long and made of lightweight steel.
+[00:43.44]Lehanneur said its shape is inspired
+[00:46.56]by the famous Seine river, which flows through Paris.
+[00:51.68]He said the torch is equal from top to bottom
+[00:55.80]and all around the middle,
+[00:57.88]which stands for equality between athletes.
+[01:02.48]The twisting shape of the torch represents peace.
+[01:07.56]The torch was made with lightweight steel.
+[01:10.36]Its lower half copies the movement of the Seine,
+[01:13.60]along which the opening ceremony
+[01:16.36]will take place for over 500,000 viewers.
+[01:21.52]Lehanneur said he wants the torch to represent
+[01:25.16]the kind of event that Paris 2024 hopes to be.
+[01:30.72]"I wanted to move away from the torch appearing
+[01:33.68]as an object of conquest," Lehanneur said.
+[01:38.24]He also told reporters that designing the torch
+[01:41.48]was much more technical than he thought it would be.
+[01:45.56]"The magic is not the torch itself,
+[01:47.96]but the flame," Lehanneur said.
+[01:51.76]The torch will begin burning in Olympia, Greece,
+[01:55.80]where the first Olympics were held, on April 16.
+[02:00.88]The Games will begin in Paris on July 26, 2024.
+[02:08.00]On May 8, the torch will arrive
+[02:11.16]in the Mediterranean city of Marseille.
+[02:15.24]It will then pass through several important places,
+[02:18.92]which include Strasbourg, the Pantheon in Paris,
+[02:22.88]the Mont Saint-Michel and multiple French territories.
+[02:28.48]Tony Estanguet, the Paris 2024 chief,
+[02:32.96]said the torch is "very, very beautiful."
+[02:37.60]He also said it is "...very pure.
+[02:40.72]It's perfectly balanced in the hand."
+[02:43.80]I'm Dominic Varela.
+[02:46.72]And I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

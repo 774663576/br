@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 克林顿和川普立场对比</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 克林顿和川普立场对比" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201605/clinton-and-trump-are-a-study-in-contrasts.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>克林顿和川普立场对比</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201605/clinton-and-trump-are-a-study-in-contrasts.mp3" id="mp3"></a>
+<a href="/static/lrc/clinton-and-trump-are-a-study-in-contrasts.lrc" id="lrc"></a>
+<a href="clinton-and-trump-are-a-study-in-contrasts-69409.html" id="CnPage" target="_blank"></a>
+<a href="americans-split-over-us-role-overseas-69390.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>American businessman Donald Trump and former Secretary of State Hillary Clinton are likely to face each other in the U.S. presidential election this year.<br/>美国商人唐纳德·川普（Donald Trump）和前国务卿希拉里·克林顿（Hillary Clinton）在今年的总统选举中可能要面对彼此。</p>
+<p>Both candidates call New York State their home. But that might be the only thing they have in common.<br/>两位选举人都称纽约州是自己的家。但是这可能是他俩唯一拥有的共同点。</p>
+<p>Donald Trump came from a wealthy family. He is known for building hotels and casinos around the world.<br/>川普来自一个富裕家庭，他以在世界各地建造酒店和赌场而为人熟知。</p>
+<p>The businessman says that the U.S. political system is broken and it will take a non-politician like himself to fix it. Trump has never held political office. He is known for his promise to "make America great again."<br/>这位富商表示，美国的政治体制已经溃败，需要一位像他这样的非政治家来解决它。川普从未担任过政治职务。他以“让美国再次强大起来”而为人熟知。</p>
+<p>Trump is the likely presidential candidate of the Republican Party. But he has had difficulty getting the support of the party's conservatives.<br/>川普是共和党可能的总统候选人。但是他一直难以得到党内保守派的支持。</p>
+<p>On Thursday, Paul Ryan, the Speaker of the House of Representatives, said he is "not ready" to support Trump as the nominee. Ryan was the party's choice for vice president four years ago.<br/>上周四，众议院议长保罗·瑞安（Paul Ryan）表示，他“还没准备好”支持川普作为被提名人。瑞安四年前在党内是作为副总统人选。</p>
+<p>Hillary Clinton grew up in a middle class family near Chicago. She has a lot of experience in politics. She has been a lawyer, a professor, activist, former First Lady, former U.S. Senator and former Secretary of State. Clinton now is campaigning to become the first woman president in U.S. history.<br/>克林顿在芝加哥附近的一家中产阶级家庭长大。她具有颇多从政经验。她做过律师、教授、活动家、前第一夫人、前参议员以及前国务卿。克林顿现在正在竞选成为美国历史上第一位女总统。</p>
+<p>Her last remaining opponent for the Democratic Party nomination, Vermont Senator Bernie Sanders, continues his campaign against her. He has gained surprisingly strong support from young Democratic voters.<br/>她角逐民主党提名的最后一个对手是佛蒙特州参议员伯尼·桑德斯（Bernie Sanders）。桑德斯还在继续竞选与她对抗。他意外获得了民主党年轻选民的强劲支持。</p>
+<p><strong>On National Security<br/>国家安全方面</strong></p>
+<p>The experiences of Clinton and Trump have shaped their ideas about America's place in the world.<br/>克林顿和川普的经历塑造了他们对美国在世界上地位的看法。</p>
+<p>After the San Bernardino, California terror attacks of December 2015, Trump suggested banning all Muslims from entering the United States. Trump has said he supports the use of waterboarding when U.S. agents question suspected terrorists. He also supports the bulk collection of information on Americans' telephone data.<br/>在2015年12月加州圣贝纳迪诺恐怖袭击之后，川普提出禁止所有穆斯林进入美国。川普还表示支持美国机构在讯问恐怖分子嫌疑人时使用水刑。他还支持批量采集美国人的电话数据。</p>
+<p>Recently, Trump questioned whether the North Atlantic Treaty Organization is "obsolete." And, he has said he wanted American allies like Japan and South Korea to pay more for their share of defense costs.<br/>日前，川普质疑北大西洋公约组织是否“过时”。他还表示希望像日本和韩国等美国盟友更多承担他们国防费用的份额。</p>
+<p>Clinton said the United States should accept 65,000 refugees from Syria. But, she wants more careful screenings of travelers from countries where terrorists are active.<br/>克林顿表示，美国应该接收65000名叙利亚难民。但是她希望对来自恐怖分子活跃国家的旅客进行更仔细地筛查。</p>
+<p>She supports the closing of the Guantanamo Bay detention center in Cuba and the banning of interrogation methods like waterboarding. She also has called for strengthening existing ties with American allies in Europe and Asia to contain Russian and Chinese influence.<br/>她支持关闭古巴关塔那摩拘留中心，并禁止水刑等审讯方法。她还呼吁加强同欧洲和亚洲的美国盟友的既有关系以遏制俄罗斯和中国的影响力。</p>
+<p><strong>On Diplomacy<br/>外交方面</strong></p>
+<p>Both Clinton and Trump support a stronger U.S. military presence in East and Southeast Asia to answer China's influence. At the same time, both candidates want China to use its influence in dealing with nuclear-armed North Korea.<br/>克林顿和川普都支持在东亚和东南亚加强美国的军事存在以回应中国的影响力。与此同时，两位候选人都希望中国用自身影响力处理核武化的朝鲜。</p>
+<p>As for Russia, Trump said that he "would probably get along with (Russian President Vladimir Putin) very well." Putin, in return, praised Trump as "a bright and talented person."<br/>至于俄罗斯，川普表示，他“可能会与俄罗斯总统普京相处融洽”。作为回应，普京称赞川普为“明智又有才华的人”。</p>
+<p>The two candidates have different ideas about the nuclear arms agreement with Iran. Trump calls it a "terrible" deal. He says it threatens Israel, an American ally, and opposes the lifting of sanctions against Iran.<br/>两位候选人对同伊朗签订的核武器协议意见不一。川普称其为可怕的交易。他说，这威胁到了美国的盟友以色列，并反对解除对伊朗实施的制裁。</p>
+<p>Clinton supports the Iran nuclear agreement, but says she will punish Iran for any violations.<br/>克林顿支持伊朗核协议，但她表示会惩罚伊朗的违背之举。</p>
+<p><strong>On Immigration<br/>移民方面</strong></p>
+<p>Stopping illegal immigration is a central issue in Trump's campaign. The businessman wants to build a wall along the U.S. border with Mexico to keep out illegal immigrants. As for illegal immigrants already in the U.S., Trump wants to expel them. He also is calling for limits on the guest workers visa program and ending birthright citizenship.<br/>阻止非法移民是川普竞选的中心议题。川普希望沿美国和墨西哥边境修一堵墙阻止非法移民。至于已经在美国的非法移民，川普要把他们驱逐出境。他还呼吁限制外籍劳工签证计划，并终止出生公民权。</p>
+<p>Clinton says immigration is an economic and "a family issue." She supports new legislation to provide a path to U.S. citizenship for more than 11 million undocumented immigrants.<br/>克林顿表示，移民是一门经济问题，也是一项家庭问题。她支持制定新的法律为1100多万非法移民提供成为美国公民的途径。</p>
+<p><strong>On Trade Partnerships<br/>贸易伙伴关系</strong></p>
+<p>As Obama's secretary of state, Clinton supported the Trans-Pacific Partnership (TPP) trade agreement. She considered it an important part of the administration's "pivot to Asia" policy. However, as a candidate, Clinton opposes the trade deal and says it will not create jobs for Americans.<br/>作为奥巴马的国务卿，克林顿支持跨太平洋伙伴关系贸易协定。她认为这是政府“重返亚洲”政策的一个重要组成部分。然而，作为候选人，克林顿反对这一贸易协定，并表示这不能为美国人创造就业。</p>
+<p>Trump says he supports free trade, but has opposed several free-trade agreements. He called the North American Free Trade Agreement (NAFTA) a "disaster." He says the TPP helps China, Japan and big businesses, but not American workers. Trump wants to punish China for unfair trade actions. He calls China a currency manipulator and wants to tighten rules on theft of intellectual property.<br/>川普表示，他支持自由贸易，但他反对一些自由贸易协定。他称所谓的北美自由贸易协定是一场灾难。他说跨太平洋伙伴关系有助于中国、日本和大企业，但是无助于美国工人。川普要惩罚<br/>中国的不公平贸易行为。他称中国为汇率操纵国，并希望加强对侵犯知识产权的规定。</p>
+<p><strong>On Energy and Environment<br/>能源和环境</strong></p>
+<p>Trump says climate change is not a problem and wants to reduce the U.S. Environmental Protection Agency. He says the Obama administration has wasted billions of dollars on "green" energy programs.<br/>川普表示，气候变化不是什么问题，并希望缩减美国环境保护局。他说奥巴马政府已经在绿色能源项目上浪费了数十亿美元。</p>
+<p>Trump calls for removing carbon emission limits in the U.S. He also supports expanding hydro-fracking oil drilling methods to increase oil production and reduce U.S. dependence on oil imports.<br/>川普要求去除美国的碳排放限制。他还支持扩大发展水力压裂石油钻探法以提高石油产量，减少美国对进口石油的依赖。</p>
+<p>Clinton says she wants to make the U.S. "the world's clean energy superpower." She says she will honor the Paris agreement to limit global carbon gas emissions and expand U.S. investment in "green" energy. Clinton opposes oil drilling in the Arctic areas of Alaska and the building of the Keystone pipeline across the U.S. Midwest.<br/>克林顿表示，她希望把美国打造成世界清洁能源超级大国。她说，她将履行巴黎协定限制全球二氧化碳气体的排放量，并扩大美国在绿色能源上的投资。克林顿反对在北极地区的阿拉斯加进行石油钻探，也反对建造穿越美国中西北的基石管道项目。</p>
+<p>I'm Christopher Jones-Cruise.<br/>我是克里斯托弗·琼斯·克鲁斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]American businessman Donald Trump and former Secretary of State Hillary Clinton
+[00:06.72]are likely to face each other in the U.S. presidential election this year.
+[00:13.80]Both candidates call New York State their home.
+[00:18.64]But that might be the only thing they have in common.
+[00:24.20]Donald Trump came from a wealthy family.
+[00:28.16]He is known for building hotels and casinos around the world.
+[00:34.12]The businessman says that the U.S. political system is broken
+[00:40.08]and it will take a non-politician like himself to fix it.
+[00:46.22]Trump has never held political office.
+[00:50.84]He is known for his promise to "make America great again."
+[00:57.68]Trump is the likely presidential candidate of the Republican Party.
+[01:03.08]But he has had difficulty getting the support of the party's conservatives.
+[01:09.04]On Thursday, Paul Ryan, the Speaker of the House of Representatives,
+[01:15.84]said he is "not ready" to support Trump as the nominee.
+[01:22.68]Ryan was the party's choice for vice president four years ago.
+[01:28.64]Hillary Clinton grew up in a middle class family near Chicago.
+[01:35.72]She has a lot of experience in politics.
+[01:40.40]She has been a lawyer, a professor, activist, former First Lady,
+[01:48.32]former U.S. Senator and former Secretary of State.
+[01:54.48]Clinton now is campaigning to become the first woman president in U.S. history.
+[02:03.24]Her last remaining opponent for the Democratic Party nomination,
+[02:08.40]Vermont Senator Bernie Sanders, continues his campaign against her.
+[02:15.28]He has gained surprisingly strong support from young Democratic voters.
+[02:22.44]The experiences of Clinton and Trump have shaped their ideas about America's place in the world.
+[02:32.44]After the San Bernardino, California terror attacks of December 2015,
+[02:40.88]Trump suggested banning all Muslims from entering the United States.
+[02:47.20]Trump has said he supports the use of waterboarding
+[02:52.52]when U.S. agents question suspected terrorists.
+[02:56.96]He also supports the bulk collection of information on Americans' telephone data.
+[03:05.60]Recently, Trump questioned whether the North Atlantic Treaty Organization is "obsolete."
+[03:13.56]And, he has said he wanted American allies like Japan and South Korea
+[03:20.08]to pay more for their share of defense costs.
+[03:25.20]Clinton said the United States should accept 65,000 refugees from Syria.
+[03:34.04]But, she wants more careful screenings of travelers from countries where terrorists are active.
+[03:43.60]She supports the closing of the Guantanamo Bay detention center in Cuba
+[03:49.36]and the banning of interrogation methods like waterboarding.
+[03:55.00]She also has called for strengthening existing ties
+[03:59.24]with American allies in Europe and Asia to contain Russian and Chinese influence.
+[04:08.08]Both Clinton and Trump support a stronger U.S. military presence
+[04:13.68]in East and Southeast Asia to answer China's influence.
+[04:19.40]At the same time, both candidates want China to use its influence
+[04:26.12]in dealing with nuclear-armed North Korea.
+[04:29.96]As for Russia, Trump said that he "would probably get along with (Russian President Vladimir Putin) very well."
+[04:40.32]Putin, in return, praised Trump as "a bright and talented person."
+[04:48.92]The two candidates have different ideas about the nuclear arms agreement with Iran.
+[04:55.80]Trump calls it a "terrible" deal.
+[04:59.16]He says it threatens Israel, an American ally,
+[05:03.40]and opposes the lifting of sanctions against Iran.
+[05:09.00]Clinton supports the Iran nuclear agreement,
+[05:13.04]but says she will punish Iran for any violations.
+[05:18.36]Stopping illegal immigration is a central issue in Trump's campaign.
+[05:25.28]The businessman wants to build a wall along the U.S. border with Mexico to keep out illegal immigrants.
+[05:35.56]As for illegal immigrants already in the U.S.,
+[05:40.24]Trump wants to expel them.
+[05:43.92]He also is calling for limits on the guest workers visa program
+[05:48.79]and ending birthright citizenship.
+[05:53.64]Clinton says immigration is an economic and "a family issue."
+[05:59.40]She supports new legislation to provide a path to U.S. citizenship
+[06:06.80]for more than 11 million undocumented immigrants.
+[06:12.56]As Obama's secretary of state,
+[06:15.68]Clinton supported the Trans-Pacific Partnership (TPP) trade agreement.
+[06:22.84]She considered it an important part of the administration's "pivot to Asia" policy.
+[06:31.04]However, as a candidate, Clinton opposes the trade deal
+[06:37.04]and says it will not create jobs for Americans.
+[06:42.60]Trump says he supports free trade,
+[06:46.12]but has opposed several free-trade agreements.
+[06:50.84]He called the North American Free Trade Agreement (NAFTA) a "disaster."
+[06:57.04]He says the TPP helps China, Japan and big businesses, but not American workers.
+[07:07.12]Trump wants to punish China for unfair trade actions.
+[07:13.08]He calls China a currency manipulator and wants to tighten rules on theft of intellectual property.
+[07:22.60]Trump says climate change is not a problem
+[07:26.48]and wants to reduce the U.S. Environmental Protection Agency.
+[07:32.36]He says the Obama administration has wasted billions of dollars on "green" energy programs.
+[07:40.92]Trump calls for removing carbon emission limits in the U.S.
+[07:47.60]He also supports expanding hydro-fracking oil drilling methods
+[07:53.44]to increase oil production and reduce U.S. dependence on oil imports.
+[08:01.52]Clinton says she wants to make the U.S. "the world's clean energy superpower."
+[08:08.68]She says she will honor the Paris agreement
+[08:12.36]to limit global carbon gas emissions
+[08:15.88]and expand U.S. investment in "green" energy.
+[08:21.16]Clinton opposes oil drilling in the Arctic areas of Alaska
+[08:26.48]and the building of the Keystone pipeline across the U.S. Midwest.
+[08:32.80]I'm Christopher Jones-Cruise.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

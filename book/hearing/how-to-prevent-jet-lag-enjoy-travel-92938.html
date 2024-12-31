@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Prevent Jet Lag, Enjoy Travel</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How to Prevent Jet Lag, Enjoy Travel" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/how-to-prevent-jet-lag-enjoy-travel.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Prevent Jet Lag, Enjoy Travel</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/how-to-prevent-jet-lag-enjoy-travel.mp3" id="mp3"></a>
+<a href="/static/lrc/how-to-prevent-jet-lag-enjoy-travel.lrc" id="lrc"></a>
+<a href="un-chief-issues-urgent-warning-of-danger-from-rising-pacific-sea-levels-92934.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">30 August, 2024</span><br/>
+<p>Many travelers face a common problem: jet lag.</p>
+<p>It is the feeling of tiredness people get when traveling a long distance, resulting in a difference in daylight hours. Nobody wants to miss the fun because they are too tired to enjoy their vacation.</p>
+<p>Here are some tips on how to deal with jet lag:</p><div class="contentImage"><img alt="FILE - A holiday traveler looks out at a airplane at Salt Lake City International Airport, in Salt Lake City, July 3, 2024. (AP Photo/Rick Bowmer, File)
+" src="https://files.21voa.com/gdb/01000000-c0a8-0242-45c7-08dcc2e4ca64_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A holiday traveler looks out at a airplane at Salt Lake City International Airport, in Salt Lake City, July 3, 2024. (AP Photo/Rick Bowmer, File)
+</span></div>
+<p><strong>What is jet lag?</strong></p>
+<p>Scientists define jet lag as the effect on the human body of traveling across <strong>time zones</strong>. Sofia Axelrod studies <strong>circadian</strong> <strong>rhythms</strong> at Rockefeller University in New York. She said a circadian rhythm is like a biological clock programmed into almost every cell in the body.</p>
+<p>"The clock is set by the 24-hour light and dark <strong>pattern</strong>," Axelrod said. "Every morning when we wake up, specialized (light) receptor cells in our <strong>retina</strong> receive a daylight signal, which is <strong>transmitted</strong> to the brain and from there, (to) the whole body."</p>
+<p>When we travel to another time zone, our eyes do not receive the daylight signal at the usual time. This causes our “internal clocks” to reset. But that process can take a while. During that period, we feel the effects of jet lag.</p>
+<p><strong>Is jet lag preventable?</strong></p>
+<p>People who travel long distances often want to prevent jet lag. One way has a high cost.</p>
+<p>Malcolm von Schantz is a professor who specializes in circadian rhythms at Northumbria University in Newcastle, England. He said that paying a lot for a bigger seat and more space in an airplane can prevent sleep <strong>deprivation</strong>.</p>
+<p>He knows most people cannot pay so much to travel. But he said timing your flights can help. For example, he suggests flying from Europe to North America during the day, so that it is evening when passengers land and they can get to sleep.</p>
+<p>"If you take the evening flight instead, you'll be woken up at midnight to be served breakfast and land an hour or two later, when both jet lag and sleep deprivation will hit you hard," he said.</p>
+<p>Von Schantz also said flying in newer model passenger jets, like the Airbus A350 or Boeing 787 Dreamliner, might help. He said those planes can maintain a more <strong>comfortable</strong> atmosphere inside, causing less tiredness.</p>
+<p><strong>What should you do when you arrive?</strong></p>
+<p>Experts say being in sunlight is important to resetting your internal body clock. That could mean either avoiding morning sun or seeking it out, depending on where you started.</p>
+<p>Getting light in the morning will move your body clock forward, while light exposure in the early evening will delay it. Sleeping for a short time during the day is acceptable, but scientists warn against sleeping for longer periods later in the day. Doing so might make it harder to sleep through the night.</p>
+<p><strong>Are there supplements or medicines for jet lag?</strong></p>
+<p>The brain naturally produces a chemical <strong>hormone</strong> called melatonin when the body thinks it is night. Taking melatonin as a supplement can be helpful. But it is not available everywhere and, in some countries like Britain and France, you need a doctor's permission.</p>
+<p>Von Schantz said that one of the good effects of melatonin is that you can start taking it before you travel, to begin the process of resetting your internal clock.</p>
+<p>"If you're in a part of the world where melatonin is available <strong>over the counter</strong>, you can combine the effects of light and melatonin to achieve the advance or delay (in your body clock) that you need," he said.</p>
+<p><strong>What can you do to deal with the effects of jet lag?</strong></p>
+<p>Russell Foster of Oxford University wrote a book on circadian rhythms. He said business travelers might want to consider arriving a day or two ahead of any important meetings or events. Being jet-lagged can lead to unwise decisions and unpleasant emotions.</p>
+<p>Tourists might not need to think as clearly as business travelers, but they should still be careful, he said. He advises tourists to get enough sleep before doing anything that might be risky or that requires a lot of attention, like driving.</p>
+<p>Foster said he tries to increase his exposure to light when he arrives at a new place to prevent jet lag. But he also has another method if light does not help: he drinks coffee.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Maria Cheng reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>jet lag</strong><em> – n.</em> a tired and unpleasant feeling that you sometimes get when you travel by airplane to a place that is far away</p>
+<p><strong>time zone</strong> – <em>n</em>. any one of the world's 24 divisions that has its own time</p>
+<p><strong>circadian rhythm</strong> – <em>n</em>. repeated activity in an organism that happens in 24-hour periods</p>
+<p><strong>pattern </strong>–n. a regular or repeated happening</p>
+<p><strong>retina</strong> – <em>n</em>. the sensitive tissue at the back of the eye that receives images and sends signals to the brain about what is seen</p>
+<p><strong>deprivation</strong> – <em>n</em>. the state of not having something that people need</p>
+<p><strong>comfortable </strong>–adj. to feel good and to not feel pain or discomfort</p>
+<p><strong>hormone </strong>–n. a chemical produced by the body that influences how the body grows and develops</p>
+<p><strong>over the counter</strong> – <em>expression</em>. available for purchase without a special note (called a prescription) from a doctor</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How to Prevent Jet Lag, Enjoy Travel]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.84]Many travelers face a common problem: jet lag.
+[00:06.76]It is the feeling of tiredness
+[00:08.80]people get when traveling a long distance,
+[00:11.48]resulting in a difference in daylight hours.
+[00:15.56]Nobody wants to miss the fun
+[00:17.36]because they are too tired to enjoy their vacation.
+[00:21.36]Here are some tips on how to deal with jet lag:
+[00:25.28]What is jet lag?
+[00:28.28]Scientists define jet lag
+[00:30.36]as the effect on the human body
+[00:32.56]of traveling across time zones.
+[00:36.00]Sofia Axelrod studies circadian rhythms
+[00:39.48]at Rockefeller University in New York.
+[00:43.12]She said a circadian rhythm
+[00:45.16]is like a biological clock
+[00:47.24]programmed into almost every cell in the body.
+[00:51.48]"The clock is set
+[00:52.72]by the 24-hour light and dark pattern," Axelrod said.
+[00:58.24]"Every morning when we wake up,
+[01:00.20]specialized (light) receptor cells in our retina
+[01:03.80]receive a daylight signal, which is transmitted
+[01:07.20]to the brain and from there, (to) the whole body."
+[01:11.36]When we travel to another time zone,
+[01:13.76]our eyes do not receive the daylight signal
+[01:16.48]at the usual time.
+[01:18.88]This causes our "internal clocks" to reset.
+[01:23.48]But that process can take a while.
+[01:26.20]During that period, we feel the effects of jet lag.
+[01:31.24]Is jet lag preventable?
+[01:33.44]People who travel long distances
+[01:36.44]often want to prevent jet lag.
+[01:38.72]One way has a high cost.
+[01:41.88]Malcolm von Schantz
+[01:43.32]is a professor who specializes in circadian rhythms
+[01:47.08]at Northumbria University in Newcastle, England.
+[01:51.64]He said that paying a lot for a bigger seat
+[01:54.80]and more space in an airplane
+[01:57.04]can prevent sleep deprivation.
+[02:00.48]He knows most people cannot pay so much to travel.
+[02:04.00]But he said timing your flights can help.
+[02:07.64]For example, he suggests flying from Europe
+[02:10.52]to North America during the day,
+[02:12.40]so that it is evening when passengers land
+[02:15.60]and they can get to sleep.
+[02:18.28]"If you take the evening flight instead,
+[02:20.80]you'll be woken up at midnight to be served breakfast
+[02:24.20]and land an hour or two later,
+[02:27.56]when both jet lag and sleep deprivation
+[02:30.36]will hit you hard," he said.
+[02:33.44]Von Schantz also said
+[02:35.12]flying in newer model passenger jets,
+[02:37.80]like the Airbus A350
+[02:40.32]or Boeing 787 Dreamliner, might help.
+[02:44.44]He said those planes can maintain
+[02:47.12]a more comfortable atmosphere inside,
+[02:49.84]causing less tiredness.
+[02:52.56]What should you do when you arrive?
+[02:55.40]Experts say being in sunlight is important
+[02:58.68]to resetting your internal body clock.
+[03:02.24]That could mean either avoiding morning sun
+[03:05.28]or seeking it out, depending on where you started.
+[03:09.76]Getting light in the morning
+[03:11.44]will move your body clock forward,
+[03:13.60]while light exposure in the early evening will delay it.
+[03:18.40]Sleeping for a short time during the day is acceptable,
+[03:21.56]but scientists warn against sleeping
+[03:24.12]for longer periods later in the day.
+[03:27.24]Doing so might make it harder to sleep through the night.
+[03:30.56]Are there supplements or medicines for jet lag?
+[03:35.20]The brain naturally produces a chemical hormone
+[03:38.00]called melatonin when the body thinks it is night.
+[03:42.16]Taking melatonin as a supplement can be helpful.
+[03:45.76]But it is not available everywhere
+[03:48.36]and, in some countries like Britain and France,
+[03:50.96]you need a doctor's permission.
+[03:54.16]Von Schantz said that one of the good effects of melatonin
+[03:57.76]is that you can start taking it before you travel,
+[04:00.92]to begin the process of resetting your internal clock.
+[04:05.44]"If you're in a part of the world
+[04:06.72]where melatonin is available over the counter,
+[04:09.76]you can combine the effects of light and melatonin
+[04:13.52]to achieve the advance
+[04:14.68]or delay (in your body clock) that you need," he said.
+[04:18.92]What can you do to deal with the effects of jet lag?
+[04:22.20]Russell Foster of Oxford University
+[04:25.48]wrote a book on circadian rhythms.
+[04:28.80]He said business travelers
+[04:30.72]might want to consider arriving a day or two
+[04:33.32]ahead of any important meetings or events.
+[04:37.08]Being jet-lagged can lead to unwise decisions
+[04:40.28]and unpleasant emotions.
+[04:43.28]Tourists might not need to think
+[04:45.20]as clearly as business travelers,
+[04:47.20]but they should still be careful, he said.
+[04:50.68]He advises tourists to get enough sleep
+[04:53.12]before doing anything that might be risky
+[04:55.64]or that requires a lot of attention, like driving.
+[05:00.00]Foster said he tries to increase his exposure to light
+[05:03.72]when he arrives at a new place to prevent jet lag.
+[05:07.84]But he also has another method
+[05:10.16]if light does not help: he drinks coffee.
+[05:14.32]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 沪港通正式开通</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 沪港通正式开通" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201411/se-eco-china-opens-stock-market-to-hong-kong-17nov14.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>沪港通正式开通</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201411/se-eco-china-opens-stock-market-to-hong-kong-17nov14.mp3" id="mp3"></a>
+<a href="/static/lrc/se-eco-china-opens-stock-market-to-hong-kong-17nov14.lrc" id="lrc"></a>
+<a href="china-opens-stock-market-to-hong-kong-59691.html" id="CnPage" target="_blank"></a>
+<a href="iraq-syria-face-aid-shortages-59663.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>Investors in Hong Kong and Shanghai may now invest in a limited group of securities on either city's stock exchange. C. K. Chow is the chairman of Hong Kong Exchanges and Clearing. He called the move "a breakthrough in the opening of China's financial markets and an important milestone in the development of Hong Kong." He said the new way to invest made Hong Kong a gateway between mainland China and international investors.<br/>香港和上海的投资者现在可以在两地证券交易所投资一组有限范围内的股票。周松岗是香港交易所主席。他称此举是“中国金融市场开放的一种突破以及香港发展的一个重要里程碑。”他说，这一新的投资渠道使得香港成为中国内地和国际投资者之间的桥梁。</p>
+<p>The Shanghai-Hong Kong Stock Connect gives investors the ability to buy stocks listed in mainland China. It also permits Chinese investors to buy stocks listed in Hong Kong.<br/>沪港通使得投资者可以购买在中国内地上市的股票，并同时允许中国投资者购买香港上市的股票。</p>
+<p>There are limits, however, to the value and the kinds of stocks that can be traded. Investors may trade only a total of $3.8 billion-dollars-worth of stocks each day.<br/>但是沪港通的额度和股票类型存在限制。投资者每天只能交易总额度为3800万美元的股票。</p>
+<p>Julian Evans-Pritchard is a China economic expert at Capital Economics based in Singapore. He told VOA's Victor Beattie that the move to open the stock exchanges to each other was important. But Mr. Evans-Pritchard noted that the total value of stock that can be traded is a relatively small quota.<br/>朱利安·埃文斯 - 普里查德（Julian Evans-Pritchard）是新加坡凯投宏观的一位中国经济专家。他对美国之音的维克多·比蒂（Victor Beattie）表示，两地证券交易所对彼此开放的举动非常重要。但埃文斯 - 普里查德先生指出，可交易股票总额度的配额相对较小。</p>
+<p>"The immediate impact of the scheme is not likely to be that big and that is partly because regulators are taking a very cautious approach to limiting the quota to about one percent of the market capitalization of each market."<br/>“该方案的直接影响可能没那么大，部分原因是因为监管部门采取了非常谨慎的态度，将配额限制在各自流通市值的1%左右。”</p>
+<p>Mr. Evans-Pritchard says, if the quota is filled, officials may see a reason to increase it over time and open up the exchange further. The stock plan represents a limited reform measure. Mr. Evans-Pritchard says what is important is that China is opening up its capital account to foreign investment money, which can come in or go out.<br/>埃文斯 - 普里查德先生说，如果配额已满，有关官员可能会因此而随着时间推移增加配额并进一步开放股票交易。该股票方案所代表的改革措施有限。埃文斯 - 普里查德先生说，重要的是，中国正在向自由流动的外国投资基金开放其资本账户。</p>
+<p>China's stock market offerings have had limited success in recent years. The biggest public stock offering by a Chinese company, Alibaba, took place on the New York Stock Exchange rather than within China.<br/>最近几年中国股票市场发行取得的成效有限。中国阿里巴巴公司最大的公开募股是在纽约证券交易所，而不是在中国进行。</p>
+<p>It was not clear if Chinese officials would approve the plan. Mr. Evans-Pritchard notes that the protests in Hong Kong had raised questions about whether Chinese officials would permit the plan, or scheme, to go forward.<br/>目前尚不清楚中国官员是否会批准该方案。埃文斯 - 普里查德先生指出，香港的抗议活动引发了人们对中国官员是否会批准该方案继续推进的质疑。</p>
+<p>"I know some people had talked about the scheme being cancelled as a result of the Hong Kong protest as a kind of punishment. But, I don't think that was in their interest."<br/>“我知道有人曾经表示作为香港抗议的一种惩罚该方案被取消了。但我认为这不符合他们的利益。”</p>
+<p>Michael McCormack is a financial advisor and executive director at Z-Ben Advisors based in Shanghai. He says the move is a major change that could increase the number of shareholders.<br/>迈克尔·麦考马克（Michael McCormack）是上海咨奔商务咨询公司的财务顾问和执行董事。他说，此举可能会大幅提升股东数量。</p>
+<p>"I think it's likely that we're going to see a lot of the state-owned firms in China - companies where one branch of the government or another owns 40 to even 80 percent of the firm - try to sell off their shares into the market and broaden the shareholding base. Both inside China and internationally... That would be the really significant change."<br/>他说，“我认为很可能我们将会看到，中国很多由政府持股40%到80%的国有企业会尝试向市场出售股票并拓宽其股权基础。无论是在中国国内还是国际上，这都是真正显著的变化。”</p>
+<p>And that's the Economics Report for VOA Learning English. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是马里奥·里特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:China Opens Shanghai Stock Market to Hong Kong]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.75]Investors in Hong Kong and Shanghai 
+[00:09.40]may now invest in a limited group of securities 
+[00:13.42]on either city's stock exchange. 
+[00:16.58]C. K. Chow is the chairman of Hong Kong Exchanges and Clearing. 
+[00:22.84]He called the move "a breakthrough 
+[00:26.08]in the opening of China's financial markets 
+[00:29.15]and an important milestone in the development of Hong Kong." 
+[00:33.87]He said the new way 
+[00:36.85]to invest made Hong Kong a gateway 
+[00:40.31]between mainland China and international investors.
+[00:44.42]The Shanghai-Hong Kong Stock Connect 
+[00:48.68]gives investors the ability 
+[00:51.40]to buy stocks listed in mainland China. 
+[00:54.35]It also permits Chinese investors to buy stocks listed in Hong Kong.
+[01:00.55]There are limits, however, 
+[01:03.59]to the value and the kinds of stocks that can be traded. 
+[01:08.04]Investors may trade only a total 
+[01:11.66]of $3.8 billion-dollars-worth of stocks each day.
+[01:17.57]Julian Evans-Pritchard is a China economic expert 
+[01:22.07]at Capital Economics based in Singapore. 
+[01:25.80]He told VOA's Victor Beattie 
+[01:29.30]that the move to open the stock exchanges 
+[01:32.63]to each other was important. 
+[01:35.02]But Mr. Evans-Pritchard noted that 
+[01:39.33]the total value of stock 
+[01:41.24]that can be traded is a relatively small quota.
+[01:45.10]"The immediate impact of the scheme 
+[01:47.95]is not likely to be that big and that is partly 
+[01:52.03]because regulators are taking a very cautious approach 
+[01:54.98]to limiting the quota to about one percent 
+[01:58.18]of the market capitalization of each market."
+[02:00.12]Mr. Evans-Pritchard says, 
+[02:02.72]if the quota is filled, 
+[02:04.71]officials may see a reason to increase it over time 
+[02:09.04]and open up the exchange further. 
+[02:11.78]The stock plan represents a limited reform measure.
+[02:16.62]Mr. Evans-Pritchard says what is important 
+[02:21.09]is that China is opening up its capital account 
+[02:24.95]to foreign investment money, 
+[02:26.84]which can come in or go out.
+[02:29.87]China's stock market offerings 
+[02:32.77]have had limited success in recent years. 
+[02:36.05]The biggest public stock offering by a Chinese company, Alibaba, 
+[02:41.97]took place on the New York Stock Exchange rather than within China.
+[02:47.25]It was not clear if Chinese officials would approve the plan. 
+[02:52.48]Mr. Evans-Pritchard notes 
+[02:55.56]that the protests in Hong Kong had raised questions 
+[02:59.35]about whether Chinese officials would permit the plan, 
+[03:02.94]or scheme, to go forward.
+[03:05.75]"I know some people had talked about the scheme 
+[03:09.81]being cancelled as a result of the Hong Kong protest 
+[03:12.75]as a kind of punishment. 
+[03:14.44]But, I don't think that was in their interest."
+[03:16.50]Michael McCormack is a financial advisor and executive director 
+[03:21.34]at Z-Ben Advisors based in Shanghai. 
+[03:24.94]He says the move is a major change 
+[03:28.54]that could increase the number of shareholders.
+[03:31.72]"I think it's likely that we're going to see 
+[03:34.26]a lot of the state-owned firms in China - 
+[03:36.01]companies where one branch of the government 
+[03:38.31]or another owns 40 to even 80 percent of the firm - 
+[03:41.60]try to sell off their shares into the market 
+[03:44.15]and broaden the shareholding base. 
+[03:45.82]Both inside China and internationally... 
+[03:47.82]That would be the really significant change."
+[03:50.48]And that's the Economics Report from VOA Learning English. 
+[03:55.92]I'm Mario Ritter.
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

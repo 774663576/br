@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Once Upon a Time...</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Once Upon a Time..." name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/once-upon-a-time.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Once Upon a Time...</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/once-upon-a-time.mp3" id="mp3"></a>
+<a href="more-children-mistakenly-eating-legal-marijuana-food-products-90260.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">12 January 2023</span><br/>
+<p>Have you ever read stories like <em>Little Red Riding Hood</em>, <em>Cinderella,</em> or the <em>Frog Prince</em>?</p>
+<p>These stories are called <strong>fairy tales</strong>. Although you might not have read them in English, you likely can find these <strong>magical</strong> stories in your own language and culture.</p>
+<p>Fairy tales are stories passed down through the generations. The names of the characters might be in a different language, but many of these stories seem to tell of similar events.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/022a0000-0aff-0242-8d46-08daf3276c9c_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>In today's <em>Everyday Grammar</em>, we will look at the beginnings of these stories, and find out the "when, "who," and "what" of these stories we loved as children.</p>
+<p><strong>Beginnings: when?</strong></p>
+<p>Many fairy tales in English start with the same opening: "Once upon a time." When we read this <strong>phrase</strong>, we immediately know the story is a fairy tale and have ideas about what might happen. Many cultures have similar expressions beginning their fairy tales.</p>
+<p>We know that these stories are made up. We set aside our disbelief to enjoy the magic of these stories.</p>
+<p>"Once upon a time" answers the question of "when."</p>
+<p>In English, the expression "once upon a time" means "at some point in the past." It is used to talk about a story that happened a long time ago, but the exact time is not important.</p>
+<p><em>"Once upon a time, there lived an old woman..."</em></p>
+<p><em>"Once upon a time, there was a rich man who lived happily for a long time with his wife." (From Cinderella)</em></p>
+<p>Some fairy tales open with "There was once a..." This phrase also shows that the story happened in the past.</p>
+<p>Both openings help us understand that the story is in the distant past. But they do not tell us about the <strong>characters</strong> in the story. Which brings us to our next question of "who."</p>
+<p><strong>Who? or What?</strong></p>
+<p>In fairy tales, nouns identify important people, places, and things. But adjectives are also very important.</p>
+<p>The adjective "little" can be used before a character's name. Like, "Little Briar Rose" in the Grimm Brothers' version of <em>Sleeping Beauty</em>.</p>
+<p>Other characters might be described with two nouns together like "Snow White" or "The Snow Maiden."</p>
+<p>There are several kinds of characters in a fairy tale.</p>
+<p>Sometimes the stories are about families. There are often siblings: brothers and sisters. You might read about a husband and wife or children and their parents.</p>
+<p><em>In the story of Hansel and Gretel, the children are brother and sister, and they get lost in the forest.</em></p>
+<p>Sometimes there are even stepparents or stepsiblings, family members created by a remarriage.</p>
+<p><em>Cinderella has two stepsisters.</em></p>
+<p>There is always a good character. This might be the hero or heroine, a female hero, in the story. This person carries out actions like rescuing someone or helping others. Or they might have a <strong>task</strong> to do or solve a problem.</p>
+<p><em>Jack is the hero after he climbs the <strong>beanstalk</strong> and kills the giant.</em></p>
+<p><em>Cinderella's <strong>fairy godmother</strong> acts as a heroine by helping Cinderella get ready for the ball.</em></p>
+<p>There are "villains" or bad people in fairy tales that might harm or put a <strong>spell</strong> on the hero or other characters in the story.</p>
+<p><em>Cinderella has an evil stepmother who makes her into her house servant.</em></p>
+<p>There is often "royalty," a queen or a king, in the stories because during the time of these tales that was how things were. And, if there is "royalty," there are also "commoners" or everyday people who might come from poor situations.</p>
+<p><em>Rapunzel is a princess who is locked in a <strong>tower</strong>.</em></p>
+<p>There also are magical numbers and objects found throughout fairy tales.</p>
+<p>The most common magical numbers are "three" and "seven." For example, there is the story of <em>Goldilocks and the Three Bears</em>. In the fairy tale of <em>Snow White</em>, there are seven <strong>dwarves</strong> in the forest.</p>
+<p>Sometimes words, phrases, or actions are repeated three times.</p>
+<p>We can also find magical objects in fairy tales. These can help the hero or heroine, like the glass shoes in <em>Cinderella</em>. They can also be used by the villain of the story, like a house with chicken legs in the story of <em>Baba Yaga</em> or the Evil Queen's talking mirror in <em>Snow White</em>.</p>
+<p>And there are magical animals that can talk and have human-like <strong>traits </strong>in fairy tales. These animals can be either good or bad. They can help or hurt the main character. In some tales, they might be the main character.</p>
+<p><em>The cat in Puss in Boots talks and wears <strong>boots</strong>.</em></p>
+<p><strong>Final thoughts</strong></p>
+<p>Today, we talked about the beginning of fairy tales. We answered the question of "when" in the opening "once upon a time." And we answered the questions of "who" and "what" by thinking about the different characters, magical numbers, and objects in a few stories.</p>
+<p>Let's close with some homework. Choose a favorite fairy tale in English. Then, write down the answers to the following questions: How does the story begin? What opening sentence does the story use? When does the story take place? Who are the characters?</p>
+<p>After that, describe a few characters. Are there any magical numbers or talking animals? Who is the hero? Is there a villain?</p>
+<p>Send you answers to <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>Share your work in the comments below!</p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>_________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fairy tale </strong>–n. a simple children's story about magical things</p>
+<p><strong>magical </strong>–adj. something with impossible powers</p>
+<p><strong>phrase </strong>–n two or more words that do not form a complete sentence but that express an idea</p>
+<p><strong>character </strong>–n. a person in a story, book, movie or play</p>
+<p><strong>task </strong>–n. a job or something that must be done</p>
+<p><strong>beanstalk </strong>–n. a bean plant</p>
+<p><strong>fairy godmother </strong>–n. a person with magical powers who saves someone from trouble</p>
+<p><strong>spell </strong>–n. a group of secret words that carry magical power</p>
+<p><strong>tower </strong>–n. a tall structure</p>
+<p><strong>dwarves </strong><em>–n. (pl.)</em> people in stories who are much smaller than most</p>
+<p><strong>trait </strong>–n. a quality that makes a person different from others</p>
+<p><strong>boots </strong><em>–n. (pl.)</em> tall shoes that protect the lower part of the leg</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

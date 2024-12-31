@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - OpenAI Introduces Voice Cloning Tool, But Waits for Public Release</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, OpenAI Introduces Voice Cloning Tool, But Waits for Public Release" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/openai-introduces-voice-cloning-tool-but-waits-for-public-release.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>OpenAI Introduces Voice Cloning Tool, But Waits for Public Release</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/openai-introduces-voice-cloning-tool-but-waits-for-public-release.mp3" id="mp3"></a>
+<a href="/static/lrc/openai-introduces-voice-cloning-tool-but-waits-for-public-release.lrc" id="lrc"></a>
+<a href="eu-climate-agency-another-record-high-temperature-for-march-92518.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">10 April 2024</span><br/>
+<p>ChatGPT developer OpenAI has introduced a new tool that it says can reproduce human voices with just a short audio <strong>sample</strong>.</p>
+<p>The tool is among several developed by technology companies that aim to <strong>clone</strong> voices with a high level of exactness.</p>
+<p>The system is called Voice Engine. OpenAI released details about Voice Engine on March 29. The company also released some examples of how the tool performs.</p><div class="contentImage"><img alt="The OpenAI logo is seen on a mobile phone in front of a computer screen which displays output from ChatGPT, March 21, 2023, in Boston.(AP Photo/Michael Dwyer, File)" src="https://files.21voa.com/gdb/01000000-0a00-0242-2d51-08dc59713715_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">The OpenAI logo is seen on a mobile phone in front of a computer screen which displays output from ChatGPT, March 21, 2023, in Boston.(AP Photo/Michael Dwyer, File)</span></div>
+<p>The company <a class="wsw__a" href="https://openai.com/blog/navigating-the-challenges-and-opportunities-of-synthetic-voices">explained</a> in a statement that the system uses written <strong>instructions</strong> and a 15-second audio sample to produce, or generate, "natural-sounding speech" in the voice of any speaker.</p>
+<p>OpenAI said it has been working on developing the tool since late 2022. It plans to continue developing it before releasing it to the public. The company said the delayed release represents "a <strong>cautious</strong> and informed" effort to prevent possible misuse.</p>
+<p>OpenAI said it began testing Voice Engine "with a small group of trusted partners." This testing aims to help company officials decide how to improve the tool's safety and learn how it can "be used for good" across different industries.</p>
+<p>There have already been highly publicized examples of false, or fake, voice recordings that sound like well-known people and politicians.</p>
+<p>One such <a class="wsw__a" href="https://www.21voa.com/a/deepfake-of-biden-s-voice-called-early-example-of-us-election-disinformation/7455392.html">example</a> was an AI-manufactured voice claiming to belong to U.S. President Joe Biden. The voice was turned into a message that was sent by telephone to voters earlier this year in the state of New Hampshire.</p>
+<p>In the fake audio, Biden appears to try to urge voters not to take part in presidential primary voting. Election officials in New Hampshire are still investigating the incident.</p>
+<p>OpenAI's statement identified such election risks. "We recognize that generating speech that <strong>resembles</strong> people's voices has serious risks, which are especially <strong>top of mind</strong> in an election year."</p>
+<p>There have been other examples of so-called "<a class="wsw__a" href="https://www.21voa.com/a/how-to-find-ai-deepfake-images/7537253.html">deepfakes</a>" being used in political campaigns around the world. A "deepfake" is a piece of audio or video created to make it appear that people in it are saying or doing things that they never did.</p>
+<p>OpenAI said it is currently discussing how to limit these and other risks of such voice cloning systems. Technology experts have also warned such tools can be used to carry out financial crimes. For example, voices can be recorded and then reproduced to represent another individual in an effort to carry out <strong>fraud</strong>.</p>
+<p>The company said it has been in contact with U.S. and international partners "from across government, media, entertainment, education, civil society and beyond." The aim is to get advice from people in these groups about the best ways to develop and deploy the system, OpenAI said.</p>
+<p>OpenAI said its early Voice Engine testers have agreed not to represent a person without their permission and to clearly state that the voices are produced by AI. The company is best known for its launch of the AI-powered <a class="wsw__a" href="https://www.21voa.com/a/microsoft-expands-partnership-with-openai-invests-billions-more/6933850.html">ChatGPT</a> tool, which was launched in November 2022.</p>
+<p>There are several other companies developing similar voice cloning tools. One of the most widely known is called <a class="wsw__a" href="https://www.descript.com/ai-voices">Descript</a>. The company explains on its website the AI-powered system can clone any person's voice with a 60-second audio sample.</p>
+<p>Descript also offers other services involving audio and video production. The company's website says users can choose a free plan that includes up to 1,000 words of voice cloning. For $24, users can get unlimited voice generation, Descript said.</p>
+<p>OpenAI listed several possible uses for the technology tool. These include providing reading assistance to non-readers or children, supporting individuals who cannot speak, and helping patients recover their voice.</p>
+<p>The company said its Voice Engine system can work in several languages. One example of such use is taking an English voice recording and producing a new audio version in another language. In an example released online, OpenAI demonstrated a person's voice and <strong>style</strong> of speaking can remain the same in other targeted languages.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from OpenAI, The Associated Press and Agence France-Presse.</em></p>
+<p><strong>__________________________________________</strong><strong> </strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>sample </strong><em>– n. </em>a small amount of something that gives you information about the thing it was taken from</p>
+<p><strong>clone </strong><em>– v. </em>to create something that is very similar to something else<em> </em></p>
+<p><strong>instructions </strong><em>– n. </em>advice and information about how to do or use something</p>
+<p><strong>cautious </strong><em>– adj.</em> taking care to avoid risks or danger</p>
+<p><strong>resemble </strong><em>– v. </em>to look like or be like someone or something</p>
+<p><strong>top of mind </strong><em>– idiom. </em>something that occupies a big part of a person's thoughts</p>
+<p><strong>fraud </strong><em>– n. </em>the crime of doing something illegal in order to get money</p>
+<p><strong>style </strong><em>– n. </em>a way of doing something that is typical of a particular person, group, place, etc.</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:OpenAI Introduces Voice Cloning Tool, But Waits for Public Release]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]ChatGPT developer OpenAI
+[00:03.68]has introduced a new tool that it says
+[00:07.36]can reproduce human voices
+[00:10.40]with just a short audio sample.
+[00:13.40]The tool is among several developed
+[00:16.68]by technology companies that aim
+[00:19.96]to clone voices with a high level of exactness.
+[00:24.84]The system is called Voice Engine.
+[00:28.24]OpenAI released details about Voice Engine on March 29.
+[00:34.32]The company also released
+[00:36.84]some examples of how the tool performs.
+[00:40.64]The company explained in a statement
+[00:44.04]that the system uses written instructions
+[00:47.68]and a 15-second audio sample
+[00:50.76]to produce, or generate, "natural-sounding speech"
+[00:55.32]in the voice of any speaker.
+[00:58.12]OpenAI said it has been working on
+[01:01.64]developing the tool since late 2022.
+[01:05.88]It plans to continue developing it
+[01:08.96]before releasing it to the public.
+[01:11.52]The company said the delayed release
+[01:14.84]represents "a cautious and informed" effort
+[01:18.96]to prevent possible misuse.
+[01:22.32]OpenAI said it began testing Voice Engine
+[01:26.64]"with a small group of trusted partners."
+[01:30.24]This testing aims to help company officials
+[01:34.44]decide how to improve the tool's safety
+[01:38.32]and learn how it can "be used for good"
+[01:41.96]across different industries.
+[01:44.32]There have already been highly publicized examples
+[01:49.08]of false, or fake, voice recordings
+[01:52.64]that sound like well-known people and politicians.
+[01:56.96]One such example was an AI-manufactured voice
+[02:01.88]claiming to belong to U.S. President Joe Biden.
+[02:05.96]The voice was turned into a message
+[02:09.44]that was sent by telephone to voters
+[02:12.44]earlier this year in the state of New Hampshire.
+[02:16.16]In the fake audio, Biden appears
+[02:19.56]to try to urge voters not to take part
+[02:23.04]in presidential primary voting.
+[02:25.48]Election officials in New Hampshire
+[02:28.64]are still investigating the incident.
+[02:31.28]OpenAI's statement identified such election risks.
+[02:37.20]"We recognize that generating speech
+[02:40.88]that resembles people's voices
+[02:43.36]has serious risks,
+[02:45.68]which are especially top of mind in an election year."
+[02:50.60]There have been other examples of so-called
+[02:54.52]"deepfakes" being used in political campaigns around the world.
+[03:00.16]A "deepfake" is a piece of audio or video
+[03:04.16]created to make it appear
+[03:06.40]that people in it are saying
+[03:08.72]or doing things that they never did.
+[03:11.92]OpenAI said it is currently discussing
+[03:15.76]how to limit these and other risks
+[03:19.04]of such voice cloning systems.
+[03:22.44]Technology experts have also warned
+[03:25.84]such tools can be used to carry out financial crimes.
+[03:30.72]For example, voices can be recorded and then reproduced
+[03:36.04]to represent another individual
+[03:38.80]in an effort to carry out fraud.
+[03:41.64]The company said it has been in contact
+[03:45.28]with U.S. and international partners
+[03:48.28]"from across government, media, entertainment,
+[03:52.40]education, civil society and beyond."
+[03:56.60]The aim is to get advice from people in these groups
+[04:00.96]about the best ways to develop
+[04:03.88]and deploy the system, OpenAI said.
+[04:07.88]OpenAI said its early Voice Engine testers
+[04:12.60]have agreed not to represent a person
+[04:15.72]without their permission and to clearly state
+[04:19.52]that the voices are produced by AI.
+[04:22.92]The company is best known for its launch
+[04:26.72]of the AI-powered ChatGPT tool,
+[04:30.44]which was launched in November 2022.
+[04:34.96]There are several other companies
+[04:37.64]developing similar voice cloning tools.
+[04:41.00]One of the most widely known is called Descript.
+[04:45.16]The company explains on its website
+[04:48.40]the AI-powered system can clone any person's voice
+[04:53.16]with a 60-second audio sample.
+[04:56.04]Descript also offers  other services
+[05:00.12]involving audio and video production.
+[05:03.24]The company's website says users can choose a free plan
+[05:08.44]that includes up to 1,000 words of voice cloning.
+[05:13.08]For $24, users can get unlimited voice generation, Descript said.
+[05:20.24]OpenAI listed several possible uses for the technology tool.
+[05:26.16]These include providing reading assistance
+[05:29.80]to non-readers or children,
+[05:32.08]supporting individuals who cannot speak,
+[05:35.68]and helping patients recover their voice.
+[05:38.84]The company said its Voice Engine system
+[05:42.28]can work in several languages.
+[05:45.00]One example of such use
+[05:47.64]is taking an English voice recording
+[05:50.52]and producing a new audio version in another language.
+[05:55.44]In an example released online,
+[05:58.04]OpenAI demonstrated a person's voice
+[06:01.44]and style of speaking can remain the same
+[06:05.24]in other targeted languages.
+[06:08.36]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

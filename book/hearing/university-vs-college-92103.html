@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - University vs. College</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, University vs. College" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/university-vs-college.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>University vs. College</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/university-vs-college.mp3" id="mp3"></a>
+<a href="language-and-mental-health-92099.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">19 January 2024</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we answer a question from Le about the difference between the words "university" and "college."</p>
+<p><strong>Question:</strong></p>
+<p>Hello Teacher,</p><div class="contentImage"><img alt="Ask a Teacher: University vs. College " src="https://files.21voa.com/gdb/01000000-0aff-0242-0262-08dc18618d92_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: University vs. College </span></div>
+<p>I love this program.</p>
+<p>Would you mind explaining the difference between "university" and "college?"</p>
+<p>I often misunderstand these two nouns.</p>
+<p>Thanks,</p>
+<p>Le</p>
+<p><strong>Answer:</strong></p>
+<p>We are glad you love our programs, Le, and thank you for writing to us.</p>
+<p>This is an important question, especially for international students who might want to apply to U.S. colleges and universities.</p>
+<p>Both places provide higher education. But their <strong>degree</strong> offerings, number of students and costs differ.</p>
+<p>Let's start with "university."</p>
+<p><strong>University</strong></p>
+<p>"Universities" are large schools offering higher education that includes <strong>undergraduate</strong> and <strong>graduate</strong> degree programs.</p>
+<p>Most <strong>faculty</strong> at universities are not only teachers but also researchers.</p>
+<p>Large universities have tens of thousands of students and have students from all over the U.S. and the world.</p>
+<p>Since universities offer both undergraduate and graduate degrees, they may offer many classes in many fields. But the cost of attending a university can be high, especially at private universities in the U.S. which are not supported by state governments.</p>
+<p>An example of a public university is <a class="wsw__a" href="https://www.21voa.com/a/west-virginia-university-to-cut-languages-creative-programs/7249320.html">West Virginia University</a>.</p>
+<p>An example of a private university is <a class="wsw__a" href="https://www.21voa.com/a/us-colleges-ask-for-more-writing-after-affirmative-action-ban/7209025.html">Yale University</a> in the state of Connecticut.</p>
+<p>Let's move on to "college."</p>
+<p><strong>College </strong></p>
+<p>"College" can also mean a school where students receive higher education. Many high school students are asked:</p>
+<p><em>Where do you want to go to college?</em></p>
+<p>The answer to this question could be a university, a <a class="wsw__a" href="https://www.21voa.com/a/community-colleges-offer-more-programs-at-low-cost/6813478.html">community college</a> or even a <strong>trade</strong> school.</p>
+<p>We also refer to students in higher education as "college students."</p>
+<p><em>When Liz was a college student, she took classes during the day and worked in a hotel at night. </em></p>
+<p>"College" is often used as a general word for a school offering education after high school. But "college" can have more specific meanings too.</p>
+<p>Colleges are smaller schools that focus on undergraduate programs. They include community colleges, private and liberal arts colleges and even technical colleges and trade schools.</p>
+<p>Faculty at community colleges mainly teach and advise students, rather than do research.</p>
+<p>A college can also be a division within a university. For example, a university might have a "college of arts and sciences," which gives bachelor's degrees.</p>
+<p>Colleges are smaller and have fewer students: hundreds to thousands of students rather than tens of thousands of students.</p>
+<p>Because colleges, especially community colleges, serve a smaller population, they have fewer international students.</p>
+<p>Classes are also likely to be limited at colleges, especially at some community colleges. They might offer general education classes, <strong>career</strong> or technical degrees. Community colleges might offer some four-year undergraduate degrees, but many offer two-year programs. The aim might be for students to transfer to a four-year school. Career or technical <strong>certificates</strong> permit students to immediately enter the workforce upon completing the classes.</p>
+<p><em>She went to a community college to study cooking to get a job working in a restaurant. </em></p>
+<p>The cost of attending a community college is lower. The schools offer a low-cost way to gain college credits. However, private colleges and some technical schools may be just as costly as private universities.</p>
+<p>Please let us know if these explanations and examples have helped you, Le.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_____________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>degree </strong><em>–n.</em> a document that shows a person has complete a series of classes at a college or university</p>
+<p><strong>undergraduate </strong><em>–adj.</em> related to a degree for four years of schooling after high school</p>
+<p><strong>graduate </strong><em>–adj.</em> related to studies after a person has received a four-year degree</p>
+<p><strong>faculty </strong><em>–n.</em> the group of teachers at a school</p>
+<p><strong>trade </strong><em>–n.</em> a job that requires special skills and training which is done by using your hands</p>
+<p><strong>career </strong><em>–n. </em>the path of a job or jobs, that are usually related, which a person takes over a long period of time</p>
+<p><strong>certificate </strong><em>–n.</em> a document showing that a person is has completed training or classes</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

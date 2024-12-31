@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Where Did Modern Humans Go after Africa?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Where Did Modern Humans Go after Africa?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/where-did-modern-humans-go-after-africa.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Where Did Modern Humans Go after Africa?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/where-did-modern-humans-go-after-africa.mp3" id="mp3"></a>
+<a href="/static/lrc/where-did-modern-humans-go-after-africa.lrc" id="lrc"></a>
+<a href="un-estimates-the-world-wastes--percent-of-its-food-92483.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">03 April 2024</span><br/>
+<p>A new study offers an answer to the question of where early humans traveled after leaving Africa.</p>
+<p>Scientists say modern humans, or Homo sapiens, developed in Africa more than 300,000 years ago. Early humans then left Africa between 60,000 to 70,000 years ago.</p>
+<p>Researchers said in a recently released study that these groups of hunter-gatherers appear to have stayed for thousands of years in an area of the Middle East. That area includes modern-day Iran, southeastern Iraq and northeastern Saudi Arabia. The early humans went on to settle all of Asia and Europe starting about 45,000 years ago.</p><div class="contentImage"><img alt="A person stands in Pebdeh Cave, in the Zagros Mountains, Iran, in this undated photo obtained by Reuters on March 25, 2024. Pebdeh Cave was occupied by hunter-gatherers as early as 42,000 years ago, inferred to be Homo Sapiens. (Mohammad Javad Shoaee/Handout via REUTERS)" src="https://files.21voa.com/gdb/01000000-0aff-0242-e3e8-08dc4f32dcf4_w268_r1.jpg"/><br/><span class="imagecaption">A person stands in Pebdeh Cave, in the Zagros Mountains, Iran, in this undated photo obtained by Reuters on March 25, 2024. Pebdeh Cave was occupied by hunter-gatherers as early as 42,000 years ago, inferred to be Homo Sapiens. (Mohammad Javad Shoaee/Handout via REUTERS)</span></div>
+<p>The scientists based their findings on <strong>genomic</strong> data taken from ancient DNA and from the genes of modern people. Scientists combined that data with <strong>paleoecological</strong> evidence. That is ancient evidence that suggests what the environment in these areas would have been like long ago.</p>
+<p>The evidence suggested the area in the Middle East would have been good for early humans. The researchers called this area a "hub" for these early people before they continued to more distant places. At the time, they numbered perhaps only in the thousands.</p>
+<p>The study was published in the scientific journal <a class="wsw__a" href="https://www.nature.com/articles/s41467-024-46161-7" target="_blank">Nature Communications</a>. Michael Petraglia is an anthropologist and a study co-author. He said the study "is a story about us and our history - our goal was to <strong>unravel</strong> some of the mystery about our <strong>evolution</strong> and our worldwide <strong>dispersal</strong>."</p>
+<p>"The combination of genetic and paleoecological models <strong>allowed</strong> us to predict the <strong>location</strong> where early human populations first" lived as soon as they left Africa, Petraglia added.</p>
+<p>These people lived in small groups of hunter-gatherers, the researchers said. The hub location offered several environmental settings, from forests to grasslands, changing over time between dry and wet periods.</p>
+<p>There would have been many resources available, with evidence showing the hunting of wild gazelle, sheep and goat, Petraglia said.</p>
+<p>They would have eaten "plants and small- to large-sized <strong>game</strong>. Hunter-gatherer groups seemed to have practiced a seasonal lifestyle, living in the lowlands in the cooler months and in the mountainous regions in the warmer months," Petraglia said.</p>
+<p>The people living in the hub at the time had dark skin and dark hair. Many might have looked like the Gumuz or Anuak people now living in parts of East Africa, said Luca Pagani, one of the study's writers.</p>
+<p>Later, they dispersed in different directions beyond the hub and the genetic differences developed between present-day East Asians and Europeans, the researchers said.</p>
+<p>The study used modern and ancient genomic data for European and Asian people. The researchers found a way to <strong>disentangle</strong> the extensive genetic mixing of populations that has taken place since then.</p>
+<p>There were earlier smaller dispersals of Homo sapiens out of Africa before the most important migration 60,000 to 70,000 years ago. But the study said these appear to have been <strong>dead ends</strong>, meaning they produced nothing.</p>
+<p>Homo sapiens was not the first human species to live outside of Africa - including the area surrounding the hub. Ancient intermixing by modern humans has left small traces of Neanderthal in the DNA of modern non-Africans.</p>
+<p>The lead writer of the study, Leonardo Vallini, said there is evidence Neanderthals lived in the area "before the arrival of Homo sapiens, so the hub may well have been where that interaction took place."</p>
+<p>Homo sapiens is the scientific name for today's humans. It means "wise man."</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by Reuters.</em></p>
+<p class="CxSpMiddle"><em>__________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>genome </strong><em>— n. </em>the genetic material possessed by a living thing</p>
+<p class="CxSpMiddle"><strong>paleoecological </strong><em>— adj. </em>related to an ancient environment</p>
+<p class="CxSpMiddle"><strong>unravel </strong><em>— v. </em>to take apart; to show hidden parts of something</p>
+<p class="CxSpMiddle"><strong>evolution </strong><em>— n. </em>the development and change of living things that takes place over a long period</p>
+<p class="CxSpMiddle"><strong>disperse </strong><em>— v. </em>to spread out over a wide area</p>
+<p class="CxSpMiddle"><strong>allow </strong><em>— v. </em>to permit or let happen</p>
+<p class="CxSpMiddle"><strong>location </strong>–n. the place where something is</p>
+<p class="CxSpMiddle"><strong>game </strong><em>— n. </em>animals that are normally hunted for food or sport</p>
+<p class="CxSpMiddle"><strong>disentangle </strong><em>— v. </em>to order what is disordered and hard to understand</p>
+<p class="CxSpMiddle"><strong>dead-end </strong><em>— n. </em>a place with no outlet; something that produces nothing</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Where Did Modern Humans Go after Africa?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.88]A new study offers an answer to the question
+[00:05.08]of where early humans traveled after leaving Africa.
+[00:10.52]Scientists say modern humans, or Homo sapiens,
+[00:14.00]developed in Africa more than 300,000 years ago.
+[00:19.56]Early humans then left Africa
+[00:22.24]between 60,000 to 70,000 years ago.
+[00:26.96]Researchers said in a recently released study
+[00:30.20]that these groups of hunter-gatherers
+[00:33.16]appear to have stayed for thousands of years
+[00:36.08]in an area of the Middle East.
+[00:39.20]That area includes modern-day Iran,
+[00:42.44]southeastern Iraq and northeastern Saudi Arabia.
+[00:48.16]The early humans went on to settle all of Asia and Europe
+[00:52.04]starting about 45,000 years ago.
+[00:56.32]The scientists based their findings on genomic data
+[01:00.08]taken from ancient DNA and from the genes of modern people.
+[01:05.92]Scientists combined that data
+[01:08.44]with paleoecological evidence.
+[01:12.28]That is ancient evidence
+[01:14.60]that suggests what the environment in these areas
+[01:17.52]would have been like long ago.
+[01:20.56]The evidence suggested the area in the Middle East
+[01:23.88]would have been good for early humans.
+[01:27.48]The researchers called this area a "hub" for these early people
+[01:31.80]before they continued to more distant places.
+[01:36.12]At the time, they numbered perhaps only in the thousands.
+[01:41.12]The study was published
+[01:42.48]in the scientific journal Nature Communications.
+[01:46.68]Michael Petraglia is an anthropologist and a study co-author.
+[01:52.64]He said the study "is a story about us and our history -
+[01:56.64]our goal was to unravel some of the mystery about our evolution
+[02:01.72]and our worldwide dispersal."
+[02:05.56]"The combination of genetic and paleoecological models
+[02:09.80]allowed us to predict the location
+[02:12.44]where early human populations
+[02:14.64]first" lived as soon as they left Africa, Petraglia added.
+[02:21.00]These people lived in small groups
+[02:23.00]of hunter-gatherers, the researchers said.
+[02:26.72]The hub location offered several environmental settings,
+[02:31.16]from forests to grasslands,
+[02:34.08]changing over time between dry and wet periods.
+[02:38.96]There would have been many resources available,
+[02:41.96]with evidence showing the hunting of wild gazelle,
+[02:45.24]sheep and goat, Petraglia said.
+[02:49.04]They would have eaten "plants and small- to large-sized game.
+[02:54.40]Hunter-gatherer groups
+[02:56.12]seemed to have practiced a seasonal lifestyle,
+[03:00.12]living in the lowlands in the cooler months
+[03:02.88]and in the mountainous regions
+[03:04.72]in the warmer months," Petraglia said.
+[03:08.40]The people living in the hub at the time
+[03:10.96]had dark skin and dark hair.
+[03:14.16]Many might have looked like the Gumuz or Anuak people
+[03:18.24]now living in parts of East Africa,
+[03:21.16]said Luca Pagani, one of the study's writers.
+[03:25.80]Later, they dispersed in different directions beyond the hub
+[03:30.04]and the genetic differences developed between
+[03:33.76]present-day East Asians and Europeans, the researchers said.
+[03:39.84]The study used modern and ancient genomic data
+[03:43.84]for European and Asian people.
+[03:47.00]The researchers found a way to disentangle
+[03:50.52]the extensive genetic mixing of populations
+[03:53.76]that has taken place since then.
+[03:57.04]There were earlier smaller dispersals of Homo sapiens
+[04:00.92]out of Africa before the most important migration
+[04:04.84]60,000 to 70,000 years ago.
+[04:09.20]But the study said these appear to have been dead ends,
+[04:12.84]meaning they produced nothing.
+[04:16.04]Homo sapiens was not the first human species
+[04:18.60]to live outside of Africa -
+[04:20.80]including the area surrounding the hub.
+[04:24.40]Ancient intermixing by modern humans
+[04:27.36]has left small traces of Neanderthal
+[04:30.48]in the DNA of modern non-Africans.
+[04:34.84]The lead writer of the study, Leonardo Vallini,
+[04:38.72]said there is evidence Neanderthals lived in the area
+[04:42.68]"before the arrival of Homo sapiens,
+[04:45.48]so the hub may well have been
+[04:47.48]where that interaction took place."
+[04:50.68]Homo sapiens is the scientific name
+[04:53.36]for today's humans. It means "wise man."
+[04:57.44]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

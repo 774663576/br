@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ringling Bros. Circus Is Back without Animals</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Ringling Bros. Circus Is Back without Animals" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/ringling-bros-circus-is-back-without-animals.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ringling Bros. Circus Is Back without Animals</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/ringling-bros-circus-is-back-without-animals.mp3" id="mp3"></a>
+<a href="begin-start-or-commence-90614.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Caty Weaver</span><br/>
+<span class="datetime">24 March 2023</span><br/>
+<p>A famous American <strong>circus</strong> has been reimagined and reborn without the use of animals in the show. The family event now centers on humans performing tricks, including walking on a wire and flying through the air on a <strong>trapeze</strong> high above the ground.</p>
+<p>Feld Entertainment owns the Ringling Bros. and Barnum &amp; Bailey circus. The company talked to the Associated Press about what people can expect to see at the traveling show in 2023. It opens in September.</p>
+<p>A group of 75 performers from 18 countries will carry out the acts, which combine artistry, skill and strength. Some will perform jumps, runs and other tricks on a wire high above the ground. The wire is stretched into a triangular path more than seven and a half meters up in the air.</p><div class="contentImage"><img alt="This combination of photos shows art renderings for the reimagined Ringling Bros. and Barnum &amp; Bailey circus, reborn without animals. (Ringling Bros and Barnum and Bailey via AP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-0336-08db2b1c1ec7_w268_r1.jpg"/><br/><span class="imagecaption">This combination of photos shows art renderings for the reimagined Ringling Bros. and Barnum &amp; Bailey circus, reborn without animals. (Ringling Bros and Barnum and Bailey via AP)</span></div>
+<p>Flying trapeze artists will also cut through the air way up high, <strong>flipping</strong> as they move. Others perform acts on self-turning wheels, bicycles, <strong>unicycles</strong> and skateboards.</p>
+<p>The "Greatest Show on Earth" as the company calls it, opens its 2023 season in Bossier City, Louisiana. It will hold shows in nine other states through the end of the year, including Ohio, Missouri, Maryland and Oklahoma.</p>
+<p>It restarts in 2024 in Florida, home to Feld Entertainment.</p>
+<p>Feld Entertainment says it aimed to create a completely new kind of circus.</p>
+<p>"We knew we were going to come back. We didn't know exactly how," says Kenneth Feld, chair and chief of Feld Entertainment. "It took us a long time to really <strong>delve</strong> in and take a look at Ringling in different ways. It became a re-imagination, a rethinking of how we were going to do it."</p>
+<p>The circus closed in 2017 after years of decreasing sales and protests over the use of animals in the circus. People for the Ethical Treatment of Animals praised the "animal-free" reform.</p>
+<p>The new production design includes moveable stairs and two main stages. Crowds watching will have a 360-degree view with live camera feeds and <strong>virtual reality</strong>.</p>
+<p>Juliette Feld Grossman is chief operating officer of Feld Entertainment. She said, "We have so much activity and action so we want to make sure that we never miss the big moments in the show."</p>
+<p>The reimagined show extends the circus's long history. The Ringling circus was around before automobiles, airplanes or movies. It first opened in 1871.</p>
+<p>The Feld family bought the circus in 1967. Kenneth Feld said that there is something about the circus that people hold dear.</p>
+<p>"When you're on a high wire and you're doing a backward <strong>somersault</strong> on the wire or you're doing something really extraordinary, I don't care where you are. You appreciate that. You understand the danger of it, the <strong>thrill</strong> of it."</p>
+<p>I'm Caty Weaver.</p>
+<p><em>The Associated Press reported this story. Caty Weaver adapted it for VOA Learning English. </em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>circus</strong> - <em>n. </em>a show that usually travels from place to place and that has a variety of exhibitions including acrobatic feats, wild animal displays, and performances by clowns</p>
+<p><strong>trapeze </strong>- <em>n. </em>a gymnastic or acrobatic device consisting of a short horizontal bar hung from two parallel ropes</p>
+<p><strong>flip </strong>- <em>v. </em>to turn in a circle fast through the air</p>
+<p><strong>unicycle </strong>- <em>n. </em>a vehicle having a single wheel and usually moved forward by pedals</p>
+<p><strong>delve </strong>- <em>v. </em>to examine a subject in detail</p>
+<p><strong>virtual reality </strong>- <em>n. </em>an artificial environment which is experienced through sights and sounds provided by a computer and in which one's actions partly decide what happens in the environment</p>
+<p><strong>somersault </strong>- <em>n. </em>a roll in which a person turns heels over head</p>
+<p><strong>thrill </strong>- <em>n. </em>a feeling of great excitement or happiness</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

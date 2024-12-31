@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Drug Slows Alzheimer's, But Not a Cure</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, New Drug Slows Alzheimer's, But Not a Cure" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/new-drug-slows-alzheimer-s-but-not-a-cure.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Drug Slows Alzheimer's, But Not a Cure</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/new-drug-slows-alzheimer-s-but-not-a-cure.mp3" id="mp3"></a>
+<a href="/static/lrc/new-drug-slows-alzheimer-s-but-not-a-cure.lrc" id="lrc"></a>
+<a href="congolese-artist-paints-politicians-pictures-with-plastic-waste-90247.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">09 January 2023</span><br/>
+<p>United States health officials last week approved a new Alzheimer's drug. The drug, called Leqembi, is the first to slow the <strong>decline</strong> in memory by several months.</p>
+<p>The Alzheimer's Association describes Alzheimer's as a brain disease that causes a decline in memory, thinking and reasoning skills.</p>
+<p>One of the most common signs of Alzheimer's disease is forgetting recently learned information or dates and events. People with the disease have difficulty doing things that they did before. Some may struggle with joining or following a discussion.</p><div class="contentImage"><img alt="This Dec. 21, 2022, image provided by Eisai in January 2023, shows vials and packaging for their medication called Leqembi.
+The U.S. Food and Drug Administration granted the approval Friday for patients in the early stages of Alzheimer's. (Eisai via AP)" src="https://files.21voa.com/gdb/09410000-0a00-0242-3778-08daf04f2abd_cx0_cy22_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This Dec. 21, 2022, image provided by Eisai in January 2023, shows vials and packaging for their medication called Leqembi.
+The U.S. Food and Drug Administration granted the approval Friday for patients in the early stages of Alzheimer's. (Eisai via AP)</span></div>
+<p>The newly approved Leqembi is a long-needed new treatment for the disease.</p>
+<p>But experts warn that the drug is not a cure.</p>
+<p>Dr. Joy Snider is a brain doctor at Washington University in St. Louis, Missouri. She said, "This drug is not a cure. It doesn't stop people from getting worse, but it does measurably slow the progression of the disease." She added, "That might mean someone could have an extra six months to a year of being able to drive."</p>
+<p>The U.S. Food and Drug Administration (FDA) approved the drug through a speedier-than-usual process. The process permits drugs to be launched based on early results.</p>
+<p>The drug is only for early-stage patients and requires an injection by healthcare workers every two weeks. It is not yet clear how much the drug can help people with the disease. There are also concerns about its safety.</p>
+<p>Still, "it's a <strong>landmark</strong>," said Dr. Richard Hodes, director of the National Institute on Aging. "It's not enough, but it's <strong>encouraging</strong> that there's something we can do," he added.</p>
+<p><strong>How does the new drug work?</strong></p>
+<p>Leqembi is made by Japan's Eisai and its U.S. partner Biogen. The drug is designed to target and clear away beta-amyloid, a substance that builds up in the brain and leads to Alzheimer's.</p>
+<p>Dr. Sam Gandy is an Alzheimer's expert at New York's Mount Sinai Hospital. He told the Associated Press that Leqembi targets a slightly different form of amyloid than other drugs that have sought to treat the disease. That might explain why Leqembi proved to be successful while many other experimental drugs have failed.</p>
+<p>In 2021, U.S. health officials approved a similar drug named Aduhelm, even though studies never proved it really helped patients. The move led to criticism after a congressional investigation.</p>
+<p><strong>How effective is Leqembi?</strong></p>
+<p>In Eisai's 18-month study of nearly 1,800 people, Leqembi appeared to delay early-stage patients from getting worse by about five months.</p>
+<p>The study measured people on an 18-point <strong>scale</strong> that follows their mental and functional abilities. People who got the drug still worsened but not as quickly as those given an inactive substance. The difference was nearly half a point on that scale by the study's end.</p>
+<p>Experts are divided over how meaningful the difference is.</p>
+<p>Dr. Matthew Schrag is a neurology researcher at Vanderbilt University in Tennessee. He said, "Most patients won't notice the difference."</p>
+<p>Schrag and some other researchers believe a meaningful improvement would require at least a difference of one full point on the 18-point scale.</p>
+<p>Others say slowing the disease early on - when people still function well - is important.</p>
+<p>Hodes, the director of the National Institute of Aging, said, "Several months with better <strong>cognition</strong>, what's that worth to you?"</p>
+<p>He added, "I think there you can get a strong argument: If I can <strong>interact</strong> with my family, be independent for months ... that's a very meaningful <strong>outcome</strong>."</p>
+<p><strong>What are the risks?</strong></p>
+<p>Like other amyloid-targeting medications, Leqembi can cause brain <strong>swelling</strong> or small brain bleeds. In Eisai's study, 13 percent of drug recipients had swelling, and 17 percent has small brain bleeds.</p>
+<p>The likely reason for this is that amyloid <strong>plaques</strong> usually form around nerve cells in the brain but sometimes they get inside blood vessels, too.</p>
+<p>Several Leqembi users died while taking the drug, including two people who were on blood-thinning medications. Eisai has said its Alzheimer's drug did not cause their deaths.</p>
+<p>But Gandy, the Alzheimer's expert, said the greatest risk of serious bleeding would be among Leqembi users who take blood thinners. Older adults commonly take blood thinners to prevent or treat <strong>strokes</strong>.</p>
+<p>Patients also may experience reactions from the drug that could include high body temperature, an upset stomach and changes in blood pressure.</p>
+<p>Eisai says the drug should be available by January 23. A year's worth of treatment is expected to cost $26,500. If <strong>insurance</strong> companies cover the drug, however, most people will not have to pay anywhere near that much.</p>
+<p>I'm Ashley Thompson.</p>
+<p><em>Hai Do adapted this story for Learning English based on reporting from the Associated Press and other sources.</em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>decline</strong> - n. the process of become worse in condition</p>
+<p><strong>landmark</strong> - n. a very important achievement</p>
+<p><strong>encourage</strong> - v. to make something more likely to happen</p>
+<p><strong>scale</strong> - n. a range of numbers that is used to show size, quality or strength</p>
+<p><strong>cognition</strong> - n. the activity of thinking, understanding, learning and remembering</p>
+<p><strong>interact</strong> - v. to talk or do things with other people</p>
+<p><strong>outcome</strong> - n. something that happens as a result of activity or progress</p>
+<p><strong>swelling</strong> - n. an area on someone body's that is larger than normal because of an illness or injury</p>
+<p><strong>plaque</strong> - n. a change in brain tissue that happens in Alzheimer's disease</p>
+<p><strong>stroke</strong> - n. a serious illness caused when a blood vessel in your brain suddenly breaks or is blocked</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New Drug Slows Alzheimer's, But Not a Cure]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]United States health officials last week
+[00:03.80]approved a new Alzheimer's drug.
+[00:06.92]The drug, called Leqembi, is the first
+[00:11.04]to slow the decline in memory by several months.
+[00:16.88]The Alzheimer's Association describes Alzheimer's
+[00:20.60]as a brain disease that causes
+[00:23.40]a decline in memory, thinking and reasoning skills.
+[00:28.84]One of the most common signs of Alzheimer's disease
+[00:33.12]is forgetting recently learned information or dates and events.
+[00:38.28]People with the disease have difficulty
+[00:41.36]doing things that they did before.
+[00:44.20]Some may struggle with joining or following a discussion.
+[00:49.36]The newly approved Leqembi
+[00:51.76]is a long-needed new treatment for the disease.
+[00:55.52]But experts warn that the drug is not a cure.
+[00:59.76]Dr. Joy Snider is a brain doctor
+[01:02.84]at Washington University in St. Louis, Missouri.
+[01:07.36]She said, "This drug is not a cure.
+[01:10.44]It doesn't stop people from getting worse,
+[01:13.68]but it does measurably slow the progression of the disease."
+[01:18.84]She added, "That might mean someone could have
+[01:22.36]an extra six months to a year of being able to drive."
+[01:27.92]The U.S. Food and Drug Administration (FDA)
+[01:32.08]approved the drug through a speedier-than-usual process.
+[01:36.20]The process permits drugs to be launched based on early results.
+[01:42.60]The drug is only for early-stage patients
+[01:46.04]and requires an injection by healthcare workers every two weeks.
+[01:51.92]It is not yet clear how much the drug
+[01:54.76]can help people with the disease.
+[01:57.76]There are also concerns about its safety.
+[02:01.92]Still, "it's a landmark," said Dr. Richard Hodes,
+[02:06.36]director of the National Institute on Aging.
+[02:09.84]"It's not enough, but it's encouraging
+[02:12.80]that there's something we can do," he added.
+[02:16.92]Leqembi is made by Japan's Eisai and its U.S. partner Biogen.
+[02:22.96]The drug is designed to target and clear away beta-amyloid,
+[02:28.48]a substance that builds up in the brain and leads to Alzheimer's.
+[02:33.96]Dr. Sam Gandy is an Alzheimer's expert
+[02:37.88]at New York's Mount Sinai Hospital.
+[02:40.88]He told the Associated Press that Leqembi
+[02:44.76]targets a slightly different form of amyloid
+[02:48.28]than other drugs that have sought to treat the disease.
+[02:52.04]That might explain why Leqembi proved to be successful
+[02:56.72]while many other experimental drugs have failed.
+[03:00.92]In 2021, U.S. health officials approved
+[03:05.08]a similar drug named Aduhelm,
+[03:08.16]even though studies never proved it really helped patients.
+[03:12.76]The move led to criticism after a congressional investigation.
+[03:18.76]In Eisai's 18-month study of nearly 1,800 people,
+[03:26.16]Leqembi appeared to delay early-stage patients
+[03:31.28]from getting worse by about five months.
+[03:34.84]The study measured people on an 18-point scale
+[03:39.80]that follows their mental and functional abilities.
+[03:44.16]People who got the drug still worsened
+[03:47.60]but not as quickly as those given an inactive substance.
+[03:52.36]The difference was nearly half a point
+[03:55.28]on that scale by the study's end.
+[03:59.48]Experts are divided over how meaningful the difference is.
+[04:04.36]Dr. Matthew Schrag is a neurology researcher
+[04:08.48]at Vanderbilt University in Tennessee.
+[04:12.12]He said, "Most patients won't notice the difference."
+[04:16.44]Schrag and some other researchers believe
+[04:20.00]a meaningful improvement would require
+[04:22.68]at least a difference of one full point on the 18-point scale.
+[04:28.76]Others say slowing the disease early on
+[04:32.16]- when people still function well - is important.
+[04:35.64]Hodes, the director of the National Institute of Aging, said,
+[04:41.00]"Several months with better cognition, what's that worth to you?"
+[04:45.60]He added, "I think there you can get a strong argument:
+[04:49.96]If I can interact with my family, be independent for months ...
+[04:54.68]that's a very meaningful outcome."
+[04:58.04]Like other amyloid-targeting medications,
+[05:01.36]Leqembi can cause brain swelling or small brain bleeds.
+[05:05.76]In Eisai's study, 13 percent of drug recipients had swelling,
+[05:11.40]and 17 percent has small brain bleeds.
+[05:15.48]The likely reason for this is that amyloid plaques
+[05:20.16]usually form around nerve cells in the brain
+[05:23.36]but sometimes they get inside blood vessels, too.
+[05:28.28]Several Leqembi users died while taking the drug,
+[05:32.12]including two people who were on blood-thinning medications.
+[05:36.48]Eisai has said its Alzheimer's drug did not cause their deaths.
+[05:42.60]But Gandy, the Alzheimer's expert,
+[05:45.52]said the greatest risk of serious bleeding
+[05:48.44]would be among Leqembi users who take blood thinners.
+[05:52.32]Older adults commonly take blood thinners to prevent or treat strokes.
+[05:58.20]Patients also may experience reactions from the drug
+[06:02.76]that could include high body temperature,
+[06:06.24]an upset stomach and changes in blood pressure.
+[06:11.04]Eisai says the drug should be available by January 23.
+[06:15.92]A year's worth of treatment is expected to cost $26,500.
+[06:23.52]If insurance companies cover the drug, however,
+[06:27.40]most people will not have to pay anywhere near that much.
+[06:31.92]I'm Ashley Thompson. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

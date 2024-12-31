@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国司法部成功解锁加州枪手的iPhone</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 美国司法部成功解锁加州枪手的iPhone" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/us-justice-department-unlocks-shooters-iphone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国司法部成功解锁加州枪手的iPhone</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/us-justice-department-unlocks-shooters-iphone.mp3" id="mp3"></a>
+<a href="/static/lrc/us-justice-department-unlocks-shooters-iphone.lrc" id="lrc"></a>
+<a href="us-justice-department-claims-to-have-information-from-san-bernardino-shooters-iphone-68793.html" id="CnPage" target="_blank"></a>
+<a href="egypt-air-plane-hijacked-to-cyprus-68774.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The United States Justice Department says it has found a way to get information from an iPhone used by a shooter in last year's mass shooting in San Bernardino, California.<br/>美国司法部表示它已经找到了一种办法，来获取去年加州圣伯纳迪诺大规模枪击事件中枪手所使用的iPhone里的信息。</p>
+<p>The Justice Department also said it no longer needs help from the iPhone's manufacturer, Apple.<br/>美国司法部还表示不再需要iPhonoe制造商苹果公司提供协助。</p>
+<p>The company had refused earlier demands by federal investigators for help in recovering data from the device.<br/>该公司此前拒绝了联邦调查人员提出的协助恢复该手机数据的要求。</p>
+<p>The government sought to require Apple to write new software programs to help investigators get the data without knowing the iPhone's password. The government believed the information would help it in its investigation of the San Bernardino shooting, in which 14 people were killed.<br/>美国政府试图要求苹果公司编写一项新程序，以帮助调查人员在不知道该手机密码的情况下获得数据。美国政府认为，这些信息对14人遇难的圣贝纳迪诺枪击事件的调查有帮助。</p>
+<p>Last month, a judge ordered Apple to help the government. But the Justice Department announced this week it has been able to collect data from the phone. It asked the judge to cancel her order. She did so on Monday.<br/>上个月，法官要求苹果公司协助政府。但是司法部本周宣布，它已经能够收集该手机上的数据。司法部让法官取消她的命令。这名法官于周一照做了。</p>
+<p>Last week, the government delayed another court hearing in the case. Officials said they needed time to test a method that could help them gain access to the iPhone without Apple's assistance. That method was developed without the help of federal agents or Apple.<br/>上周，政府推迟了这起案件的另一次开庭审理。官员们表示，他们需要时间来检验一种无需苹果协助就能帮助他们获得iPhone手机权限的办法。该方法是在没有联邦特工和苹果公司帮助的情况下开发出来的。</p>
+<p>Lawyers for Apple have said that the company wants to know how the device was unlocked.<br/>苹果公司律师表示，该公司希望知道该设备是如何解锁的。</p>
+<p>But the withdrawal of the court process could take away Apple's ability to legally request details on the method the government used. It also is likely to raise questions among users of Apple products and the technology industry about the strength of Apple's security on its devices.<br/>但是法院流程的取消夺走了苹果公司合法了解政府所使用方法的能力。它可能也会提升苹果公司产品用户及科技行业对该公司设备安全性的质疑。</p>
+<p>I'm Caty Weaver.<br/>我是卡蒂·韦弗。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.12]The United States Justice Department says
+[00:03.28]it has found a way to get information from an iPhone
+[00:07.68]used by a shooter in last year's mass shooting in San Bernardino, California.
+[00:15.40]The Justice Department also said
+[00:18.04]it no longer needs help from the iPhone's manufacturer, Apple.
+[00:23.64]The company had refused earlier demands by federal investigators
+[00:29.28]for help in recovering data from the device.
+[00:34.08]The government sought to require Apple to write new software programs
+[00:39.44]to help investigators get the data without knowing the iPhone's password.
+[00:45.76]The government believed the information
+[00:48.60]would help it in its investigation of the San Bernardino shooting,
+[00:53.28]in which 14 people were killed.
+[00:56.28]Last month, a judge ordered Apple to help the government.
+[01:01.60]But the Justice Department announced this week
+[01:04.92]it has been able to collect data from the phone.
+[01:08.48]It asked the judge to cancel her order.
+[01:12.76]She did so on Monday.
+[01:15.40]Last week, the government delayed another court hearing in the case.
+[01:21.44]Officials said they needed time to test a method
+[01:25.40]that could help them gain access to the iPhone without Apple's assistance.
+[01:31.28]That method was developed without the help of federal agents or Apple.
+[01:38.08]Lawyers for Apple have said that the company wants to know how the device was unlocked.
+[01:45.44]But the withdrawal of the court process could take away Apple's ability
+[01:51.28]to legally request details on the method the government used.
+[01:56.22]It also is likely to raise questions  among users of Apple products
+[02:02.68]and the technology industry
+[02:05.20]about the strength of Apple's security on its devices.
+[02:09.96]I'm Caty Weaver.
+[02:11.68]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

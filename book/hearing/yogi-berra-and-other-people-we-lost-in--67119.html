@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - “It Ain’t Over ‘Til It’s Over”: Yogi Berra and Other People We Lost in 2015</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, In the News, “It Ain’t Over ‘Til It’s Over”: Yogi Berra and Other People We Lost in 2015" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/yogi-berra-and-other-people-we-lost-in-2015.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>“It Ain’t Over ‘Til It’s Over”: Yogi Berra and Other People We Lost in 2015</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/yogi-berra-and-other-people-we-lost-in-2015.mp3" id="mp3"></a>
+<a href="dozens-feared-dead-in-another-myanmar-landslide-67112.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">29 December, 2015</span><br/>
+<p>Each year we lose a number of people known around the world for their talents and accomplishments. Even though these seven famous figures have died, their <strong>legacies</strong> live on. Now, we say goodbye.</p>
+<p>"<strong>Yogi" Berra</strong> is known as one of the greatest Major League Baseball players of all time.</p>
+<p>His full name was Lawrence Peter Berra, but everyone called him Yogi. He was a catcher for the New York Yankees baseball team for nearly most of his 19-year career.</p>
+<div class="contentImage"><img alt="File-New York Yankee catcher Yogi Berra poses at spring training in Florida, in an undated file photo. Berra, the Yankees Hall of Fame catcher died in 2015. He was 90. (AP Photo/File)" src="https://files.21voa.com/gdb/72E09C3F-205F-46FF-92A3-CF225BBAE39D_cx0_cy11_cw91_mw268_s_n_r1.jpg"/><br/><span class="imagecaption">File-New York Yankee catcher Yogi Berra poses at spring training in Florida, in an undated file photo. Berra, the Yankees Hall of Fame catcher died in 2015. He was 90. (AP Photo/File)</span></div>
+<p>He won some of the top awards in the sport, and played in many All-Star and World Series games. He also won the American League's Most Valuable Player Award three times. </p>
+<p>After his time as a player, Berra became the manager of his former team.</p>
+<p>In addition to his <strong>incredible</strong> gift for baseball, Berra will be remembered for what he contributed to American English. Berra had many "Yogi–isms" -- expressions or phrases that were not correct but still made perfect sense.</p>
+<p>For example, he said, "You can observe a lot by just watching"; "It ain't over ‘til it's over," and "When you come to a fork in the road, take it."</p>
+<p>Egyptian actor <strong>Omar Sharif</strong> passed away in July this year. He is best known for his appearances in both British and American movies. They include "Lawrence of Arabia," "Doctor Zhivago" and "Funny Girl."</p>
+<p><em>"You know I'll be much more direct. You know you are woman. I am man. You are smaller so I can be taller than, you are softer.....</em></p>
+<p>Sharif was nominated for an Academy Award and won three Golden Globe Awards.</p>
+<p>Later in life he started playing the card game bridge. Sharif excelled at the game. He was named one of the 50 best bridge players in the world.</p>
+<p>Other actors who passed away include <strong>Leonard Nimoy</strong>. Nimoy was best known for his role as Mr. Spock, the pointy-eared, half–human/half-Vulcan science officer on the television series "Star Trek."</p>
+<p>Many will remember Nimoy by his famous split-finger <strong>salute</strong> and blessing: "Live long and prosper."</p>
+<p>Singer and legendary guitarist<strong> B.B. King </strong>became one of the best-known blues performers of all-time. King's <strong>velvety</strong> voice and expressive style inspired a generation of musicians.</p>
+<p>King made his first recording in 1949. He and his famous guitar, which he called Lucille, brought music to audiences for more than 60 years. In 1970, he won his first Grammy for his hit song "The Thrill Is Gone."</p>
+<p><em>"Thrill is Gone. The thrill is gone away. Thrill is gone, baby. Thrill is gone away. You done me wrong, baby...."</em></p>
+<p><strong>Wes Craven</strong> created some of the most important horror films of all time, including the "Scream" series. In 1984, he defined the horror <strong>genre</strong> with the character Freddy Krueger in the movie "A Nightmare on Elm Street."</p>
+<p>Craven was a film director, writer, producer and actor. He inspired us with his imagination and vision.</p>
+<p>Prime Minister<strong> Lee Kuan Yew</strong> will be remembered as the man behind Singapore's success.</p>
+<p>Lee oversaw Singapore's independence from Britain and separation from Malaysia. He then transformed the independent country into one of Asia's wealthiest and least corrupt countries. In 2010, Time magazine listed Lee as one of the world's 100 most influential people.</p>
+<p>"Whoever governs Singapore must have that iron in him or give it up. This is not a game of cards. This is your life and mine. I've spent a whole lifetime building this."</p>
+<p>The People's Action Party – which Lee co-founded – has ruled Singapore for 50 years.</p>
+<p>And, when it comes to equal rights for all, social activist and lifelong civil rights leader <strong>Julian Bond</strong> was passionate about his work.</p>
+<p>Taught by the Rev. Martin Luther King, Jr. at Morehouse College, Bond was a leader in the 1960s civil rights movement. He was among the activists who demanded equal rights for African-Americans.</p>
+<p>Bond's <strong>advocacy</strong> for equal rights also went beyond race issues and beyond the United States. He opposed the U.S. involvement in the Vietnam War; he was arrested outside the South African Embassy in Washington for protesting against apartheid; and he fought for equal rights for gay and lesbians.</p>
+<p>"It just seems to me something right to do. It seems to me the right to be married is a civil right and I believe civil rights <strong>ought</strong> to be extended to everybody. Who ought not have these rights? what category of people ought not have these rights? I can't think of one."</p>
+<p>I'm Marsha James.</p>
+<p><em>Marsha James wrote this story for Learning English. Kelly Jean Kelly was the editor.</em></p>
+<p><em>What do you think of this story? Write to us in the Comments Section or on 51VOA.COM. </em></p>
+<p>______________________________________________________________</p>
+<h2><strong>Words in This Story </strong></h2>
+<p><strong>legacy </strong>- <em>n.</em><strong> </strong><span class="def_text">something that happened in the past or that comes from someone in the past</span></p>
+<p><strong>incredible </strong>- <em>adj. </em><span class="def_text">extremely good, great, or large</span></p>
+<p><strong>salute </strong>-<strong> <em>n.</em> </strong><span class="def_text">an act or ceremony that shows respect for someone</span></p>
+<p><strong>velvety </strong>-<strong> </strong><em>adj. </em><span class="def_text">soft and smooth</span></p>
+<p><strong>genre </strong>- <em>n.</em><span class="def_text">a particular type or category of literature or art</span></p>
+<p><strong>advocacy </strong>- <em>n.</em><span class="def_text">the act or process of supporting a cause or proposal</span></p>
+<p><strong>ought</strong> -<em>v.</em><span class="un_text"> used to say or suggest what should be done</span></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

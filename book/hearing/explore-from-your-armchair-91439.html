@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Explore from Your 'Armchair'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Explore from Your 'Armchair'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/explore-from-your-armchair.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Explore from Your 'Armchair'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/explore-from-your-armchair.mp3" id="mp3"></a>
+<a href="/static/lrc/explore-from-your-armchair.lrc" id="lrc"></a>
+<a href="new-covid--variant-expands-internationally-91437.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">02 September 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program we explore words and expressions in the English language. We give definitions, examples, and notes on usage.</p>
+<p>Today we talk about a piece of <strong>furniture</strong> used for sitting. As the name suggests, an armchair has extensions for resting your arms. So, armchairs are more <strong>comfortable</strong> than other chairs. In fact, they are so comfortable that people sit in them for hours.</p><div class="contentImage"><img alt="Pictured here is an traditional style armchair in front of some bookshelves." src="https://files.21voa.com/gdb/01000000-0aff-0242-936e-08dbaa5c816c_cx0_cy3_cw0_w268_r1.jpeg"/><br/><span class="imagecaption">Pictured here is an traditional style armchair in front of some bookshelves.</span></div>
+<p>Besides being a kind of furniture, Americans use the word "armchair" in front of other words. They do this to describe different sorts of people and the experiences they might or might not have.</p>
+<p>For example, some experiences can be called <strong>vicarious</strong>. If you live vicariously, you experience things through other people. You do not actually do the thing you are interested in yourself. Rather, you enjoy the activity by watching or reading about what others do.</p>
+<p><u>Armchair detectives</u> are not real detectives investigating crimes. An armchair detective enjoys reading detective novels or watching true crime shows. Armchair detectives may even try to solve a crime. But all their efforts are done from the safety and comfort<strong> </strong>of their homes.</p>
+<p>Living vicariously through others can be a wonderful chance to escape. Let's say you do not have the time or money to travel. But you still want to experience the pleasure of traveling. You can read about places that you would like to visit. You can watch travel <strong>documentaries</strong> about them too. And you can do these things from the comfort<strong> </strong>of your own home. So, you could call yourself an <u>armchair traveler. </u></p>
+<p>If you enjoy watching and reading about people who do dangerous activities -- such as climbing Mount Everest or free diving into the depths of the ocean -- you might be an <u>armchair adventurer</u>.</p>
+<p>However, we also use "armchair" to describe another sort of person. If someone does not have responsibility for a job but talks about it from a distance, we can use the word "armchair" to describe them. Also, if someone is not an expert in a subject, but gives advice anyway, we could use the word "armchair."</p>
+<p>For example, an armchair <u><strong>strategist</strong></u> gives strategies that are more <strong>theoretical</strong> than <strong>practical</strong>. This means they are talking about a problem but are not actually involved in solving it.</p>
+<p>In the same way, an <u>armchair general</u> gives advice on going into battle ... from a safe distance. Armchair generals are not involved in a real battle.</p>
+<p>In the U.S., a favorite term comes from American football. <u>Armchair quarterbacks</u> comment on a football game from the comfort of their own chair. They criticize and insult the players who actually play the game while they themselves have never played it.</p>
+<p>But the use of the term "armchair quarterback" goes far beyond the world of sports. So, you could hear the term used to describe anyone who does not do an activity or have responsibility but still makes sharp comments or criticizes others who work at the job every day.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>furniture </strong>–n. things found in the room of a home or business such as chairs, tables, sofas, and shelves</p>
+<p><strong>comfortable </strong>–adj. causing a feeling of ease and enjoyment and not pain</p>
+<p><strong>vicarious </strong>–adj. something that is not felt by oneself but through others</p>
+<p><strong>documentary </strong>–n. a kind of movie that tells a real story and that does not use actors but real people</p>
+<p><strong>strategist </strong>–n. a person who is skilled at making detailed plans to reach goals that extend over a long period of time</p>
+<p><strong>theoretical </strong>–adj. having to do with the theory of how something should work rather than how people know something works</p>
+<p><strong>practical </strong>–adj. having to do with reality rather than what is possible in the future or imaginary</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Explore from Your 'Armchair']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:08.52]And now, Words and Their Stories,
+[00:11.76]from VOA Learning English.
+[00:15.08]On this program we explore words
+[00:21.52]and expressions in the English language.
+[00:24.92]We give definitions, examples, and notes on usage.
+[00:32.00]Today we talk about a piece of furniture used for sitting.
+[00:38.20]As the name suggests,
+[00:40.12]an armchair has extensions for resting your arms.
+[00:45.96]So, armchairs are more comfortable than other chairs.
+[00:51.16]In fact, they are so comfortable
+[00:53.88]that people sit in them for hours.
+[00:58.76]Besides being a kind of furniture,
+[01:01.48]Americans use the word "armchair" in front of other words.
+[01:07.84]They do this to describe different sorts of people
+[01:11.52]and the experiences they might or might not have.
+[01:17.88]For example, some experiences can be called vicarious.
+[01:24.88]If you live vicariously,
+[01:27.16]you experience things through other people.
+[01:31.56]You do not actually do the thing
+[01:34.24]you are interested in yourself.
+[01:36.60]Rather, you enjoy the activity
+[01:39.68]by watching or reading about what others do.
+[01:45.00]Armchair detectives are not real detectives investigating crimes.
+[01:51.84]An armchair detective enjoys reading detective novels
+[01:56.68]or watching true crime shows.
+[02:01.32]Armchair detectives may even try to solve a crime.
+[02:06.00]But all their efforts
+[02:08.00]are done from the safety and comfort of their homes.
+[02:13.20]Living vicariously through others
+[02:15.76]can be a wonderful chance to escape.
+[02:19.68]Let's say you do not have the time or money to travel.
+[02:24.20]But you still want to experience the pleasure of traveling.
+[02:30.24]You can read about places that you would like to visit.
+[02:34.88]You can watch travel documentaries about them too.
+[02:39.04]And you can do these things
+[02:41.52]from the comfort of your own home.
+[02:44.68]So, you could call yourself an armchair traveler.
+[02:50.60]If you enjoy watching and reading
+[02:53.60]about people who do dangerous activities --
+[02:56.96]such as climbing Mount Everest
+[03:00.00]or free diving into the depths of the ocean --
+[03:04.40]you might be an armchair adventurer.
+[03:09.04]However, we also use "armchair"
+[03:11.96]to describe another sort of person.
+[03:15.72]If someone does not have responsibility for a job
+[03:19.48]but talks about it from a distance,
+[03:22.64]we can use the word "armchair" to describe them.
+[03:28.28]Also, if someone is not an expert in a subject,
+[03:32.84]but gives advice anyway,
+[03:35.60]we could use the word "armchair."
+[03:39.72]For example, an armchair strategist
+[03:43.76]gives strategies that are more theoretical than practical.
+[03:49.96]This means they are talking about a problem
+[03:53.00]but are not actually involved in solving it.
+[03:58.68]In the same way, an armchair general
+[04:02.24]gives advice on going into battle ... from a safe distance.
+[04:08.48]Armchair generals are not involved in a real battle.
+[04:14.00]In the U.S., a favorite term comes from American football.
+[04:19.52]Armchair quarterbacks comment on a football game
+[04:23.32]from the comfort of their own chair.
+[04:26.80]They criticize and insult the players who actually play the game
+[04:32.64]while they themselves have never played it.
+[04:37.16]But the use of the term "armchair quarterback"
+[04:40.12]goes far beyond the world of sports.
+[04:43.12]So, you could hear the term used to describe anyone
+[04:48.00]who does not do an activity or have responsibility
+[04:52.68]but still makes sharp comments
+[04:55.64]or criticizes others who work at the job every day.
+[05:00.76]And that's all the time we have for this Words and Their Stories.
+[05:05.64]Until next time ... I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

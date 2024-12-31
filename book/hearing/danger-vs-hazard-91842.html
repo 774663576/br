@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Danger vs. Hazard</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Danger vs. Hazard" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/danger-vs-hazard.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Danger vs. Hazard</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/danger-vs-hazard.mp3" id="mp3"></a>
+<a href="serena-williams-ruby-bridges-to-be-honored-at-women-s-hall-of-fame-91837.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">24 November 2023</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between the words "danger" and "hazard."</p>
+<p><strong>Question:</strong></p>
+<p>Hello friends,</p><div class="contentImage"><img alt="Ask a Teacher: Danger vs. Hazard " src="https://files.21voa.com/gdb/01000000-c0a8-0242-61d1-08dbeb95460e_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Danger vs. Hazard </span></div>
+<p>I'm Roberto, and I live in S<i>&amp;#</i>227;o Paulo, Brazil. I have a question. What's the difference between "danger" and "hazard"? Thank you.</p>
+<p><strong>Answer</strong></p>
+<p>Thanks for your question, Roberto. Both "danger" and "hazard" are nouns that can mean a dangerous or life-threatening situation. But each can refer to a more specific possibility of harm that separate meanings.</p>
+<p>Let's start with "danger."</p>
+<p><strong>Danger</strong></p>
+<p>"Danger" has a few meanings. It can be used as a substitute for risk, for example.</p>
+<p><em>Ellie's job is in danger since she protested the pay changes at her workplace.</em></p>
+<p><em>The danger of wrecking a car is greater when it begins to rain because the water spreads the oil on the roads before it washes it away.</em></p>
+<p>A "danger" is something or someone that can hurt you.</p>
+<p><em>The escaped prisoner was a danger to the area surrounding the prison.</em></p>
+<p>Dangers usually involve immediacy.</p>
+<p>This is different from "hazard," in which the <strong>exposure</strong> might be extremely low, but there is a higher chance of great harm or death.</p>
+<p>Let's look more closely at "hazard" now.</p>
+<p><strong>Hazard</strong></p>
+<p>A "hazard" is a source of danger or harm to a person or environment.</p>
+<p><em>Deep frying turkeys on Thanksgiving is a fire hazard.</em></p>
+<p><em>Radiation exposure is a hazard to our health.</em></p>
+<p>"Hazard" is a known threat. Yet, there is an unpredictable element to a "hazard."</p>
+<p>Take for example a volcano. Volcanoes are a hazard to not only the people that live near them, but they are also a hazard to the environment. Volcanoes have a great possiblity of harm and the possibility of eruptions is difficult to predict.</p>
+<p>As a plural noun, "hazards" are special lights on cars that <strong>flash</strong> on and off to warn other drivers. They are used when a vehicle is either not working properly or if the road or weather conditions are hazardous.</p>
+<p><em>Drivers often turn on their hazards when there is thick fog to make it easier for other drivers to see them.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Roberto.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>exposure</strong> <em>– n.</em> the fact or condition of being affected by something or experiencing something</p>
+<p><strong>flash </strong>– <em>n</em>. a sudden burst of light</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

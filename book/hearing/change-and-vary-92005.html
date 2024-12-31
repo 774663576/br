@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Change and Vary</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Change and Vary" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/change-and-vary.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Change and Vary</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/change-and-vary.mp3" id="mp3"></a>
+<a href="grammar-and-new-year-s-resolutions-92001.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">29 December 2023</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we answer a question about the words "change" and "vary."</p>
+<p><strong>Question:</strong></p>
+<p>Hello Teacher,</p><div class="contentImage"><img alt="Ask a Teacher: Change and Vary" src="https://files.21voa.com/gdb/01000000-0aff-0242-4c54-08dc07f9f5ba_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Change and Vary</span></div>
+<p>I'm Ali, and I live in Mashhad, Iran.</p>
+<p>What is the difference between "change" and "vary?"</p>
+<p>I'm keen on knowing how American people use "vary" in different forms in daily conversations.</p>
+<p>Thank you,</p>
+<p>Ali</p>
+<p><strong>Answer</strong></p>
+<p>Thanks for writing to us, Ali!</p>
+<p>Here is the first major difference between the word "change" and the word "vary": Only one of them is a noun and a verb.</p>
+<p>"Change" is that word. You can "change your opinion" for example. That's change as a verb.</p>
+<p>You can also have "<em>a</em> change of opinion." That's change as a noun!</p>
+<p>"Vary" is more narrow in meaning. It means to make a partial change in something, or to diversify something.</p>
+<p>Sometimes change and vary are <strong>synonyms</strong>.</p>
+<p>Let's look at each one more closely.</p>
+<p><strong>Change as a verb</strong></p>
+<p>While "change" can be either a noun or a verb, we will compare the verbal meanings and uses to "vary."</p>
+<p>It can be used in a lot of different situations and can be a synonym for many other verbs like transform, exchange, switch or alter.</p>
+<p>"Change" meanings range from making a difference or altering something particular to completely transforming or replacing something.</p>
+<p><em>Many schools are changing the college application requirements in response to the ending of</em><a class="wsw__a" href="https://www.21voa.com/a/us-colleges-ask-for-more-writing-after-affirmative-action-ban/7209025.html"><em> Affirmative Action.</em></a></p>
+<p><em>Water changes from a liquid to a solid when it freezes at zero degrees Celsius</em>.</p>
+<p>"Change" can also mean making a slight modification in something to switching or making a shift from one thing to another.</p>
+<p><em>The leaves change colors every autumn. </em></p>
+<p><em>Emma changed her shirt because she spilled something on it.</em></p>
+<p><em>Derek changed his money from dollars to euros when he went to France. </em></p>
+<p>Andrey's <strong>accent</strong> changed after he moved to the big city.</p>
+<p><strong>Vary </strong></p>
+<p>Now let's look at "vary."</p>
+<p>"Vary" is a verb. It can mean to make a partial change or to differentiate between items by size, amount or degree.</p>
+<p><em>I like to vary my meals with different types of grains and greens.</em></p>
+<p><em>Insects vary in size from large to very small.</em></p>
+<p>It can also mean to show or experience a change.</p>
+<p><em>The night sky varies depending on the Earth's rotation and orbit around the sun.</em></p>
+<p><em>Interest rates vary due to how the economy is.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Ali.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>synonyms </strong><em>–</em> <em>n</em>. a word that is similar in meaning to another word</p>
+<p><strong>accent </strong><em>–</em> <em>n</em>. a way of pronouncing words that occurs among the people in a particular region or country</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

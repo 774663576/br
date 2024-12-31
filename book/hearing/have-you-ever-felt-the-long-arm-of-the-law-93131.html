@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Have You Ever Felt the ‘Long Arm of the Law?’</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Have You Ever Felt the ‘Long Arm of the Law?’" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/have-you-ever-felt-the-long-arm-of-the-law.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Have You Ever Felt the ‘Long Arm of the Law?’</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/have-you-ever-felt-the-long-arm-of-the-law.mp3" id="mp3"></a>
+<a href="/static/lrc/have-you-ever-felt-the-long-arm-of-the-law.lrc" id="lrc"></a>
+<a href="europe-s-space-agency-is-in-talks-with-spacex-to-cut-space-junk-93127.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">09 November, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Laws help to keep society running smoothly. They help to keep things in order.</p>
+<p>So, when we talk about <u>law and order</u>, we are talking about how crime should be kept under control and how society should run.</p><div class="contentImage"><img alt="FILE - A police car sits outside Ohio City Hall which received a bomb threat on Thursday morning, in Springfield, Ohio, U.S., September 12, 2024. (REUTERS/Julio-Cesar Chavez) " src="https://files.21voa.com/gdb/7ac41c48-13ee-4cc2-a2c6-746562c68856_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A police car sits outside Ohio City Hall which received a bomb threat on Thursday morning, in Springfield, Ohio, U.S., September 12, 2024. (REUTERS/Julio-Cesar Chavez) </span></div>
+<p>The term <u>law and order</u> includes how police enforce laws and how the judicial system deals with criminals.</p>
+<p><u>Law and order</u> also describes a situation where most people respect and obey laws. They want to feel safe and to have a sense of public order.</p>
+<p>Sometimes people use the term to describe a political candidate. For example:</p>
+<p><em>If a city has problems with crime, candidates for public office might run a <u>law and order</u> campaign. They promise to put policies in place that reduce crime.</em></p>
+<p>Now, when we talk about catching criminals, we can use another expression: <u>the long arm of the law.</u> This describes the ability of police to find and catch people who commit crimes. It further describes the power of law enforcement and the legal system to punish criminals and carry out justice.</p>
+<p>So, the <u>long arm of the law</u> is the far-reaching power of police and the legal system. For example:</p>
+<p><em>Criminals who are <u>on the run</u> are unlikely to escape the long arm of the law forever. If they make one mistake, they might get caught.</em></p>
+<p>Now, let's talk about non-criminals. Sometimes people might do things that they do not know are illegal. For example<strong>,</strong></p>
+<p><em>A<strong> prank</strong> or <strong>practical joke</strong> played on a friend might seem harmless. But <u>in the eyes of the law,</u> it might actually be illegal.</em></p>
+<p>When we say <u>in the eyes of the law</u>, we mean what a law actually says and how people who enforce the law understand it.</p>
+<p>That leads us to another expression: <strong><u>ignorance</u></strong><u> of the law is no excuse</u>. If we are ignorant of something, we don't know about it. However, simply not knowing if an action is illegal doesn't matter in the eyes of the law.</p>
+<p>The <u>long arm of the law</u> will still reach out and <strong>uphold</strong> the law. Then we might find ourselves <u>on the wrong side of the law</u>. And that's a bad place to be. Being <u>on the wrong side of the law</u> means we have broken a law, or worse, laws.</p>
+<p>So, if we want to be <strong>upstanding</strong>, law-<strong>abiding </strong>citizens and avoid the <u>long arm of the law,</u> we should stay on the <u>right side of the law!</u></p>
+<p>And that's the end of this <em>Words and Their Stories</em>.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p><em>___________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>prank </strong><em>–n.</em> a trick or joke that is played on a person</p>
+<p><strong>practical joke </strong><em>–n.</em> a trick or joke meant to cause the subject embarrassment or public discomfort</p>
+<p><strong>ignorance </strong><em>–n. </em>lack of knowledge, education, or awareness</p>
+<p><strong>uphold </strong><em>–v. </em>to give support to</p>
+<p><strong>upstanding </strong><em>–adj.</em> someone who is honest and respectable and is able to stand upright without shame or embarrassment</p>
+<p><strong>abide </strong><em>–v.</em> to accept or live by a belief, rule or principle</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Have You Ever Felt the ‘Long Arm of the Law?’]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]
+[00:08.36]And now, Words and Their Stories,
+[00:11.96]from VOA Learning English.
+[00:19.20]Laws help to keep society running smoothly.
+[00:23.72]They help to keep things in order.
+[00:27.96]So, when we talk about law and order,
+[00:31.16]we are talking about
+[00:32.68]how crime should be kept under control
+[00:35.56]and how society should run.
+[00:39.60]The term law and order includes
+[00:42.76]how police enforce laws
+[00:45.28]and how the judicial system
+[00:48.12]deals with criminals.
+[00:50.76]Law and order also describes a situation
+[00:54.40]where most people respect and obey laws.
+[00:58.64]They want to feel safe
+[01:01.00]and to have a sense of public order.
+[01:05.68]Sometimes people use the term
+[01:08.20]to describe a political candidate.
+[01:11.76]For example:
+[01:13.00]If a city has problems with crime,
+[01:15.92]candidates for public office
+[01:18.32]might run a law and order campaign.
+[01:21.44]They promise to put policies in place
+[01:25.36]that reduce crime.
+[01:28.44]Now, when we talk about catching criminals,
+[01:31.44]we can use another expression:
+[01:34.08]the long arm of the law.
+[01:37.28]This describes the ability of police to find
+[01:41.56]and catch people who commit crimes.
+[01:45.32]It further describes the power of law enforcement
+[01:49.44]and the legal system to punish criminals
+[01:53.12]and carry out justice.
+[01:57.08]So, the long arm of the law
+[01:59.52]is the far-reaching power of police
+[02:02.36]and the legal system.
+[02:04.96]For example:
+[02:06.24]Criminals who are on the run
+[02:08.68]are unlikely to escape
+[02:10.80]the long arm of the law forever.
+[02:13.64]If they make one mistake,
+[02:16.00]they might get caught.
+[02:18.96]Now, let's talk about non-criminals.
+[02:21.96]Sometimes people might do things
+[02:25.44]that they do not know are illegal.
+[02:28.80]For example,
+[02:30.04]A prank or practical joke
+[02:32.84]played on a friend might seem harmless.
+[02:36.28]But in the eyes of the law,
+[02:39.32]it might actually be illegal.
+[02:42.92]When we say in the eyes of the law,
+[02:45.88]we mean what a law actually says
+[02:49.36]and how people who enforce the law understand it.
+[02:54.84]That leads us to another expression:
+[02:57.72]ignorance of the law is no excuse.
+[03:02.16]If we are ignorant of something,
+[03:04.40]we don't know about it.
+[03:06.20]However, simply not knowing
+[03:09.20]if an action is illegal
+[03:11.24]doesn't matter in the eyes of the law.
+[03:14.08]The long arm of the law will still reach out
+[03:17.92]and uphold the law.
+[03:20.84]Then we might find ourselves
+[03:22.64]on the wrong side of the law.
+[03:25.08]And that's a bad place to be.
+[03:28.48]Being on the wrong side of the law
+[03:30.88]means we have broken a law,
+[03:33.76]or worse, laws.
+[03:37.44]So, if we want to be upstanding,
+[03:40.48]law-abiding citizens
+[03:42.64]and avoid the long arm of the law,
+[03:46.00]we should stay on the right side of the law!
+[03:50.64]And that's the end of this Words and Their Stories.
+[03:53.68]Until next time,
+[03:55.12]I'm Anna Matteo.
+[03:56.76]
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

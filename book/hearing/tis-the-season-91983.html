@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Tis the Season!</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Tis the Season!" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/tis-the-season.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Tis the Season!</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/tis-the-season.mp3" id="mp3"></a>
+<a href="a-visit-from-st-nicholas-91982.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">23 December 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Today we talk about the word "season." We use this word in many different ways.</p>
+<p>"Season" can <strong>refer to </strong>one of the four parts of the year. For example, Washington, D.C. is in a part of the United States that has four seasons: winter, spring, summer, and autumn. Some parts of the U.S. do not have four seasons.</p><div class="contentImage"><img alt="FILE - A diver dressed as Santa Claus performs amongst fish during a Christmas-themed underwater show at an aquarium in Seoul, South Korea on December 4, 2019. (Photo by Jung Yeon-je / AFP)
+" src="https://files.21voa.com/gdb/A98A677E-54CF-4C5F-867A-156CD807A4D4_cx6_cy0_cw91_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A diver dressed as Santa Claus performs amongst fish during a Christmas-themed underwater show at an aquarium in Seoul, South Korea on December 4, 2019. (Photo by Jung Yeon-je / AFP)
+</span></div>
+<p>"Season" can also describe the periods marked by warmth and growth or cold weather and falling leaves. For example, when the weather becomes warmer and days are lighter longer, the growing season begins for some plants. When the weather gets colder and the days darker, the <strong>hibernation</strong> season begins for some animals.</p>
+<p>We also use "season" to describe periods that are only related to the weather. For example, some areas of the world have <u>rainy seasons</u> and <u>dry seasons</u>. Some parts of the U.S. have <u>tornado season</u>. And in other parts of the world there are <u>monsoon seasons</u>.</p>
+<p>"Season" can also refer to the time before and during a major holiday. December is a busy <u>holiday season</u> in many parts of the world. Holidays include Christmas, Hanukkah, Kwanzaa, the Feast of Our Lady of Guadalupe and the Winter Solstice. December is often a time to take a break from work and spend time with loved ones.</p>
+<p>Speaking of Christmas, when we say <u>‘tis the season</u> we are talking about something dealing with this holiday – its good side and its not-so-good side. For example, let's say I give a co-worker a big box of homemade cookies. They might say to me, "Thanks! But why are you giving me so many cookies?" I can answer, "'Tis the season!"</p>
+<p>Here is another example. If I go out to a store and it is packed with holiday shoppers, I could <strong>complain</strong> to a friend. And they could respond, "Well, ‘tis the season!" What they <em>really </em>mean is this: At this time of the year, stores are usually very busy with Christmas shoppers.</p>
+<p>In fact, Christmas is like <u>open season</u> on shopping deals. "Open season on" something means that it is being hunted, targeted, or in this case ... bought.</p>
+<p>"Open season" also describes a period of time when a particular activity or opportunity is unrestricted. It is widely available. This term probably comes from hunting. Hunting traditionally has many restrictions. People can hunt only at certain times of the year and even then, there are restrictions on which animals and how many you can hunt. Fishing too has similar restrictions. But if it is open season, there are few restrictions.</p>
+<p>As in our earlier shopping example, we can use this term for just about anything that is targeted with few restrictions. When talking about the best times to travel, for example, it is a good idea to travel <u>off-season</u>. If few people are traveling, it is a good time to find <strong>cheap</strong> air travel, hotels, and <strong>rental</strong> cars. It is open season on travel deals.</p>
+<p>And like <u>hunting season</u>, we can have other "seasons" too. For example, beach areas are popular during <u>tourist season</u>. And people with <strong>allergies</strong> probably do not like <u>hay fever season</u> or <u>allergy season</u>.</p>
+<p>So, "season" can simply mean a time of the year marked by a special activity. Sports seasons, for example, are popular with fans of sports.</p>
+<p>We also have different seasons in our lives: Our time as children, going off to college, becoming parents, helping our aging parents, starting new careers or starting retirement. These are all different seasons of life. And they all have different <strong>aspects</strong> to enjoy and to be thankful for.</p>
+<p>And that's the end of this <em>Words and Their Stories</em>. Until next time ...</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p><em>___________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>refer </strong><strong>to </strong><em>–v. (phrasal)</em> to talks about or describe</p>
+<p><strong>hibernate </strong><em>–v. </em>to pass winter in a resting state : <strong>hibernation</strong><strong> </strong>–n.</p>
+<p><strong>complain </strong><em>–v.</em> to say that you are unhappy with something</p>
+<p><strong>cheap </strong><em>–adj.</em> not costly; low cost</p>
+<p><strong>rental </strong><em>–adj.</em> something you have paid for the temporary use of</p>
+<p><strong>allergy </strong>–n. a condition of being especially sensitive to things like pollen, mold or foods which can make a person suffering from it feel sick</p>
+<p><strong>career </strong>–n. the period of working and doing a job in one's life, especially within one field or profession</p>
+<p><strong>aspect </strong>–n. a part of something</p>
+<p><em>We want to hear from you. Do you have similar expressions in your language? Our comment policy is </em><a class="wsw__a" href="https://www.21voa.com/p/5378.html"><em>here</em></a><em>.</em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

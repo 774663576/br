@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Native Americans Describe the ‘Rez Accent’</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Native Americans Describe the ‘Rez Accent’" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202207/native-americans-describe-the-rez-accent.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Native Americans Describe the ‘Rez Accent’</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202207/native-americans-describe-the-rez-accent.mp3" id="mp3"></a>
+<a href="to-me-vs-for-me-89248.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">02 July 2022</span><br/>
+<p>An accent is a way of saying the words in a language that happens among people of one area or region of a country, but not another.</p>
+<p>Many people who study languages, linguists, predicted in the 1960s that accents would disappear in America. As Americans moved across the country, they said English would become standardized, meaning that it would be spoken the same way everywhere.</p>
+<p>Schooling, mass media like television and radio, people moving to the United States from other places and increased car and airplane travel would all add to the standardization of English.</p>
+<div class="contentImage"><img alt="Native American students high fiving as they pass each other at the University of California, Riverside, June 26, 2014. " src="https://files.21voa.com/gdb/096e0000-0a00-0242-f531-08da4e35518f_cx0_cy4_cw99_w268_r1.jpg"/><br/>
+<span class="imagecaption">Native American students high fiving as they pass each other at the University of California, Riverside, June 26, 2014. </span></div>
+<p>But sociolinguist William Labov of the University of Pennsylvania says, while some accents in America are disappearing, others are growing stronger.</p>
+<p>One of these regional accents is Native American English, known as the "rez accent." It is spoken in many <strong>Indigenous</strong> communities in the United States and Canada. The word "rez" is shortened from the word "reservation." Reservations are areas of land in the United States and Canada that are kept separate for Native Americans or Indigenous people to live in.</p>
+<p>Kalina Newmark is from the Sahtu Region in Canada's Northwest Territories. Her ancestors were called the Dene people, but she does not speak her tribe's language of Slavey.</p>
+<p>"My mom can understand and speak it<strong>,</strong> but she didn't pass it on to us. She learned it from her great-grandmother. My grandmother chose not to pass along the language because she wanted to make it easier for her children when they went to school," Newmark said.</p>
+<p>Newmark went to Dartmouth College in the U.S. state of New Hampshire. The school is known for its<strong> </strong>Indigenous student population.</p>
+<p>There, she met other Indigenous students from all over North America. Newmark noticed something very interesting about everyone's<strong> pronunciation</strong>. The English they spoke shared some similar qualities,<strong> </strong>although they came from different language backgrounds.</p>
+<p>These especially could be heard during times of socializing. The accent was even present for students who had not learned their<strong> </strong>ancestral language.</p>
+<p>Newmark and another student, Nacole Walker, decided to examine the rez accent when they were given a project to study a non-English language. They realized that the rez accent had never been studied before.</p>
+<p>Walker is a Lakota person from the Standing Rock Reservation in the states of North and South Dakota. She said linguists have studied other forms of English, like African American English, and Chicano English, which is spoken by Mexican Americans.</p>
+<p>"We knew something <strong>unique</strong> was happening [with indigenous English] and wanted to narrow<strong> </strong>it down," Walker said.</p>
+<p>They recorded discussions and <strong>interviews</strong> with 75 people from different<strong> </strong>tribes and Nations all over North America. Their findings were published in <em>Language in Society</em> in September of 2016.</p>
+<p>The Dartmouth team found that Indigenous communities speak different English <strong>dialects</strong>, but these ways of speaking shared prosody <strong>patterns</strong>. Prosody describes the "music" of a language. It includes pitch, how high or low the sounds of the voice are; rhythm, the beat of stressed and unstressed <strong>syllables</strong>; and intonation, or the changes in pitch when speaking.</p>
+<p>James Stanford is a sociolinguist at Dartmouth. He guided the students in their study. He said that the most important quality is how the pitch and intonation rises and falls like a song. The <strong>feature </strong>was named after the<strong> character</strong>, "Thomas Builds-the-Fire," played by Evan Adams from the 1998 film <em>Smoke Signals</em>. The movie was the first to be made and performed by Indigenous people.</p>
+<p>The group identified another feature that appeared unique to Indigenous populations: the pitch rises at the end of their sentences. Stanford said that in <strong>Standard</strong> English, speakers usually end their sentences by dropping their pitch levels lower. Indigenous speakers end their sentences with a middle or higher pitch.</p>
+<p>The final important feature is the timing of the syllables, or the rhythm. Some language experts describe languages like French and Spanish as syllable-timed. "Each syllable takes up the same amount of time," Stanford said.</p>
+<p>English is not syllable-timed. It is stress-timed, meaning that only stressed syllables are said at regular places in speech. The unstressed syllables are shortened. The team noted that the rez accent of English is syllable-timed.</p>
+<p><strong>Where did the "Rez" accent come from?</strong></p>
+<p>Newmark thinks that the rez accent possibly came from different Native tribes interacting in the 1880s when Indigenous peoples were placed on reservations. The Native American and First Nations children were forced into schools and had to speak English.</p>
+<p>The rez accent also might have had its beginning in the 1950s and 1960s when the US government closed some reservations and sent Native American into cities. The children were forced to speak English and interact with each other. "They were all learning English together," said Newmark, "and making an English of their own."<br/>
+<br/>
+Twyla Baker is a citizen of the Mandan, Hidatsa and Arikara Nation. She is also president of an indigenous college on the Fort Berthold Reservation in the state of North Dakota. She said that the Rez accent is a form of <strong>adaptation</strong>. She said that before Native Americans came into contact with Europeans, the tribes connected with each other. They traveled, traded, and built political connections with other tribes. This led to many Indigenous people learning four or five languages.</p>
+<p>Baker knows that many people think that the rez accent is not correct English. They may even make fun of it. But she wants Indigenous people not to feel bad about who they are, where they come from and how they speak English.</p>
+<p>"I would love for our young people to feel that they are accepted not just in the spaces that they occupy in Indian Country, but when they step off the reservation," Baker added.</p>
+<p>I'm Bryan Lynn.</p>
+<p>And I'm Faith Pirlo.</p>
+<p><em>Cecily Hilleary wrote this article for VOA. Faith Pirlo adapted it for Learning English. </em></p>
+<p><em>_______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>indigenous </strong>– <em>adj</em>. produced, living or existing in a certain place or environment<strong> </strong></p>
+<p><strong>pronunciation </strong><em>– n.</em> the way in which a word is normally or correctly said</p>
+<p><strong>unique </strong><em>–adj.</em> unlike anything else</p>
+<p><strong>interview </strong>–n. a meeting in which people talk to each other to get information</p>
+<p><strong>dialect </strong><em>– n. </em>a form of a language that is spoken in a particular area and that uses some of its own words, grammar, and pronunciations</p>
+<p><strong>pattern</strong> – <em>n</em>. a regular and repeated way in which something happens</p>
+<p><strong>syllable</strong> – <em>n. a </em>part a word is naturally divided into when pronounced</p>
+<p><strong>character </strong>– <em>n</em>. a person who appears in a story, book, play, movie, or television show</p>
+<p><strong>feature</strong> <em>– n.</em> usual quality or important part of something</p>
+<p><strong>standard</strong> – <em>n. </em>a level of quality, achievement, etc., that is considered acceptable or desirable</p>
+<p><strong>adaptation</strong> – <em>n</em>. the state of adapting or changing</p>
+<p><em>What do you think of the rez accent? We want to hear from you. Write to us in the Comments Section. </em></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

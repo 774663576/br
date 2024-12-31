@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Creature Offers Clues on Amphibian Evolution</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Creature Offers Clues on Amphibian Evolution" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/creature-offers-clues-on-amphibian-evolution.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Creature Offers Clues on Amphibian Evolution</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/creature-offers-clues-on-amphibian-evolution.mp3" id="mp3"></a>
+<a href="new-way-to-fight-brain-cancer-shows-promise-92439.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">25 March 2024</span><br/>
+<p>Scientists recently studied the <strong>fossil</strong> of a creature that lived in what is now the U.S. state of Texas about 270 million years ago. They named it Kermitops gratus in honor of Kermit the Frog from the children's television program <em>The Muppets</em>.</p>
+<p>The fossil belongs to a group of animals that are thought to have given rise to modern-day frogs, salamanders, and limbless caecilians. Those animals, called <strong>amphibians</strong>, are creatures that can live both on land and in water.</p>
+<p>And the study offers details into the history of how amphibians have <strong>evolved</strong>.</p><div class="contentImage"><img alt="A composite image shows the fossil skull of the Permian Period proto-amphibian Kermitops (L) alongside a modern frog skull (Lithobates palustris), in this undated handout. (Brittany M. Hance, Smithsonian/Handout via REUTERS)" src="https://files.21voa.com/gdb/efc279e3-c979-4851-80ca-a5398a454b4d_cx0_cy12_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A composite image shows the fossil skull of the Permian Period proto-amphibian Kermitops (L) alongside a modern frog skull (Lithobates palustris), in this undated handout. (Brittany M. Hance, Smithsonian/Handout via REUTERS)</span></div>
+<p>Only the head, or skull, was discovered. It measured around three centimeters long. Researchers think the amphibian-like creature had a wide body that was around 15-18 centimeters long.</p>
+<p>Amphibians are one of the four groups of living <strong>vertebrates</strong> on land. The others are reptiles, birds, and mammals. Special details, or features, on the Kermitops skull are providing researchers with more information about the history of amphibians.</p>
+<p>Calvin So is a George Washington University doctoral student. And he is the lead writer of the study recently released in the publication <em>Zoological Journal of the Linnean Society</em>.</p>
+<p>So said Kermitops helps researchers understand the early history of amphibians by showing there is not a clear history "of step by step becoming more like the modern amphibian."</p>
+<p>The fossil was collected in 1984 near Lake Kemp in Texas. It was kept in the large collection of the Smithsonian Institution's National Museum of Natural History in Washington, D.C. But it was not fully studied until recently.</p>
+<p>Kermitops had facial features that were similar to frogs and salamanders. But it had palpebral bones or eyelid bones, that are not found in modern amphibians.</p>
+<p>So said, "The length of the skull in front of the eyes is longer than the length of the skull behind the eyes, which differs from the other fossil amphibians living at the same time." He added that it might have enabled Kermitops to close its mouth faster than others to capture insects as food.</p>
+<p>So added, "We really thought it looked like Kermit the Frog." That led researchers to name it Kermitops, meaning "Kermit face."</p>
+<p>Kermitops lived about 20 million years before the worst mass die-off, or extinction, in Earth's history. And it appeared about 40 million years before the first dinosaurs. It lived alongside other members that formed the amphibian group.</p>
+<p>The environment in which Kermitops lived appears to have changed back and forth between warm and wet seasons and hot and dry seasons.</p>
+<p>So said, "This environment would be similar to modern-day <strong>monsoons</strong> that take place in the Southwest U.S. and Southeast Asia."</p>
+<p>The fossil record of early amphibians and their ancestors is not complete. That makes it difficult to understand the beginnings of modern amphibians.</p>
+<p>Arjan Mann of the National Museum of Natural History helped write the study. He said Kermitops shows the importance "of continuing to add new fossil data to understanding this evolutionary problem."</p>
+<p>I'm Gena Bennett.</p>
+<p><em>Will Dunham reported this story for Reuters. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>fossil </strong><em>– n. </em>something (such as a leaf, skeleton, or footprint) that is from a plant or animal which lived in ancient times and that you can see in some rocks</p>
+<p><strong>amphibian </strong><em>– n.</em> an animal (such as a frog or toad) that can live both on land and in water</p>
+<p><strong>evolution </strong><em>– n.</em> the process by which changes in plants and animals happen over time</p>
+<p><strong>vertebrate </strong><em>– n. </em>an animal that has a backbone</p>
+<p><strong>monsoon </strong><em>– n. </em>a wind in the Indian Ocean and southern Asia that brings heavy rains in the summer</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 什么是圆周率日</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 什么是圆周率日" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/what-is-pi-day.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>什么是圆周率日</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/what-is-pi-day.mp3" id="mp3"></a>
+<a href="/static/lrc/what-is-pi-day.lrc" id="lrc"></a>
+<a href="what-is-pi-day-92390.html" id="CnPage" target="_blank"></a>
+<a href="us-insurance-group-rates-most-driver-assistance-systems-poor-92384.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Math lovers celebrate Pi Day on March 14, or 3/14. Around the world, many people even mark the day by eating a tasty piece of pie.<br/>
+数学爱好者在3月14日庆祝圆周率日。在世界各地，许多人甚至通过吃一块美味的馅饼来纪念这一天。</p>
+<p>For those who do not know, pi is a mathematical constant, a value that never changes. It expresses the ratio of a circle's circumference (the distance around the circle) to its diameter (the distance across the circle, passing through its center.)<br/>
+对于那些不知道圆周率日的人来说，圆周率是一个数学常数，也就是一个定值。它表示圆的周长与其直径的比率。</p>
+<p>The approximate value of this mathematical constant is 3.1415926535. But those are just the first 10 digits of pi. The numbers go on infinitely, or forever.<br/>
+这个数学常数的近似值是3.1415926535。但这只是圆周率的前10位数字。这些数字是无限的，或者说是永无止境的。</p>
+<p>Pi can calculate the circumference of a circle by measuring the diameter and multiplying that by the 3.14-plus number. The formula has been used in physics, astronomy, engineering and other fields, dating back thousands of years.<br/>
+圆周率可用于计算圆的周长，即测量直径的长度并乘以3.14这个数字。该公式已被应用于物理学、天文学、工程学和其他领域，可以追溯到数千年前。</p>
+<p>Long before computers, scientists such as Isaac Newton spent many hours calculating decimal places by hand. But today, researchers use computers to come up with trillions of digits for pi. But there is no end.<br/>
+早在计算机出现之前，像牛顿这样的科学家就花了很多时间手工计算小数位数。但今天，研究人员使用计算机计算出数万亿位数的圆周率。但是没有尽头。</p>
+<p><span style="font-weight: bold;">What are some practical uses for Pi?<br/>
+圆周率的一些实际用途</span></p>
+<p>There are many uses for pi.<br/>
+圆周率有很多用途。</p>
+<p>The number helps calculate the size of paper rolls used in printers. And it helps decide the necessary size of a container that serves heating and air conditioning systems in buildings of different sizes.<br/>
+这个数字有助于计算打印机中使用的纸卷的大小。它有助于确定不同尺寸建筑中供暖和空调系统所需容器的必要尺寸。</p>
+<p>Scientists use the number to point an antenna toward a satellite and calculate the orbits and positions of planets and other space bodies.<br/>
+科学家们用这个数字将天线指向卫星，以及计算行星和其他空间物体的轨道和位置。</p>
+<p>Scientists with the American space agency NASA use pi to calculate when parachutes should open as a vehicle splashes down on Earth or lands on Mars.<br/>
+美国宇航局的科学家使用圆周率来计算当飞行器溅落地球或降落火星时降落伞何时打开。</p>
+<p><span style="font-weight: bold;">Pi Day<br/>
+圓周率日</span></p>
+<p>In 1706, British mathematician William Jones began using the Greek letter pi for the number 3.14… It is the first Greek letter in the words "periphery" and "perimeter." Both words have similar meanings as circumference.<br/>
+1706年，英国数学家威廉·琼斯开始使用希腊字母π来表示3.14……这是单词periphery和perimeter中的第一个希腊字母。这两个词与周长的含义相似。</p>
+<p>Pi Day itself dates back to the year 1988. That was when physicist Larry Shaw began celebrations at the Exploratorium, a science museum in San Francisco, California.<br/>
+圆周率日自身可以追溯到1988年。当时物理学家拉里·肖在加州旧金山探索馆这家科学博物馆开始庆祝活动。</p>
+<p>The so-called holiday did not gain national recognition until more than 20 years later. In 2009, the U.S. Congress declared every March 14 to be Pi Day as a way to bring more interest in math and science.<br/>
+直到20多年后，这个所谓的节日才得到全美国的认可。2009年，美国国会宣布每年3月14日为圆周率日，以提高人们对数学和科学的兴趣。</p>
+<p>The San Francisco museum that started the holiday organizes events, including a walk around a circular sign, called the Pi Shrine, 3.14 times. Of course, there is also plenty of pie to eat.<br/>
+开创这一节日的旧金山博物馆会组织活动，包括绕着一个名为Pi Shrine的圆形标志散步3.14次。当然，这里也有很多馅饼可以吃。</p>
+<p>Many Pi Day events take place at colleges in the United States. For example, Nova Southeastern University (NSU) in Florida holds the "Mental Math Bingo" game with free pizza pies.<br/>
+许多圆周率日活动都在美国的大学举行。例如，佛罗里达州的新东南大学举办了免费披萨派的“心理数学宾果”游戏。</p>
+<p>Jason Gershman oversees NSU's math department. He said, "Every year, Pi Day provides us with a way to celebrate math, have some fun and recognize how important math is in all our lives."<br/>
+贾森·戈希曼负责新东南大学的数学部门。他说：“每年的圆周率日都为我们提供了一种庆祝数学、享受乐趣并认识到数学在我们生活中的重要性的途径。”</p>
+<p>NASA has its yearly "Pi Day Challenge" online. The space agency offers games and puzzles, such as calculating the orbit of an asteroid or the distance a moon rover would need to travel each day to study a certain lunar area.<br/>
+美国宇航局每年都会在网上举办“圆周率日挑战赛”。美国宇航局提供游戏和谜题，例如计算小行星的轨道或月球车研究某个月球区域每天需要行驶的距离。</p>
+<p>If you still wonder why Pi Day is such an important day for math lovers, here are two more reasons: Albert Einstein, possibly the world's best-known scientist, was born on March 14, 1879. And famed physicist Stephen Hawking died on March 14, 2018, at age 76.<br/>
+如果你仍然想知道为什么圆周率日对数学爱好者来说如此重要，还有两个原因：阿尔伯特·爱因斯坦这位可能是世界上最著名的科学家，出生于1879年3月14日。著名物理学家斯蒂芬·霍金于2018年3月14日去世，享年76岁。</p>
+<p>Although pi is not a perfect number. Hawking once had this to say: "One of the basic rules of the universe is that nothing is perfect. Perfection simply doesn't exist. Without imperfection, neither you nor I would exist."<br/>
+虽然圆周率不是一个完美的数字。霍金曾说过：“宇宙的一条基本规则是，没有什么是完美的。完美根本不存在。没有这些不完美，你和我就可能都不存在。”</p>
+<p>And Happy Pi Day!<br/>
+祝大家圆周率日快乐！</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:What Is Pi Day?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.84]Math lovers celebrate Pi Day
+[00:04.16]on March 14, or 3/14.
+[00:07.36]Around the world,
+[00:08.88]many people even mark the day
+[00:11.36]by eating a tasty piece of pie.
+[00:15.20]For those who do not know,
+[00:16.92]pi is a mathematical constant,
+[00:19.76]a value that never changes.
+[00:22.92]It expresses the ratio of a circle's circumference
+[00:27.12](the distance around the circle) to its diameter
+[00:30.92](the distance across the circle,
+[00:32.88]passing through its center.)
+[00:35.96]The approximate value of this mathematical constant
+[00:39.32]is 3.1415926535.
+[00:45.88]But those are just the first 10 digits of pi.
+[00:49.52]The numbers go on infinitely, or forever.
+[00:54.08]Pi can calculate the circumference of a circle
+[00:57.16]by measuring the diameter
+[00:59.36]and multiplying that by the 3.14-plus number.
+[01:04.92]The formula has been used in physics,
+[01:07.60]astronomy, engineering and other fields,
+[01:11.16]dating back thousands of years.
+[01:14.24]Long before computers, scientists
+[01:17.04]such as Isaac Newton spent many hours
+[01:20.04]calculating decimal places by hand.
+[01:23.52]But today, researchers use computers
+[01:26.76]to come up with trillions of digits for pi.
+[01:29.96]But there is no end.
+[01:32.60]There are many uses for pi.
+[01:34.76]The number helps calculate the size
+[01:37.44]of paper rolls used in printers.
+[01:40.00]And it helps decide
+[01:41.68]the necessary size of a container
+[01:44.40]that serves heating and air conditioning systems
+[01:48.00]in buildings of different sizes.
+[01:51.52]Scientists use the number to point an antenna
+[01:54.64]toward a satellite and calculate the orbits
+[01:57.88]and positions of planets and other space bodies.
+[02:03.12]Scientists with the American space agency NASA
+[02:06.44]use pi to calculate when parachutes should open
+[02:10.24]as a vehicle splashes down on Earth or lands on Mars.
+[02:15.80]In 1706, British mathematician William Jones
+[02:20.20]began using the Greek letter pi
+[02:22.68]for the number 3.14…
+[02:26.12]It is the first Greek letter in the words
+[02:28.72]"periphery" and "perimeter."
+[02:31.36]Both words have similar meanings as circumference.
+[02:37.00]Pi Day itself dates back to the year 1988.
+[02:42.04]That was when physicist Larry Shaw
+[02:44.80]began celebrations at the Exploratorium,
+[02:48.04]a science museum in San Francisco, California.
+[02:52.68]The so-called holiday
+[02:54.28]did not gain national recognition
+[02:56.56]until more than 20 years later.
+[02:59.88]In 2009, the U.S. Congress
+[03:02.88]declared every March 14 to be Pi Day
+[03:06.36]as a way to bring more interest in math and science.
+[03:11.00]The San Francisco museum that started the holiday
+[03:14.28]organizes events, including a walk around a circular sign,
+[03:18.80]called the Pi Shrine, 3.14 times.
+[03:24.36]Of course, there is also plenty of pie to eat.
+[03:28.12]Many Pi Day events
+[03:30.80]take place at colleges in the United States.
+[03:34.64]For example, Nova Southeastern University
+[03:38.20](NSU) in Florida
+[03:40.36]holds the "Mental Math Bingo" game
+[03:42.84]with free pizza pies.
+[03:46.12]Jason Gershman oversees NSU's math department.
+[03:49.72]He said, "Every year, Pi Day provides us
+[03:53.72]with a way to celebrate math, have some fun
+[03:57.52]and recognize how important math is in all our lives."
+[04:03.40]NASA has its yearly "Pi Day Challenge" online.
+[04:08.08]The space agency offers games and puzzles,
+[04:11.12]such as calculating the orbit of an asteroid
+[04:14.40]or the distance a moon rover
+[04:17.00]would need to travel each day
+[04:19.08]to study a certain lunar area.
+[04:22.72]If you still wonder why Pi Day
+[04:24.84]is such an important day for math lovers,
+[04:27.60]here are two more reasons: Albert Einstein,
+[04:31.84]possibly the world's best-known scientist,
+[04:34.72]was born on March 14, 1879.
+[04:39.48]And famed physicist Stephen Hawking
+[04:43.20]died on March 14, 2018, at age 76.
+[04:49.40]Although pi is not a perfect number.
+[04:51.96]Hawking once had this to say:
+[04:54.28]"One of the basic rules of the universe
+[04:57.24]is that nothing is perfect.
+[04:59.20]Perfection simply doesn't exist.
+[05:02.84]Without imperfection,
+[05:04.36]neither you nor I would exist."
+[05:07.92]And Happy Pi Day!
+[05:10.04]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

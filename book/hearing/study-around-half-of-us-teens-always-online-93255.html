@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Study: Around Half of US Teens Always Online</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Study: Around Half of US Teens Always Online" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/study-around-half-of-us-teens-always-online.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Study: Around Half of US Teens Always Online</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/study-around-half-of-us-teens-always-online.mp3" id="mp3"></a>
+<a href="/static/lrc/study-around-half-of-us-teens-always-online.lrc" id="lrc"></a>
+<a href="what-were-google-s-top-searches-in-2024-93254.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">26 December, 2024</span><br/>
+<p>Nearly half of American teenagers – children ages 13 to 17 - say they are online “<strong>constantly</strong>” despite concerns about the effects of social media and smartphones on their mental health.</p>
+<p>The information comes from a report that was recently released by the Pew Research Center.</p>
+<p>As in past years, YouTube was the most popular<strong> platform</strong> teenagers used. Around 90 percent said they watched videos on the website, down slightly from 95 percent in 2022. Nearly 75 percent of those questioned said they visit YouTube every day.</p><div class="contentImage"><img alt="FILE — Isabella Cimato, 17, from left, Arianna Schaden, 14, and Sofia Harrison, 15, check their phones at Roosevelt Field shopping mall in Garden City, N.Y., on July 27, 2015. (AP Photo/Seth Wenig, File)" src="https://files.21voa.com/gdb/4e279598-ef5f-44c9-a7c2-9a4d352672e5_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE — Isabella Cimato, 17, from left, Arianna Schaden, 14, and Sofia Harrison, 15, check their phones at Roosevelt Field shopping mall in Garden City, N.Y., on July 27, 2015. (AP Photo/Seth Wenig, File)</span></div>
+<p>There was a small downward change in several popular <strong>apps</strong> teens used. For example, 63 percent of teens said they used TikTok, down from 67 percent. Snapchat use went to 55 percent from 59 percent. This small decline could be due to pandemic-era restrictions easing up and kids having more time to see friends in person. But the change is probably not big enough to be truly meaningful.</p>
+<p>X saw the biggest decline among teenage users. Only 17 percent of teenagers said they use X, down from 23 percent in 2022, the year Elon Musk bought the platform.</p>
+<p>Reddit usage remained the same at 14 percent. About 6 percent of teenagers said they use Threads, Meta's answer to X that launched in 2023.</p>
+<p>The report comes as countries around the world try to understand the effects of social media on young people's well-being.</p>
+<p>Australia recently passed a law banning children under 16 from social networks. Still, it is unclear how the Australian government will be able to enforce the age limit. It is also unclear whether such a ban will come with unexpected or bad effects, such as <strong>isolating</strong> some children.</p>
+<p>Meta's messaging service WhatsApp was different in that it saw the number of teenage users increase to 23 percent from 17 percent in 2022.</p>
+<p>Pew also asked teenagers how often they use different online platforms. A small but notable number said they are on them “almost constantly.” For YouTube, 15 percent reported constant use, for TikTok, 16 percent, and for Snapchat, 13 percent.</p>
+<p>As in previous public opinion studies, girls were more likely to use TikTok almost constantly while boys went to YouTube. There was no meaningful gender difference in the use of Snapchat, Instagram and Facebook.</p>
+<p>Around 25 percent of Black and Hispanic teens said they visit TikTok almost constantly, compared with just 8 percent of white teenagers.</p>
+<p>The report was based on a public opinion study of 1,391 U.S. teenagers that ran from September 18 to October 10, 2024.</p>
+<p>I'm John Russell.</p>
+<p><em>Barbara Ortutay reported on this story for the Associated Press. John Russell adapted it for VOA Learning English.</em></p>
+<p><em>______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>constantly</strong><em> – adv.</em> always, without change</p>
+<p><strong>platform</strong> <em>– n.</em> a website or app that serves as a base from which a service is provided</p>
+<p><strong>app </strong><em>– n. (short for application) </em>a program that performs a task or set of tasks</p>
+<p><strong>isolate </strong><em>-- v. </em>to separate or set apart from others</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Study: Around Half of US Teens Always Online]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]FNearly half of American teenagers
+[00:04.12]– children ages 13 to 17
+[00:07.80]- say they are online "constantly"
+[00:10.96]despite concerns about the effects of social media
+[00:15.56]and smartphones on their mental health.
+[00:18.92]The information comes from a report
+[00:22.48]that was recently released
+[00:24.72]by the Pew Research Center.
+[00:27.36]As in past years, YouTube
+[00:30.76]was the most popular platform teenagers used.
+[00:35.28]Around 90 percent said
+[00:37.88]they watched videos on the website,
+[00:41.00]down slightly from 95 percent in 2022.
+[00:47.24]Nearly 75 percent of those questioned
+[00:51.44]said they visit YouTube every day.
+[00:54.88]There was a small downward change
+[00:58.04]in several popular apps teens used.
+[01:01.84]For example, 63 percent of teens
+[01:06.32]said they used TikTok,
+[01:08.88]down from 67 percent.
+[01:12.28]Snapchat use went to 55 percent
+[01:16.24]from 59 percent.
+[01:19.68]This small decline could be due
+[01:22.40]to pandemic-era restrictions easing up
+[01:26.12]and kids having more time
+[01:28.32]to see friends in person.
+[01:31.12]But the change is probably not big enough
+[01:34.96]to be truly meaningful.
+[01:37.44]X saw the biggest decline among teenage users.
+[01:42.80]Only 17 percent of teenagers
+[01:46.16]said they use X,
+[01:48.00]down from 23 percent in 2022,
+[01:52.68]the year Elon Musk bought the platform.
+[01:56.12]Reddit usage remained the same at 14 percent.
+[02:01.24]About 6 percent of teenagers said they use Threads,
+[02:06.16]Meta's answer to X that launched in 2023.
+[02:11.36]The report comes as countries around the world
+[02:15.56]try to understand the effects of social media
+[02:19.80]on young people's well-being.
+[02:22.44]Australia recently passed a law
+[02:25.48]banning children under 16
+[02:28.16]from social networks.
+[02:30.40]Still, it is unclear how the Australian government
+[02:35.48]will be able to enforce the age limit.
+[02:38.96]It is also unclear whether such a ban
+[02:42.52]will come with unexpected or bad effects,
+[02:46.64]such as isolating some children.
+[02:50.12]Meta's messaging service WhatsApp
+[02:53.28]was different in that it saw the number of
+[02:56.72]teenage users increase to 23 percent
+[03:01.20]from 17 percent in 2022.
+[03:05.36]Pew also asked teenagers how often
+[03:09.04]they use different online platforms.
+[03:12.48]A small but notable number said
+[03:15.00]they are on them "almost constantly."
+[03:18.24]For YouTube, 15 percent reported constant use,
+[03:23.80]for TikTok, 16 percent,
+[03:26.12]and for Snapchat, 13 percent.
+[03:30.68]As in previous public opinion studies,
+[03:33.80]girls were more likely
+[03:35.88]to use TikTok almost constantly
+[03:39.00]while boys went to YouTube.
+[03:41.60]There was no meaningful gender difference
+[03:44.96]in the use of Snapchat,
+[03:47.40]Instagram and Facebook.
+[03:49.92]Around 25 percent of Black and Hispanic teens
+[03:54.96]said they visit TikTok almost constantly,
+[03:58.92]compared with just 8 percent of white teenagers.
+[04:03.48]The report was based on a public opinion study
+[04:07.60]of 1,391 U.S. teenagers
+[04:12.84]that ran from September 18
+[04:15.80]to October 10, 2024.
+[04:20.52]I'm John Russell. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

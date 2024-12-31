@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 奥巴马历史性访问广岛</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 奥巴马历史性访问广岛" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201605/obama-hiroshima-preview.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>奥巴马历史性访问广岛</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201605/obama-hiroshima-preview.mp3" id="mp3"></a>
+<a href="/static/lrc/obama-hiroshima-preview.lrc" id="lrc"></a>
+<a href="obama-hiroshima-preview-69813.html" id="CnPage" target="_blank"></a>
+<a href="obama-world-leaders-rattled-by-trumps-words-69793.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>President Barack Obama laid a wreath in the Japanese city of Hiroshima on Friday.<br/>美国总统奥巴马周五在日本广岛献上了花圈。</p>
+<p>Obama is the first American president to visit Hiroshima while in office. The United States dropped an atomic bomb on the city. The bombing there and in the Japanese city of Nagasaki brought a swift end to World War II.<br/>奥巴马是首位在任期间访问广岛的美国总统。美国对该城市投下了一枚原子弹。广岛以及长崎的原子弹爆炸迅速结束了第二次世界大战。</p>
+<p>Thousands at the ceremony watched as the U.S. president stood next to Japanese Prime Minister Shinzo Abe at the Peace Memorial Park. Obama then bowed briefly and placed the wreath at the arch memorial built to remember the dead and injured.<br/>在广岛和平纪念公园，奥巴马站在日本首相安倍晋三旁边，有数千人观看了这一仪式。奥巴马随后向纪念死伤者的慰灵碑短暂鞠躬并献上了花圈。</p>
+<p>"Death fell from the sky and the world was changed," Obama said.<br/>奥巴马说，“死亡自天而降，世界从此改观。”</p>
+<p>The president then met briefly with two survivors who were at the ceremony. He held the hand of 91-year-old Sunao Tsuboi and hugged an emotional Shigeaki Mori.<br/>奥巴马随后简单会见了两名参加仪式的幸存者。他握着91岁的Sunao Tsuboi的手，并拥抱了情绪激动的Shigeaki Mori。</p>
+<p>Obama talked about the horrors of war and the need to work toward a world without nuclear weapons.<br/>奥巴马谈到了战争的恐怖，以及致力于走向无核化世界的必要性。</p>
+<p>"Technological progress without an equivalent progress in human institutions can doom us," he said. Revolutions, or great leaps forward, in technology "requires a moral revolution as well."<br/>他说，“如果科技进步，但是人类秩序未能取得同等进步，就会让我们遭遇噩运。”科技上的革新或巨大飞跃“同时也需要道德革新。”</p>
+<p>"This tragedy must not be repeated again," said Abe in his speech at Hiroshima. "We are determined to realize a world free of nuclear weapons," he said.<br/>安倍晋三在广岛的讲话中表示，“这一悲剧绝不能重演，我们决心要实现一个无核化的世界。”</p>
+<p>Some Americans objected to Obama's visit to Hiroshima. They saw his visit as disrespectful to U.S. veterans who fought in the war. For many older Americans, the visit is a painful reminder of conflict and lost lives.<br/>一些美国人反对奥巴马访问广岛。他们视奥巴马的访问是对这场战争中作战的美国退伍军人的不敬。对许多美国老年人来说，这次访问是对战争以及人类牺牲的痛苦回忆。</p>
+<p>In Japan, the national broadcaster -- NHK -- found that 70 percent of Japanese wanted Obama to visit Hiroshima. Only two percent of Japanese polled said they opposed the trip.<br/>日本国家电视台发现，70%的日本人希望奥巴马访问广岛，只有2%的日本受访者表示他们反对这次访问。</p>
+<p>The United States dropped a powerful atomic bomb on Hiroshima and a second atomic bomb on Nagasaki in August, 1945. Japan was at war with the U.S., Britain, France, China and other nations -- which formed a group called the Allies. The Allies fought against Japan, Germany and Italy -- which were known as the Axis powers.<br/>1945年8月，美国在广岛和长崎投下了两枚威力巨大的原子弹。日本当时在和美国、英国、法国、中国等国家作战，这些国家形成了同盟国组织。同盟国和被称为轴心国的日本、德国和意大利作战。</p>
+<p>The atomic bombs did two things: First, they killed 140,000 people in Hiroshima and 70,000 in Nagasaki. Many people died later of burns and the from the effects of radiation. The bombs also destroyed both cities, leaving few structures standing.<br/>原子弹实现了两点：第一，它们造成广岛市14万人以及长崎市7万人死亡。很多人后来因为烧伤以及核辐射影响死亡。原子弹还摧毁了这两座城市，只剩下很少的建筑未倒塌。</p>
+<p>Secondly, the bombings brought an end to World War II. They stopped Japan from its attempt to control East Asia.<br/>其次，这两次轰炸结束了第二次世界大战，阻止了日本控制东亚的企图。</p>
+<p>Less than two weeks after the attacks, Japan announced its surrender. Japan said it surrendered because of the power of "a new and most cruel bomb" according to History.com.<br/>在这次攻击后不到两个星期，日本宣布投降。根据History网站的信息，日本说它投降是因为这种残酷的新型炸弹的力量。</p>
+<p>Since then, Japan has rebuilt and become a modern, rich nation with the help of the United States.<br/>从那时起，日本在美国的帮助下重建并成为一个现代化的富裕国家。</p>
+<p>Chris Appy, a professor at the University of Massachusetts, spoke to VOA before the president's visit.<br/>马萨诸塞大学教授Chris Appy在奥巴马访问前对美国之音表示：</p>
+<p>"I was very pleased that he decided to go. I think just showing up is (an) important symbolic act that many Japanese have wanted for a long time."<br/>“我很高兴奥巴马决定前往广岛。我认为奥巴马的出现具有重要象征意义，这是很多日本人期待已久的。”</p>
+<p>But Appy said he was disappointed that Obama, in his words, "appears not willing to apologize."<br/>但是Appy表示奥巴马不用对投放原子弹道歉。</p>
+<p>"After all, I think in our personal lives we consider it the height of maturity when (an) adult is, is willing to take responsibility and accountability for actions -- particularly actions that lead to the suffering of innocent victims."<br/>“毕竟，我认为日本对导致无数受害者的侵略行为做出极具诚意的道歉才能配得上称作一个负责任的国家。”</p>
+<p>Professor Appy said "apology and forgiveness are important in Japan."<br/>Appy教授表示，“日本道歉并取得受害国家的原谅非常重要。”</p>
+<p>American officials said before the trip that the president would not apologize.<br/>美国官员在访问前表示，奥巴马总统不会道歉。</p>
+<p>"As a Japanese national, I want to give a sincere welcome to President Barack Obama. I think we don't need his apology," wrote Kiyohisa Miki from Japan on VOAnews.com. "As President Obama said, Japan and America got over past divides. And now we are important friends for each other. This is enough right?"<br/>来自日本的 Kiyohisa Miki 在VOA网站上留言表示，“作为日本人，我对奥巴马表示真诚欢迎。我认为奥巴马无需道歉。正如奥巴马总统所说，日本和美国克服了过去的分歧，我们现在是彼此重要的朋友。这就够了，对吧。”</p>
+<p>I'm Christopher Jones-Cruise.<br/>我是克里斯托弗·琼斯·克鲁斯。</p>
+<p>特别注明：这篇报道的部分言论罔顾历史，所以51VOA以正确的历史态度对这些言论做出翻译。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]President Barack Obama laid a wreath in the Japanese city of Hiroshima on Friday.
+[00:07.92]Obama is the first American president to visit Hiroshima while in office.
+[00:15.92]The United States dropped an atomic bomb on the city.
+[00:20.84]The bombing there and in the Japanese city of Nagasaki
+[00:26.04]brought a swift end to World War II.
+[00:31.48]Thousands at the ceremony watched
+[00:34.28]as the U.S. president stood next to Japanese Prime Minister Shinzo Abe
+[00:40.48]at the Peace Memorial Park.
+[00:43.24]Obama then bowed briefly and placed the wreath at the arch memorial
+[00:49.92]built to remember the dead and injured.
+[00:54.44]"Death fell from the sky and the world was changed," Obama said.
+[01:01.72]The president then met briefly with two survivors who were at the ceremony.
+[01:08.04]He held the hand of 91-year-old Sunao Tsuboi
+[01:14.76]and hugged an emotional Shigeaki Mori.
+[01:19.88]Obama talked about the horrors of war
+[01:23.68]and the need to work toward a world without nuclear weapons.
+[01:29.88]"Technological progress without an equivalent progress in human institutions can doom us," he said.
+[01:38.96]Revolutions, or great leaps forward, in technology "requires a moral revolution as well."
+[01:50.20]"This tragedy must not be repeated again," said Abe in his speech at Hiroshima.
+[01:57.80]"We are determined to realize a world free of nuclear weapons," he said.
+[02:05.64]Some Americans objected to Obama's visit to Hiroshima.
+[02:11.52]They saw his visit as disrespectful to U.S. veterans who fought in the war.
+[02:18.88]For many older Americans, the visit is a painful reminder of conflict and lost lives.
+[02:27.92]In Japan, the national broadcaster -- NHK
+[02:33.52]-- found that 70 percent of Japanese wanted Obama to visit Hiroshima.
+[02:40.56]Only two percent of Japanese polled said they opposed the trip.
+[02:47.84]The United States dropped a powerful atomic bomb on Hiroshima
+[02:52.88]and a second atomic bomb on Nagasaki in August, 1945.
+[03:00.76]Japan was at war with the U.S., Britain, France, China and other nations
+[03:08.64]-- which formed a group called the Allies.
+[03:12.92]The Allies fought against Japan, Germany and Italy
+[03:18.88]-- which were known as the Axis powers.
+[03:23.32]The atomic bombs did two things:
+[03:26.29]First, they killed 140,000 people in Hiroshima and 70,000 in Nagasaki.
+[03:35.92]Many people died later of burns and the from the effects of radiation.
+[03:42.40]The bombs also destroyed both cities,
+[03:46.16]leaving few structures standing.
+[03:49.64]Secondly, the bombings brought an end to World War II.
+[03:55.56]They stopped Japan from its attempt to control East Asia.
+[04:01.26]Less than two weeks after the attacks, Japan announced its surrender.
+[04:08.84]Japan said it surrendered because of the power of "a new and most cruel bomb"
+[04:15.64]according to History.com.
+[04:19.88]Since then, Japan has rebuilt and become a modern, rich nation
+[04:26.92]with the help of the United States.
+[04:30.80]Chris Appy, a professor at the University of Massachusetts,
+[04:35.44]spoke to VOA before the president's visit.
+[04:39.52]"I was very pleased that he decided to go.
+[04:41.60]I think just showing up is (an) important symbolic act
+[04:46.56]that many Japanese have wanted for a long time."
+[04:50.04]But Appy said he was disappointed that Obama, in his words,
+[04:55.08]"appears not willing to apologize."
+[04:58.80]"After all, I think in our personal lives we consider it the height of maturity when (an) adult is, is willing to
+[05:05.96]take responsibility and accountability for actions
+[05:09.68]-- particularly actions that lead to the suffering of innocent victims."
+[05:14.48]Professor Appy said "apology and forgiveness are important in Japan."
+[05:20.60]American officials said before the trip that the president would not apologize.
+[05:29.84]"As a Japanese national, I want to give a sincere welcome to President Barack Obama.
+[05:37.24]I think we don't need his apology," wrote Kiyohisa Miki from Japan on VOAnews.com.
+[05:47.60]"As President Obama said, Japan and America got over past divides.
+[05:54.76]And now we are important friends for each other.
+[05:59.76]This is enough, right?"
+[06:02.52]I'm Christopher Jones-Cruise.
+[06:05.12]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

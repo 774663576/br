@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 报告称全球近半互联网流量是机器人产生</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 报告称全球近半互联网流量是机器人产生" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/report-bots-make-up-nearly-half-of-worldwide-internet-traffic.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>报告称全球近半互联网流量是机器人产生</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/report-bots-make-up-nearly-half-of-worldwide-internet-traffic.mp3" id="mp3"></a>
+<a href="/static/lrc/report-bots-make-up-nearly-half-of-worldwide-internet-traffic.lrc" id="lrc"></a>
+<a href="report-bots-make-up-nearly-half-of-worldwide-internet-traffic-92553.html" id="CnPage" target="_blank"></a>
+<a href="report-company-plans-major-human-testing-of-brain-computer-device-92549.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>A report by a cybersecurity company suggests that nearly half of the world's internet traffic is now produced by computer systems called bots.<br/>
+一家网络安全公司的报告显示，目前世界上近一半的互联网流量是由称为机器人的计算机系统产生的。</p>
+<p>A bot is a software program that often works by itself on the internet to perform the same kinds of actions as humans do.<br/>
+机器人是一种软件程序，它通常在互联网上独立运行，执行与人类相同的动作。</p>
+<p>The report, produced by California-based internet security company Imperva, found that 49.6 percent of worldwide internet traffic came from bots in 2023. That is the highest level reported since the company started examining bot traffic levels in 2013. Traffic from human users fell to 50.4 percent.<br/>
+这份由总部位于加利福尼亚州的互联网安全公司Imperva编制的报告发现，2023年，全球49.6%的互联网流量来自机器人。这是该公司自2013年开始检查机器人流量水平以来报告的最高水平。来自人类用户的流量下降到50.4%。</p>
+<p>Imperva's study also found that web traffic linked to "bad bots" grew to 32 percent in 2023, a rise of 30.2 percent from 2022.<br/>
+Imperva的研究还发现，2023年，与“坏机器人”相关的网络流量增长到32%，比2022年增长了30.2%。</p>
+<p>Nanhi Singh heads application security at Imperva. She said in a statement that bots are currently "one of the most pervasive and growing threats facing every industry."<br/>
+Nanhi Singh在Imperva负责应用程序安全部门。她在一份声明中表示，机器人目前是“每个行业面临的最普遍、最严重的威胁之一。”</p>
+<p>Bots are generally designed to visit websites and independently search for many kinds of online information. They are able to operate at much greater speeds than humans and can process repeated searches and process large amounts of data.<br/>
+机器人通常被设计为访问网站并独立搜索多种在线信息。它们的操作速度比人类快得多，可以处理重复搜索和处理大量数据。</p>
+<p>Online search advisor Yoast notes that some bots are considered good because they are built to carry out legal, productive activities for businesses.<br/>
+在线搜索顾问Yoast指出，一些机器人被认为是好的，因为它们的构建是为企业进行合法、富有成效的活动。</p>
+<p>Bots can also be useful to individuals through tools such as OpenAI's chatbot, ChatGPT. A chatbot also operates online independently but can assist humans with searching, writing, or processing large amounts of data in a short period. ChatGPT and similar tools are known as generative artificial intelligence (AI).<br/>
+机器人也可以通过OpenAI的聊天机器人ChatGPT等工具对个人用户有益。聊天机器人也可以独立在线运行，但可以帮助人类在短时间内搜索、书写或处理大量数据。ChatGPT和类似的工具被称为生成式人工智能（AI）。</p>
+<p>Other bots are considered malicious, or bad, because they are trained to hack, or break into, network computer systems. These kinds of bots present themselves as humans and collect private data or financial information that can be used to commit crimes. And some bots are designed to spread misinformation and false news.<br/>
+其他机器人被认为是恶意的，或坏的，因为它们被训练来破解或闯入网络计算机系统。这类机器人以人类的身份出现，收集可用于犯罪的私人数据或财务信息。一些机器人被设计用来传播错误信息和虚假新闻。</p>
+<p>Some bots, called "scrapers," visit web pages and scrape, or capture, all the data on the website they can find. Another kind is known as a spam bot, which is designed to overload a website or social media service with messages or emails.<br/>
+一些被称为“抓取器”的机器人访问网页，抓取或捕获他们能找到的网站上的所有数据。另一种被称为木马程序，它旨在让网站或社交媒体服务过载。</p>
+<p>Imperva's latest report noted that an increase in generative AI systems across the world resulted in the number of "simple bots" increasing about six percent to 39.6 percent in 2023.<br/>
+Imperva的最新报告指出，世界各地生成式人工智能系统的增加导致“简单机器人”的数量在2023年增加了约6%，达到39.6%。</p>
+<p>Much of this increase was linked to active AI training systems on the internet known as large language models. Such systems collect huge amounts of online data to train AI systems like ChatGPT.<br/>
+这一增长很大程度上与互联网上被称为大型语言模型的活跃人工智能训练系统有关。这样的系统收集大量的在线数据来训练像ChatGPT这样的人工智能系统。</p>
+<p>The study suggested some countries have a much bigger problem with bad bots than others. Web traffic linked to malicious bots in 2023 was highest in Ireland, at 71 percent, the researchers found. Germany was next, with 67.5 percent. Mexico had the next highest at 42.8 percent. In the United States, bad bot traffic was reported to be 35.4 percent, up more than 3 percent from 2022.<br/>
+这项研究表明，一些国家的不良机器人问题比其他国家严重得多。研究人员发现，2023年与恶意机器人相关的网络流量在爱尔兰最高，为71%。紧随其后的德国为67.5%。其次是墨西哥，为42.8%。据报道，在美国，不良机器人流量为35.4%，比2022年增长了3%以上。</p>
+<p>Imperva reported that account takeovers – one of the most severe results of bad bot activity – increased 10 percent in 2023 over 2022. Of all login attempts across the internet, 11 percent were linked with account takeovers, the company said.<br/>
+Imperva报告称，账户盗用是不良机器人活动最严重的结果之一，2023年比2022年增加了10%。该公司表示，在所有互联网登录尝试中，11%与账户盗用有关。</p>
+<p>The highest number of account takeovers – 36.8 percent – happened in the financial services industry. Next was the travel industry, with 11.5 percent, followed by business services at eight percent.<br/>
+账户盗用数量最多的是金融服务业，占36.8%。其次是旅游业，占11.5%，其次是商业服务业，占8%。</p>
+<p>Imperva's Singh said the problem is likely to worsen in coming years to the point where such bots could become "omnipresent." She urged organizations to "proactively" introduce bot management and security tools in an effort to limit automated traffic and prevent dangerous account takeovers.<br/>
+Imperva的Singh表示，未来几年这一问题可能会恶化，以至于此类机器人可能“无处不在”。她敦促各组织“积极”引入机器人管理和安全工具，以限制自动化流量，防止危险的账户盗用。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Report: Bots Make up Nearly Half of Worldwide Internet Traffic+++报告称全球近半互联网流量是机器人产生]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A report by a cybersecurity company
+[00:03.92]suggests that nearly half
+[00:06.44]of the world's internet traffic
+[00:09.24]is now produced by computer systems called bots.
+[00:14.88]A bot is a software program
+[00:18.04]that often works by itself on the internet
+[00:21.44]to perform the same kinds of actions as humans do.
+[00:26.72]The report, produced by California-based
+[00:30.60]internet security company Imperva,
+[00:33.84]found that 49.6 percent of worldwide internet traffic
+[00:40.32]came from bots in 2023.
+[00:43.96]That is the highest level reported
+[00:47.56]since the company started examining
+[00:50.16]bot traffic levels in 2013.
+[00:54.04]Traffic from human users fell to 50.4 percent.
+[01:00.20]Imperva's study also found that web traffic
+[01:05.16]linked to "bad bots"
+[01:07.36]grew to 32 percent in 2023,
+[01:11.40]a rise of 30.2 percent from 2022.
+[01:17.72]Nanhi Singh heads application security at Imperva.
+[01:23.52]She said in a statement that bots are currently
+[01:27.96]"one of the most pervasive and growing threats
+[01:32.20]facing every industry."
+[01:34.72]Bots are generally designed to visit websites
+[01:39.48]and independently search
+[01:41.64]for many kinds of online information.
+[01:44.92]They are able to operate at
+[01:47.64]much greater speeds than humans
+[01:50.60]and can process repeated searches
+[01:53.68]and process large amounts of data.
+[01:57.36]Online search advisor Yoast notes
+[02:01.60]that some bots are considered good
+[02:04.80]because they are built to carry out legal,
+[02:07.68]productive activities for businesses.
+[02:11.08]Bots can also be useful to individuals
+[02:15.40]through tools such as OpenAI's
+[02:18.44]chatbot, ChatGPT.
+[02:21.48]A chatbot also operates online independently
+[02:26.84]but can assist humans with searching,
+[02:30.08]writing, or processing large amounts of data in a short period.
+[02:36.16]ChatGPT and similar tools
+[02:39.56]are known as generative artificial intelligence (AI).
+[02:45.44]Other bots are considered malicious, or bad,
+[02:49.72]because they are trained to hack,
+[02:52.12]or break into, network computer systems.
+[02:56.52]These kinds of bots present themselves as humans
+[03:01.12]and collect private data or financial information
+[03:05.48]that can be used to commit crimes.
+[03:08.76]And some bots are designed
+[03:11.52]to spread misinformation and false news.
+[03:15.60]Some bots, called "scrapers,"
+[03:18.92]visit web pages and scrape, or capture,
+[03:23.08]all the data on the website they can find.
+[03:26.96]Another kind is known as a spam bot,
+[03:30.64]which is designed to overload a website
+[03:34.12]or social media service with messages or emails.
+[03:38.84]Imperva's latest report noted that
+[03:42.68]an increase in generative AI systems across the world
+[03:48.08]resulted in the number of "simple bots"
+[03:51.68]increasing about six percent to 39.6 percent in 2023.
+[03:59.44]Much of this increase was linked
+[04:02.32]to active AI training systems on the internet
+[04:06.88]known as large language models.
+[04:10.12]Such systems collect huge amounts of online data
+[04:14.80]to train AI systems like ChatGPT.
+[04:19.12]The study suggested some countries
+[04:23.12]have a much bigger problem with bad bots than others.
+[04:27.64]Web traffic linked to malicious bots in 2023
+[04:33.40]was highest in Ireland,
+[04:35.76]at 71 percent, the researchers found.
+[04:40.32]Germany was next, with 67.5 percent.
+[04:45.92]Mexico had the next highest at 42.8 percent.
+[04:51.36]In the United States, bad bot traffic was reported
+[04:56.04]to be 35.4 percent,
+[04:59.24]up more than 3 percent from 2022.
+[05:03.20]Imperva reported that account takeovers –
+[05:07.52]one of the most severe results of bad bot activity –
+[05:11.88]increased 10 percent in 2023 over 2022.
+[05:18.00]Of all login attempts across the internet,
+[05:22.00]11 percent were linked
+[05:24.08]with account takeovers, the company said.
+[05:27.96]The highest number of account takeovers – 36.8 percent –
+[05:33.96]happened in the financial services industry.
+[05:37.72]Next was the travel industry, with 11.5 percent,
+[05:43.44]followed by business services at eight percent.
+[05:47.68]Imperva's Singh said the problem
+[05:51.52]is likely to worsen in coming years
+[05:54.76]to the point where such bots could become "omnipresent."
+[05:59.92]She urged organizations to "proactively"
+[06:03.96]introduce bot management
+[06:06.16]and security tools in an effort to limit automated traffic
+[06:11.52]and prevent dangerous account takeovers.
+[06:15.76]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

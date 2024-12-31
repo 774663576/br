@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Handwriting Returns in California Schools</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Handwriting Returns in California Schools" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/handwriting-returns-in-california-schools.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Handwriting Returns in California Schools</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/handwriting-returns-in-california-schools.mp3" id="mp3"></a>
+<a href="/static/lrc/handwriting-returns-in-california-schools.lrc" id="lrc"></a>
+<a href="environmentalists-celebrate-return-of-rhinos-in-central-kenya-92253.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">18 February 2024</span><br/>
+<p>Starting this year, six- to twelve-year-olds in California will be required to learn <strong>cursive </strong>handwriting.</p>
+<p>The return to handwriting comes after many years in which typing on computer keyboards was taught and handwriting was pushed aside.</p>
+<p>Cursive is a kind of handwriting in which all the letters in a word are connected to each other.</p><div class="contentImage"><img alt="A student at Orangethorpe Elementary School practices writing cursive as California grade school students are being required to learn cursive handwriting this year, in Fullerton, California, U.S. January 23, 2024. (REUTERS/Mike Blake)" src="https://files.21voa.com/gdb/6de8e967-539a-454c-9aa0-21366ba01d70_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A student at Orangethorpe Elementary School practices writing cursive as California grade school students are being required to learn cursive handwriting this year, in Fullerton, California, U.S. January 23, 2024. (REUTERS/Mike Blake)</span></div>
+<p>Assembly Bill 446 requires that handwriting be taught to 2.6 million Californian students in <strong>grades</strong> one through six. And it requires cursive lessons in grades three and above.</p>
+<p>Former elementary school teacher Sharon Quirk-Silva supported the bill and California Governor Gavin Newsom signed it into law in October.</p>
+<p>Experts say learning cursive improves brain development, reading skills, and hand movement. Some educators also find value in teaching children to read historic documents and family letters from past generations.</p>
+<p>Pamela Keller teaches grades four to six at Orangethorpe Elementary School in Fullerton about 50 kilometers southeast of Los Angeles. She said she was already teaching cursive before the law took effect on January 1.</p>
+<p>Some children <strong>complain </strong>about the difficulty, but Keller has a ready answer:</p>
+<p>"We tell them, well, it's going to make you smarter, it's going to make some connections in your brain, and it's going to help you move to the next level. And then they get <strong>excited</strong> because students want to be smarter. They want to learn," Keller said.</p>
+<p>During a recent visit to the school <strong>library</strong>, Keller said one student got excited seeing an image of the U.S. Constitution, written in 1787, saying, "It's cursive!"</p>
+<p>Several of Keller's students say the subject was difficult, like the letter Z, but they enjoyed it anyways.</p>
+<p>"I love it, because I just feel it's <strong>fancier</strong>...to write, and it's fun to learn new letters," said Sophie Guardia, a 9-year-old in the fourth grade.</p>
+<p>In teacher Nancy Karcher's class, her third-grade students said, "It's fun," "Now I can read my mom's writing," and "It's for my secrets."</p>
+<p><strong>Cursive coming back</strong></p>
+<p>As computers and smart devices grew in popularity, cursive writing was pushed aside. In 2010, the national Common Core education <strong>standards</strong> were published to help students prepare for university. Cursive was left out.</p>
+<p>"They stopped teaching kids how to form any letters at all. Teacher colleges are not preparing teachers to teach handwriting," said Kathleen Wright. She is the founder of the Handwriting Collective, a nonprofit group.</p>
+<p>But cursive is coming back. California became the 22nd U.S. state to require cursive handwriting and the 14th to pass a cursive teaching bill since 2014, said Lauren Gendill. She is a researcher at the National Conference of State Legislatures. Five states have introduced cursive bills so far in 2024.</p>
+<p>Leslie Zoroya is project director for reading language arts at the Los Angeles County Office of Education. She said research has shown that learning cursive supports several linked skills that improve childhood development.</p>
+<p>Zoroya said, "You're using different<strong> neural</strong> networks when you're doing cursive rather than printing. And so, it's creating those pathways in your brain."</p>
+<p>Zoroya said she got the idea from former California Governor Jerry Brown.</p>
+<p>California's teaching standards always had cursive writing goals, but Quirk-Silva said cursive was not always taught and was weakening.</p>
+<p>She said, "The hope of the legislation is that by the time students leave sixth grade, they would be able to read and write it."</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Daniel Trotta reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>______________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cursive </strong>–n. a form of handwriting in which the writing instrument never leaves the paper while writing a word</p>
+<p><strong>grade </strong>–n. a level of education that is equal to one school year</p>
+<p><strong>complain </strong><em>– v. </em>to say (something that expresses annoyance or unhappiness)</p>
+<p><strong>excited </strong><em>– adj. </em>very enthusiastic and eager about something</p>
+<p><strong>library </strong><em>– n.</em> a place where books, magazines, and other materials (such as videos and musical recordings) are available for people to use or borrow</p>
+<p><strong>fancy </strong><em>– adj. </em>not plain or ordinary</p>
+<p><strong>standard </strong>– <em>n</em>. a level of quality, especially one that people think is acceptable</p>
+<p><strong>neural </strong>– <em>adj</em>. of, relating to, or involving a nerve or the nervous system</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Handwriting Returns in California Schools]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Starting this year, six- to twelve-year-olds in California
+[00:06.00]will be required to learn cursive handwriting.
+[00:11.32]The return to handwriting comes after many years
+[00:15.44]in which typing on computer keyboards was taught
+[00:19.88]and handwriting was pushed aside.
+[00:24.40]Cursive is a kind of handwriting
+[00:27.16]in which all the letters in a word
+[00:29.84]are connected to each other.
+[00:33.08]Assembly Bill 446 requires that handwriting
+[00:38.68]be taught to 2.6 million Californian students
+[00:44.08]in grades one through six.
+[00:46.80]And it requires cursive lessons
+[00:50.08]in grades three and above.
+[00:53.68]Former elementary school teacher Sharon Quirk-Silva
+[00:58.92]supported the bill and California Governor
+[01:02.88]Gavin Newsom signed it into law in October.
+[01:08.84]Experts say learning cursive improves brain development,
+[01:13.76]reading skills, and hand movement.
+[01:17.88]Some educators also find value in teaching children
+[01:22.88]to read historic documents
+[01:25.20]and family letters from past generations.
+[01:30.28]Pamela Keller teaches grades four to six
+[01:33.92]at Orangethorpe Elementary School in Fullerton
+[01:38.88]about 50 kilometers southeast of Los Angeles.
+[01:44.56]She said she was already teaching cursive
+[01:48.00]before the law took effect on January 1.
+[01:53.36]Some children complain about the difficulty,
+[01:56.72]but Keller has a ready answer:
+[01:59.88]"We tell them, well, it's going to make you smarter,
+[02:04.60]it's going to make some connections in your brain,
+[02:08.20]and it's going to help you move to the next level.
+[02:13.16]And then they get excited because students
+[02:16.28]want to be smarter. They want to learn," Keller said.
+[02:21.92]During a recent visit to the school library,
+[02:25.36]Keller said one student got excited
+[02:28.88]seeing an image of the U.S. Constitution,
+[02:32.72]written in 1787, saying, "It's cursive!"
+[02:39.04]Several of Keller's students say the subject was difficult,
+[02:43.84]like the letter Z, but they enjoyed it anyways.
+[02:49.44]"I love it, because I just feel it's fancier...to write,
+[02:53.92]and it's fun to learn new letters,"
+[02:56.84]said Sophie Guardia, a 9-year-old in the fourth grade.
+[03:02.72]In teacher Nancy Karcher's class,
+[03:05.72]her third-grade students said, "It's fun,"
+[03:09.28]"Now I can read my mom's writing,"
+[03:11.96]and "It's for my secrets."
+[03:16.00]As computers and smart devices grew in popularity,
+[03:20.96]cursive writing was pushed aside.
+[03:24.80]In 2010, the national Common Core education standards
+[03:30.52]were published to help students prepare for university.
+[03:35.96]Cursive was left out.
+[03:39.16]"They stopped teaching kids how to form any letters at all.
+[03:44.80]Teacher colleges are not preparing teachers
+[03:48.08]to teach handwriting," said Kathleen Wright.
+[03:53.36]She is the founder of the Handwriting Collective,
+[03:57.00]a nonprofit group.
+[04:00.16]But cursive is coming back.
+[04:02.56]California became the 22nd U.S. state
+[04:07.76]to require cursive handwriting
+[04:10.32]and the 14th to pass a cursive teaching bill since 2014,
+[04:17.12]said Lauren Gendill.
+[04:20.48]She is a researcher
+[04:22.36]at the National Conference of State Legislatures.
+[04:27.56]Five states have introduced cursive bills so far in 2024.
+[04:35.12]Leslie Zoroya is project director
+[04:39.04]for reading language arts
+[04:41.24]at the Los Angeles County Office of Education.
+[04:46.60]She said research has shown
+[04:49.64]that learning cursive supports several linked skills
+[04:53.84]that improve childhood development.
+[04:58.00]Zoroya said, "You're using different neural networks
+[05:02.64]when you're doing cursive rather than printing.
+[05:06.28]And so, it's creating those pathways in your brain."
+[05:11.28]Zoroya said she got the idea
+[05:14.08]from former California Governor Jerry Brown.
+[05:18.80]California's teaching standards
+[05:21.12]always had cursive writing goals,
+[05:24.84]but Quirk-Silva said cursive
+[05:27.32]was not always taught and was weakening.
+[05:32.00]She said, "The hope of the legislation
+[05:35.44]is that by the time students leave sixth grade,
+[05:39.20]they would be able to read and write it."
+[05:43.72]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

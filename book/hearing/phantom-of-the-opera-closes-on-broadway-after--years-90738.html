@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - ‘Phantom of the Opera’ Closes on Broadway after 35 Years</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, ‘Phantom of the Opera’ Closes on Broadway after 35 Years" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/phantom-of-the-opera-closes-on-broadway-after-35-years.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>‘Phantom of the Opera’ Closes on Broadway after 35 Years</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/phantom-of-the-opera-closes-on-broadway-after-35-years.mp3" id="mp3"></a>
+<a href="/static/lrc/phantom-of-the-opera-closes-on-broadway-after-35-years.lrc" id="lrc"></a>
+<a href="scientists-release-improved-version-of-first-black-hole-image-90736.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">17 April 2023</span><br/>
+<p><em>The Phantom of the Opera</em> closed Sunday night after 35 years on New York City's famous Broadway.</p>
+<p>The musical theater show opened on January 26, 1988. It completed nearly 14,000 performances.</p>
+<p>The show ended with another performance of its most famous song, <em>The Music of the Night</em>. The performance included many well-known singers and actors who had parts in the show over the years.</p><div class="contentImage"><img alt="The Phantom of the Opera cast on stage after the final performance of the famous Broadway show in New York City, on April 16, 2023. (Photo by Charles Sykes/Invision/AP)" src="https://files.21voa.com/gdb/cd44aa22-8901-4d38-bb45-8e353326e7e5_w268_r1.jpg"/><br/><span class="imagecaption">"The Phantom of the Opera" cast on stage after the final performance of the famous Broadway show in New York City, on April 16, 2023. (Photo by Charles Sykes/Invision/AP)</span></div>
+<p>The show's creator, Andrew Lloyd Webber, attended the final performance. So did Sarah Brightman, the singer who first played the lead character, Christine. The two came on <strong>stage</strong> for a final celebration. A video played that honored those involved in the show who had died. Some attendees drank sparkling wine as shiny gold and silver paper came down from the show's famous <strong>chandelier</strong>.</p>
+<p>Lloyd Webber <strong>dedicated</strong> the final performance to his son, Nick, who recently died after a long illness.</p>
+<p>The show is the story of the <strong>phantom</strong>, a <strong>composer</strong> with a misshapen face who wears a mask and haunts the Paris Opera House. He falls in love with Christine, a young singer.</p>
+<p>Actors, singers and Broadway <strong>producers</strong> with close connections to Lloyd Webber were there, too, including Glenn Close and Lin-Manuel Miranda.</p>
+<p>Lloyd Webber's other <strong>musicals</strong> include <em>Cats</em>, <em>Jesus Christ Superstar</em>, <em>Evita</em>, <em>Sunset Boulevard</em> and <em>School of Rock</em>. With <em>Phantom</em> closing, he has only one show playing on Broadway: <em>Bad Cinderella</em>.</p>
+<p>The longest-running Broadway show is now <em>Chicago</em>, which opened in 1996.</p>
+<p>New York theater experts say many shows had difficulties coming back after Broadway closed for 18 months during the COVID-19 pandemic. Some, such as Miranda's <em>Hamilton</em>, returned to full <strong>audiences</strong>. But other shows, including <em>Phantom</em>, depend heavily on out-of-town visitors. Many tourists have yet to come back to New York City.</p>
+<p>The show first played in London in 1986. It has been seen by over 145 million people in 183 cities around the world. In New York City alone, it sold over $1.3 billion in tickets.</p>
+<p>The show was supposed to close in February of this year but its run was extended because of increased interest.</p>
+<p>There are still theaters where you can see the show around the world. It is in its 37th year in London. You can also see <em>Phantom</em> in Japan, Greece, Australia, Sweden, Italy, South Korea and the Czech Republic. New productions are also opening in 2024 in Bucharest, Romania and Vienna, Austria.</p>
+<p>Emilie Kouatchou played Christine in the final show.</p>
+<p>"We get to celebrate at the end of this," she said before the show started. "We get to all come together and drink and laugh and talk about the show and all the highs and lows. It's ending on a big note."</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by the Associated Press.</em></p>
+<p>______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>chandelier</strong><em>–n. </em>a large light fixture with many lights and glass or crystal decoration</p>
+<p><strong>dedicate</strong> <em>–v.</em> to do something to honor the memory of someone else</p>
+<p><strong>phantom </strong>–n. a ghost</p>
+<p><strong>composer </strong>–n. a person who writes music</p>
+<p><strong>producer </strong>–n. a person who organizes the financial support for a creative production such as a film or show</p>
+<p><strong>musical </strong>–n. a type of theatrical production with mostly signing instead of speaking</p>
+<p><strong>audience </strong>–n. people who gather to watch a performance</p>
+<p><strong>fantasy </strong>–n. something made up or not real</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:‘Phantom of the Opera’ Closes on Broadway after 35 Years]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Phantom of the Opera
+[00:01.76]closed Sunday night after 35 years
+[00:05.52]on New York City's famous Broadway.
+[00:09.08]The musical theater show
+[00:10.96]opened on January 26, 1988.
+[00:16.04]It completed nearly 14,000 performances.
+[00:21.16]The show ended with another performance
+[00:24.48]of its most famous song,
+[00:26.64]The Music of the Night.
+[00:28.68]The performance included
+[00:30.60]many well-known singers and actors
+[00:33.76]who had parts in the show over the years.
+[00:37.76]The show's creator, Andrew Lloyd Webber,
+[00:41.36]attended the final performance.
+[00:44.04]So did Sarah Brightman,
+[00:46.00]the singer who first played
+[00:48.24]the lead character, Christine.
+[00:50.84]The two came on stage for a final celebration.
+[00:55.24]A video played
+[00:56.84]that honored those involved in the show
+[00:59.12]who had died.
+[01:00.28]Some attendees drank sparkling wine
+[01:05.04]as shiny gold and silver paper
+[01:08.28]came down from the show's famous chandelier.
+[01:13.32]Lloyd Webber dedicated
+[01:15.04]the final performance to his son, Nick,
+[01:17.80]who recently died after a long illness.
+[01:22.36]The show is the story of the phantom,
+[01:25.40]a composer with a misshapen face
+[01:29.04]who wears a mask
+[01:30.76]and haunts the Paris Opera House.
+[01:33.92]He falls in love with Christine, a young singer.
+[01:38.96]Actors, singers and Broadway producers
+[01:43.60]with close connections
+[01:45.56]to Lloyd Webber were there, too,
+[01:47.96]including Glenn Close
+[01:50.48]and Lin-Manuel Miranda.
+[01:53.84]Lloyd Webber's other musicals include Cats,
+[01:57.04]Jesus Christ Superstar, Evita,
+[02:00.92]Sunset Boulevard and School of Rock.
+[02:04.32]With Phantom closing,
+[02:06.56]he has only one show playing on Broadway:
+[02:09.84]Bad Cinderella.
+[02:13.52]The longest-running Broadway show
+[02:15.92]is now Chicago,
+[02:17.36]which opened in 1996.
+[02:21.44]New York theater experts say
+[02:24.36]many shows had difficulties
+[02:26.40]coming back after Broadway closed for 18 months
+[02:29.88]during the COVID-19 pandemic.
+[02:32.44]Some, such as Miranda's Hamilton,
+[02:36.40]returned to full audiences.
+[02:39.28]But other shows, including Phantom,
+[02:42.48]depend heavily on out-of-town visitors.
+[02:46.08]Many tourists have yet to come back
+[02:48.96]to New York City.
+[02:51.44]The show first played in London in 1986.
+[02:55.88]It has been seen by over 145 million people
+[03:00.36]in 183 cities around the world.
+[03:03.56]In New York City alone,
+[03:05.96]it sold over $1.3 billion in tickets.
+[03:11.60]The show was supposed
+[03:13.24]to close in February of this year
+[03:15.52]but its run was extended
+[03:17.00]because of increased interest.
+[03:20.04]There are still theaters
+[03:21.96]where you can see the show around the world.
+[03:24.88]It is in its 37th year in London.
+[03:28.56]You can also see Phantom in Japan,
+[03:31.48]Greece, Australia, Sweden,
+[03:34.72]Italy, South Korea and the Czech Republic.
+[03:38.68]New productions are also opening in 2024
+[03:42.56]in Bucharest, Romania and Vienna, Austria.
+[03:47.52]Emilie Kouatchou played Christine
+[03:50.92]in the final show.
+[03:53.24]"We get to celebrate at the end of this," she said
+[03:56.40]before the show started.
+[03:58.20]"We get to all come together
+[04:00.12]and drink and laugh and talk about the show
+[04:03.16]and all the highs and lows.
+[04:06.08]It's ending on a big note."
+[04:08.40]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

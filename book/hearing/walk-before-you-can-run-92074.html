@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Walk Before You Can Run</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Walk Before You Can Run" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/walk-before-you-can-run.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Walk Before You Can Run</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/walk-before-you-can-run.mp3" id="mp3"></a>
+<a href="/static/lrc/walk-before-you-can-run.lrc" id="lrc"></a>
+<a href="miners-find-mammoth-remains-buried-in-north-dakota-92072.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">13 January 2024</span><br/>
+<p>And now, <em>Words and Their Stories</em>, from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give definitions, examples, notes on usage, and sometimes we use them in short conversations.</p><div class="contentImage"><img alt="FILE - A child runs as beach-goers enjoy New Year's Day in the rain, on the beach in Durban, South Africa January 1, 2024. (REUTERS/Rogan Ward)" src="https://files.21voa.com/gdb/ca994bd7-60ae-4800-ad82-3fcf58e8ec1c_cx0_cy11_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A child runs as beach-goers enjoy New Year's Day in the rain, on the beach in Durban, South Africa January 1, 2024. (REUTERS/Rogan Ward)</span></div>
+<p>Today we talk about the process of learning to do something.</p>
+<p>For example, if you want to play a musical instrument, you need to learn how. You must take small steps. You learn how to hold or sit at the instrument. You learn how to read notes and how to play basic chords. Then you progress to short, easy songs.</p>
+<p>In other words, you need to take baby steps.</p>
+<p>Babies can look funny when they are learning to walk. Their steps are unsure; their knees do not quite bend fully. They do not walk straight and often fall down. The more they walk, the <strong>steadier</strong> they get on their feet. Soon their unsteady baby steps lead to a smoother, often speedy, <strong>gait</strong>.</p>
+<p>We often use the term to describe how to reach a complex goal. Small baby steps can lead to the bigger goal.</p>
+<p>We will often use the term to suggest that someone slow down and be patient.</p>
+<p>A similar English expression goes, "You have to walk before you can run."</p>
+<p>Let's listen as two friends use these idioms.</p>
+<p><em>A: Hey, how are your piano lessons going?</em></p>
+<p><em>B: Slowly. I want to play a real song. But my teacher has me working on these same set of chords over and over again! They are difficult and <strong>boring</strong> at the same time.</em></p>
+<p><em>A: I've been playing piano for years, and <strong>chords</strong> are important. They are the foundations of music. You need to know how to walk before you can run.</em></p>
+<p><em>B: I know, I know! But I also MUST be able to play a song by next month.</em></p>
+<p><em>A: Why are you in such a hurry? Learning music requires patience. Take baby steps!</em></p>
+<p><em>B: Please no more advice! I told a friend I could play the piano. And now she wants me to play at her children's birthday party.</em></p>
+<p><em>A: Oh, in that case. I have other advice for you.</em></p>
+<p><em>B: What's that?</em></p>
+<p><em>A: You reap what your sow.</em></p>
+<p><em>B: Thanks a lot. ... Hey what are you doing next month...?</em></p>
+<p>Learning a language is a lifelong process. To keep yourself from burning out, take baby steps. Learn a little every day, and soon your English will be <strong>fabulous</strong>!</p>
+<p>And that's all the time we have this <em>Words and Their Stories</em>!</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p><em>_______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>basic </strong>- <em>adj. </em>simple, not difficult</p>
+<p><strong>chord </strong>- <em>n. </em>a group of three or more musical notes that are played or sung at the same time</p>
+<p><strong>steady </strong>- <em>adj. </em>balanced and stable</p>
+<p><strong>gait </strong>- <em>n. </em>another word for the way a person or animal walks</p>
+<p><strong>boring </strong>- <em>adj. </em>not fun, exciting or interesting</p>
+<p><strong>fabulous </strong>- <em>adj. </em>impressive or exciting</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Walk Before You Can Run]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:08.80]And now, Words and Their Stories,
+[00:12.16]from VOA Learning English.
+[00:21.68]On this program, we explore words
+[00:24.68]and expressions in the English language.
+[00:27.92]We give definitions, examples,
+[00:31.80]notes on usage, and sometimes
+[00:35.32]we use them in short conversations.
+[00:39.20]Today we talk about the process
+[00:41.84]of learning to do something.
+[00:44.84]For example,
+[00:46.20]if you want to play a musical instrument,
+[00:49.44]you need to learn how.
+[00:51.48]You must take small steps.
+[00:55.16]You learn how to hold or sit at the instrument.
+[01:00.24]You learn how to read notes
+[01:02.24]and how to play basic chords.
+[01:05.16]Then you progress to short, easy songs.
+[01:10.60]In other words, you need to take baby steps.
+[01:16.12]Babies can look funny when they are learning to walk.
+[01:19.64]Their steps are unsure;
+[01:22.76]their knees do not quite bend fully.
+[01:26.84]They do not walk straight and often fall down.
+[01:31.48]The more they walk,
+[01:32.88]the steadier they get on their feet.
+[01:36.00]Soon their unsteady baby steps
+[01:40.04]lead to a smoother, often speedy, gait.
+[01:45.08]We often use the term
+[01:47.20]to describe how to reach a complex goal.
+[01:50.88]Small baby steps
+[01:52.96]can lead to the bigger goal.
+[01:56.20]We will often use the term to suggest
+[01:59.88]that someone slow down and be patient.
+[02:04.12]A similar English expression goes,
+[02:07.92]"You have to walk before you can run."
+[02:12.16]Let's listen as two friends use these idioms.
+[02:17.92]A: Hey, how are your piano lessons going?
+[02:21.68]B: Slowly. I want to play a real song.
+[02:25.24]But my teacher has me working
+[02:27.80]on these same set of chords
+[02:30.28]over and over again!
+[02:32.00]They are difficult and boring at the same time.
+[02:35.92]A: I've been playing piano for years,
+[02:38.92]and chords are important.
+[02:41.28]They are the foundations of music.
+[02:44.12]You need to know how to walk before you can run.
+[02:48.20]B: I know, I know! But I also MUST
+[02:52.56]be able to play a song by next month.
+[02:55.56]A: Why are you in such a hurry?
+[02:58.28]Learning music requires patience.
+[03:01.44]Take baby steps!
+[03:03.60]B: Please no more advice!
+[03:07.84]I told a friend I could play the piano.
+[03:11.40]And now she wants me to play
+[03:13.84]at her children's birthday party.
+[03:15.92]A: Oh, in that case. I have other advice for you.
+[03:20.32]B: What's that?
+[03:21.48]A: You reap what your sow.
+[03:24.00]B: Thanks a lot.
+[03:25.36]... Hey what are you doing next month...?
+[03:29.48]Learning a language is a lifelong process.
+[03:33.40]To keep yourself from burning out,
+[03:37.00]take baby steps.
+[03:39.28]Learn a little every day,
+[03:41.84]and soon your English will be fabulous!
+[03:45.92]And that's all the time we have
+[03:48.64]for this Words and Their Stories!
+[03:52.16]I'm Andrew Smith.
+[03:56.48]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

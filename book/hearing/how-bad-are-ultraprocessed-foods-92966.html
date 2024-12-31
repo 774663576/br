@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Bad Are Ultraprocessed Foods?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How Bad Are Ultraprocessed Foods?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/how-bad-are-ultraprocessed-foods.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Bad Are Ultraprocessed Foods?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/how-bad-are-ultraprocessed-foods.mp3" id="mp3"></a>
+<a href="deadly-typhoon-yagi-hits-factories-in-northern-vietnam-92965.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">09 September, 2024</span><br/>
+<p>Most Americans eat ultraprocessed foods every day. These are foods that you cannot make at home because they contain flavors and chemicals that change the taste or feel of the food.</p>
+<p>Such food may also go through preparation methods that are not possible in a home kitchen. They are usually high in salt, sugar and fat. Americans may eat them in the form of sugary cereals at breakfast, frozen pizzas at dinner, and in-between bites like potato chips, sodas and ice cream.</p>
+<p>Ultraprocessed foods make up about 60 percent of the American diet. For children and teenagers, it is even higher – about two-thirds of what they eat.</p><div class="contentImage"><img alt="FILE - A customer makes a purchase at a convenience store in Boston in this July 12, 2005 file photo. (AP Photo/Lisa Poole, file)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-795e-08dcc9034574_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A customer makes a purchase at a convenience store in Boston in this July 12, 2005 file photo. (AP Photo/Lisa Poole, file)</span></div>
+<p>Scientists have connected eating ultraprocessed foods to poor health results. Being overweight is one such result and that may lead to diabetes and heart disease. Other possible health risks include depression and <strong>dementia</strong>. One recent study suggested that eating these foods may raise the risk of early death.</p>
+<p>Nutrition science is complex, though, and most research so far has found connections -- not proof -- regarding the health effects of these foods.</p>
+<p>Food manufacturers argue that processing increases food safety and food supplies. They say it also offers a low-cost, easy way to provide a <strong>diverse</strong> and nutritious diet.</p>
+<p>The Associated Press asked several nutrition experts to explain these foods so that people can make informed choices.</p>
+<p><strong>What are ultraprocessed foods?</strong></p>
+<p>Most foods are processed, whether it is by freezing, grinding, <strong>fermentation</strong>, <strong>pasteurization</strong> or other means. In 2009, Brazilian <strong>epidemiologist</strong> Carlos Monteiro and his team first proposed a way to classify foods by how much they are processed, not by their nutrient content. This is called the Nova classification system. It is used by international bodies like the World Health Organization.</p>
+<p>Kevin Hall is a researcher who studies <strong>metabolism</strong> and diet at the National Institutes of Health. He said that foods at the top of the Nova four-level <strong>scale</strong> are foods prepared with industrial processes and ingredients such as additives, colors and <strong>preservatives</strong> that you could not use in a home kitchen.</p>
+<p>"These are most, but not all, of the packaged foods you see," Hall said.</p>
+<p><strong>Are ultraprocessed foods harmful?</strong></p>
+<p>Not all processing is unhealthy, Hall noted. Whole-grain bread, yogurt, tofu and infant <strong>formula</strong> are all highly processed, for example. But they are also nutritious.</p>
+<p>Still, many studies suggest that diets high in ultraprocessed foods are tied to poor health results. The exact cause is still unclear.</p>
+<p>Hall and his partners carried out a small study with 20 people who came to live at a health center for a month. Some of the people ate ultraprocessed foods, while others ate unprocessed foods. The two groups got the same amount of calories, sugar, fat, fiber and nutrients for two weeks. They could eat as much as they liked.</p>
+<p>When people ate the diet of ultraprocessed foods, they took in about 500 calories per day more than when they ate unprocessed foods, researchers found. They gained an average of about 1 kilogram during the study period. People who ate only unprocessed foods for the same amount of time lost about 1 kilogram.</p>
+<p>A new study is currently taking place and its results should appear next year.</p>
+<p><strong>Should ultraprocessed foods be regulated?</strong></p>
+<p>Dr. Neena Prasad is director of the Bloomberg Philanthropies' Food Policy Program. She said such foods are often made to be both low-cost and very tasty.</p>
+<p>"You just can't stop eating them," Prasad said. She said she believes leaders have enough facts to change policies. This could mean raising taxes on sugary drinks, limiting salt in these foods and controlling how advertisers sell the foods to children.</p>
+<p>Earlier this year, Food and Drug Administration Commissioner Robert Califf told a group of food policy experts that ultraprocessed foods are a complex subject. However, Califf said, "We've got to have the scientific basis and then we've got to follow through."</p>
+<p><strong>How should consumers manage ultraprocessed foods at home?</strong></p>
+<p>Aviva Musicus is science director for the Center for Science in the Public Interest. She said buyers should check information printed on food containers and make choices based on the current U.S. Dietary Guidelines.</p>
+<p>"We have really good evidence that added sugar is not great for us. We have evidence that high-<strong>sodium</strong> foods are not great for us," she said.</p>
+<p>Musicus added, "We have great evidence that fruits and vegetables which are <strong>minimally</strong> processed are really good for us."</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jonel Aleccia reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>dementia</strong> – <em>n</em>. a mental illness that causes someone to be unable to think clearly or to understand what is real and what is not real</p>
+<p><strong>diverse </strong>– <em>adj</em>. made up of people or things that are different from each other</p>
+<p><strong>convenient</strong> – <em>adj</em>. allowing you to do something easily or without trouble</p>
+<p><strong>fermentation</strong> – <em>n</em>. to go through a chemical change that results in the production of alcohol</p>
+<p><strong>pasteurization</strong> – <em>n</em>. a process in which a liquid (such as milk or cream) is heated to a temperature that kills harmful germs and then cooled quickly</p>
+<p><strong>epidemiology</strong> – <em>n. </em>the study of how disease spreads and can be controlled</p>
+<p><strong>metabolism</strong> – <em>n.</em> the chemical processes by which a plant or an animal uses food, water, and the like5 to grow and heal and to make energy</p>
+<p><strong>scale</strong> –<em> n</em>. a range of levels of something from lowest to highest</p>
+<p><strong>sodium</strong> – <em>n</em>. a soft silver-white element that is found in salt, baking soda, and other compounds</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

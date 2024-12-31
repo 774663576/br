@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Thinking in English</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Thinking in English" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/thinking-in-english.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Thinking in English</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/thinking-in-english.mp3" id="mp3"></a>
+<a href="halloween-in-america-costumes-candy-costs-for-night-of-fright-93094.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">25 October, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Hoang in Vietnam about how to think in English.</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/3ae349fb-f634-471c-a1a6-86f1808061e0_w268_r1.png"/></div>
+<p>People say that to speak English <strong>fluently</strong>, you need to think in English. So how can I think in English faster? When I talk with foreigners...with the first <strong>conversation</strong>, I talk very slowly and the remaining time I use for thinking. And with the second conversation (because I've been talking before), I feel natural and I speak more fluently.</p>
+<p>So how can I be fluent like the second conversation when I'm having the first conversation?</p>
+<p>Thank you,</p>
+<p>Hoang</p>
+<p><strong>Answer</strong></p>
+<p>I'm happy to answer this question, Hoang.</p>
+<p>It can be difficult to fully explain how to think in a foreign language. That is because the explanation asks us to consider the relationship between thoughts and the language we use to express them.</p>
+<p>However, we can still notice what happens when we think in a foreign language. And we can compare it to times when we have to <strong>pause</strong> and <strong>translate</strong> from our native language.</p>
+<p>Consider what happens when you exchange simple greetings, questions, and answers in a foreign language. If someone asks you in English, “How are you today?” you can probably answer without pausing or translating from your native language. For example, you can quickly reply, “I'm fine, thank you. And how are you?”</p>
+<p>This example shows us the basic things we need for thinking in a foreign language. In this situation, you know all the words you need to say. You don't need to stop and think about the grammar. And you have heard and said these phrases so many times that your response is <strong>automatic</strong>.</p>
+<p>The reason the second conversation you talk about feels more natural is because you have already heard and used some of the <strong>vocabulary</strong> and grammar you need. So, for any subject you want to discuss, you will be able to think in English after you have learned and practiced what you need to say many times.</p>
+<p><strong>Steps for thinking in English</strong></p>
+<p>Here are some suggestions for learning to think in English:</p>
+<p>Choose a subject you are interested in discussing. Then, imagine you are speaking with another person. How easily and quickly can your mind find the vocabulary and grammar you need? Note when you need to pause to find vocabulary or think about grammar. Next, learn the vocabulary and grammar and then practice using them several times. Repeat the words until they become automatic.</p>
+<p>If you can plan ahead and practice in your mind what you will likely talk about, then your first conversation might feel easier and similar to a second conversation.</p>
+<p>You can find more advice for thinking in English in our <a class="wsw__a" href="https://www.21voa.com/a/train-your-mind-to-think-in-english/5023664.html"><em>Education Tips</em> article, “Train Your Brain to Think in English.”</a></p>
+<p>Keep in mind that, to think in English, you need to read, listen to, and speak as much English as possible. This will help your mind use English more easily.</p>
+<p>For our readers and listeners, what are your questions about American English? We'd like to hear from you. Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>. And please include where you are from in your email, too.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.<em> </em></p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>fluently </strong><em>–adv.</em> speaking easily and well</p>
+<p><strong>conversation </strong><em>–n.</em> a discussion between people</p>
+<p><strong>translate </strong><em>–v.</em> to take the words of one language and turn them into another language</p>
+<p><strong>pause </strong><em>–v.</em> to stop and take a moment while doing an activity</p>
+<p><strong>automatic </strong><em>–adj.</em> something done without extra thought</p>
+<p><strong>vocabulary </strong><em>–n.</em> the words a person knows and is able to use correctly</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

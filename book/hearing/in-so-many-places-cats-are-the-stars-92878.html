@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - In So Many Places, Cats Are the Stars</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, In So Many Places, Cats Are the Stars" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/in-so-many-places-cats-are-the-stars.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>In So Many Places, Cats Are the Stars</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/in-so-many-places-cats-are-the-stars.mp3" id="mp3"></a>
+<a href="/static/lrc/in-so-many-places-cats-are-the-stars.lrc" id="lrc"></a>
+<a href="researchers-discover-very-small-human-ancestors-92873.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">09 August, 2024</span><br/>
+<p>From the United States and Britain to Russia and South America, cats often appear in famous public places.</p>
+<p>Cat fans say the animals bring value to the places where they live. Cats can add a cute element or reduce the number of rodents. Sometimes, cats even come to define the place they live in.</p>
+<p><strong>Cats in the United States </strong></p><div class="contentImage"><img alt="FILE - Larry the cat, Chief Mouser to the Cabinet Office, poses for the cameras outside 10 Downing Street in London, on March 13, 2024. (AP Photo/Alberto Pezzali, File)" src="https://files.21voa.com/gdb/6c6dbe98-6b3a-4ac6-acd1-2598f11306b1_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Larry the cat, Chief Mouser to the Cabinet Office, poses for the cameras outside 10 Downing Street in London, on March 13, 2024. (AP Photo/Alberto Pezzali, File)</span></div>
+<p>In 2020, a green-eyed cat named Willow appeared at a Joe Biden campaign event in Pennsylvania. The cat jumped onstage and left with soon-to-be first lady Jill, who later wrote a book about the creature.</p>
+<p>But the White House is not the only well-known place in the United States to house cats.</p>
+<p>The Hemingway Homes and Museum, in Key West, Florida has fifty-nine cats that move freely through the estate. Half of the creatures are related to Hemingway's own six-toed cat, Snow White.</p>
+<p>Visitors are kept away from the furniture, but the animals sit on the writer's desk. A large “Cat Bible” shows the family history, or lineage, of the resident cats.</p>
+<p>Alexa Morgan of the Hemingway museum said the cats bring extra public interest.</p>
+<p>“We have visitors that come here for Hemingway, and then once they see the cats and they love them, then it's like they visit again so they can come back and see the cats,” she said.</p>
+<p><strong>Cats in Britain </strong></p>
+<p>In Britain, there is Lilibet.</p>
+<p>She is a Siberian Forest cat who spends time sitting by the fire at the Lanesborough Hotel in London. Plenty of people visit the hotel just to see the cat, who is named after Queen Elizabeth II, said managing director Stuart Geddes.</p>
+<p>Lilibet has special hair known as hypoallergenic fur. That means her hair is not likely to cause problems for people who are sensitive to cat hair. Lilibet is not the only cat living in an important British building.</p>
+<p>Hodge sits inside Southwark Cathedral, which was established in 1106. He moves around bringing happiness to visitors and going into the shop for treats.</p>
+<p>Not far away, across the Thames River, is Larry, the famous cat of 10 Downing St., the official home of the prime minister of Britain. Larry has stayed longer than most prime ministers — Kier Starmer is his sixth.</p>
+<p>Employed as Chief Mouser to the Cabinet Office, Larry pays his way by keeping the prime minister's office and home more cat than mouse.</p>
+<p>He has lasted longer than his rival Palmerston, a previous Foreign Office cat who retired to the British countryside in 2020.</p>
+<p><strong>Russia and beyond </strong></p>
+<p>Cats also live in the Hermitage Museum in Saint Petersburg, Russia.</p>
+<p>About 80 cats get to call Catherine the Great's palace home in return for keeping the pest population down. They have their own press officer and volunteer assistants, who keep them publicized, fed, and watered while they walk around Russia's state museum.</p>
+<p>In Venezuela, under a banner of Hugo Chavez, an unnamed cat has become well-known to the journalists of Caracas. Often found moving near TV crews at the National Electoral Council, this mysterious animal keeps reporters company as they wait for updates.</p>
+<p>Far away in another part of the world, Lule is so beloved at the Day and Night bar in Pristina, Kosovo, that her cat face has become its symbol. Owner Genc Salihu says she is part of the family, and people come just to see and pet Lule.</p>
+<p>“She is very much the soul of this place,” he said.</p>
+<p>I'm John Russell.</p>
+<p><em>Hilary Fox reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cute </strong><em>-- adj.</em> attractive or pretty</p>
+<p><strong>rodent </strong><em>– n.</em> a small mammal (such as a mouse)</p>
+<p><strong>onstage</strong> <em>– adv.</em> on or onto a stage</p>
+<p><strong>estate</strong> <em>– n.</em> a property usually with a large house on it</p>
+<p><strong>furniture</strong><em> – n.</em> equipment that is necessary or useful (beds, desks, chairs, etc.)</p>
+<p><strong>museum</strong><em> –n.</em> a building where interesting and valuable things are collected and shown to the public</p>
+<p><strong>treat</strong> <em>–n. </em>a special food to eat</p>
+<p><strong>pay (your) way</strong> <em>–idiom </em>to earn your living or pay for staying in the place you live in</p>
+<p><strong>palace</strong><em> –n.</em> the home of a king or queen</p>
+<p><strong>pest</strong> <em>–n.</em> an unwanted animal, like an insect or rodent, that damages homes or farms</p>
+<p><strong>symbol </strong><em>– n</em>. a sign, object or even a person that stands for or suggests another thing such as an idea or a country</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:In So Many Places, Cats Are the Stars]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.48]From the United States and Britain
+[00:03.60]to Russia and South America,
+[00:06.16]cats often appear in famous public places.
+[00:10.56]Cat fans say the animals bring value
+[00:14.08]to the places where they live.
+[00:16.88]Cats can add a cute element
+[00:19.64]or reduce the number of rodents.
+[00:22.88]Sometimes, cats even come to define
+[00:26.64]the place they live in.
+[00:28.36]In 2020, a green-eyed cat named Willow
+[00:33.60]appeared at a Joe Biden
+[00:35.76]campaign event in Pennsylvania.
+[00:38.92]The cat jumped onstage
+[00:41.72]and left with soon-to-be first lady Jill,
+[00:45.92]who later wrote a book about the creature.
+[00:49.12]But the White House is not the only
+[00:51.84]well-known place in the United States
+[00:54.92]to house cats.
+[00:57.04]The Hemingway Homes and Museum,
+[00:59.80]in Key West, Florida
+[01:01.76]has fifty-nine cats
+[01:03.64]that move freely through the estate.
+[01:06.84]Half of the creatures are related
+[01:09.48]to Hemingway's own six-toed cat, Snow White.
+[01:14.40]Visitors are kept away from the furniture,
+[01:17.92]but the animals sit on the writer's desk.
+[01:21.92]A large "Cat Bible" shows the family history,
+[01:25.68]or lineage, of the resident cats.
+[01:29.68]Alexa Morgan of the Hemingway museum
+[01:33.20]said the cats bring extra public interest.
+[01:37.52]"We have visitors that come here for Hemingway,
+[01:41.04]and then once they see the cats
+[01:43.40]and they love them,
+[01:45.20]then it's like they visit again
+[01:47.80]so they can come back
+[01:49.24]and see the cats," she said.
+[01:51.96]In Britain, there is Lilibet.
+[01:55.44]She is a Siberian Forest cat
+[01:58.52]who spends time sitting by the fire
+[02:01.24]at the Lanesborough Hotel in London.
+[02:05.20]Plenty of people visit the hotel
+[02:08.36]just to see the cat,
+[02:10.40]who is named after Queen Elizabeth II,
+[02:13.96]said managing director Stuart Geddes.
+[02:17.56]Lilibet has special hair
+[02:19.72]known as hypoallergenic fur.
+[02:23.28]That means her hair is not likely
+[02:26.12]to cause problems for people
+[02:28.56]who are sensitive to cat hair.
+[02:31.36]Lilibet is not the only cat
+[02:33.96]living in an important British building.
+[02:37.84]Hodge sits inside Southwark Cathedral,
+[02:41.40]which was established in 1106.
+[02:45.64]He moves around bringing happiness to visitors
+[02:49.40]and going into the shop for treats.
+[02:52.60]Not far away,
+[02:54.16]across the Thames River, is Larry,
+[02:57.36]the famous cat of 10 Downing St.,
+[03:00.68]the official home of the prime minister of Britain.
+[03:05.00]Larry has stayed longer
+[03:06.84]than most prime ministers —
+[03:09.28]Kier Starmer is his sixth.
+[03:12.44]Employed as Chief Mouser
+[03:14.84]to the Cabinet Office,
+[03:17.04]Larry pays his way
+[03:18.76]by keeping the prime minister's office and home
+[03:22.56]more cat than mouse.
+[03:25.20]He has lasted longer than his rival Palmerston,
+[03:29.16]a previous Foreign Office cat
+[03:31.64]who retired to the British countryside in 2020.
+[03:36.60]Cats also live in the Hermitage Museum
+[03:40.04]in Saint Petersburg, Russia.
+[03:42.88]About 80 cats get to call
+[03:45.24]Catherine the Great's palace home
+[03:47.92]in return for keeping
+[03:49.64]the pest population down.
+[03:52.72]They have their own press officer
+[03:55.12]and volunteer assistants,
+[03:57.68]who keep them publicized,
+[04:00.00]fed, and watered while they walk
+[04:02.76]around Russia's state museum.
+[04:06.12]In Venezuela, under a banner of Hugo Chavez,
+[04:10.60]an unnamed cat has become well-known
+[04:13.72]to the journalists of Caracas.
+[04:17.08]Often found moving near TV crews
+[04:20.00]at the National Electoral Council,
+[04:23.24]this mysterious animal
+[04:25.12]keeps reporters company
+[04:27.12]as they wait for updates.
+[04:29.72]Far away in another part of the world,
+[04:32.60]Lule is so beloved
+[04:34.28]at the Day and Night bar in Pristina, Kosovo,
+[04:38.52]that her cat face has become its symbol.
+[04:41.96]Owner Genc Salihu says she is part of the family,
+[04:46.32]and people come just to see and pet Lule.
+[04:50.20]"She is very much the soul of this place," he said.
+[04:54.24]I'm John Russell. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reviewing Your Favorite Character Description</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Reviewing Your Favorite Character Description" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202210/reviewing-your-favorite-character-description.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reviewing Your Favorite Character Description</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202210/reviewing-your-favorite-character-description.mp3" id="mp3"></a>
+<a href="governments-propose-measures-to-protect-citizens-from-harmful-ai-89757.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">06 October 2022</span><br/>
+<p>Last week, we asked our readers and listeners to write about their favorite <strong>character</strong> from a book they had read. One reader, Arunabh wrote to us about their favorite character, Matilda, from the children's book with the same name, <em>Matilda </em>by Roald Dahl.</p>
+<p>In this week's <em>Everyday Grammar</em>, we will review parts of Arunabh's description of Matilda.</p>
+<p><strong>Arunabh's description of Matilda</strong></p><div class="contentImage"><img alt="Everyday Grammar: Reviewing Your Favorite Character Description " src="https://files.21voa.com/gdb/03990000-0aff-0242-7392-08daa61739aa_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Reviewing Your Favorite Character Description </span></div>
+<p>Matilda is <strong>brilliant</strong>, <strong>resilient</strong>, creative and kind, despite growing up in difficult circumstances.</p>
+<p>Her parents treat her poorly, but she manages to read books, thus she gets ahead of other children in her class. She also develops <strong>magical</strong> powers to defeat Miss Trunchbull.</p>
+<p>Matilda said, "...Be outrageous. Go the whole <strong>hog</strong>. Make sure everything you do is so completely crazy it's unbelievable..."</p>
+<p>When Miss Trunchbull refuses to take Matilda to a higher form, Miss Honey continues to <strong>nurture</strong> her...She <strong>allows</strong> Matilda to read high-level textbooks while the rest of her class learns simple reading and math...</p>
+<p><strong>Review of Arunabh's description of Matilda</strong></p>
+<p>Let us look at how Arunabh first describes Matilda.</p>
+<p>Matilda is brilliant, resilient, creative and kind, despite growing up in difficult circumstances.</p>
+<p>Arunabh uses four adjectives to describe Matilda. "Brilliant" means very bright, and in this case refers to Matilda's mind. She is very smart. "Resilient" is a good choice for describing Matilda. Because of her family, she has become very mentally strong.</p>
+<p>Arunabh uses the preposition "despite" to contrast the surprising information that Matilda had a hard childhood. "Growing up" is a <strong>gerund</strong> meaning to change from a child into an adult. We use the "ing" form of the verb to make a gerund, but unlike verbs, gerunds are nouns.</p>
+<p>Arunabh describes Matilda as creative. Another word for this is "imaginative." Children use their imaginations all the time. And lastly, he describes her as "kind" or caring and nice. Matilda is always looking out for her classmates and friends.</p>
+<p>Let's continue to the next part of the description</p>
+<p>Her parents treat her poorly, but she manages to read books, thus she gets ahead of other children in her class. She also develops magical powers to defeat Miss Trunchbull.</p>
+<p>Arunabh describes how other characters act towards Matilda. We find out how Matilda's parents "treat" her or behave towards her. He uses the adverb "poorly" to describe her parents' mistreatment of her.</p>
+<p>Another adverb "thus" is used in this paragraph. "Thus" is used to refer to a result of something that you just said. So because Matilda reads books she was able to be at the top of her class.</p>
+<p>Arunabh also uses descriptive verbs like "develops" and the infinitive form "to defeat" which means to beat or win a victory over.</p>
+<p>In the next part of the description, we see Matilda's speech within <strong>quotation</strong> marks.</p>
+<p>Matilda said, "...Be outrageous. Go the whole hog. Make sure everything you do is so completely crazy it's unbelievable..."</p>
+<p>Here, Matilda is talking about Miss Trunchbull's actions against her students. No one, not even the parents, believe how Miss Trunchbull is hurting her students.</p>
+<p>"Go the whole hog" is an <strong>idiom</strong> meaning to do something completely or thoroughly.</p>
+<p>Lastly, let's look at the last group of sentences, and here we have some suggestions.</p>
+<p>When Miss Trunchbull refuses to take Matilda to a higher form, Miss Honey continues to nurture her...She allows Matilda to read high-level textbooks while the rest of her class learns simple reading and math...</p>
+<p>In this paragraph, Miss Trunchbull does not want Matilda to move onto higher-level classes. We suggest replacing "higher form" and "high-level" with the adjective "<strong>advanced</strong>."</p>
+<p>We also see Miss Honey's reaction to Matilda's problem. Miss Honey then helps Matilda. "Nurture" is a good word choice for how Miss Honey is helping Matilda. "Nurture" means to encourage and care for, especially in growing, learning and life.</p>
+<p><strong>Closing thoughts</strong></p>
+<p>In today's report, we looked at Arunabh's favorite character Matilda. He described her with adjectives such as "brilliant," "resilient," and "creative." He used descriptive verbs and adverbs to show how other characters behave towards Matilda. We learned new words like "thus," an adverb and "despite," a preposition. We also learned a new idiom with the expression "go the whole hog," which means to do something completely.</p>
+<p>We hope that over the last few weeks, you have enjoyed learning about ways to describe your favorite character. We thank Arunabh for writing to us about Matilda! Great job!</p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>____________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>character </strong><em>– n.</em> a person (or animal) who appears in a story, book, play, movie, or television show</p>
+<p><strong>brilliant </strong><em>–</em> <em>adj</em>. extremely intelligent or impressive</p>
+<p><strong>resilient </strong><em>– </em><em>adj</em>. able to become healthy or strong again after something bad has happened</p>
+<p><strong>magical </strong>– <em>adj. </em>very pleasant or exciting</p>
+<p><strong>hog</strong> – <em>n.</em> another word for pig</p>
+<p><strong>nurture </strong><em>– v. </em>to further the development of</p>
+<p><strong>allow </strong>– <em>v.</em> to permit</p>
+<p><strong>gerund </strong><em>–</em> <em>n. (grammar). </em>the -ing form of a verb that acts like a noun</p>
+<p><strong>quotation</strong> <em>– n.</em> a group of words taken from a written work or speech and repeated by someone other than the writer or speaker</p>
+<p><strong>idiom </strong><em>– n. </em>an expression in the usage of a language that is peculiar to itself either in having a meaning that cannot be derived from the conjoined meanings of its elements (such as up in the air for "undecided") or in its grammatically atypical use of words (such as give way)</p>
+<p><strong>advanced </strong><em>– adj. </em>far along in a course of progress or development</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

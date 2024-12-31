@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Where Do You Live? Part 2</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Where Do You Live? Part 2" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/where-do-you-live-part-2.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Where Do You Live? Part 2</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/where-do-you-live-part-2.mp3" id="mp3"></a>
+<a href="new-adobe-ai-tools-permit-users-to-use-text-to-create-edit-photos-90605.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">23 March 2023</span><br/>
+<p>Imagine a teacher says the following to you during an English speaking test:</p>
+<p><em>Tell me about where you live. Can you describe your living space? </em></p>
+<p>Today's report will explore ways to answer such a question. We will talk about nouns, verbs, and prepositions that can help us give a detailed, clear answer – and earn a good score on the test!</p><div class="contentImage"><img alt="Everyday Grammar: Where Do You Live? Part 2" src="https://files.21voa.com/gdb/01000000-0a00-0242-94e0-08db2baca096_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Where Do You Live? Part 2</span></div>
+<p>Let's start with some important terms and ideas.</p>
+<p><strong>Nouns </strong></p>
+<p>In <a class="wsw__a" href="https://www.21voa.com/a/where-do-you-live-/6962459.html" rel="noreferrer noopener" target="_blank">an earlier Everyday Grammar report</a>, we explored how you can talk about where you live in general terms. We learned about how to talk about a neighborhood or a part of a city.</p>
+<p>In today's report, we will explore how to talk about the exact place where you live.</p>
+<p>When we talk about where we live, a number of nouns, verbs, and prepositions become important.</p>
+<p>The nouns are limited in number. There are three important nouns we often use to talk about living spaces: house, apartment, and room. We will explore more about these nouns later.</p>
+<p><strong>Verbs </strong></p>
+<p>In terms of verbs, we often describe living places in two ways.</p>
+<p>We use verbs to show how we pay for the living space. Important verbs related to finances include own, rent, or share.</p>
+<p>So, we might say, "They own their house," or "she rents her apartment," or "we share an apartment."</p>
+<p>We also use verbs to describe the contents or objects of the living space. Important verbs related to objects or contents include have.</p>
+<p>So, for example, a person might say, "The apartment has three rooms."</p>
+<p>We can also talk about the exact objects in a room with have. For example, a person could say, "The bedroom has a bed, a fan, and a desk," or "The bathroom has a shower, a sink, and a toilet."</p>
+<p><strong>Prepositions </strong></p>
+<p>Finally, we arrive at prepositions. These are short words that place nouns in space.</p>
+<p>When we talk about living spaces, the preposition "in" is probably the most important.</p>
+<p>We say, "I live in a house," or "I live in an apartment," for example. When we talk about objects or locations, we often say, "...in the kitchen..." or "...in the bathroom..." or "...in the bedroom..."</p>
+<p>So, a person might say, "The stove is in the kitchen," or "A sink is in the bathroom."</p>
+<p><strong>Putting it all together </strong></p>
+<p>So, we have three important ingredients for talking about our living spaces – nouns, verbs, and prepositions. How do we put all of them together?</p>
+<p>Let's start with something we heard at the beginning of our report:</p>
+<p>Tell me about where you live.</p>
+<p>You could respond to this by saying, for example:</p>
+<p><em>I live in a house.</em></p>
+<p>Or</p>
+<p><em>I live in an apartment.</em></p>
+<p>Or</p>
+<p><em>I rent a room in a house.</em></p>
+<p>Or</p>
+<p><em>I share an apartment.</em></p>
+<p>Or you might say:</p>
+<p><em>I own a house.</em></p>
+<p><strong>Expand </strong></p>
+<p>Now consider how might you answer the following:</p>
+<p><em>Tell me about where you live. Can you describe your living space?</em></p>
+<p>You might say:</p>
+<p><em>I live in an apartment. The apartment has four rooms: two bedrooms, a bathroom, and a living room. I share a room with my sister.</em></p>
+<p>Or you might say:</p>
+<p><em>I rent a room in a house. The room has a bed, a desk, a closet, and a bookshelf.</em></p>
+<p><strong>Closing thoughts </strong></p>
+<p>Today, we explored some ways to describe a living space. There are, of course, many other ways to do so. You might use other nouns, verbs, or prepositions. But as a starting point, the small set of nouns, verbs, and prepositions we talked about today can be very useful.</p>
+<p>Let's end this report with a homework assignment. Write to us about a living space. It can be either real or imaginary. Try to use some of the terms that we explored today – but be sure to use some new ones too!</p>
+<p>You can send your work to <a class="wsw__a" href="mailto:learningenglish@voanews.com" rel="noreferrer noopener" target="_blank">learningenglish@voanews.com</a> .</p>
+<p>I'm John Russell.</p>
+<p><em>*house itself is very general and can refer to anything from a very small, simple structure to something that is very large. </em></p>
+<p>_______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story </strong></h2>
+<p><strong>shower </strong><em>– n.</em> a device that produces a spray of water for you to stand under and wash your body</p>
+<p><strong>sink</strong> <em>– n.</em> a wide bowl that has a faucet for water and a drain at the bottom and is usually positioned in a counter or on a pedestal</p>
+<p><strong>toilet</strong> <em>– n. </em>a large bowl attached to a pipe that is used for getting rid of bodily waste and then flushed with water</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

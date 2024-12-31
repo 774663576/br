@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Public Show Explores Influence of Leon Monet</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, New Public Show Explores Influence of Leon Monet" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/new-public-show-explores-influence-of-leon-monet.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Public Show Explores Influence of Leon Monet</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/new-public-show-explores-influence-of-leon-monet.mp3" id="mp3"></a>
+<a href="unique-island-animals-at-greater-risk-of-extinction-90588.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">19 March 2023</span><br/>
+<p>Behind some great men, there is a big brother.</p>
+<p>Leon Monet, Claude Monet's older brother, is central to a new public art show, or exhibition, in Paris. The exhibition explores the part Leon Monet played in the famous impressionist painter's life and art.</p>
+<p>Leon was a color chemist who was four years older than Claude. Historians now understand that Leon helped Claude succeed. He helped in the development of the famous color <strong>palette </strong>that Claude used to create artworks like the "Water Lilies" series.</p><div class="contentImage"><img alt="A guard sits by a painting in an exhibition on Leon Monet at the Mus&lt;I&gt;&amp;#&lt;/I&gt;233;e du Luxembourg in Paris, Monday, March 13, 2023. (AP Photo/Lewis Joly)" src="https://files.21voa.com/gdb/01000000-0aff-0242-5694-08db270c0438_w268_r1.jpg"/><br/><span class="imagecaption">A guard sits by a painting in an exhibition on Leon Monet at the Mus<i>&amp;#</i>233;e du Luxembourg in Paris, Monday, March 13, 2023. (AP Photo/Lewis Joly)</span></div>
+<p>Geraldine Lefebvre is in charge of the exhibition at the Musee du Luxembourg.</p>
+<p>"It's never been known before, but without Leon there would not have been a Monet — the artist the world knows today," Lefebvre said.</p>
+<p>She explained, "His rich big brother supported him in the first period of his life when he had no money or <strong>clients</strong> and was starving."</p>
+<p>Lefebvre said that the colors Claude was famous for "came from the <strong>synthetic textile dye</strong> colors Leon created" in the town of Rouen. Rouen was the subject of some of Claude's best-known paintings.</p>
+<p>The exhibition represents years of investigation by Lefebvre. She visited Monet's great-grandchildren, studied family records and brought to light a painting of Leon by Claude.</p>
+<p>Leon hid the painting in a private collection. The 1874 artwork has never before been seen by the public. It shows Leon with a black suit, serious expression and red face.</p>
+<p>The exhibit shows that the long-held belief that the Monet brothers did not communicate is incorrect.</p>
+<p>"Historians always thought the two brothers had nothing to do with each other," she said.</p>
+<p>"In reality, they were incredibly close throughout their life," Lefebvre said.</p>
+<p>The brothers had an argument in the early 1900s and that may explain why no direct signs of the relationship exist.</p>
+<p>What is now known is that Leon helped his younger brother. He <strong>introduced</strong> Claude to other artists, gave Claude money, and purchased Claude's art — buying it at high prices to improve the painter's public image.</p>
+<p>"This exhibit is important as it throws light on Leon Monet, who up until now has been an <strong>invisible figure</strong>," said Frances Fowle of the National Galleries of Scotland.</p>
+<p>Leon's influence went beyond his brother: He financially supported other artists such as Camille Pissarro, Auguste Renoir and Alfred Sisley.</p>
+<p>Claude Monet also worked for his older brother as a color assistant. Leon would <strong>dissolve</strong> carbon to create a chemical called aniline, which created synthetic colors that natural colors could not compete with. One of the earlier examples of Leon's colorful influence on Claude's art is in the exhibition. It is an 1860s picture Monet drew of his future wife Camille. She appears in a dress of a green color that had never been seen before.</p>
+<p>"The French press <strong>coined the term</strong> ‘Monet green,'" Lefebvre said, adding that reporters made fun of it at first. "At the time, they said he would make a good dye artist."</p>
+<p>However, both Monets had the last laugh.</p>
+<p>Claude Monet founded impressionism — a term that comes from his 1872 painting "Impression, Sunrise" — to become one of the most famous painters of the last two hundred years. And by the height of the artistic movement at the end of the 19th century, "80 percent of all impressionists' work" used the synthetic colors borrowed from Leon, Lefebvre says</p>
+<p><em>Leon Monet. Brother of the Artist and Collector</em> runs at the Musee du Luxembourg in Paris from March 15 until July 16.</p>
+<p>I'm John Russell.</p>
+<p><em>Thomas Adamson reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>palette </strong><em>-- n. </em>the range of colors used by someone</p>
+<p><strong>synthetic</strong> <em>– adj.</em> made by combining different substances : not natural</p>
+<p><strong>textile </strong><em>– n. </em>a fabric that is woven or knit</p>
+<p><strong>dye</strong> <em>– n.</em> a substance used for changing the color of something (such as hair or cloth) usually permanently</p>
+<p><strong>introduce </strong><em>– v. </em>to make (someone) known to someone else by name</p>
+<p><strong>invisible </strong><em>– adj. </em> impossible to see : not visible</p>
+<p><strong>figure </strong><em>– n. </em>a person who has a specified status or who is regarded in a specified way</p>
+<p><strong>dissolve </strong><em>– v. </em> to mix with a liquid and become part of the liquid</p>
+<p><strong>coin a term </strong><em>– expression </em>to be the first person to say or develop a term or expression</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

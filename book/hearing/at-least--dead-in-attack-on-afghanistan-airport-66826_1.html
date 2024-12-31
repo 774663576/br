@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 阿富汗机场遭遇袭击造成至少50人遇难</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 阿富汗机场遭遇袭击造成至少50人遇难" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/at-least-50-dead-in-attack-on-afghanistan-airport.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>阿富汗机场遭遇袭击造成至少50人遇难</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/at-least-50-dead-in-attack-on-afghanistan-airport.mp3" id="mp3"></a>
+<a href="/static/lrc/at-least-50-dead-in-attack-on-afghanistan-airport.lrc" id="lrc"></a>
+<a href="at-least--dead-in-attack-on-afghanistan-airport-66826.html" id="CnPage" target="_blank"></a>
+<a href="oil-prices-down-but-production-stays-up-66790.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Eleven Taliban fighters attacked an important airport in southern Afghanistan early Tuesday, killing at least 50 people, Afghan officials say.<br/>阿富汗官员表示，11名塔利班武装分子周二凌晨袭击了阿富汗南部一座重要的机场，并造成至少50人死亡。</p>
+<p>The Afghan Defense Ministry said 38 civilians, 10 soldiers and two police officers were killed. The attack on the Kandahar Air Field lasted 20 hours, reported the Washington Post. Among the dead were women and children, the newspaper wrote.<br/>阿富汗国防部表示，38名平民、10名士兵和2名警察被杀害。华盛顿邮报表示，塔利班对坎大哈机场的袭击持续了20个小时。该报称遇难者中包括妇女和儿童。</p>
+<p>The airport includes a military base with troops from the North Atlantic Treaty Organization, or NATO. There were no reports that NATO troops were killed or injured in the attack.<br/>该机场包括一个北约的军事基地。目前没有报道称北约士兵在袭击中有死伤。</p>
+<p>A spokesman for the Taliban says fighters entered the base and attacked local and foreign military troops. He said more than 150 soldiers were killed in the attack. The Taliban often makes claims about the results of their attacks that are not true.<br/>塔利班一位发言人表示，塔利班战士进入了基地并袭击了当地和外国军队。他说，超过150名士兵在袭击中丧生。塔利班经常在袭击后果方面宣扬不真实的信息。</p>
+<p>Taliban attacks have grown in number and strength in Afghanistan this year after the withdrawal last year of combat troops from other countries.<br/>去年他国战斗部队从阿富汗撤军之后，塔利班袭击的数量和强度都有所增长。</p>
+<p>I'm Christopher Jones-Cruise.<br/>我是克里斯托弗·琼斯克鲁斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.80]Eleven Taliban fighters attacked an important airport 
+[00:04.92]in southern Afghanistan early Tuesday, 
+[00:07.80]killing at least 50 people, Afghan officials say. 
+[00:12.24]The Afghan Defense Ministry said 38 civilians,  
+[00:16.84]10 soldiers and two police officers were killed. 
+[00:22.12]The attack on the Kandahar Air Field lasted 20 hours,  
+[00:28.00]reported the Washington Post. 
+[00:29.85]Among the dead were women and children, the newspaper wrote.   
+[00:36.44]The airport includes a military base 
+[00:39.88]with troops from the North Atlantic Treaty Organization, or NATO.  
+[00:45.68]There were no reports that NATO troops were killed or injured in the attack.
+[00:52.84]A spokesman for the Taliban 
+[00:55.08]says fighters entered the base 
+[00:57.92]and attacked local and foreign military troops. 
+[01:02.40]He said more than 150 soldiers were killed in the attack. 
+[01:08.64]The Taliban often makes claims about the results of their attacks that are not true. 
+[01:16.68]Taliban attacks have grown in number and strength 
+[01:20.52]in Afghanistan this year 
+[01:23.04]after the withdrawal last year of combat troops from other countries. 
+[01:29.04]I'm Christopher Jones-Cruise.                           
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

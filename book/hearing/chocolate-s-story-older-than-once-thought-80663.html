@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Chocolate's Story Older Than Once Thought</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Chocolate's Story Older Than Once Thought" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201811/chocolate-s-story-older-than-once-thought.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Chocolate's Story Older Than Once Thought</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201811/chocolate-s-story-older-than-once-thought.mp3" id="mp3"></a>
+<a href="san-francisco-program-trains-homeless-for-tech-jobs-80660.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Pete Musto</span><br/>
+<span class="datetime">04 November, 2018</span><br/>
+<p>Humans may have been enjoying cacao, the substance used to make chocolate, for much longer than experts had thought. </p>
+<p>Researchers at the University of British Columbia in Canada have found that humans grew cacao trees and <strong>consumed</strong> cacao starting around 5,300 years ago. </p>
+<p>They published their findings in the <strong>journal</strong> Nature Ecology &amp; Evolution in late October.</p>
+<p>The researchers found evidence of cacao's use at an ancient village in the highlands of southeastern Ecuador. They examined the remains of very old objects at the Santa Ana-La Florida <strong>archeological</strong> site. The village was part of the Mayo-Chinchipe culture of the Andes.</p>
+<p>Time has had little effect on the village and ceremonial center. The researchers were able to find a lot of evidence of the use of cacao.</p>
+<p>Scientists had already mostly agreed that cacao was first <strong>domesticated</strong> in South America instead of Central America, as they once believed. But the new discovery shows cacao was domesticated about 1,500 years earlier than was known before.</p>
+<p>The scientists found evidence of cacao being used at the site from 5,300 to 2,100 years ago.</p>
+<div class="contentImage"><img alt="In this April 16, 2015 photo, cacao beans dry under sun at the Agropampatar chocolate farm Co-op in El Clavo, Venezuela." src="https://files.21voa.com/gdb/BA1ED09A-6FDE-4D18-9A82-CF4812DF6780_w268_r0.jpg"/><br/><span class="imagecaption">In this April 16, 2015 photo, cacao beans dry under sun at the Agropampatar chocolate farm Co-op in El Clavo, Venezuela.</span></div>
+<p>Cameron McNeil is a professor at Lehman College in New York. She is editor of the book "Chocolate in Mesoamerica." She told the Associated Press that Santa Ana-La Florida is "the earliest site now with domesticated cacao." McNeil was not involved in the new research.</p>
+<p>The University of British Columbia researchers found extremely small pieces from the cacao tree in the remains of containers and other objects, as well as genetic material from the tree. They also identified a substance found in the cacao tree but not in its wild relatives. This suggests that humans grew the tree for food purposes.</p>
+<p>A <strong>tropical</strong> tree known as Theobroma cacao produces large, round <strong>pods</strong> that contain the bean-like cacao seeds. A soft, light-colored substance covers each seed. Today, the seeds are cooked and turned into many chocolate products.</p>
+<p>But thousands of years ago, cacao was used to make drinks.</p>
+<p>Michael Blake is a professor of archaeology at the University of British Columbia who helped lead the study. He said that the objects on which cacao was found suggest a lot about how people used the substance at the time.</p>
+<p>"They clearly drank it," Blake told the Reuters news service.</p>
+<p>There is no established history of <strong>indigenous</strong> populations in South or Central America using cacao to make chocolate the way people do now, the researchers reported. Indigenous populations in the upper Amazon area today still use cacao to make special drinks, they added.</p>
+<p>Archeological evidence suggests cacao domestication moved into Central America and Mexico about 4,000 years ago. It is not clear how cacao's use spread between South and Central America.</p>
+<p>But by the time Spanish explorers arrived in Central America in the late 1400s, people were using it to make hot and cold chocolate drinks with <strong>spices</strong>.</p>
+<p>By the 1580s, Spain began importing cacao and spreading it to other European countries. By the 1800s, technology developed in the Netherlands made it possible to turn cacao into a solid chocolate product.</p>
+<p>Michael Laiskonis teaches chocolate-making classes at the Institute of Culinary Education in New York. He said he has observed a growing interest in natural cacao tastes. He said he <strong>introduces</strong> his students to the history of chocolate. He tells his students, for example, about a <strong>recipe</strong> from the 1600s that mixed Mayan and Aztec versions of cacao drinks with European influences.</p>
+<p>Laiskonis said chocolate is "something that's always been <strong>transforming</strong>." </p>
+<p>I'm ­Pete Musto.</p>
+<p><em>Pete Musto adapted this story for VOA Learning English using materials from the Associated Press and Reuters news service. Ashley Thompson was the editor. </em></p>
+<p><em>We want to hear from you. What other special foods do you think people have been using for much longer than we know? Write to us in the Comments Section or on 51VOA.COM.</em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>consume</strong>(<strong>d</strong>) – <em>v.</em> to eat or drink something</p>
+<p><strong>journal­ </strong>– <em>n.</em> a magazine that reports on things of special interest to a particular group of people</p>
+<p><strong>archeological</strong> – <em>adj.</em> related to the science that deals with past human life and activities by studying the bones and tools of ancient people</p>
+<p><strong>domesticate</strong>(<strong>d</strong>) – <em>v.</em> to grow a plant for human use</p>
+<p><strong>tropical</strong> – <em>adj.</em> of, relating to, occurring in, or used in the area between either one of the two imaginary lines that circle the Earth to the north and south of the equator</p>
+<p><strong>pod</strong>(<strong>s</strong>) – <em>n.</em> a long, thin part of some plants that has seeds inside</p>
+<p><strong>indigenous</strong> – <em>adj.</em> produced, living, or existing naturally in a particular region or environment</p>
+<p><strong>spice</strong>(<strong>s</strong>) – <em>n.</em> a substance, such as pepper or nutmeg, that is used in cooking to add flavor to food and that comes from a dried plant and is usually a powder or seed</p>
+<p><strong>introduce</strong>(<strong>s</strong>) – <em>v.</em> to cause someone to learn about or try something for the first time</p>
+<p><strong>recipe</strong> – <em>n.</em> a set of instructions for making food</p>
+<p><strong>transform</strong>(<strong>ing</strong>) – <em>v.</em> to change something completely and usually in a good way</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

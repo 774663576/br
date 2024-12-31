@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Misinformation, Disinformation</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Misinformation, Disinformation" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/misinformation-disinformation.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Misinformation, Disinformation</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/misinformation-disinformation.mp3" id="mp3"></a>
+<a href="tech-companies-want-to-build-artificial-general-intelligence-92526.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gena Bennett</span><br/>
+<span class="datetime">12 April 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from a reader in South Korea.</p>
+<p><strong>Question</strong></p>
+<p>Hello, dear my teacher.</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-bee9-08dc57c8e1cd_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>I'm Lim from South Korea.</p>
+<p>This year 2024, there are many news reports about elections all over the world. I see the word ‘fake news' in many articles, but I can't tell the difference between ‘disinformation' and ‘misinformation.' Could you explain exactly the difference showing different example expressions?</p>
+<p>I always thank you.</p>
+<p>Gyeonggyun Lim</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing, Lim. This is a very good question.</p>
+<p>Mis- and dis- are both common prefixes in English. Prefixes are letters we add to the beginning of a word. Each prefix has a meaning. Adding a prefix to a word makes a new word with a new meaning.</p>
+<p>Let's start with mis- and misinformation.</p>
+<p>Mis- means "bad" or "wrong." For example, add mis- to adventure and we get the new word misadventure. A misadventure is an unlucky event or a bad adventure or experience.</p>
+<p>So, misinformation means "wrong or bad information." Misinformation often comes from someone misunderstanding something.</p>
+<p>We often use misinformation with the phrase "a lot of."</p>
+<p>For example:</p>
+<p><em>There is <u>a lot of</u> <u>misinformation</u> on the internet.</em></p>
+<p>Next let's look at disinformation. Dis- means "not" or "none." For example, if we add dis- to agree, the new word disagree means to "not agree."</p>
+<p>It might seem like disinformation just means "not information." But its meaning is more complex than that. Disinformation means false information that is spread on purpose. A person, group, or government can spread disinformation. Their goal is to hide the truth or trick people.</p>
+<p>We often use disinformation with the word campaign. For example:</p>
+<p><em>I hope the <u>disinformation</u> <u>campaign</u> does not work.</em></p>
+<p>Someone who spreads disinformation knows that the information is untrue. But when misinformation spreads, it is generally not done to deceive, or trick, people.</p>
+<p>We often use both misinformation and disinformation with the word spread. Note that "spread" can be a verb or a noun.</p>
+<p>For example,</p>
+<p><em>The internet <u>spreads</u> a lot of <u>misinformation</u>.</em></p>
+<p><em>The government should stop the <u>spread</u> of <u>disinformation</u>.</em></p>
+<p>We hope this explanation has helped you, Lim.</p>
+<p>Do you have a question about American English? Send us an email at learningenglish@voanews.com.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Gena Bennett.</p>
+<p><em>Gena Bennett wrote this lesson for VOA Learning English.</em></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

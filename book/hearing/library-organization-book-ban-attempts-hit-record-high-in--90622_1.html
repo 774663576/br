@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国图书馆协会称2022年美国禁书尝试创下纪录</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 美国图书馆协会称2022年美国禁书尝试创下纪录" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/library-organization-book-ban-attempts-hit-record-high-in-2022.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国图书馆协会称2022年美国禁书尝试创下纪录</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/library-organization-book-ban-attempts-hit-record-high-in-2022.mp3" id="mp3"></a>
+<a href="/static/lrc/library-organization-book-ban-attempts-hit-record-high-in-2022.lrc" id="lrc"></a>
+<a href="library-organization-book-ban-attempts-hit-record-high-in--90622.html" id="CnPage" target="_blank"></a>
+<a href="holding-down-the-fort-is-a-big-job-90621.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The American Library Association (ALA) released a new report Thursday about book banning in the country. It found attempted book bans and information restrictions at school and public libraries continue to increase, setting a record in 2022.<br/>
+美国图书馆协会周四发布了一份关于美国图书禁令的新报告。它发现未遂的学校和公共图书馆图书禁令和信息限制继续增加，并在2022年创下纪录。</p>
+<p>The report says there were 1,200 known challenges in 2022. That is almost double the number from the year before, and it had also been record setting.<br/>
+该报告表示，2022年已知有1200项质疑。这几乎是前一年数字的两倍，并且还创下了纪录。</p>
+<p>The ALA began collecting the data 20 years ago.<br/>
+美国图书馆协会于20年前开始收集这种数据。</p>
+<p>"I've never seen anything like this," says Deborah Caldwell-Stone, who directs the ALA's Office for Intellectual Freedom. She said the last two years have been frightening, tiring, and angering.<br/>
+美国图书馆协会知识自由办公室负责人黛博拉·考德威尔·斯通表示：“我从未没见过这样的事情。”她表示，过去两年一直令人恐惧、疲倦和愤怒。</p>
+<p>The report also says the way restrictions are requested has changed. A few years ago, challenges were usually from parents and community members concerned about an individual book, the ALA says.<br/>
+该报告还表示，提出限制的方式已经改变。美国图书馆协会表示，几年前，质疑通常来自于关注某本图书的家长或社区成员。</p>
+<p>Now, the requests are often for several removals, and organized by national groups such as Moms for Liberty. Their goal is "unifying, educating and empowering parents to defend their parental rights at all levels of government."<br/>
+现在通常要求下架多本图书，并由诸如“自由母亲”之类的全国性机构进行组织。他们的目标是“联合、教育和赋能家长在各级政府捍卫自己作为父母的权利。”</p>
+<p>Last year, more than 2,500 different books were objected to, compared to 1,858 in 2021 and just 566 in 2019. In many cases, hundreds of books were challenged in a single request.<br/>
+去年，有2500多本不同的书籍受到反对，而2021年为1858本，2019年仅为566本。在很多案例中，数百本书籍在一次请求中受到质疑。</p>
+<p>The ALA bases its findings on media accounts and voluntary reporting from libraries. It says the numbers might be far higher.<br/>
+美国图书馆协会的结论是基于社交媒体账户和图书馆自愿呈报的报告。它说实际数字可能要高得多。</p>
+<p>Librarians around the country have told of being harassed and threatened with violence or legal action.<br/>
+全国各地图书馆都提到自己遭到暴力或法律诉讼的骚扰和威胁。</p>
+<p>Caldwell-Stone says that some books have been targeted because of racist language. But she says the majority of requests for removal are for works with LGBTIQA+ or racial themes.<br/>
+考德威尔·斯通表示，有些书因为种族主义言论被针对。但是她说，大多数下架请求都是针对LGBTIQA或种族主题的作品。</p>
+<p>Bills easing the restriction of books have been proposed or passed in Arizona, Iowa, Texas, Missouri, and Oklahoma, among other states.<br/>
+亚利桑那州、爱荷华州、德克萨斯州、密苏里州和俄克拉荷马州等州已经提出或通过了减轻书籍限制的法案。</p>
+<p>In Florida, Governor Ron DeSantis has approved laws to review reading materials and limit classroom discussion of gender identity and race. Books removed in Florida include John Green's Looking for Alaska, Colleen Hoover's Hopeless, and Margaret Atwood's The Handmaid's Tale.<br/>
+在佛罗里达州，州长罗恩·德桑蒂斯已经批准了法案，审查阅读材料并限制关于性别认同和种族的课堂讨论。佛罗里达州下架的书籍包括约翰·格林的《寻找阿拉斯加》，科琳·胡佛的《绝望》以及玛格丽特·阿特伍德的《女仆的故事》。</p>
+<p>DeSantis has called reports of mass bannings a "hoax." He said earlier this month that some people "are attempting to use our schools for indoctrination."<br/>
+德桑蒂斯称大规模禁令的报告是“愚弄大众”。他本月早些时候表示，有些人试图利用我们的学校进行“灌输”。</p>
+<p>Some books do come back. Officials at Florida's Duval County Public Schools were widely criticized after they removed Roberto Clemente: The Pride of the Pittsburgh Pirates. It is a children's book about of the late baseball star from Puerto Rico.<br/>
+有些书籍确实重新上架了。佛罗里达州杜瓦尔县公立学校官员在禁止了罗伯托·克莱门特的《匹兹堡海盗的骄傲》之后，受到了广泛的批评。这是一本关于波多黎各已故棒球明星的儿童读物。</p>
+<p>
+In February, they announced the book would again be available, explaining they had needed to examine it and make sure it did not violate any state laws.<br/>
+今年2月，他们宣布这本书再次上架，并解释说他们需要对该书进行检查，确保它不违反任何州法律。</p>
+<p>I'm Gregory Stachel.<br/>
+我是格雷戈里·斯塔切尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Library Organization: Book Ban Attempts Hit Record High in 2022]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The American Library Association (ALA)
+[00:06.16]released a new report Thursday
+[00:09.16]about book banning in the country.
+[00:13.08]It found attempted book bans
+[00:15.68]and information restrictions
+[00:18.44]at school and public libraries
+[00:22.12]continue to increase,
+[00:24.56]setting a record in 2022.
+[00:29.44]The report says there were  1,200
+[00:34.04]known challenges in 2022.
+[00:38.72]That is almost double the number
+[00:41.36]from the year before,
+[00:43.12]and it had also been record setting.
+[00:47.56]The ALA began collecting the data
+[00:50.76]20 years ago.
+[00:53.36]"I've never seen anything like this,"
+[00:56.08]says Deborah Caldwell-Stone,
+[00:58.80]who directs the ALA's Office
+[01:01.88]for Intellectual Freedom.
+[01:05.52]She said the last two years
+[01:08.00]have been frightening,
+[01:09.76]tiring, and angering.
+[01:13.60]The report also says
+[01:15.52]the way restrictions are requested has changed.
+[01:20.44]A few years ago,
+[01:22.08]challenges were usually from parents
+[01:25.00]and community members
+[01:27.20]concerned about an individual book,
+[01:30.32]the ALA says.
+[01:33.20]Now, the requests are often
+[01:35.64]for several removals,
+[01:37.76]and organized by national groups
+[01:41.24]such as Moms for Liberty.
+[01:44.84]Their goal is "unifying,
+[01:47.16]educating and empowering parents
+[01:50.16]to defend their parental rights
+[01:52.52]at all levels of government."
+[01:55.88]Last year, more than 2,500 different books
+[02:00.20]were objected to,
+[02:02.12]compared to 1,858 in 2021
+[02:07.88]and just 566 in 2019.
+[02:13.48]In many cases,
+[02:15.32]hundreds of books were challenged
+[02:17.56]in a single request.
+[02:20.28]The ALA bases its findings on media accounts
+[02:24.60]and voluntary reporting from libraries.
+[02:29.36]It says the numbers might be far higher.
+[02:32.60]Librarians around the country
+[02:35.68]have told of being harassed
+[02:38.00]and threatened with violence or legal action.
+[02:42.96]Caldwell-Stone says that some books
+[02:45.64]have been targeted because of racist language.
+[02:48.92]But she says the majority of requests for removal
+[02:52.84]are for works with LGBTIQA+
+[02:57.60]or racial themes.
+[03:00.64]Bills easing the restriction of books
+[03:03.24]have been proposed or passed in Arizona,
+[03:06.48]Iowa, Texas, Missouri, and Oklahoma,
+[03:11.36]among other states.
+[03:14.20]In Florida, Governor Ron DeSantis
+[03:17.36]has approved laws to review reading materials
+[03:20.60]and limit classroom discussion
+[03:22.76]of gender identity and race.
+[03:26.44]Books removed in Florida
+[03:28.52]include John Green's Looking for Alaska,
+[03:31.68]Colleen Hoover's Hopeless,
+[03:34.20]and Margaret Atwood's The Handmaid's Tale.
+[03:38.80]DeSantis has called reports
+[03:40.72]of mass bannings a "hoax."
+[03:43.20]He said earlier this month
+[03:45.16]that some people
+[03:46.28]"are attempting to use our schools for indoctrination."
+[03:51.56]Some books do come back.
+[03:54.00]Officials at Florida's Duval County Public Schools
+[03:58.80]were widely criticized after they removed
+[04:01.88]Roberto Clemente:
+[04:03.96]The Pride of the Pittsburgh Pirates.
+[04:07.68]It is a children's book about
+[04:09.68]of the late baseball star from Puerto Rico.
+[04:13.68]In February,
+[04:15.12]they announced the book
+[04:16.40]would again be available,
+[04:18.40]explaining they had needed to examine it
+[04:21.04]and make sure it did not violate any state laws.
+[04:25.32]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 报告称目前亚洲亿万富豪在数量上首次超过美国</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 报告称目前亚洲亿万富豪在数量上首次超过美国" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201711/report-finds-asia-now-has-more-billionaires-than-us.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>报告称目前亚洲亿万富豪在数量上首次超过美国</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201711/report-finds-asia-now-has-more-billionaires-than-us.mp3" id="mp3"></a>
+<a href="/static/lrc/report-finds-asia-now-has-more-billionaires-than-us.lrc" id="lrc"></a>
+<a href="report-finds-asia-now-has-more-billionaires-than-us-77108.html" id="CnPage" target="_blank"></a>
+<a href="south-korean-president-does-not-seek-nuclear-weapons-77101.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">A new report finds that for the first time, Asian billionaires outnumber those in the United States.<br/>一份新报告发现，亚洲亿万富豪在数量上首次超过了美国。
+<p>The number of Asian billionaires rose by nearly one quarter in 2016 to 637, according to the report published by UBS Group AG and PricewaterhouseCoopers.<br/>根据瑞银集团和普华永道发布的报告，亚洲亿万富豪人数在2016年增长了近1/4，达到了637人。</p>
+<p>UBS is a financial advisory company that serves wealthy people around the world. PricewaterhouseCoopers is an international company providing accounting and tax services.<br/>瑞银是一家为全球富豪服务的金融咨询公司，而普华永道是一家提供会计和税务服务的国际公司。</p>
+<p>The report counted 563 billionaires in America and 342 in Europe. It found that while the U.S. no longer has the most billionaires, it still has the most overall billionaire wealth. This is because more of the world's wealthiest individuals live in the United States.<br/>该报告统计出美国有563位亿万富豪，而欧洲有342位。报告发现，虽然美国的亿万富豪数量不再居首，但是它仍然亿万富翁总财富最多的国家。这是因为更多全球最富有人士生活在美国。</p>
+<p>The increase in Asia was due to a sharp rise in self-made billionaires. About 75 percent of new billionaires came from Asia's two biggest economies, China and India. China by far had the highest number of new billionaires, 67, while India added 16.<br/>亚洲的增长是由于本地亿万富豪急剧增长。大约75%的新增亿万富豪来自亚洲两个最大的经济体：中国和印度。截至目前，中国新增亿万富豪数量最多，达到了67位，而印度增加了16位。</p>
+<p>The combined wealth of Asian billionaires grew by almost a third in 2016 to $2 trillion, from $1.5 trillion in 2015.<br/>2016年亚洲亿万富豪的总财富增长了近1/3，从2015年的1.5万亿美元增长到了2万亿美元。</p>
+<p>The total wealth of U.S. billionaires rose to $2.8 trillion in 2016, compared to $2.4 trillion the previous year. Most of the increase in wealth came from technological innovation, followed by financial services and materials, according to the report.<br/>美国亿万富豪的总财富2016年增长到了2.8万亿美元，而去年则为2.4万亿美元。报告指出，大部分财富增长来自于技术创新行业，其次是金融服务和材料行业。</p>
+<p>If the current trend continues, the total wealth of Asian billionaires is expected to be higher than all U.S. billionaires in about four years.<br/>如果目前的趋势继续下去，亚洲亿万富豪的总财富有望在四年左右超过所有美国亿万富豪。</p>
+<p>Worldwide, the report said total billionaire wealth rose 17 percent in 2016 to $6 trillion. This was largely fueled by the increase in Asian billionaires. It also came from strong economic growth in materials, industrial production, financial services and technology.<br/>报告指出，2016年全球范围内亿万富豪的总财富增长了17%，达到6万亿美元。这大部分受益于亚洲亿万富豪的增长，同时也得益于材料、工业生产、金融服务和科技行业的强劲经济增长。</p>
+<p>In Europe, billionaire wealth remained largely unchanged from 2015 to 2016. Overall wealth grew just 5 percent to $1.3 trillion. Europe added 24 new billionaires in 2016, while 21 dropped off the list, a third of them due to death.<br/>在欧洲，亿万富豪的财富从2015年到2016年基本维持不变。他们的总财富只增长了5%，达到1.3万亿美元。欧洲在2016年增加了24位新的亿万富豪，另有21位掉出榜单，其中1/3是因为去世。</p>
+<p>The report estimated that the 1,542 billionaires studied either owned or partly owned companies that employ at least 27.7 million people worldwide.<br/>该报告估计，这项调查涉及的1542位亿万富豪拥有或部分拥有的公司在全球范围内雇佣了至少2770万人。</p>
+<p>Billionaires in various countries are increasingly putting more of their money into philanthropy, art and sports. Many invested in major sports clubs, including soccer, baseball and basketball. "According to our analysis, more than 140 of the top sports clubs globally are owned by just 109 billionaires," the report said.<br/>各国亿万富豪越来越多地将钱投入到慈善、艺术和体育事业。许多人投资了足球、棒球和篮球等大型体育俱乐部。报告称，“根据我们的分析，全球顶级运动俱乐部中有超过140家是由109位亿万富豪拥有的。”</p>
+<p>Overall, the average billionaire's age is 63. In America it is 67 years old, while the average in Asia is 59. Chinese billionaires averaged 55 years old. Among all billionaires, the report found those involved in technology were the youngest. On average, they became billionaires at age 47. <br/>总的来说，这些亿万富豪的平均年龄是63岁。在美国是67岁，而在亚洲，平均年龄为59岁。中国亿万富豪平均年龄为55岁。该报告发现，在所有这些亿万富豪中，科技行业的亿万富豪最为年轻。平均而言，他们在47岁成为亿万富豪。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Report: Asia Now Has More Billionaires than US]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]A new report finds that for the first time,
+[00:03.81]Asian billionaires outnumber those in the United States.
+[00:10.50]The number of Asian billionaires rose by nearly one quarter in 2016 to 637,
+[00:21.78]according to the report published
+[00:24.79]by UBS Group AG and PricewaterhouseCoopers.
+[00:30.79]UBS is a financial advisory company
+[00:35.57]that serves wealthy people around the world.
+[00:39.86]PricewaterhouseCoopers is an international company
+[00:44.77]providing accounting and tax services.
+[00:48.95]The report counted 563 billionaires in America and 342 in Europe.
+[00:59.53]It found that while the U.S. no longer has the most billionaires,
+[01:05.82]it still has the most overall billionaire wealth.
+[01:10.94]This is because more of the world's wealthiest individuals live in the United States.
+[01:19.22]The increase in Asia was due to a sharp rise in self-made billionaires.
+[01:28.16]About 75 percent of new billionaires came
+[01:32.89]from Asia's two biggest economies, China and India.
+[01:38.89]China by far had the highest number of new billionaires, 67, while India added 16.
+[01:49.87]The combined wealth of Asian billionaires grew
+[01:54.80]by almost a third in 2016 to $2 trillion, from $1.5 trillion in 2015.
+[02:05.20]The total wealth of U.S. billionaires rose to $2.8 trillion in 2016,
+[02:14.00]compared to $2.4 trillion the previous year.
+[02:19.72]Most of the increase in wealth came from technological innovation,
+[02:25.73]followed by financial services and materials, according to the report.
+[02:32.76]If the current trend continues, the total wealth of Asian billionaires
+[02:39.97]is expected to be higher than all U.S. billionaires in about four years.
+[02:46.68]Worldwide, the report said total billionaire wealth rose 17 percent in 2016 to $6 trillion.
+[02:58.88]This was largely fueled by the increase in Asian billionaires.
+[03:05.26]It also came from strong economic growth in materials,
+[03:10.43]industrial production, financial services and technology.
+[03:16.59]In Europe, billionaire wealth remained largely unchanged from 2015 to 2016.
+[03:25.29]Overall wealth grew just 5 percent to $1.3 trillion.
+[03:32.06]Europe added 24 new billionaires in 2016,
+[03:37.80]while 21 dropped off the list, a third of them due to death.
+[03:43.63]The report estimated that the 1,542 billionaires studied either owned
+[03:52.46]or partly owned companies that employ at least 27.7 million people worldwide.
+[04:01.73]Billionaires in various countries are increasingly
+[04:06.07]putting more of their money into philanthropy, art and sports.
+[04:11.61]Many invested in major sports clubs, including soccer, baseball and basketball.
+[04:19.89]"According to our analysis, more than 140 of the top sports clubs globally
+[04:27.91]are owned by just 109 billionaires," the report said.
+[04:34.18]Overall, the average billionaire's age is 63.
+[04:40.05]In America it is 67 years old, while the average in Asia is 59.
+[04:47.58]Chinese billionaires averaged 55 years old.
+[04:52.41]Among all billionaires, the report found
+[04:56.35]those involved in technology were the youngest.
+[05:00.25]On average, they became billionaires at age 47.
+[05:06.67]I'm Bryan Lynn.
+[05:08.87]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

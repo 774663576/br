@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 全球最长铁路开通</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 全球最长铁路开通" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201501/se-econ-longest-rail-22jan15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>全球最长铁路开通</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201501/se-econ-longest-rail-22jan15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-longest-rail-22jan15.lrc" id="lrc"></a>
+<a href="longest-rail-route-part-of-silk-road-revival-61160.html" id="CnPage" target="_blank"></a>
+<a href="japan-demands-islamic-state-release-hostages-61079.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>The longest railway in the world is now open. In December, a train carrying products from China arrived in Spain's capital, Madrid. The railway is one of the most recent transportation projects that China has financed in Europe. China is paying to improve roads, bridges and railroads to increase trade between East Asia and Europe. The European Union is China's biggest trading partner, and Europe is welcoming the money China is spending to improve infrastructure.<br/>全球最长的铁路现在开通了。去年12月份，一辆满载中国产品的列车抵达西班牙首都马德里。这条铁路是中国在欧洲投资建设的最新交通项目之一。中国正在出资改善道路、桥梁和铁路，以增加东亚和欧洲之间的贸易。欧盟是中国最大的贸易伙伴，而且欧洲欢迎中国投资改善基础设施。</p>
+<p>The train carried 40 containers and travelled 13,000 kilometers. It began in Yiwu, a Chinese city in the coastal province of Zhejiang, in November. It arrived in Madrid three weeks later. A ship would take about six weeks to make the same trip.<br/>这列列车载着40个集装箱行驶了1.3万公里。它于11月从中国沿海省份浙江的义乌市出发，并于三周之后抵达马德里。一艘轮船走完同样的行程需要大概6个星期。</p>
+<p>The train is to return to China with Spanish wine and food before the beginning of the Chinese New Year in February.<br/>这列列车将于2月份的中国农历新年来临之前满载西班牙葡萄酒和美食回到中国。</p>
+<p>Jonathan Fenby wrote the book "Will China Dominate the 21st Century?" He says China has just begun its efforts to improve trade routes. <br/>乔纳森·芬比（Jonathan Fenby）撰写了《中国会主宰21世纪吗?》一书。他说中国才刚刚开始努力改善贸易路线。</p>
+<p>"These things are, are developing and they are going to go on developing, I think. There is a rail link now from Chongqing in southwest China through Russia, which ends in Duisberg in Germany," Fenby said.<br/>芬比说，“他们正在发展这些并且也会继续发展。现在有列车从中国西南的重庆市穿过俄罗斯并抵达德国的杜伊斯堡。”</p>
+<p>Trains now travel between Germany and China five times a week.<br/>现在德国和中国之间每周发出五趟列车。</p>
+<p>China is investing a lot of money to improve bridges and roads in Europe. It recently paid $167 million to build a bridge over the Danube river in Serbia. Chinese Premier Li Keqiang went to the opening ceremony. Serbian Prime Minister Aleksandar Vucic said the bridge is the first of many investments China will make in his country. <br/>中国正投入大量资金来改善欧洲的桥梁和道路。该国最近斥资1.67亿美元在塞尔维亚的多瑙河上架设一座桥梁。中国总理李克强来到了开幕式。塞尔维亚总理亚历山大·武契奇（Aleksandar Vucic）表示，这座桥梁是中国在塞尔维亚众多投资中的第一项。</p>
+<p>He says the bridge is a sign of friendship between China and Serbia. He adds that there will be more such projects with China, including, in his words, new bridges and new paths to the future.<br/>他说，这座桥梁是中国和塞尔维亚友谊的象征。他补充道，该国同中国还会有更多这类项目，包括他所说的通往未来的新的桥梁和道路。</p>
+<p>Chinese Foreign Minister Wang Yi says the money his country is spending shows China is taking a new approach to relations with other countries.<br/>中国外交部长王毅说，中国正在投资的这些资金表明中国正以一种全新的途径发展同其它国家的关系。</p>
+<p>He says by the end of 2014 China had created 70 relationships with countries and areas around the world. He says China is building partnerships, rather than alliances.<br/>他说，截至2014年年底，中国同世界各国和地区已经结成了70对（战略合作伙伴）关系。他说，中国正在建立伙伴关系而不是联盟。</p>
+<p>China has promised to spend $40 billion to improve infrastructure. The investments make China's presence known around the world. <br/>中国已经承诺斥资400亿美元改善基础设施。这些投资使得中国的存在为世人所知。</p>
+<p>Observers say European countries have lessened their criticisms of China's poor record for human rights and political reform as China has improved Europe's infrastructure.<br/>观察人士表示，随着中国改善了欧洲的基础设施，欧洲国家已经减少了对中国人权和政改不良记录的批评。</p>
+<p>And that's the Economics Report From VOA Learning English. I'm Christopher Cruise.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是克里斯托弗·克鲁斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:World's Longest Rail Route Part of China's 'Silk Road' Revival]
+[ar:Christopher Cruise]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.48]The longest railway in the world is now open. 
+[00:09.91]In December, a train carrying products 
+[00:18.59]from China arrived in Spain's capital, Madrid. 
+[00:22.52]The railway is one of the most recent transportation projects 
+[00:27.15]that China has financed in Europe. 
+[00:30.23]China is paying to improve roads, bridges and railroads 
+[00:36.06]to increase trade between East Asia and Europe. 
+[00:40.04]The European Union is China's biggest trading partner, 
+[00:44.86]and Europe is welcoming the money 
+[00:47.66]China is spending to improve infrastructure.
+[00:51.12]The train carried 40 containers and travelled 13,000 kilometers. 
+[00:58.08]It began in Yiwu, 
+[01:00.68]a Chinese city in the coastal province of Zhejiang, in November. 
+[01:06.26]It arrived in Madrid three weeks later. 
+[01:09.61]A ship would take about six weeks to make the same trip.
+[01:14.45]The train is to return to China with Spanish wine 
+[01:19.09]and food before the beginning of the Chinese New Year in February.
+[01:24.23]Jonathan Fenby wrote the book "Will China Dominate the 21st Century?" 
+[01:30.37]He says China has just begun its efforts to improve trade routes.
+[01:36.43]"These things are, 
+[01:38.34]are developing and they are going to go on developing, I think. 
+[01:40.73]There is a rail link now from Chongqing in southwest China through Russia, 
+[01:45.76]which ends in Duisberg in Germany," Fenby said.
+[01:48.84]Trains now travel between Germany and China five times a week.
+[01:54.59]China is investing a lot of money 
+[02:01.61]to improve bridges and roads in Europe. 
+[02:05.20]It recently paid $167 million 
+[02:09.78]to build a bridge over the Danube river in Serbia. 
+[02:13.98]Chinese Premier Li Keqiang went to the opening ceremony. 
+[02:19.05]Serbian Prime Minister Aleksandar Vucic 
+[02:22.99]said the bridge is the first of many investments 
+[02:26.69]China will make in his country.
+[02:28.77]He says the bridge is a sign of friendship between China and Serbia. 
+[02:40.28]He adds that there will be more such projects with China, 
+[02:44.61]including, in his words, new bridges and new paths to the future.
+[02:51.09]Chinese Foreign Minister Wang Yi says the money 
+[02:55.13]his country is spending shows China 
+[02:57.97]is taking a new approach to relations with other countries.
+[03:02.55]He says by the end of 2014 China had created 70 relationships 
+[03:14.59]with countries and areas around the world. 
+[03:17.68]He says China is building partnerships, rather than alliances.
+[03:23.25]China has promised to spend $40 billion to improve infrastructure. 
+[03:30.37]The investments make China's presence known around the world.
+[03:35.45]Observers say European countries have lessened their criticisms 
+[03:40.89]of China's poor record for human rights 
+[03:44.07]and political reform as China has improved Europe's infrastructure.
+[03:49.70]And that's the Economics Report From VOA Learning English. 
+[03:55.23]I'm Christopher Cruise.
+[03:57.57]更多听力请访问51voa.com
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

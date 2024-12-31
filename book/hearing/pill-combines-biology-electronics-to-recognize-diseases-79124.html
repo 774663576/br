@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Pill Combines Biology, Electronics to Recognize Diseases</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Pill Combines Biology, Electronics to Recognize Diseases" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201806/pill-combines-biology-electronics-to-recognize-diseases.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Pill Combines Biology, Electronics to Recognize Diseases</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201806/pill-combines-biology-electronics-to-recognize-diseases.mp3" id="mp3"></a>
+<a href="kate-chopin-athenaise-79123.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Susan Shand</span><br/><span class="datetime">01 June, 2018</span><br/>
+<p>Researchers say a <strong>pill</strong> could soon send radio signals from inside your <strong>stomach </strong>to help doctors recognize signs of disease.</p>
+<p>Scientists have developed a small pill for patients to swallow. It mixes <strong>synthetic </strong>biology and electronics to find bleeding in the stomach and other parts of the <strong>digestive</strong> <strong>tract</strong>.</p>
+<p>The system can be changed for many medical, environmental and other uses, the researchers said.</p>
+<div class="contentImage"><img alt="MIT engineers have designed an ingestible sensor with bacteria programmed to sense environmental conditions and relay the information to an electronic circuit. (Photo courtesy of Lillie Paquette, MIT)" src="https://files.21voa.com/gdb/A485B387-1388-49C7-98DB-E2787E6A3064_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">MIT engineers have designed an ingestible sensor with bacteria programmed to sense environmental conditions and relay the information to an electronic circuit. (Photo courtesy of Lillie Paquette, MIT)</span></div>
+<p>The biological part of the pill uses bacteria engineered to light up when it comes in contact with heme, the iron-containing molecule in blood.</p>
+<p>The electronic side includes a small light <strong>detector</strong>, computer and computer chip. It also has a battery to provide power and a <strong>transmitter </strong>that sends information to a cellphone or computer.</p>
+<p>"A major <strong>challenge</strong> for sensing in the GI (gastrointestinal) tract is, the space available for a device is very limited," said electrical engineer Phillip Nadeau. He is with the Massachusetts Institute of Technology in Boston, Massachusetts.</p>
+<p>Using very low-power electronics, Nadeau and other engineers put all the parts in a pill. It measures about 3 centimeters long by 1 centimeter wide.</p>
+<p>The pill is still a little too big to swallow, but Nadeau says it likely can be engineered to a third that size.</p>
+<p>The engineered bacteria are in areas covered by a <strong>membrane. </strong>This thin, soft material lets small molecules in, but does not let the organisms out.</p>
+<p>The researchers say the bacteria can be engineered to die if they accidentally leak from the pill. Future models may just use the most important enzymes instead of whole bacteria.</p>
+<p>In laboratory tests, the pill successfully identified pigs fed small amounts of blood from those not given blood. The pill has not been tested on human beings, but the team hopes to do so in the next year or two.</p>
+<p>Since the parts cost little to manufacture, researchers believe that, once ready, the final product would sell for tens to hundreds of dollars. And they say the same method could be used to identify markers for disease or to find chemicals in the environment.</p>
+<p>"It's really exciting, and I think it's got a lot of legs," said Rice University bioengineer Jeff Tabor. He was not part of the research team.</p>
+<p>But Tabor notes that the sensors may need to be much more sensitive than what was used in the pig tests. He says there may be much less blood in the stomachs of real human patients than what the pigs were given. Other conditions may have the same limitations.</p>
+<p>"For many actual diseases, you might have far less of the molecule you need to sense available to you," he added.</p>
+<p>A report on the study was published in the journal <em>Science</em>.</p>
+<p>I'm Susan Shand.</p>
+<p><em>This story was reported by VOA's Steve Baragona. It was adapted by Susan Shand and edited by George Grow.</em></p>
+<p><em>_______________________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>pill</strong> – <em>n.</em> a small, rounded object that you swallow and that contains medicine</p>
+<p><strong>stomach </strong>– <em>n.</em> the organ in your body where food goes and begins to break down after you swallow it</p>
+<p><strong>synthetic</strong> – <em>adj.</em> made by combining different substances; man-made, not natural</p>
+<p><strong>digestive tract</strong> – <em>n.</em> a series of organs in the body, including the stomach and the intestines</p>
+<p><strong>detector </strong><em>– n.</em> a device for identifying or measuring the presence of something</p>
+<p><strong>challenge</strong> <em>– n.</em> a problem; an invitation to compete</p>
+<p><strong>transmitter</strong> <em>– n.</em> a device that sends out signals</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

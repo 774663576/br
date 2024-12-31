@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New English Assessment as Part of PISA Study</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, New English Assessment as Part of PISA Study" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/new-english-assessment-as-part-of-pisa-study.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New English Assessment as Part of PISA Study</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/new-english-assessment-as-part-of-pisa-study.mp3" id="mp3"></a>
+<a href="/static/lrc/new-english-assessment-as-part-of-pisa-study.lrc" id="lrc"></a>
+<a href="abortion-decision-leads-more-women-to-register-to-vote-89943.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">08 November 2022</span><br/>
+<p>Cambridge University Press and Assessment is partnering with the Organization for Economic Cooperation and Development (OECD) on a new English language <strong>assessment</strong>. The goal of the new assessment is to improve understanding of how English is taught and learned as a foreign language.</p>
+<p>The assessment will be a part of the OECD's Program for International Student Assessment, called PISA. PISA is a worldwide study every three years that measures student performance in math, science and reading in the native language. About 80 countries take part in the study.</p>
+<p>PISA will be adding a foreign language assessment in 2025 as part of the study. So far, English is the only foreign language that will be used in the assessment.</p><div class="contentImage"><img alt="FILE - Students practice printing and cursive handwriting at the Mountaineer Montessori School in Charleston, WV., Sept. 2009. (AP Photo/Bob Bird)" src="https://files.21voa.com/gdb/c4930000-0aff-0242-add0-08d9f7e9c573_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Students practice printing and cursive handwriting at the Mountaineer Montessori School in Charleston, WV., Sept. 2009. (AP Photo/Bob Bird)</span></div>
+<p>"It's a fact that English is the language of communication of study, of work, spoken by billions of people," Hanan Khalifa told VOA. Khalifa is a language learning and teaching expert with Cambridge, and one of the leading experts on the PISA foreign language assessment. "So it wasn't surprising to use English as a foreign language to start with," she said.</p>
+<p>Khalifa calls the new test "<strong>groundbreaking</strong>."</p>
+<p>She said large studies of English language teaching and learning have been limited. There was a study in the 1970s by the University of Gothenburg in Sweden looking at English as a foreign language. And Cambridge was involved in a 2000s study among some European Union countries that assessed teaching and learning foreign languages. Cambridge has tested English teaching and learning in individual countries, but never on a worldwide level.</p>
+<p>The PISA assessment <strong>administered</strong> "all over the world with <strong>participating</strong> countries gives us really, really rich data," Khalifa said. Until now there has not been a "<strong>reliable</strong> ... data source about the levels of the abilities of people who would speak English."</p>
+<p>She said the data will help countries make decisions about how to use resources. Without good data it can be hard to know whether countries should center their efforts on developing study programs, training teachers, or introducing students to the language earlier, she said.</p>
+<p>The PISA study is only given out to 15-year-old students who attend the school system. The test will center on assessing real-world, everyday English communication.</p>
+<p>Khalifa said the test "is not about whether your grammar is accurate and whether your vocabulary is spot on." She added: "It's about whether your message has actually been communicated to the other side or not."</p>
+<p>The test will be entirely online and through a computer. Students will be assessed based on their English language ability. Students will speak into microphones for the spoken parts of the test.</p>
+<p>OECD <strong>piloted</strong> the assessment in five countries in 2021, and Khalifa said it was a success.</p>
+<p>Catalina Covacevich is with OECD and was involved with the pilot program.</p>
+<p>She said in a statement that "we were concerned that students with low levels of speaking skills may have found the pilot stressful, but one school enjoyed it so much, they <strong>clapped</strong> after the speaking assessment."</p>
+<p>Khalifa said the test is not meant to trick students or be overly difficult.</p>
+<p>"We try to <strong>minimize</strong> the <strong>anxiety</strong> as much as possible," she said.</p>
+<p>But the countries involved take the results seriously. Khalifa said that countries that have been helped by PISA have changed their education policies. Some countries have decided to hire more teachers or introduce foreign languages at a younger age, she said.</p>
+<p>"And that is one of the key reasons why we partnered with OECD," Khalifa said. "It is about that <strong>influence </strong>[of PISA]."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p><em>_________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>assessment </strong><em>— n. </em>the act of making a judgment about something</p>
+<p><strong>groundbreaking </strong><em>— adj. </em>introducing new ideas or methods</p>
+<p><strong>administer </strong><em>— v. </em>to manage the operation of</p>
+<p><strong>participate </strong><em>— v. </em>to be involved with others in doing something</p>
+<p><strong>reliable </strong><em>— adj. </em>able to be trusted to do or provide what is needed</p>
+<p><strong>pilot </strong><em>— adj. </em>done as a test to see if a larger program, study, etc., should be done</p>
+<p><strong>clap </strong><em>— v. </em>to hit the palms of your hands together usually more than once</p>
+<p><strong>minimize </strong><em>— v. </em>to make something bad or not wanted as small as possible</p>
+<p><strong>anxiety </strong><em>— n. </em>fear or nervousness about what might happen</p>
+<p><strong>influence </strong><em>— n. </em> the power to change or affect someone or something</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New English Assessment as Part of PISA Study]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Cambridge University Press and Assessment
+[00:03.40]is partnering with the Organization
+[00:05.72]for Economic Cooperation and Development (OECD)
+[00:09.04]on a new English language assessment.
+[00:14.56]The goal of the new assessment is to improve understanding
+[00:18.48]of how English is taught and learned as a foreign language.
+[00:24.08]The assessment will be a part of the OECD's Program
+[00:27.52]for International Student Assessment, called PISA.
+[00:31.12]PISA is a worldwide study every three years
+[00:35.24]that measures student performance in math,
+[00:37.92]science and reading in the native language.
+[00:41.20]About 80 countries take part in the study.
+[00:45.96]PISA will be adding a foreign language assessment
+[00:48.76]in 2025 as part of the study.
+[00:52.08]So far, English is the only foreign language
+[00:55.72]that will be used in the assessment.
+[00:59.16]"It's a fact that English is the language of communication of study,
+[01:03.36]of work, spoken by billions of people," Hanan Khalifa told VOA.
+[01:09.52]Khalifa is a language learning and teaching expert with Cambridge,
+[01:14.76]and one of the leading experts on the PISA foreign language assessment.
+[01:20.16]"So it wasn't surprising to use English
+[01:23.04]as a foreign language to start with," she said.
+[01:27.24]Khalifa calls the new test "groundbreaking."
+[01:30.32]She said large studies of English language teaching
+[01:34.48]and learning have been limited.
+[01:36.72]There was a study in the 1970s
+[01:39.16]by the University of Gothenburg in Sweden
+[01:41.92]looking at English as a foreign language.
+[01:45.00]And Cambridge was involved in a 2000s study
+[01:48.52]among some European Union countries
+[01:51.12]that assessed teaching and learning foreign languages.
+[01:55.40]Cambridge has tested English teaching
+[01:57.84]and learning in individual countries,
+[02:00.52]but never on a worldwide level.
+[02:04.76]The PISA assessment administered
+[02:06.84]"all over the world with participating countries
+[02:09.76]gives us really, really rich data," Khalifa said.
+[02:14.24]Until now there has not been a "reliable ... data source
+[02:17.72]about the levels of the abilities of people
+[02:20.48]who would speak English."
+[02:23.20]She said the data will help countries
+[02:25.60]make decisions about how to use resources.
+[02:29.04]Without good data it can be hard to know
+[02:31.68]whether countries should center their efforts
+[02:34.24]on developing study programs, training teachers,
+[02:38.48]or introducing students to the language earlier, she said.
+[02:43.88]The PISA study is only given out to 15-year-old students
+[02:47.84]who attend the school system.
+[02:49.92]The test will center on assessing real-world,
+[02:53.44]everyday English communication.
+[02:56.96]Khalifa said the test "is not about whether your grammar is accurate
+[03:01.32]and whether your vocabulary is spot on."
+[03:04.72]She added: "It's about whether your message
+[03:07.56]has actually been communicated to the other side or not."
+[03:12.40]The test will be entirely online and through a computer.
+[03:16.60]Students will be assessed based on their English language ability.
+[03:20.92]Students will speak into microphones for the spoken parts of the test.
+[03:27.16]OECD piloted the assessment in five countries in 2021,
+[03:32.04]and Khalifa said it was a success.
+[03:36.48]Catalina Covacevich is with OECD
+[03:40.04]and was involved with the pilot program.
+[03:43.84]She said in a statement that "we were concerned
+[03:46.88]that students with low levels of speaking skills
+[03:49.88]may have found the pilot stressful, but one school enjoyed it so much,
+[03:54.96]they clapped after the speaking assessment."
+[03:58.32]Khalifa said the test is not meant to trick students or be overly difficult.
+[04:04.40]"We try to minimize the anxiety as much as possible," she said.
+[04:09.72]But the countries involved take the results seriously.
+[04:13.36]Khalifa said that countries that have been helped by PISA
+[04:17.48]have changed their education policies.
+[04:20.28]Some countries have decided to hire more teachers
+[04:23.48]or introduce foreign languages at a younger age, she said.
+[04:28.28]"And that is one of the key reasons why we partnered
+[04:31.28]with OECD," Khalifa said.
+[04:33.92]"It is about that influence of PISA."
+[04:36.88]I'm Dan Novak. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

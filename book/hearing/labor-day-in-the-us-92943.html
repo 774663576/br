@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Labor Day in the US</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Labor Day in the US" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/labor-day-in-the-us.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Labor Day in the US</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/labor-day-in-the-us.mp3" id="mp3"></a>
+<a href="nigerian-herders-bring-cows-to-city-in-search-of-grass-92942.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By VOA</span><br/><span class="datetime">01 September, 2024</span><br/>
+<p>Labor Day is a national holiday to celebrate workers in the United States. The holiday, on the first Monday of September, is on September 2 this year.</p>
+<p>For Americans, the holiday also informally marks the end of summer. The hot days of summer turn to cooler days ahead. Students are returning to school. Many celebrate the holiday with an outdoor <a class="wsw__a" href="https://www.21voa.com/a/tasty-travels-barbecue-american-food-tradition/3949118.html">barbecue</a> or one more weekend at the beach.</p>
+<p><strong>Origin of Labor Day</strong></p><div class="contentImage"><img alt="FILE - Iron worker Robert Farula marches up Fifth Ave. carrying an American flag during the Labor Day parade on Sept. 8, 2012, in New York. (AP Photo/Mary Altaffer, File)" src="https://files.21voa.com/gdb/01000000-0aff-0242-ce39-08dcc6bf668f_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Iron worker Robert Farula marches up Fifth Ave. carrying an American flag during the Labor Day parade on Sept. 8, 2012, in New York. (AP Photo/Mary Altaffer, File)</span></div>
+<p>But Labor Day started with a struggle.</p>
+<p>On May 1, 1889, workers demonstrated on the streets of Paris, France. The demonstration led to International Labor Day. Most countries in the world, except the United States and Canada, celebrate Labor Day on the first of May.</p>
+<p>The first American Labor Day celebration was held on September 5, 1882, in New York City. About 10,000 workers marched through the streets to show the strength of labor organizations.</p>
+<p>For many years after that, American workers used the first Monday in September to demand better working conditions and pay. Several U.S. cities and states began to recognize the day as Labor Day. In 1894, President Grover Cleveland signed a bill into law making it a national holiday.</p>
+<p>Music was a part of many Labor Day marches.</p>
+<p>One American labor song is called <em>Bread and Roses</em>. It is based on a 1911 poem by James Oppenheim. The poem speaks about the women's labor movement. At that time, conditions in factories, where many women worked, were horrible. A fire at a clothing factory in New York killed 146 people. Most of the victims were immigrant women.</p>
+<p><strong>Labor Day activities</strong></p>
+<p>For the three-day Labor Day weekend, many Americans head to airports and highways for end-of-summer escapes. They visit beaches, mountains or lakes. Some prepare outdoor cookouts for family and friends.</p>
+<p>The <a class="wsw__a" href="https://newsroom.acg.aaa.com/aaas-travel-trends-and-tips-for-labor-day-weekend/">American Automobile Association (AAA) said</a>, “Americans see the extended Labor Day weekend as an <strong>opportunity</strong> to say <strong>farewell</strong> to summer with one final trip.” The group said Labor Day weekend travel in the U.S. went up nine percent compared to last year.</p>
+<p>Robert F. Moss is a barbecue expert and historian. He wrote the book <em>Barbecue: The History of an American Institution</em>. Moss said barbecue was already an American tradition when the labor movements developed in the late 19th century. He noted that it was a natural way to celebrate as large groups gathered.</p>
+<p>“It still has a lot of that same communal sense, gathering around the grill, eating together,” he told the Associated Press.</p>
+<p><strong>Not wearing white after Labor Day</strong></p>
+<p>Americans also have a saying that one should not wear white after Labor Day.</p>
+<p>That may sound strange, but it is true. Many Americans put away their white clothes on Labor Day and do not wear them again until the following May, after Memorial Day.</p>
+<p>One reason for the clothing custom relates to the season. In the U.S., the months between June and September are summer. The weather is usually hot and people wear light-colored clothing to keep cool.</p>
+<p>Clothing experts say it likely goes back to the Gilded Age — the same period in the late 1800s that started Labor Day. Wealthy New Yorkers in places such as Newport, Rhode Island, would put away their cool, white clothing at the end of the summer. And they returned to the city with darker, heavier clothes for dirt-packed streets.</p>
+<p>After the pandemic, many businesses and people have turned to more relaxed clothing. So the saying, or rule, might not be true anymore.</p>
+<p>But you may want to be careful about wearing white to an American-style Labor Day barbecue. The trouble is not fashion – it is <a class="wsw__a" href="https://www.21voa.com/a/ketchup-an-american-condiment-with-an-asian-connection/3961575.html">ketchup</a>. If it spills, the popular red tomato sauce can ruin that nice set of white clothes.</p>
+<p>I'm Andrew Smith. And I'm Caty Weaver.</p>
+<p><em>Hai Do, Mario Ritter Jr., Kelly Jean Kelly, Jerilyn Watson and Nancy Steinbach contributed to this report. Additional information came from The Associated Press and the AAA.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>opportunity</strong> - n. chance, occasion</p>
+<p><strong>farewell</strong> - n. goodbye</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

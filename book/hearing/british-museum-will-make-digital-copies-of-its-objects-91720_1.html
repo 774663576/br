@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 大英博物馆将藏品数字化</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 大英博物馆将藏品数字化" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202310/british-museum-will-make-digital-copies-of-its-objects.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>大英博物馆将藏品数字化</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202310/british-museum-will-make-digital-copies-of-its-objects.mp3" id="mp3"></a>
+<a href="/static/lrc/british-museum-will-make-digital-copies-of-its-objects.lrc" id="lrc"></a>
+<a href="british-museum-will-make-digital-copies-of-its-objects-91720.html" id="CnPage" target="_blank"></a>
+<a href="spanish-composer-imagines-vivaldi-s-four-seasons-with-climate-change-91715.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The British Museum, in London, recently announced plans to make digital copies of all the objects it keeps. The museum said in August that about 2,000 items had been stolen or were missing.<br/>
+位于伦敦的大英博物馆最近宣布计划对其收藏的所有藏品进行数字复制。该博物馆在8月份表示，大约有2000件藏品被盗或失踪。</p>
+<p>The museum is one of the busiest in the world.<br/>
+这个博物馆是世界上最繁忙的博物馆之一。</p>
+<p>It holds objects such as the Rosetta Stone, the Parthenon Marbles — known as the Elgin Marbles — and ancient stones and jewelry.<br/>
+它收藏着罗塞塔石碑、帕台农神庙大理石雕（又称埃尔金大理石雕）以及古代石头和珠宝等藏品。</p>
+<p>The leader, or chair of the museum, is George Osborne. He recently told the Culture, Media and Sport Committee of Parliament that he believed a person who worked at the museum was responsible.<br/>
+该博物馆主席是乔治·奥斯本。他最近告诉英国议会的文化、媒体和体育委员会，他认为博物馆的某位工作人员应该对此负责。</p>
+<p>Osborne called it "an inside job by someone...who the museum had put trust in." He said the person took items from the museum little by little.<br/>
+奥斯本称之为“博物馆信任内部工作人员”。他说，这个人蚂蚁搬家式地从博物馆拿走了藏品。</p>
+<p>The museum's director at the time was German art historian Hartwig Fischer. Fischer left the job in August after serving since 2016. He said the blame for the thefts "must ultimately" rest with him. He added the museum did not react as it should have when concerns first came up that someone had been stealing.<br/>
+博物馆当时的馆长是德国艺术史学家哈特维格·菲舍尔。菲舍尔自2016年任职后，于今年8月离职。他说，盗窃的责任“最终必须”落在他身上。他补充说，当人们一开始担心有人偷窃时，博物馆没有做出应有的反应。</p>
+<p>"There are lots of lessons to be learned," Osborne said.<br/>
+奥斯本说：“我们需要吸取很多教训。”</p>
+<p>The museum head said about 350 of the 2,000 items have been found and are in the process of being returned.<br/>
+这位博物馆负责人表示，2000件藏品中约有350件已被发现，正在归还中。</p>
+<p>Stolen items included gold rings, earrings and other jewelry from the ancient Greek and Roman times.<br/>
+被盗物品包括古希腊和罗马时代的金戒指、耳环和其它珠宝。</p>
+<p>The director of the museum for the time being is Mark Jones. He said the museum is confident "that a theft of this kind can never happen again." Jones added that one way to improve the museum's security is to show more items to the public instead of, as he said, "simply by locking items away."<br/>
+该博物馆现任馆长是马克·琼斯。他说，博物馆自认“这种盗窃永远不会再发生了。”琼斯补充说，提高博物馆安全性的方法之一是向公众展示更多的物品，而不是像他所说的那样“简单地把物品锁起来”。</p>
+<p>The project to digitize about 8 million items will take five years.<br/>
+将大约800万件藏品数字化的项目将耗时五年。</p>
+<p>In September, the museum asked for help in finding the missing items. The organization launched a phone number for people to call if they had information.<br/>
+9月，博物馆请求帮助寻找丢失的物品。该机构推出了一个电话号码，如果人们有消息可以拨打。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·费里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:British Museum Will Make Digital Copies of Its Objects]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The British Museum, in London,
+[00:02.40]recently announced plans to make digital copies
+[00:06.56]of all the objects it keeps.
+[00:09.24]The museum said in August
+[00:12.00]that about 2,000 items had been stolen or were missing.
+[00:17.00]The museum is one of the busiest in the world.
+[00:20.24]It holds objects such as the Rosetta Stone,
+[00:23.84]the Parthenon Marbles — known as the Elgin Marbles —
+[00:29.72]and ancient stones and jewelry.
+[00:33.60]The leader, or chair of the museum, is George Osborne.
+[00:38.52]He recently told the Culture,
+[00:40.92]Media and Sport Committee of Parliament
+[00:43.68]that he believed a person
+[00:45.88]who worked at the museum was responsible.
+[00:49.80]Osborne called it "an inside job by someone...
+[00:52.92]who the museum had put trust in."
+[00:55.96]He said the person took items from the museum little by little.
+[01:02.32]The museum's director at the time
+[01:04.72]was German art historian Hartwig Fischer.
+[01:08.40]Fischer left the job in August
+[01:10.72]after serving since 2016.
+[01:14.20]He said the blame for the thefts
+[01:17.00]"must ultimately" rest with him.
+[01:20.64]He added the museum did not react as it should have
+[01:25.04]when concerns first came up
+[01:28.00]that someone had been stealing.
+[01:32.52]"There are lots of lessons to be learned," Osborne said.
+[01:37.16]The museum head said about 350 of the 2,000 items
+[01:43.28]have been found and are in the process of being returned.
+[01:48.76]Stolen items included gold rings,
+[01:51.80]earrings and other jewelry
+[01:54.00]from the ancient Greek and Roman times.
+[01:57.44]The director of the museum
+[01:59.04]for the time being is Mark Jones.
+[02:02.00]He said the museum is confident
+[02:05.00]"that a theft of this kind can never happen again."
+[02:09.60]Jones added that one way to improve the museum's security
+[02:14.76]is to show more items to the public instead of,
+[02:19.32]as he said, "simply by locking items away."
+[02:24.40]The project to digitize about
+[02:27.56]8 million items will take five years.
+[02:31.16]In September, the museum asked for help
+[02:34.36]in finding the missing items.
+[02:37.12]The organization launched a phone number for people to call
+[02:40.72]if they had information.
+[02:43.64]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

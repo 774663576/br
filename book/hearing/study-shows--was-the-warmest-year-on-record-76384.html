@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Study: 2016 Warmest Year on Record</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Study: 2016 Warmest Year on Record" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201708/study-shows-2016-was-the-warmest-year-on-record.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Study: 2016 Warmest Year on Record</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201708/study-shows-2016-was-the-warmest-year-on-record.mp3" id="mp3"></a>
+<a href="detroit-turning-to-immigrants-to-energize-local-economy-76382.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anne Ball</span><br/>
+<span class="datetime">20 August, 2017</span><br/>
+<p>Last year, planet Earth was hotter than ever before. That is according to a report by the U.S. National Oceanic and Atmospheric Administration (NOAA).</p>
+<p>It says that 2016 marked the third year in a row of record warmth. NOAA scientists have kept records for the last 136 years.</p>
+<p>The report says long-term global warming and an unusually strong El Niño weather pattern combined to make it a record hot year. El Niños are weather patterns that warm the Pacific Ocean. That puts a lot of heat into the atmosphere and raises temperatures. They helped raise extreme temperatures, dry conditions and heavy rains.</p>
+<p>It also says high temperatures helped set fires in Alberta, Canada. Deadly heat and drought, or extremely dry conditions hit India, which resulted in a water crisis.</p>
+<div class="contentImage"><img alt="FILE - Buffalos on the dried-up Chandola Lake in Ahmedabad, India, March 30, 2016. The drought-- very dry conditions-- meant water shortages for the country's animals and people.." src="https://files.21voa.com/gdb/67D85D1E-C728-4BB7-83EC-18C9ADC9F2F4_w268_r0.jpg"/><br/><span class="imagecaption">FILE - Buffalos on the dried-up Chandola Lake in Ahmedabad, India, March 30, 2016. The drought-- very dry conditions-- meant water shortages for the country's animals and people..</span></div>
+<p>
+<p>More than 450 scientists from nearly 60 countries contributed to the report, released on August 10th.</p>
+<p>Deke Arndt is a co-author of the report. He spoke to VOA by Skype.</p>
+<p>"It confirms what we know. We know we live in a warming world, we know that that world is going to continue to warm. We know that this is going to cause issues around the world."</p>
+<p>Named the <a class="underline" href="https://www.ametsoc.org/ams/index.cfm/publications/bulletin-of-the-american-meteorological-society-bams/state-of-the-climate/">State of the Climate</a>, NOAA says the report takes into account tens of thousands of measurements. They include global climate indicators, weather events, <strong>greenhouse gas emissions, </strong>sea levels, the saltiness of the oceans, snow cover and sea ice.</p>
+<p>Greenhouse gases were the highest on record. Other climate numbers that were at their highest record include global surface temperatures, as well as sea surface temperatures. And, the global sea level average also rose to a new record high in 2016 - it was about 82 millimeters higher than observed in 1993.</p>
+<p>Tropical cyclones were also up. There were 93 named cyclones in 2016. One number went down—the amount of Arctic sea ice. It was not good news. The most Arctic sea ice coverage in March 2016 was the smallest in 37 years.</p>
+<p>NOAA's Arndt says there is little question about why the planet is warming.</p>
+<p>"We can always refine the numbers on exactly what percent is coming, but the vast majority is coming from human activity. And that's very abundantly clear."</p>
+<p>But this report is not in agreement with the Trump administration policy. Environmental Protection Agency chief Scott Pruitt says it is still debatable whether humans are responsible for global warming.</p>
+<p>"I believe the ability to measure with <strong>precision</strong> the degree of human activity's effect on the climate is subject to more debate."</p>
+<p>Pruitt's statements and the U.S. withdrawal from the Paris climate agreement goes against what many climate scientists in the U.S. believe.</p>
+<p>The NOAA report came out days after <em>The New York Times</em> published a <strong>draft </strong>of a U.S. government report on climate. It said that the average temperature in the country has risen quickly and <strong>drastically </strong>since 1980. It also says that recent <strong>decades </strong>have been the warmest in the past 1,500 years.</p>
+<p>This report was written by scientists from 13 federal agencies. It says that Americans are already feeling the result of climate change. It also says human activities are mainly responsible for climate change, and that there are no other explanations.</p>
+<p>The report is part of the National Climate Assessment and is published every four years. The National Academy of Sciences has approved the study. The authors are waiting for the Trump administration to approve its release.</p>
+<p>I'm Anne Ball.<br/><br/><em>Anne Ball adapted this story for Learning English from several VOA News story. Hai Do was the editor. We want to hear from you. Write to us in the Comments Section and visit us <a class="underline" href="http://www.21voa.com/">on 51VOA.COM</a>. </em></p>
+<p>____________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>greenhouse gas </strong><em>– n.</em> carbon dioxide and other gases that scientists have linked to rising temperatures in Earth's atmosphere</p>
+<p><strong>emission </strong><em>– n.</em> the act of producing or sending out something (such as energy or gas) from a source</p>
+<p><strong>precision </strong><em>– n.</em> the quality of being precise : exactness or accuracy</p>
+<p><strong>draft </strong><em>– n</em>. a version of something (such as a document) that you make before you make the final version</p>
+<p><strong>drastic </strong>- <em>adj</em>. extreme in effect or action: severe or serious</p>
+<p><strong>decade </strong><em>– n.</em> ten years</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Keep a Betta Fish</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How to Keep a Betta Fish" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/how-to-keep-a-betta-fish.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Keep a Betta Fish</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/how-to-keep-a-betta-fish.mp3" id="mp3"></a>
+<a href="us-pays-to-clean-up-agent-orange-used-in-vietnam-war-90210.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">02 January 2023</span><br/>
+<p>Betta fish are known for their bright colors. They are popular with Americans as <strong>pets</strong>.</p>
+<p>They are often kept alone in a small tank. Male fish are prized for their stronger colors and beautiful <strong>fins</strong>.</p>
+<p>With good care, bettas live three to five years, but some are known to live 10 years.</p><div class="contentImage"><img alt="Young woman feeding betta fish in aquarium at home." src="https://files.21voa.com/gdb/09410000-0a00-0242-889a-08dae870e8fd_w268_r1.jpeg"/><br/><span class="imagecaption">Young woman feeding betta fish in aquarium at home.</span></div>
+<p>In the northern parts of the world, winter has arrived, and some people might be wondering what to do with their time now that they are indoors. Keeping a betta fish can be a fun <strong>hobby </strong>that does not involve going outside. It also does not require too much skill, but you do have to be willing to learn.</p>
+<p>But how do you take care of a betta fish?</p>
+<p><strong>Required parts</strong></p>
+<p>First, betta fish need a home. A tank that holds at least 11 liters of water is suggested although 19 liters is better. Larger tanks are better because the water needs to be changed less often and provides a healthier environment for the fish.</p>
+<p>Second, the tank needs small rocks or sand at the bottom. In the pet fish industry, this is called substrate. A few centimeters at the bottom are all that is needed. Clean the rocks or sand with running water without soap until it runs clear before adding them to the tank.</p>
+<p>Third, a <strong>filter</strong> is needed to purify the water. Many people keep bettas without filters. But the fish should be raised with a filter to stay healthy. Follow the filter's guidelines and choose a filter that is the right size for the tank.</p>
+<p>Fourth, a heater is suggested to keep your fish in good condition. These fish prefer warmer water, usually between 24 and 28 degrees Celsius. Pet stores sell heaters for fish. Choose the right size for your aquarium and follow its guidelines, or instructions, to set it up.</p>
+<p>A light and <strong>decorations</strong> are the final details to set up your tank. A light may not be necessary if the room receives enough natural light. But an electric light might be helpful if you wish to grow plants in the tank. If real plants seem like too much work, plastic plants work as well. You can also find other decorations like rocks, or wood pieces. Just make sure they are safe for fish.</p>
+<p><strong>Water quality and temperature</strong></p>
+<p>The quality of the water is important to keeping a fish alive and healthy. The filter and heater will do a lot to keep the water safe for the fish, but there are additional steps you should take.</p>
+<p>Make sure the water you add to the tank is safe for fish. <strong>Tap</strong> water can be used. But it usually contains a chlorine-based chemical harmful to fish, so additional steps need to be taken.</p>
+<p>Krista Keller is a professor at the University of Illinois at Urbana-Champaign College of Veterinary Medicine. Writing online in 2019, she said, "If tap water is used in the tank, it is <strong>recommended</strong> to use a <strong>dechlorinating</strong> product and test for heavy metals."</p>
+<p>Pet stores sell dechlorinating chemicals and they are easy to use. Just follow the instructions on the container. Stores also sell home water testing products. But many fish stores are happy to test your water if you bring in a small amount. They can also provide advice on keeping fish in your area's water.</p>
+<p><strong>Betta fish care</strong></p>
+<p>After setting up your tank, there are a few more things to consider. You will need to feed your fish and change its water.</p>
+<p>There are many choices for food. There are pellets, frozen whole foods, freeze-dried foods, and live food. Pet stores will carry many of these. Feed your fish once to twice a day. Whatever food you choose, make sure it contains meat or insects because that is what bettas eat in the wild.</p>
+<p>It is suggested to change one fourth of your tank's water once every week or two. Remove the old water and add fresh water. Your filter also may require some additional cleaning every month or so.</p>
+<p><strong>Tank friends</strong></p>
+<p>Male betta fish are kept alone because they are aggressive fish. Another name for bettas is Siamese fighting fish. Males should never be kept with other betta males. If you have a larger tank with other fish, they might live together peacefully. But know that male betta fish often attack other fish and may have to live separately.</p>
+<p>Female betta fish can live with other fish peacefully. A group of females can be kept too. Make sure they have a tank that is large enough and a filter designed for the tank's size.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Gregory Stachel wrote this story for VOA Learning English. </em></p>
+<p>____________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fin </strong>–<em>n</em>. the part of a fish or marine mammal that the animal uses to move or affect its movement</p>
+<p><strong>pet </strong><em>– n. </em>an animal (such as a dog, cat, bird, or fish) that people keep mainly for pleasure</p>
+<p><strong>hobby </strong><em>– n. </em>an activity that a person does for pleasure when not working</p>
+<p><strong>filter </strong><em>– n. </em>a device that is used to remove something unwanted from a liquid or gas that passes through it</p>
+<p><strong>decoration </strong><em>– n. </em>something that is added to something else to make it more attractive</p>
+<p><strong>tap </strong>–<em>n</em>. a device that controls the flow (usually of water) from a pipe or tank</p>
+<p><strong>recommend </strong><em>– v. </em>to suggest that someone do (something)</p>
+<p><strong>dechlorinate </strong><em>– v. </em>to remove chlorine from a substance</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

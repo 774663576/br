@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 油价下跌对各国影响各异</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 油价下跌对各国影响各异" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201411/se-eco-falling-oil-prices-affect-nations-differently-28nov14.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>油价下跌对各国影响各异</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201411/se-eco-falling-oil-prices-affect-nations-differently-28nov14.mp3" id="mp3"></a>
+<a href="/static/lrc/se-eco-falling-oil-prices-affect-nations-differently-28nov14.lrc" id="lrc"></a>
+<a href="falling-oil-prices-affect-nations-differently-59897.html" id="CnPage" target="_blank"></a>
+<a href="south-korean-students-stressed-over-college-entrance-exam-59896.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>World oil prices have dropped by about 30 percent since June. That has helped many economies around the world. When people spend less on fuel, they can spend more on other goods. But lower oil prices also mean reduced profits for national oil companies. Privately-owned oil producers and companies that provide services to the oil industry are also affected.<br/>六月份以来世界石油价格已经下跌了大约30%，这已经帮助了世界各地的很多经济体。当人们在汽油上的消费减少，他们就能在其它商品上增加消费。但油价下跌还意味着国营石油公司利润减少。民营石油生产商以及为石油行业提供服务的公司也受到了影响。</p>
+<p>Increased American oil production is one reason for the drop in world oil prices. Hydraulic fracturing technology developed in the U.S. has made that increase possible. Hydraulic fracturing, or fracking, is a process of pumping water and chemicals into the ground to force out natural gas and oil. It is often used to recover these fossil fuels from rock called shale.<br/>美国石油产量增加是全球油价下跌的原因之一。美国开发的水力压裂技术已经使得石油产量增加成为可能。水力压裂法是指向地下注入水和化学物质以获得天然气和石油的过程。它常被用于从页岩中回收这些化石燃料。</p>
+<p>Jim Krane is an energy expert at the James Baker Institute for Public Policy at Rice University. He says oil produced from shale has changed the market.<br/>吉姆·克兰（Jim Krane）是莱斯大学詹姆斯.贝克公共政策研究所的一位能源专家。他说，页岩油改变了这一市场。</p>
+<p>"The shale production that is entering the market and pushing other sources of supply that used to come to the U.S. away from the U.S. and they are trying to find markets for that."<br/>“页岩油气产品正在进入市场，并推动美国其它常用供应渠道远离美国。他们正在为此寻找市场。”</p>
+<p>Mr. Krane says slowing economies in China and Europe have also reduced the demand for oil.<br/>克兰先生表示，中国和欧洲经济放缓也降低了石油需求。</p>
+<p>In the past, the Organization of Petroleum Exporting Countries would react to decreasing demand by cutting production. The twelve member states often cooperate to influence oil prices around the world. However, Jim Krane says members want to defend their share of the market and are unwilling to make production cuts.<br/>在过去，石油输出国组织将会通过减产对石油需求降低做出反应。这12个成员国经常合作以影响世界各地的石油价格。然而，克兰表示，（这一次，）各成员国想要捍卫自己的市场份额，不愿意减产。</p>
+<p>"They are willing to see prices drop for a little while to see if they could sweat some of these higher-cost producers out of the market."<br/>“他们都愿意看到油价再降一点，想看看是否可以把一些成本较高的石油生产商逐出市场。”</p>
+<p>However, this could affect small oil producing companies in the U.S. These companies feel the effects of falling prices more sharply on their profit margin.<br/>但是这可能会影响美国的一些小型石油生产企业。这些公司认为价格下降严重影响了他们的利润空间。</p>
+<p>"If you are a small company thinking about investing in putting in some new oil production, well, you might think twice if prices are down at $75 (a barrel)..."<br/>“如果你是一家小公司，想要投资新生产出一些石油，若油价低于75美元每桶你可能就会三思而行。”</p>
+<p>U.S. companies are not alone in feeling pressure from falling prices. Oil makes up 83 percent of Nigeria's exports and 70 percent of the nation's economy.<br/>并非只有美国企业受到了价格下跌的压力。石油占到了尼日利亚出口的83%以及该国经济的70%。</p>
+<p>Finance minister Ngozi Okonjo-Iweala recently announced measures the government would take to increase income. These include new taxes on costly goods and a six percent cut in government spending.<br/>尼日利亚财政部长恩戈齐·奥孔约-伊维拉（Ngozi Okonjo-Iweala）最近宣布政府将会采取措施以增加收入。这些措施包括对奢侈品开征新税，以及政府支出减少6%。</p>
+<p>India is increasingly dependent on oil imports. Lower oil prices have helped ease high inflation, which reached 10 percent last year. The government also has moved to cut back fuel price supports, or subsidies. The move has not affected the price people pay for fuel because of the sharp decrease in oil prices.<br/>印度越来越依赖于石油进口。油价下跌有助于缓解通胀高企，去年印度的通货膨胀达到了10%。印度政府也已经开始削减燃油价格补贴。由于石油价格大跌，此举并未影响到人们要支付的油价。</p>
+<p>In places like Houston, Texas, the oil industry is a major employer and economic driver. Economist Patrick Jankowski says lower oil prices have a clear dollar cost.<br/>在德克萨斯州休斯敦等地，石油行业是就业大户和经济驱动力。经济学家帕特里克·扬科夫斯基（Patrick Jankowski）表示，油价下跌的损失很明显。</p>
+<p>"If you look at the production that we get in the state of Texas, we are producing 4.5 million more barrels a month than we were doing this time last year. Yet the value of our production in Texas has dropped by over a billion dollars a month."<br/>他说，“看看德克萨斯州的石油产量，我们现在每月比去年同期多生产450万桶以上的石油。然而我们在德克萨斯州的产值每月减少了10亿美元以上。”</p>
+<p>However, Mr. Jankowski believes the over-supply will slowly disappear.<br/>不过扬科夫斯基先生认为供过于求的局面将会逐渐消失。</p>
+<p>"By 2016, we will probably see production drop again, definitely by 2017. By then we will see prices go back up again."<br/>他说，“到2016年，我们可能会看到产量再次下跌。到2017年,产量肯定会下跌。届时我们将会看到油价再度回升。”</p>
+<p>He says decreasing prices may make energy company leaders nervous, but most are prepared for it.<br/>他说，价格下降可能会使能源公司领导非常紧张，但许多人已经做好了这一准备。</p>
+<p>And that's the Economics Report for VOA Learning English. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Falling Oil Prices Affect Nations Differently]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.89]World oil prices have dropped by about 30 percent since June. 
+[00:12.17]That has helped many economies around the world. 
+[00:16.55]When people spend less on fuel, 
+[00:19.78]they can spend more on other goods. 
+[00:22.83]But lower oil prices 
+[00:25.96]also mean reduced profits for national oil companies. 
+[00:30.19]Privately-owned oil producers and companies 
+[00:34.68]that provide services to the oil industry are also affected.
+[00:40.06]Increased American oil production is one reason 
+[00:44.59]for the drop in world oil prices. 
+[00:47.63]Hydraulic fracturing technology developed in the U.S. 
+[00:52.86]has made the increase possible. 
+[00:55.94]Hydraulic fracturing, or fracking, is a process 
+[01:01.64]of pumping water and chemicals into the ground 
+[01:04.71]to force out natural gas and oil. 
+[01:08.26]It is often used to recover these fossil fuels from rock called shale.
+[01:15.33]Jim Krane is an energy expert at the James Baker Institute 
+[01:20.90]for Public Policy at Rice University. 
+[01:24.36]He says oil produced from shale has changed the market.
+[01:30.64]"The shale production that is entering the market 
+[01:34.02]and pushing other sources of supply 
+[01:36.66]that used to come to the U.S. away from the U.S. 
+[01:41.24]and they are trying to find markets for that."
+[01:42.83]Mr. Krane says slowing economies in China and Europe 
+[01:47.61]have also reduced the demand for oil.
+[01:50.79]In the past, the Organization of Petroleum Exporting Countries 
+[01:57.07]would react to decreasing demand by cutting production. 
+[02:01.56]The twelve member states often cooperate 
+[02:05.69]to influence oil prices around the world. 
+[02:09.17]However, Jim Krane says members want to defend 
+[02:14.50]their share of the market and are unwilling to make production cuts.
+[02:19.83]"They are willing to see prices drop for a little while 
+[02:23.93]to see if they could sweat some of these higher-cost producers 
+[02:27.82]out of the market."
+[02:29.11]However, this could affect small oil producing companies in the U.S. 
+[02:34.85]These companies feel the effects of falling prices 
+[02:39.36]more sharply on their profit margin.
+[02:42.31]"If you are a small company thinking about investing 
+[02:45.64]in putting in some new oil production, 
+[02:49.13]well, you might think twice if prices are down at $75 (a barrel)..."
+[02:53.01]U.S. companies are not alone in feeling pressure from falling prices. 
+[02:58.55]Oil makes up 83 percent of Nigeria's exports 
+[03:04.03]and 70 percent of the nation's economy.
+[03:07.76]Finance minister Ngozi Okonjo-Iweala recently announced 
+[03:13.49]measures the government would take to increase income. 
+[03:17.23]These include new taxes on costly goods 
+[03:21.80]and a six percent cut in government spending.
+[03:24.99]India is increasingly dependent on oil imports. 
+[03:30.26]Lower oil prices have helped ease high inflation, 
+[03:35.24]which reached 10 percent last year. 
+[03:38.77]The government also has moved 
+[03:41.66]to cut back fuel price supports, or subsidies. 
+[03:46.00]The move has not affected the price people 
+[03:49.53]pay for fuel because of the sharp decrease in oil prices.
+[03:54.06]In places like Houston, Texas, 
+[03:58.04]the oil industry is a major employer and economic driver. 
+[04:03.17]Economist Patrick Jankowski says 
+[04:08.04]lower oil prices have a clear dollar cost.
+[04:12.23]"If you look at the production that we get in the state of Texas, 
+[04:15.32]we are producing 4.5 million more barrels 
+[04:18.06]a month than we were doing this time last year. 
+[04:20.05]Yet the value of our production in Texas 
+[04:22.24]has dropped by over a billion dollars a month."
+[04:24.13]However, Mr. Jankowski believes 
+[04:26.77]the over-supply will slowly disappear.
+[04:29.65]"By 2016, we will probably see production drop again, 
+[04:33.39]definitely by 2017. 
+[04:35.03]By then we will see prices go back up again."
+[04:37.63]He says decreasing prices may make 
+[04:41.16]energy company leaders nervous, 
+[04:46.04]but most are prepared for it.
+[04:51.36]And that's the Economics Report from VOA Learning English. 
+[04:53.50]I'm Mario Ritter.
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

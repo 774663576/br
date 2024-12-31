@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Japan Says Visitors Disrespecting Mount Fuji</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Japan Says Visitors Disrespecting Mount Fuji" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/japan-says-visitors-disrespecting-mount-fuji.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Japan Says Visitors Disrespecting Mount Fuji</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/japan-says-visitors-disrespecting-mount-fuji.mp3" id="mp3"></a>
+<a href="icing-on-the-cake-is-as-good-as-it-sounds-91507.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">17 September 2023</span><br/>
+<p>On a gray and rainy Saturday, buses arrive continually at a base station of Japan's Mount Fuji. The buses release foreign visitors<strong> </strong>in front of stores and restaurants.</p>
+<p>The area looks similar to a <strong>theme</strong><strong> park</strong>. It is not what most Japanese would expect below the 3,776-meter mountain. Mt Fuji is considered an important religious area. And Japanese honor the mountain for its perfectly balanced form.</p>
+<p>"Hey, no smoking here!" a store worker told a man wearing shorts and holding a can of beer. He was standing in front of the red "torii" gate which marks the entrance to the Shinto religious center ahead.</p><div class="contentImage"><img alt="Visitors are seen at the fifth stage on the slopes of Mount Fuji, Japan's highest mountain 3,776 metres (12,388 ft), in Fujiyoshida, Japan on September 9, 2023. (REUTERS/Mariko Katsumura)" src="https://files.21voa.com/gdb/b01167f0-ddf7-4992-8535-df76e28ac00c_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Visitors are seen at the fifth stage on the slopes of Mount Fuji, Japan's highest mountain 3,776 metres (12,388 ft), in Fujiyoshida, Japan on September 9, 2023. (REUTERS/Mariko Katsumura)</span></div>
+<p>Mt Fuji sits between the Yamanashi and Shizuoka areas in eastern Japan. It has always been popular with local and foreign visitors.</p>
+<p>But a recent increase in visitors to Japan has led to high levels of pollution and other difficulties, officials say. They add they may be forced to take extreme measures. They may restrict the number of visitors by limiting the only way to visit the mountain by a yet-to-be-built public transportation system.</p>
+<p>"Fuji faces a real crisis," Masatake Izumi, a Yamanashi area official, told reporters recently. It was the last weekend before the paths closed for the year.</p>
+<p>"It's uncontrollable and we fear that Mt Fuji will soon become so <strong>unattractive</strong>, nobody would want to climb it," he said.</p>
+<p>Mt Fuji was listed as a UNESCO World Heritage area 10 years ago, further increasing its popularity. World Heritage areas are places that the UN protects for having great value to humanity.</p>
+<p>But the listing came with conditions that Japan reduce the number of visitors, environmental harm from visitors, and fix man-made areas designed for visitors.</p>
+<p>However, the number of visitors has increased. "Subaru," the fifth and largest base station, had about 4 million visitors this summer. That is a 50 percent increase from 2013.</p>
+<p>Despite the hard work of cleaners, businesses, and volunteers, social media is filled with posts about dirty bathrooms and waste along the climbing path.</p>
+<p>Izumi worries that the International Council on Monuments and Sites (ICOMOS), which advises the World Heritage Committee, could come looking for an <strong>update</strong>.</p>
+<p>"Bullet climbing" is where climbers try to climb Japan's tallest mountain for sunrise and go down the mountain on the same day. Officials say that it is a growing problem as well.</p>
+<p>Rescue requests totaled 61 this year, up 50 percent from last year. Non-Japanese visitors make up about 25 percent, Shizuoka area police found. An official said most were poorly equipped, suffering from cold temperatures or the height of the mountain. Yamanashi police did not have similar data.</p>
+<p>One local visitor said restrictions will have to come.</p>
+<p>"Any Japanese person would want to climb Mt Fuji at least once in their life," said 62-year-old Jun Shibazaki, who arrived to visit. "But it's so <strong>crowded</strong>. Limited entry might be something we have to live with."</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Mariko Katsumura reported this story for Reuters. Gregory Stachel adapted the story for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>theme park </strong><em>– n.</em> an amusement park where the rides and attractions are based on a particular theme</p>
+<p><strong>unattractive </strong><em>– adj.</em> not beautiful, interesting, or pleasing</p>
+<p><strong>update</strong> –<strong><em> </em></strong><em>n.</em> a report that includes the most recent information about something</p>
+<p><strong>crowded </strong><em>– adj.</em> filled with too many people or things</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

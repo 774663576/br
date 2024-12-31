@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 脸书网股价大跌近20%</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 脸书网股价大跌近20%" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201807/facebook-suffers-huge-one-day-drop-in-market-value.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>脸书网股价大跌近20%</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201807/facebook-suffers-huge-one-day-drop-in-market-value.mp3" id="mp3"></a>
+<a href="/static/lrc/facebook-suffers-huge-one-day-drop-in-market-value.lrc" id="lrc"></a>
+<a href="facebook-suffers-huge-one-day-drop-in-market-value-79667.html" id="CnPage" target="_blank"></a>
+<a href="longest-lunar-eclipse-of-the-century-79666.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Facebook share prices dropped almost 20 percent Thursday. That is believed to be the largest one-day drop of any company on the American stock market.<br/>脸书网股价周四大跌了近20%，这被认为是美国上市公司最大的单日跌幅。
+<p>The stock value drop amounted to a $119-billion loss.<br/>这次股价下跌相当于1190亿美元的损失。</p>
+<p>One day earlier, Facebook had released a disappointing second-quarter financial report. The report said the social media site's user base and earnings had not grown as much as expected. The report also predicted far weaker growth in the future than had been expected.<br/>一天前，脸书网发布了令人失望的第二季度财务报告。报告称该社交媒体网站的用户基数和收入增长不及预期，报告还预测未来的增长将会远低于之前预期。</p>
+<p>Facebook has struggled in recent years with several privacy issues. But most experts believed the company had successfully dealt with them.<br/>最近几年，脸书网一直在努力解决几项隐私问题。但是大多数专家认为该公司已经成功解决了这些问题。</p>
+<p>Many had come to consider Facebook almost immune to image problems, especially after the most recent scandal involving the British company Cambridge Analytica. The political research business collected private data of tens of millions of Facebook users. It provided that information to the 2016 presidential campaign of then-candidate Donald Trump.<br/>很多人已经开始认为脸书网几乎不会受到形象问题的影响，特别是在最近卷入英国剑桥分析公司丑闻之后。这家政治研究公司收集了数千万脸书网用户的私人数据，它把这些信息提供给了2016年时任总统候选人川普。</p>
+<p>Facebook has also faced public image problems because of the way Russia used the site to try to influence the 2016 U.S. presidential election.<br/>脸书网还因为俄罗斯利用该网站试图影响2016年美国大选而面临公众形象问题。</p>
+<p>I'm Caty Weaver.<br/>我是凯蒂·韦弗。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Facebook Suffers Huge One-Day Drop in Market Value]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.12]Facebook share prices dropped almost 20 percent Thursday.
+[00:06.44]That is believed to be the largest one-day drop
+[00:10.73]of any company on the American stock market.
+[00:14.92]The stock value drop amounted to a $119-billion loss.
+[00:22.64]One day earlier, Facebook had released a disappointing
+[00:27.80]second-quarter financial report.
+[00:31.04]The report said the social media site's user base and earnings
+[00:37.08]had not grown as much as expected.
+[00:40.76]The report also predicted far weaker growth
+[00:44.55]in the future than had been expected.
+[00:49.08]Facebook has struggled in recent years with several privacy issues.
+[00:55.28]But most experts believed the company had successfully dealt with them.
+[01:01.56]Many had come to consider Facebook almost immune to image problems,
+[01:08.00]especially after the most recent scandal
+[01:11.44]involving the British company Cambridge Analytica.
+[01:16.56]The political research business collected private data
+[01:21.20]of tens of millions of Facebook users.
+[01:25.52]It provided that information to the 2016 presidential campaign
+[01:31.40]of then-candidate Donald Trump.
+[01:34.60]Facebook has also faced public image problems
+[01:39.52]because of the way Russia used the site
+[01:42.96]to try to influence the 2016 U.S. presidential election.
+[01:50.08]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

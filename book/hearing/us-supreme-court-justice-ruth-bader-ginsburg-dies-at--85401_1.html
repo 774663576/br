@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国最高法院大法官金斯伯格去世引发政治争斗</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国最高法院大法官金斯伯格去世引发政治争斗" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202009/us-supreme-court-justice-ruth-bader-ginsburg-dies-at-87.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国最高法院大法官金斯伯格去世引发政治争斗</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202009/us-supreme-court-justice-ruth-bader-ginsburg-dies-at-87.mp3" id="mp3"></a>
+<a href="/static/lrc/us-supreme-court-justice-ruth-bader-ginsburg-dies-at-87.lrc" id="lrc"></a>
+<a href="us-supreme-court-justice-ruth-bader-ginsburg-dies-at--85401.html" id="CnPage" target="_blank"></a>
+<a href="facebook-launches-college-only-service-as-way-for-students-to-connect-85398.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">U.S. Supreme Court Justice Ruth Bader Ginsburg died Friday night at her home in Washington, D.C. She was 87. Her death is likely to set up a political battle over when to nominate a successor.<br/>
+美国最高法院大法官露丝·巴德·金斯伯格周五晚上在华盛顿的家中去世，享年87岁。她的去世可能会引发一场何时提名继任者的政治斗争。
+<p>Ginsburg died of problems connected to metastatic pancreatic cancer, the court said. Ginsburg announced in July that she was getting chemotherapy treatments for masses on her liver, the latest of her several battles with cancer.<br/>
+最高法院表示，金斯伯格因为胰腺癌转移去世。金斯伯格在7月份宣布，她当时正在接受针对肝脏肿块的化疗，她数次与癌症抗争，这是最近的一次。</p>
+<p>Ginsburg was born in Brooklyn, New York, in 1933. Her dream, she had said, was to be an opera singer. She finished at the top of her Columbia University law school class in 1959 but no law firm would hire her. She had, in her words from 2007, "three strikes against her" — for being Jewish, female and a mother.<br/>
+金斯伯格于1933年出生在纽约布鲁克林。她曾说自己的梦想是当一名歌剧演唱家。1959年，她以第一名的成绩从哥伦比亚大学法学院毕业，但是没有律师事务所愿意雇佣她。用她2007年说的话来说，她面临三重桎梏，因为她是犹太人、女性和一位母亲。</p>
+<p>She went to work with the American Civil Liberties Union in the 1970s. Ginsburg won several cases against gender discrimination. In 1980, she was appointed to serve on a U.S. Court of Appeals. She joined the Supreme Court in 1993, under President Bill Clinton.<br/>
+上世纪70年代，她进入了美国公民自由联盟工作。金斯伯格赢得了几场反对性别歧视的案件。1980年，她被任命为美国上诉法院法官。她于1993年在比尔·克林顿总统提名下进入了美国最高法院。</p>
+<p>Ginsburg spent her final years on the court as the unquestioned leader of its liberal wing. She became hugely popular for her defense of the rights of women and minorities. Many young people were among her fans, appointing her with the hip-hop style name "Notorious RBG."<br/>
+金斯伯格生命的最后几年在大法院是自由派毋容置疑领导人。她因为捍卫妇女和少数族裔的权利而大受欢迎。她的粉丝中有不少年轻人，他们以嘻哈风格的名字“声名狼藉的金斯伯格”来指代她。</p>
+<p>She was also widely respected for the strength she showed in the face of many health issues. Those issues included five cancer crises, beginning in 1999. She had a bad fall that resulted in broken bones, a heart operation and other hospitalizations all later in life.<br/>
+她还因为面对诸多健康问题展示出来的力量而受到广泛尊重。这些问题包括从1999年以来的5次癌症危机。她生命末期曾经有一次摔伤严重导致骨骼断裂，做了一次心脏手术，还经历了其它住院治疗。</p>
+<p>"Our Nation has lost a jurist of historic stature," said Chief Justice John Roberts in a statement. "We at the Supreme Court have lost a cherished colleague. Today we mourn, but with confidence that future generations will remember Ruth Bader Ginsburg as we knew her -- a tireless and resolute champion of justice."<br/>
+首席大法官约翰·罗伯茨在一项声明中表示：“美国失去了一位具有历史地位的法学家。我们最高法院失去了一位珍爱的同事。今天我们哀悼，但也充分相信，后代会记住我们认识的金斯伯格，她是一位不知疲倦且坚定的正义捍卫者。”</p>
+<p><strong>Political debate over replacement<br/>
+关于继任者的政治辩论</strong></p>
+<p>Her death came just six weeks before election day, November 3. The news immediately opened debate over whether President Donald Trump should nominate a replacement and the Republican-led Senate should hold confirmation hearings. Trump's main opponent in the race is Democratic Party candidate, Joe Biden.<br/>
+她在11月3日美国大选日前6周去世。这一消息立刻引发了川普总统是否应该提名一位继任者，以及共和党领导的参议院是否应该举行提名确认听证会的辩论。川普在竞选中的主要对手是民主党候选人乔·拜登。</p>
+<p>Just hours after her death, Senate Majority Leader Mitch McConnell said in a statement, "President Trump's nominee will receive a vote on the floor of the United States Senate."<br/>
+参议院多数党领袖米奇·麦康奈尔在金斯伯格去世几个小时之后发表声明称：“参议院拟就川普总统提名的大法官人选进行投票。”</p>
+<p>Democratic Senate leader Chuck Schumer replied on Twitter, "The American people should have a voice in the selection of their next Supreme Court Justice. Therefore, this vacancy should not be filled until we have a new president."<br/>
+民主党参议院领导人查克·舒默在推特上回应称：“美国民众在挑选继任大法官方面应该有话语权。因此，这一空缺应该在选出新总统之后再填补。”</p>
+<p>In 2016, McConnell refused to hold a hearing for a Supreme Court candidate nominated by President Barack Obama, a Democrat. McConnell said at the time, "The next president may also nominate someone very different. Either way, our view is this: Give the people a voice."<br/>
+2016年，麦康奈尔拒绝举行民主党总统巴拉克·奥巴马提名的大法官人选的听证会。麦康奈尔当时说：“下任总统也可能提名完全不同的一个人。无论如何我们的看法都是：给民众话语权。“</p>
+<p>National Public Radio reported that Ginsburg told her granddaughter Clara Spera just before she died: "My most fervent wish is that I will not be replaced until a new president is installed."<br/>
+国家公共广播电台报道称，金斯伯格在去世前对她的孙女克拉拉·斯佩拉表示：“我最热切的愿望是，在新总统就任前，我不会被取代。”</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Supreme Court Justice Ruth Bader Ginsburg Dies at 87+++美国最高法院大法官金斯伯格去世引发政治争斗]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.40]U.S. Supreme Court Justice Ruth Bader Ginsburg
+[00:06.08]died Friday night at her home in Washington, D.C.
+[00:10.84]She was 87.
+[00:12.80]Her death is likely to set up a political battle
+[00:17.76]over when to nominate a successor.
+[00:21.16]Ginsburg died of problems connected
+[00:24.20]to metastatic pancreatic cancer, the court said.
+[00:29.68]Ginsburg announced in July that she was getting chemotherapy treatments
+[00:34.72]for masses on her liver, the latest of her several battles with cancer.
+[00:40.72]Ginsburg was born in Brooklyn, New York, in 1933.
+[00:46.96]Her dream, she had said, was to be an opera singer.
+[00:51.80]She finished at the top of her Columbia University law school class
+[00:57.16]in 1959 but no law firm would hire her.
+[01:02.24]She had, in her words from 2007,
+[01:07.20]"three strikes against her" — for being Jewish, female and a mother.
+[01:13.16]She went to work with the American Civil Liberties Union in the 1970s.
+[01:19.80]Ginsburg won several cases against gender discrimination.
+[01:25.44]In 1980, she was appointed to serve on a U.S. Court of Appeals.
+[01:31.48]She joined the Supreme Court in 1993, under President Bill Clinton.
+[01:38.16]Ginsburg spent her final years on the court
+[01:42.36]as the unquestioned leader of its liberal wing.
+[01:46.88]She became hugely popular
+[01:49.40]for her defense of the rights of women and minorities.
+[01:53.84]Many young people were among her fans,
+[01:56.88]appointing her with the hip-hop style name "Notorious RBG."
+[02:02.76]She was also widely respected for the strength she showed
+[02:08.00]in the face of many health issues.
+[02:10.64]Those issues included five cancer crises, beginning in 1999.
+[02:18.32]She had a bad fall that resulted in broken bones,
+[02:22.44]a heart operation and other hospitalizations all later in life.
+[02:28.76]"Our Nation has lost a jurist of historic stature,"
+[02:33.92]said Chief Justice John Roberts in a statement.
+[02:38.00]"We at the Supreme Court have lost a cherished colleague.
+[02:42.72]Today we mourn, but with confidence that future generations
+[02:48.28]will remember Ruth Bader Ginsburg as we knew her
+[02:52.48]-- a tireless and resolute champion of justice."
+[02:57.16]Her death came just six weeks before election day, November 3.
+[03:03.04]The news immediately opened debate
+[03:06.80]over whether President Donald Trump should nominate a replacement
+[03:12.00]and the Republican-led Senate should hold confirmation hearings.
+[03:16.68]Trump's main opponent in the race is Democratic Party candidate, Joe Biden.
+[03:23.08]Just hours after her death,
+[03:26.44]Senate Majority Leader Mitch McConnell said in a statement,
+[03:31.04]"President Trump's nominee will receive a vote
+[03:34.60]on the floor of the United States Senate."
+[03:37.88]Democratic Senate leader Chuck Schumer replied on Twitter,
+[03:42.88]"The American people should have a voice
+[03:46.04]in the selection of their next Supreme Court Justice.
+[03:50.08]Therefore, this vacancy should not be filled
+[03:54.12]until we have a new president."
+[03:56.80]In 2016, McConnell refused to hold a hearing
+[04:02.08]for a Supreme Court candidate nominated
+[04:05.28]by President Barack Obama, a Democrat.
+[04:09.00]McConnell said at the time,
+[04:11.64]"The next president may also nominate someone very different.
+[04:16.16]Either way, our view is this: Give the people a voice."
+[04:22.32]National Public Radio reported that Ginsburg
+[04:25.84]told her granddaughter Clara Spera just before she died:
+[04:30.88]"My most fervent wish is that I will not be replaced
+[04:35.56]until a new president is installed."
+[04:39.84]I'm Caty Weaver.
+[04:43.32]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

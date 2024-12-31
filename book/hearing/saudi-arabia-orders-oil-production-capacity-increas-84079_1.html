@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 沙特下令提高石油产量</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 沙特下令提高石油产量" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202003/saudi-arabia-orders-oil-production-capacity-increas.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>沙特下令提高石油产量</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202003/saudi-arabia-orders-oil-production-capacity-increas.mp3" id="mp3"></a>
+<a href="/static/lrc/saudi-arabia-orders-oil-production-capacity-increas.lrc" id="lrc"></a>
+<a href="saudi-arabia-orders-oil-production-capacity-increas-84079.html" id="CnPage" target="_blank"></a>
+<a href="nursing-homes-face-serious-problems-from-coronavirus-84071.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Saudi Arabia has directed the state oil company Aramco to increase its total possible oil production, or capacity. It announced the move at the Saudi Tadawul stock exchange Wednesday.<br/>
+沙特已经指示国有阿美石油公司提升石油总产量。该国周三在沙特达乌尔证券交易所宣布了这一举动。
+<p>A short time later, Abu Dhabi's oil and gas company ADNOC said it was increasing production by 25 percent to 4 million barrels per day.<br/>
+不久之后，阿布扎比石油和天然气公司ADNOC表示将把日产量提高25%到400万桶。</p>
+<p>Saudi Arabia is working to flood the market after another oil producer, Russia, refused to agree to oil production cuts.<br/>
+在另一个石油生产国俄罗斯拒绝达成减产协议之后，沙特正在努力打压市场。</p>
+<p>Worldwide, demand for oil is decreasing as the spread of the new coronavirus has interfered with travel, transport and other industries.<br/>
+由于新冠病毒的传播已经影响到旅游、运输和其它行业，全球范围内对石油的需求开始下降。</p>
+<p>Saudi Arabia said earlier this week it would increase its oil production to 12.3 million barrels a day starting in April. That is 300,000 barrels per day more than Aramco's current production. Now the company says it will produce up to 13 million barrels per day.<br/>
+沙特本周早些时候表示，将从4月开始将该国石油产量提高到每天1230万桶。这比阿美公司目前每天的产量多出了30万桶。该公司现在表示每天将会生产高达1300万桶。</p>
+<p>Aramco also said Wednesday that the Saudi Energy Ministry, led by Crown Prince Mohammed bin Salman, ordered the increase.<br/>
+阿美公司周三还表示，王储穆罕默德·萨勒曼领导的沙特能源部下达了提高产量的命令。</p>
+<p>Saudi Arabia had been producing around 9.8 million barrels per day. That amount was in line with an agreement among a number of oil producing nations, including Russia. The cuts were an attempt to stop the oversupply in the market that had pushed prices down.<br/>
+沙特过去每天日产量约为980万桶。这一数额符合包括俄罗斯在内的多家石油生产国之间的协议。减产是为了阻止市场供过于求造成价格下跌。</p>
+<p>However, a few days ago, the kingdom's policy changed completely when Russia refused to go along with deeper cuts.<br/>
+但是在几天前，当俄罗斯拒绝进一步削减产量，沙特王国的政策彻底改变了。</p>
+<p>Saudi Arabia is a member of the Organization of Petroleum Exporting Countries, or OPEC. It is expected that other members of that group will also increase production.<br/>
+沙特是石油输出国组织（简称欧佩克）的成员国。欧佩克预计该组织其它成员国也将会提高产量。</p>
+<p>Abu Dhabi's ADNOC on Wednesday said it would increase output from about 3 million barrels to over 4 million barrels of oil a day starting in April. In addition, the company said it would move up its plans for a 5 million barrels a day production goal. ADNOC said its plan to increase production was made in reaction to the market.<br/>
+阿布扎比的ADNOC公司周三表示，将从4月起将每天的石油产量从300万桶提升到400万桶。此外该公司还表示计划将日产量目标提高到500万桶。ADNOC公司称其计划提高产量是为了回应市场。</p>
+<p>Experts say it appears Saudi Arabia hopes to pressure Russia by controlling market share in a price war.<br/>
+专家表示，沙特似乎希望通过控制价格战中的市场份额向俄罗斯施加压力。</p>
+<p>The price of unprocessed, or crude oil went down 25 percent on Monday. It was the sharpest decrease since the 1991 Gulf War. By yesterday, the price had increased a small amount. By the end of trading, oil was at $36 a barrel.<br/>
+原油价格周一下跌了25%。这是1991年海湾战争以来的最大跌幅。到昨天为止，原油价格已经小幅回升。截至交易结束时的原油价格为36美元每桶。</p>
+<p>Eurasia Group is a private business that researches and advises clients about political risk. It describes the current oil situation as a crisis that could last "several weeks or months, until prices are low enough to change fundamental views in Moscow and Riyadh" and force a compromise.<br/>
+欧亚集团是一家研究政治风险并向客户提供建议的私营企业。它将当前的石油形势称为一场危机，这场危机可能持续数周到数月，直到价格低到足以改变俄罗斯和沙特的基本观点，并迫使各方达成妥协。</p>
+<p>I'm Susan Shand.<br/>
+我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Saudi Arabia Orders Oil Production Capacity Increase]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Saudi Arabia has directed the state oil company Aramco to increase its total possible oil production, or capacity.
+[00:13.56]It announced the move at the Saudi Tadawul stock exchange Wednesday.
+[00:21.76]A short time later, Abu Dhabi's oil and gas company ADNOC
+[00:27.52]said it was increasing production by 25 percent to 4 million barrels per day.
+[00:37.24]Saudi Arabia is working to flood the market after another oil producer, Russia, refused to agree to oil production cuts.
+[00:50.60]Worldwide, demand for oil is decreasing as the spread of the new coronavirus
+[00:57.88]has interfered with travel, transport and other industries.
+[01:04.44]Saudi Arabia said earlier this week it would increase its oil production to 12.3 million barrels a day starting in April.
+[01:16.00]That is 300,000 barrels per day more than Aramco's current production.
+[01:24.16]Now the company says it will produce up to 13 million barrels per day.
+[01:31.60]Aramco also said Wednesday that the Saudi Energy Ministry,
+[01:37.40]led by Crown Prince Mohammed bin Salman, ordered the increase.
+[01:44.12]Saudi Arabia had been producing around 9.8 million barrels per day.
+[01:51.16]That amount was in line with an agreement among a number of oil producing nations, including Russia.
+[01:59.56]The cuts were an attempt to stop the oversupply in the market that had pushed prices down.
+[02:08.68]However, a few days ago, the kingdom's policy changed completely when Russia refused to go along with deeper cuts.
+[02:20.20]Saudi Arabia is a member of the Organization of Petroleum Exporting Countries, or OPEC.
+[02:29.28]It is expected that other members of that group will also increase production.
+[02:36.20]Abu Dhabi's ADNOC on Wednesday said it would increase output
+[02:41.32]from about 3 million barrels to over 4 million barrels of oil a day starting in April.
+[02:49.08]In addition, the company said it would move up its plans for a 5 million barrels a day production goal.
+[02:57.60]ADNOC said its plan to increase production was made in reaction to the market.
+[03:06.84]Experts say it appears Saudi Arabia hopes to pressure Russia by controlling market share in a price war.
+[03:17.80]The price of unprocessed, or crude oil went down 25 percent on Monday.
+[03:24.40]It was the sharpest decrease since the 1991 Gulf War.
+[03:31.28]By yesterday, the price had increased a small amount.
+[03:35.52]By the end of trading, oil was at $36 a barrel.
+[03:42.08]Eurasia Group is a private business that researches and advises clients about political risk.
+[03:49.44]It describes the current oil situation as a crisis that could last "several weeks or months,
+[03:57.52]until prices are low enough to change fundamental views in Moscow and Riyadh" and force a compromise.
+[04:07.12]I'm Susan Shand. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

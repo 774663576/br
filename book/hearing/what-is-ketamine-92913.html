@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Is Ketamine?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, What Is Ketamine?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/what-is-ketamine.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Is Ketamine?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/what-is-ketamine.mp3" id="mp3"></a>
+<a href="mongolia-aims-to-gain-more-foreign-visitors-92912.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Caty Weaver</span><br/><span class="datetime">21 August, 2024</span><br/>
+<p>An investigation into the death of American actor Matthew Perry has led to criminal charges against five people. Perry, a star of the popular television series <em>Friends</em>, died suddenly in October. He was 54. Doctors who examined his body after death said Perry died from an <strong>overdose</strong> of the powerful drug ketamine.</p>
+<p><strong>So what is ketamine?</strong></p>
+<p>Ketamine is a powerful anesthetic. The drug is often used to put people into a deep sleep for medical operations, also called surgery. The treatment is called general anesthesia. A doctor can inject the drug into a muscle or through a liquid flow directly into a patient's veins.</p><div class="contentImage"><img alt="FILE - Matthew Perry poses for a portrait on Feb. 17, 2015, in New York. A ketamine overdose killed the American actor on October 28, 2023. He was 54 years old. (Photo by Brian Ach/Invision/AP, File)" src="https://files.21voa.com/gdb/c5bab48c-c720-4b25-96f8-8f634bd6c285_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Matthew Perry poses for a portrait on Feb. 17, 2015, in New York. A ketamine overdose killed the American actor on October 28, 2023. He was 54 years old. (Photo by Brian Ach/Invision/AP, File)</span></div>
+<p>The drug's chemistry is similar to the recreational drug called PCP. Some people use ketamine recreationally for its <strong>euphoric</strong> effects. It can cause <strong>hallucinations</strong> and can affect breathing and the heart.</p>
+<p><strong>Ketamine becomes popular</strong></p>
+<p>The United States Food and Drug Administration (FDA) approved ketamine for use only for general anesthesia. However, American doctors are free to <strong>prescribe</strong> drugs for treatments other than those approved by the FDA. This is known as off-label use.</p>
+<p>Ketamine use has seen a huge, fast rise in recent years as a treatment for pain and mental health disorders, including depression and anxiety.</p>
+<p>Perry was using it to treat depression. His usual doctors were treating him with what is called ketamine infusion therapy. However, investigators say the actor turned to other sources when his doctors refused to give him as much as he wanted.</p>
+<p>Last week, government lawyers said Perry got ketamine illegally through a group that included two doctors, Perry's assistant and a woman they identified as the “Ketamine Queen.” Perry's assistant injected the actor with ketamine — including several times on the day Perry died.</p>
+<p><strong>How else is ketamine being used?</strong></p>
+<p>Emergency medical workers also sometimes use ketamine to <strong>sedate</strong> people who appear to be out of control, aggressive or a threat to themselves or others. Some states and agencies around the country have begun to reconsider this use of ketamine because of the drug's health risks.</p>
+<p>In 2019, an American court found two emergency medical workers guilty in the overdose killing of a teenager in Colorado. The medical team injected the man with a deadly amount of ketamine during a police operation.</p>
+<p>An Associated Press investigation found that, generally, use of ketamine and similar drugs as a policing or security tool has spread quietly across the nation over the last 15 years.</p>
+<p>I'm Caty Weaver.</p>
+<p><em>The Associated Press reported this story. Caty Weaver adapted the report for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>overdose </strong><em>–n. </em>a lethal or toxic amount (as of a drug)</p>
+<p><strong>euphoric </strong><em>–adj.</em> marked by a feeling of great happiness and excitement: characterized by, based on, or producing euphoria</p>
+<p><strong>hallucination </strong><em>–n.</em> the awareness of something (as a visual image, a sound, or a smell) that seems to be experienced through one of the senses but is not real, cannot be sensed by someone else, and is usually the result of mental illness or the effect of a drug</p>
+<p><strong>prescribe </strong><em>–v.</em> to write or give medical orders, such as for drugs or other treatments</p>
+<p><strong>sedate </strong><em>–v </em><strong> </strong>to dose with sedatives, drugs that can make people sleep</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

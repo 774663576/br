@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - International Students also Learn outside of Class</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, International Students also Learn outside of Class" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/international-students-also-learn-outside-of-class.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>International Students also Learn outside of Class</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/international-students-also-learn-outside-of-class.mp3" id="mp3"></a>
+<a href="first-dibs-90346.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">28 January 2023</span><br/>
+<p>The cost of attending a college or university in the United States is very high. <a class="wsw__a" href="https://educationdata.org/average-cost-of-college">Education Data Initiative</a>, an organization that collects data on the U.S. education system, says the average college student spends more than $50,000 each school year.</p>
+<p>Some international students receive scholarships or financial aid. But many have to pay full price and often need to work outside of their class and study hours. The U.S. Immigration and Customs Enforcement agency says <a class="wsw__a" href="https://www.ice.gov/sevis/employment">students on an F-1 visa</a> are permitted to work both on, and off <strong>campus</strong>, as long as they follow certain rules.</p>
+<p>Students can also get experience with American work culture by volunteering for organizations outside of their study area.</p><div class="contentImage"><img alt="Students practice string instruments with RocMusic in this undated file photo. (Photo courtesy of RocMusic)" src="https://files.21voa.com/gdb/09320000-0a00-0242-b586-08daff3c6301_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Students practice string instruments with RocMusic in this undated file photo. (Photo courtesy of RocMusic)</span></div>
+<p>Learning English recently spoke with two international students about what they learned about American culture from their jobs.</p>
+<p><strong>The Indian pollster</strong></p>
+<p>Khushi Agnish, from India, recently finished her <strong>undergraduate</strong> studies at Quinnipiac University in the northeastern state of Connecticut.</p>
+<p>Agnish received a scholarship from Quinnipiac. But she needed a job to cover extra costs. She got a job making public opinion research phone calls for the Quinnipiac University Polling Institute. The <strong>poll </strong>researches a wide range of topics such as tensions between Russia and Ukraine and New York City's new mayor.</p>
+<p>Agnish said she made up to 100 phone calls a night for the work. One thing she learned was how to confidently speak on the telephone with Americans. She said sometimes Americans had trouble understanding her <strong>accent</strong>.</p>
+<p>"People just think if it's an Indian person calling or if they're talking to an Indian person, it's probably a <strong>scam</strong>. Other than that, a lot of times people were actually really nice."</p>
+<p>Agnish also worked at the campus technology center and volunteered at a hospital as a sexual assault <strong>counselor</strong>. At the technology center, she helped people who had computer problems, like lost files. At the hospital, she helped people who said they had been assaulted to contact the police and fill out paperwork.</p>
+<p>Agnish said she learned that in America "people are not just sitting at home or telling girls to sit at home." She said that is different than in India, where many women do not go out alone because they are concerned about rape.</p>
+<p>"I was glad I could help in some way," she said.</p>
+<p><strong>The piano player teaching kids</strong></p>
+<p>Tony Yan Tong Chen just completed his undergraduate degree at the Eastman School of Music in Rochester, New York. He is now <strong>applying</strong> to study for an advanced degree in piano performance.</p>
+<p>He came to the U.S. from New Zealand with a strong background in classical music. Along with piano, he is a skilled <strong>string</strong> musician.</p>
+<p>Chen said the best jobs at Eastman for piano players are saved for <strong>graduate</strong> students. He could do things like work in an office or direct people to their seats during musical performances. He chose not to do those jobs.</p>
+<p>Instead, Chen got a job with <a class="wsw__a" href="https://www.rocmusic.org/">ROCmusic</a> to teach young students from Rochester schools how to play music in an orchestra. Many of these students lack a musical background and do not know how to talk about music. "I had to change my vocabulary to make it <strong>accessible</strong> and help them improve," he said.</p>
+<p>"When <strong>certain</strong> students even just show up, that will really please me. So I think in general, it's just really celebrating small successes."</p>
+<p><strong>Academic advice</strong></p>
+<p>Like other international students, Agnish and Chen's work experience gave them extra money and added to their understanding of American culture.</p>
+<p>But one professor who studies education had a warning for international students: do not let your work prevent you from completing your degree on time.</p>
+<p>Walter Ecton is an assistant professor at Florida State University. He and two other professors recently wrote a paper on <a class="wsw__a" href="https://journals.sagepub.com/doi/10.1177/23328584221140410">students who work while attending college</a>. The paper noted that students who work are about 20 percent less likely to complete their degrees than those who do not. He said the best amount of work for students is five to 10 hours a week.</p>
+<p>Ecton said it is likely that international students who work while going to school learn a good deal about American culture, new kinds of people and work <strong>routines</strong>. But they need to be sure they do not put themselves in a bad situation by delaying their progress.</p>
+<p>"For international students, many of them are paying really large amounts to be over in the United States. They need to work to support themselves, but they also want to get their degrees as quickly as possible."</p>
+<p>If the students can finish on time and move on to the next part of their lives, a little bit of work can be, as Chen put it, a way to "get out of the music school <strong>bubble</strong> ... and feel more <strong>integrated</strong> into the community."</p>
+<p>I'm Caty Weaver. And I'm Dan Friedell.</p>
+<p><em>Dan Friedell wrote this story for Learning English.</em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>campus </strong>–n. the location of a school</p>
+<p><strong>undergraduate </strong>–n. the first level of higher education in the U.S.</p>
+<p><strong>poll </strong>–n. a public opinion survey</p>
+<p><strong>accent </strong>–n. a way of pronouncing words that occurs among the people in a particular region or country</p>
+<p><strong>scam </strong>–n. a dishonest way to make money by deceiving people</p>
+<p><strong>counselor </strong>–n. a person who provides help or advice</p>
+<p><strong>assault </strong>–n. a physical attack</p>
+<p><strong>apply </strong>–v. to ask for the chance to enter or attend something, such as a school</p>
+<p><strong>string</strong> –adj. a kind of instrument that makes a sound because of strings, such as a guitar, violin or cello</p>
+<p><strong>graduate </strong>–adj. a student working on an advanced degree</p>
+<p><strong>accessible </strong>–adj. understandable</p>
+<p><strong>certain </strong>–pronoun. one member of a group</p>
+<p><strong>routine </strong>–n. something that happens often or usually</p>
+<p><strong>bubble </strong>–n. a protected area, an area not influenced by outside forces</p>
+<p><strong>integrate </strong>–v. to become a member of a larger group</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Symbols of Easter</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Symbols of Easter" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/symbols-of-easter.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Symbols of Easter</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/symbols-of-easter.mp3" id="mp3"></a>
+<a href="small-living-space-returns-as-housing-prices-rise-in-us-92457.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dr. Jill Robbins</span><br/>
+<span class="datetime">28 March 2024</span><br/>
+<p>Spring has begun in the northern half of the Earth. For Christians, a major springtime holiday is Easter. This year, Easter falls on March 31. In this week's Everyday Grammar, we learn how to talk about holidays and the foods, objects and activities connected to them.</p>
+<p><strong>Easter eggs</strong></p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-f6e9-08dc4e8c9ee9_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>On Easter Sunday, families with children follow the tradition of coloring eggs and hiding them for an egg hunt. Some of the eggs are just one color. But others are painted in great detail. The Easter eggs symbolize new life and rebirth.</p>
+<p><strong>The Easter Bunny</strong></p>
+<p>There is a <strong>mythical</strong> animal we talk about at Easter, the Easter Bunny. Bunnies, or rabbits, <u>stand for</u> fertility in some cultures. That is because rabbits reproduce easily and often.</p>
+<p>In the days and weeks before Easter, toy bunnies are found in stores. So are plastic eggs that parents fill with candies to give their children on Easter morning.</p>
+<p>The American President even hosts an Easter egg "roll" at the White House on the Monday after Easter. The child who rolls their egg the farthest distance without breaking it is the winner.</p>
+<p><strong>Lamb</strong></p>
+<p>Lamb is often served at Easter meals. For Christians, lamb <u>represents</u> Jesus Christ, who Christians call the Lamb of God. Another food that is common at Easter is ham. Pigs <u>symbolized</u> good luck in Europe in the time before Christianity.</p>
+<p>You might have noticed three ways we have talked about the connections people make between the foods and symbols of Easter. They involved two transitive verbs and a phrasal verb. First, we used "symbolize," which means to be a representation or expression of something. We said that eggs symbolize new life.</p>
+<p>Next is "stands for," a phrasal verb. We said that bunnies stand for fertility. In this case, "stands for" also means to be a representation of something.</p>
+<p>Finally, we used "represents" to explain the importance and meaning of lamb.</p>
+<p><strong>Take a closer look at symbol</strong></p>
+<p>Let's look a bit more at how to use these words.</p>
+<p>"Symbolize" is the verb form of the noun "symbol." A symbol is an object, action or event that expresses a quality or idea. Let's compare the verb and noun form. We will start with an example using "symbolize."</p>
+<p><em>The lion <u>symbolizes</u> courage.</em></p>
+<p>The sentence has this structure:</p>
+<p><em>Noun phrase + symbolize + noun</em></p>
+<p>Now let's look at how to use "symbol."</p>
+<p><em>The lion is a <u>symbol</u> of courage.</em></p>
+<p>The sentence has this structure:</p>
+<p><em>Noun phrase + BE + a symbol of + noun.</em></p>
+<p>Please note that even though our two example sentences have different structures, the meaning is the same.</p>
+<p>Of course, you can create much more complex sentences and examples when using "symbolize" or "symbol." But for this lesson, we will keep things simple.</p>
+<p><strong>Stand for</strong></p>
+<p>Next, let's take a closer look at "stand for." This phrasal verb has a few different meanings. But in our description of Easter, we used "stand for" in the same way we use "symbolize." That is right -- it means to be a representation – or symbol - of something. Here is another example:</p>
+<p><em>The color yellow often <u>stands for</u> happiness and joy.</em></p>
+<p><strong>Represent</strong></p>
+<p>Finally, we have "represent." This verb has many meanings. In this lesson, "represent" means to serve as a symbol or sign of something. Let's look at this word in another example sentence.</p>
+<p><em>Wedding rings <u>represent </u>a married couple's love.</em></p>
+<p>Today, we have learned three verbs you can use to describe holiday celebrations: symbolize, stand for and represent.</p>
+<p>Let's quickly compare our three verbs. All of them are transitive verbs, meaning they take a direct object. And they can all be used in a simple structure:</p>
+<p><em>Noun or noun phrase + verb (or phrasal verb) + noun or noun phrase</em></p>
+<p>For example:</p>
+<p><em>Red <u>symbolizes</u> love</em></p>
+<p><em>Red stands for love</em></p>
+<p><em>Red <u>represents</u> love</em></p>
+<p><strong>Now it's your turn</strong></p>
+<p>Try to use all three verbs to tell us about a holiday that you celebrate. What do the foods or activities of the day symbolize, stand for or represent? You can email us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's Everyday Grammar.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Dr. Jill Robbins wrote this lesson for Learning English.</em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>symbolize</strong><em> – v.</em> used to show one thing represents or is similar to another because it is typical of that thing</p>
+<p><strong>mythical</strong> – <em>adj</em>. something or someone that exists only in stories; not true</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

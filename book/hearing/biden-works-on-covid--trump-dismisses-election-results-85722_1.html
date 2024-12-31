@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登忙着制定抗疫政策 川普忙着要推翻大选结果</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登忙着制定抗疫政策 川普忙着要推翻大选结果" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202011/biden-works-on-covid-19-trump-dismisses-election-results.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登忙着制定抗疫政策 川普忙着要推翻大选结果</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202011/biden-works-on-covid-19-trump-dismisses-election-results.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-works-on-covid-19-trump-dismisses-election-results.lrc" id="lrc"></a>
+<a href="biden-works-on-covid--trump-dismisses-election-results-85722.html" id="CnPage" target="_blank"></a>
+<a href="huge-iceberg-floats-toward-south-georgia-putting-wildlife-at-risk-85719.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">American President-elect Joe Biden is moving quickly to set up his future administration and discuss policy issues. The move comes as President Donald Trump continues to dismiss the election results, taking legal actions and demanding recounts.<br/>
+美国当选总统拜登正在迅速建立自己未来的政府以及讨论政策问题。当此之际，川普总统继续不承认选举结果，采取法律行动并要求重新计票。
+<p>Speaking Monday from Wilmington, Delaware, Biden said, "This election is over. It's time to put aside the partisanship and the rhetoric."<br/>
+拜登周一在特拉华州威尔明顿市发表讲话时表示：“这次大选已经尘埃落定。现在是时候抛弃党派立场和刺耳言论了。”</p>
+<p>He also spoke about the COVID-19 health crisis. "It doesn't matter your party, your point of view," he said. "We can save tens of thousands of lives if everyone would just wear a mask for the next few months. Not Democratic or Republican lives — American lives."<br/>
+他还谈到了新冠肺炎健康危机。他说：“不管你是什么党派，持什么观点。如果大家在未来几个月里能戴上口罩，我们就可以挽救数万人的性命。我不是说的民主党人或共和党人的性命，而是美国人的性命。”</p>
+<p>Biden said, "the goal is to get back to normal as fast as possible." He cheered the results announced of Pfizer's vaccine trial as "great news." But he warned that it would be many more months before the vaccine is widely available.<br/>
+拜登表示：“我们的目标是尽快恢复正常。”他为辉瑞公司宣布的疫苗试验结果感到高兴，称这是“重大新闻。”但是他警告说，这种疫苗的广泛使用还需要好几个月的时间。</p>
+<p>Biden and Vice President-elect Kamala Harris have been meeting with 13 scientists and public health experts expected to lead the next administration's COVID-19 effort. The group includes former Surgeon General Dr. Vivek Murthy, former Food and Drug Administration Commissioner David Kessler and Yale University public health care expert Dr. Marcella Nunez-Smith.<br/>
+拜登和当选副总统卡马拉·哈里斯已经会见了13名科学家和公共卫生专家，这些人预期将在下届政府中主导新冠肺炎的抗疫工作。这群人包括前卫生部长维维克·穆尔西博士、前食品和药物管理局局长大卫·凯斯勒博士以及耶鲁大学公共卫生专家马塞拉·努涅斯-史密斯博士。</p>
+<p>Besides fighting COVID-19, Biden and Harris said the goals of the new administration include economic recovery, racial equality and new climate change policies.<br/>
+拜登和哈马斯表示，除了对抗新冠肺炎，新政府的目标还包括经济复苏、种族平等和新的气候变化政策。</p>
+<p>During the campaign, Biden repeatedly said he will return the United States to the Paris climate agreement and support the World Health Organization. He also promised to revisit the Iranian nuclear agreement and rebuild relations with NATO allies.<br/>
+在竞选期间，拜登一再表示，他将带领美国重返巴黎气候协定，并支持世界卫生组织。他还承诺重新签订伊朗核协议，并重建与北约盟国的关系。</p>
+<p>Biden also plans to change current immigration policies, raise taxes on the wealthy and expand health care.<br/>
+拜登还计划改变当前的移民政策，提高富人税收并扩大医疗保健。</p>
+<p><b>Trump dismisses election results<br/>
+川普不承认选举结果</b></p>
+<p>With 270 Electoral College votes needed to win, Biden now has 279 and he continues to lead vote counts in Arizona and Georgia. Biden has received more than 75 million votes overall and Trump, 71 million.<br/>
+总统大选获胜需要270张选举人票，拜登目前已经获得了279票，并且仍在亚利桑那州和佐治亚州的计票中领先。拜登一共获得了超过7500万张选票，川普获得了7100万张选票。</p>
+<p>The Trump campaign has dismissed the election results so far, saying, "This election is far from over." It said it would begin to argue in court Monday "to ensure election laws are fully upheld and the rightful winner is seated." Courts in several states already have rejected a number of the campaign's legal actions.<br/>
+川普竞选委员会目前一直不承认选举结果，并称：“这次大选还远没有结束。”它称周一将会开始法庭辩论，“以确保选举法得到充分遵守，并且合法胜选者能够就任。”有些州的法院已经驳回了多起关于大选的诉讼。</p>
+<p>President Trump is facing increasing pressure to concede the election.<br/>
+川普总统正面临承认这次大选的越来越大的压力。</p>
+<p>On Sunday, George W. Bush, the only living Republican former president called Biden and Harris to congratulate them on their victory. Bush said in a statement, "The President-elect reiterated that while he ran as a Democrat, he will govern for all Americans. I offered him the same thing I offered Presidents Trump and Obama: my prayers for his success, and my pledge to help in any way I can."<br/>
+周日，唯一在世的共和党前总统小布什致电拜恩和哈里斯，祝贺他们胜选。小布什在声明中表示：“当选总统一再说明，虽然他作为民主党人参选，但他将为所有的美国人执政。就像当时对待川普和奥巴马总统一样，我祝福他取得成功，并承诺尽我所能提供帮助。”</p>
+<p>The General Services Administration is the agency responsible for helping with the process of putting a new administration in place. As of Monday, it had not started the process nor received any guidance on when to do so.<br/>
+美国总务管理局负责协助新政府上台的程序。截至周一，该机构尚未启动这一程序，也未收到任何有关何时启动这一程序的指导。</p>
+<p>Trump continued to question the election results and the voting process on the social media site Twitter. On Monday, the president also announced he had dismissed the Secretary of Defense from office. He wrote on Twitter, "Mark Esper has been terminated. I would like to thank him for his service."<br/>
+川普继续在社交媒体网站推特上质疑选举结果和投票程序。周一，川普还宣布将国防部长撤职。他在推特上写道：“马克·埃斯珀已被撤职。我要感谢他的服务。”</p>
+<p>The U.S. Constitution and federal law have established a process to seat a president-elect.<br/>
+美国宪法和联邦法律建立了一套当选总统上台的流程。</p>
+<p>American states will meet on December 8 to choose electors who will vote for the winner of the presidential election. On December 14, the electors will meet to vote in a process known as the Electoral College.<br/>
+美国各州将于12月8日举行会议选出选举人，这些人将投票给总统大选中（该州）的胜选者。12月14日，选举人团将通过通过所谓的选举人团制度进行投票。</p>
+<p>The entire U.S. Congress will meet on January 6, 2021 to officially count the Electoral College votes. The president-elect will be sworn in on January 20 at noon.<br/>
+美国国会全体议员将于2021年1月6日开会，正式清点选举人团的票数。当选总统将于1月20日中午宣誓就职。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Works on COVID-19, Trump Dismisses Election Results]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]American President-elect Joe Biden is moving quickly
+[00:05.36]to set up his future administration and discuss policy issues.
+[00:12.48]The move comes as President Donald Trump
+[00:15.96]continues to dismiss the election results,
+[00:19.64]taking legal actions and demanding recounts.
+[00:24.44]Speaking Monday from Wilmington, Delaware,
+[00:28.36]Biden said, "This election is over.
+[00:32.20]It's time to put aside the partisanship and the rhetoric."
+[00:37.72]He also spoke about the COVID-19 health crisis.
+[00:42.88]"It doesn't matter your party, your point of view," he said.
+[00:47.36]"We can save tens of thousands of lives
+[00:50.92]if everyone would just wear a mask for the next few months.
+[00:56.20]Not Democratic or Republican lives — American lives."
+[01:02.32]Biden said, "the goal is to get back to normal as fast as possible."
+[01:09.32]He cheered the results announced of Pfizer's vaccine trial as "great news."
+[01:16.40]But he warned that it would be many more months
+[01:20.00]before the vaccine is widely available.
+[01:24.56]Biden and Vice President-elect Kamala Harris
+[01:28.76]have been meeting with 13 scientists and public health experts
+[01:34.20]expected to lead the next administration's COVID-19 effort.
+[01:40.80]The group includes former Surgeon General Dr. Vivek Murthy,
+[01:46.28]former Food and Drug Administration Commissioner David Kessler
+[01:51.60]and Yale University public health care expert Dr. Marcella Nunez-Smith.
+[01:59.44]Besides fighting COVID-19, Biden and Harris said
+[02:04.12]the goals of the new administration include economic recovery,
+[02:09.28]racial equality and new climate change policies.
+[02:15.08]During the campaign, Biden repeatedly said
+[02:18.96]he will return the United States to the Paris climate agreement
+[02:23.92]and support the World Health Organization.
+[02:28.16]He also promised to revisit the Iranian nuclear agreement
+[02:32.88]and rebuild relations with NATO allies.
+[02:37.20]Biden also plans to change current immigration policies,
+[02:42.92]raise taxes on the wealthy and expand health care.
+[02:48.76]With 270 Electoral College votes needed to win,
+[02:53.92]Biden now has 279 and he continues to lead
+[03:00.24]vote counts in Arizona and Georgia.
+[03:04.60]Biden has received more than 75 million votes overall
+[03:10.00]and Trump, 71 million.
+[03:14.16]The Trump campaign has dismissed the election results so far,
+[03:18.80]saying, "This election is far from over."
+[03:23.12]It said it would begin to argue in court Monday
+[03:27.12]"to ensure election laws are fully upheld
+[03:31.28]and the rightful winner is seated."
+[03:35.52]Courts in several states already have rejected
+[03:39.44]a number of the campaign's legal actions.
+[03:43.80]President Trump is facing increasing pressure to concede the election.
+[03:50.80]On Sunday, George W. Bush, the only living Republican former president
+[03:57.00]called Biden and Harris to congratulate them on their victory.
+[04:03.32]Bush said in a statement, "The President-elect reiterated
+[04:08.48]that while he ran as a Democrat, he will govern for all Americans.
+[04:14.32]I offered him the same thing I offered Presidents Trump and Obama:
+[04:20.84]my prayers for his success, and my pledge to help in any way I can."
+[04:28.44]The General Services Administration is the agency responsible
+[04:33.36]for helping with the process of putting a new administration in place.
+[04:39.56]As of Monday, it had not started the process
+[04:43.36]nor received any guidance on when to do so.
+[04:48.36]Trump continued to question the election results
+[04:51.92]and the voting process on the social media site Twitter.
+[04:56.92]On Monday, the president also announced
+[05:00.44]he had dismissed the Secretary of Defense from office.
+[05:06.36]He wrote on Twitter, "Mark Esper has been terminated.
+[05:11.56]I would like to thank him for his service."
+[05:15.76]The U.S. Constitution and federal law
+[05:19.04]have established a process to seat a president-elect.
+[05:23.92]American states will meet on December 8 to choose electors
+[05:29.48]who will vote for the winner of the presidential election.
+[05:34.12]On December 14, the electors will meet to vote
+[05:38.80]in a process known as the Electoral College.
+[05:43.60]The entire U.S. Congress will meet on January 6, 2021
+[05:50.24]to officially count the Electoral College votes.
+[05:54.84]The president-elect will be sworn in on January 20 at noon.
+[06:02.76]I'm Caty Weaver.
+[06:04.36]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

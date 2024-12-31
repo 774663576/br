@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Can Happen in US Presidential Election</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, What Can Happen in US Presidential Election" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202010/what-can-happen-in-us-presidential-election.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Can Happen in US Presidential Election</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202010/what-can-happen-in-us-presidential-election.mp3" id="mp3"></a>
+<a href="more-women-lead-atlantic-city-gambling-operations-85492.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">04 October 2020</span><br/>
+<p>Election Day is usually the end of the presidential campaign in the United States. This year, it could be just the beginning.</p>
+<p>Republican and Democratic Party activists are preparing for possible legal fights over ballots, voting rights, and the process for seating the winner.</p>
+<p>All of this comes as the country is dealing with the coronavirus health crisis, also known as COVID-19. The virus has infected more than seven million people nationwide. More than 200,000 have died from the disease.</p>
+<p>The U.S. Constitution and federal law have established the following process to seat a president. It is a little more complex than simply giving the <strong>keys</strong> to the White House to the winner.</p>
+<div class="contentImage"><img alt="FILE - People wait in a line to vote in the Georgia's primary election at Park Tavern on Tuesday, June 9, 2020, in Atlanta. (AP Photo/Brynn Anderson)" src="https://files.21voa.com/gdb/d967a08e-dfe3-47a7-a01b-d3e7a515e40c_w268_r0.jpg"/><br/>
+<span class="imagecaption">FILE - People wait in a line to vote in the Georgia's primary election at Park Tavern on Tuesday, June 9, 2020, in Atlanta. (AP Photo/Brynn Anderson)</span></div>
+<p><strong>Election day</strong></p>
+<p>This year, election day is Tuesday, November 3.</p>
+<p>Voters in all 50 states and the District of Columbia are not voting directly for the president. They are instead voting for a list of electors who promise to support one of the presidential candidates.</p>
+<p>Citizens of U.S. territories including Puerto Rico, Guam and American Samoa cannot vote in the presidential election. But they can vote if their official <strong>residency</strong> is in one of the states or Washington, DC.</p>
+<p>In some states, voters can vote in person or mail in <strong>absentee </strong>ballots before November 3. But the voting stops when voting stations close on election day. Then, states can begin counting the ballots.</p>
+<p>Each state has its own <strong>deadline</strong> for confirming election results. However, legal action or other issues could delay the vote count.</p>
+<p><strong>Deadline to choose electors</strong></p>
+<p>December 8 is known as the <a class="wsw__a" href="https://www.abajournal.com/news/article/dec.-8-safe-harbor-deadline-is-a-critical-date-in-nightmare-election-scenarios">safe harbor deadline</a>. That is the deadline for states to choose electors who will vote for the winner of the presidential election. The U.S. Congress cannot question or challenge any electors named by this date.</p>
+<p>This year, some people fear that delays from mail-in ballots and vote-counting disputes might not produce a winner in some states by the deadline.</p>
+<p>Writing in <em>The New Yorker</em>, Jeffrey Toobin <a class="wsw__a" href="https://www.newyorker.com/magazine/2020/09/28/the-legal-fight-awaiting-us-after-the-election">describes</a> a possible conflict in four states: Michigan, North Carolina, Pennsylvania and Wisconsin. All four have Republican-controlled legislatures and the state governor is a Democrat. If the legislature was to appoint one list of electors, but the governor rejects it or sends a different list, what would happen? His answer is simply, "No one knows."</p>
+<p>
+<strong>Electoral College</strong></p>
+<p>December 14 is the date when electors are required to meet and vote for president. This process is known as the <a class="wsw__a" href="https://www.archives.gov/electoral-college/about">Electoral College</a>.</p>
+<p>The Electoral College currently has 538 members. They will meet in each state and vote for the president and vice president. A majority of 270 electoral votes is required to elect the president.</p>
+<p>There have been five <a class="wsw__a" href="https://history.house.gov/Institution/Electoral-College/Electoral-College/">winners</a> of the Electoral College who actually lost the popular vote. They are John Quincy Adams in 1824; Rutherford B. Hayes in 1876; Benjamin Harrison in 1888; George W. Bush in 2000; and Donald J. Trump in 2016.</p>
+<p>A copy of the official Electoral College results will go to the president of the Senate, who is also the U.S. Vice President by December 23.</p>
+<p><strong>Congress to confirm the winner</strong></p>
+<p>On January 3, 2021, members of the new Congress take office. Three days later, the new Congress will count the electoral votes and officially confirm the winner.</p>
+<p>But if no candidate wins a clear majority of electors, the House of Representatives will vote to decide who becomes president. This process is established in the 12th Amendment to the U.S. Constitution. Each state's delegation gets one vote, and the winner of the majority of state delegations becomes president. The Senate votes for the vice president.</p>
+<p>This has happened two times in U.S. history.</p>
+<p>In 1824, the Electoral College votes were divided among four candidates. Andrew Jackson had 99 votes. John Quincy Adams came in second with 85. William Crawford received 41 and Henry Clay, the House Speaker, had 37. The House chose Adams over Jackson for president. And Adams named Clay as his Secretary of State.</p>
+<p>
+On February 1, 1877, Congress <a class="wsw__a" href="https://history.house.gov/HistoricalHighlight/Detail/35920?ret=True">met</a> to count the electoral votes from the 1876 presidential election. Democrat Samuel Tilden had won the popular vote over Rutherford B. Hayes. But Tilden was one vote short of the 185 electoral votes needed to win.</p>
+<p>However, Republican lawmakers disputed election results from Oregon and three southern states: Florida, Louisiana and South Carolina. Both Tilden and Hayes <strong>submitted</strong> electoral votes from the three southern states claiming victory.</p>
+<p>The Democratic-controlled House and the Republican majority Senate met 15 times to decide on the winner. It finally awarded the disputed election to Hayes by one electoral vote.</p>
+<p><strong>Presidential succession</strong></p>
+<p>The Constitution states that the president's term in office begins on January 20. The president is sworn-in by the middle of the day.</p>
+<p>If Congress has yet to confirm a winner of the presidential election, federal law requires the nation to have an acting president. The Speaker of the House would then serve as Acting President under current <a class="wsw__a" href="https://uscode.house.gov/view.xhtml?req=granuleid:USC-prelim-title3-section19&amp;num=0&amp;edition=prelim">presidential succession law</a>.</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Hai Do wrote this story for Learning English. George Grow was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p>_______________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>key - </strong><em>adj.</em><strong> </strong>extremely or crucially important</p>
+<p><strong>residency - </strong><em>n.</em><strong> </strong>a period of time when someone lives in a place</p>
+<p><strong>absentee - </strong><em>adj. </em>not being present</p>
+<p><strong>deadline - </strong><em>n. </em>a date or time when something must be finished <strong>: </strong>the last day, hour, or minute that something will be accepted</p>
+<p><strong>submit - </strong><em>v. </em>to leave to the judgment or approval of someone else</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

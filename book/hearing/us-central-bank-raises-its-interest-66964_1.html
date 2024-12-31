@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美联储08年以来首次加息</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美联储08年以来首次加息" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/us-central-bank-raises-its-interest.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美联储08年以来首次加息</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/us-central-bank-raises-its-interest.mp3" id="mp3"></a>
+<a href="/static/lrc/us-central-bank-raises-its-interest.lrc" id="lrc"></a>
+<a href="us-central-bank-raises-its-interest-66964.html" id="CnPage" target="_blank"></a>
+<a href="new-education-law-gives-states-more-control-66936.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The United States central bank has raised an important interest rate by one-fourth of 1 percent.<br/>美国央行（即美联储）将一项重要利率提高了0.25%。</p>
+<p>The move may have been small, but it marks the first time since late 2008 that the Federal Reserve has raised important interest rates that it controls. The federal funds rate, a rate paid by banks for short-term loans, is now one-half of 1 percent.<br/>该动作可能很小，但是它标志着美联储自2008年年底以来首次提高其控制的一项重要利率。银行短期贷款支付的联邦基金利率目前为0.5%。</p>
+<p>The Federal Reserve Open Market Committee decides monetary policy for the U.S. The committee announced the change Wednesday in a statement on economic policy. It had met for two days in Washington.<br/>美联储公开市场委员会控制着美国的货币政策。该委员会周三在一份经济政策声明中宣布了这项变化。在此之前该委员会在华盛顿进行了两天的会谈。</p>
+<p>Janet Yellen, the first woman to lead the Federal Reserve System, spoke after the announcement.<br/>美联储首位女性掌门人耶伦在该消息宣布后做了发言。</p>
+<p>The committee's decision was based on a few factors, Yellen said. Economic growth is expected to continue in the U.S. Another reason to increase interest rates, Yellen noted, was the low official rate of inflation. The central bank has said its target inflation rate is 2 percent. It says that rate would help support employment and keep prices stable. However, inflation currently is not at the target rate, but below 1 percent.<br/>耶伦表示，该委员会的决定是基于几项因素。美国经济增长预期将会继续。她指出，加息的另一个原因是官方通货膨胀率很低。央行曾表示其目标通胀率为2%，这一通货膨胀率将有助于支持就业和保持物价稳定。然而，目前的通货膨胀率并非处于目标通胀率，而是低于1%。</p>
+<p>The high exchange value of the dollar has also kept inflation low, Yellen said. The strong dollar means the prices of imported products remain low.<br/>耶伦表示，美元的高汇率也保证了通货膨胀率低。强势美元意味着进口产品价格维持很低。</p>
+<p>The federal reserve chief also said the strong labor market provided another reason to raise rates. The U.S. economy is adding about 200,000 jobs each month.<br/>美联储主席耶伦还表示，就业市场强劲是加息的另一个原因。美国经济每月新增约20万个就业岗位。</p>
+<p>Yellen described the path to higher interest rates as normalization. The central bank's interest rates are well below historical averages.<br/>耶伦称提高利率之路为正常化。美联储利率远远低于历史平均水平。</p>
+<p>The Federal Reserve, or Fed, also released its expectation for some important economic numbers. The fed expects its federal funds rate to reach between 2 percent and 4 percent by 2018.<br/>美联储还发布了该机构对一些重要经济数据的预期。美联储预计到2018年联邦基金利率将达到2%和4%之间。</p>
+<p>Yellen was asked if the Fed may have moved too soon in increasing interest rates. She answered that the central bank had weighed many risks and had made a small move.<br/>耶伦被问到，美联储在加息上是否步子迈得太大。她回答说，央行衡量了诸多风险并做出了一些小的举措。</p>
+<p>She said, "The Fed's decision today reflects our confidence in the U.S. economy."<br/>她说，“美联储的今天的决定反映出了我们对美国经济的信心。”</p>
+<p>The central bank has kept the interest rates it controls at nearly zero to support lending and economic activity. Financial policymakers considered this necessary as the country recovered from the "Great Recession" from 2007 to 2009.<br/>美联储一直将其控制的利率维持接近于零以支持信贷和经济活动。财政政策制定者认为在美国经济从2007年到2009年的大萧条中恢复之际，此举很有必要。</p>
+<p>During that period, home prices dropped sharply and unemployment jumped in the worst financial crisis since the 1930s.<br/>在那期间，在这场20世纪30年代以来最严重的金融危机中，房价大跌，失业率飙升。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.48]The United States central bank has raised an 
+[00:03.52]important interest rate by one-fourth of 1 percent. 
+[00:07.96]The move may have been small, 
+[00:10.48]but it marks the first time since late 2008 
+[00:14.56]that the Federal Reserve has raised important interest rates that it controls. 
+[00:21.72]The federal funds rate, 
+[00:23.68]a rate paid by banks for short-term loans, 
+[00:27.24]is now one-half of 1 percent. 
+[00:30.56]The Federal Reserve Open Market Committee decides monetary policy. 
+[00:36.68]The committee announced the change Wednesday 
+[00:39.56]in a statement on economic policy. 
+[00:42.80]It had met for two days in Washington.
+[00:46.96] Janet Yellen, the first woman to lead the Federal Reserve System, 
+[00:51.64]spoke after the announcement.
+[00:55.68]The committee's decision was based on a few factors, Yellen said. 
+[01:00.96]Economic growth is expected to continue in the U.S. 
+[01:05.80]Another reason to increase interest rates, Yellen noted, 
+[01:09.84]was the low official rate of inflation. 
+[01:13.52]The central bank has said its target inflation rate is 2 percent.  
+[01:19.56]It says that rate would help support employment and keep prices stable. 
+[01:26.20]However, inflation currently is not at the target rate, 
+[01:31.04]but below 1 percent. 
+[01:34.24]The high exchange value of the dollar 
+[01:37.36]has also kept inflation low, Yellen said. 
+[01:41.56]The strong dollar means the prices of imported products remain low.   
+[01:48.84]The federal reserve chief also said the strong labor market 
+[01:53.56]provided another reason to raise rates. 
+[01:57.88]The U.S. economy is adding about 200,000 jobs each month. 
+[02:05.00]Yellen described the path to higher interest rates as normalization. 
+[02:11.68]The central bank's interest rates are well below historical averages. 
+[02:18.48]The Federal Reserve, or Fed, also released its expectation 
+[02:23.86]for some important economic numbers. 
+[02:27.80]The fed expects its federal funds rate 
+[02:30.92]to reach between 2 percent and 4 percent by 2018.   
+[02:38.20]Yellen was asked if the Fed may have moved too soon 
+[02:42.48]in increasing interest rates. 
+[02:45.28]She answered that the central bank 
+[02:47.76]had weighed many risks and had made a small move.  
+[02:52.76]She said, "The Fed's decision today 
+[02:55.84]reflects our confidence in the U.S. economy." 
+[03:01.00]The central bank has kept the interest rates it controls 
+[03:05.36]at nearly zero to support lending and economic activity. 
+[03:11.44]Financial policymakers considered this necessary 
+[03:15.72]as the country recovered from the "Great Recession" 
+[03:19.56]from 2007 to 2009.  
+[03:24.08]During that period, home prices dropped sharply 
+[03:27.96]and unemployment jumped in the worst financial crisis 
+[03:32.60]since the 1930s.  
+[03:35.48]I'm Mario Ritter.                                                                        
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

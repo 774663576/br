@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国年轻人不及父辈富有</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美国年轻人不及父辈富有" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201808/young-americans-are-less-wealthy-than-their-parents.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国年轻人不及父辈富有</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201808/young-americans-are-less-wealthy-than-their-parents.mp3" id="mp3"></a>
+<a href="/static/lrc/young-americans-are-less-wealthy-than-their-parents.lrc" id="lrc"></a>
+<a href="young-americans-are-less-wealthy-than-their-parents-79833.html" id="CnPage" target="_blank"></a>
+<a href="learn-how-to-catch-lightning-in-a-bottle--79826.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The cost of living in the United States is going up, notes writer Alissa Quart. As reported in the New York Post, Quart points to "the costs of housing, education, health care and child care in particular."<br/>作者艾丽莎·夸特（Alissa Quart）指出，美国的生活成本正在上涨。夸特在《纽约时报》的报道中指出“尤其是住房、教育、医疗和儿童保育费用。”
+<p>At the same time, a new study found that half of Americans born in the 1980s are falling behind their parents economically. The study is a project of researchers at Stanford University, Harvard University, and the University of California, Berkeley. Their report is called "The Fading American Dream."<br/>与此同时，一项新的研究发现，有一半的美国80后在经济上落后于他们的父母。该研究是斯坦福大学、哈佛大学和加州大学伯克利分校研究人员的一个项目。他们的报告名为《衰落的美国梦》。</p>
+<p>Together, these findings show that many younger adults are experiencing "downward mobility." In other words, they are not doing as well, either socially or economically, as their parents were at the same age.<br/>这些研究结果一同展现了很多年轻人正在经历“向下流动”。换句话说，他们在社会或经济方面不及同年龄阶段的父母。</p>
+<p><br/><strong>Will things always get better?<br/>一切会好转吗?</strong></p>
+<p>The idea of downward mobility is especially troubling for Americans, writes Robert Samuelson in The Washington Post. He says most U.S. citizens believe that, over time, the amount of money they earn will rise and life will get easier.<br/>罗伯特·萨缪尔森（Robert Samuelson）在《华盛顿邮报》上写道，向下流动让美国人尤为不安。他说，大多数美国公民认为，随着时间推移，他们的收入会越来越高，生活也会越来越好。</p>
+<p>And for some, that belief has come true.<br/>对一些人来说，这种信念已经成为现实。</p>
+<p>In the "Fading American Dream" study, researchers found that 90 percent of Americans born in the 1940s grew up to earn more than their parents. That percentage is so high, say the researchers, partly because of historical events. In the 1930s, the U.S. economy was in a severe depression, and most people's earnings went down. But in the 1950s, the economy expanded, and most people's incomes went up. As a result, almost all Americans born in the 1940s experienced upward mobility.<br/>在《衰落的美国梦》这项研究中，研究人员发现，90%的40后长大后的收入超过了他们的父母。研究人员表示，这个比例如此之高，部分原因在于历史性事件。在上世纪30年代，美国经济陷入严重萧条，大多数人的收入下降。但是20世纪50年代经济增长，大多数人收入上涨。结果，几乎所有的40后都经历了向上流动。</p>
+<p>But among members of this generation, only about 60 percent of their children earned more money than they did. And only 50 percent of children born in the following 10 years were earning more than their parents at the same age.<br/>但是在这一代人中，他们的孩子只有约60%的人的收入超过了他们。而接下来10年出生的孩子只有50%的人的收入超过了同年龄阶段的父母。</p>
+<p>In other words, Americans' ease of living is going down. In technical terms, the economists write, "Absolute mobility has fallen sharply" over the past 50 years.<br/>换句话说，美国人的生活轻松度正在下降。经济学家写道，从技术角度来看，过去50年来，“整个社会流动已经大幅下滑。”</p>
+<p><strong>The middle class<br/>中产阶级</strong></p>
+<p>Alissa Quart wrote a book about the financial difficulties of everyday Americans. It is called Squeezed: Why Our Families Can't Afford America.<br/>夸特写了一本关于美国人日常经济困难的书。这本书名为《挤压：为什么我们的家庭承担不起美国》。</p>
+<p>In her book, Quart tells about teachers who are struggling to pay for housing, child care and other regular costs. One high school teacher said he drives for ride sharing service Uber at night to earn more money. He corrects students' papers between riders.<br/>夸特在书中讲述了那些付不起住房、儿童保育和其它常规花销的教师。一位高中老师说他晚上去跑优步（Uber）赚钱。他在开车间隙批改学生的作业。</p>
+<p>Another man, a college professor, only earns enough to pay for simple food, such as pasta and potatoes, for his children. A different college professor turned to government assistance to feed her child and pay for a doctor.<br/>另一位大学教授的收入只够给他的孩子买一些简单的食物，例如意大利面和土豆。还有一位大学教授求助于政府援助来养育孩子以及看病。</p>
+<p>Quart says even lawyers increasingly cannot earn an income that enables them to meet their needs. The problem of decreasing incomes in their field is made worse by debt they may have from law school.<br/>夸特表示，甚至律师也越来越无法获得能够满足他们需求的收入。他们上法学院时欠下的债务（学生贷款）使得他们专业领域收入下降的问题更加严重。</p>
+<p><strong>What caused these problems?<br/>问题根源</strong></p>
+<p>Quart and the economists who studied these issues say many things have led to lower incomes and downward mobility.<br/>夸特和研究这些问题的其他经济学家表示，很多原因导致了收入下降和社会向下流动。</p>
+<p>The economic recession of 2007 to 2009 is partly to blame, they say.<br/>他们称部分原因是由于2007年到2009年的经济衰退。</p>
+<p>Modern technology also plays a part. Quart says robots threaten to reduce the earnings of health care workers, truckers, reporters, and people who work at supermarkets, drug stores and tax preparation services.<br/>现代科技也是一个原因。夸特表示，机器人可能会降低医疗人员、卡车司机、记者以及超市、药店和报税公司从业人员的收入。</p>
+<p>In The Washington Post, Robert Samuelson noted that poor schools, a weak housing industry and too many government rules also are to blame.<br/>萨缪尔森在《华盛顿邮报》上指出，烂学校、弱势房地产业以及政府监管过多也是原因之一。</p>
+<p>With all these things – and more – partly responsible, what is the solution? These experts say the answer is complex. But all point to one issue that needs to be examined: economic inequality. Quartz writes that while America is one of the richest countries in the world, it also has one of the biggest divides between the wealthy and the poor.<br/>所有这些，以及其它一些因素都是部分原因。那有什么解决方案呢？这些专家表示解决办法非常复杂。但是所有人都指出需要审视一个问题：经济不平等。夸特写道，虽然美国是全球最富有的国家之一，但是贫富差距也是最大的。</p>
+<p>The researchers in the "Fading American Dream" study make a similar observation. They say raising GDP -- the gross domestic product – will not significantly improve the economic situation of most Americans. A higher GDP may help only those who are already doing well.<br/>《衰落的美国梦》这项研究中的研究人员发表了类似言论。他们表示，国内生产总值不断提高无法显著改善大多数美国人的经济状况。国内生产总值提高可能只会帮助那些已经做得很好的人。</p>
+<p>Instead, the economists say, the United States could try to repeat something Americans born in the 1940s experienced. As those children grew up, they almost all benefited from a better economy.<br/>经济学家表示，相反，美国可以尝试重复40后的经历。随着40后的孩子长大，他们几乎都从经济改善中受益。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳森·埃文斯。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Young Americans Are Less Wealthy Than Their Parents]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.24]The cost of living in the United States is going up, notes writer Alissa Quart.
+[00:08.01]As reported in the New York Post, Quart points to "the costs of housing,
+[00:14.96]education, health care and child care in particular."
+[00:21.64]At the same time, a new study found that half of Americans born in the 1980s
+[00:29.44]are falling behind their parents economically.
+[00:34.48]The study is a project of researchers at Stanford University,
+[00:39.64]Harvard University, and the University of California, Berkeley.
+[00:45.88]Their report is called "The Fading American Dream."
+[00:51.64]Together, these findings show that many younger adults
+[00:56.80]are experiencing "downward mobility."
+[01:01.12]In other words, they are not doing as well,
+[01:05.12]either socially or economically,
+[01:07.96]as their parents were at the same age.
+[01:12.80]The idea of downward mobility is especially troubling for Americans,
+[01:18.80]writes Robert Samuelson in The Washington Post.
+[01:23.72]He says most U.S. citizens believe that, over time,
+[01:29.08]the amount of money they earn will rise and life will get easier.
+[01:36.00]And for some, that belief has come true.
+[01:41.28]In the "Fading American Dream" study,
+[01:44.24]researchers found that 90 percent of Americans born in the 1940s
+[01:50.28]grew up to earn more than their parents.
+[01:54.36]That percentage is so high, say the researchers,
+[01:58.64]partly because of historical events.
+[02:03.12]In the 1930s, the U.S. economy was in a severe depression,
+[02:08.68]and most people's earnings went down.
+[02:13.00]But in the 1950s, the economy expanded,
+[02:17.40]and most people's incomes went up.
+[02:21.01]As a result, almost all Americans born in the 1940s experienced upward mobility.
+[02:31.00]But among members of this generation,
+[02:33.56]only about 60 percent of their children earned more money than they did.
+[02:39.64]And only 50 percent of children born in the following 10 years
+[02:45.02]were earning more than their parents at the same age.
+[02:49.92]In other words, Americans' ease of living is going down.
+[02:56.40]In technical terms, the economists write,
+[03:00.12]"Absolute mobility has fallen sharply" over the past 50 years.
+[03:06.96]Alissa Quart wrote a book about the financial difficulties of everyday Americans.
+[03:14.28]It is called Squeezed: Why Our Families Can't Afford America.
+[03:22.24]In her book, Quart tells about teachers
+[03:26.13]who are struggling to pay for housing, child care and other regular costs.
+[03:33.48]One high school teacher said he drives
+[03:36.76]for ride sharing service Uber at night to earn more money.
+[03:42.88]He corrects students' papers between riders.
+[03:48.20]Another man, a college professor, only earns enough to pay for simple food,
+[03:54.80]such as pasta and potatoes, for his children.
+[03:59.39]A different college professor turned to government assistance
+[04:03.83]to feed her child and pay for a doctor.
+[04:08.12]Quart says even lawyers increasingly cannot earn an income
+[04:13.19]that enables them to meet their needs.
+[04:16.96]The problem of decreasing incomes in their field is made worse
+[04:21.30]by debt they may have from law school.
+[04:25.56]Quart and the economists who studied these issues
+[04:29.60]say many things have led to lower incomes and downward mobility.
+[04:36.72]The economic recession of 2007 to 2009 is partly to blame, they say.
+[04:44.81]Modern technology also plays a part.
+[04:49.20]Quart says robots threaten to reduce the earnings of health care workers,
+[04:54.96]truckers, reporters, and people who work at supermarkets,
+[04:59.56]drug stores and tax preparation services.
+[05:04.96]In The Washington Post, Robert Samuelson noted that poor schools,
+[05:10.52]a weak housing industry and too many government rules also are to blame.
+[05:18.48]With all these things – and more – partly responsible,
+[05:22.96]what is the solution?
+[05:25.64]These experts say the answer is complex.
+[05:30.44]But all point to one issue that needs to be examined: economic inequality.
+[05:38.40]Quartz writes that while America is one of the richest countries in the world,
+[05:44.00]it also has one of the biggest divides between the wealthy and the poor.
+[05:51.96]The researchers in the "Fading American Dream" study make a similar observation.
+[05:59.28]They say raising GDP -- the gross domestic product
+[06:04.16]– will not significantly improve the economic situation of most Americans.
+[06:11.08]A higher GDP may help only those who are already doing well.
+[06:17.78]Instead, the economists say, the United States
+[06:22.72]could try to repeat something Americans born in the 1940s experienced.
+[06:29.32]As those children grew up, they almost all benefited from a better economy.
+[06:36.44]I'm Jonathan Evans.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

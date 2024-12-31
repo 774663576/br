@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Learn about US Presidential Campaigns</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, This is America, Learn about US Presidential Campaigns" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/learn-about-us-presidential-campaigns.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Learn about US Presidential Campaigns</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/learn-about-us-presidential-campaigns.mp3" id="mp3"></a>
+<a href="/static/lrc/learn-about-us-presidential-campaigns.lrc" id="lrc"></a>
+<a href="businesses-recover-from-major-worldwide-tech-outage-92829.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">25 July, 2024</span><br/>
+<p>Every four years, the United States holds an election for the president in November. This lesson aims to help teachers and learners understand the political processes and expressions used during the election campaign.</p>
+<p><strong>The political parties</strong></p>
+<p>Let us begin with the expression, political party. In elections, parties organize candidates who share party members' ideas about how government should operate. They try to win elections to gain and keep political power.</p><div class="contentImage"><img alt="Images representing the Republican Party and the Democratic Party in the United States." src="https://files.21voa.com/gdb/01000000-0aff-0242-253f-08dc81a74f05_cx0_cy5_cw0_w268_r1.jpeg"/><br/><span class="imagecaption">Images representing the Republican Party and the Democratic Party in the United States.</span></div>
+<p>There are two major political parties in the U.S. They are the Democratic Party and the Republican Party. There are other small political parties at the national level. These include the Libertarian and Green parties.</p>
+<p><strong>Primaries and caucuses</strong></p>
+<p>Each of the U.S. states and territories holds votes early in the election year. In many states and territories, these votes are called <strong>primaries</strong>. You may know the word “primary” as an adjective meaning “happening or coming first” as in “primary school.” When speaking of elections, it is a noun, but it has a similar meaning – it is the first election in a voting process that takes place over one year.</p>
+<p>You might also hear the term <strong>caucus</strong>. A caucus is also a kind of election, but it is held privately by the party and usually does not involve state election officials or equipment. The Iowa caucus was for a long time the first presidential contest during an election year.</p>
+<p>In a primary or a caucus, voters choose the party's candidates for local and state offices as well as for national offices. The candidates who get the most votes become the candidates for the election in the fall.</p>
+<p>Primaries can be “open” or “closed.” Anyone can take part in an open primary election — even members of another party. Only registered party members can vote in a closed primary.</p>
+<p><strong>Delegates</strong></p>
+<p>In some states, voters choose delegates in the primaries.<strong> </strong>State party organizations have different rules for choosing them. Delegates are people who will attend their party's convention, or general meeting.</p>
+<p>When a delegate is elected to choose a particular candidate, we say the delegate is <strong>pledged</strong> to the candidate. To pledge is to promise something.</p>
+<p><strong>Conventions</strong></p>
+<p>Each party holds a national convention – a large meeting where the delegates officially <strong>nominate</strong> the candidate that the party supports for the presidential election. The verb “nominate” means to officially choose someone as a candidate for a position. You will hear some other forms of the word in election news.</p>
+<p><strong>Nomination</strong></p>
+<p>To describe the process of having the delegates choose a candidate, we use the noun form, “nomination.” At the convention, the candidate who gains the majority of delegates is called the “nominee.” The nominee gives a speech to accept the nomination.</p>
+<p><strong>The party platform</strong></p>
+<p>The party platform is a statement of the ideology of the party and its candidate. At the party convention, the organizing committee shares its platform. The platform is a statement of the policies that the party hopes to put in place during its candidate's term in office.</p>
+<p><strong>The campaign trail</strong></p>
+<p>Presidential candidates travel the country speaking to voters at a series of events called <strong>rallies</strong>. Reporters use the expression “campaign trail” to describe these events. This is a <strong>metaphor</strong> for progressing along a path toward a goal. The election campaign is sometimes called a “race,” another metaphor comparing the election campaign to a sporting competition.</p>
+<p><strong>Debates</strong></p>
+<p>Part of the campaign process is for the candidates to debate each other. These are televised events where a reporter asks questions that interest the public and gives each candidate a limited time to answer them. The form of the political debates is not the same as traditional <strong>academic</strong> debates, where teams compete under clear rules and time limits.</p>
+<p><strong>Donors</strong></p>
+<p>Presidential candidates and others who run for public office must find money to pay for those rallies, television advertising, and campaign workers. A common way to pay for a campaign is to ask for money. People who give to a candidate are donors. The Federal Election Commission makes rules about how much, when, and how donations can be made.</p>
+<p><strong>Polls and the Polls</strong></p>
+<p>Researchers get the opinions of voters in an effort to guess, or predict, the results of an upcoming election. They do this with <strong>polls</strong>, or public opinion studies. This word has two meanings in the elections. One is where a researcher might ask you about your party affiliation and which candidate you plan to support in a telephone call. Your party affiliation is the party you are registered with or that you support.</p>
+<p>The other meaning of “poll” is the place where you go to vote on election day. We can also use “polling place.” Schools, religious centers and public buildings can be polling places. In them, voters <strong>cast </strong>their ballot secretly. That means they fill out their ballot without pressure from others in the room and turn in their ballot to be counted by poll workers.</p>
+<p>In the last two election years of 2020 and 2022, people could send in their ballots by mail. But polling places remain important for processing and counting ballots.</p>
+<p><strong>Privacy and politics</strong></p>
+<p>Now that you have some of the expressions used to talk about the presidential campaign, you should use them with some care. It is not normal to ask someone what party he or she is a member of although many people will offer that information freely.</p>
+<p>In some situations, such as among close friends, you will hear Americans talk about the candidates and voice their opinions openly. But when talking with a new <strong>acquaintance</strong> or a stranger, it is best to avoid asking about political affiliation.</p>
+<p>Also, know that some workplaces have rules against political activity, and, in government, most political activity is not legal although people often share their opinions.</p>
+<p>I'm Jill Robbins. And I'm Andrew Smith.</p>
+<p><em>Jill Robbins wrote this lesson for VOA Learning English.</em></p>
+<p><em>_________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>primary</strong> – <em>n.</em> an election in which members of the same political party run against each other for the chance to be in the general election</p>
+<p><strong>caucus </strong><em>–n.</em> a political party meeting used to decide candidates and often delegates that is private and only open to party members</p>
+<p><strong>pledge </strong>– <em>v</em>.<strong> </strong> to formally promise to give or do (something)</p>
+<p><strong>platform</strong> – <em>n</em>. the official beliefs and goals of a political party</p>
+<p><strong>sustainable</strong> – <em>adj</em>. involving methods that do not completely use up or destroy natural resources</p>
+<p><strong>rally</strong> – <em>n. </em>a public meeting to support or oppose someone or something</p>
+<p><strong>metaphor </strong><em>–n.</em> a word or term that means one thing that is used to represent a different thing usually because of a similarity</p>
+<p><strong>academic </strong><em>–adj.</em> related to school or schooling</p>
+<p><strong>poll </strong>–<em> n. </em>an activity in which several or many people are asked a question or a series of questions to provide information about what people think about something; a place for voting</p>
+<p><strong>affiliation</strong> – <em>n.</em> the state of belonging to a particular religious or political group</p>
+<p><strong>cast</strong> –<em> v. </em>to formally make (a vote)</p>
+<p><strong>acquaintance</strong> – <em>n</em>. someone who is known but who is not a close friend</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Learn about US Presidential Campaigns]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Every four years, the United States
+[00:03.40]holds an election for the president in November.
+[00:07.52]This lesson aims to help teachers and learners
+[00:11.28]understand the political processes
+[00:13.84]and expressions used during the election campaign.
+[00:18.56]Let us begin with the expression, political party.
+[00:22.16]In elections, parties organize candidates
+[00:26.08]who share party members' ideas
+[00:28.44]about how government should operate.
+[00:31.56]They try to win elections
+[00:33.28]to gain and keep political power.
+[00:36.96]There are two major political parties in the U.S.
+[00:40.24]They are the Democratic Party and the Republican Party.
+[00:45.28]There are other small political parties at the national level.
+[00:49.16]These include the Libertarian and Green parties.
+[00:54.44]Each of the U.S. states and territories
+[00:57.88]holds votes early in the election year.
+[01:02.72]In many states and territories,
+[01:06.04]these votes are called primaries.
+[01:10.28]You may know the word "primary" as an adjective
+[01:14.08]meaning "happening or coming first"
+[01:18.24]as in "primary school."
+[01:21.88]When speaking of elections, it is a noun,
+[01:25.84]but it has a similar meaning
+[01:29.44]– it is the first election in a voting process
+[01:33.40]that takes place over one year.
+[01:37.52]You might also hear the term caucus.
+[01:41.44]A caucus is also a kind of election,
+[01:46.12]but it is held privately
+[01:48.92]by the party and usually does not involve
+[01:53.16]state election officials or equipment.
+[01:57.92]The Iowa caucus was for a long time
+[02:01.64]the first presidential contest during an election year.
+[02:07.64]In a primary or a caucus, voters choose
+[02:11.96]the party's candidates for local and state offices
+[02:16.44]as well as for national offices.
+[02:20.96]The candidates who get the most votes
+[02:23.92]become the candidates for the election in the fall.
+[02:29.24]Primaries can be "open" or "closed."
+[02:33.08]Anyone can take part in an open primary election
+[02:38.04]— even members of another party.
+[02:42.20]Only registered party members
+[02:45.12]can vote in a closed primary.
+[02:49.12]In some states, voters choose delegates in the primaries.
+[02:54.60]State party organizations
+[02:56.88]have different rules for choosing them.
+[03:00.44]Delegates are people who will attend
+[03:02.56]their party's convention, or general meeting.
+[03:06.92]When a delegate is elected to choose a particular candidate,
+[03:10.96]we say the delegate is pledged to the candidate.
+[03:15.56]To pledge is to promise something.
+[03:19.64]Each party holds a national convention
+[03:23.64]– a large meeting where the delegates officially
+[03:27.80]nominate the candidate that the party supports
+[03:31.68]for the presidential election.
+[03:35.36]The verb "nominate"
+[03:37.52]means to officially choose someone
+[03:40.24]as a candidate for a position.
+[03:44.20]You will hear some other forms of the word
+[03:47.36]in election news.
+[03:50.24]To describe the process
+[03:51.84]of having the delegates choose a candidate,
+[03:54.64]we use the noun form, "nomination."
+[03:58.88]At the convention, the candidate
+[04:01.16]who gains the majority of delegates
+[04:03.32]is called the "nominee."
+[04:06.40]The nominee gives a speech to accept the nomination.
+[04:11.80]The party platform is a statement of
+[04:15.68]the ideology of the party and its candidate.
+[04:21.32]At the party convention,
+[04:23.48]the organizing committee shares its platform.
+[04:28.32]The platform is a statement of the policies
+[04:31.72]that the party hopes to put in place
+[04:34.92]during its candidate's term in office.
+[04:40.40]Presidential candidates travel the country
+[04:43.32]speaking to voters at a series of events called rallies.
+[04:48.60]Reporters use the expression "campaign trail"
+[04:51.68]to describe these events.
+[04:53.60]This is a metaphor for
+[04:55.76]progressing along a path toward a goal.
+[04:59.80]The election campaign is sometimes called a "race,"
+[05:03.12]another metaphor comparing the election campaign
+[05:06.44]to a sporting competition.
+[05:09.56]Part of the campaign process
+[05:11.88]is for the candidates to debate each other.
+[05:16.88]These are televised events where a reporter
+[05:21.12]asks questions that interest the public
+[05:24.28]and gives each candidate
+[05:26.36]a limited time to answer them.
+[05:29.88]The form of the political debates is not the same
+[05:34.28]as traditional academic debates,
+[05:37.60]where teams compete under clear rules and time limits.
+[05:44.88]Presidential candidates and others who run for public office
+[05:48.84]must find money to pay for those rallies,
+[05:52.12]television advertising, and campaign workers.
+[05:55.64]A common way to pay for a campaign is to ask for money.
+[05:59.88]People who give to a candidate are donors.
+[06:03.60]The Federal Election Commission
+[06:06.04]makes rules about how much,
+[06:08.20]when, and how donations can be made.
+[06:13.20]Researchers get the opinions of voters
+[06:16.68]in an effort to guess, or predict,
+[06:20.40]the results of an upcoming election.
+[06:25.12]They do this with polls,
+[06:27.56]or public opinion studies.
+[06:31.40]This word has two meanings in the elections.
+[06:36.48]One is where a researcher might
+[06:39.36]ask you about your party affiliation
+[06:42.44]and which candidate you plan to support
+[06:45.96]in a telephone call.
+[06:48.60]Your party affiliation is the party
+[06:51.80]you are registered with or that you support.
+[06:56.88]The other meaning of "poll" is the place
+[07:01.60]where you go to vote on election day.
+[07:05.56]We can also use "polling place."
+[07:08.84]Schools, religious centers
+[07:12.28]and public buildings can be polling places.
+[07:17.00]In them, voters cast their ballot secretly.
+[07:22.84]That means they fill out their ballot
+[07:25.40]without pressure from others in the room
+[07:28.36]and turn in their ballot to be counted by poll workers.
+[07:34.48]In the last two election years of 2020 and 2022,
+[07:40.76]people could send in their ballots by mail.
+[07:45.48]But polling places remain important
+[07:49.12]for processing and counting ballots.
+[07:53.48]Now that you have some of the expressions used
+[07:56.20]to talk about the presidential campaign,
+[07:59.60]you should use them with some care.
+[08:01.92]It is not normal to ask someone
+[08:04.88]what party he or she is a member of
+[08:07.84]although many people will offer that information freely.
+[08:12.80]In some situations, such as among close friends,
+[08:16.64]you will hear Americans talk about the candidates
+[08:19.96]and voice their opinions openly.
+[08:23.36]But when talking with a new acquaintance or a stranger,
+[08:26.44]it is best to avoid asking about political affiliation.
+[08:31.96]Also, know that some workplaces
+[08:34.40]have rules against political activity,
+[08:36.84]and, in government, most political activity is not legal
+[08:41.80]although people often share their opinions.
+[08:45.68]I'm Jill Robbins.
+[08:47.96]And I'm Andrew Smith. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

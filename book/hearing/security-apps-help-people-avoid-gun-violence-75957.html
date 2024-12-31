@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Security Apps Help People Avoid Gun Violence</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Security Apps Help People Avoid Gun Violence" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201707/security-apps-help-people-avoid-gun-violence.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Security Apps Help People Avoid Gun Violence</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201707/security-apps-help-people-avoid-gun-violence.mp3" id="mp3"></a>
+<a href="whisky-fuel-75947.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Olivia Liu</span><br/>
+<span class="datetime">15 July, 2017</span><br/>
+<p>Computer programs called apps are helping people avoid violence in the streets of Rio de Janeiro, Brazil.</p>
+<p>Rio de Janeiro has an average of 15 gun battles every day. Innocent people often get caught up in the shootings.</p>
+<p>One of the latest security apps is called OTT. That is short for Onde Tem Tiroteio, which means "Where There is a Shootout" in Portuguese.</p>
+<div class="contentImage"><img alt="Police officers aim their weapons as they ride past during an operation at the Mangueira favela in Rio de Janeiro, Brazil, Friday, June 30, 2017. A 76-year-old woman and her daughter, who tried to come to her aid, have been killed in a shootout between police and drug traffickers in Rio de Janeiro." src="https://files.21voa.com/gdb/3A154583-79BD-451D-B07B-FD2B7065F385_w268_r1.jpg"/><br/><span class="imagecaption">Police officers aim their weapons as they ride past during an operation at the Mangueira favela in Rio de Janeiro, Brazil, Friday, June 30, 2017. A 76-year-old woman and her daughter, who tried to come to her aid, have been killed in a shootout between police and drug traffickers in Rio de Janeiro.</span></div>
+<p>The app collects reports of shootings and sends the information to its users through social media services, such as Instagram, Twitter, Facebook, Telegram and Zello.</p>
+<p>Henrique Coelho Caamaño provides technical support for OTT. He told the Reuters news agency, "I keep saying, I don't want a million ‘likes.' I only want to save lives."</p>
+<p>His group says its news <strong>alerts</strong> reach nearly 3 million people. That number represents almost half the population of Rio de Janeiro.</p>
+<p>"Our job is not to arrest anyone," Caamaño said. "We don't have a direct link to the police and drug traffickers, or whatever. Our aim is to help people avoid crossing paths with lost bullets."</p>
+<p>Violent crime in the city rose by 11 percent in the first half of 2017, compared with the same period in 2016. More than 2,300 people were killed in the first five months of this year.</p>
+<p>Another app that informs users of gun violence is called "Crossfire," or Fogo Cruzado in Portuguese. The app was created just before the 2016 Olympic Games in Rio de Janeiro. Its developers received financial support from the rights group Amnesty International.</p>
+<p>"Shootings take place on a daily basis," says Cecília Oliveira, the data manager for the app. "Not a day goes by without the peace police unit recording gunfire or a shooting in some area."</p>
+<p>Oliveira said that people provide information about street violence through social media.</p>
+<p>"Sometimes they'll tell us: ‘I walked through a shootout just now,' and sometimes they tell us: ‘It's calmed down,'" she said. "We have that <strong>rapport</strong> from people. The number of app users grows every day."</p>
+<p>The app provides users with details about shootouts, such as the <strong>location</strong>, the number of people shot and other information. Since Rio de Janeiro does not keep an official list of shootings, the app helps provide unrecorded gun violence <strong>statistics</strong>.</p>
+<p>I'm Mario Ritter.</p>
+<p>And I'm Olivia Liu.</p>
+<p><em>Olivia Liu adapted this story for Learning English. George Grow was the editor.</em></p>
+<p>____________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>rapport</strong> – <em>n.</em> to have good relations with someone</p>
+<p><strong>statistics</strong> – <em>n.</em> numbers that represent information about people or activities</p>
+<p><strong>location</strong> – n. a position or place</p>
+<p><strong>alert </strong>– n. a message or loud sound that warns people of some danger or problem</p>
+<p><em>We want to hear from you. Write to us in the Comments Section. </em></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Activists Challenge Harvard’s Legacy Admissions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Activists Challenge Harvard’s Legacy Admissions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/activists-challenge-harvard-s-legacy-admissions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Activists Challenge Harvard’s Legacy Admissions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/activists-challenge-harvard-s-legacy-admissions.mp3" id="mp3"></a>
+<a href="americas-presidents-rutherford-hayes-91155.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">08 July 2023</span><br/>
+<p>A civil rights group is taking legal action against <strong>legacy</strong> <strong>admissions</strong> at Harvard University. It says the practice discriminates against students of color by giving special consideration to mostly white children of <strong>alumni</strong>.</p>
+<p>The practice has faced growing criticism after the recent <a class="wsw__a" href="https://www.21voa.com/a/us-supreme-court-rejects-race-consideration-in-college-admissions/7160538.html">Supreme Court decision</a> that ended the consideration of race in college admissions at Harvard and the University of North Carolina. The decision ended admissions policies used by American colleges to increase the number of Black, Hispanic and other minority groups.</p>
+<p>The legal action was filed Monday by Lawyers for Civil Rights, a nonprofit group based in Boston. The group filed the <strong>complaint</strong> on behalf of Black and Latino community groups in New England. It argued that Harvard's admissions system violates the Civil Rights Act.</p><div class="contentImage"><img alt="FILE - A person relaxes at Harvard University, Thursday, June 29, 2023, in Cambridge, Mass. A civil rights group is taking legal action against legacy admissions at Harvard University. (AP Photo/Michael Casey)" src="https://files.21voa.com/gdb/c3ae3ad1-04bb-40b6-bca8-87b44a79d408_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A person relaxes at Harvard University, Thursday, June 29, 2023, in Cambridge, Mass. A civil rights group is taking legal action against legacy admissions at Harvard University. (AP Photo/Michael Casey)</span></div>
+<p>"Your family's last name and the size of your bank account are not a measure of <strong>merit</strong>, and should have no <strong>bearing</strong> on the college admissions process," said Ivan Espinoza-Madrigal. He is the group's executive director.</p>
+<p>The civil rights group National Association for the Advancement of Colored People (NAACP) added its support to the effort on Monday. And the group asked more than 1,500 colleges and universities to make admissions more fair, including by ending legacy admissions.</p>
+<p>Opponents of legacy admissions say the practice is no longer defensible following the high court's decision. They note that the Supreme Court's ruling says colleges must ignore the race of applicants but schools can still give a lift to the children of alumni and donors.</p>
+<p>The complaint was submitted to the Education Department's Office for Civil Rights. It uses Harvard data that became public during the affirmative action case that went before the Supreme Court. The records showed that 70 percent of Harvard's donor-related and legacy <strong>applicants</strong> are white. Being a legacy student makes an applicant about six times more likely to be admitted.</p>
+<p>The complaint points out that other selective schools, including Amherst College in Massachusetts and Johns Hopkins University of Maryland, have ended the practice.</p>
+<p>The complaint argues that Harvard's legacy preference has nothing to do with merit and takes away spots from qualified students of color. It asks the U.S. Education Department to declare the practice illegal. It also asks the department to force Harvard to stop the practice as long as the university receives federal funding.</p>
+<p>If legacy and donor <strong>preferences</strong> were removed, "more students of color would be admitted to Harvard," the complaint says.</p>
+<p>Harvard said it would not comment on the complaint.</p>
+<p>The complaint was filed on behalf of Chica Project, African Community Economic Development of New England, and the Greater Boston Latino Network.</p>
+<p>Also Monday, the NAACP started a campaign aimed to get universities across the nation to improve diversity. The group called on 532 public and 1,134 private colleges and universities to end legacy preferences, eliminate "racially <strong>biased</strong>" entrance exams, hire teachers from different backgrounds, and support poor and first-generation students.</p>
+<p>Another campaign is urging the alumni of 30 top colleges to stop giving donations until their schools end legacy admissions. That campaign, led by education nonprofit Ed Mobilizer, also targets Harvard and other Ivy League schools.</p>
+<p>U.S. President Joe Biden suggested last week that universities should rethink the practice. He said legacy admissions "expand <strong>privilege</strong> instead of <strong>opportunity</strong>."</p>
+<p>It is unclear exactly which schools use legacy admissions and how much it helps. In California, state law requires schools to say if they use legacy admissions. The University of Southern California reported that 14 percent of last year's admitted students had family ties to alumni or donors. Stanford reported a similar rate.</p>
+<p>An <em>Associated Press</em> survey of the nation's most selective colleges last year found that legacy students in the freshman class ranged from 4 percent to 23 percent. At four schools — Notre Dame, the University of Southern California, Cornell and Dartmouth — legacy students outnumbered Black students.</p>
+<p>Supporters of legacy admissions say it builds an alumni community and can increase donations. The donations, they add, can help support poor students of color.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting from Associated Press.</em></p>
+<p><em>_________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>legacy</strong><em>— n. </em>something that happened in the past or that comes from someone in the past</p>
+<p><strong>admission </strong><em>— n. </em>the right or permission to enter a place</p>
+<p><strong>alumni </strong><em>— n. </em>someone who was a student at a particular school, college, or university</p>
+<p><strong>complaint </strong><em>— n. </em>a statement that you are unhappy or not satisfied with something</p>
+<p><strong>merit </strong><em>— n. </em>a good quality or feature that deserves to be praised</p>
+<p><strong>bearing </strong><em>— n. </em>the way in which a person moves, stands, or behaves</p>
+<p><strong>applicant </strong><em>— n. </em>someone who formally asks for something</p>
+<p><strong>preference </strong><em>— n. </em>a feeling of liking or wanting one person or thing more than another person or thing</p>
+<p><strong>biased </strong><em>— adj. </em>having or showing a bias</p>
+<p><strong>privilege </strong><em>— n. </em>a right or benefit that is given to some people and not to others</p>
+<p><strong>opportunity </strong><em>— n. </em>an amount of time or a situation in which something can be done</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

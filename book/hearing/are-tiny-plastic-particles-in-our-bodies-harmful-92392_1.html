@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 微塑料是否对人体有害？</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 微塑料是否对人体有害？" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/are-tiny-plastic-particles-in-our-bodies-harmful.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>微塑料是否对人体有害？</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/are-tiny-plastic-particles-in-our-bodies-harmful.mp3" id="mp3"></a>
+<a href="/static/lrc/are-tiny-plastic-particles-in-our-bodies-harmful.lrc" id="lrc"></a>
+<a href="are-tiny-plastic-particles-in-our-bodies-harmful-92392.html" id="CnPage" target="_blank"></a>
+<a href="what-is-pi-day-92390.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>A new study examines possible harm caused by microscopic pieces of plastic that end up inside people's bodies.<br/>
+一项新的研究考察了最终进入人体的微小塑料碎片可能造成的危害。</p>
+<p>These materials – known as microplastics and nanoplastics – can enter the body through the air or in food or drinks.<br/>
+这些材料被称为微塑料和纳米塑料，它可以通过空气、食物或饮料进入人体。</p>
+<p>Tiny plastic pieces have received widespread attention in the media. But so far, very little research has been done on how the substances affect human heart health.<br/>
+微小的塑料制品受到了媒体的广泛关注。但到目前为止，关于这些物质如何影响人类心脏健康的研究很少。</p>
+<p>One new study suggests the buildup of such plastics inside the body can increase the risk of a stroke, heart attack or death. But the researchers noted the evidence presented cannot prove a direct link between tiny plastic materials and heart problems.<br/>
+一项新的研究表明，这种塑料在体内的堆积会增加中风、心脏病发作或死亡的风险。但研究人员指出，所提供的证据无法证明微小塑料材料与心脏问题之间的直接联系。</p>
+<p><span style="font-weight: bold;">What did the study find?<br/>
+该研究有何发现？</span></p>
+<p>The study involved 257 people who had medical operations to clear blocked blood vessels in their necks. Italian researchers examined the fatty buildup the doctors removed from the carotid arteries, which supply blood and oxygen to the brain.<br/>
+这项研究涉及257人，他们接受了清理颈部堵塞血管的医疗手术。意大利研究人员检查了医生从为大脑提供血液和氧气的颈动脉中清除的脂肪堆积物。</p>
+<p>Using two methods, they found evidence of plastics – mostly nanoplastics that cannot be seen – in the artery plaque of 150 patients. No evidence of plastics was seen in 107 patients.<br/>
+他们采用两种方法，在150名患者的动脉斑块中发现了塑料的证据，其中大部分是看不见的纳米塑料。在107名患者中没有发现塑料的迹象。</p>
+<p>The team followed these people for three years. During that time, 30 individuals, or 20 percent of the group with plastics, had a heart attack, stroke, or died from any cause. These rates dropped to about eight percent among those with no evidence of plastics.<br/>
+这个团队对这些人进行了为期三年的跟踪调查。在此期间，发现塑料的群体中有30人，占比20%，发生了心脏病、中风或死于各种原因。在那些没有塑料证据的群体中，这一比例降至8%左右。</p>
+<p>Research results were recently published in a study in the New England Journal of Medicine.<br/>
+研究结果最近发表在《新英格兰医学杂志》上的一项研究中。</p>
+<p>The researchers also found more evidence of inflammation in individuals with tiny plastic bits in their blood. Inflammation is the body's reaction to injury and is thought to raise the risk of heart attacks and strokes.<br/>
+研究人员还发现了血液中有微小塑料碎片的人出现炎症的更多证据。炎症是身体对损伤的反应，它被认为会增加心脏病发作和中风的风险。</p>
+<p><span style="font-weight: bold;">What are the problems with the study?<br/>
+这项研究有什么问题？</span></p>
+<p>The researchers admitted their study was very small. For example, it only looked at people with narrowed arteries who were already at risk for heart attacks and stroke.<br/>
+研究人员承认他们的研究规模很小。例如，它只观察了动脉狭窄的人群，这些人已经存在心脏病发作和中风的风险。</p>
+<p>And the patients with the plastics had more heart disease, diabetes and high cholesterol than those without plastics. They were also more likely to be men and more likely to be smokers. Both of those groups generally have higher rates of heart disease.<br/>
+检出塑料制品的患者比没有检出塑料制品的患者更容易发生心脏病、糖尿病和高胆固醇。他们也更有可能是男性，更有可能是吸烟者。这两组人通常都有较高的心脏病发病率。</p>
+<p>The researchers tried to account for these risk differences. But they noted they may have missed some important elements that could change the results. The team said because of these ongoing questions, this kind of study cannot prove the plastics caused the health problems.<br/>
+研究人员试图解释这些风险差异。但他们指出，他们可能错过了一些可能改变结果的重要因素。该团队表示，由于这些持续存在的问题，这类研究无法证明塑料导致了健康问题。</p>
+<p>Steve Nissen is a heart expert at the Cleveland Clinic in the state of Ohio who was not part of the study. He told the Associated Press he thinks the team's estimate that the risk of heart attack, stroke or death was four times greater seems too high.<br/>
+史蒂夫·尼森是俄亥俄州克利夫兰诊所的心脏病专家，他没有参与这项研究。他告诉美联社，他认为该研究小组估算心脏病发作、中风或死亡的风险高出四倍，这似乎太高了。</p>
+<p>"It would mean that these microplastics are the most important cause of coronary heart disease yet discovered. And I just don't think that's likely to be right," Nissen said.<br/>
+尼森说：“这意味着这些微塑料是迄今为止发现的导致冠心病的最重要原因。我只是认为这不太可能是对的。”</p>
+<p><span style="font-weight: bold;">What is next for the researchers?<br/>
+研究人员的下一步是什么？</span></p>
+<p>Philip Landrigan of Boston College University told the AP that more research is needed on the issue. Landrigan, who wrote about the study in the Journal, said it is the first one suggesting a connection between microplastics and nanoplastics with disease in humans. Other scientists have found plastic bits in the lungs, liver, blood, placenta and breast milk.<br/>
+波士顿学院大学的菲利普·兰德里根告诉美联社，需要对这个问题进行更多的研究。兰德里根在《华尔街日报》上撰文谈到了这项研究，他说这是第一个表明微塑料和纳米塑料与人类疾病之间存在联系的研究。其他科学家已经在肺、肝、血液、胎盘和母乳中发现了塑料碎片。</p>
+<p>"It does not prove cause and effect, but it suggests cause and effect," Landrigan said. "And it needs urgently to be either replicated or disproven by other studies done by other investigators in other populations."<br/>
+兰德里根说：“它不能证明因果关系，但它启发了因果关系。它迫切需要被其他研究人员在其他人群中进行的其它研究所重复或推翻。”</p>
+<p>The Cleveland Clinic's Nissen added about the study, "It's a wake-up call that perhaps we need to take the problem of microplastics more seriously. As a cause for heart disease? Not proven. As a potential cause? Yes, maybe," Nissen said.<br/>
+克利夫兰诊所的尼森在谈到这项研究时补充道，“这是一个警钟，也许我们需要更认真地对待微塑料问题。作为心脏病的病因？尚未被证实。作为潜在病因？是的，也许。”</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Are Tiny Plastic Particles in Our Bodies Harmful?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A new study examines possible harm
+[00:04.00]caused by microscopic pieces of plastic
+[00:08.16]that end up inside people's bodies.
+[00:11.56]These materials – known as microplastics
+[00:16.32]and nanoplastics – can enter the body
+[00:20.16]through the air or in food or drinks.
+[00:24.04]Tiny plastic pieces have received
+[00:27.68]widespread attention in the media.
+[00:30.60]But so far, very little research has been done
+[00:35.16]on how the substances affect human heart health.
+[00:40.12]One new study suggests the buildup
+[00:43.68]of such plastics inside the body
+[00:46.76]can increase the risk of a stroke,
+[00:49.52]heart attack or death.
+[00:51.96]But the researchers noted the evidence presented
+[00:56.20]cannot prove a direct link
+[00:58.88]between tiny plastic materials
+[01:01.92]and heart problems.
+[01:04.36]The study involved 257 people
+[01:09.36]who had medical operations
+[01:12.04]to clear blocked blood vessels in their necks.
+[01:16.20]Italian researchers examined the fatty buildup
+[01:20.68]the doctors removed from the carotid arteries,
+[01:24.80]which supply blood and oxygen to the brain.
+[01:29.32]Using two methods, they found evidence of plastics
+[01:34.40]– mostly nanoplastics that cannot be seen
+[01:38.12]– in the artery plaque of 150 patients.
+[01:42.64]No evidence of plastics was seen in 107 patients.
+[01:49.20]The team followed these people for three years.
+[01:53.80]During that time, 30 individuals,
+[01:57.08]or 20 percent of the group with plastics,
+[02:00.76]had a heart attack, stroke, or died from any cause.
+[02:05.68]These rates dropped to about eight percent
+[02:09.56]among those with no evidence of plastics.
+[02:13.20]Research results were recently published
+[02:17.08]in a study in the New England Journal of Medicine.
+[02:21.08]The researchers also found more evidence of inflammation
+[02:26.60]in individuals with tiny plastic bits in their blood.
+[02:31.16]Inflammation is the body's reaction to injury
+[02:35.76]and is thought to raise the risk of heart attacks and strokes.
+[02:40.56]The researchers admitted their study was very small.
+[02:45.92]For example, it only looked at people with narrowed arteries
+[02:51.24]who were already at risk for heart attacks and stroke.
+[02:55.60]And the patients with the plastics had more heart disease,
+[03:00.96]diabetes and high cholesterol
+[03:03.92]than those without plastics.
+[03:06.60]They were also more likely to be men
+[03:09.76]and more likely to be smokers.
+[03:12.60]Both of those groups generally
+[03:15.52]have higher rates of heart disease.
+[03:18.20]The researchers tried to account
+[03:21.52]for these risk differences.
+[03:24.12]But they noted they may have missed
+[03:27.24]some important elements
+[03:29.16]that could change the results.
+[03:31.96]The team said because of these ongoing questions,
+[03:36.00]this kind of study cannot prove the plastics
+[03:40.00]caused the health problems.
+[03:42.60]Steve Nissen is a heart expert
+[03:46.28]at the Cleveland Clinic in the state of Ohio
+[03:49.60]who was not part of the study.
+[03:52.36]He told the Associated Press
+[03:55.68]he thinks the team's estimate
+[03:58.24]that the risk of heart attack, stroke or death
+[04:02.00]was four times greater seems too high.
+[04:06.12]"It would mean that these microplastics
+[04:09.88]are the most important cause
+[04:11.72]of coronary heart disease yet discovered.
+[04:15.88]And I just don't think that's likely to be right," Nissen said.
+[04:21.76]Philip Landrigan of Boston College University
+[04:26.44]told the AP that more research is needed on the issue.
+[04:31.88]Landrigan, who wrote about the study in the Journal,
+[04:36.12]said it is the first one suggesting
+[04:39.24]a connection between microplastics
+[04:42.08]and nanoplastics with disease in humans.
+[04:46.56]Other scientists have found plastic bits in the lungs,
+[04:51.76]liver, blood, placenta and breast milk.
+[04:56.36]"It does not prove cause and effect,
+[05:00.00]but it suggests cause and effect," Landrigan said.
+[05:05.08]"And it needs urgently to be either replicated
+[05:09.44]or disproven by other studies
+[05:12.44]done by other investigators in other populations."
+[05:17.40]The Cleveland Clinic's Nissen added about the study,
+[05:22.00]"It's a wake-up call that perhaps we need
+[05:25.28]to take the problem of microplastics more seriously.
+[05:30.12]As a cause for heart disease? Not proven.
+[05:34.48]As a potential cause? Yes, maybe," Nissen said.
+[05:40.00]I'm Bryan Lynn.
+[05:42.00]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

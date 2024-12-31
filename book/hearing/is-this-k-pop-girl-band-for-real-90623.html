@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Is This K-Pop Girl Band for Real?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Is This K-Pop Girl Band for Real?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/is-this-k-pop-girl-band-for-real.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Is This K-Pop Girl Band for Real?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/is-this-k-pop-girl-band-for-real.mp3" id="mp3"></a>
+<a href="for-some-retirees-it-s-not-time-to-stop-learning-90620.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">26 March 2023</span><br/>
+<p>Less than two months ago the new South Korean girl group MAVE: released its first music video. It now has nearly 20 million views on YouTube.</p>
+<p>At first look, MAVE: looks like any other K-pop band. But it only exists <strong>virtually</strong>. Its four members - SIU, ZENA, TYRA and MARTY - live in the digital world, also called the metaverse. The group's songs, dances, talks and even their hair are created by web designers and artificial intelligence.</p>
+<p>"When I first saw MAVE, it was a little confusing to tell whether they were humans or virtual <strong>characters</strong>," said Han Su-min, a 19-year-old in Seoul. "Because I use metaverse <strong>platforms</strong> with my friends often, I feel like I could become their fan."</p><div class="contentImage"><img alt="Footages of virtual girl group MAVE is played at the control room of MBC in Seoul, South Korea, February 28, 2023. ( REUTERS/Kim Soo-hyeon)" src="https://files.21voa.com/gdb/01000000-0aff-0242-459b-08db26494d3b_w268_r1.jpg"/><br/><span class="imagecaption">Footages of virtual girl group MAVE is played at the control room of MBC in Seoul, South Korea, February 28, 2023. ( REUTERS/Kim Soo-hyeon)</span></div>
+<p>MAVE:'s almost human-like characters provide an early look at how the metaverse is likely to look in the coming years.</p>
+<p>It also represents a push by the technology company Kakao Corporation to become a strong force in entertainment. Apart from creating MAVE:, Kakao made a $960 million offer recently to buy SM Entertainment. SM has a record company that is home to several popular K-pop groups.</p>
+<p>Kakao has said earlier that it has invested more than $9 million in Metaverse Entertainment, a group it formed with gaming group Netmarble, to create MAVE:.</p>
+<p><strong>Four languages</strong></p>
+<p>The idea of a virtual band is not new in South Korea. In 1998, the virtual singer Adam was created. Twenty years later, there was the K-pop girl group K/DA, based on characters from the video game League of Legends. Neither was popular.</p>
+<p>But South Korean technology has made progress since then in creating virtual characters. MAVE: is more natural-looking thanks to new tools and artificial intelligence. Developers are able to create facial expressions and small details in things like hair, <strong>viewers</strong> say.</p>
+<p>With the aid of an AI voice creator, its members can speak four languages - Korean, English, French and Bahasa. But they cannot speak to answer any questions. They must use words prepared by humans.</p>
+<p>The group's voices in its first song "Pandora" and the dance in the music video were created by human performers.</p>
+<p>Experts say the COVID-19 pandemic aided the growth of such virtual characters. Many K-pop companies moved online during <strong>lockdowns</strong> to keep fans happy.</p>
+<p>Lee Jong-im is a pop culture critic who teaches at Seoul National University. He said fans got used to online performances and have become more accepting of the idea that there can be both virtual and real K-pop singers.</p>
+<p>Virtual groups like MAVE: are making news for being new and different. But questions remain over whether they can be just as popular as regular bands with their large numbers of fans.</p>
+<p>Lee Gyu-tag is an associate professor of cultural studies at George Mason University Korea. He said that unless virtual groups have "unpredictability, they will become something close to video technology, not K-pop."</p>
+<p>Yet, MAVE:'s creators and entertainment industry officials are hopeful.</p>
+<p>"With so many comments received from all over the world, I've realized that viewers do want something new and that they are rather open-minded," said Roh Shi-yong. He is the head producer of a weekly music show that showed MAVE:'s performance twice.</p>
+<p>"The metaverse <strong>era</strong> is coming."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by Reuters.</em></p>
+<p><em>_____________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>virtual </strong><em>— adj. </em>existing or occurring on computers or on the Internet</p>
+<p><strong>character </strong><em>— n. </em>a person who appears in a story, book, play, movie, or television show</p>
+<p><strong>platform </strong><em>— n. </em>a flat surface that is raised higher than the floor or ground and that people stand on when performing or speaking</p>
+<p><strong>viewer </strong><em>— n. </em>a person who sees or looks at something</p>
+<p><strong>lockdown </strong><em>— n. </em>an emergency measure or condition in which people are temporarily prevented from entering or leaving a restricted area or building (such as a school) during a threat of danger</p>
+<p><strong>era </strong><em>— n. </em>a period of time that is associated with a particular quality, event, person, etc.</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

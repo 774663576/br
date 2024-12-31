@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 非洲国家寻求在联合国拥有更大权力和影响力</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 非洲国家寻求在联合国拥有更大权力和影响力" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201601/african-nations-seek-greater-power-and-influence-at-united-nations.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>非洲国家寻求在联合国拥有更大权力和影响力</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201601/african-nations-seek-greater-power-and-influence-at-united-nations.mp3" id="mp3"></a>
+<a href="/static/lrc/african-nations-seek-greater-power-and-influence-at-united-nations.lrc" id="lrc"></a>
+<a href="african-nations-seek-greater-power-and-influence-at-united-nations-67592.html" id="CnPage" target="_blank"></a>
+<a href="islamic-state-video-honors-paris-terrorists-67579.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The leaders of Zimbabwe and Equatorial Guinea are calling for African nations to have more power and influence at the United Nations.<br/>津巴布韦和赤道几内亚领导人呼吁让非洲国家在联合国拥有更多权力和影响力。</p>
+<p>President Robert Mugabe of Zimbabwe and President Teodoro Obiang Nguema of Equatorial Guinea say the continent should have at least one permanent seat on the powerful U.N. Security Council.<br/>津巴布韦总统穆加贝和赤道几内亚总统奥多罗·奥比昂·恩圭马（Teodoro Obiang Nguema）表示，非洲大陆在权力很大的联合国安理会至少应该拥有一个常任理事国席位。</p>
+<p>The two leaders spoke during a visit to Zimbabwe by Nguema as they prepare for the meeting of the African Union General Assembly later this month in Ethiopia.<br/>这两位领导人在恩圭马访问津巴布韦期间发表了讲话，他们正在筹备本月晚些时候在埃塞尔比亚举行的非盟大会。</p>
+<p>They also spoke about peace, security and terrorism in Africa. And Nguema said African nations must work to become economically independent, just as they have become politically independent.<br/>他们还谈到了非洲的和平、安全和恐怖主义。恩圭马表示，非洲国家必须努力完成经济独立，就像它们已经完成了政治上的独立。</p>
+<p>He said Africa should have two seats on the U.N. Security Council. But the continent should at least have one, he said, with the power to veto, or cancel, resolutions.<br/>他说，非洲应该在联合国安理会拥有两个席位。但是他说非洲大陆至少应该拥有一个具有否决权的席位。</p>
+<p>"I think that is the revolution which Africa looks for," he said.<br/>他说，“我认为这是非洲寻求的大变革。”</p>
+<p>Mugabe has served as president of Zimbabwe since 1987; Nguema of Equatorial Guinea since 1979.<br/>穆加贝自1987年以来一直担任津巴布韦总统，赤道几内亚的恩圭马是自1979年。</p>
+<p>The United States, Russia, Britain, China and France have permanent seats on the council, with veto powers. There are also 10 non-permanent members. These nations serve on the Council for two years. They cannot veto resolutions.<br/>美国、俄罗斯、英国、中国和法国拥有安理会常任理事国席位，具有否决权。此外还有10个非常任理事国，这些国家在安理会任期为两年，不具备否决权。</p>
+<p>I'm Christopher Jones-Cruise.<br/>我是克里斯托弗·琼斯·克鲁斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.60]The leaders of Zimbabwe and Equatorial Guinea
+[00:05.00]are calling for African nations to have more power
+[00:08.40]and influence at the United Nations.
+[00:12.52]President Robert Mugabe of Zimbabwe
+[00:16.76]and President Teodoro Obiang Nguema of Equatorial Guinea
+[00:22.84]say the continent should have at least one permanent seat
+[00:27.96]on the powerful U.N. Security Council. T
+[00:32.80]he two leaders spoke during a visit to Zimbabwe by Nguema
+[00:38.28]as they prepare for the meeting of the African Union General Assembly
+[00:43.96]later this month in Ethiopia.
+[00:46.88]They also spoke about peace, security and terrorism in Africa.
+[00:54.04]And Nguema said African nations
+[00:58.32]must work to become economically independent,
+[01:02.92]just as they have become politically independent.
+[01:07.08]He said Africa should have two seats on the U.N. Security Council.
+[01:13.64]But the continent should at least have one, he said,
+[01:17.80]with the power to veto, or cancel, resolutions.
+[01:24.48]"I think that is the revolution which Africa looks for," he said.
+[01:30.08]Mugabe has served as president of Zimbabwe since 1987;
+[01:37.76]Nguema of Equatorial Guinea since 1979.
+[01:44.76]The United States, Russia, Britain, China and France
+[01:50.92]have permanent seats on the council, with veto powers.
+[01:56.52]There are also 10 non-permanent members.
+[02:00.96]These nations serve on the Council for two years.
+[02:05.80]They cannot veto resolutions.
+[02:09.28]I'm Christopher Jones-Cruise.                             
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

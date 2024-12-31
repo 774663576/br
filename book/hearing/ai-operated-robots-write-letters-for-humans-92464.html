@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - AI-operated Robots Write Letters for Humans</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, AI-operated Robots Write Letters for Humans" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/ai-operated-robots-write-letters-for-humans.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>AI-operated Robots Write Letters for Humans</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/ai-operated-robots-write-letters-for-humans.mp3" id="mp3"></a>
+<a href="/static/lrc/ai-operated-robots-write-letters-for-humans.lrc" id="lrc"></a>
+<a href="cherry-trees-to-be-removed-in-washington-improvement-project-92462.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">29 March 2024</span><br/>
+<p>Humans have been writing by hand for thousands of years.</p>
+<p>Since ancient times, people have used every tool imaginable to share information, do business, and keep records.</p>
+<p>But as computers took over the job and the <strong>type-written</strong> word became more common, something was lost in the process; namely, the <strong>charm</strong> and personal nature of a hand-written note or letter.</p><div class="contentImage"><img alt="Robots Hand Write Letters for Humans" src="https://files.21voa.com/gdb/01000000-0aff-0242-fe53-08dc4d95e9bb_tv_w268_r1.jpg"/><br/><span class="imagecaption">Robots Hand Write Letters for Humans</span></div>
+<p><strong>Modern tools </strong></p>
+<p>Now, letter writing is making a comeback in the form of artificial intelligence-operated robots. These AI robots can write notes for humans in their own handwriting.</p>
+<p>David Wachs is the head and founder of Handwrytten. He said businesses use his company's robots for handwritten letters and "thank-you" notes to create a strong and personal connection with those who receive them.</p>
+<p>Many non-profit organizations also use handwritten letters to keep donations coming. It helps turn one-time givers, or donors, into yearly givers, Wachs explained.</p>
+<p>Wachs added, "I think what's old is new again."</p>
+<p><strong>A president's hobby </strong></p>
+<p><strong>Automated</strong> letter writing is not new. Thomas Jefferson, the third U.S. President, often used a polygraph created by British inventor John Isaac Hawkins. Jefferson considered the device the greatest invention of his time. It let him make copies of his letters to keep for his own records.</p>
+<p>Charles Morrill is a historian and professional woodworker who worked as a guide for several years at Monticello, Jefferson's Virginia home from 1770 until his death in 1826. Morrill said about the polygraph, "Jefferson falls in love with this and it becomes in many ways the <strong>hobby</strong> of his presidency...He keeps buying machines and exchanges ones that are not quite perfect for the next one that's a little bit better."</p>
+<p>The president had more than ten of the devices at one point, Morrill added. Using what he considered wonderful technology, historians say Jefferson went on to write almost 20,000 letters in his lifetime.</p>
+<p>In a January 15, 1809 letter to Charles Willson Peale, who worked with Hawkins to develop and perfect the machine, Jefferson wrote: "The use of the polygraph has <strong>spoiled</strong> me for the old copying press the copies of which are hardly ever <strong>legible</strong>," adding, "I could not, now therefore, live without the Polygraph."</p>
+<p>Morrill remembered that a visitor once told him, "What is it about you Americans and this new, new thing? Other cultures aren't like this. You Americans are just so <strong>absolutely </strong>convinced that the next new thing is going to do it; the latest software, the latest computer, the latest phone."</p>
+<p>"And I think this kind of begins with Jefferson," Morrill added.</p>
+<p><strong>From early polygraphs to AI-created letters </strong></p>
+<p>Handwriting technology has greatly changed since Jefferson's time.</p>
+<p>Wachs says such technology now includes 3D printing and laser cutting, among others. And if users need help thinking of exactly what to write in their notes, they can choose AI to help them create a more effective message.</p>
+<p>Whether via the printing press or the polygraph, a computer or a robot, one thing is clear... humans will use whatever tool they have to express themselves through the printed word.</p>
+<p>I'm John Russell.</p>
+<p><em>Julie Taboh reported on this story for VOA News. John Russell adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>type-written </strong><em>- adj.</em><strong> </strong>written by using a typewriter or a computer</p>
+<p><strong>charm</strong> <em>– n. </em>a quality that causes something to be very likeable</p>
+<p><strong>appreciate</strong> <em>– v.</em> to be thankful for something</p>
+<p><strong>automate </strong>–<em> v.</em> to run or operate something by using machines instead of people</p>
+<p><strong>hobby</strong> –<em> n.</em> an activity that a person does for pleasure when not working</p>
+<p><strong>spoil</strong> <em>– v.</em> to have a bad effect on someone or something</p>
+<p><strong>legible</strong> <em>– adj.</em> capable of being read</p>
+<p><strong>absolutely </strong><em>-- adv.</em><strong> </strong>completely or totally</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:AI-operated Robots Write Letters for Humans]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Humans have been writing by hand
+[00:03.56]for thousands of years.
+[00:05.80]Since ancient times,
+[00:07.96]people have used every tool imaginable
+[00:11.44]to share information,
+[00:13.20]do business, and keep records.
+[00:16.44]But as computers took over the job
+[00:19.68]and the type-written word became more common,
+[00:23.08]something was lost in the process;
+[00:26.40]namely, the charm and personal nature
+[00:29.92]of a hand-written note or letter.
+[00:33.16]Now, letter writing is making a comeback
+[00:36.92]in the form of artificial intelligence-operated robots.
+[00:42.08]These AI robots can write notes for humans
+[00:46.32]in their own handwriting.
+[00:49.12]David Wachs is the head and founder of Handwrytten.
+[00:53.24]He said businesses use his company's robots
+[00:57.24]for handwritten letters and "thank-you" notes
+[01:01.12]to create a strong and personal connection
+[01:04.64]with those who receive them.
+[01:08.20]Many non-profit organizations
+[01:10.80]also use handwritten letters
+[01:13.16]to keep donations coming.
+[01:15.48]It helps turn one-time givers, or donors,
+[01:19.68]into yearly givers, Wachs explained.
+[01:23.32]Wachs added, "I think what's old is new again."
+[01:28.64]Automated letter writing is not new.
+[01:31.56]Thomas Jefferson, the third U.S. President,
+[01:35.52]often used a polygraph
+[01:37.68]created by British inventor John Isaac Hawkins.
+[01:43.08]Jefferson considered the device
+[01:45.48]the greatest invention of his time.
+[01:48.72]It let him make copies of his letters
+[01:51.68]to keep for his own records.
+[01:54.88]Charles Morrill is a historian
+[01:57.60]and professional woodworker
+[01:59.68]who worked as a guide for several years at Monticello,
+[02:03.92]Jefferson's Virginia home from 1770
+[02:07.84]until his death in 1826.
+[02:11.92]Morrill said about the polygraph,
+[02:14.56]"Jefferson falls in love with this
+[02:17.16]and it becomes in many ways
+[02:19.48]the hobby of his presidency...
+[02:22.04]He keeps buying machines
+[02:24.52]and exchanges ones that are not quite perfect
+[02:28.00]for the next one that's a little bit better."
+[02:31.76]The president had more than
+[02:33.88]ten of the devices at one point, Morrill added.
+[02:37.96]Using what he considered wonderful technology,
+[02:41.84]historians say Jefferson went on to write
+[02:45.48]almost 20,000 letters in his lifetime.
+[02:49.48]In a January 15, 1809 letter
+[02:53.48]to Charles Willson Peale,
+[02:55.72]who worked with Hawkins
+[02:57.16]to develop and perfect the machine,
+[02:59.88]Jefferson wrote: "The use of the polygraph
+[03:03.68]has spoiled me for the old copying press
+[03:06.88]the copies of which are hardly ever legible,"
+[03:10.24]adding, "I could not, now therefore,
+[03:13.56]live without the Polygraph."
+[03:16.56]Morrill remembered that a visitor once told him,
+[03:20.08]"What is it about you Americans and this new, new thing?
+[03:24.40]Other cultures aren't like this.
+[03:26.80]You Americans are just so absolutely convinced
+[03:31.00]that the next new thing is going to do it;
+[03:34.48]the latest software, the latest computer, the latest phone."
+[03:39.60]"And I think this kind of begins
+[03:41.96]with Jefferson," Morrill added.
+[03:45.04]Handwriting technology has greatly changed
+[03:48.36]since Jefferson's time.
+[03:50.52]Wachs says such technology now includes
+[03:53.92]3D printing and laser cutting, among others.
+[03:58.08]And if users need help
+[03:59.96]thinking of exactly what to write in their notes,
+[04:03.28]they can choose AI
+[04:04.84]to help them create a more effective message.
+[04:08.20]Whether via the printing press or the polygraph,
+[04:12.08]a computer or a robot, one thing is clear...
+[04:16.08]humans will use whatever tool they have
+[04:19.08]to express themselves through the printed word.
+[04:24.92]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

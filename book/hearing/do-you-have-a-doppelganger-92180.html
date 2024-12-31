@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Do You Have a 'Doppelgänger'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Do You Have a 'Doppelgänger'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/do-you-have-a-doppelganger.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Do You Have a 'Doppelgänger'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/do-you-have-a-doppelganger.mp3" id="mp3"></a>
+<a href="/static/lrc/do-you-have-a-doppelganger.lrc" id="lrc"></a>
+<a href="webb-telescope-captures-images-of--spiral-galaxies-92178.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">03 February 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>English borrows from many other languages. And today we talk about a word that comes from German – doppelganger.</p>
+<p>The word "doppelganger" comes from German <strong>folklore</strong>. The online dictionary <em>Merriam-Webster </em>describes the old story. All living creatures have a <strong>spirit</strong> who is <strong>invisible</strong> but exactly the same as the living person. But just because you can't see them, doppelgangers are not <strong>ghosts</strong>. They are sometimes described as "the spiritual opposite or <strong>negative</strong> of their human <strong>counterpart</strong>."</p>
+<div class="contentImage"><img alt="FILE - In this photo provided by Zooparc de Beauval, twin panda cubs Yuandudu and Huanlili take their first steps in public, at the Beauval Zoo in Saint-Aignan-sur-Cher, France, Dec. 11, 2021. (Zooparc de Beauval via AP)" src="https://files.21voa.com/gdb/BB0D17A2-D48D-49F1-9AF0-9B7BB7E2F378_cx5_cy11_cw89_w268_r1.jpg"/><br/>
+<span class="imagecaption">FILE - In this photo provided by Zooparc de Beauval, twin panda cubs Yuandudu and Huanlili take their first steps in public, at the Beauval Zoo in Saint-Aignan-sur-Cher, France, Dec. 11, 2021. (Zooparc de Beauval via AP)</span></div>
+<p>Even though the word comes from spiritual folklore, we use it in a very real way. When two people look very similar, we can call them doppelgangers.</p>
+<p>English has other expressions that have a similar meaning. If someone looks like someone else, you can call them a look-alike, spitting image or mirror image.</p>
+<p>Let's hear two friends use some of these expressions.</p>
+<p><em>A: Were you at the airport yesterday?</em></p>
+<p><em>B: No. I haven't been to the airport in over a year. </em></p>
+<p><em>A: Are you sure about that? </em></p>
+<p><em>B: I think I would know if I were at the airport. Why do you ask?</em></p>
+<p><em>A: Well, if you weren't there, then I ran into your doppelganger. She was a mirror image of you!</em></p>
+<p><em>B: Wow, I've heard about doppelgangers. But I didn't think I really had a look-alike out there in the world. </em></p>
+<p><em>A: Well, you do. And they are on their way to Costa Rica. </em></p>
+<p><em>B: I wish I could trade places with my doppelganger!</em></p>
+<p>If you know someone who looks exactly like another person, you can also call them a dead ringer.</p>
+<p>Experts say this expression comes from American horse racing, and usage began in the late 19<sup>th</sup> century.</p>
+<p>Sometimes, racehorse owners would race a horse under a false name and <strong>pedigree</strong>. They did this to trick people who bet money on race results. These horses were called "ringers."</p>
+<p>Here is how to use this expression in a sentence: My best friend in college is a dead ringer for George Clooney. When we're out in public, he gets asked for his autograph all the time.</p>
+<p>In the expression "dead ringer," the word "dead" does not mean lifeless. In this case, it means exact or <strong>precise</strong>. It is a way to add <strong>emphasis, </strong>or highlight something. For example, if I am sure that my friend is right about something, I can say she is dead right. We can also say someone is "dead wrong" if they are most certainly wrong.</p>
+<p>The next time you want to describe two people who look the same, you can choose any of these expressions.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. Until next time ...</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>__________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>folklore </strong><em>– n.</em><strong> </strong>customs, beliefs, stories, and sayings of a people handed down from generation to generation</p>
+<p><strong>spirit</strong> <em>– n. </em>a force within a human being thought to give the body life, energy, and power</p>
+<p><strong>invisible </strong><em>– adj. </em>incapable by nature of being seen<strong>: </strong>not perceptible by vision</p>
+<p><strong>ghost </strong><em>– n. </em>the soul of a dead person believed to be an inhabitant of the unseen world or to appear to the living in bodily likeness</p>
+<p><strong>negative</strong> <em>– adj. </em>extending or measured in a direction opposite to one chosen as positive</p>
+<p><strong>counterpart </strong><em>– n. </em>one remarkably similar to another: a thing that fits another perfectly</p>
+<p><strong>pedigree </strong><em>– n. </em>lineage or line of ancestors of a person or animal: purity of breed recorded by an ancestral line</p>
+<p><strong>precise </strong><em>– adj. </em>exactly or sharply defined or stated</p>
+<p><strong>emphasis </strong><em>– n. </em>the act or fact of giving stress to a word or syllable when speaking: special attention or importance given to something</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Do You Have a 'Doppelgänger'?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]And now, Words and Their Stories,
+[00:12.20]from VOA Learning English.
+[00:15.08]English borrows from many other languages.
+[00:23.64]And today we talk about a word
+[00:26.84]that comes from German – doppelganger.
+[00:31.84]The word "doppelganger"
+[00:33.68]comes from German folklore.
+[00:37.16]The online dictionary Merriam-Webster
+[00:40.04]describes the old story.
+[00:42.96]All living creatures have a spirit
+[00:45.88]who is invisible but exactly the same
+[00:50.16]as the living person.
+[00:53.28]But just because you can't see them,
+[00:55.96]doppelgangers are not ghosts.
+[00:59.04]They are sometimes described
+[01:01.64]as "the spiritual opposite or negative
+[01:05.44]of their human counterpart."
+[01:09.04]Even though the word
+[01:10.44]comes from spiritual folklore,
+[01:12.96]we use it in a very real way.
+[01:17.08]When two people look very similar,
+[01:20.04]we can call them doppelgangers.
+[01:24.44]English has other expressions
+[01:26.68]that have a similar meaning.
+[01:30.32]If someone looks like someone else,
+[01:33.40]you can call them a look-alike,
+[01:36.12]spitting image or mirror image.
+[01:41.64]Let's hear two friends
+[01:43.44]use some of these expressions.
+[01:46.32]A: Were you at the airport yesterday?
+[01:48.48]B: No. I haven't been to the airport in over a year.
+[01:52.44]A: Are you sure about that?
+[01:54.20]B: I think I would know
+[01:55.36]if I were at the airport.
+[01:57.04]Why do you ask?
+[01:58.88]A: Well, if you weren't there,
+[02:00.48]then I ran into your doppelganger.
+[02:02.24]She was a mirror image of you!
+[02:04.40]B: Wow, I've heard about doppelgangers.
+[02:07.64]But I didn't think I really had
+[02:10.36]a look-alike out there in the world.
+[02:12.56]A: Well, you do.
+[02:14.16]And they are on their way to Costa Rica.
+[02:16.96]B: I wish I could trade places with my doppelganger!
+[02:21.24]If you know someone who looks
+[02:23.56]exactly like another person,
+[02:26.00]you can also call them a dead ringer.
+[02:31.56]Experts say this expression comes
+[02:34.56]from American horse racing,
+[02:37.04]and usage began in the late 19th century.
+[02:43.12]Sometimes, racehorse owners
+[02:46.00]would race a horse
+[02:47.84]under a false name and pedigree.
+[02:52.00]They did this to trick people
+[02:54.00]who bet money on race results.
+[02:57.52]These horses were called "ringers."
+[03:00.64]Here is how to use this expression in a sentence:
+[03:05.16]My best friend in college
+[03:07.56]is a dead ringer for George Clooney.
+[03:11.24]When we're out in public,
+[03:12.92]he gets asked for his autograph all the time.
+[03:18.68]In the expression "dead ringer,"
+[03:21.08]the word "dead" does not mean lifeless.
+[03:24.84]In this case, it means exact or precise.
+[03:30.56]It is a way to add emphasis,
+[03:32.84]or highlight something.
+[03:35.80]For example, if I am sure
+[03:38.00]that my friend is right about something,
+[03:40.52]I can say she is dead right.
+[03:44.40]We can also say someone is "dead wrong"
+[03:47.60]if they are most certainly wrong.
+[03:52.24]The next time you want to describe two people
+[03:55.04]who look the same,
+[03:56.60]you can choose any of these expressions.
+[03:59.84]And that's all the time we have
+[04:02.60]for this Words and Their Stories.
+[04:04.68]Until next time ...
+[04:06.40]I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

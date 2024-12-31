@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯太空项目60年辉煌后遭遇困境</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 俄罗斯太空项目60年辉煌后遭遇困境" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201710/russian-space-program-faces-struggles.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯太空项目60年辉煌后遭遇困境</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201710/russian-space-program-faces-struggles.mp3" id="mp3"></a>
+<a href="/static/lrc/russian-space-program-faces-struggles.lrc" id="lrc"></a>
+<a href="russian-space-program-faces-struggles-76857.html" id="CnPage" target="_blank"></a>
+<a href="half-teenagers-in-us-and-japan-addicted-to-smartphones-76851.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Russia's space program faces hard questions as it marks the 60th anniversary of the launch of Sputnik, the first man-made satellite.<br/>俄罗斯的太空计划在该国首颗人造卫星斯普特尼克发射60周年之际面临着难题。 
+<p>Some experts are wondering how Russia's aging rocket designs will compete with new, less costly rockets.<br/>一些专家希望知道，俄罗斯过时的火箭设计如何同成本更低的新型火箭竞争。</p>
+<p><strong>Sputnik<br/>斯普特尼克</strong></p>
+<p>Sixty years ago, the area known as the Soviet Union was in a fierce competition with the United States to reach beyond Earth's atmosphere.<br/>60年前，苏联同美国在太空方面展开了激烈竞争。</p>
+<p>Tensions between the world's biggest nuclear powers, the United States and the U.S.S.R., were high. The Cold War between the two competing sides, which began after the end of World War II, was intensifying.<br/>美国和苏联这两个世界上最大的核大国之间剑拔弩张。二战结束之后，这两个相互竞争的国家之间的冷战正在加剧。</p>
+<p>Then, on October 4, 1957, news broke that the Soviets had placed the first artificial satellite into orbit.<br/>然后，在1957年10月4日，有消息传出，苏联已经将第一颗人造卫星送入轨道。</p>
+<p>Called Sputnik, the satellite was a small sphere, 58 centimeters wide and about 84 kilograms in weight. It contained two radio transmitters that sent out a beep that could be received by radio operators on Earth.<br/>这颗名为斯普特尼克的人造卫星直径58厘米，重量大约为84公斤。它携带了两个无线电发射机，发出的蜂鸣声可以被地球上的无线电操作人员接收到。</p>
+<p>The satellite was tiny. Yet, it started the extremely costly competition known as the Space Race. The race would end with the Americans' Apollo Moon landings in 1969.<br/>这颗卫星非常小。然而，它开启了一场极其昂贵的太空竞赛，并以1969年美国阿波罗登月作为结束。</p>
+<p>In October of 1957, however, many people in the West were shocked. The Soviets had put an object in Earth's orbit, and they had done it before the West. Soviet media said it was because the socialist political system of the U.S.S.R. was better.<br/>然而在1957年10月，西方国家的很多人都深感震惊，因为苏联在西方国家之前将物体送上了地球轨道。苏联媒体称，这是因为苏联的社会主义政治制度更加优越。</p>
+<p>In the U.S., lawmakers placed an urgent importance on science education in an effort to "catch up" with the Soviets.<br/>美国国会议员紧抓科学教育，以图赶超苏联。</p>
+<p><strong>A product of the Soviet missile program<br/>苏联导弹项目的产物</strong></p>
+<p>The project to launch the first satellite into space was a product of the Soviet's development of their first long-distance missile, the R-7.<br/>将首颗卫星送入太空的项目是苏联发展该国第一款远程导弹R7的产物。</p>
+<p>It was designed as an intercontinental ballistic missile meant to strike the U.S. with a nuclear warhead.<br/>R7被设计为一种洲际弹道导弹，旨在用核弹头攻击美国。</p>
+<p>Sergei Korolyov led a team that was building the rocket. He had the idea to place a simple satellite on the rocket.<br/>谢尔盖·科里奥列夫（Sergei Korolyov）领导了一个建造导弹的小组。他产生了将一颗简单的卫星放置在该导弹上的想法。</p>
+<p>The Soviets were already planning a satellite that would carry scientific instruments. But Korolyov pushed for a basic satellite design that could be put into space quickly -- before the U.S. could attempt a launch.<br/>苏联当时已经在计划制造一款携带科学仪器的卫星。但是科里奥列夫推动了一项基本文星的设计，这样可以在美国试图发射之前尽快将其送入太空。</p>
+<p>The designers considered a cone shape for Sputnik, but Korolyov insisted on a sphere. He is quoted as saying, "The Earth is a sphere, and its first satellite also must have a spherical shape."<br/>设计师想将斯普特尼克设计为锥形，但是科里奥列夫坚持要设计成球形。他说：“地球就是一个球体，所以第一颗地球卫星也必须是球形。”</p>
+<p>A main part of Russia's Soyuz space capsules that are still in use today also is spherical.<br/>俄罗斯目前仍在使用的联盟号太空飞船的主体也是球形。</p>
+<p><strong>Aging rockets, manufacturing problems bring delays<br/>过时的火箭和制造问题导致延误</strong></p>
+<p>Although the Soviet Union came apart in 1991, the Russian Federation remains very important in the space industry.<br/>虽然苏联于1991年解体，但是俄罗斯联邦在航天领域仍然非常重要。</p>
+<p>But, observers point out that the Soyuz rocket boosters Russia uses to carry people and supplies to the International Space Station are very old. The Soyuz rockets are modified versions of the S-7 that carried Sputnik into space.<br/>但是观察家们指出，用于运送人员和物资到国际空间站的联盟号火箭助推器年代久远。联盟号火箭是将斯普特尼克送入太空的S-7火箭的更新版本。</p>
+<p>Another rocket used by Russia, the Proton, was designed in the 1960s.<br/>俄罗斯使用的另一款质子号火箭设计于上世纪60年代。</p>
+<p>These rockets have earned a reputation for reliability over many years of service. But recent launch problems have raised questions about the quality of parts manufactured for the vehicles.<br/>这些火箭凭借多年服役过程中的可靠性赢得了声誉。但是最近的发射故障已经引发了人们对这些载运工具零件质量的质疑。</p>
+<p>Officials found problems with the Soyuz and Proton rockets in 2016 at a factory in the city of Voronezh in western Russia, where the engines for both rockets are built.<br/>有关人员2016年在俄罗斯西部沃罗涅日市的一家工厂发现了联盟号和质子号火箭存在的问题。这家工厂为这两款火箭制造发动机。</p>
+<p>Russia's space agency sent 70 rocket engines back to the production lines to replace problem parts, the Associated News agency said. These issues led to a one-year suspension of Proton launches.<br/>美联社报道称，俄罗斯宇航局将70台火箭发动机送回生产线更换故障部件。这些问题导致质子号火箭发射被暂停了一年。</p>
+<p>That suspension caused Russia to fall behind both the U.S. and China for commercial satellite launches in 2016. Russia had led the world for more than 10 years before that.<br/>这一暂停导致俄罗斯2016年在商业卫星发射上落后于中美两国。在此之前的十来年时间里，俄罗斯都领先于世界。</p>
+<p>Russia's space agency Roscosmos also decided on cost cutting measures. It cut Russian International Space Station crews. The AP reports that two cosmonauts instead of three are to be used. Cosmonaut is the Russian term for astronaut.<br/>俄罗斯宇航局也决定削减成本，它减少了国际空间站上的俄罗斯宇航员。美联社报告称，国际空间站上的俄罗斯宇航员从三名减为两名。</p>
+<p>Many people in Russia have criticized the cuts.<br/>很多俄罗斯人都对这些削减措施提出了批评。</p>
+<p><strong>A new Russian space launch center<br/>俄罗斯新的太空发射中心</strong></p>
+<p>However, Russia has spent huge amounts of money on a second space launch center in the far east of the country near Vostochny. The new spaceport is meant to offer an alternative to the Baikonur Cosmodrome in Kazakhstan, where Russia launches almost all its rockets.<br/>然而，俄罗斯已经在该国靠近东方港的远东地区投入巨资建造第二个太空发射中心。这个新的太空港将成为哈萨克斯坦拜科努尔航天发射场之外的另一选择，俄罗斯大部分火箭都是在拜科努尔发射的。</p>
+<p>Despite the money put into the new center, work in Vostochny has been slowed by workers' protests over pay and the arrest of construction officials accused of corruption.<br/>尽管把资金投到了这个新的发射中心，东方港发射中心的工程进度一直受到了工人抗议工资和建设官员腐败被抓的拖累。</p>
+<p>For example, Maksim Surayev was a cosmonaut who is now a lawmaker. He criticized the low pay of workers at the cosmonaut training center near Moscow known as Star City.<br/>例如，前宇航员马克西姆·苏拉耶夫（Maksim Surayev）现在是一名议员。他对莫斯科附近的星城宇航员培训中心的员工薪酬不高提出了批评。</p>
+<p>"It's wrong when, instead of fulfilling their task to prepare for space flight, they have to find side jobs and a place to live," Surayev told Parliament.<br/>苏拉耶夫对议会表示：“这是不对的。因为当他们在完成太空飞行准备任务的时候，他们还得找兼职和找地方住。”</p>
+<p>In addition to budget and manufacturing problems, the Russian space program has seen some projects postponed. For instance, space agency officials had hoped to launch the Russian module for the I.S.S. in 2007. But the module has been delayed for many years.<br/>除了预算和制造问题，俄罗斯太空计划已经推迟了一些项目。例如，宇航局官员曾经希望发射国际空间站的俄罗斯模块，但是该模块已经被推迟了多年。</p>
+<p>The launch is now planned for next year, but some reports say another delay is possible.<br/>这项发射目前计划在明年进行，但是有报道称可能还会延迟。</p>
+<p><strong>A historic day<br/>历史性的一天</strong></p>
+<p>Yet, Russia's space presence with its 60-year history continues -- dating back to that first launch that shocked the West.<br/>然而，俄罗斯的太空存在和它60年的历史还在继续--这可以追溯到那次震惊西方的第一颗人造卫星的发射。</p>
+<p>On October 4 this year, AP said that Sergei Ryanzanskiy posted on Twitter a picture of himself holding a small model of the Sputnik satellite.<br/>美联社表示，今年10月4日，谢尔盖·梁赞斯基（Sergei Ryanzanskiy）在推特上发布了一张自己手持斯普特尼克卫星小号模型的照片。</p>
+<p>Ryanzanskiy is currently a cosmonaut on the International Space Station.<br/>梁赞斯基目前是国际空间站上的一名宇航员。</p>
+<p>He was marking the 60th anniversary of the historic launch.<br/>他是在纪念这次历史性发射60周年。</p>
+<p>Ryanzanskiy had a special reason to note the event.<br/>梁赞斯基留意该事件有着特殊理由。</p>
+<p>His grandfather was the chief designer of radio guidance systems for space vehicles during the Soviet era. And he was involved in the Sputnik launch.<br/>他的祖父是苏联时代航天器无线电制导系统的首席设计师，同时还参与了斯普特尼克的发射。</p>
+<p>In August, Ryazanskiy helped release five very small satellites that were manufactured by a 3-D printer. One of the hand-held satellites honored Sputnik's 60th anniversary.<br/>八月份，梁赞斯基协助释放了五款由3D打印机制造的非常微小的卫星。这些便携式卫星的其中一款就是为了纪念斯普特尼克发射60周年。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·里特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:60 Years After First Satellite, Russian Space Program Faces Struggles]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.01]Russia's space program faces hard questions
+[00:03.83]as it marks the 60th anniversary of the launch of Sputnik,
+[00:09.14]the first man-made satellite.
+[00:12.30]Some experts are wondering how Russia's aging rocket designs
+[00:18.25]will compete with new, less costly rockets.
+[00:24.18]Sixty years ago, the area known as the Soviet Union
+[00:29.41]was in a fierce competition with the United States to reach beyond Earth's atmosphere.
+[00:37.32]Tensions between the world's biggest nuclear powers,
+[00:41.87]the United States and the U.S.S.R., were high.
+[00:47.02]The Cold War between the two competing sides,
+[00:51.09]which began after the end of World War II, was intensifying.
+[00:57.70]Then, on October 4, 1957, news broke
+[01:04.73]that the Soviets had placed the first artificial satellite into orbit.
+[01:11.54]Called Sputnik, the satellite was a small sphere,
+[01:17.32]58 centimeters wide and about 84 kilograms in weight.
+[01:24.24]It contained two radio transmitters that sent out a beep
+[01:30.20]that could be received by radio operators on Earth.
+[01:35.08]The satellite was tiny.
+[01:37.90]Yet, it started the extremely costly competition known as the Space Race.
+[01:46.18]The race would end with the Americans' Apollo Moon landings in 1969.
+[01:54.46]In October of 1957, however, many people in the West were shocked.
+[02:02.17]The Soviets had put an object in Earth's orbit,
+[02:07.13]and they had done it before the West.
+[02:10.03]Soviet media said it was because the socialist political system of the U.S.S.R. was better.
+[02:19.96]In the U.S., lawmakers placed an urgent importance
+[02:25.13]on science education in an effort to "catch up" with the Soviets.
+[02:32.55]The project to launch the first satellite into space
+[02:36.94]was a product of the Soviet's development of their first long-distance missile, the R-7.
+[02:45.30]It was designed as an intercontinental ballistic missile
+[02:50.50]meant to strike the U.S. with a nuclear warhead.
+[02:55.43]Sergei Korolyov led a team that was building the rocket.
+[03:02.15]He had the idea to place a simple satellite on the rocket.
+[03:08.49]The Soviets were already planning a satellite that would carry scientific instruments.
+[03:16.23]But Korolyov pushed for a basic satellite design
+[03:21.63]that could be put into space quickly -- before the U.S. could attempt a launch.
+[03:29.55]The designers considered a cone shape for Sputnik,
+[03:35.01]but Korolyov insisted on a sphere.
+[03:39.48]He is quoted as saying, "The Earth is a sphere,
+[03:44.26]and its first satellite also must have a spherical shape."
+[03:50.13]A main part of Russia's Soyuz space capsules that are still in use today also is spherical.
+[04:00.63]Although the Soviet Union came apart in 1991,
+[04:06.46]the Russian Federation remains very important in the space industry.
+[04:12.83]But, observers point out that the Soyuz rocket boosters Russia uses to carry people
+[04:20.28]and supplies to the International Space Station are very old.
+[04:26.10]The Soyuz rockets are modified versions of the S-7 that carried Sputnik into space.
+[04:36.27]Another rocket used by Russia, the Proton, was designed in the 1960s.
+[04:44.96]These rockets have earned a reputation for reliability over many years of service.
+[04:52.91]But recent launch problems have raised questions
+[04:57.74]about the quality of parts manufactured for the vehicles.
+[05:03.49]Officials found problems with the Soyuz and Proton rockets in 2016
+[05:11.30]at a factory in the city of Voronezh in western Russia,
+[05:16.70]where the engines for both rockets are built.
+[05:20.26]Russia's space agency sent 70 rocket engines back to the production lines
+[05:27.41]to replace problem parts, the Associated News agency said.
+[05:33.58]These issues led to a one-year suspension of Proton launches.
+[05:40.95]That suspension caused Russia to fall behind both the U.S. and China
+[05:48.13]for commercial satellite launches in 2016.
+[05:53.22]Russia had led the world for more than 10 years before that.
+[05:59.31]Russia's space agency Roscosmos also decided on cost cutting measures.
+[06:07.04]It cut Russian International Space Station crews.
+[06:12.00]The AP reports that two cosmonauts instead of three are to be used.
+[06:19.87]Cosmonaut is the Russian term for astronaut.
+[06:25.41]Many people in Russia have criticized the cuts.
+[06:31.31]However, Russia has spent huge amounts of money on a second space launch center
+[06:38.75]in the far east of the country near Vostochny.
+[06:43.72]The new spaceport is meant to offer an alternative
+[06:48.13]to the Baikonur Cosmodrome in Kazakhstan,
+[06:52.94]where Russia launches almost all its rockets.
+[06:57.22]Despite the money put into the new center,
+[07:00.85]work in Vostochny has been slowed by workers' protests over pay
+[07:07.23]and the arrest of construction officials accused of corruption.
+[07:12.56]And people with ties to the space program
+[07:17.02]have criticized the spending on Vostochny at the expense of other priorities.
+[07:24.47]For example, Maksim Surayev was a cosmonaut who is now a lawmaker.
+[07:31.91]He criticized the low pay of workers at the cosmonaut training center
+[07:37.82]near Moscow known as Star City.
+[07:41.89]"It's wrong when, instead of fulfilling their task to prepare for space flight,
+[07:49.00]they have to find side jobs and a place to live," Surayev told Parliament.
+[07:55.89]In addition to budget and manufacturing problems,
+[08:00.60]the Russian space program has seen some projects postponed.
+[08:06.42]For instance, space agency officials had hoped
+[08:11.33]to launch the Russian module for the I.S.S. in 2007.
+[08:16.82]But the module has been delayed for many years.
+[08:21.57]The launch is now planned for next year,
+[08:25.78]but some reports say another delay is possible.
+[08:31.32]Yet, Russia's space presence with its 60-year history continues
+[08:38.08]-- dating back to that first launch that shocked the West.
+[08:43.44]On October 4 this year, AP said that Sergei Ryanzanskiy
+[08:50.28]posted on Twitter a picture of himself holding a small model of the Sputnik satellite.
+[08:58.61]Ryanzanskiy is currently a cosmonaut on the International Space Station.
+[09:06.42]He was marking the 60th anniversary of the historic launch.
+[09:12.09]Ryanzanskiy had a special reason to note the event.
+[09:17.47]His grandfather was the chief designer of radio guidance systems
+[09:23.85]for space vehicles during the Soviet era.
+[09:27.61]And he was involved in the Sputnik launch.
+[09:31.84]In August, Ryazanskiy helped release five very small satellites
+[09:39.52]that were manufactured by a 3-D printer.
+[09:43.60]One of the hand-held satellites honored Sputnik's 60th anniversary.
+[09:51.41]I'm Mario Ritter. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

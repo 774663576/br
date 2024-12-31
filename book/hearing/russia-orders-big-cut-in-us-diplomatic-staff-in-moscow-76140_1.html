@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯下令大幅削减美国驻莫斯科外交人员</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 俄罗斯下令大幅削减美国驻莫斯科外交人员" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201707/russia-orders-big-cut-in-us-diplomatic-staff-in-moscow.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯下令大幅削减美国驻莫斯科外交人员</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201707/russia-orders-big-cut-in-us-diplomatic-staff-in-moscow.mp3" id="mp3"></a>
+<a href="/static/lrc/russia-orders-big-cut-in-us-diplomatic-staff-in-moscow.lrc" id="lrc"></a>
+<a href="russia-orders-big-cut-in-us-diplomatic-staff-in-moscow-76140.html" id="CnPage" target="_blank"></a>
+<a href="hundreds-of-thousands-of-somalis-displaced-by-drought-conflict-76132.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Russia has called on the United States to show "political will" to improve relations between the two countries.<br/>俄方呼吁美国展现出改善两国关系的政治意愿。
+<p>The comment comes one day after Russian President Vladimir Putin ordered large cuts in the number of people working at the U.S. Embassy. Putin ordered the United States to reduce its diplomatic workers in Russia by 755.<br/>这一评论是在俄罗斯总统下令大幅削减美国大使馆工作人员数量的一天之后发布的。普京下令美国减少755名驻俄罗斯外交工作人员。</p>
+<p>Dmitry Peskov is a Russian government spokesman. He said Monday, "We are interested in a steady development of our ties and are sorry to note that we are still far from that."<br/>德米特里·佩斯科夫（Dmitry Peskov）是俄罗斯政府发言人。他在周一表示：“我们有意稳步发展我们两国关系。然而很抱歉地指出，我们离实现这一步还有很远。”</p>
+<p>Peskov said the reduction of diplomatic staff ordered by Putin could include Russia citizens. But it is still likely to require big reductions in U.S. personnel at the U.S. embassy in Moscow.<br/>佩斯科夫表示，普京下令削减的美国外交人员可能也包括俄罗斯公民，但是这可能仍然需要美国驻莫斯科大使馆的美方人员作出大幅削减。</p>
+<p>Putin made his announcement in a Russian television interview on Sunday. He acted after U.S. officials said President Donald Trump would sign into law legislation that places additional sanctions on Russia, and two other countries: Iran and North Korea.<br/>普京周日在接受俄罗斯电视台采访时宣布了这一决定。他是在美国官员声称川普将会签署国会对俄罗斯以及伊朗和朝鲜两国进行额外制裁的法案之后采取了这一行动。</p>
+<p>The bill was approved by large majorities in the U.S. Senate and House of Representatives.<br/>该法案在美国参众两院议员中以绝大优势获得通过。</p>
+<p>Putin said on Russian state television Sunday, "We had hoped that the situation will somehow change, but apparently if it changes, it won't be soon. I thought it was the time to show that we're not going to leave it without an answer."<br/>普京周日在俄罗斯电视台上表示：“我们原本希望形势会有所好转，但是看来即使形势转变，也不会是在近期。我认为现在是时候表明我们不会对此置之不理。”</p>
+<p>Putin said that Russia is open to working with the U.S. on issues such as terrorism and cybercrime. But he said it "only hears" false charges of Russian interference.<br/>普京表示，俄罗斯愿意与美国在恐怖主义和网络犯罪等问题上合作。但是他表示，他听到的只有俄罗斯干涉美国大选这种不实指控。</p>
+<p>Russian experts said Putin had hoped for better relations with the Trump administration than he had with former President Barack Obama. Obama had ordered reductions in Russian diplomatic staff to punish Russia for interfering with the 2016 U.S. elections.<br/>俄罗斯专家表示，普京曾希望同川普政府的关系会强于同美国前总统奥巴马的关系。奥巴马曾下令削减俄罗斯外交人员，以惩罚俄罗斯干涉美国2016年大选。</p>
+<p>Congressional and FBI investigations into possible connections between Trump's campaign and Russia have made it more difficult for Trump to move for improved relations.<br/>美国国会和联邦调查局对川普竞选和俄罗斯之间潜在联系的调查使得川普很难采取行动改善两国关系。</p>
+<p>Michael O'Hanlon is a foreign policy expert for the Brookings Institution, a Washington think tank. He said, "President Trump himself is already using far tougher words toward Russia than he did as a [presidential] candidate. O'Hanlon also said Trump's top security experts are taking a hard line against Russia.<br/>迈克尔·奥汉龙（Michael O'Hanlon）是华盛顿智囊团之一的布鲁金斯学会的外交政策专家。他说，“川普总统本人对俄罗斯的表态比他作为总统候选人时的言论更为强硬。”奥汉龙还表示，川普的高级安全专家对俄罗斯持强硬态度。</p>
+<p>Former U.S. ambassador to Russia, Michael McFaul, said the new Russian sanctions will likely mean longer waits for Russians to obtain visas to travel to the United States.<br/>美国前驻俄罗斯大使迈克尔·麦克福尔（Michael McFaul）表示，俄罗斯新出台的制裁措施可能意味着俄罗斯人获取赴美签证需要等待更长时间。</p>
+<p>"If these cuts are real, Russians should expect to wait weeks if not months to get visas to come to U.S." McFaul said on Twitter. He served as U.S. ambassador to Russia from 2012-2014 during the Obama administration.<br/>麦克福尔在推特上表示：“如果真的削减这么多美方外交人员，俄罗斯人应该预料到需要等待数周甚至数月才能获得赴美签证。”他在奥巴马执政期间，担任了2012年-2014年的美国驻俄罗斯大使。</p>
+<p>The sanctions bill passed by Congress places additional economic limits on Russian industries. Russia's economy has already felt the effects from sanctions put in place in 2014. Those restrictions were meant to punish Russia for its annexation of Crimea from Ukraine that same year.<br/>国会通过的这项制裁法案对俄罗斯多个行业施加了新的经济限制。俄罗斯经济已经受到了2014年西方制裁的影响。这些限制意在惩罚俄罗斯同年从乌克兰吞并了克里米亚。</p>
+<p>In early July, Putin and Trump met twice during a meeting of the Group of 20 leaders in Germany. During their first meeting, Trump said Putin denied he directed efforts to interfere with the U.S. presidential election.<br/>7月初，普京和川普在德国20国集团领导人会议期间举行了两次会晤。在他们首次会晤期间，川普表示普京否认他下令采取措施干涉美国大选。</p>
+<p>U.S. Vice President Mike Pence spoke in Eastern Europe Monday after the embassy staff reductions were announced by Putin. Pence said there is no bigger threat to Baltic States than Russia.<br/>美国副总统彭斯在普京宣布削减美方外交人员后，于周一在东欧发表了讲话。彭斯表示，俄罗斯是波罗的海国家面临的最大威胁。</p>
+<p>He said Russia continues to try to change international borders by force, "undermine democracies" and "divide the free nations of Europe, one against another."<br/>她说，俄罗斯继续在寻求通过武力重画国际疆界，“破坏民主”并且“逐一分裂欧洲自由国家。”</p>
+<p>Pence spoke in Estonia's capital, Tallinn, after meeting with leaders of Estonia, Latvia, and Lithuania.<br/>彭斯在会见了爱沙尼亚、拉脱维亚和立陶宛领导人之后，在爱沙尼亚首都塔林发表了上述讲话。</p>
+<p>I'm Ashley Thompson.<br/>我是阿什利·汤普森。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Russia Orders Big Cut in US Diplomatic Staff in Moscow]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]Russia has called on the United States to show "political will"
+[00:07.64]to improve relations between the two countries.
+[00:12.96]The comment comes one day after Russian President Vladimir Putin
+[00:20.00]ordered large cuts in the number of people working at the U.S. Embassy.
+[00:27.92]Putin ordered the United States to reduce its diplomatic workers in Russia by 755.
+[00:38.80]Dmitry Peskov is a Russian government spokesman.
+[00:43.52]He said Monday, "We are interested in a steady development of our ties
+[00:50.72]and are sorry to note that we are still far from that."
+[00:57.12]Peskov said the reduction of diplomatic staff
+[01:01.40]ordered by Putin could include Russia citizens.
+[01:06.64]But it is still likely to require big reductions
+[01:11.16]in U.S. personnel at the U.S. embassy in Moscow.
+[01:17.20]Putin made his announcement in a Russian television interview on Sunday.
+[01:23.68]He acted after U.S. officials said President Donald Trump
+[01:29.70]would sign into law legislation that places additional sanctions on Russia,
+[01:36.84]and two other countries: Iran and North Korea.
+[01:42.52]The bill was approved by large majorities
+[01:46.27]in the U.S. Senate and House of Representatives.
+[01:51.28]Putin said on Russian state television Sunday,
+[01:55.28]"We had hoped that the situation will somehow change,
+[02:00.60]but apparently if it changes, it won't be soon.
+[02:06.04]I thought it was the time to show that we're
+[02:10.08]not going to leave it without an answer."
+[02:14.64]Putin said that Russia is open to working with the U.S.
+[02:19.60]on issues such as terrorism and cybercrime.
+[02:24.60]But he said it "only hears" false charges of Russian interference.
+[02:31.96]Russian experts said Putin had hoped for better relations with the Trump administration
+[02:39.28]than he had with former President Barack Obama.
+[02:44.52]Obama had ordered reductions in Russian diplomatic staff
+[02:49.72]to punish Russia for interfering with the 2016 U.S. elections.
+[02:57.16]Congressional and FBI investigations into possible connections
+[03:02.76]between Trump's campaign and Russia have made it more difficult
+[03:08.67]for Trump to move for improved relations.
+[03:13.56]Michael O'Hanlon is a foreign policy expert for the Brookings Institution,
+[03:20.16]a Washington think tank.
+[03:22.76]He said, "President Trump himself is already using far tougher words
+[03:29.60]toward Russia than he did as a [presidential] candidate.
+[03:34.04]O'Hanlon also said Trump's top security experts are taking a hard line against Russia.
+[03:43.36]Former U.S. ambassador to Russia, Michael McFaul, said the new Russian sanctions
+[03:50.52]will likely mean longer waits for Russians to obtain visas to travel to the United States.
+[03:59.08]"If these cuts are real, Russians should expect to wait weeks
+[04:04.64]if not months to get visas to come to U.S."
+[04:09.44]McFaul said on Twitter. He served as U.S. ambassador to Russia
+[04:14.61]from 2012-2014 during the Obama administration.
+[04:21.76]The sanctions bill passed by Congress places additional economic limits on Russian industries.
+[04:30.68]Russia's economy has already felt the effects from sanctions put in place in 2014.
+[04:39.44]Those restrictions were meant to punish Russia for its annexation
+[04:45.00]of Crimea from Ukraine that same year.
+[04:49.64]In early July, Putin and Trump met twice
+[04:54.21]during a meeting of the Group of 20 leaders in Germany.
+[04:59.48]During their first meeting, Trump said Putin denied
+[05:04.44]he directed efforts to interfere with the U.S. presidential election.
+[05:10.96]U.S. Vice President Mike Pence spoke in Eastern Europe Monday
+[05:16.79]after the embassy staff reductions were announced by Putin.
+[05:22.40]Pence said there is no bigger threat to Baltic States than Russia.
+[05:29.44]He said Russia continues to try to change international borders by force,
+[05:36.80]"undermine democracies" and "divide the free nations of Europe,
+[05:42.80]one against another."
+[05:45.36]Pence spoke in Estonia's capital, Tallinn,
+[05:49.56]after meeting with leaders of Estonia, Latvia, and Lithuania.
+[05:56.00]I'm Ashley Thompson. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

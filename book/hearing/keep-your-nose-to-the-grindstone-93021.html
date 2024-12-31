@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Keep Your Nose to the Grindstone</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Keep Your Nose to the Grindstone" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/keep-your-nose-to-the-grindstone.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Keep Your Nose to the Grindstone</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/keep-your-nose-to-the-grindstone.mp3" id="mp3"></a>
+<a href="us-accuses-visa-of-illegally-blocking-competition-93020.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">28 September, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Learning a language is difficult. Sometimes it requires a plan and resources. But it also usually requires hard work. People who <strong>persist</strong> with their language goals often get good results. They keep working even through hard times. They <u>keep their nose to the grindstone</u>.</p>
+<p>When you <u>keep your nose to the grindstone,</u> you work very hard for a long time at something. You don't give up.</p><div class="contentImage"><img alt="FILE - This is an antique grindstone used for sharpening knives. (Adobe Photo by Mannyo/Wirestock Creators)" src="https://files.21voa.com/gdb/1f7eda90-3172-4142-8ff6-1fe31c72e71c_cx0_cy8_cw0_w268_r1.jpeg"/><br/><span class="imagecaption">FILE - This is an antique grindstone used for sharpening knives. (Adobe Photo by Mannyo/Wirestock Creators)</span></div>
+<p>How do we use this<strong> idiom</strong> in daily life? How did it come to mean <strong>perseverance</strong>? And just what is a grindstone? We answer all these questions on today's show.</p>
+<p>First, let's talk about a grindstone. A grindstone is a large stone circular stone with a hole in the middle. An <strong>axle</strong> fits through that hole. When the stone turns quickly on the axle, it can sharpen, shape, or smooth a tool.</p>
+<p>And that brings us to the beginnings of this idiom.</p>
+<p>On his website Phrase Finder, writer and language researcher Gary Martin suggests two possible beginnings. Both are set in work environments of long ago: a place for milling<strong> </strong>grain and a place for sharpening tools.</p>
+<p>Some online sources claim that <u>keeping your nose to the grindstone</u> comes from milling grain. If the stone got too hot while grinding, it could burn the grain. So, workers would have to keep their noses close to the stone and smell for any sign of burning.</p>
+<p>However, word expert Martin says that doesn't seem true. He claims that these mills used millstones. So, if this story were true, we would say <u>keep your nose to the millstone.</u> But we don't.</p>
+<p>He also notes that the terms “millstone” and “grindstone” were used interchangeably hundreds of years ago. But then, at some point long ago, that stopped. Grain mills used millstones and not grindstones. And <strong>vice versa</strong> – tool sharpening workshops used grindstones and not millstones.</p>
+<p>So, let's talk about the explanation set in a tool sharpening workshop. Martin talks about old workshops in his area of England. He says these workshops have <strong>benches</strong> very near to grinding stones. Workers would sit on the benches <strong>hunched over</strong> and work very hard and very long. He goes on to write the following:</p>
+<p><em>“They had to pay close attention to their work as a moment too long on the wheel could cause the steel to overheat and be ruined.”</em></p>
+<p>Martin guesses that this story is the more likely explanation. Imagine being hunched over your work and working hard at it. That describes <u>having your nose to the grindstone</u>.</p>
+<p>In some cases, we also say <u>put your nose to the grindstone</u>. We may say it this way if we give someone advice. For example, “You need to <u>put your nose to the grindstone</u> if you're going to finish this project on time.”</p>
+<p>Now let's hear another example.</p>
+<p><em>A: Have you seen Marisa lately? She hasn't called or texted in weeks!</em></p>
+<p><em>B: I was worried about her too. But the other day, I ran into her co-worker. She said Marisa has her <u>nose to the grindstone</u> trying to finish her year-end report.</em></p>
+<p><em>A: Oh I forgot about that! In that case, let's take her some dinner. She never eats when she's busy with work. </em></p>
+<p><em>B: Good idea! I'll make my famous pasta and meatballs. </em></p>
+<p>If I had to pick an <strong>opposite</strong> of this idiom, it would be this one: All work and no play makes Jack a <strong>dull </strong>boy.</p>
+<p>Life can't be all about work. So, if you've been keeping your nose to the grindstone, remember to take a break.</p>
+<p>And that's all the time we have this <em>Words and Their Stories</em>.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>persist</strong> <em>– v.</em> to continue to do something in spite of opposition, warnings, or pleas</p>
+<p><strong>idiom</strong> <em>– n. </em>an expression that cannot be understood from the meanings of its separate words but must be learned as a whole</p>
+<p><strong>perseverance </strong><em>– n. </em>continued effort to do or achieve something despite difficulties, failure, or opposition</p>
+<p><strong>axle </strong><em>– n. </em>a pin, pole, or bar on or with which a wheel revolves</p>
+<p><strong>mill </strong><em>– v. </em>Milling transforms grain into flour for food preparation. : <em>– n.</em> A mill is where grain is processed into flour.</p>
+<p><strong>vice versa </strong><em>– adv. </em>with the order changed <strong>: </strong>with the relations reversed</p>
+<p><strong>bench </strong><em>– n. </em>a long seat for two or more persons</p>
+<p><strong>hunch over</strong> <em>phrasal verb </em>to bend one's body into an arch or hump</p>
+<p><strong>opposite </strong><em>– adj. </em>as different as possible</p>
+<p><strong>dull </strong><em>– adj. </em>mentally slow</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

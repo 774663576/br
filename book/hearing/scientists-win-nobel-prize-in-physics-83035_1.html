@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 三名科学家获得诺贝尔物理学奖</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 三名科学家获得诺贝尔物理学奖" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201910/scientists-win-nobel-prize-in-physics.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>三名科学家获得诺贝尔物理学奖</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201910/scientists-win-nobel-prize-in-physics.mp3" id="mp3"></a>
+<a href="/static/lrc/scientists-win-nobel-prize-in-physics.lrc" id="lrc"></a>
+<a href="scientists-win-nobel-prize-in-physics-83035.html" id="CnPage" target="_blank"></a>
+<a href="trump-faces-criticism-on-decision-to-withdraw-from-northern-syria-83031.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Three scientists have won the Nobel Prize in Physics for their work in helping to understand "the evolution of the universe and the Earth's place in the cosmos."<br/>三名科学家因其帮助理解“宇宙的演化和地球在宇宙中的地位”而荣获诺贝尔物理学奖。 
+<p>The Royal Swedish Academy of Sciences announced the winners Tuesday.<br/>瑞典皇家科学院周二宣布了获奖者。</p>
+<p>Half of the $918,000 in prize money will go to Canadian-born James Peebles, a retired professor at Princeton University in the United States. The Nobel Committee on Physics praised his theoretical discoveries in cosmology – the science of the beginnings and development of the universe.<br/>在91.8万美元的奖金中，有一半将被授予出生在加拿大的詹姆斯·皮布尔斯，他是美国普林斯顿大学的退休教授。诺贝尔物理学委员会表彰了他在宇宙学中的理论发现，这是一门关于宇宙起源和发展的科学。</p>
+<p>The other half of the award will go to Michael Mayor and Didier Queloz, both of the University of Geneva in Switzerland. In 1995, the two men announced the first discovery of an exoplanet — a planet outside our solar system — that orbits a sun-like star.<br/>另一半奖金将授予米歇尔·马约尔和迪迪埃·奎洛兹，两人都来自瑞士日内瓦大学。1995年，两人宣布首次发现一颗系外行星，即太阳系以外围绕类日恒星运行的行星。</p>
+<p>Queloz also works at the University of Cambridge in England.<br/>奎洛兹也在英国剑桥大学工作。</p>
+<p>Ulf Danielsson of the Royal Swedish Academy of Science spoke to reporters as the winners were announced.<br/>瑞典皇家科学院的乌尔夫·丹尼尔森在获奖者宣布之际接受了记者采访。</p>
+<p>"This year's Nobel laureates in physics have painted a picture of the universe far stranger and more wonderful than we ever could have imagined," he said.<br/>他说：“今年的诺贝尔物理学奖获奖者给我们描绘了一副比我们想象中更为陌生和奇妙的宇宙图景。”</p>
+<p>Scientists have praised Peebles as one of the most influential cosmologists of his time. They say he recognized the importance of the cosmic radiation background that was left over from a huge explosion billions of years ago. Scientists call the explosion "the Big Bang."<br/>科学家称赞皮布尔斯是他那个时代最有影响力的宇宙学家之一。他们说皮布尔斯认识到了数十亿年前一场巨大爆炸留下的宇宙辐射背景的重要性。科学家们称这次爆炸为“大爆炸。”</p>
+<p>The Nobel committee said Peebles' theories about the cosmos led to "the foundation of our modern understanding of the universe's history, from the Big Bang to the present day."<br/>诺贝尔奖委员会表示，皮布尔斯关于宇宙的理论奠定了“我们对从大爆炸到现在的宇宙历史的现代理解的基础。”</p>
+<p>Peebles laughed repeatedly when he spoke by telephone with The Associated Press. He talked about answering the phone before sunrise and thinking that "it's either something very wonderful or it's something horrible."<br/>皮布尔斯在接受美联社的电话采访中多次笑出声来。他谈到了天还没亮接听电话，觉得“要么是好事，要么是坏事。”</p>
+<p>Mayor and Queloz were credited for having "started a revolution in astronomy" with the discovery of exoplanet 51 Pegasi B. The gaseous ball is comparable to the planet Jupiter.<br/>马约尔和奎洛兹因为发现了系外行星飞马座51，“开启了天文学革命”而获得表彰。这颗气态星球可以与木星相媲美。</p>
+<p>Mayor noted that in 1995, "no one knew whether exoplanets existed or not."<br/>马约尔指出，在1995年“没有人知道系外行星是否存在。”</p>
+<p>The committee said more than 4,000 exoplanets have been found in our own Milky Way galaxy since then.<br/>诺奖委员会表示，自那时起，在我们自己的银河系发现了4千多颗系外行星。</p>
+<p>Queloz was meeting with other scientists interested in finding new planets when the press office at Cambridge University told him the big news: He had won the Nobel Prize.<br/>当剑桥大学新闻办公室告诉奎洛兹他获得诺奖的这一重大新闻时，他正在跟其他有志于寻找新行星的科学家们会面。</p>
+<p>He thought it was joke at first.<br/>他一开始以为是玩笑。</p>
+<p>"I could barely breathe," Queloz told the AP. "It's enormous. It's beyond usual emotions. My hand was shaking for a long time."<br/>奎洛兹对美联社表示：“我几乎没法呼吸。这是大事，超出了普通的情绪。我的手抖了好久。”</p>
+<p>Swedish academy member Mats Larsson said this year's award was "one of the easiest physics prizes for a long time to explain."<br/>瑞典学院成员马茨·拉尔森表示，今年的奖项是“长期以来最容易解释的物理学奖之一。”</p>
+<p>"If there are a hundred billion planetary systems, with maybe 10 billion planetary systems with Earth-like planets, it would be highly unlikely and against all physical theories to assume that life only developed on our planet," he added.<br/>他还说：“如果有一千亿个行星系统，里面可能就会有一百亿个具有类地行星的行星系统。那么这可能就会违背假设只有地球才有生命的所有物理理论。”</p>
+<p>The three men will be recognized at ceremonies in Stockholm on December 10, the anniversary of the death of prize founder Alfred Nobel in 1896.<br/>这三人将于12月10日在斯德哥尔摩的颁奖典礼上获得表彰，这天也是诺奖创始人阿尔弗雷德·诺贝尔的忌日。</p>
+<p>I'm Anne Ball.<br/>我是安妮·鲍尔。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:3 Scientists Win Nobel Prize in Physics]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Three scientists have won the Nobel Prize in Physics for their work in helping to understand
+[00:08.13]"the evolution of the universe and the Earth's place in the cosmos."
+[00:14.88]The Royal Swedish Academy of Sciences announced the winners Tuesday.
+[00:21.51]Half of the $918,000 in prize money will go to Canadian-born James Peebles,
+[00:31.87]a retired professor at Princeton University in the United States.
+[00:37.96]The Nobel Committee on Physics praised his theoretical discoveries in cosmology
+[00:45.78]– the science of the beginnings and development of the universe.
+[00:52.72]The other half of the award will go to Michael Mayor and Didier Queloz,
+[01:00.12]both of the University of Geneva in Switzerland.
+[01:06.60]In 1995, the two men announced the first discovery of an exoplanet
+[01:14.82]— a planet outside our solar system — that orbits a sun-like star.
+[01:23.24]Queloz also works at the University of Cambridge in England.
+[01:29.92]Ulf Danielsson of the Royal Swedish Academy of Science
+[01:35.13]spoke to reporters as the winners were announced.
+[01:39.43]"This year's Nobel laureates in physics have painted a picture of the universe
+[01:46.90]far stranger and more wonderful than we ever could have imagined," he said.
+[01:55.36]Scientists have praised Peebles as one of the most influential cosmologists of his time.
+[02:03.80]They say he recognized the importance of the cosmic radiation background
+[02:10.77]that was left over from a huge explosion billions of years ago.
+[02:18.17]Scientists call the explosion "the Big Bang."
+[02:23.60]The Nobel committee said Peebles' theories about the cosmos led to
+[02:30.45]"the foundation of our modern understanding of the universe's history,
+[02:35.72]from the Big Bang to the present day."
+[02:38.92]Peebles laughed repeatedly when he spoke by telephone with The Associated Press.
+[02:47.03]He talked about answering the phone before sunrise and thinking
+[02:52.56]that "it's either something very wonderful or it's something horrible."
+[02:59.56]Mayor and Queloz were credited for having "started a revolution in astronomy"
+[03:07.84]with the discovery of exoplanet 51 Pegasi B.
+[03:14.14]The gaseous ball is comparable to the planet Jupiter.
+[03:19.33]Mayor noted that in 1995, "no one knew whether exoplanets existed or not."
+[03:28.96]The committee said more than 4,000 exoplanets have been found
+[03:35.57]in our own Milky Way galaxy since then.
+[03:41.16]Queloz was meeting with other scientists interested in finding new planets
+[03:47.48]when the press office at Cambridge University told him the big news:
+[03:53.94]He had won the Nobel Prize.
+[03:57.28]He thought it was joke at first.
+[04:01.13]"I could barely breathe," Queloz told the AP.
+[04:05.68]"It's enormous. It's beyond usual emotions. My hand was shaking for a long time."
+[04:16.32]Swedish academy member Mats Larsson said this year's award was
+[04:22.57]"one of the easiest physics prizes for a long time to explain."
+[04:30.12]"If there are a hundred billion planetary systems,
+[04:34.75]with maybe 10 billion planetary systems with Earth-like planets,
+[04:41.51]it would be highly unlikely and against all physical theories
+[04:47.56]to assume that life only developed on our planet," he added.
+[04:55.72]The three men will be recognized at ceremonies in Stockholm on December 10,
+[05:02.44]the anniversary of the death of prize founder Alfred Nobel in 1896.
+[05:11.36]I'm Anne Ball. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

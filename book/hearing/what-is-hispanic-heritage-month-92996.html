@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What is Hispanic Heritage Month?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, What is Hispanic Heritage Month?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/what-is-hispanic-heritage-month.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What is Hispanic Heritage Month?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/what-is-hispanic-heritage-month.mp3" id="mp3"></a>
+<a href="/static/lrc/what-is-hispanic-heritage-month.lrc" id="lrc"></a>
+<a href="black-women-mathematicians-receive-congressional-medals-for-space-program-work-92993.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">20 September, 2024</span><br/>
+<p>Celebrations across the United States are taking place to mark National Hispanic Heritage Month. </p>
+<p>It is a yearly tradition that honors the <strong>diversity</strong> and culture of Hispanic people. The month-long period is a chance for many in the U.S. to learn about what Hispanics have given to American culture. It is celebrated each year from September 15 to October 15.</p>
+<p>The group includes people whose ancestors come from Spain, Mexico, the Caribbean and Central and South America. The latest <strong>census </strong>estimates there are more than 65 million people identified as ethnically Hispanic in the U.S.</p><div class="contentImage"><img alt="FILE - Members of the Cathedral City High School Ballet Folklorico pose for photo prior to joining in the Kingdom Day Parade in Los Angeles, Jan. 16, 2023." src="https://files.21voa.com/gdb/b5cb4006-0bf6-4b37-bad9-e82d382a887f_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Members of the Cathedral City High School Ballet Folklorico pose for photo prior to joining in the Kingdom Day Parade in Los Angeles, Jan. 16, 2023.</span></div>
+<p><strong>A long history</strong></p>
+<p>Before there was National Hispanic Heritage Month, there was Hispanic Heritage Week. President Lyndon B. Johnson signed the law in 1968. The U.S. Library of Congress says every president since Johnson has issued a proclamation for National Hispanic Heritage Month. On September 13, President Joe Biden issued a proclamation recognizing September 15 through October 15, as National Hispanic Heritage Month.</p>
+<p>Rachel Gonzalez-Martin is an associate professor of Mexican American and Latino Studies at the University of Texas at Austin. She said the celebration has grown over the past 10 years because of the larger number of Latinos in the U.S. She noted that Hispanic Heritage Month was an official recognition of belonging “that became really powerful."</p>
+<p><strong>Many holidays honored</strong></p>
+<p>September 15 is the date when some Latin American countries mark their independence days. The Central American nations of Guatemala, Honduras, El Salvador, Nicaragua, and Costa Rica celebrate their independence on September 15. Mexico marks its national day on September 16.</p>
+<p>Also, during National Hispanic Heritage Month, the South American nation of Chile observes its independence day on September 18.</p>
+<p>Alberto Lammers is director of communications at the UCLA Latino Policy and Politics Institute. He said, "It became a chance for people to know Hispanic cultures, for Latinos to get to know a community better and for the American public to understand a little better the long history of Latinos in the U.S."</p>
+<p>Lammers said the four-week period is about honoring the way Hispanic populations have shaped the U.S. in the past and present.</p>
+<p>"It gives us a chance to acknowledge how Latinos have been part of this nation for so many centuries," Lammers said. "I think that's what is great about this. It has allowed us to really dig deeper and a chance to tell our stories."</p>
+<p><strong>More than one label</strong></p>
+<p>Hispanic is a pre-existing term the federal government began using in the 1970s for people whose ancestors came from Spanish-speaking cultures. But some people do not like the term “Hispanic.” They use other terms like "Latino" or "Latinx" which mean different things to different groups.</p>
+<p>Events marking National Hispanic Heritage Month are planned in places from California to New York.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Fernanda Figueroa reported this story for the Associated Press. Jill Robbins adapted it for Learning English. </em></p>
+<p>_________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>census –</strong>n. an official count of a country's population</p>
+<p><strong>diversity</strong> –<em> n</em>. the state of having people who are different races or who have different cultures in a group or organization</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:What is Hispanic Heritage Month?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.96]Celebrations across the United States
+[00:04.80]are taking place to mark
+[00:07.04]National Hispanic Heritage Month.
+[00:10.16]It is a yearly tradition that honors the diversity
+[00:13.80]and culture of Hispanic people.
+[00:17.80]The month-long period is a chance
+[00:20.00]for many in the U.S. to learn about
+[00:22.48]what Hispanics have given to American culture.
+[00:26.20]It is celebrated each year
+[00:28.16]from September 15 to October 15.
+[00:32.24]The group includes people
+[00:33.96]whose ancestors come from Spain,
+[00:36.24]Mexico, the Caribbean
+[00:38.84]and Central and South America.
+[00:42.24]The latest census estimates
+[00:44.24]there are more than 65 million people
+[00:47.52]identified as ethnically Hispanic in the U.S.
+[00:52.28]Before there was National Hispanic Heritage Month,
+[00:55.40]there was Hispanic Heritage Week.
+[00:58.80]President Lyndon B. Johnson
+[01:01.12]signed the law in 1968.
+[01:04.64]The U.S. Library of Congress
+[01:06.72]says every president since Johnson
+[01:09.68]has issued a proclamation
+[01:11.28]for National Hispanic Heritage Month.
+[01:14.60]On September 13, President Joe Biden
+[01:17.68]issued a proclamation recognizing September 15
+[01:21.72]through October 15,
+[01:23.36]as National Hispanic Heritage Month.
+[01:26.96]Rachel Gonzalez-Martin
+[01:28.88]is an associate professor
+[01:30.72]of Mexican American and Latino Studies
+[01:34.08]at the University of Texas at Austin.
+[01:37.76]She said the celebration has grown over the past 10 years
+[01:41.80]because of the larger number of Latinos in the U.S.
+[01:46.08]She noted that Hispanic Heritage Month
+[01:48.68]was an official recognition of belonging
+[01:51.68]"that became really powerful."
+[01:54.80]September 15 is the date when some
+[01:57.56]Latin American countries
+[01:59.16]mark their independence days.
+[02:02.20]The Central American nations of Guatemala,
+[02:04.92]Honduras, El Salvador,
+[02:07.60]Nicaragua, and Costa Rica
+[02:10.28]celebrate their independence on September 15.
+[02:15.52]Mexico marks its national day on September 16.
+[02:20.44]Also, during National Hispanic Heritage Month,
+[02:24.00]the South American nation of Chile
+[02:26.64]observes its independence day on September 18.
+[02:31.16]Alberto Lammers is director of communications
+[02:35.48]at the UCLA Latino Policy and Politics Institute.
+[02:41.12]He said, "It became a chance
+[02:43.24]for people to know Hispanic cultures,
+[02:45.68]for Latinos to get to know a community better
+[02:49.08]and for the American public to understand a little better
+[02:53.32]the long history of Latinos in the U.S."
+[02:57.08]Lammers said the four-week period
+[02:59.92]is about honoring the way Hispanic populations
+[03:03.24]have shaped the U.S. in the past and present.
+[03:07.36]"It gives us a chance to acknowledge
+[03:09.44]how Latinos have been part of this nation
+[03:11.88]for so many centuries," Lammers said.
+[03:15.92]"I think that's what is great about this.
+[03:18.76]It has allowed us to really dig deeper
+[03:21.40]and a chance to tell our stories."
+[03:24.92]Hispanic is a pre-existing term
+[03:27.64]the federal government began using in the 1970s
+[03:31.52]for people whose ancestors came
+[03:33.48]from Spanish-speaking cultures.
+[03:36.36]But some people do not like the term "Hispanic."
+[03:40.04]They use other terms like "Latino" or "Latinx"
+[03:44.00]which mean different things to different groups.
+[03:47.92]Events marking National Hispanic Heritage Month
+[03:51.48]are planned in places from California to New York.
+[03:54.84]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

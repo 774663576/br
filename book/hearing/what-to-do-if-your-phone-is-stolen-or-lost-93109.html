@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What to Do if Your Phone Is Stolen or Lost</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, What to Do if Your Phone Is Stolen or Lost" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/what-to-do-if-your-phone-is-stolen-or-lost.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What to Do if Your Phone Is Stolen or Lost</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/what-to-do-if-your-phone-is-stolen-or-lost.mp3" id="mp3"></a>
+<a href="brazilian-artist-s-mural-shows-climate-disasters-93108.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">30 October, 2024</span><br/>
+<p>Phones hold so much of our digital lives — emails, social media and bank accounts, photos and more.</p>
+<p>As a result, if our phones ever get stolen or lost, we can face major problems.</p>
+<p>In some places, phone thefts have increased. Britain, for example, has some 200 phones stolen every day in “snatch thefts” - when a person steals a phone in a public place, sometimes right out of an owner's hand, and escapes quickly.</p><div class="contentImage"><img alt="FILE - A woman holds a phone to her ear as she walks along the high street of Richmond, in London, Britain, October 11, 2024. (REUTERS/Jaimi Joy)" src="https://files.21voa.com/gdb/30d913bc-75c3-4575-9dc3-1a29c6f7204c_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A woman holds a phone to her ear as she walks along the high street of Richmond, in London, Britain, October 11, 2024. (REUTERS/Jaimi Joy)</span></div>
+<p>The government has promised to take steps against the crime and is meeting with technology companies and device makers to come up with solutions.</p>
+<p>Here are steps you can take before and after your phone goes missing.</p>
+<p><strong>Basic steps </strong></p>
+<p>There are things you can do to make it less painful if someone steals your phone. Because some of these features are more<strong> technical</strong> in nature, people often do not think of them.</p>
+<p>Lock down as much as you can. At a minimum, require a password or special scan to unlock the device.</p>
+<p>You can also add similar requirements to important individual apps — like your banking account, WhatsApp or Signal — to protect your finances or messaging from thieves.</p>
+<p>You will probably have lots of important photos saved on your camera roll.</p>
+<p>It is a good idea to back the photos up, along with contacts, calendar and other files. Google and Apple offer cloud-based backup services, although the free versions have limited <strong>storage</strong> space. You can also back up your files to an <strong>external</strong> hard drive, memory card or a laptop.</p>
+<p>Some police forces and phone companies advise turning off message previews. This prevents thieves trying to break into your accounts from seeing reset or login codes when the phone is locked.</p>
+<p>To do this on an iPhone, for example, go to Notifications in your settings and choose Show Previews. You can also go down the app list to turn previews off for individual apps but leave them on for less risky ones like news or weather.</p>
+<p><strong>Turn on newer features </strong></p>
+<p>Recent iOS and Android updates include a number of new elements designed to make thefts less profitable.</p>
+<p>IPhone users can turn on Stolen Device Protection, which makes it a lot harder for phone thieves to change key <strong>functions</strong> and settings. Many thieves will want to wipe the data off and reset so they can resell it, but with this <strong>feature </strong>on, they will need a face or fingerprint scan to do so. Apple also recently updated its “activation lock ” feature to make it harder for thieves to sell parts from stolen phones.</p>
+<p>Android phones, meanwhile, can now use artificial intelligence (AI) to detect motion indicating someone took a device out of your hand and is racing away on foot or a bike. The program then locks the screen immediately. There is also a feature called Private Spaces that lets you hide sensitive files on your phone.</p>
+<p><strong>Write down your device number </strong></p>
+<p>Take note of your phone's serial number, also known as an IMEI number. It can link you to the phone if it does eventually get recovered. Call it up by typing (asterisk)#06# on your phone's keypad. If you have already lost your phone you can also find it in other places like the box it came in.</p>
+<p><strong>If the device is stolen </strong></p>
+<p>If you are unlucky enough to have your phone stolen, notify police. Call your insurance company if you have a policy that covers the device. Inform your phone company so they can freeze your number and issue a replacement SIM card or eSIM. Notify your bank so they can watch out for unusual activity.</p>
+<p><strong>Tracking your device </strong></p>
+<p>Try to find your phone with the find my device feature. For iPhones, go to iCloud.com/find from a web browser. Android users should go to www.google.com/android/find. Samsung also has its own service for Galaxy phones.</p>
+<p>These services will show your phone's current or last known location on a map. The service is also handy if you cannot find your phone somewhere in the house. Apple says even if a phone cannot connect to the internet or has been turned off, it can use Bluetooth to contact any nearby Apple devices by using the same network behind its AirTags tracking devices. Google says newer Pixel phones can be located “for several hours” after they have been turned off using similar technology.</p>
+<p>You can get the phone to play a sound, even if it is on silent. You can also put the phone in lost mode, which locks it and displays a message and contact details on the screen for anyone who finds it. Lost mode on iOS also suspends any Apple Pay cards and passes.</p>
+<p>If the device shows up in an unfamiliar location on the map, and you suspect it has been stolen, experts say it is better to contact police rather than trying to get it back yourself.</p>
+<p>Cybersecurity company Norton says, “Confronting a thief yourself is not recommended.”</p>
+<p><strong>Final steps </strong></p>
+<p>If you cannot find your phone, there are some final steps to take.</p>
+<p>Log yourself out of all your accounts that might be accessible on the phone. Then remove your phone from your list of trusted devices that you use to get <strong>multifactor authentication </strong>codes. But make sure you can get those codes somewhere else, such as email.</p>
+<p>Then, as a final step, you can erase the phone remotely so that there is no chance of any data falling into the wrong hands. However, take note: Apple says that if the iPhone is offline, the remote erase will only happen the next time the phone comes back online. But if you find the phone before it gets erased, you can cancel the request.</p>
+<p>Google warns that SD memory cards plugged into Android phones might not be remotely erased. And after the phone has been wiped, it will not show up with find my device.</p>
+<p>I'm Ashley Thompson. And I'm John Russell.</p>
+<p><em>Kelvin Chan reported on this story for the Associated Press. John Russell adapted it for VOA Learning English.</em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>function</strong><em> -- n.</em> a computer subroutine; the action for which a person or thing is specially fitted or used or for which a thing exists</p>
+<p><strong>feature</strong> <em>--n.</em> a prominent part or characteristic</p>
+<p><strong>technical </strong><em>-- adj. </em>marked by or characteristic of specialization</p>
+<p><strong>storage </strong><em>-- n.</em> space or a place for keeping things (such as data, objects, etc.)</p>
+<p><strong>external </strong><em>-- adj. </em>of, relating to, or connected with the outside or an outer part</p>
+<p><strong>multifactor authentication</strong><em> -- n.</em> a multi-step login process that requires more than just a password (for example: a password plus a special code sent by text message)</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

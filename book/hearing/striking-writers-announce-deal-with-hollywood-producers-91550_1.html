@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国编剧协会宣布与好莱坞制作人达成协议</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 美国编剧协会宣布与好莱坞制作人达成协议" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/striking-writers-announce-deal-with-hollywood-producers.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国编剧协会宣布与好莱坞制作人达成协议</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/striking-writers-announce-deal-with-hollywood-producers.mp3" id="mp3"></a>
+<a href="/static/lrc/striking-writers-announce-deal-with-hollywood-producers.lrc" id="lrc"></a>
+<a href="striking-writers-announce-deal-with-hollywood-producers-91550.html" id="CnPage" target="_blank"></a>
+<a href="nasa-s-first-asteroid-samples-arrive-on-earth-91549.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The Writers Guild of America (WGA) said Sunday that it had reached an agreement with Hollywood movie and television studios. The announcement signaled that the group's five-month strike is nearing an end.<br/>
+美国编剧协会周日表示，已与好莱坞影视工作室达成协议。这标志着该组织为期五个月的罢工行将结束。</p>
+<p>The WGA is the labor group that represents writers in the United States who work on many movies and television programs.<br/>
+美国编剧协会是一家劳工组织，它代表着美国从事诸多影视节目的编剧。</p>
+<p>The writers' group said its members will not yet return to work, but they will no longer protest – or picket – outside movie studios.<br/>
+该编剧团体表示，其成员尚未返回工作岗位，但他们将不再在电影制片厂外抗议。</p>
+<p>The WGA said it reached an agreement with the Alliance of Motion Picture and Television producers for a tentative three-year deal. It is called "tentative," which means not certain, because it must still be approved by the WGA's leaders and members. A vote could happen this week.<br/>
+美国编剧协会表示，它与电影电视制片人联盟达成了一项为期三年的暂定协议。它被称为“暂定”，意思是不确定，因为它仍然必须得到美国编剧协会领导人和成员的批准。投票可能在本周进行。</p>
+<p>The WGA said its labor stoppage lasted more than 140 days. If it had gone five days longer, the strike would have been the longest in WGA history.<br/>
+美国编剧协会表示，其停工持续了140多天。如果罢工时间再延长五天，这次罢工将是美国编剧协会历史上持续时间最长的一次。</p>
+<p>When the new contract is approved, programs that depend on writers who have not been working could be back on television within days. Those include nightly comedy programs such as The Tonight Show Starring Jimmy Fallon and Jimmy Kimmel Live!.<br/>
+当新合同获得批准后，那些依赖于罢工编剧的节目可能会在几天内重回屏幕。其中包括每晚的喜剧节目，如吉米·法伦和吉米·金梅尔的《今夜秀》！。</p>
+<p>The news made some media experts think the actors' group – known as SAG-AFTRA – could be close to ending its strike.<br/>
+这一消息让一些媒体专家认为，美国电影电视演员工会可能即将结束罢工。</p>
+<p>SAG-AFTRA congratulated the WGA on reaching its agreement. It used words such as "strength, resiliency and solidarity" to describe the writers' group's decision to hold out for a good deal.<br/>
+美国电影电视演员工会祝贺美国编剧协会达成协议。它用“力量、韧性和团结”等词来形容编剧团体坚持要求达成协议的决定。</p>
+<p>SAG-AFTRA added, "We remain committed to achieving the necessary terms for our members." It also said it wants the studio leaders to "return to the table and make a fair deal that our members deserve and demand."<br/>
+美国电影电视演员工会补充道，“我们仍然致力于为我们的会员达成必要条款。”它还表示，希望好莱坞影视工作室领导人“回到谈判桌上，做出我们会员应得和要求的公平交易。”</p>
+<p>The writers and studio heads made their agreement without intervention from government officials. That has happened in the past.<br/>
+编剧和好莱坞影视工作室负责人在没有政府官员干预的情况下达成了协议。这种情况过去也曾发生过。</p>
+<p>State and local government leaders congratulated the two groups on their new plan. California Governor Gavin Newsom said he was "grateful the two sides have come together."<br/>
+州和地方政府领导人对这两个团体的新计划表示祝贺。加州州长加文·纽瑟姆表示，他“很感激双方走到了一起。”</p>
+<p>One of the main issues that caused the strike was how writers are paid by streaming video services such as Netflix. Another issue was the use of artificial intelligence technology in the creation of scripts. The strike stopped production on a number of daily television programs and delayed upcoming television shows and movies that had been planned for production.<br/>
+导致罢工的主要问题之一是作家如何通过Netflix等流媒体视频服务获得报酬。另一个问题是在脚本创作时使用人工智能技术。这场罢工停止了一些日常电视节目的制作，并推迟了原本计划制作的即将播出的电视节目和电影。</p>
+<p>The writers started their strike on May 2. Film and television actors stopped working on July 14. The two groups had not gone on strike at the same time since 1960.<br/>
+编剧们于5月2日开始罢工。电影和电视演员于7月14日停止工作。自1960年以来，这两个团体从未同时举行过罢工。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Striking Writers Announce Deal with Hollywood Producers]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Writers Guild of America (WGA) said Sunday
+[00:05.44]that it had reached an agreement
+[00:07.96]with Hollywood movie and television studios.
+[00:11.76]The announcement signaled
+[00:14.12]that the group's five-month strike is nearing an end.
+[00:18.88]The WGA is the labor group
+[00:21.36]that represents writers in the United States
+[00:24.72]who work on many movies and television programs.
+[00:28.76]The writers' group said its members
+[00:31.24]will not yet return to work, but they will no longer protest –
+[00:36.00]or picket – outside movie studios.
+[00:40.00]The WGA said it reached an agreement
+[00:43.52]with the Alliance of Motion Picture and Television producers
+[00:48.40]for a tentative three-year deal.
+[00:51.40]It is called "tentative," which means not certain,
+[00:55.92]because it must still be approved
+[00:58.68]by the WGA's leaders and members.
+[01:02.08]A vote could happen this week.
+[01:05.80]The WGA said its labor stoppage
+[01:09.12]lasted more than 140 days.
+[01:13.20]If it had gone five days longer,
+[01:15.92]the strike would have been the longest in WGA history.
+[01:21.00]When the new contract is approved,
+[01:24.00]programs that depend on writers who have not been working
+[01:29.12]could be back on television within days.
+[01:32.44]Those include nightly comedy programs
+[01:35.36]such as The Tonight Show Starring Jimmy Fallon
+[01:38.56]and Jimmy Kimmel Live!.
+[01:41.68]The news made some media experts think
+[01:44.76]the actors' group – known as SAG-AFTRA –
+[01:48.60]could be close to ending its strike.
+[01:51.48]SAG-AFTRA congratulated the WGA
+[01:55.20]on reaching its agreement.
+[01:57.48]It used words such as "strength,
+[02:00.60]resiliency and solidarity" to describe the writers' group's decision
+[02:06.72]to hold out for a good deal.
+[02:08.96]SAG-AFTRA added, "We remain committed
+[02:12.72]to achieving the necessary terms for our members."
+[02:17.04]It also said it wants the studio leaders to "return to the table
+[02:22.00]and make a fair deal that our members deserve and demand."
+[02:25.68]The writers and studio heads made their agreement
+[02:30.00]without intervention from government officials.
+[02:33.28]That has happened in the past.
+[02:35.92]State and local government leaders
+[02:38.96]congratulated the two groups on their new plan.
+[02:42.24]California Governor Gavin Newsom said he was "grateful
+[02:46.24]the two sides have come together."
+[02:48.80]One of the main issues that caused the strike
+[02:52.60]was how writers are paid by streaming video services
+[02:56.80]such as Netflix.
+[02:59.20]Another issue was the use of artificial intelligence technology
+[03:04.32]in the creation of scripts.
+[03:07.52]The strike stopped production
+[03:09.44]on a number of daily television programs
+[03:12.20]and delayed upcoming television shows and movies
+[03:16.20]that had been planned for production.
+[03:19.88]The writers started their strike on May 2.
+[03:23.52]Film and television actors stopped working on July 14.
+[03:29.88]The two groups had not gone on strike
+[03:32.40]at the same time since 1960.
+[03:35.64]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

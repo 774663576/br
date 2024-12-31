@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Baby Hippo Has Become an Educational Force</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Baby Hippo Has Become an Educational Force" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201807/baby-hippo-has-become-an-educational-force.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Baby Hippo Has Become an Educational Force</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201807/baby-hippo-has-become-an-educational-force.mp3" id="mp3"></a>
+<a href="first-ladies-in-africa-creating-change-for-women-79494.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Pete Musto</span><br/>
+<span class="datetime">08 July, 2018</span><br/>
+<p>Imagine having an animal as your teacher. How much do you think one could learn from a hippopotamus, for example?</p>
+<p>At the Cincinnati Zoo, a baby hippo named Fiona is helping to educate young people, both in the city of Cincinnati, Ohio and across the United States.</p>
+<p>Fiona was born at the Cincinnati Zoo in January 2017. She arrived nearly two months early, before her body was strong. That meant her body was smaller than that of other baby hippos. Her birth weight was so low that Fiona's caregivers feared she might not survive.</p>
+<p>But thanks to special treatments and assistance from hospital workers, Fiona stayed healthy. Her story gained national attention because of stories on traditional and social media.</p>
+<p>The young hippo is now a <strong>symbol</strong> for the Cincinnati Zoo. The zoo has used her name and image to sell a great deal of <strong>merchandise</strong>, including clothing and toys. She is also the star of at least six books and she is a very popular subject for <strong>library</strong> and classroom activities.</p>
+<p>The latest book is called "<em>Saving Fiona</em>," which the zoo's director wrote.</p>
+<p>"She has taught us a lot," director Thane Maynard told the Associated Press.</p>
+<div class="contentImage"><img alt="Cincinnati Zoo director Thane Maynard sits for a photograph beside the enclosure of Fiona, their baby Nile Hippopotamus, in Cincinnati, Ohio." src="https://files.21voa.com/gdb/53DEC43B-AD43-4875-B722-79201CE49836_w268_r0.jpg"/><br/><span class="imagecaption">Cincinnati Zoo director Thane Maynard sits for a photograph beside the enclosure of Fiona, their baby Nile Hippopotamus, in Cincinnati, Ohio.</span></div>
+<p>Some experts believe Fiona is the smallest hippo ever to survive. She weighed only 13 kilograms at birth. That is one-third the size of a normal, fully developed baby Nile hippopotamus. She was also unable to stand or take milk from her mother.</p>
+<p>A Cincinnati Zoo worker collected milk from Fiona's mother Bibi by hand. And the <a class="wsw__a" href="https://apnews.com/c40aac3a1d8b4f5e957ba6f84f412b5f">Smithsonian Institution's National Zoo</a> in Washington, DC helped develop a highly-nutritional food product for her. Workers from Cincinnati Children's Hospital were asked to help inject nutrients directly into her <strong>bloodstream</strong>.</p>
+<p>Maynard notes that everyone was worried about Fiona during the first six months of her life. But by her first birthday, she had grown to 318 kilograms, a healthy weight for a hippopotamus that age.</p>
+<p>Maynard's book is aimed at young readers, telling them the story of Fiona's struggle to survive, while also teaching them about hippos. It includes many facts about the animals, such as the fact that adult hippos only eat plants, but can run faster than people. The book also notes adult hippos can be dangerous because of their size – weighing up to 2,270 kilograms.</p>
+<p>"Part of the zoo's <strong>mission </strong>is public education," Maynard said. "(The book) is reaching kids and families with a message of hope...never giving up."</p>
+<p>To date, all the books about Fiona, when combined, have sold tens of thousands of copies.</p>
+<p>Educators say <strong>lessons</strong> with stories involving animals appeal to students. Fiona has been on the cover of three <a class="wsw__a" href="https://scholasticnews.scholastic.com/"><em>Scholastic News </em>magazines</a>. Those magazines have reached millions of students. And the stories about Fiona came with reading exercises or mathematics problems, such as finding how many <strong>bathtubs</strong> the water in her zoo would fill.</p>
+<p>Stephanie Smith is executive director for <em>Scholastic News</em> for students in <strong>grades</strong> three through six. She says youngsters love Fiona's story.</p>
+<p>"Kids will just <strong>gobble</strong> it up. It makes teaching easy," she said.</p>
+<p>However, Mike Shriberg sees a problem with all the attention Fiona has been receiving. Shriberg is with the National Wildlife Federation, a private non-profit group. He says environmental activists see all the stories about media stars like Fiona as an avoidance of the serious difficulties hippos and other animals face. These including shrinking wildlife <strong>habitats</strong> and illegal hunting.</p>
+<p>Shriberg argues there is a deeper message about the environment that educators should be sharing. But he admits that, growing up as a child in Cincinnati, he visited the zoo often. He says this helped influence him to become an environmental activist.</p>
+<p>Shriberg says the attention on Fiona — which has seen her image placed on items from playing cards to alcoholic drinks — is a good thing overall.</p>
+<p>"We are...in favor of anything that is engaging people with wildlife, he said. "You've got the American public and people around the world really caring about hippos and animals."</p>
+<p>I'm Pete Musto.</p>
+<p><em>Dan Sewell reported this story for the Associated Press. Pete Musto adapted it for VOA Learning English. George Grow was the editor. </em></p>
+<p><em>We want to hear from you. How do you think the attention on Fiona might affect how people treat animals and the environment? Write to us in the Comments Section or on 51VOA.COM.</em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>symbol</strong> – <em>n.</em> an action, object, or event that expresses or represents a particular idea or quality</p>
+<p><strong>merchandise</strong> – <em>n.</em> goods that are bought and sold</p>
+<p><strong>library</strong> – <em>n.</em> a place where books, magazines, and other materials, such as videos and musical recordings, are available for people to use or borrow</p>
+<p><strong>bloodstream</strong> – <em>n.</em> the flow of blood that moves through the heart and body</p>
+<p><strong>mission </strong>– <em>n.</em> a task that you consider to be a very important duty</p>
+<p><strong>lesson</strong>(<strong>s</strong>) – <em>n.</em> an activity that you do in order to learn something</p>
+<p><strong>bathtub</strong>(<strong>s</strong>) – <em>n.</em> a large and long container in which people clean themselves with soap and water</p>
+<p><strong>grade</strong>(<strong>s</strong>) – <em>n.</em> a level of study that is completed by a student during one year</p>
+<p><strong>gobble</strong> – <em>v.</em> to take something quickly or suddenly</p>
+<p><strong>habitat</strong>(<strong>s</strong>) – <em>n.</em> the place or type of place where a plant or animal naturally or normally lives or grows</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

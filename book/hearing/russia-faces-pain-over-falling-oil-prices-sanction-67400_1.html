@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 俄罗斯面临油价下跌和西方国家经济制裁之痛</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 俄罗斯面临油价下跌和西方国家经济制裁之痛" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201601/russia-faces-pain-over-falling-oil-prices-sanction.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>俄罗斯面临油价下跌和西方国家经济制裁之痛</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201601/russia-faces-pain-over-falling-oil-prices-sanction.mp3" id="mp3"></a>
+<a href="/static/lrc/russia-faces-pain-over-falling-oil-prices-sanction.lrc" id="lrc"></a>
+<a href="russia-faces-pain-over-falling-oil-prices-sanction-67400.html" id="CnPage" target="_blank"></a>
+<a href="spotlight-on--oscar-nominees-67379.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>Russia's economy is struggling at the beginning of 2016. Low oil prices and Western sanctions against Russia continue to affect the country's economy.<br/>2016年一开始俄罗斯经济就开始挣扎。低油价和西方对俄罗斯的制裁继续影响着该国的经济。</p>
+<p>Prime Minister Dmitry Medvedev thinks the economy is looking better than one year ago. But he told a conference this week that Russia must prepare for the worst-case scenario. In such a case, conditions would worsen, not improve.<br/>俄罗斯总理梅德韦杰夫认为该国经济比上一年看上去有所改善。但是他本周在一次会议上表示，俄罗斯必须为最坏的情况做好准备，在这种情况下，各类条件将会恶化而不是改善。</p>
+<p>Medvedev spoke in Moscow at the yearly Gaidar Forum on economics. He noted that 2015 was probably the most difficult year for Russia economically in the past 10 years. The level of economic activity shrank 3.8 percent last year.<br/>梅德韦杰夫在莫斯科举行的每年一度的盖达尔经济论坛上发表了讲话。他指出，2015年可能是俄罗斯经济过去十年最为困难的一年。去年俄罗斯经济活动水平萎缩了3.8%。</p>
+<p>Two main reasons for this were the sharp drop in the price of oil and Western economic sanctions. Oil is Russia's main export. Its price has dropped about 70 percent to $30 a barrel over the past 12 months.<br/>造成这种情况的两个主要原因是油价大幅下跌以及西方经济制裁。石油是俄罗斯的主要出口产品。过去12个月石油价格已经下降大约70%，跌至30美元一桶。</p>
+<p>Western countries placed sanctions on Russia because of its 2014 takeover of Crimea. Russia also has continued its military support for rebels in eastern Ukraine. The western measures have cut off Russian banks from international credit. The value of the ruble has dropped from 30 to the U.S. dollar to about 75.<br/>由于2014年俄罗斯接管克里米亚，西方国家对俄罗斯进行了经济制裁。俄罗斯还继续对乌克兰东部反政府武装提供军事支持。西方国家的制裁措施让俄罗斯银行无法获得国际信贷。卢布汇率也已经下跌，从1美元兑换30卢布跌至1美元兑换大约75卢布。</p>
+<p>Inflation was a major concern for Russians last year. On average, prices increased at a rate of 15 percent in 2015. Yet consumer food prices increased between 20 and 30 percent. High inflation for staple products has hurt Russia's poor. The number of Russians below subsistence poverty rose to more than 20 million last year from 18 million a year earlier.<br/>通货膨胀是俄罗斯去年面临的主要问题。2015年各类价格平均以15%的速度上涨。然而，食品消费价格上涨了20%到30%。大宗商品的高通胀伤害了俄罗斯穷人。生存贫困线以下的俄罗斯人口数量从前一年的1800万上升到去年的2000万。</p>
+<p>Prime Minister Medvedev said the result of inflation was a fall in real incomes. "Many people have become poorer," he said. "And, the middle class has suffered. And, this is probably one of the most painful aftereffects of the last years."<br/>俄罗斯总理梅德韦杰夫表示，通货膨胀是实际收入下降的结果。他说，“很多人都变得更加贫穷，而且中产阶级也受到了影响。这可能是过去几年最为严重的后遗症之一。”</p>
+<p>Government officials have said they expect the economy to improve this year. They predict that inflation will drop below 10 percent in February.<br/>政府官员表示，他们预计今年的经济会有所改善。他们预计2月份的通胀率将会降至10%以下。</p>
+<p>Medvedev praised his government's plan for reducing shocks from overseas. He added that the economy was not in tatters.<br/>梅德韦杰夫对政府计划减少海外冲击表示赞扬。他补充说俄罗斯经济并未支离破碎。</p>
+<p>"Russia is in (the) top 10 countries with the lowest public debt and greatest foreign exchange reserves. And, that really provides for the resilience of our financial system," he said.<br/>他说，“俄罗斯位居公共债务最低和外汇储备最大的10大国家之列。这让我们的金融体系有能力做出应变。”</p>
+<p>The prime minister admitted the federal government would likely face budget cuts. About half of Russia's budget depends on oil export revenues.<br/>梅德韦杰夫承认联邦政府可能会面临预算削减。俄罗斯大约一半预算依赖于石油出口收入。</p>
+<p>Russia's 2016 budget was made in October, when oil was selling for $50 a barrel. Many observers say the more likely price is between $30 and $40, and could even drop below $20.<br/>俄罗斯2016年的预算是在去年10月份制定的，当时油价为50美元每桶。许多观察家认为，石油更可能的价格是在30到40美元之间，甚至可能跌破20美元。</p>
+<p>And that's the Economics Report. I'm Mario Ritter.<br/>以上就是本期经济报道的全部内容，我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.40]From VOA Learning English,
+[00:03.16]this is the Economics Report.
+[00:06.92]Russia's economy is struggling at the beginning of 2016.
+[00:12.00]Low oil prices and Western sanctions against Russia
+[00:17.08]continue to affect the country's economy.
+[00:21.52]Prime Minister Dmitry Medvedev
+[00:24.24]thinks the economy is looking better than one year ago.
+[00:29.24]But he told a conference this week
+[00:31.84]that Russia must prepare for the worst-case scenario.
+[00:36.84]In such a case, conditions would worsen, not improve.
+[00:42.28]Medvedev spoke in Moscow at the yearly Gaidar Forum on economics.
+[00:49.92]He noted that 2015 was probably the most difficult year
+[00:55.40]for Russia economically in the past 10 years.
+[00:59.72]The level of economic activity shrank 3.8 percent last year.
+[01:07.16]Two main reasons for this were the sharp drop in the price of oil
+[01:12.20]and Western economic sanctions.
+[01:15.44]Oil is Russia's main export.
+[01:18.72]Its price has dropped about 70 percent
+[01:22.56]to $30 a barrel over the past 12 months.
+[01:28.28]Western countries placed sanctions on Russia
+[01:31.92]because of its 2014 takeover of Crimea.
+[01:36.96]Russia also has continued its military support for rebels in eastern Ukraine.
+[01:46.04]The western measures have cut off Russian banks from international credit.
+[01:51.80]The value of the ruble has dropped from 30 to the U.S. dollar to about 75.
+[02:00.60]Inflation was a major concern for Russians last year.
+[02:05.32]On average, prices increased at a rate of 15 percent in 2015.
+[02:12.56]Yet consumer food prices increased between 20 and 30 percent.
+[02:19.20]High inflation for staple products has hurt Russia's poor.
+[02:24.52]The number of Russians below subsistence poverty
+[02:28.96]rose to more than 20 million last year from 18 million a year earlier.
+[02:37.64]Prime Minister Medvedev said the result of inflation was a fall in real incomes.
+[02:45.32]"Many people have become poorer," he said.
+[02:48.64]"And, the middle class has suffered.
+[02:51.00]And, this is probably one of the most painful aftereffects of the last years."
+[02:58.72]Government officials have said they expect the economy to improve this year.
+[03:05.08]They predict that inflation will drop below 10 percent in February.
+[03:12.08]Medvedev praised his government's plan for reducing shocks from overseas.
+[03:18.48]He added that the economy was not in tatters.
+[03:24.68]"Russia is in (the) top 10 countries
+[03:27.84]with the lowest public debt and greatest foreign exchange reserves.
+[03:34.08]And, that really provides for the resilience of our financial system," he said.
+[03:40.76]The prime minister admitted the federal government would likely face budget cuts.
+[03:47.04]About half of Russia's budget depends on oil export revenues.
+[03:53.76]Russia's 2016 budget was made in October,
+[03:57.60]when oil was selling for $50 a barrel.
+[04:01.92]Many observers say the more likely price is between $30 and $40,
+[04:09.08]and could even drop below $20.
+[04:14.48]And that's the Economics Report.
+[04:17.36]I'm Mario Ritter.
+[04:18.76]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

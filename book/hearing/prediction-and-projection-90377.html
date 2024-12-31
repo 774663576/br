@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Prediction and Projection</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Prediction and Projection" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/prediction-and-projection.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Prediction and Projection</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/prediction-and-projection.mp3" id="mp3"></a>
+<a href="rights-group-says-tanzania-seizing-animals-of-herders-90376.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">03 February 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "projection" and "prediction."</p>
+<p><strong>Question:</strong></p>
+<p>Hello,</p>
+<div class="contentImage"><img alt="Ask a Teacher: Prediction and Projection " src="https://files.21voa.com/gdb/09320000-0a00-0242-348a-08db047ee843_w268_r1.png"/><br/>
+<span class="imagecaption">Ask a Teacher: Prediction and Projection </span></div>
+<p>This is Mohammed from Libya. I would like to know the difference between "projection" and "prediction." How can I use them the right way?</p>
+<p>Thanks!</p>
+<p>Best regards,</p>
+<p>Mohammed</p>
+<p><strong>Answer </strong></p>
+<p>Dear Mohammed,</p>
+<p>Thanks for writing to us. These two words are similar and are often used to describe guesses about the future, but they have some interesting differences.</p>
+<p>Let's start with "prediction."</p>
+<p><strong>Prediction </strong></p>
+<p>The word "prediction" is a noun meaning a statement about what will happen in the future. Because people make predictions, they may or may not happen. "Predictions" are often made for the near future.</p>
+<p>We often use this word's verb form, "predict," with events like the weather.</p>
+<p>For example, in the <em>Science and Technology Report</em> <a class="wsw__a" href="https://www.21voa.com/a/study-exxon-scientists-predicted-global-warming-since-1970s-/6917670.html">"Study: Exxon Scientists Predicted Global Warming since 1970s,"</a> the word "prediction" is used in the plural form to talk about the possibility of world temperature changes in the 1970s.</p>
+<p><em>"A new study says scientists at the oil company Exxon Mobile made <strong>accurate</strong> predictions about global warming starting in the 1970s."</em></p>
+<p>A study by Harvard University researchers said that the "predictions" made by scientists in the 1970s became true. That means they believed something would happen in the future, and it happened that way.</p>
+<p>Not only scientists make predictions about the weather. Groundhogs also make predictions. Groundhogs are large animals that live under ground.</p>
+<p>On February 2<sup>nd</sup> in the United States, several groundhogs including Punxsutawney Phil in the state of Pennsylvania and French Creek Freddie in West Virginia, wake up and "predict" the weather for spring. The activities around these "predictions" are cultural traditions rather than real <strong>weather forecasts</strong>.</p>
+<p>The tradition goes like this: If the groundhogs see their <strong>shadows</strong>, meaning that it is a sunny day with no clouds, the prediction is there will be six more weeks of winter.</p>
+<p>If they do not see their shadows, meaning that it is cloudy and there is no sun, the groundhogs' prediction is there will be an early spring.</p>
+<p><em>This year, Punxsutawney Phil's prediction is that there will not be an early spring because he did see his shadow.</em></p>
+<p>Let's move onto "projection."</p>
+<p><strong>Projection </strong></p>
+<p>"Projection" is a noun. It has a similar meaning to "prediction," something that might happen in the future. But "projections" can change depending on the situation or conditions.</p>
+<p>"Projections" are created based on numbers and facts. But if that information changes, it is understood that the projection changes too. Projections are often made for longer periods.</p>
+<p>For example, in 2019, projections for children finishing secondary education programs by 2030 were only at 60 percent worldwide. That was only if conditions stayed the same.</p>
+<p>Since COVID-19 affected children's education, that projection has probably changed.</p>
+<p>Here is another example:</p>
+<p><em>Recently the United Nations reported a projection for <a class="wsw__a" href="https://www.21voa.com/a/world-population-hits-8-billion-creating-many-challenges/6835690.html">the world's population</a> increasing to 9.7 billion people by the year 2050.</em></p>
+<p>And here is one additional note: The word projection is often used to describe information in a form that can be seen, like a graph or chart. A prediction is a statement about the future, but, unlike a projection, it is not easily changed if the underlying conditions change.</p>
+<p>Please let us know if these explanations and examples have helped you, Mohammed!<em> </em></p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>accurate </strong>–adj. free from mistakes or errors</p>
+<p><strong>weather forecast </strong>– <em>n. </em>a statement saying what the weather will be like the next day or for the next few days</p>
+<p><strong>shadow </strong><em>– n.</em> an area of darkness created when a source of light is blocked</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

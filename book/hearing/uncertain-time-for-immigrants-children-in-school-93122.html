@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Uncertain Time for Immigrants’ Children in School</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Uncertain Time for Immigrants’ Children in School" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/uncertain-time-for-immigrants-children-in-school.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Uncertain Time for Immigrants’ Children in School</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/uncertain-time-for-immigrants-children-in-school.mp3" id="mp3"></a>
+<a href="researchers-discover-world-s-oldest-tadpole-93121.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">05 November, 2024</span><br/>
+<p>On the first day of seventh grade in Aurora, Colorado, this past August, Alisson Ramirez worried about making friends and not understanding lessons taught in English.</p>
+<p>"I was nervous that people would ask me things and I wouldn't know how to answer," the Venezuelan teen says. "And I would be <strong>ashamed</strong> to answer in Spanish."</p>
+<p>But it was not what she had expected. Her teachers had translated words from their lessons into Spanish. They gave out written instructions in Spanish. Some teachers even asked in Spanish if students had finished or had questions.</p><div class="contentImage"><img alt="Alisson Ram&lt;I&gt;&amp;#&lt;/I&gt;237;rez uses a laptop to work on an assignment during science class Wednesday, Aug. 28, 2024, in Aurora, Colorado. (AP Photo/Godofredo A. V&lt;I&gt;&amp;#&lt;/I&gt;225;squez)" src="https://files.21voa.com/gdb/22a32a8d-9a6f-44fd-aed9-76df79b0dea5_w268_r1.jpg"/><br/><span class="imagecaption">Alisson Ram<i>&amp;#</i>237;rez uses a laptop to work on an assignment during science class Wednesday, Aug. 28, 2024, in Aurora, Colorado. (AP Photo/Godofredo A. V<i>&amp;#</i>225;squez)</span></div>
+<p>"That made me feel better," says Alisson. The 13-year-old is among the 3,000 new students, mostly from Venezuela and Colombia, at the Aurora public school system.</p>
+<p><strong>City officials and false claims</strong></p>
+<p>While teachers have been working hard to educate children of immigrants, outside the classrooms, city officials are not as welcoming. They promised not to spend any money helping newcomers and tried to keep them from coming to the area.</p>
+<p>One city official even claimed that criminals from Venezuela had occupied buildings in Aurora. The police investigated and found it was not true. But the false claim continued to spread.</p>
+<p>Maria Angel Torres is Alisson's mother. The family had left Venezuela to escape lawlessness and violence. They left behind a food truck business after being attacked for not paying protection money. The family then crossed the dangerous Darien Gap on foot to head north and seek asylum in the United States.</p>
+<p>Torres said she did not believe criminals had <strong>taken over</strong> buildings. But she worried that bad reports about Venezuelans would affect her and her family. Some organizations and <strong>churches</strong> wanted to help her family. But others are deeply afraid.</p>
+<p>Torres told the Associated Press, “I don't look like a threat. But people here act like they feel terrorized.”</p>
+<p><strong>Times have changed in Aurora</strong></p>
+<p>Aurora is used to educating children of immigrants.</p>
+<p>The 2020 <strong>census</strong> reported that more than a third of people in Aurora speak a language other than English at home. Immigrants and refugees have been moving to Aurora because it is close to Denver and it has a lower cost of living.</p>
+<p>However, some schools in the area were not ready for the sudden arrival of many non-English-speaking students from Venezuela and Colombia. Before, a teacher might have had one or two new students in her class. Now, teachers in some schools have as many as 10, or a third of their classroom.</p>
+<p><strong>Translanguaging</strong></p>
+<p>Marcella Garcia is the head of Aurora Hills Middle School. She observed that some new students were not talking in classrooms where only English was spoken. So, the school system advised teachers to use a method called "translanguaging." That means using Spanish or the home language at times to help new students understand English lessons and discussions happening around them.</p>
+<p>The method has helped Alisson feel more at ease.</p>
+<p>One day in September, Alisson and her friends spoke Spanish among themselves as their teacher spoke to the class in English about a drawing he was showing in front of the class.</p>
+<p>It was a drawing of an ancient Egyptian marketplace. “What do you think this <strong>dude</strong> here is doing with the <strong>basket</strong>?” the teacher asked the class. One girl who had been in Aurora schools longer than the rest <strong>translated</strong> for Alisson and the other new students.</p>
+<p>Before the school began using this new method, teachers may have stopped the new students from talking among themselves. Now, they permit students to help each other in any language they can.</p>
+<p>So far, there appears to be little public criticism in the area against this method. It generally requires more work for teachers, who have to translate materials or their talks in real-time.</p>
+<p><strong>Rumors of violence</strong></p>
+<p>Recently, Alisson's mother received messages from Aurora Public Schools that there have been <strong>rumors</strong> of bomb threats at its schools and others across the state. The schools said there was no truth to the rumors.</p>
+<p>But that does not make Torres feel better. She said in Venezuela, the country is in trouble, but no one there would think of threatening children at school.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Bianca Vázquez Toness reported</em><em> this story for the Associated Press.</em><em> Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>ashamed</strong> – <em>adj</em>. not wanting to do something because of shame or embarrassment</p>
+<p><strong>take</strong> <strong>over</strong> – <em>phrasal verb</em>. to take control of something</p>
+<p><strong>church </strong>–<em> n</em>. place of religious worship</p>
+<p><strong>census</strong> –<em> n</em>. the official process of counting the number of people in a country, city, or town and collecting information about them</p>
+<p><strong>dude </strong>–<em> n</em>. <em>informal.</em> a man — used especially by young people</p>
+<p><strong>basket </strong>–<em> n</em>. a container usually made by weaving together long thin pieces of material</p>
+<p><strong>translate</strong> –<em> v</em>. to change words from one language into another language</p>
+<p><strong>rumor </strong>–<em> n</em>. information or a story that is passed from person to person but has not been proven to be true</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

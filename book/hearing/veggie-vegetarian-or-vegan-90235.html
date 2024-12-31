@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Veggie, Vegetarian, or Vegan?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Veggie, Vegetarian, or Vegan?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202301/veggie-vegetarian-or-vegan.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Veggie, Vegetarian, or Vegan?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202301/veggie-vegetarian-or-vegan.mp3" id="mp3"></a>
+<a href="questions-answers-about-holiday-activities-90229.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">06 January 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between three words: "veggie," "vegetarian," and "vegan."</p>
+<p><strong>Question</strong></p>
+<p>Hi VOA team and happy holidays!</p><div class="contentImage"><img alt="Ask a Teacher: Veggie, Vegetarian, or Vegan?" src="https://files.21voa.com/gdb/03370000-0aff-0242-bfda-08daef4b51f9_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Veggie, Vegetarian, or Vegan?</span></div>
+<p>I am wondering if you could help me clarify the difference between "vegan," "vegetarian," and "veggie." When can we use them? Or are they interchangeable?</p>
+<p>Thank you,</p>
+<p>Noura</p>
+<p><strong>Answer </strong></p>
+<p>Dear Noura,</p>
+<p>As we start the new year, many of us are thinking about ways to be healthier. This is a great question to begin our 2023 series of Ask a Teacher. Some of the answers might surprise you!</p>
+<p>Let's start with "veggie."</p>
+<p>In American English, the noun "veggie" is a shortened and informal way to say "vegetable." It is used as a countable noun. To make the noun plural we add an "s."</p>
+<p><em>My <strong>guinea pigs</strong> love to eat a many kinds of veggies, including lettuce, carrots and broccoli.</em></p>
+<p>Veggie can also be used as an adjective meaning "vegetarian." American English speakers often use "veggie" as an adjective to describe vegetarian recipes and dishes rather than describing people as being "veggies."</p>
+<p><em>I love making veggie <strong>tortilla chip</strong> soup with peppers, corn and tomatoes! </em></p>
+<p><em>We are <strong>grilling</strong> up some veggie burgers made with black beans.</em></p>
+<p> </p>
+<p>Now let's move onto "vegetarian."</p>
+<p>As a noun, a "vegetarian" is a person who does not eat meat or fish. They usually eat foods made from plants. There are different kinds of vegetarians. Some eat eggs, others eat and drink dairy products like cheese and milk. Other people are <strong>flexible</strong> in their diet. For example, they might eat vegetarian food on some days of the week and eat animal products on other days. They are called "flexitarians."</p>
+<p><em>Adaline became a vegetarian in college.</em></p>
+<p><em>Mark is an ovo-vegetarian. He does not eat any animal products except for eggs.</em></p>
+<p>"Vegetarian" can also be an adjective describing something that only has fruit or vegetables and no meat or fish.</p>
+<p><em>I love Indian food not just for the bold and spicy flavors, but there are many vegetarian choices!</em></p>
+<p>Let's move onto "vegan."</p>
+<p>If a vegetarian does not eat fish or meat, what is a vegan?</p>
+<p>A vegan, as a noun, is someone who does not eat or use any animal products or products made from animals. This can include things like honey from bees, whey protein from milk, and a color made from <strong>crushed</strong> insects called carmine often used in <strong>cosmetics</strong>.</p>
+<p><em>She prefers agave <strong>nectar</strong> to honey because she is a vegan.</em></p>
+<p>Veganism is more of a lifestyle and not just what people eat. Vegans are against killing animals. They do not use any animal products for health and environmental reasons. They are also against <strong>cruelty </strong>to animals.</p>
+<p><em>Davey Havok, the singer of the band AFI, has been a vegan for 24 years.</em></p>
+<p>Just like "vegetarian," "vegan" can be an adjective, too. It describes something that was not made from animal products and that did not involve harming an animal in any way.</p>
+<p><em>Many bags are now made with vegan <strong>leather</strong>.</em></p>
+<p><em>Cosmetic brands are becoming vegan and cruelty-free.</em></p>
+<p>Please let us know if these explanations and examples have helped you, Noura!</p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>______________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>guinea pig</strong> <em>–</em> <em>n</em>. a small furry animal, or rodent, that is often kept as a pet</p>
+<p><strong>tortilla chip </strong><em>– n.</em> a thin, hard piece of food (called a chip) that is made from corn and usually salted</p>
+<p><strong>grill </strong><em>– v.</em> to cook food on a metal frame over a fire</p>
+<p><strong>flexible </strong><em>–</em> <em>adj.</em> willing to change or to try different things</p>
+<p><strong>cosmetic </strong><em>– n. </em>a substance that is put on the face or body to improve appearance</p>
+<p><strong>nectar</strong> <em>–n. </em>a sweet liquid produced by plants</p>
+<p><strong>cruelty</strong><em> – n.</em> actions that cause suffering</p>
+<p><strong>leather </strong><em>– n. </em>animal skin used to make shoes, clothing and other things</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

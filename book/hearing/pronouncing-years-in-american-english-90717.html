@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Pronouncing Years in American English</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Pronouncing Years in American English" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/pronouncing-years-in-american-english.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Pronouncing Years in American English</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/pronouncing-years-in-american-english.mp3" id="mp3"></a>
+<a href="mexican-activists-help-us-women-get-abortion-90706.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">13 April 2023</span><br/>
+<p>Have you ever wondered how to read years in English?</p>
+<p>In today's <em>Everyday Grammar,</em> we take a closer look at some ways to pronounce years in American English.</p>
+<p>The most common and easiest way to pronounce years is to say the first two <strong>digits</strong> as one number and the last digits as another two-digit number. Let's call this the "first method."</p><div class="contentImage"><img alt="Everyday Grammar: Pronouncing years in American English" src="https://files.21voa.com/gdb/01000000-0aff-0242-5a58-08db3abe782a_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Pronouncing years in American English</span></div>
+<p>For example:</p>
+<p><em>I was born in 1987 (nineteen eighty-seven).</em></p>
+<p><em>Last year was 2022 (twenty twenty-two).</em></p>
+<p>When we read stories for VOA Learning English, we use this method of saying years in most cases.</p>
+<p>For years where the third digit is a zero, there are additional ways of saying the year.</p>
+<p>Americans often say "oh" for the number zero. So, a number like 1801 (one thousand eight hundred one) would be "eighteen oh one."</p>
+<p><em>The first Mother's Day celebration was held in Grafton, West Virginia in 1908.</em></p>
+<p>Another, less common, way would be to say, "eighteen hundred and one."</p>
+<p>In American English, it is common not to say the "and" when talking about years. Some people might think it sounds out-of-date or very <strong>formal</strong>. But for most, it is just an extra <strong>syllable </strong>that is not necessary.</p>
+<p>If the year ends in two zeros, we can just say, "hundred." So, 1700 (one thousand seven hundred) would be "seventeen hundred."</p>
+<p>If the year ends in one zero, use the first method:</p>
+<p><em>1990 was an unusual year for our circle of friends.</em></p>
+<p>When the year ends in three zeros, say the year as one number. One followed by three zeros is "one thousand," and two is "two thousand."</p>
+<p><em>I turned 13 years old in the year 2000.</em></p>
+<p>People often use the word "year" right before saying the numbers to show that they are talking about time and not talking about other things.</p>
+<p>With the start of the new <strong>millennium</strong>, the way that we say the years changed a little.</p>
+<p>There are two ways we can pronounce these years. We can pronounce them with the word "thousand" or we can use the first method, breaking the year into a <strong>pair</strong> of two-digit numbers.</p>
+<p>For the years 2001 to 2009, saying the year with the word "thousand" is most common.</p>
+<p><em>Between 2007 and 2008 the world experienced a terrible financial<strong> </strong>crisis.</em></p>
+<p><em>Barack Obama became the 44<sup>th</sup> President of the United States in 2009 (two thousand nine).</em></p>
+<p>After 2011, both methods are common.</p>
+<p><em>Amanda graduated from college in 2017 (twenty seventeen).</em></p>
+<p><em>I worked at a local coffee shop in 2012 (two thousand twelve.)</em></p>
+<p>In VOA Learning English, we use the first method because it has one fewer syllable.</p>
+<p>Now let's go further back in time to talk about the years before the year 1000.</p>
+<p>In America English, we often split 3-digit years into sets. We usually say the first digit separately and then the last two digits as a set.</p>
+<p><em>The year 492 (four ninety-two) was a <strong>leap</strong> year.</em></p>
+<p><strong>Final thoughts</strong></p>
+<p>In today's <em>Everyday Grammar</em> we took a closer look at some ways to pronounce years in English. While the most common and easiest way is to say the first two digits and the second two digits as sets, as in 2023 (twenty twenty-three), this method is not the only way.</p>
+<p>We now know that the word "oh" is used instead of "zero" for dates like 1901 when the third number is a zero. We also found out there are two ways to say years starting in 2001.</p>
+<p>How do you pronounce the years in English? Do you prefer one method over the other?</p>
+<p>Write to us in the comments or send us an email, <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a><u>.</u></p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>pronounce </strong>– <em>v.</em> to make the sound of (a word or letter) with your voice</p>
+<p><strong>digits</strong> – <em>n</em>. numerals from 0 to 9, used to form part of a number</p>
+<p><strong>formal </strong>–<em> adj.</em> following or according with established form, custom, or rule</p>
+<p><strong>syllable </strong>–n. a natural division of a word usually involving one vowel sound and one consonant sound</p>
+<p><strong>millennium</strong> – <em>n.</em> a period of a thousand years</p>
+<p><strong>financial </strong>–<em> adj. </em>relating to money</p>
+<p><strong>pair </strong>–n. two of something</p>
+<p><strong>leap</strong> –<em> n. </em>a long or high jump</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

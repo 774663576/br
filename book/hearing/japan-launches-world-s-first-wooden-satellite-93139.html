@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Japan Launches World’s First Wooden Satellite</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Japan Launches World’s First Wooden Satellite" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/japan-launches-world-s-first-wooden-satellite.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Japan Launches World’s First Wooden Satellite</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/japan-launches-world-s-first-wooden-satellite.mp3" id="mp3"></a>
+<a href="/static/lrc/japan-launches-world-s-first-wooden-satellite.lrc" id="lrc"></a>
+<a href="late-snow-on-japan-s-mount-fuji-sets-a-record-93135.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">11 November, 2024</span><br/>
+<p>An experimental satellite made out of wood has been launched into space. Japanese developers of the device say it is the first time a wooden satellite has ever been sent to space.</p>
+<p>The small satellite, called LignoSat, launched aboard an uncrewed Cargo Dragon spacecraft to the International Space Station (ISS). The satellite will later be released into orbit about 400 kilometers above Earth.</p>
+<p>The satellite was built in the form of a box, with each side measuring about 10 centimeters. It was developed jointly by researchers at Kyoto University and Japanese homebuilder Sumitomo Forestry.</p><div class="contentImage"><img alt="Takao Doi, a former Japanese astronaut and professor at Kyoto University, holds an engineering model of LignoSat during an interview with Reuters at his laboratory at Kyoto University in Kyoto, Japan, October 25, 2024. (REUTERS/Irene Wang)" src="https://files.21voa.com/gdb/cbe6ecbd-f0c6-42b5-8e94-365c8c030199_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Takao Doi, a former Japanese astronaut and professor at Kyoto University, holds an engineering model of LignoSat during an interview with Reuters at his laboratory at Kyoto University in Kyoto, Japan, October 25, 2024. (REUTERS/Irene Wang)</span></div>
+<p>A spokeswoman for Sumitomo Forestry told the French news agency AFP that the launch of the satellite was “successful.” She said the plan calls for the device to be released into orbit in about a month, when its strength and effectiveness will be tested.</p>
+<p>While made mostly of wood, LignoSat contains electronic elements that will control its movements and collect data on its operation. Once deployed, the satellite is expected to remain in orbit for about six months.</p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>The main goal of the experimental satellite is to see whether wood material can be used to build additional satellites or other space equipment. Wood is considered more environmental friendly. This is because it can just burn up when reentering Earth's atmosphere. Satellites and other materials made of metal can release polluting particles into the air and oceans upon reentry.</p>
+<p>International officials have already identified space<strong> junk</strong> as a growing problem. This includes things like dead satellites, lost pieces of equipment or small pieces of paint. Such objects can present threats to spacecraft and satellites operating in space.</p>
+<p>Takao Doi is an astronaut who has flown on past space missions and studies human space activities at Kyoto University. He told Reuters he thinks wood can greatly improve future stays for long-term space travelers. "With <strong>timber</strong>, a material we can produce by ourselves, we will be able to build houses, live and work in space forever," Doi said.</p>
+<p>He added that the experiment is designed to demonstrate the abilities of wood to serve as a suitable material for developing future space equipment.</p>
+<p>"Early 1900s airplanes were made of wood," said Kyoto University forest science professor Koji Murata. "A wooden satellite should be <strong>feasible</strong>, too." Murata noted that wood can last longer in space than on Earth because water or oxygen cannot burn or destroy it.</p>
+<p>Doi said it is possible metal satellites could be banned in the future. "If we can prove our first wooden satellite works, we want to <strong>pitch</strong> it to Elon Musk's SpaceX."</p>
+<p>The team said a 10-month experiment aboard the ISS found that honoki – a native tree in Japan and traditionally used to make <strong>sword</strong> covers – is well-suited for spacecraft. LignoSat is made of honoki as part of a traditional Japanese <strong>crafting </strong>method that does not use screws or glue.</p>
+<p>Kenji Kariya is a leader at Sumitomo Forestry Tsukuba Research Institute. He told Reuters the wooden satellite will also test the ability of the material to reduce the effects of space radiation on <strong>semiconductors</strong>.</p>
+<p>"It may seem <strong>outdated</strong>, but wood is actually <strong>cutting-edge</strong> technology as civilization heads to the moon and Mars." Kariya noted that expanding into space technologies could support the timber industry.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Reuters and Agence France-Press reported on this story. Bryan Lynn adapted the reports for VOA Learning English.</em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>junk </strong><em>– n. </em>material that is no longer of use or working</p>
+<p><strong>timber </strong><em>– n.</em> wood used to construct buildings</p>
+<p><strong>feasible </strong><em>– adj. </em>possible to do</p>
+<p><strong>pitch </strong><em>– v.</em> try to persuade someone to do something</p>
+<p><strong>sword </strong><em>– adj. </em>a weapon with a long, metal blade and a handle, that was especially used in the past</p>
+<p><strong>crafting </strong><em>– n.</em> an activity in which you make something using a log of skill, especially with your hands</p>
+<p><strong>semiconductor </strong><em>– n. a material, such as silicon, that permits electricity to move through it more easily when its temperature increases</em></p>
+<p><strong>outdated </strong><em>– adj.</em> not modern enough</p>
+<p><strong>cutting-edge </strong><em>– adj. </em>very modern, with all the newest developments</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Japan Launches World’s First Wooden Satellite]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]An experimental satellite
+[00:02.76]made out of wood
+[00:04.68]has been launched into space.
+[00:07.88]Japanese developers of the device
+[00:11.56]say it is the first time
+[00:14.36]a wooden satellite
+[00:15.96]has ever been sent to space.
+[00:19.08]The small satellite, called LignoSat,
+[00:23.72]launched aboard an uncrewed Cargo Dragon spacecraft
+[00:28.56]to the International Space Station (ISS).
+[00:33.56]The satellite will later be released into orbit
+[00:37.84]about 400 kilometers above Earth.
+[00:42.00]The satellite was built in the form of a box,
+[00:46.92]with each side measuring about 10 centimeters.
+[00:51.64]It was developed jointly by researchers
+[00:56.04]at Kyoto University
+[00:58.28]and Japanese homebuilder Sumitomo Forestry.
+[01:03.52]A spokeswoman for Sumitomo Forestry
+[01:07.96]told the French news agency AFP
+[01:11.76]that the launch of the satellite was "successful."
+[01:16.36]She said the plan calls for the device
+[01:20.48]to be released into orbit in about a month,
+[01:24.32]when its strength and effectiveness will be tested.
+[01:30.24]While made mostly of wood,
+[01:32.76]LignoSat contains electronic elements
+[01:36.68]that will control its movements
+[01:39.20]and collect data on its operation.
+[01:42.84]Once deployed, the satellite is expected
+[01:46.68]to remain in orbit for about six months.
+[01:51.64]The main goal of the experimental satellite
+[01:55.60]is to see whether wood material can be used
+[01:59.68]to build additional satellites or other space equipment.
+[02:04.52]Wood is considered more environmental friendly.
+[02:09.08]This is because it can just burn up
+[02:12.92]when reentering Earth's atmosphere.
+[02:15.96]Satellites and other materials made of metal
+[02:20.56]can release polluting particles
+[02:23.12]into the air and oceans upon reentry.
+[02:28.52]International officials have already identified
+[02:33.08]space junk as a growing problem.
+[02:36.28]This includes things like dead satellites,
+[02:40.80]lost pieces of equipment or small pieces of paint.
+[02:46.48]Such objects can present threats
+[02:49.72]to spacecraft and satellites operating in space.
+[02:55.60]Takao Doi is an astronaut
+[02:58.52]who has flown on past space missions
+[03:01.84]and studies human space activities
+[03:05.40]at Kyoto University.
+[03:07.84]He told Reuters he thinks wood
+[03:11.44]can greatly improve future stays
+[03:14.88]for long-term space travelers.
+[03:18.36]"With timber, a material we can produce by ourselves,
+[03:23.60]we will be able to build houses,
+[03:26.48]live and work in space forever," Doi said.
+[03:32.32]He added that the experiment is designed
+[03:36.08]to demonstrate the abilities of wood
+[03:39.36]to serve as a suitable material
+[03:42.44]for developing future space equipment.
+[03:45.64]"Early 1900s airplanes were made of wood,"
+[03:51.36]said Kyoto University
+[03:53.56]forest science professor Koji Murata.
+[03:57.92]"A wooden satellite should be feasible, too."
+[04:02.20]Murata noted that wood can last
+[04:05.36]longer in space than on Earth
+[04:08.44]because water or oxygen
+[04:11.12]cannot burn or destroy it.
+[04:14.00]Doi said it is possible metal satellites
+[04:18.24]could be banned in the future.
+[04:20.56]"If we can prove our first wooden satellite works,
+[04:25.60]we want to pitch it to Elon Musk's SpaceX."
+[04:31.00]The team said a 10-month experiment
+[04:34.32]aboard the ISS found that honoki
+[04:38.16]– a native tree in Japan and traditionally used
+[04:42.28]to make sword covers – is well-suited for spacecraft.
+[04:47.40]LignoSat is made of honoki
+[04:50.92]as part of a traditional Japanese crafting method
+[04:54.96]that does not use screws or glue.
+[04:59.24]Kenji Kariya is a leader
+[05:01.92]at Sumitomo Forestry Tsukuba Research Institute.
+[05:07.24]He told Reuters the wooden satellite
+[05:10.96]will also test the ability of the material
+[05:14.88]to reduce the effects of space radiation
+[05:18.56]on semiconductors.
+[05:20.56]"It may seem outdated,
+[05:23.56]but wood is actually cutting-edge technology
+[05:27.84]as civilization heads to the moon and Mars."
+[05:32.16]Kariya noted that expanding into space technologies
+[05:37.68]could support the timber industry.
+[05:41.28]I'm Bryan Lynn. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

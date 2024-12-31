@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Defining Plagiarism, How to Avoid It</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Defining Plagiarism, How to Avoid It" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/defining-plagiarism-how-to-avoid-it.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Defining Plagiarism, How to Avoid It</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/defining-plagiarism-how-to-avoid-it.mp3" id="mp3"></a>
+<a href="refugees-once-cut-trees-in-uganda-now-work-to-plant-them-92117.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith, Jill Robbins, and Dan Novak</span><br/>
+<span class="datetime">23 January 2024</span><br/>
+<p>It has become easy for students to find and copy published material. But copying another person's writing without giving them credit can get students and other scholars into big trouble. Copying another person's writing without crediting them is called plagiarism.</p>
+<p>Recently, the leader of Harvard University stepped down over problems related to the use of other peoples' work in her writing.</p>
+<p>American <a class="wsw__a" href="https://www.copyright.gov/what-is-copyright/">copyright law</a> protects <strong>original</strong> works of <strong>authorship</strong> including books, movies, music, images and artworks. The protection extends to computer software and the design of buildings and structures.</p><div class="contentImage"><img alt="FILE - In this Aug. 13, 2019 file photo, students walk near the Widener Library in Harvard Yard at Harvard University in Cambridge, Mass. (AP Photo/Charles Krupa)
+" src="https://files.21voa.com/gdb/C6A8EF7E-A9FF-48D9-A135-EE53B3FCCFC8_w268_r1.jpg"/><br/><span class="imagecaption">FILE - In this Aug. 13, 2019 file photo, students walk near the Widener Library in Harvard Yard at Harvard University in Cambridge, Mass. (AP Photo/Charles Krupa)
+</span></div>
+<p>The owner can sell a copyright or permit others to use it because it is property and property ownership is protected by law in the U.S.</p>
+<p>The idea is that copyright helps society. If people can gain from their own creations, called their intellectual property, then more people will want to create original works.</p>
+<p>The law, however, permits the unlicensed use of copyrighted works under what is called <a class="wsw__a" href="https://www.copyright.gov/fair-use/">fair use</a>. Fair use can include criticism, comment, news reporting, education and research. However, there are some limitations.</p>
+<p>In education, students can include small parts of copyrighted work in their writing and research. But they must provide credit to the original creators through a citation which gives details about the <strong>source</strong>.</p>
+<p>Many universities, including Harvard University, even urge students to give credit to sources of ideas when they come from discussions with professors or other students. Harvard even warns students about copying themselves. That is, they cannot hand in the same work for more than one class without the permission of their instructors.</p>
+<p>A failure to do so is considered plagiarizing.</p>
+<p><strong>How can professors know if a student is plagiarizing?</strong></p>
+<p>Just as it is easy to copy, it is also easy for professors to know if a student has plagiarized.</p>
+<p>First, there are computer programs and artificial intelligence, or AI, tools that compare students' papers to large databases of published writing. The programs can identify whether students have copied published writing. Second, if English is not a student's first language, a professor might recognize a change in wording and writing <strong>style</strong>. This could bring more attention to the student's paper.</p>
+<p>Plagiarism is punished in different ways. Professors could simply warn a student not to do it again, lower their <strong>grade</strong>, or they might fail the student in that class. In more extreme cases, a student may be temporarily banned or expelled from school.</p>
+<p><strong>Tools to avoid plagiarism</strong></p>
+<p>There are free tools to make citations easier for students and to avoid plagiarism. <a class="wsw__a" href="https://www.zotero.org/">Zotero</a> is a free, open-source program that helps organize all the research a student may use. For example, it can automatically create citations and combine them into a list. The <a class="wsw__a" href="https://owl.purdue.edu/owl/purdue_owl.html">Purdue Online Writing Lab</a>, or Purdue OWL for short, is another free resource.</p>
+<p>Many universities also have writing centers where students can learn the citation rules. And another way for students to learn how to avoid plagiarism is to read published papers and pay careful attention to how information is presented. Students should observe when and how citations are used. This can help them learn the rules of citations.</p>
+<p>In educational, or academic, writing, it is better to cite too much than too little.<em> </em></p>
+<p><strong>A possible double standard</strong></p>
+<p>Harvard's Claudine Gay resigned this month after several accusations of plagiarism in her <strong>academic</strong> work.</p>
+<p>Gay's academic writing got attention after she was strongly criticized for her answers to a Congressional committee related to freedom of speech. Critics found several cases of possible plagiarism in her 1997 doctoral paper. Harvard's governing board first supported Gay, saying a review of her scholarly work turned up "a few instances of <strong>inadequate</strong> citation" but no evidence of research wrongdoing.</p>
+<p>There has been debate among academics over whether her conduct amounted to academic dishonesty. D. Stephen Voss is an associate professor of political science at the University of Kentucky. He knew Gay when they were graduate students at Harvard. A paper he co-wrote in the 1990s was one Gay is accused of plagiarizing from.</p>
+<p>He said in an <a class="wsw__a" href="https://www.newyorker.com/news/q-and-a/why-some-academics-are-reluctant-to-call-claudine-gay-a-plagiarist">interview</a> with the <em>New Yorker</em> magazine that Gay did plagiarize from him. But what she copied from his paper was "<strong>trivial</strong>" and "<strong>inconsequential</strong>."</p>
+<p>What Gay used from his paper "did not take an idea of any <strong>significance</strong> from my work." He added: "the bit she used from us was not in any way a major component of what made her research important or valuable."</p>
+<p>Roger Kreuz is a psychology professor at the University of Memphis who is writing a book on the history and psychology of plagiarism. He told VOA in an email that if plagiarism is defined as taking words from another person's work, "the opinion of (Voss) doesn't really matter."</p>
+<p>Kreuz wrote in the online publication, <a class="wsw__a" href="https://theconversation.com/plagiarism-is-not-always-easy-to-define-or-detect-220592">The Conversation</a>, that university students and professors might face different requirements when it comes to plagiarism. Kreuz wrote that professors suspected of plagiarism may be given the <strong>benefit of the doubt</strong> by their schools. They may also be given the chance to make corrections to their published work.</p>
+<p>Kreuz added that university leaders think that <strong>faculty</strong> members know what plagiarism is and how to avoid it. If a problem arises, administrators might think they were just being careless with their citations or use of quotation marks.</p>
+<p>Students, on the other hand, must follow university policies on academic behavior. Harvard, for example, warns that students may be forced to leave the college if they plagiarize. Work written by students is more likely to be closely examined and put through tools that identify plagiarism than faculty work.</p>
+<p>Many students consider this a <strong>double standard</strong>.</p>
+<p>Kreuz wrote in <a class="wsw__a" href="https://www.bostonglobe.com/2024/01/15/opinion/plagiarism-university-policies-faculty-harvard-claudine-gay/">an opinion piece</a> in <em>The Boston Globe</em> that university plagiarism policies for faculty are unclear.</p>
+<p>How "can academics set or enforce policies for faculty when the concept is so ill-defined?" he asked.</p>
+<p>I'm Dan Novak. And I'm Gena Bennett.</p>
+<p><em>Andrew Smith, Jill Robbins, and Dan Novak wrote this story for VOA Learning English. Additional information came from Robert Kreuz's article in The Conversation and reporting from The Associated Press.</em></p>
+<p><em>____________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>original </strong><em>— adj. </em>created first</p>
+<p class="CxSpMiddle"><strong>author </strong><em>— n. </em>a person who writes a work or starts something</p>
+<p class="CxSpMiddle"><strong>citation </strong><em>— n. </em>quotes from written works</p>
+<p class="CxSpMiddle"><strong>style </strong><em>— n. </em>a way of doing something, such as writing, that is identifiable</p>
+<p class="CxSpMiddle"><strong>grade </strong><em>— n. </em>a number or letter that is given to a piece of schoolwork that shows the student's level of success</p>
+<p class="CxSpMiddle"><strong>academic </strong><em>— adj. </em>related to school especially colleges or universities</p>
+<p class="CxSpMiddle"><strong>trivial </strong><em>— adj. </em>not important or useful</p>
+<p class="CxSpMiddle"><strong>inconsequential </strong><em>— adj. </em>not important; resulting in nothing</p>
+<p class="CxSpMiddle"><strong>significant </strong><em>— adj. </em>important</p>
+<p class="CxSpMiddle"><strong>benefit of the doubt </strong><em>— idiom </em>to treat someone as honest or good although there is some doubt whether they are</p>
+<p class="CxSpMiddle"><strong>faculty </strong><em>— n. </em>the teachers at a school or college</p>
+<p class="CxSpMiddle"><strong>double standard </strong><em>— idiom </em>treating two groups very differently in a way that is considered unfair</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

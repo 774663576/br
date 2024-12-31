@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Surge and Soar</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Surge and Soar" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/surge-and-soar.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Surge and Soar</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/surge-and-soar.mp3" id="mp3"></a>
+<a href="has-earth-warmed-more-than-we-thought-92207.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">09 February 2024</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we answer a question about the difference between "surge" and "soar."</p>
+<p><strong>Question:</strong></p>
+<p>Hi my dear teacher,</p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0a00-0242-7e2c-08dc27f7178b_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>I'm Hamid from Iran. What is difference between "surge" and "soar?" Can they be used interchangeably?</p>
+<p>Much obliged,</p>
+<p>Hamid</p>
+<p><strong>Answer:</strong></p>
+<p>While "surge" and "soar" have a similar verbal meaning of rising or increasing quickly, there are some big differences! Let's look at each word with some examples.</p>
+<p><strong>Surge</strong></p>
+<p>As a verb, "surge" means to rise or increase very quickly in an abnormal way.</p>
+<p><em>Food prices surged due to inflation.</em></p>
+<p>"Surge" can also mean to rise rapidly and fall quickly.</p>
+<p><em>The boat was surging through the water during the storm.</em></p>
+<p>When talking about something coming in waves, we can use "surge."</p>
+<p><em>The waves surged to the <strong>shore</strong> as the hurricane approached.</em></p>
+<p><em>Kaitlyn's emotions surged as she accepted her award. </em></p>
+<p>And lastly as a verb, we use "surge" to talk about physical things like electricity or water moving rapidly through something and with force or power.</p>
+<p><em>Electricity can surge through electronic devices unexpectedly causing damage.</em></p>
+<p>As a noun, the most basic meaning is a powerful rise or increase in something that was once <strong>steady</strong> or not moving. This could be physical things like water or power, or it could be more <strong>abstract</strong> like your feelings.</p>
+<p><em>There has been a surge of interest in American football from young women due to </em><a class="wsw__a" href="https://www.21voa.com/a/it-has-never-been-more-costly-to-see-the-super-bowl/7463874.html"><em>Taylor Swift</em></a><em>. </em></p>
+<p><em>The storm surge left residents along the coast unable to return to their homes for months. </em></p>
+<p><em>Surge protectors can keep computers and other electronics safe during thunderstorms. </em></p>
+<p><em>Carol felt a surge of sadness move over her when her dog died. </em></p>
+<p>Let's move onto "soar."</p>
+<p><strong>Soar</strong></p>
+<p>Much like "surge," "soar" is a verb that can mean to rise rapidly. However, "soar" is used mostly to talk about a position, value or price.</p>
+<p><em>Pat's blood pressure always soars to 140/90 when she goes to the doctor because she is worried. </em></p>
+<p><em>Stock prices soared after the new CEO of the company was announced. </em></p>
+<p>Soar can also be used to talk about things that fly, like birds or planes.</p>
+<p><em>The <strong>geese</strong> soared in formation as they flew south for the winter.</em></p>
+<p><em>The skydiver felt as though she was soaring through the air after she jumped out of the plane. </em></p>
+<p>And lastly, "soar' means to rise or move to a higher state. This can be physically like a voice or abstractly like your <strong>spirits</strong> or feelings. It can also be used to talk about how tall or high things are.</p>
+<p><em>The singer's voice soared over the other members of the <strong>choir</strong>. </em></p>
+<p><em>Her spirits soared when she learned of the good news. </em></p>
+<p><em>One World Trade Center soars above all other buildings in New York City, standing at a height of 541 meters or 1776 feet. </em></p>
+<p>Please let us know if these explanations and examples have helped you, Hamid.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher. </em>Thank you for joining me over the past two years. I have enjoyed answering your questions. I hope that your English skills "soar" ever higher!</p>
+<p>Take care,</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>shore</strong> <em>– n.</em> the land along the edge of an area of water (such as an ocean, lake, etc.)</p>
+<p><strong>steady </strong>– <em>adj. </em>something that is strong and keeps working over time</p>
+<p><strong>abstract </strong><em>– adj.</em> relating to or involving general ideas or qualities rather than specific people, objects, or actions</p>
+<p><strong>geese </strong>– <em>n.(pl.)</em> birds that live in and close to water and migrate in the winter to warmer areas.<strong> </strong></p>
+<p><strong>spirit</strong> <em>– n. </em>a force within a human being thought to give the body life, energy, and power</p>
+<p><strong>choir</strong> –<em> n. </em>a group of singers especially in a church</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

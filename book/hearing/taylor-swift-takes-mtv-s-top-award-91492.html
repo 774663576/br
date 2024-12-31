@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Taylor Swift Takes MTV's Top Award</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Taylor Swift Takes MTV's Top Award" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/taylor-swift-takes-mtv-s-top-award.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Taylor Swift Takes MTV's Top Award</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/taylor-swift-takes-mtv-s-top-award.mp3" id="mp3"></a>
+<a href="ai-development-requires-large-amounts-of-water-91491.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">13 September 2023</span><br/>
+<p>Taylor Swift took home the top prize at the 2023 MTV Video Music Awards (VMAs) for her <em>Anti-Hero</em> music video.</p>
+<p>The music network's yearly awards show took place at the Prudential Center in Newark, New Jersey.</p>
+<p>"This is unbelievable. The fact that this is a fan-voted award means so much to me," Swift said in her acceptance speech. "I can't believe it was a year ago that I announced the <em>Midnights </em>album."</p>
+<div class="contentImage"><img alt="Joey Fatone, from center, Lance Bass, and Justin Timberlake of NSYNC present the award for best pop to Taylor Swift, far left, for Anti-Hero during the MTV Video Music Awards on September 12, 2023, at the Prudential Center in Newark, N.J. (Photo by Charles Sykes/Invision/AP)" src="https://files.21voa.com/gdb/013566e3-6899-44b8-b19d-44539a245179_w268_r1.jpg"/><br/>
+<span class="imagecaption">Joey Fatone, from center, Lance Bass, and Justin Timberlake of NSYNC present the award for best pop to Taylor Swift, far left, for "Anti-Hero" during the MTV Video Music Awards on September 12, 2023, at the Prudential Center in Newark, N.J. (Photo by Charles Sykes/Invision/AP)</span></div>
+<p>The night's first presenters were from the male musical act NSYNC. They reunited to hand the best <strong>pop</strong> video award to Swift.</p>
+<p>Swift received the most nominations of any performer. Swift later returned to the stage to receive the song of the year award for <em>Anti-hero</em> and also the best direction award.</p>
+<p>The performer received nine awards in total. Those included artist of the year in a group of nominees made up of women for the first time on the VMA show.</p>
+<p>Ice Spice, who worked with Swift on <em>Karma (Remix)</em>, won best new artist.</p>
+<p>New music filled the show with songs from Nicki Minaj who also was the <strong>host</strong>. Minaj performed the new song <em>Last Time I saw You</em>. She then performed a piece from her upcoming <em>Pink Friday 2 </em>album.</p>
+<p>The award show centered on showing music's international power. K-pop, or Korean pop, boy group Tomorrow X Together and Brazilian artist Anitta introduced a new song together, <em>Back for More</em>.</p>
+<p>Another K-pop group, Stray Kids, performed the song <em>S-Class</em>. Mexican singer Peso Pluma performed a song called <em>Lady Gaga </em>and Colombian singer Karol G sang <em>Oki Doki </em>and another song <em>Tá OK (remix)</em>.</p>
+<p>Tiffany Haddish presented the award for "Best Afrobeats," a new award group. Afrobeats is music with influences from Africa and Black American culture. Rema and Selena Gomez won the award for the popular song <em>Calm Down. </em></p>
+<p>"Africa in the house!" Rema said in his acceptance speech. Gomez said, "I want to send all of my love to Nigeria, thank you."</p>
+<p>Colombian star Shakira received the Video Vanguard Award and performed a mix of her popular songs.</p>
+<p>"MTV, thank you for being such a big part of my career since I was only 18 years old," Shakira said. She also thanked her parents and her children, who she brought to the show.</p>
+<p>"This is for you my people, my Latin American people, inside and outside this country," she said in the Spanish language.</p>
+<p>Diddy received the Global Icon Award from Mary J. Blige and his daughter Chance Combs. He is the third act to receive the award, after the <a class="wsw__a" name="_Int_bl5dFMm0">Red Hot</a> Chili Peppers in 2022 and the Foo Fighters in 2021.</p>
+<p>The artist also performed at the VMAs for the first time since 2005. The performance was a collection of some of his most popular songs like <em>Bad Boy for Life </em>and <em>Mo Money Mo Problems</em>.</p>
+<p>Lil Wayne opened the show with a performance of his new single <em>Kat Food. </em>Olivia Rodrigo then brought her <em>Vampire</em> music video to the stage before performing <em>Get Him Back!</em></p>
+<p>Later, Anitta would win the "best Latin" award for the second year. In her acceptance speech, she laughed, saying, "I wanna thank myself." And she added, "Because I work so hard!"</p>
+<p>French Montana, a performer who presented an award, brought attention to an effort to provide aid to victims of the Morocco earthquake. The performer grew up in Morocco.</p>
+<p>The VMA show ended with a celebration of 50 years of the musical form <strong>hip-hop</strong>. It included Nicki Minaj, Lil Wayne, LL Cool J, and DMC of Run-DMC.</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Maria Sherman reported this story for The Associated Press. Gregory Stachel adapted the story for VOA Learning English. </em></p>
+<p>___________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>pop </strong><em>– n.</em> music that is popular</p>
+<p><strong>host </strong><em>– n.</em> a person who talks to guests on a television or radio show</p>
+<p><strong>hip-hop </strong><em>– n.</em> rap music</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

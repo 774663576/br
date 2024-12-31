@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ups and Downs, Highs and Lows</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Ups and Downs, Highs and Lows" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/ups-and-downs-highs-and-lows.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ups and Downs, Highs and Lows</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/ups-and-downs-highs-and-lows.mp3" id="mp3"></a>
+<a href="americas-presidents-jefferson-90549.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">11 March 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Up and down. High and low. These short words describe more than just directions. They also connect to our feelings and experiences. In this episode of <em>Words and Their Stories</em>, we'll start down low and end up high.</p>
+<p>Many cultures around the world connect the words "low" or "down" with something <strong>negative</strong>. This is because our minds can easily connect low places, like the floor or the ground, with dirt.</p><div class="contentImage"><img alt="FILE - In this April 10, 2014 photo, people ride up and down the escalators inside the Sambil mall in Caracas, Venezuela. (AP Photo/Fernando Llano)" src="https://files.21voa.com/gdb/3062DEC4-47D4-43C0-99A8-D767E1CB93EA_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - In this April 10, 2014 photo, people ride up and down the escalators inside the Sambil mall in Caracas, Venezuela. (AP Photo/Fernando Llano)</span></div>
+<p>So, when someone asks, "<u>How low can you go?</u>" they are expressing their opinion that another person's behavior is bad in a moral or ethical sense.</p>
+<p>If you are <u>down and out</u>, that means you are poor, without enough money for the things you need.</p>
+<p>And if you are <a class="wsw__a" href="https://www.21voa.com/videos/have-you-ever-heard-the-idiom-down-in-the-dumps-trash-expert-jazmine-malone-expl/890153877686888/">down in the dumps</a>, that means you feel unhappy or depressed.</p>
+<p>Next, let's look at two "down" expressions that relate to either getting or keeping information. They sound similar but have different meanings. The following exchange uses one of these expressions:</p>
+<p>A: <em>So, did Maria tell you anything?</em></p>
+<p>B: <em>She did! But keep this <u>on the down-low</u>—she's going to quit her job next month.</em></p>
+<p>A: <em>Oh my gosh! Wow—that is big news.</em></p>
+<p>B: <em>I know, but she doesn't want anyone else to know.</em></p>
+<p>A: <em>No worries. I'll keep it <u>on the DL</u>.</em></p>
+<p>To <u>keep something on the down-low</u> means to keep information secret. Speakers often say the shortened form, "on the DL," when using the expression.</p>
+<p>On the other hand, if you want <u>the low-down on</u> a situation, that means you want to get the information. For example:</p>
+<p>A: <em>Did Jane give you <u>the low-down on</u> the budget?</em></p>
+<p>B: <em>Yeah. She said they can't afford to do a summer project this year. </em></p>
+<p>So, <u>getting the low-down</u> means you are getting information. <u>Keeping it on the down-low </u>means you are keeping information away from people.</p>
+<p><strong>Moving up</strong></p>
+<p>Now, let's move up to a few expressions with "high."</p>
+<p>Imagine you are driving in an area with a lot of traffic. You see a car waiting to turn onto your street, so you stop and let that car make the turn. But this makes the car behind you slow down. The driver of this car now <strong>honks</strong> the horn for a long time, leans out the car window, and shouts at you.</p>
+<p>At this point, you have a choice. You can also shout in return, or you can <u>take the high road</u> and not answer. <u>To take the high road</u> means to behave in a way that is morally correct, even when other people around you are not behaving well.</p>
+<p>Our next expression relates to time. Sometimes there are things that people should do, but they wait longer than necessary to do them. By waiting, they sometimes create problems or make things worse.</p>
+<p>In these situations, we can use the phrase "<u>it's high time</u>" to say that people have delayed doing something for too long.</p>
+<p>For example, someone can say, "<u>It's high time</u> you cleaned up that apartment. It is so dirty!"</p>
+<p>Next, we look at the word <u>highfalutin</u>. If you say someone is <u>highfalutin</u>, that means you think the person is overly <strong>fancy</strong> or <strong>pompous</strong>. <u>Highfalutin</u> is usually a negative way of referring to ways of speaking and behaving.</p>
+<p>According to Merriam-Webster's Dictionary of American English, the first known use of this word was in 1839 in the United States.</p>
+<p>Finally, you can <u>end on a high note</u> by <a class="wsw__a" href="https://www.21voa.com/a/let-s-end-on-a-high-note-/5718680.html">connecting to another <em>Words and Their Stories</em> program</a>. There, you can learn more expressions about highs and lows.</p>
+<p>Then, give yourself a high-five for reading and listening to this week's <em>Words and Their Stories</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English. </em></p>
+<p>____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>negative </strong><em>–adj.</em> not good; the opposite of positive</p>
+<p><strong>honk </strong><em>–v.</em> to make a loud sound often with the horn of a car</p>
+<p><strong>fancy </strong><em>–adj.</em> uncommon, costly, or fashionable</p>
+<p><strong>pompous </strong><em>–adj.</em> behaving in a way that appears to show a person thinks they are better than others</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

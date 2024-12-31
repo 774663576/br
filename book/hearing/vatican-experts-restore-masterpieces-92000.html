@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Vatican Experts Restore Masterpieces</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Vatican Experts Restore Masterpieces" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/vatican-experts-restore-masterpieces.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Vatican Experts Restore Masterpieces</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/vatican-experts-restore-masterpieces.mp3" id="mp3"></a>
+<a href="/static/lrc/vatican-experts-restore-masterpieces.lrc" id="lrc"></a>
+<a href="us-data-shows-more-women-live-in-east-more-men-in-west-91999.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">28 December 2023</span><br/>
+<p>Alessandra Zarelli works to keep the artwork of the Vatican Museums in good condition. She says, whenever she works on a masterpiece, she must calm her heart so her thinking can center on her work.</p>
+<p>Vatican City is a small country surrounded by the Italian capital, Rome. It is the headquarters and seat of government of the Roman Catholic Church. The Vatican Museums contain thousands of artworks hundreds of years old including paintings by Michelangelo.</p>
+<p>"The emotion of working on something like a Michelangelo is truly indescribable," said Zarelli. She helped repair one of his wall paintings in Vatican City's Pauline Chapel.</p><div class="contentImage"><img alt="Restorers Alessandra Zarelli and Rossana Giardina work on paintings at the painting and wood materials restoration laboratory inside the Vatican Museums, at the Vatican, December 11, 2023. (REUTERS/Guglielmo Mangiapane)" src="https://files.21voa.com/gdb/c5bc0212-d6f6-4539-aaf5-b609902737ed_cx0_cy9_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Restorers Alessandra Zarelli and Rossana Giardina work on paintings at the "painting and wood materials restoration laboratory" inside the Vatican Museums, at the Vatican, December 11, 2023. (REUTERS/Guglielmo Mangiapane)</span></div>
+<p>Michelangelo painted during the Renaissance period of European history during a growth of interest in science, art, and literature.</p>
+<p>Zarelli is part of a special team at the Vatican Museums' repair laboratory for paintings and wood pieces.</p>
+<p>The team is responsible for looking after thousands of square meters of wall paintings, including the famous ceiling and walls of the Sistine Chapel. They also look after some 5,300 oil paintings and wooden statues.</p>
+<p><strong>A century of restoration</strong></p>
+<p>The painting and wood lab is one of eight specialized groups in the museums. It permitted several news organizations, including Reuters, the chance to see its inner workings to mark its 100th anniversary.</p>
+<p>Care and repair methods change often and today's workers often have to repair mistakes from care workers that came before them. They repair work from recent history to many centuries ago.</p>
+<p>Another problem, usually from the distant past, is that restorers were not technicians but artists in their own right. Francesca Persegati is chief restorer at the Vatican Museums. She said that some of those artists thought they could "improve" the original by adding their own work.</p>
+<p>"It's important to be <strong>humble</strong> in this job, to respect the work but also to have a scientific background to understand the materials," she said.</p>
+<p>Before a painting even reaches the lab, another team carries out tests to see if paint or color has been added since the piece was first made. They also check it for possible other work below the surface.</p>
+<p>In another part of the lab, Caterina Manisco was working on an 1895 painting called <em>Madonna and Child Between St. Teresa and St. Francis</em>. Italian Emma Richards was the artist. She painted for the rich and powerful, like Queen Victoria and Prince Albert. Such work was a rarity for women artists of the time.</p>
+<p>"Because she was a woman, I somehow feel very close to her," said Manisco, an external restorer at the lab.</p>
+<p>To mark the 100th anniversary of the paintings and wood lab, the Vatican Museums are using special technology. It permits visitors to use their phones to connect with information about the artwork they are looking at.</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Philip Pullella reported this story for Reuters. Gregory Stachel adapted it for VOA Learning English.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>museum </strong>– <em>n</em>. a building in which interesting and valuable things (such as paintings and sculptures or scientific or historical objects) are collected and shown to the public</p>
+<p><strong>restore </strong>– <em>v</em>. to return (something) to an earlier or original condition by repairing it or cleaning it</p>
+<p><strong>concentrate </strong>– <em>v</em>. to think about something: to give your attention to the thing you are doing or reading</p>
+<p><strong>paralyze </strong>– <em>v</em>. to make (a person or animal) unable to move or feel all or part of the body</p>
+<p><strong>humble </strong>– <em>adj</em>. not proud: not thinking of yourself as better than other people</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Vatican Experts Restore Masterpieces]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Alessandra Zarelli works to keep the artwork
+[00:04.56]of the Vatican Museums in good condition.
+[00:09.92]She says, whenever she works on a masterpiece,
+[00:14.24]she must calm her heart
+[00:16.80]so her thinking can center on her work.
+[00:21.28]Vatican City is a small country
+[00:24.36]surrounded by the Italian capital, Rome.
+[00:29.36]It is the headquarters and seat
+[00:32.36]of government of the Roman Catholic Church.
+[00:37.72]The Vatican Museums contain
+[00:40.64]thousands of artworks hundreds of years old
+[00:44.72]including paintings by Michelangelo.
+[00:49.44]"The emotion of working on something
+[00:52.00]like a Michelangelo is truly indescribable," said Zarelli.
+[00:59.76]She helped repair one of his wall paintings
+[01:03.48]in Vatican City's Pauline Chapel.
+[01:08.24]Michelangelo painted during the Renaissance
+[01:12.12]period of European history during a growth
+[01:16.80]of interest in science, art, and literature.
+[01:22.36]Zarelli is part of a special team
+[01:25.72]at the Vatican Museums' repair laboratory
+[01:30.00]for paintings and wood pieces.
+[01:34.32]The team is responsible for looking after
+[01:38.12]thousands of square meters of wall paintings,
+[01:41.96]including the famous ceiling and walls
+[01:45.24]of the Sistine Chapel.
+[01:48.36]They also look after some 5,300 oil paintings
+[01:53.96]and wooden statues.
+[01:57.28]The painting and wood lab is one of eight
+[02:00.40]specialized groups in the museums.
+[02:05.00]It permitted several news organizations,
+[02:08.76]including Reuters, the chance to see its inner workings
+[02:13.68]to mark its 100th anniversary.
+[02:18.28]Care and repair methods change often
+[02:21.92]and today's workers often have to repair mistakes
+[02:26.76]from care workers that came before them.
+[02:31.12]They repair work from recent history
+[02:34.52]to many centuries ago.
+[02:38.16]Another problem, usually from the distant past,
+[02:42.52]is that restorers were not technicians
+[02:46.04]but artists in their own right.
+[02:49.72]Francesca Persegati is chief restorer
+[02:53.60]at the Vatican Museums.
+[02:57.00]She said that some of those artists
+[02:59.72]thought they could "improve"
+[03:01.72]the original by adding their own work.
+[03:06.20]"It's important to be humble in this job,
+[03:09.76]to respect the work
+[03:11.52]but also to have a scientific background
+[03:14.92]to understand the materials," she said.
+[03:19.44]Before a painting even reaches the lab,
+[03:22.80]another team carries out tests
+[03:25.64]to see if paint or color has been added
+[03:29.60]since the piece was first made.
+[03:33.40]They also check it for possible other work
+[03:36.60]below the surface.
+[03:39.20]In another part of the lab, Caterina Manisco
+[03:43.88]was working on an 1895 painting
+[03:48.24]called Madonna and Child
+[03:51.00]Between St. Teresa and St. Francis.
+[03:55.84]Italian Emma Richards was the artist.
+[04:00.36]She painted for the rich and powerful,
+[04:03.36]like Queen Victoria and Prince Albert.
+[04:08.92]Such work was a rarity
+[04:11.48]for women artists of the time.
+[04:15.16]"Because she was a woman,
+[04:17.20]I somehow feel very close to her,"
+[04:19.96]said Manisco, an external restorer at the lab.
+[04:26.12]To mark the 100th anniversary
+[04:28.64]of the paintings and wood lab,
+[04:31.28]the Vatican Museums are using special technology.
+[04:36.80]It permits visitors to use their phones
+[04:40.00]to connect with information
+[04:42.16]about the artwork they are looking at.
+[04:45.84]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

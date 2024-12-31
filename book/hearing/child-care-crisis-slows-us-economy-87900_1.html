@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 儿童保育危机拖累美国经济</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 儿童保育危机拖累美国经济" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202110/child-care-crisis-slows-us-economy.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>儿童保育危机拖累美国经济</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202110/child-care-crisis-slows-us-economy.mp3" id="mp3"></a>
+<a href="/static/lrc/child-care-crisis-slows-us-economy.lrc" id="lrc"></a>
+<a href="child-care-crisis-slows-us-economy-87900.html" id="CnPage" target="_blank"></a>
+<a href="japanese-gardens-bridge-indoor-outdoor-space-87899.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Because of the COVID-19 health crisis, many American parents are having a difficult time balancing the needs of their children and work responsibilities.<br/>
+由于新冠肺炎健康危机，许多美国家长难以平衡孩子需求与工作责任之间的关系。
+<p>That is because many childcare centers in the United States have closed. The ones that remain open have limited spaces for additional children.<br/>
+这是因为美国许多托儿所都已经关闭。保持开放的托儿所能额外接收儿童的空间也有限。</p>
+<p>Media reports say the problem is "a national crisis." The Associated Press (AP) notes that President Joe Biden is trying to include a "burst" of spending on children in the $1.9 trillion spending bill being considered by the U.S. Congress.<br/>
+媒体报道称这个问题是国家危机。美联社指出，拜登总统试图在国会正审议的1.9万亿美元支出法案中加上“暴增”的儿童支出。</p>
+<p>The Biden administration has said it does not want parents to spend more than seven percent of their income on childcare costs. The administration also wants pre-school for very young children to be available to every family.<br/>
+拜登政府曾表示，不希望家长的育儿费用超过收入的7%。政府还希望每个家庭的孩子都能上幼儿园。</p>
+<p>Betsey Stevenson is an economist at the University of Michigan. She said a change in the availability of childcare will make a difference in the U.S. economy for many years. She said it will do this by "influencing who returns to work, what types of jobs parents take and the career path they are able to follow."<br/>
+贝齐·斯蒂文森是密歇根大学的经济学家。她表示，托儿服务可用性的变化将对美国经济产生多年的影响。她说，它将通过“影响谁重返工作岗位、家长从事什么类型工作以及他们所能遵循的职业路线”来实现这点。</p>
+<p>One of those parents is Bryan Kang of Los Angeles. He used to work as a therapist, teaching people how to physically recover from injuries or sickness.<br/>
+洛杉矶的布莱恩·康就是其中一位这样的家长。他曾经是一位治疗师，教人们如何从伤病中康复。</p>
+<p>When he and his wife had a baby in July, he found that childcare centers were full. Without someone to take care of the baby, he could no longer leave home for work. He needed a job he could do from home.<br/>
+当他和他的妻子在今年7月有了孩子时，他发现托儿所已经爆满。由于没有人照顾婴儿，他没法再出门工作。他需要找一份可以在家里干的工作。</p>
+<p>His new job permits him to teach at home using his computer, but he earns less money than before. Even if he had found a place for his baby, it would have been too costly. So for him to work from home was a better choice.<br/>
+他的新工作允许他在家里使用自己的电脑教学，但是收入比以前低。就算他能找到托儿所，费用也可能太高了。所以对他来说，在家工作是更好的选择。</p>
+<p>Treasury Secretary Janet Yellen has called the childcare business "broken," because it is too costly for parents. But workers who take care of children also are not paid very much.<br/>
+美国财政部长珍妮特·耶伦称托儿所行业已经破产，因为它对父母来说费用太高了。但是保育员的工资也不高。</p>
+<p>Right now, many childcare workers are looking for new jobs. Some workers are now earning two times their former pay at new workplaces. The people who own childcare businesses cannot pay enough to replace them.<br/>
+目前，许多保育员都在找新工作。一些员工在新工作场所的收入是原来工资的两倍。托儿所老板付不起足够高工资来替换他们。</p>
+<p>Amy McCoy owns a childcare business called Forever Young Daycare near Seattle, Washington. She is getting tired of doing several jobs because some of her employees stopped working.<br/>
+艾米·麦科伊在华盛顿州西雅图市附近开办了一家名为  Forever Young Daycare的托儿所。由于她的员工不干了，她已经厌倦了干几份工作。</p>
+<p>"Nobody wants to work for what I can afford to pay right now," McCoy said. She thinks parents will have to face higher costs so she can raise the pay for new workers.<br/>
+麦科伊表示：“现在没人愿意拿我现在付得起的工资来上班。”她认为家长将不得不面临更高费用，这样她才能给新员工涨薪水。</p>
+<p>The U.S. Treasury Department reported in September that many childcare workers are poor, earning less than $25,000 a year. At the same time, childcare businesses do not make much money for their owners.<br/>
+美国财政部在9月份的报告中表示，许多儿童保育员都很穷，年收入不足2.5万美元。与此同时，托儿所能给老板赚到的钱也并不多。</p>
+<p>Briana McFadden used to run a childcare business in Washington. She closed it last month after 12 years. She thinks she would have stayed open if she got money from the government.<br/>
+布莱恩娜·麦克法登曾经在华盛顿经营一家托儿所。她在干了12年之后于上个月关门不干了。她认为如果能获得政府补贴，她就会继续干下去。</p>
+<p>"It really wasn't worth it to continue," she said. She plans to start a new business – a small store.<br/>
+她说：“真不值得继续干下去。”她计划开门新生意，也就是开家小商店。</p>
+<p>Biden is still trying to find support for the spending bill from U.S. lawmakers. And it is not clear if his plan to support children and families will be included in the final spending bill.<br/>
+拜登仍在努力寻求美国议员对支出法案的支持。目前尚不清楚他支持儿童和家庭的计划是否会包含在最终的支出法案中。</p>
+<p>Donald Schneider is an economics expert who once worked for the U.S. Congress. He said he thinks the help for children and childcare will cost about $465 billion over 10 years if it is approved.<br/>
+唐纳德·施耐德是一位曾在美国国会工作的经济专家。他说，如果获得批准，他认为未来10年对儿童和儿童保育的补贴将会耗资约4650亿美元。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Child Care ‘Crisis’ Slows US Economy]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Because of the COVID-19 health crisis,
+[00:03.44]many American parents are having a difficult time
+[00:07.64]balancing the needs of their children and work responsibilities.
+[00:13.88]That is because many childcare centers
+[00:17.44]in the United States have closed.
+[00:21.20]The ones that remain open
+[00:23.56]have limited spaces for additional children.
+[00:28.84]Media reports say the problem is "a national crisis."
+[00:35.44]The Associated Press (AP) notes that President Joe Biden
+[00:41.76]is trying to include a "burst" of spending
+[00:46.32]on children in the $1.9 trillion spending bill
+[00:52.56]being considered by the U.S. Congress.
+[00:56.52]The Biden administration has said
+[00:59.60]it does not want parents to spend
+[01:02.60]more than seven percent of their income on childcare costs.
+[01:09.28]The administration also wants pre-school
+[01:13.04]for very young children to be available to every family.
+[01:19.20]Betsey Stevenson is an economist at the University of Michigan.
+[01:25.00]She said a change in the availability of childcare
+[01:28.68]will make a difference in the U.S. economy for many years.
+[01:33.72]She said it will do this by "influencing who returns to work,
+[01:40.08]what types of jobs parents take
+[01:43.24]and the career path they are able to follow."
+[01:48.16]One of those parents is Bryan Kang of Los Angeles.
+[01:53.28]He used to work as a therapist, teaching people
+[01:57.40]how to physically recover from injuries or sickness.
+[02:02.60]When he and his wife had a baby in July,
+[02:06.16]he found that childcare centers were full.
+[02:11.56]Without someone to take care of the baby,
+[02:14.72]he could no longer leave home for work.
+[02:18.80]He needed a job he could do from home.
+[02:22.48]His new job permits him to teach at home using his computer,
+[02:29.48]but he earns less money than before.
+[02:33.12]Even if he had found a place for his baby,
+[02:37.80]it would have been too costly.
+[02:41.40]So for him to work from home was a better choice.
+[02:48.00]Treasury Secretary Janet Yellen
+[02:51.40]has called the childcare business "broken,"
+[02:55.48]because it is too costly for parents.
+[03:01.20]But workers who take care of children
+[03:04.12]also are not paid very much.
+[03:08.48]Right now, many childcare workers are looking for new jobs.
+[03:14.16]Some workers are now earning two times their former pay
+[03:19.36]at new workplaces.
+[03:22.44]The people who own childcare businesses
+[03:25.04]cannot pay enough to replace them.
+[03:29.00]Amy McCoy owns a childcare business
+[03:32.40]called Forever Young Daycare near Seattle, Washington.
+[03:38.80]She is getting tired of doing several jobs
+[03:41.96]because some of her employees stopped working.
+[03:47.52]"Nobody wants to work
+[03:49.28]for what I can afford to pay right now," McCoy said.
+[03:54.20]She thinks parents will have to face higher costs
+[03:59.00]so she can raise the pay for new workers.
+[04:04.32]The U.S. Treasury Department reported in September
+[04:08.52]that many childcare workers are poor,
+[04:12.28]earning less than $25,000 a year.
+[04:17.44]At the same time, childcare businesses
+[04:21.44]do not make much money for their owners.
+[04:25.84]Briana McFadden used to run a childcare business in Washington.
+[04:31.16]She closed it last month after 12 years.
+[04:36.12]She thinks she would have stayed open
+[04:39.56]if she got money from the government.
+[04:43.60]"It really wasn't worth it to continue," she said.
+[04:48.32]She plans to start a new business – a small store.
+[04:54.72]Biden is still trying to find support
+[04:58.60]for the spending bill from U.S. lawmakers.
+[05:03.32]And it is not clear if his plan
+[05:06.20]to support children and families will be included
+[05:09.88]in the final spending bill.
+[05:13.64]Donald Schneider is an economics expert
+[05:17.40]who once worked for the U.S. Congress.
+[05:21.56]He said he thinks the help for children and childcare
+[05:26.28]will cost about $465 billion over 10 years if it is approved.
+[05:34.64]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

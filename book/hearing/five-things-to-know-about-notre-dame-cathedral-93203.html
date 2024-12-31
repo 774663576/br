@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Five Things to Know about Notre Dame Cathedral</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Five Things to Know about Notre Dame Cathedral" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/five-things-to-know-about-notre-dame-cathedral.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Five Things to Know about Notre Dame Cathedral</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/five-things-to-know-about-notre-dame-cathedral.mp3" id="mp3"></a>
+<a href="what-to-know-about-south-korea-s-short-period-of-martial-law-93202.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">04 December, 2024</span><br/>
+<p>Notre Dame Cathedral in the French capital of Paris is set to reopen to the public Sunday after a five-year-long rebuilding project. The Cathedral had been badly damaged in a fire in 2019.</p>
+<p>The Roman Catholic religious center is considered a jewel of Gothic building design, a <strong>symbol</strong> of Paris and is a popular site to visit.</p>
+<p>The cathedral took 182 years to build between the 12th and 14th centuries. It holds some surprising stories. Here are five special things to know about this famous Parisian site:</p><div class="contentImage"><img alt="French President Emmanuel Macron, center left, and his wife Brigitte Macron, third right, visit the restored interiors of Notre-Dame Cathedral, Friday, Nov.29, 2024 in Paris. (Christophe Petit Tesson, Pool via AP)" src="https://files.21voa.com/gdb/47d79232-3e69-4e7f-a599-2bcc234ad808_w268_r1.jpg"/><br/><span class="imagecaption">French President Emmanuel Macron, center left, and his wife Brigitte Macron, third right, visit the restored interiors of Notre-Dame Cathedral, Friday, Nov.29, 2024 in Paris. (Christophe Petit Tesson, Pool via AP)</span></div>
+<p><strong>The cathedral is considered France's geographic center. </strong></p>
+<p>In front of the cathedral, a metal and stone marker in the road describes the place as the "starting point of the roads of France.'' This sign marks the starting point for measuring distances between Paris and other cities across the country.</p>
+<p>The marker was placed in 1924, but the idea of the cathedral as the center of the nation dates to 1769. King Louis XV thought there should be a central site for France's growing system of roads. That idea tied the nation's <strong>geography</strong> to its heart in Paris.</p>
+<p><strong>Its famous statues were added in the 19th century</strong></p>
+<p>Those frightening stone statues on Notre Dame might seem ancient, but not all of them are what they appear. The <strong>gargoyles</strong> are <strong>monster</strong>-shaped elements used to direct rainwater away from the building. They have been around since the time of the cathedral's <strong>construction</strong>. But the monster-like creatures often seen in <strong>photos</strong> and movies are <strong>chimera</strong>, and they are much newer.</p>
+<p>In 1841, the French government asked the architects Eugène Viollet-le-Duc and Jean-Baptiste Lassus to repair the then-collapsing building. Viollet-le-Duc added these frightening-looking statues to make the cathedral seem more mysterious. He drew ideas for the chimera from Victor Hugo's famous book <em>The Hunchback of Notre Dame.</em></p>
+<p>How to tell them apart? Gargoyles <strong>resemble horizontal spikes</strong> coming out of the<strong> facade</strong> and have <strong>spouts </strong>to permit rainwater to flow out.</p>
+<p><strong>During the French Revolution, protesters changed Notre Dame.</strong></p>
+<p>During the French Revolution, there were protests of religious centers.</p>
+<p>In 1793, revolutionaries took away the cathedral's religious symbols and renamed it "Notre-Dame de la Raison," or, in English, “Our Lady of Reason.”</p>
+<p>During that time, the cathedral held events celebrating science and new ideas and, for a short time, it was even used to store the alcoholic drink called wine.</p>
+<p>Religious services started again in 1795 under the rule of Napoleon I.</p>
+<p><strong>Statues without heads were found and repaired.</strong></p>
+<p>In 1792, revolutionaries also cut the heads off 28 statues from the front of Notre Dame, thinking the statues were of French <strong>royalty</strong>. They were really representations of ancient kings of Judah, from stories in the Bible, the Christian holy book.</p>
+<p>The heads were thought lost forever.</p>
+<p>But in 1977, workers working in a <strong>courtyard</strong> in Paris uncovered hundreds of pieces of stone sculptures. Experts confirmed they were the missing heads of Notre Dame's kings of Judah statues.</p>
+<p>Today, 22 of the heads have been repaired and are shown at the Cluny Museum in Paris.</p>
+<p><strong>The 2019 fire exposed a worldwide lack of outdoor lead pollution guidelines.</strong></p>
+<p>The 2019 fire that almost destroyed Notre Dame caused a serious health risk. When the<strong> flames</strong> melted the top of the building, large amounts of harmful lead dust were released into the air and came down across Paris.</p>
+<p>Officials found there were no rules to measure the danger of outdoor lead dust. This was not just a Paris issue — major cities like London and Rome, and even the World Health Organization — do not have guidelines for outdoor lead pollution.</p>
+<p>The Notre Dame fire forced officials to take a closer look at their safety standards. It took four months for the city to complete an extensive cleaning of the city's streets even as visitors and the citizens of Paris walked around the cathedral every day.</p>
+<p>Now that you know these five things, you can enjoy seeing the photos of the new Notre Dame when it opens to the public.</p>
+<p>I'm Caty Weaver.</p>
+<p>Tom Nouvian<em> reported this story for the Associated Press.</em><em> Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>symbol</strong> –<em> n</em>. an action, object, event, etc., that expresses or represents a particular idea or quality</p>
+<p><strong>gargoyle </strong>– <em>n</em>. a strange or ugly human or animal figure that sticks out from the roof of a building (such as a church) and is used to cause rainwater to flow away from the sides of a building.</p>
+<p><strong>chimera</strong> – <em>n</em>. a monster from Greek mythology that breathes fire and has a lion's head, a goat's body, and a snake's tail</p>
+<p><strong>resemble </strong>– <em>v</em>. to look or be like</p>
+<p><strong>horizontal </strong>– <em>adj</em>. positioned from side to side rather than up and down; parallel to the ground</p>
+<p><strong>spike</strong> – <em>n</em>. a long, thin rod that ends in a point and is often made of metal</p>
+<p><strong>fa<i>&amp;#</i>231;ade</strong> – <em>n.</em> the front of a building</p>
+<p><strong>spout</strong> –<em> n</em>. a tube, pipe, or hole out of which a liquid flows</p>
+<p><strong>royalty </strong>–<em> n.</em> members of a royal family</p>
+<p><strong>courtyard</strong> –<em> n</em>. an open space that is surrounded completely or partly by a building or group of buildings</p>
+<p><strong>flame</strong> – <em>n</em>. the hot, glowing gas that can be seen when a fire is burning</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

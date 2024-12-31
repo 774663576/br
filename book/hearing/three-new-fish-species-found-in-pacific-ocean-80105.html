@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Three New Fish Species Found in Pacific Ocean</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Three New Fish Species Found in Pacific Ocean" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201809/three-new-fish-species-found-in-pacific-ocean.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Three New Fish Species Found in Pacific Ocean</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201809/three-new-fish-species-found-in-pacific-ocean.mp3" id="mp3"></a>
+<a href="forming-questions-part--yes-no-questions-80104.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">13 September, 2018</span><br/>
+<p>Scientists say they have discovered three new <strong>species</strong> of fish in one of the deepest places on Earth.</p>
+<p>All three species were found in the Pacific Ocean, off the coast of Chile and Peru. They were deep in the Atacama Trench -- 7,500 meters below the surface.</p>
+<p>Researchers from Britain's Newcastle University say the new species have been given temporary names based on their coloring. They are known as ‘the pink, the blue and the purple Atacama Snailfish.'</p>
+<p>The three snailfish species are different from most other fish. Their unusual bodies are built to deal with the cold water and extreme pressure deep in the ocean.</p>
+<p>All three are small and <strong>translucent</strong>, meaning light can pass through their skin. They also have no <strong>scales</strong> on the skin for protection.</p>
+<div class="contentImage"><img alt="From left, purple, pink, and blue Atacama snailfish. (Newscastle University)" src="https://files.21voa.com/gdb/5A1316D7-D1D8-4A2B-B0FC-135E7CAC91B9_w268_r0.jpg"/><br/><span class="imagecaption">From left, purple, pink, and blue Atacama snailfish. (Newscastle University)</span></div>
+<p>Thomas Linley is with Newscastle University. He said in a statement, "the hardest structures in their bodies are the bones in their inner ear which give them balance and their <strong>teeth</strong>. Without the extreme pressure and cold to support their bodies they are extremely <strong>fragile</strong> and melt rapidly when brought to the surface."</p>
+<p>A team of 40 scientists from 17 nations captured video of the fish in their natural environment.</p>
+<p>Other scientists say the "blue" Atacama Snailfish appeared to be a rare "<strong>winged</strong>" snailfish. But it has long <strong>fin </strong>and big head similar to the Ethereal Snailfish off the coast of Mariana Islands.</p>
+<p>The "pink" was closer in appearance to the Mariana Snailfish, a species found in the deepest part of Mariana Trench on the other side of the Pacific.</p>
+<p>The third species is a small purple snailfish. It is similar to fish living at the depth of 3,500 meters. One of the purple snailfish, about 9 centimeters long, was brought to the surface for further study.</p><span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close"><span class="ico ico-close m-0"></span></span>
+<p>In addition to the discovery of the new species of snailfish, scientists also captured rare video of long-legged isopods, known as Munnopsids. The shellfish has a small body, about the size of a human hand. It can swim backwards and upside down using its extremely long legs.</p>
+<p>The scientists say what they have found in the deep sea is an environment rich with many species in large numbers.</p>
+<p>From the video shot by the Newcastle scientists, Linley said, "There is something about the snailfish that allows them to <strong>adapt</strong> to living very deep. Beyond the reach of other fish they are free of competitors and <strong>predators</strong>."</p>
+<p>He added, "they seem to be quite active and look very well-fed."</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Hai Do adapted this story for Learning English based on <a class="wsw__a" href="https://theconversation.com/snailfish-how-we-found-a-new-species-in-one-of-the-oceans-deepest-places-103003?utm_source=twitter&amp;utm_medium=twitterbutton" target="_blank">The Conversation</a>. George Grow was the editor.</em></p>
+<p><em>Write to us in the Comments Section or on 51VOA.COM. </em></p>
+<p><em>_____________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>species </strong>- n. a group of plants or animals that are similar and can produce young plants or animals</p>
+<p><strong>translucent </strong>- adj. not completely clear, like transparent, but clear enough to allow light to pass through</p>
+<p><strong>scale </strong>- n. one of many small thin plates that cover the bodies of fish or snakes</p>
+<p><strong>teeth </strong>- n. plural of tooth, hard white objects inside the mouth that are used for biting and chewing</p>
+<p><strong>fragile </strong>- adj. easily broken or damaged</p>
+<p><strong>winged </strong>- adj. having wings</p>
+<p><strong>fin</strong> - n. a thin flat part that sticks out from the body of a fish and is used for moving through water</p>
+<p><strong>adapt </strong>- v. to change so that it functions better or is better suited for a purpose</p>
+<p><strong>predator -</strong> n. an animal that lives by killing and eating other animals</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Sweden Brings Books, Handwriting Back to School</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Sweden Brings Books, Handwriting Back to School" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/sweden-brings-books-handwriting-back-to-school.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Sweden Brings Books, Handwriting Back to School</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/sweden-brings-books-handwriting-back-to-school.mp3" id="mp3"></a>
+<a href="breeding-special-mosquitoes-to-fight-dengue-91547.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">26 September 2023</span><br/>
+<p>As children returned to school in Sweden last month, many of their teachers were putting a new importance on some traditional skills. These included reading printed books, quiet reading time and handwriting practice. Teachers were spending less time with digital devices, online research and <strong>typing</strong> skills.</p>
+<p>The return to traditional ways of learning might be the answer to questions raised by politicians and experts. They have questioned the country's dependence on electronic technology in education. For example, schools in Sweden have introduced tablets in preschools but critics say students are not learning basic skills as well.</p>
+<p>Lotta Edholm is the Swedish Minister for Schools. She took office 11 months ago as part of a new center-right government. She was one of the biggest critics of the level of technology in schools.</p>
+<div class="contentImage"><img alt="Students read at the Djurgardsskolan elementary school in Stockholm, Sweden, Thursday, Aug. 31, 2023. (AP Photo/David Keyton)" src="https://files.21voa.com/gdb/01000000-0a00-0242-f01d-08dbbde4ba71_w268_r1.jpg"/><br/>
+<span class="imagecaption">Students read at the Djurgardsskolan elementary school in Stockholm, Sweden, Thursday, Aug. 31, 2023. (AP Photo/David Keyton)</span></div>
+<p>"Sweden's students need more textbooks," Edholm said in March. "Physical books are important for student learning."</p>
+<p>The minister announced last month that the government wants to <strong>reverse</strong> the decision made by the National Agency for Education to make digital devices required in preschools. The ministry told the Associated Press that it plans to stop digital learning for children under the age of six<em>.</em></p>
+<p>Sweden's students score above the European average for reading ability. But an international test of fourth grade reading levels, the Progress in International Reading Literacy Study, showed Sweden's children had lost ground between 2016 and 2021.</p>
+<p>Some learning loss might have resulted from the COVID-19 pandemic. The losses could also be a result of a growing number of immigrant students who do not speak Swedish as their first language. But an overuse of electronic devices during school lessons may cause kids to fall behind, education experts say.</p>
+<p>Sweden's Karolinska Institute is a medical school centered on research.</p>
+<p>"There's clear scientific evidence that digital tools <strong>impair</strong> rather than <strong>enhance</strong> student learning," the institute said in a statement last month. The institute added that schools should instead center on teaching using printed <strong>textbooks</strong> and teacher knowledge. Information from digital sources may not be <strong>accurate</strong>, it said.</p>
+<p>The expansion of digital learning tools in schools also has drawn concern from the United Nations' education and culture agency.</p>
+<p>In a report published last month, UNESCO issued an "urgent call for <strong>appropriate</strong> use of technology in education." The report urged countries to speed up internet connections at schools. But it also warned that technology in education should be used in a way so that it never replaces in-person, teacher-led instruction.</p>
+<p>Online instruction is a highly debated subject across Europe and in other parts of the world. Poland, for instance, just launched a program to give a <strong>laptop</strong> paid for by the government to each student starting in fourth grade.</p>
+<p>In the United States, the coronavirus pandemic pushed public schools to provide millions of laptops to students. But there is still a digital divide, which is part of the reason why American schools often use both print and digital textbooks, said Sean Ryan. He is president of the U.S. school division at textbook publisher McGraw Hill.</p>
+<p>Educators are less likely to use only digital textbooks because some households lack the technology or internet connection at home, he added.</p>
+<p>To answer Sweden's decline in 4th grade reading performance, the Swedish government announced $64.7 million in book purchases for the country's schools this year. Another $45.3 million will be spent yearly in 2024 and 2025 to speed up the return of textbooks to schools.</p>
+<p>Not all experts think Sweden's move away from digital technology is only about what is best for students.</p>
+<p>Criticizing the effects of technology is "a popular move with conservative politicians," Neil Selwyn said. He is a professor of education at Monash University in Melbourne, Australia.</p>
+<p>"The Swedish government does have a <strong>valid</strong> point when saying that there is no evidence for technology improving learning, but I think that's because there is no straightforward evidence of what works with technology," Selwyn added. "Technology is just one part of a really complex network of <strong>factors</strong> in education."</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press.</em></p>
+<p><em>____________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>type </strong><em>–v.</em> to write using a keyboard</p>
+<p class="CxSpMiddle"><strong>impair </strong><em>— v. </em>to worsen the ability of something or someone to perform a task or to operate</p>
+<p class="CxSpMiddle"><strong>enhance </strong><em>— v. </em>to improve something</p>
+<p class="CxSpMiddle"><strong>textbook </strong><em>—</em><em> n. </em>a book about a subject that is designed for teaching in a school</p>
+<p class="CxSpMiddle"><strong>accurate </strong><em>–adj.</em> free from errors or mistakes</p>
+<p class="CxSpMiddle"><strong>appropriate </strong>–<em>adj.</em> having the right qualities for some purpose</p>
+<p class="CxSpMiddle"><strong>laptop </strong><em>— n. </em>an easily carried computer that has a keyboard</p>
+<p class="CxSpMiddle"><strong>valid </strong><em>–adj.</em> fair or reasonable</p>
+<p class="CxSpMiddle"><strong>factor </strong><em>–n.</em> something that influences a result</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

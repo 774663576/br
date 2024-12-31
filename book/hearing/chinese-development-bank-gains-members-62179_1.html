@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 亚投行新成员不断增加</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 亚投行新成员不断增加" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201503/se-development-bank-29mar15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>亚投行新成员不断增加</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201503/se-development-bank-29mar15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-development-bank-29mar15.lrc" id="lrc"></a>
+<a href="chinese-development-bank-gains-members-62179.html" id="CnPage" target="_blank"></a>
+<a href="dont-panic-62170.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Development banking in Asia has been in the news lately. Last year, China proposed creation of a development bank called the Asian Infrastructure Investment Bank. Chinese officials say the institution would help finance infrastructure projects throughout Asia.<br/>亚洲的开发银行业务最近一直备受新闻关注。去年，中国提议建立一家名为亚洲基础设施投资银行的开发银行。中国官员表示，该机构有助于为整个亚洲地区的基础设施建设项目提供融资。</p>
+<p>The area has a need for better roads and other infrastructure, including ports and power supplies. The Asian Development Bank, another organization, was set up to reduce poverty in Asia and the Pacific. It estimated last May that the Asia-Pacific area needs about $800 billion a year in infrastructure development.<br/>该地区存在改善道路和包括港口以及电力供应在内的其它基础设施的需求。而另一家组织 -- 亚洲开发银行的建立是为了在亚太地区消除贫困。据亚洲开发银行去年5月份估计，亚太地区每年在基础设施上需要8千亿美元。</p>
+<p>China reports that more than 20 countries have agreed to be founding members of the Asia Infrastructure Investment Bank, or AIIB. Recently, some European powers added themselves to the list. U.S. allies Britain, Germany, France and Italy have joined up. So has South Korea. And Australia has agreed to move forward with negotiations.<br/>中国报道称已经有20多个国家同意成为亚洲基础设施投资银行（以下简称亚投行）的创办成员国。最近，一些欧洲大国也把自己加入到名单之内。美国的盟友英国、德国、法国和意大利已经加入。韩国也已加入。澳大利亚已经同意进行进一步谈判。</p>
+<p>The United States, however, has said it is concerned about the governance of the AIIB. It has urged countries to consider the bank's standards, its social and environmental policies, before joining.<br/>然而美国表示担心亚投行的管理。美国督促各国在加入前考虑该银行的标准，以及它的社会和环境政策。</p>
+<p>Some observers say the United States should join the bank as a founding member. Asia expert Alejandro Reyes said the way the U.S. has dealt with the bank shows outdated thinking.<br/>一些观察家表示，美国应该加入该行成为创办成员国。亚洲问题专家亚历杭德罗·雷耶斯（Alejandro Reyes）表示，美国处理该银行的方式显示出过时的思维。</p>
+<p>Yet other observers have said it is unlikely the U.S. will do so. The last day to become a founding member is March 31st.<br/>然而另一些观察家表示，美国不可能会这样做。成为创办成员国的截止日期是3月31日。</p>
+<p>Robert Kahn is a senior fellow at the Council on Foreign Relations. He said U.S. officials are concerned that the AIIB may be seeking to replace existing institutions, such as the World Bank and Asian Development Bank.<br/>罗伯特·卡恩（Robert Kahn）是外交关系委员会的高级研究员。他说美国官员担心亚投行可能会需求取代现有机构，例如世界银行和亚洲开发银行。</p>
+<p>"In a world with the better politics, the United States would be joining this institution, but because of the environment on the Hill (in Washington), the United States is not only not in position where it could join this institution and get it approved by Congress, it cannot get even basic reform in the IMF through in a way that would make the existing institutions more attractive to the rising powers."<br/>他说，“在政策改善的情况下，美国将会加入这一机构；但是由于国会山上的客观环境，美国不仅没有能力加入该机构并获得国会批准，它甚至无法对国际货币基金组织进行最基本的改革，使这家现有机构对新兴大国更具吸引力。”</p>
+<p>The U.S. Congress has failed to approve reforms of voting rights for the International Monetary Fund. The delay has led China and other countries to consider setting up their own institutions as a way to gain more influence in world economic governance.<br/>美国国会未能通过对国际货币基金组织投票权的改革。这一搁置导致中国和其它国家考虑建立他们自己的机构，以此在全球经济治理中获得更大影响力。</p>
+<p>Still, officials at the IMF, World Bank and Asian Development Bank say they are looking for ways to cooperate with the AIIB.<br/>然而，国际货币基金组织、世界银行以及亚洲开发银行的官员们表示，他们正在探索与亚投行合作的途径。</p>
+<p>U.S. officials say they welcome new multi-lateral institutions that would observe high standards that the international community has built. China says it will uphold high standards. But most details will not become clear until the new bank is operational.<br/>美国官员表示，他们欢迎遵守国际社会业已建立的高标准的新的多边机构。中国表示将会坚持高标准。但是大多数细节要到这家银行运营后才会明朗。</p>
+<p>The bank is expected to start with $100 billion in capital, mostly from China.<br/>亚投行预计将以1千亿美元资金开始运营，其中大部分来自中国。</p>
+<p>Experts say it remains to be seen how China will take on a leadership position in the AIIB or whether it will work with existing organizations. Tom Wright is director of the Project of International Order and Strategy at the Brookings Institution in Washington, DC.<br/>专家们表示，中国在亚投行将会如何担当领导地位，以及是否会和现有机构合作尚有待观察。汤姆·赖特（Tom Wright）是华盛顿布鲁金斯学会国际秩序与战略项目负责人。</p>
+<p>"This is not the end. It really is just [the] beginning and especially the beginning of a new chapter for China. It set up this bank, it said it is going to take a leadership position, but huge questions still hang over how it is going to behave."<br/>他说，“一切尚未结束。这只是个开始，特别是中国新篇章的开始。中国建立了这家银行，并表示将占据领导地位，但是对该国将会如何表现仍存在巨大疑问。”</p>
+<p>China considers itself in a good position to carry out infrastructure projects in Asia. However, it has depended on state-owned companies and labor when working overseas.<br/>中国认为自己占据了在亚洲开展基础设施项目的有利地位。然而该国在海外运转时依赖国有企业和劳动力。</p>
+<p>Using international labor standards rather than Chinese labor rules would be a step forward, says economist Liu Li-gang of the ANZ Banking Group. He says China should open up competition for bank-supported projects. He said this will reduce criticism from often linked to Chinese foreign investment.<br/>澳新银行集团的经济学家刘厉刚表示，采用国际劳工标准而不是中国劳动法将向前迈进一步。他说，中国应该开放银行支持项目的竞争。这会减少通常和中国的外国投资有关的批评。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Chinese Development Bank Gains Members]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]Development banking in Asia has been in the news lately.
+[00:04.47]Last year, China proposed creation of a development bank
+[00:09.36]called the Asian Infrastructure Investment Bank.
+[00:14.11]Chinese officials say the institution
+[00:17.52]would help finance infrastructure projects throughout Asia.
+[00:22.58]The area has a need for better roads and other infrastructure,
+[00:29.08]including ports and power supplies.
+[00:32.38]The Asian Development Bank, another organization,
+[00:37.14]was set up to reduce poverty in Asia and the Pacific.
+[00:42.81]It estimated last May that the Asia-Pacific area
+[00:47.30]needs about $800 billion a year in infrastructure development.
+[00:53.85]China reports that more than 20 countries
+[00:58.30]have agreed to be founding members
+[01:01.42]of the Asia Infrastructure Investment Bank, or AIIB.
+[01:08.35]Recently, some European powers added themselves to the list.
+[01:14.76]U.S. allies Britain, Germany, France and Italy have joined up.
+[01:21.94]So has South Korea.
+[01:24.66]And Australia has agreed to move forward with negotiations.
+[01:31.63]The United States, however,
+[01:34.16]has said it is concerned about the governance of the AIIB.
+[01:40.19]It has urged countries to consider the bank's standards,
+[01:45.02]its social and environmental policies, before joining.
+[01:50.92]Some observers say the United States
+[01:54.98]should join the bank as a founding member.
+[01:58.11]Asia expert Alejandro Reyes said
+[02:02.85]the way the U.S. has dealt with the bank shows outdated thinking.
+[02:08.70]Yet other observers have said it is unlikely the U.S. will do so.
+[02:15.21]The last day to become a founding member is March 31st.
+[02:20.97]Robert Kahn is a senior fellow at the Council on Foreign Relations.
+[02:28.04]He said U.S. officials are concerned
+[02:31.47]that the AIIB may be seeking to replace existing institutions,
+[02:37.80]such as the World Bank and Asian Development Bank.
+[02:43.44]"In a world with the better politics,
+[02:45.83]the United States would be joining this institution,
+[02:49.32]but because of the environment on the Hill (in Washington),
+[02:52.97]the United States is not only not in position
+[02:55.28]where it could join this institution and get it approved by Congress,
+[02:58.65]it cannot get even basic reform in the IMF through in a way
+[03:03.50]that would make the existing institutions more attractive to the rising powers."
+[03:08.42]The U.S. Congress has failed to approve reforms of voting rights
+[03:13.46]for the International Monetary Fund.
+[03:16.53]The delay has led China and other countries
+[03:20.69]to consider setting up their own institutions 
+[03:24.76]as a way to gain more influence in world economic governance.
+[03:30.54]Still, officials at the IMF, World Bank and Asian Development Bank
+[03:38.81]say they are looking for ways to cooperate with the AIIB.
+[03:45.47]U.S. officials say they welcome new multi-lateral institutions
+[03:52.34]that would observe high standards that the international community has built.
+[03:58.45]China says it will uphold high standards.
+[04:02.95]But most details will not become clear until the new bank is operational.
+[04:10.23]The bank is expected to start with $100 billion in capital, mostly from China.
+[04:19.42]Experts say it remains to be seen
+[04:23.32]how China will take on a leadership position in the AIIB
+[04:29.69]or whether it will work with existing organizations.
+[04:33.99]Tom Wright is director of the Project of International Order and Strategy
+[04:40.89]at the Brookings Institution in Washington, DC.
+[04:45.60]"This is not the end. It really is just [the] beginning
+[04:49.27]and especially the beginning of a new chapter for China.
+[04:52.15]It set up this bank, it said it is going to take a leadership position,
+[04:56.45]but huge questions still hang over how it is going to behave."
+[05:01.94]China considers itself in a good position
+[05:06.09]to carry out infrastructure projects in Asia.
+[05:09.62]However, it has depended on state-owned companies and labor when working overseas.
+[05:17.36]Using international labor standards rather than Chinese labor rules
+[05:24.31]would be a step forward, says economist Liu Li-gang of the ANZ Banking Group.
+[05:31.88]He says China should open up competition for bank-supported projects.
+[05:39.04]He said this will reduce criticism from often linked to Chinese foreign investment.
+[05:46.65]I'm Mario Ritter.
+[05:48.81]
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

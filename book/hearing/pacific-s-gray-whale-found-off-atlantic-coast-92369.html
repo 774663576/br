@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Pacific’s Gray Whale Found off Atlantic Coast</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Pacific’s Gray Whale Found off Atlantic Coast" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/pacific-s-gray-whale-found-off-atlantic-coast.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Pacific’s Gray Whale Found off Atlantic Coast</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/pacific-s-gray-whale-found-off-atlantic-coast.mp3" id="mp3"></a>
+<a href="/static/lrc/pacific-s-gray-whale-found-off-atlantic-coast.lrc" id="lrc"></a>
+<a href="new-data-suggests-jupiter-s-moon-europa-has-less-oxygen-than-expected-92367.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">11 March 2024</span><br/>
+<p>Scientists have confirmed the presence of a gray whale off New England in North America recently.</p>
+<p>The large sea animal disappeared from the Atlantic Ocean two centuries ago. The scientists are <strong>thrilled</strong> with the discovery but they say it shows the effects of climate change on sea life.</p>
+<p>Researchers with the New England Aquarium in Boston found the gray whale on March 1. At the time, they were flying about 48 kilometers south of Nantucket, an island off the coast of Massachusetts in the Atlantic. The whale, which can weigh over 27,000 kilograms, usually lives in the northern Pacific Ocean.</p><div class="contentImage"><img alt="This photo by Orla O'Brien shows a gray whale south of Nantucket, Massachusetts, on March 1, 2024. (Orla O'Brien/New England Aquarium via AP)" src="https://files.21voa.com/gdb/4df06435-4a5a-48fe-9f23-5371a5704f55_w268_r1.jpg"/><br/><span class="imagecaption">This photo by Orla O'Brien shows a gray whale south of Nantucket, Massachusetts, on March 1, 2024. (Orla O'Brien/New England Aquarium via AP)</span></div>
+<p>The gray whale disappeared from the Atlantic Ocean by the 18th century. But there have been five observations of the animal in the Atlantic and Mediterranean waters in the last 15 years, the aquarium said in a statement. The whale found this month was likely the same animal observed off the coast of Florida late last year, the aquarium said.</p>
+<p>The researchers who found the animal off Massachusetts said they were not sure at first. But after circling the area for 45 minutes, they were able to take photographs that confirmed it was a gray whale.</p>
+<p>"I didn't want to say out loud what it was, because it seemed <strong>crazy</strong>," said Orla O'Brien. She is a research scientist with the Anderson Cabot Center for Ocean Life at the New England Aquarium.</p>
+<p>Scientists said they were thrilled to see the animal, but its presence probably has to do with the warming of the planet. The Northwest Passage, which connects the Atlantic and Pacific oceans through the Arctic Ocean in Canada, has lacked ice in the summertime in recent years, they said.</p>
+<p>That means gray whales can travel through the passage in the summer when normally they would have been blocked, the scientists said. O'Brien said the animal's arrival off New England serves "as a reminder of how quickly <strong>marine species</strong> respond to climate change, given the chance."</p>
+<p>Gray whales were almost completely killed off by hunting during the years of <strong>commercial</strong> whaling. Today, the whales have recovered to the point that they are considered a species of "least concern" by the International Union for Conservation of Nature. The organization, however, considers the western population of whales that live off the coast of Asia to be endangered.</p>
+<p>They can be identified by the lack of a part of a body often seen on other whales: a dorsal fin. Also, they can be identified by their <strong>blotchy</strong> appearance which is different from the humpback and minke whales seen off New England. Gray whales can also be identified by the unusual sounds they make.</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Patrick Whittle reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>thrill </strong><em>– n. </em>a feeling of great excitement or happiness</p>
+<p><strong>crazy </strong><em>– adj. </em>very strange or unusual</p>
+<p><strong>marine </strong><em>– adj. </em>of or relating to the sea or the plants and animals that live in the sea</p>
+<p><strong>species </strong><em>– n. </em>a group of animals or plants that are similar and can produce young animals or plants</p>
+<p><strong>commercial </strong><em>– adj. </em>concerned with earning money</p>
+<p><strong>blotchy </strong><em>– n. </em>a usually dark-colored spot especially on the skin</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Pacific’s Gray Whale Found off Atlantic Coast]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Scientists have confirmed the presence
+[00:03.76]of a gray whale off New England
+[00:07.48]in North America recently.
+[00:11.68]The large sea animal disappeared
+[00:14.92]from the Atlantic Ocean two centuries ago.
+[00:20.76]The scientists are thrilled with the discovery
+[00:24.84]but they say it shows
+[00:26.76]the effects of climate change on sea life.
+[00:31.76]Researchers with the New England Aquarium in Boston
+[00:36.92]found the gray whale on March 1.
+[00:41.88]At the time, they were flying about
+[00:45.24]48 kilometers south of Nantucket,
+[00:49.20]an island off the coast of Massachusetts
+[00:53.92]in the Atlantic.
+[00:56.84]The whale, which can weigh over 27,000 kilograms,
+[01:02.88]usually lives in the northern Pacific Ocean.
+[01:08.08]The gray whale disappeared
+[01:10.16]from the Atlantic Ocean by the 18th century.
+[01:16.32]But there have been five observations of the animal
+[01:21.04]in the Atlantic and Mediterranean waters
+[01:25.72]in the last 15 years, the aquarium said in a statement.
+[01:33.04]The whale found this month
+[01:35.40]was likely the same animal
+[01:38.00]observed off the coast of Florida
+[01:41.20]late last year, the aquarium said.
+[01:45.84]The researchers who found the animal off Massachusetts
+[01:50.76]said they were not sure at first.
+[01:55.00]But after circling the area for 45 minutes,
+[01:59.48]they were able to take photographs
+[02:02.48]that confirmed it was a gray whale.
+[02:06.72]"I didn't want to say out loud what it was,
+[02:10.44]because it seemed crazy," said Orla O'Brien.
+[02:16.80]She is a research scientist
+[02:19.44]with the Anderson Cabot Center for Ocean Life
+[02:24.04]at the New England Aquarium.
+[02:27.88]Scientists said they were thrilled to see the animal,
+[02:32.44]but its presence probably has to do
+[02:35.68]with the warming of the planet.
+[02:39.52]The Northwest Passage,
+[02:41.72]which connects the Atlantic and Pacific oceans
+[02:46.24]through the Arctic Ocean in Canada,
+[02:49.56]has lacked ice in the summertime
+[02:52.52]in recent years, they said.
+[02:56.88]That means gray whales
+[02:58.64]can travel through the passage in the summer
+[03:01.88]when normally they would have been blocked,
+[03:05.24]the scientists said.
+[03:08.60]O'Brien said the animal's arrival off New England
+[03:13.28]serves "as a reminder of how quickly marine species
+[03:18.60]respond to climate change, given the chance."
+[03:23.72]Gray whales were almost completely killed off
+[03:27.24]by hunting during the years of commercial whaling.
+[03:32.96]Today, the whales have recovered to the point
+[03:36.68]that they are considered a species of "least concern"
+[03:41.48]by the International Union
+[03:44.48]for Conservation of Nature.
+[03:48.64]The organization, however,
+[03:51.08]considers the western population of whales
+[03:54.96]that live off the coast of Asia to be endangered.
+[04:01.00]They can be identified by the lack of a part of a body
+[04:06.36]often seen on other whales: a dorsal fin.
+[04:11.44]Also, they can be identified
+[04:14.32]by their blotchy appearance
+[04:17.12]which is different from the humpback
+[04:19.96]and minke whales seen off New England.
+[04:24.68]Gray whales can also be identified
+[04:27.92]by the unusual sounds they make.
+[04:32.64]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

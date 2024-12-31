@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Talking Stormy Weather</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Talking Stormy Weather" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202210/talking-stormy-weather.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Talking Stormy Weather</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202210/talking-stormy-weather.mp3" id="mp3"></a>
+<a href="reviewing-your-favorite-character-description-89759.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">07 October 2022</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question from VSRC Murthy in India about some stormy weather.</p>
+<p><strong>Question:</strong></p>
+<p>Hello VOA Learning English,</p><div class="contentImage"><img alt="Ask a Teacher: Talking Stormy Weather " src="https://files.21voa.com/gdb/03990000-0aff-0242-6453-08daa70105ae_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Talking Stormy Weather </span></div>
+<p>I have a question about the differences and similarities among these words: "hurricanes," "typhoons," "tornadoes," "cyclones," and "thunderstorms."</p>
+<p>Thank you,</p>
+<p>VSRC Murthy from Hyderabad, India.</p>
+<p><strong>Answer:</strong></p>
+<p>Thank you, VSRC Murthy! Your question is timed well. Powerful storms have been in the news recently, from a hurricane that hit the southern United States to a typhoon that blew into the Philippines, Vietnam and Thailand.</p>
+<p>Which word you might use to describe a storm often depends on where you are in the world. Let's start with hurricane.</p>
+<p>Merriam-Webster Dictionary says that word means a tropical cyclone with winds of 119 kilometers an hour or greater, and usually including rain, thunder, and lightning. The term is used for such storms in the North Atlantic Ocean down to the Caribbean Sea.</p>
+<p>Typhoons are the same kind of powerful ocean storm, or cyclone, but that term is used for storms in the Northwest Pacific Ocean.</p>
+<p>In the South Pacific and Indian Ocean, these storms are more commonly called tropical cyclones.</p>
+<p>All of these storms are considered cyclones because they <strong>rotate </strong>or move in a circular motion across <strong>tropical</strong> or subtropical warm waters.</p>
+<p>You may have heard names like "tropical depression" or "tropical storm" in news coverage of hurricanes and the like. These kinds of storms can lead to a hurricane or typhoon depending on the speed of the winds.</p>
+<p>A storm with winds below 62.7 kilometers per hour is a "tropical depression." If the winds are from 62.7 to 118 kilometers per hour, the storm is called a "tropical storm." And lastly, anything over 119 kilometers per hour is consider a hurricane, typhoon, or cyclone.</p>
+<p>Hurricanes and typhoons include thunderstorms and storm<strong> surges </strong>from ocean water that can lead to coastal flooding.</p>
+<p>Thunderstorms are heavy rainstorms in which you can hear <strong>thunder</strong>. During thunderstorms, winds are strong and there is always lightning. You can find thunderstorms in different parts of the world, not just in the tropics.</p>
+<p>When thunderstorms become severe with intense winds, tornadoes can form. Tornadoes are narrow storms that start in a thunderstorm and touch the ground. They are very violent and destructive.</p>
+<p>Here are a few examples of how we can use these words in sentences:</p>
+<p>Hurricane season in the Atlantic Ocean is from June through the end of November.</p>
+<p>Typhoon Noru quickly strengthened into a super typhoon last week with winds up to 175 kilometers per hour.</p>
+<p>Often in the summer, thunderstorms form in the afternoons bringing heavy rain and lightning.</p>
+<p>Tornado <strong>Alley</strong> is an area in the central United States where tornadoes happen often.</p>
+<p> </p>
+<p>Please let us know if these examples and explanations have helped you, <strong>VSRC Murthy! </strong></p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>rotate</strong> – <em>v</em>. to turn or cause something to turn in a circle<strong> </strong></p>
+<p><strong>tropical </strong><em>– adj. </em>of or occurring in the tropics</p>
+<p><strong>surge</strong> <em>– n</em><strong>. </strong>an abnormal rise in the level of the sea along a coast caused by the onshore winds of a severe cyclone</p>
+<p><strong>thunder </strong>– <em>n</em>. the loud sound that comes from lightening in the sky</p>
+<p><strong>alley </strong><em>– n.</em> a narrow street or passage</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

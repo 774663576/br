@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 气候变化改变驯鹿生存方式</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 气候变化改变驯鹿生存方式" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/as-climate-changes-herders-feed-reindeer.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>气候变化改变驯鹿生存方式</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/as-climate-changes-herders-feed-reindeer.mp3" id="mp3"></a>
+<a href="/static/lrc/as-climate-changes-herders-feed-reindeer.lrc" id="lrc"></a>
+<a href="as-climate-changes-herders-feed-reindeer-92503.html" id="CnPage" target="_blank"></a>
+<a href="is-it-real-or-bogus-92502.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>As he drives slowly across snow, Nils Mathis Sara drops food on the ground for hundreds of his reindeer to eat. His animals live in Finnmark, the northernmost point of Norway.<br/>
+当尼尔斯·马蒂斯·萨拉慢慢驶过雪地，他把食物扔在地上，喂养他的数百只驯鹿。他的这些动物生活在挪威最北端的芬马克。</p>
+<p>But Sara wishes he did not have to feed them.<br/>
+但萨拉希望他用不着喂它们。</p>
+<p>"This is an emergency situation," said the 65-year-old Sara. "I am not supposed to feed them. They are supposed to feed me."<br/>
+“这是紧急情况，”65岁的萨拉说。“不应该是我喂它们，应该是它们养活我。”</p>
+<p>Sara is Sami, an ethnic group native to the northern areas of Norway, Sweden, Finland, and the Kola peninsula of Russia.<br/>
+萨拉是萨米人，这是一个在挪威、瑞典、芬兰和俄罗斯科拉半岛北部地区土生土长的民族。</p>
+<p>Normally, the reindeer find their own food. They dig through the snow to reach small plants, called lichen, buried below.<br/>
+通常情况下，驯鹿会自己寻找食物。他们刨开积雪，找到埋在下面的被称为地衣的小植物。</p>
+<p>But every winter for the past ten years, Sara has had to buy food to help the animals live through the cold season. Winter temperatures in the area can drop to as low as minus 40 degrees Celsius.<br/>
+但在过去十年的每年冬天，萨拉都不得不购买食物来帮助它们度过寒冷的季节。该地区的冬季气温可能降至零下40摄氏度。</p>
+<p>Until recently, only snow fell during the winter months in Finnmark. But in recent years, the weather has been warmer, with temperatures sometimes rising above freezing. That means rain, instead of snow, falls on the ground. Then, when the temperature drops, that water turns to ice.<br/>
+就在前些年，芬马克的冬季只有雪。但近年来天气变暖，气温有时会升至冰点以上。这意味着下的是雨而不是雪。然后，当温度下降时，落下的雨水就会结冰。</p>
+<p>The thick ice makes it difficult for the reindeer to reach the lichen. "It is especially hard for the younger reindeer, as their hooves are not strong enough to break through," Sara said.<br/>
+厚厚的冰使驯鹿很难够到地衣。萨拉说：“这对幼小的驯鹿来说尤其困难，因为它们的蹄不够强壮，无法刨开冰层。”</p>
+<p>One morning in March, Sara and a family member put down about one and a half metric tons of food for the reindeer. The two men have been doing the same thing every other day since February.<br/>
+三月的一个早晨，萨拉和一位家人为驯鹿放下了大约1.5公吨的食物。自二月份以来，这两个人每隔一天就会做同样的事情。</p>
+<p>"I should really be doing this every day, but economically it does not make sense," said Sara.<br/>
+萨拉说：“我真的应该每天都这样做，但从经济角度来说，这没有意义。”</p>
+<p>Feeding the animals can also bring unexpected results.<br/>
+喂养动物也会带来意想不到的结果。</p>
+<p>Later that day, Sara sees hundreds of reindeer in his reindeer feeding area. But, the reindeer do not belong to him.<br/>
+当天晚些时候，萨拉在他的驯鹿饲养区看到了数百头驯鹿。但是，这些驯鹿不是他家的。</p>
+<p>Sara quickly drives over to the herder of the other reindeer. He asks the herder to move the animals out of the area. The reindeer had come to Sara's area because of the smell of the food Sara had put on the ground.<br/>
+萨拉迅速开车去这些驯鹿的牧民家。他要求该牧民把驯鹿赶出这个地区。这些驯鹿来到萨拉所在的地区，是因为萨拉放在地上的食物散发出的气味。</p>
+<p>In addition, reindeer are semi-wild. Normally, herders follow the animals as they look for food under the snow. But feeding the animals makes them slowly become less wild and depend more on humans.<br/>
+此外，驯鹿是半野生的。通常情况下，牧民跟随驯鹿在雪下寻找食物。但喂养这些动物会使它们慢慢失去野性，从而更多地依赖人类。</p>
+<p>This makes the Sami people live more like farmers than herders. Sara says this goes against the Sami's traditional way of living.<br/>
+这使得萨米人的生活更像农民而不是牧民。萨拉说，这违背了萨米人的传统生活方式。</p>
+<p>"When we feed the reindeer, they change their behavior and become more accustomed to humans," Sara said. "This is not our way."<br/>
+萨拉说：“当我们喂养驯鹿时，它们会改变行为，变得更习惯人类。这不是我们的生活方式。”</p>
+<p>I'm Andrew Smith.<br/>
+我是安德鲁·史密斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:As Climate Changes, Herders Feed Reindeer]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]As he drives slowly across snow,
+[00:04.52]Nils Mathis Sara drops food on the ground
+[00:09.24]for hundreds of his reindeer to eat.
+[00:12.44]His animals live in Finnmark,
+[00:15.44]the northernmost point of Norway.
+[00:18.48]But Sara wishes he did not have to feed them.
+[00:23.08]"This is an emergency situation,"
+[00:26.96]said the 65-year-old Sara.
+[00:29.88]"I am not supposed to feed them.
+[00:32.80]They are supposed to feed me."
+[00:36.40]Sara is Sami, an ethnic group
+[00:39.92]native to the northern areas of
+[00:42.88]Norway, Sweden, Finland,
+[00:45.96]and the Kola peninsula of Russia.
+[00:50.00]Normally, the reindeer find their own food.
+[00:54.16]They dig through the snow to reach small plants,
+[00:58.68]called lichen, buried below.
+[01:02.04]But every winter for the past ten years,
+[01:06.24]Sara has had to buy food
+[01:09.36]to help the animals live through the cold season.
+[01:14.68]Winter temperatures in the area
+[01:17.24]can drop to as low as minus 40 degrees Celsius.
+[01:22.28]Until recently, only snow fell
+[01:26.56]during the winter months in Finnmark.
+[01:29.52]But in recent years, the weather has been warmer,
+[01:33.92]with temperatures sometimes rising above freezing.
+[01:39.88]That means rain, instead of snow,
+[01:43.08]falls on the ground.
+[01:44.92]Then, when the temperature drops,
+[01:48.36]that water turns to ice.
+[01:52.04]The thick ice makes it difficult
+[01:54.52]for the reindeer to reach the lichen.
+[01:58.08]"It is especially hard for the younger reindeer,
+[02:02.04]as their hooves are not strong enough
+[02:04.40]to break through," Sara said.
+[02:08.48]One morning in March, Sara and a family member
+[02:12.96]put down about one and a half
+[02:15.40]metric tons of food for the reindeer.
+[02:20.00]The two men have been doing the same thing
+[02:23.20]every other day since February.
+[02:27.12]"I should really be doing this every day,
+[02:30.20]but economically it does not make sense," said Sara.
+[02:36.80]Feeding the animals can also bring unexpected results.
+[02:42.76]Later that day, Sara sees hundreds of reindeer
+[02:47.24]in his reindeer feeding area.
+[02:49.60]But, the reindeer do not belong to him.
+[02:55.12]Sara quickly drives over
+[02:57.20]to the herder of the other reindeer.
+[03:00.76]He asks the herder to move the animals out of the area.
+[03:06.24]The reindeer had come to Sara's area
+[03:09.56]because of the smell of the food
+[03:12.00]Sara had put on the ground.
+[03:15.24]In addition, reindeer are semi-wild.
+[03:19.12]Normally, herders follow the animals
+[03:22.76]as they look for food under the snow.
+[03:26.84]But feeding the animals makes them slowly become
+[03:30.76]less wild and depend more on humans.
+[03:36.56]This makes the Sami people live
+[03:39.56]more like farmers than herders.
+[03:42.20]Sara says this goes against
+[03:45.48]the Sami's traditional way of living.
+[03:49.36]"When we feed the reindeer,
+[03:51.40]they change their behavior
+[03:53.56]and become more accustomed to humans," Sara said.
+[03:59.64]"This is not our way."
+[04:02.40]I'm Andrew Smith. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

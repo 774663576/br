@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Argentine Town Struggles with Parrot Invasion</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Argentine Town Struggles with Parrot Invasion" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/argentine-town-struggles-with-parrot-invasion.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Argentine Town Struggles with Parrot Invasion</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/argentine-town-struggles-with-parrot-invasion.mp3" id="mp3"></a>
+<a href="short-corn-is-growing-stronger-in-us-midwest-93033.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By </span><br/><span class="datetime">03 October, 2024</span><br/>
+<p>The Argentine town of Hilario Ascasubi near the country's Atlantic coast has a problem not many places have ever had.</p>
+<p>It has too many parrots.</p>
+<p>Biologists say thousands of the green-yellow-and-red birds have invaded the town. These experts say deforestation has driven the birds' migration.</p><div class="contentImage"><img alt="Parrots stand on an switch box and cables in the town of Hilario Ascasubi in Argentina on September 23, 2024. (REUTERS/Agustin Marcarian)
+" src="https://files.21voa.com/gdb/4af06d18-356a-4d61-a1cd-6ca8e08d9c06_cx0_cy6_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Parrots stand on an switch box and cables in the town of Hilario Ascasubi in Argentina on September 23, 2024. (REUTERS/Agustin Marcarian)
+</span></div>
+<p>The problem is that the birds bite the town's electric <strong>cables</strong>. This is causing electricity outages. People living in the town are also unhappy about the birds' noise making and the birds' droppings, or waste that is getting everywhere.</p>
+<p>Daiana Lera is a biologist. She said much of Argentina's forestland has been lost over the years. As a result, the parrots are going into the cities.</p>
+<p>“The hillsides are disappearing, and this is causing them to come closer to the cities to find food, shelter and water,” Lera said.</p>
+<p>In the past few years, the parrots have started to arrive in the autumn and winter to seek refuge. Local people say, at times, there are up to 10 parrots for each of the town's 5,000 human <strong>inhabitants</strong>. Only during the summer do the birds migrate south to the <strong>cliffs</strong> of Patagonia for <strong>breeding</strong> season.</p>
+<p>Images show hundreds of birds <strong>perched</strong> on electric cables, buildings and churches.</p>
+<p>Ramón Alvarez is a local reporter for Radio Taxi Fm. About the parrots, he said, “They bite and damage the cables, water can get into the wires when it rains....”</p>
+<p>That affects Alvarez directly. “It goes without saying that when the power goes out, there is no radio,” he said.</p>
+<p>The locals have tried different methods to scare away the birds, such as noise and even laser light. But nothing has worked.</p>
+<p>“We need to start to restore our natural environments,” Lera said. “But until that happens, we have to think of strategies that allow us to live together in the most <strong>harmonious</strong> way possible in our towns.”</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Miguel Bianco and Agustin Marcarian reported this story for Reuters news agency. Mario Ritter, Jr. adapted it for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cable </strong><em>–n.</em> thick wires usually covered by plastic that carry electricity</p>
+<p><strong>inhabitant</strong> <em>–n. </em>a person who lives in a particular place or area</p>
+<p><strong>cliff</strong> <em>–n.</em> a high steep surface of rock, earth, or ice</p>
+<p><strong>breeding </strong><em>–adj.</em> the producing and raising of plants or animals by sexual reproduction</p>
+<p><strong>perch </strong><em>–v.</em> to sit or stand on a high place, especially for birds</p>
+<p><strong>harmonious </strong><em>–adj.</em> <strong> </strong>marked by agreement in feeling or action; agreeable</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 2015年重要商业新闻回顾</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 2015年重要商业新闻回顾" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/top-business-stories-in-2015.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>2015年重要商业新闻回顾</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/top-business-stories-in-2015.mp3" id="mp3"></a>
+<a href="/static/lrc/top-business-stories-in-2015.lrc" id="lrc"></a>
+<a href="top-business-stories-in--67075.html" id="CnPage" target="_blank"></a>
+<a href="man-is-rescue-china-large-landslide-67062.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>As 2015 comes to a close, here are some of the top business stories of the year:<br/>随着2015年的结束，以下是一些今年最重要的商业新闻。</p>
+<p>The Trans-Pacific Partnership (TPP) created the world's largest free-trade zone among 12 nations around the Pacific.<br/>跨太平洋伙伴关系（TPP）在12个环太平洋国家中创建了全球最大的自由贸易区。</p>
+<p>Together, they account for $28.5 trillion in combined gross domestic product, or 40 percent of the world's economic output. The TPP spans four continents and 800 million people. The agreement aims to strengthen economic ties, cut tariffs and foster trade among the member countries.<br/>这些国家加起来国民生产总值达到28.5万亿美元，相当于全球经济总量的40%。跨太平洋伙伴关系横跨四大洲和8亿人口。该协议希望在成员国之间加强经济联系，降低关税和促进贸易。</p>
+<p>The 12 nations involved are the U.S., Japan, Malaysia, Vietnam, Singapore, Brunei, Australia, New Zealand, Canada, Mexico, Chile and Peru.<br/>协议涉及的12个国家包括美国、日本、马来西亚、越南、新加坡、文莱、澳大利亚、新西兰、加拿大、墨西哥、智利以及秘鲁。</p>
+<p>The TPP is a counterweight to China's growing economic power globally.<br/>跨太平洋伙伴协议是为了抗衡中国日益成为全球化的经济大国。</p>
+<p>This year, the International Monetary Fund (IMF) selected China's yuan to be in the group of top global currencies. Experts said this showed a declining role for Europe in global financial markets, and an increasing role for China. It is the world's second-largest economy.<br/>今年，国际货币基金组织将人民币加入全球重要货币篮子。专家表示，这表明欧洲在全球金融市场的作用有所下降，以及中国作用的增强。中国是全球第二大经济体。</p>
+<p>China had an economic slowdown in the third quarter, but analysts disagreed over its scope. There is a lack of transparency in the economic data that China provides to the rest of the world.<br/>第三季度中国经济有所放缓，但是分析师不认同其放缓范围。中国在向其它国家提供的经济数据上缺乏透明度。</p>
+<p>China also set up the Asian Infrastructure Investment Bank (AIIB). It is an international development bank with 57 countries participating. China will use the new bank to expand its global influence in Asia and compete with the World Bank in Washington, D.C.<br/>中国还创建了亚洲基础设施投资银行。这是一家有着57个国家参与的国际开发银行。中国将利用这一新的银行扩大其在亚洲的全球影响力，并同总部位于华盛顿的世界银行展开竞争。</p>
+<p><strong>Greek bailout<br/>希腊援助计划</strong></p>
+<p>The huge bailout of the Greek economy was another big story this year. The International Monetary Fund (IMF), the European Commission (EC) and the European Central Bank (ECB) issued $97.6 billion to avoid a Greek bankruptcy.<br/>对希腊经济的大规模援助是今年另一大新闻。国际货币基金组织、欧盟委员会和欧洲央行提供了976亿美元以避免希腊破产。</p>
+<p>It was feared that if Greece failed to pay its debt and left the Eurozone, it would cause a global financial crisis. In exchange for the bailout, the lenders demanded major economic reforms from Greece. Despite these measures, the Greek economy has shrunk by a quarter in five years, and unemployment is above 25 percent.<br/>人们担心希腊无法偿付其债务并退出欧元区，这将会造成全球性的经济危机。作为援助的交换条件，借贷方要求希腊进行重大经济改革。尽管采取了这些措施，希腊经济五年来还是缩水了四分之一，而失业率超过了25%。</p>
+<p><strong>Volkswagen admits to lying<br/>大众汽车承认作欺骗</strong></p>
+<p>Volkswagen, Europe's largest automaker, was hit by scandal. The German automaker admitted to lying about carbon dioxide emissions from its cars. VW installed software that fooled regulators into thinking the cars emitted less pollution than they did.<br/>欧洲最大的汽车制造商大众汽车受到丑闻冲击。这家德国汽车制造商承认在该公司汽车的二氧化碳排放量上作弊。大众汽车安装了软件欺骗监管人员，让他们以为这些汽车的污染排放低于实际排放。</p>
+<p>The cars gave off up to nine times more pollution than the amount allowed by the U.S. government. In September, Volkswagen admitted that up to 11 million cars globally could have the misleading devices. Bringing all these vehicles into compliance with pollution regulations will be one of the most complex and costly fixes in automotive history.<br/>这些汽车的污染排放量高达美国政府允许的9倍以上。今年九月份，大众汽车公司承认全球范围内有多达1100万辆汽车可能安装了这种误导性设备。让所有这些汽车符合污染排放规定将是汽车历史上最为复杂和昂贵的修复方案。</p>
+<p><strong>U.S. Fed raises interest rate<br/>美联储加息</strong></p>
+<p>Lastly, in the face of an improving economy, the U.S. Federal Reserve raised the key interest rate for the first time in seven years. The rate increase was just ¼ of a point. During the financial crisis of 2007 and 2008, the Federal Reserve cut the key interest rate to almost zero for the past seven years.<br/>最近随着经济改善，美联储七年来首次上调了基准利率。该利率只提高了0.25个百分点。在2007和2008年的金融危机期间，美联储将过去七年的基准利率下调到0。</p>
+<p>This was done to flood the economy with cheap money and boost hiring. Since the start of the Great Recession, unemployment has fallen from 10 percent to 5 percent.<br/>这样做是为了给经济注入低廉成本的资金并推动招聘。自从那次大萧条开始，失业率已经从10%下降到5%。</p>
+<p>And those are some of the top business and economic stories from 2015.<br/>以上就是2015年一些最为重要的商业和经济新闻。</p>
+<p>I'm Mary Gotschall.<br/>我是玛丽·歌切尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]As 2015 comes to a close,
+[00:03.36]here are some of the top business stories of the year:
+[00:06.96]The Trans-Pacific Partnership (TPP) created the world's largest free-trade zone
+[00:12.32]among 12 nations around the Pacific.
+[00:15.88]Together, they account for $28.5 trillion
+[00:20.84]in combined gross domestic product,
+[00:23.44]or 40 percent of the world's economic output.
+[00:29.12]The TPP spans four continents and 800 million people.
+[00:34.72]The agreement aims to strengthen economic ties,
+[00:39.08]cut tariffs and foster trade among the member countries.
+[00:44.80]The 12 nations involved are the U.S., Japan, Malaysia, Vietnam,
+[00:53.36]Singapore, Brunei, Australia, New Zealand, Canada, Mexico, Chile and Peru.
+[01:03.96]The TPP is a counterweight to China's growing economic power globally.
+[01:11.32]This year, the International Monetary Fund (IMF)
+[01:14.84]selected China's yuan to be in the group of top global currencies.
+[01:20.68]Experts said this showed a declining role for Europe in global financial markets,
+[01:28.00]and an increasing role for China.
+[01:31.20]It is the world's second-largest economy.
+[01:35.24]China had an economic slowdown in the third quarter,
+[01:39.24]but analysts disagreed over its scope.
+[01:43.44]There is a lack of transparency in the economic data
+[01:47.36]that China provides to the rest of the world.
+[01:51.92]China also set up the Asian Infrastructure Investment Bank (AIIB).
+[01:57.44]It is an international development bank
+[02:00.28]with 57 countries participating.
+[02:03.96]China will use the new bank to expand its global influence in Asia
+[02:09.88]and compete with the World Bank in Washington, D.C.
+[02:14.44]The huge bailout of the Greek economy was another big story this year.
+[02:21.04]The International Monetary Fund (IMF), the European Commission (EC)
+[02:25.52]and the European Central Bank (ECB) issued $97.6 billion
+[02:31.04]to avoid a Greek bankruptcy.
+[02:34.60]It was feared that if Greece failed to pay its debt
+[02:38.36]and left the Eurozone, it would cause a global financial crisis.
+[02:44.60]In exchange for the bailout, the lenders demanded major economic reforms from Greece.
+[02:51.72]Despite these measures, the Greek economy has shrunk by a quarter in five years,
+[02:58.40]and unemployment is above 25 percent.
+[03:02.84]Volkswagen, Europe's largest automaker, was hit by scandal.
+[03:08.40]The German automaker admitted to lying about carbon dioxide emissions from its cars.
+[03:15.64]VW installed software that fooled regulators into thinking the cars
+[03:22.00]emitted less pollution than they did.
+[03:25.80]The cars gave off up to nine times more pollution
+[03:29.76]than the amount allowed by the U.S. government.
+[03:33.56]In September, Volkswagen admitted that up to 11 million cars globally
+[03:39.56]could have the misleading devices.
+[03:42.44]Bringing all these vehicles into compliance
+[03:45.64]with pollution regulations will be one of the most complex
+[03:50.56]and costly fixes in automotive history.
+[03:55.40]Lastly, in the face of an improving economy,
+[03:59.36]the U.S. Federal Reserve raised the key interest rate
+[04:03.56]for the first time in seven years.
+[04:06.88]The rate increase was just ? of a point.
+[04:11.48]During the financial crisis of 2007 and 2008,
+[04:16.36]the Federal Reserve cut the key interest rate to almost zero for the past seven years.
+[04:23.52]This was done to flood the economy with cheap money and boost hiring.
+[04:29.36]Since the start of the Great Recession,
+[04:32.24]unemployment has fallen from 10 percent to 5 percent.
+[04:36.96]And those are some of the top business and economic stories from 2015.
+[04:42.76]I'm Mary Gotschall.
+[04:44.68]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

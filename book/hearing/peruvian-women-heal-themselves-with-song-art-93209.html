@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Peruvian Women Heal Themselves with Song, Art</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Peruvian Women Heal Themselves with Song, Art" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/peruvian-women-heal-themselves-with-song-art.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Peruvian Women Heal Themselves with Song, Art</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/peruvian-women-heal-themselves-with-song-art.mp3" id="mp3"></a>
+<a href="notes-about-being-93208.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">06 December, 2024</span><br/>
+<p>The 36-year-old Peruvian artist Sadith Silvano makes creations born of ancient songs.</p>
+<p>Brush in hand, eyes on the cloth, the Peruvian woman paints as she sings. And through her voice, her ancestors speak.</p>
+<p>“When we paint, we listen to the inspiration that comes from the music and connect to nature, to our elders,” said Silvano.</p><div class="contentImage"><img alt="Sadith Silvano, from Paoyhan, a Shipibo-Konibo Indigenous community in the Amazon, puts on an earring at her home and workshop where she hand-paints textiles in Lima, Peru, Saturday, Oct. 19, 2024. (AP Photo/Guadalupe Pardo)" src="https://files.21voa.com/gdb/0c0d2e78-757b-4beb-8d0f-15b030e4ebda_w268_r1.jpg"/><br/><span class="imagecaption">Sadith Silvano, from Paoyhan, a Shipibo-Konibo Indigenous community in the Amazon, puts on an earring at her home and workshop where she hand-paints textiles in Lima, Peru, Saturday, Oct. 19, 2024. (AP Photo/Guadalupe Pardo)</span></div>
+<p>The artist now lives and works in Lima, Peru, where she moved 20 years ago from Paoyhan. It is a Shipibo-Konibo Indigenous community located in the Amazon.</p>
+<p>“These pieces are sacred,” she added. “We bless our work with the energy of our songs.”</p>
+<p>Official data says close to 33,000 Shipibo-Konibo people live in Peru. They are believed to come from the surroundings of the Uyacali river. Many moved to urban areas like Cantagallo, the Lima neighborhood where Silvano lives.</p>
+<p>Hand-painted textiles like the ones she makes have slowly gained recognition. Known as “kené,” these works were declared part of the “Cultural Heritage of the Nation” by the Peruvian government in 2008.</p>
+<p>Each kené is special, Shipibo craftswomen say. Every design speaks of a woman's community, her worldview and beliefs.</p>
+<p>“Every design tells a story,” Silvano said while dressed in traditional clothing. “It is a way in which a Shipibo woman distinguishes herself.”</p>
+<p>Paoyhan, where Silvano was born, is far from Lima. To get there requires an airplane flight and a 12-hour boat trip.</p>
+<p>In her hometown, locals rarely speak languages other than Shipibo. Doors and windows there have no locks.</p>
+<p>Adela Sampayo, a 48-year-old healer who was born not too far from Paoyhan, moved to Cantagallo in 2000.</p>
+<p>But she says that all her skills come from the Amazon River area.</p>
+<p>“Since I was a little girl, my mom treated me with traditional medicine,” said Sampayo. “She gave me plants to become stronger, to avoid getting sick, to be courageous,” she added. “That's how the energy of the plants started growing inside me.”</p>
+<p>Sampayo, too, communicates her worldview through her textiles. Though she does not paint, she embroiders, and each thread tells a tale from home.</p>
+<p>“Each plant has a spirit,” said the healer, pointing to the leaves embroidered in the cloth. “And medicinal plants come from God.”</p>
+<p>The plants painted by Silvano also bear meaning. One of them represents pure love. Another represents a wise man. And another, a serpent.</p>
+<p>“The anaconda is special for us,” Silvano said. “It's our protector, like a god that cares for us and provides food and water.”</p>
+<p>In ancient times, she said, her people believed that the sun was their father, and the anacondas were their guardians. Colonization brought Catholicism and their worldview changed.</p>
+<p>“Nowadays we have different religions...but we respect our other beliefs too,” Silvano said.</p>
+<p>For many years, after her father took her to Lima hoping for a better future, she thought of her time in the jungle. Life in Paoyhan was not easy, but she learned to be strong at a young age.</p>
+<p>“When we encounter difficult times, we overcome them with our therapy: designing, painting, singing,” Silvano said. “We have a song that is melodic and heals our soul, and another one that is inspiring and brings us joy.”</p>
+<p>Few Shipibo girls are told to study or make a living of their own, Silvano said. Instead, they are taught to wait for a husband. And once married, they are taught to deal with problems, difficulties, or bad treatment.</p>
+<p>“Even though we suffer, people tell us: Take it, he's the father of your children. Take it, he is your husband,” Silvano said. “But deep inside, we are wounded. So what do we do? We sing.”</p>
+<p>The lesson is taught by mothers to daughters: If you are hurt at home, grab your cloth, your brush and leave. Go far away, alone, and sit. Connect with your kené and paint. And while you paint, sing.</p>
+<p>“That's our healing,” Silvano said. “Through our songs, our kenés, we are free.”</p>
+<p>I'm John Russell.</p>
+<p><em>Maria Teresa Hernandez reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>brush</strong> <em>– n</em>. a device with bristles typically set into a handle and used especially for painting</p>
+<p><strong>inspiration </strong><em>– n.</em> a divine influence or action on a person believed to qualify him or her to receive and communicate sacred revelation</p>
+<p><strong>sacred</strong> <em>– adj. </em>of or relating to religion, worthy of respect</p>
+<p><strong>courageous</strong> <em>–adj.</em> showing the ability to do difficult things</p>
+<p><strong>textile </strong><em>– n.</em> a woven or knit cloth</p>
+<p><strong>craftswoman</strong> <em>–n.</em> a woman who is skilled in a craft</p>
+<p><strong>distinguish </strong><em>– v. </em>to mark as separate or different</p>
+<p><strong>embroider</strong> <em>– v.</em> to decorate with needlework</p>
+<p><strong>anaconda<em> </em></strong><em>– n. </em>a large kind of constricting snake</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

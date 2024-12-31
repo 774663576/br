@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Plant a Tree That Will Last for Many Years</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Plant a Tree That Will Last for Many Years" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/plant-a-tree-that-will-last-for-many-years.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Plant a Tree That Will Last for Many Years</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/plant-a-tree-that-will-last-for-many-years.mp3" id="mp3"></a>
+<a href="researchers-develop-method-to-remove-carbon-from-ocean-90806.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">01 May 2023</span><br/>
+<p>This time of year, in the U.S., many people are thinking about their gardens and getting their land ready for warmer weather.</p>
+<p>Some people are thinking about planting flowers. Others want to plant trees.</p>
+<p>For those who love trees, there is a national day for tree planting, called Arbor Day. Arbor Day is observed on the last Friday in April. However, some states pick their own Arbor Day depending on their climate. The aim is to have the observance on the best day of the year to plant a tree.</p><div class="contentImage"><img alt="This image provided by Bugwood.org shows a street lined with sugar maple trees (Acer saccharum), the state trees of West Virginia. (John Ruter/University of Georgia/Bugwood.org via AP)" src="https://files.21voa.com/gdb/ba9e8810-5126-473f-82ce-58542061b339_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This image provided by Bugwood.org shows a street lined with sugar maple trees (Acer saccharum), the state trees of West Virginia. (John Ruter/University of Georgia/Bugwood.org via AP)</span></div>
+<p>When thinking about trees, remember that they will usually live many years longer than the people who plant them.</p>
+<p>One gardening expert who spoke to the Associated Press says it is important to make good choices today if you are considering planting trees for tomorrow.</p>
+<p>Daniel Herms is an insect expert who centers his research on how trees respond to <strong>stress</strong>. He works for Davey Tree Expert Co., a landscaping business in the Midwestern state of Ohio. The company creates and cares for gardens, lawns and properties.</p>
+<p>"Things are changing faster than the lifespan of trees," he said.</p>
+<p>That means the weather and the kinds of insects that live in an area today – may be different in 20 or 30 years. However, many trees can live for 50 years or more.</p>
+<p>That means people who plant trees today have to think about the results of their choices tomorrow.</p>
+<p>Herms said some trees will <strong>thrive</strong> and some will not over the next 20 or 30 years "depending on the <strong>traits</strong> that make them <strong>adapt</strong> to the changing climate."</p>
+<p>So, how do you choose a good tree?</p>
+<p>One way to do it might be to choose the "state" tree where you live. However, Herms said, some state trees no longer thrive in their own states.</p>
+<p>For example, the state trees of California are the very large redwoods and sequoias. They are two of the largest and tallest trees in the world.</p>
+<p>However, the trees grew that way along the Northern California coast because of the <strong>moisture</strong> in the air that comes from the ocean. The wet air is called fog. Herms said there is less fog along the coast of California because of climate change. In the future, the sequoias and redwoods may not grow as well, he warned.</p>
+<p>Other state trees are in the same situation. Herms said they could do well in other places, but they are not certain to live long lives in their "home" states. They include the blue spruce of Colorado, the Western white pine of Idaho, the Eastern white pine of Maine and West Virginia's sugar maple.</p>
+<p>But if you have a tree growing on your land that is now <strong>vulnerable</strong>, Herms said it is not necessary to remove it. You just have to take care of it.</p>
+<p>"In most cases, it can continue to grow...with a proactive healthcare program," Herms said. Proactive means making sure conditions are good for the growth and health of the tree. That includes giving the tree proper water if it is drier where you live today than when you planted the tree. In addition, you can add nutrients to the soil to make sure the tree stays healthy. A trained arborist – a person who knows how to care for trees – can help.</p>
+<p>People are concerned about keeping trees healthy not only because they look good when they grow. Trees produce oxygen, they provide shade and cooling during hot weather, and they reduce water runoff. Runoff is water that comes during storms that is not <strong>absorbed</strong> into the ground.</p>
+<p>Herms said that trees also trap carbon, "so they can contribute to climate goals." In fact, trees need carbon dioxide to grow.</p>
+<p>Even if you do not live in the U.S., you can still join in celebrating trees. If you are thinking of planting a tree this year, Herms suggests choosing a tree that will do well even if your area gets a little bit warmer as the tree grows. Check with a local college or university if you need some help finding this information. If your city has an arboretum, a place that grows and cares for trees, there is likely someone there who can help.</p>
+<p>Here is some basic information about planting trees. First, dig a hole as deep and twice as large as the tree's <strong>root</strong> ball. Then add a generous amount of <strong>compost</strong> as extra material into the soil as you fill the hole. Water the tree for at least its first three years. Herms said young trees need at least 2.5 centimeters of water each week. That can come from rain or extra water you provide.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by Jessica Damiano of the Associated Press.</em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>stress</strong> <em>–n. </em>a state of tension or difficulty</p>
+<p><strong>thrive </strong>–v. to live well</p>
+<p><strong>trait </strong>–n. a quality that something has which makes it different from other things</p>
+<p><strong>adapt </strong>–v. to change to deal with new conditions or pressures</p>
+<p><strong>moisture </strong>–n. the amount of water present in something</p>
+<p><strong>vulnerable </strong>–adj. in danger of being hurt or damaged</p>
+<p><strong>absorb </strong>–v. to take in a liquid, such as water</p>
+<p><strong>root </strong>–n. the part of a plant or tree that is below the ground and that takes in nutrients from the soil</p>
+<p><strong>compost </strong>–n. organic material used to enrich soil and cover the ground for growing plants</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

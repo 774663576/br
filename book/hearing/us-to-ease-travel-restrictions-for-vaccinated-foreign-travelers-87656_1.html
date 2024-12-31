@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国放宽对已完全接种疫苗的国际旅客的旅行限制</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 美国放宽对已完全接种疫苗的国际旅客的旅行限制" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202109/us-to-ease-travel-restrictions-for-vaccinated-foreign-travelers.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国放宽对已完全接种疫苗的国际旅客的旅行限制</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202109/us-to-ease-travel-restrictions-for-vaccinated-foreign-travelers.mp3" id="mp3"></a>
+<a href="/static/lrc/us-to-ease-travel-restrictions-for-vaccinated-foreign-travelers.lrc" id="lrc"></a>
+<a href="us-to-ease-travel-restrictions-for-vaccinated-foreign-travelers-87656.html" id="CnPage" target="_blank"></a>
+<a href="year-old-sisters-from-japan-become-oldest-twins-87655.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The United States has issued new travel policies that will permit vaccinated international travelers from 33 nations to fly into the country.<br/>
+美国发布了新的旅行政策，允许来自33个国家的已接种疫苗的国际旅客飞往该国。
+<p>The new rules, set to take effect in early November, were announced Monday by the administration of President Joe Biden.<br/>
+拜登政府周一宣布了这项新规定，它将于11月初正式生效。</p>
+<p>Under the rules, all adult foreign air travelers to the U.S. must be fully vaccinated against COVID-19 before they can board a flight. This is in addition to the current requirement that travelers show proof of a negative COVID-19 test carried out within 72 hours of departure to the U.S.<br/>
+根据规定，所有前往美国的成年外国航空旅客必须在登机前完全接种疫苗。这是对目前要求前往美国的旅客出示登机前72小时内新冠肺炎检测阴性证明的补充。</p>
+<p>The new policies cover travelers from 26 European nations including France, Germany, Italy, Spain, Switzerland and Greece. The rules will also permit conditional U.S. entry to flyers from Britain, Ireland, China, India, South Africa, Iran and Brazil.<br/>
+这项新政策涵盖来自26个欧洲国家的旅客，其中包括法国、德国、意大利、西班牙、瑞士和希腊。该规定还将允许来自英国、爱尔兰、中国、印度、南非、伊朗和巴西的航空旅客有条件地入境美国。</p>
+<p>The administration of former U.S. President Donald Trump first placed COVID-19-related travel restrictions on air travelers from China in January 2020. These were later extended to many other countries.<br/>
+前总统川普领导的美国政府于2020年1月对中国航空旅客首次实施了与新冠肺炎相关的旅行限制。这些限制后来扩展到了其它许多国家。</p>
+<p>The United States has permitted foreign air travelers from more than 150 countries throughout the coronavirus pandemic. Some experts criticized that policy, as it included nations with high COVID-19 rates.<br/>
+在整个新冠病毒大流行期间，美国允许了来自150多个国家的国际航空旅客入境。一些专家批评这项政策，因为它包括了新冠肺炎发病率很高的国家。</p>
+<p>The new rules affect almost all foreigners flying to the U.S.<br/>
+这项新规定几乎影响到了所有飞往美国的外国人。</p>
+<p>The new policy also affects unvaccinated Americans traveling to the U.S. Now, they must be tested for COVID-19 within a day of travel. They must show proof of the test and its result. And, they have to show proof of purchase of a virus test they are required to take after entering the U.S.<br/>
+新政策也影响到了未接种疫苗的美国人回国。现在，他们必须在旅行前24小时内接受新冠肺炎检测。他们必须出示检测证明及其结果。而且，他们还得出示一项入境美国后必须要做的病毒检测的购买证明。</p>
+<p>The U.S. Centers for Disease Control and Prevention (CDC) says the government will accept full vaccination of travelers with any COVID-19 vaccine approved for emergency use by the World Health Organization (WHO). This includes the vaccines from Pfizer, Moderna and Johnson &amp; Johnson.<br/>
+美国疾控与预防中心表示，政府将承认旅客完全接种世卫组织批准紧急使用的任何新冠肺炎疫苗。这其中包括辉瑞、莫德纳和强生公司的疫苗。</p>
+<p>Other WHO-approved vaccines will also be accepted. These include AstraZeneca and China's Sinovac. The WHO is reviewing Russia's Sputnik V vaccine, but has not yet approved it.<br/>
+其它世卫组织批准的疫苗也将被认可。其中包括阿斯利康疫苗和中国的科兴疫苗。世卫组织正在审查俄罗斯的卫星V疫苗，但是尚未批准该疫苗。</p>
+<p>Separately on Monday, the United States extended pandemic restrictions at land borders with Canada and Mexico. Those rules bar nonessential travel through October 21. Officials did not say if the new vaccination rule for air travel would also be established at border crossings on land.<br/>
+同样是在周一，美国延长了与加拿大以及墨西哥陆地边境的大流行限制。这些规定禁止在10月21日之前进行非必要旅行。官员们没有说明是否会在陆地过境点制定类似航空旅客的疫苗接种新规。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US to Ease Travel Restrictions for Vaccinated Foreign Travelers]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The United States has issued new travel policies
+[00:04.92]that will permit vaccinated international travelers
+[00:09.92]from 33 nations to fly into the country.
+[00:15.44]The new rules, set to take effect in early November,
+[00:20.04]were announced Monday by the administration of President Joe Biden.
+[00:27.24]Under the rules, all adult foreign air travelers
+[00:31.76]to the U.S. must be fully vaccinated against COVID-19
+[00:37.96]before they can board a flight.
+[00:41.12]This is in addition to the current requirement
+[00:45.28]that travelers show proof of a negative COVID-19 test
+[00:50.72]carried out within 72 hours of departure to the U.S.
+[00:57.72]The new policies cover travelers from 26 European nations
+[01:04.08]including France, Germany, Italy, Spain, Switzerland and Greece.
+[01:12.80]The rules will also permit conditional U.S. entry to flyers
+[01:18.44]from Britain, Ireland, China, India, South Africa, Iran and Brazil.
+[01:27.84]The administration of former U.S. President Donald Trump
+[01:32.68]first placed COVID-19-related travel restrictions
+[01:37.80]on air travelers from China in January 2020.
+[01:44.12]These were later extended to many other countries.
+[01:49.44]The United States has permitted foreign air travelers
+[01:54.08]from more than 150 countries throughout the coronavirus pandemic.
+[02:00.08]Some experts criticized that policy,
+[02:04.40]as it included nations with high COVID-19 rates.
+[02:10.88]The new rules affect almost all foreigners flying to the U.S.
+[02:17.64]The new policy also affects unvaccinated Americans
+[02:22.84]traveling to the U.S.
+[02:25.52]Now, they must be tested for COVID-19 within a day of travel.
+[02:32.80]They must show proof of the test and its result.
+[02:38.00]And, they have to show proof of purchase of a virus test
+[02:43.16]they are required to take after entering the U.S.
+[02:48.00]The U.S. Centers for Disease Control and Prevention (CDC)
+[02:52.72]says the government will accept full vaccination of travelers
+[02:57.96]with any COVID-19 vaccine approved for emergency use
+[03:03.68]by the World Health Organization (WHO).
+[03:06.32]This includes the vaccines from Pfizer, Moderna and Johnson &amp; Johnson.
+[03:14.00]Other WHO-approved vaccines will also be accepted.
+[03:19.96]These include AstraZeneca and China's Sinovac.
+[03:26.52]The WHO is reviewing Russia's Sputnik V vaccine,
+[03:32.44]but has not yet approved it.
+[03:35.88]Separately on Monday, the United States extended pandemic restrictions
+[03:42.52]at land borders with Canada and Mexico.
+[03:47.88]Those rules bar nonessential travel through October 21.
+[03:55.44]Officials did not say if the new vaccination rule for air travel
+[04:01.16]would also be established at border crossings on land.
+[04:06.76]I'm Bryan Lynn.
+[04:09.16]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

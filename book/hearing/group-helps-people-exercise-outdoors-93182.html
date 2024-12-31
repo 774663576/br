@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Group Helps People Exercise Outdoors</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Group Helps People Exercise Outdoors" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/group-helps-people-exercise-outdoors.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Group Helps People Exercise Outdoors</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/group-helps-people-exercise-outdoors.mp3" id="mp3"></a>
+<a href="nations-agree-to-300-billion-deal-at-climate-talks-93181.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">26 November, 2024</span><br/>
+<p>From VOA Learning English, this is the Health &amp; Lifestyle report.</p>
+<p>In Edmonton, Alberta, the sun had yet to come up. The temperature was more than 20 degrees below zero. In the dark and cold, Tanis Smith was ready to run up and down hundreds of stairs among the trees in the Saskatchewan River Valley.</p>
+<p>And Smith was not alone. Ten people joined her for the activity. All were wearing several <strong>layers</strong> of clothing to keep warm.</p><div class="contentImage"><img (ap="" alt="In this May 25, 2016 photo, members of the running group " and="" andrew="" down="" friendship="" fun="" group="" harnik)"="" in="" keep="" lincoln="" memorial,="" moving.="" november="" of="" people="" photo="" project"="" run="" src="https://files.21voa.com/gdb/6822190d-518b-4cd8-9775-efd50b696af8_w268_r1.jpg" stairs="" the="" to="" up="" uses="" washington.=""/><br/><span class="imagecaption">In this May 25, 2016 photo, members of the running group "November Project" run up and down the stairs of the Lincoln Memorial, in Washington. The group uses fun and friendship to keep people moving. (AP Photo/Andrew Harnik)</span></div>
+<p>“You're pretty much just putting everything you own on,” said Smith, an accountant. “If you look at the pictures, you don't know who you are unless you remember what you were wearing.”</p>
+<p>Since that winter back in 2013, Smith has rarely missed a workout with a group called November Project.</p>
+<p>November Project is a network of free outdoor group exercise classes that started in Boston, Massachusetts. No matter the weather, members get out of bed before sunrise at least once a week and go outdoors for group exercise.</p>
+<p>November Project is part exercise, part fun, and part community. It is a model for exercising outdoors, especially in the winter.</p>
+<p>It started in 2011, when two friends agreed to exercise every morning for the month of November. They were looking for accountability and <strong>motivation</strong> to help them stick to an exercise <strong>routine</strong>.</p>
+<p>By the end of that first month, they had invited others to join them. Soon, their meetings were bringing in almost forty people. And it became a year-round project.</p>
+<p>“A party is better when there's more people around. We would talk to anybody who would listen,” said Bojan Mandaric. He created the project with friend, Brogan Graham.</p>
+<p>Then, as people moved to other cities, they took the idea with them. So, the November Project grew. Now, there are 52 groups in eight countries, including 44 in the United States and Canada.</p>
+<p><strong>What do the workouts look like?</strong></p>
+<p>People of all ages and fitness levels join the workouts. Some groups begin with something called “The Bounce.” They <strong>chant</strong> and jump at the same time to bring the group together. Those who feel <strong>inhibited</strong>, do not have to do this.</p>
+<p>Most classes include running and body weight exercises like <strong>squats</strong>. The project also uses the surroundings of the location. So, for example, some places include running up steps in an outdoor sports <strong>stadium</strong>. Currently in D.C., members meet on Wednesdays to run up the steps of the Lincoln Memorial.</p>
+<p>To keep the workouts fun, they also might include fun games and activities from childhood. In Edmonton, they play snow games in winter and water games in summer. The games help to lower inhibitions. This helps people make connections, said Jason Shaw. He is co-leader of the Indianapolis, Indiana group.</p>
+<p>“Nobody (is) cool at November Project,” he said.</p>
+<p>Shaw said groups recognize members' <strong>milestones</strong>. People can earn prizes for reaching different goals.</p>
+<p>To find out if a November Project group is near you, go to their website at <a class="wsw__a" href="https://november-project.com/np-experience/">November-Project.com</a>. Building community and making friends is another big part of the project. So, each group is active on social media.</p>
+<p>If you do not have a November Project nearby, you can find another type of outdoor exercise group. Or start your own.</p>
+<p>The November Project organizers offer a few suggestions on how to work out during colder months.</p>
+<p><strong>Find workout friends</strong></p>
+<p>Find workout friends. At the center of the project, is accountability. Members promise to show up. There is a sense of letting down your teammates if you do not show up, said Mandaric, who moved to Boston from Serbia to row <strong>crew</strong> for Northeastern University. (Rowing crew is a type of boat racing.)</p>
+<p><strong>Invest in some cold-weather clothing</strong></p>
+<p>There is no such thing as bad weather, just bad clothing, said Shaw, the leader from Indianapolis. He suggests wearing clothing next to your skin that removes <strong>sweat</strong>. This will help keep you warm and dry. Avoid cotton, he warned. It keeps sweat in contact with your body and will make you colder.</p>
+<p>Also, add a top layer that protects against bad weather. On its webpage, the November Project leaders for Washington, DC say workouts are not cancelled for weather.</p>
+<p><strong>Make it a usual activity</strong></p>
+<p>Promise yourself to exercise on the same days and times for a month. Create a routine. This will make it easier to stick to an exercise routine, says Mandaric.</p>
+<p><strong>Make it fun</strong></p>
+<p>And make sure to have fun. Exercise does not have to be hard or serious.</p>
+<p>Smith, the member from Edmonton, Alberta, says she enjoys the social part of the November Project the most. She calls it “a chosen family.” They came together because they had fun exercising. She said. “You can have fun and get fit.”</p>
+<p>And that's the Health &amp; Lifestyle report. I'm Anna Matteo.</p>
+<p><em>Albert Stumm reported this story for the Associated Press. Anna Matteo adapted it into a lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>layer </strong><em>-n.</em><strong> </strong>one thickness or fold over or under another</p>
+<p><strong>call-and-response </strong><em>-n.</em><strong> </strong>statement quickly followed by an answering statement</p>
+<p><strong>chant </strong><em>-n. </em>a rhythmic, one-tone statement or song said out loud</p>
+<p><strong>squat </strong><em>-n. </em>an exercise in which a standing person lowers to a position in which the torso is erect and the knees are deeply bent and then rises to an upright position</p>
+<p><strong>burpee </strong><em>-n. </em>conditioning exercise in which a person squats, places the palms of the hands on the floor in front of the feet, jumps back into a push-up position, in some cases completes one push-up, returns to the squat position, and then jumps up into the air while extending the arms overhead</p>
+<p><strong>inhibition </strong><em>-n. </em>a restraint or check upon the free or spontaneous instincts or impulses of an individual guided or directed by the social and cultural forces of the environment</p>
+<p><strong>milestone </strong><em>-n. </em>a significant point in development</p>
+<p><strong>crew </strong><em>-n. </em>the sport of rowing a boat, causing it to move through water using poles with flat ends called oars</p>
+<p><strong>sweat </strong><em>-n. </em>the fluid excreted from the sweat glands of the skin</p>
+<p><strong>routine</strong> <em>-n. </em>a standard or regular way of doing something</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 又一种阿尔茨海默病治疗药物显示出疗效</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 又一种阿尔茨海默病治疗药物显示出疗效" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/another-alzheimer-s-drug-showing-promise.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>又一种阿尔茨海默病治疗药物显示出疗效</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/another-alzheimer-s-drug-showing-promise.mp3" id="mp3"></a>
+<a href="/static/lrc/another-alzheimer-s-drug-showing-promise.lrc" id="lrc"></a>
+<a href="another-alzheimer-s-drug-showing-promise-91204.html" id="CnPage" target="_blank"></a>
+<a href="brazilian-cave-objects-suggest-earlier-arrival-of-humans-in-americas-91201.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Another experimental Alzheimer's drug has been shown to slow patients' worsening conditions, researchers reported Monday.<br/>
+研究人员周一报道，另一种实验性阿尔茨海默病药物已被证明可以减缓患者病情的恶化。</p>
+<p>The American drug company Eli Lilly said it is seeking U.S. Food and Drug Administration (FDA) approval for the drug donanemab. If approved, it would be the second Alzheimer's treatment for delaying the disease. Alzheimer's affects the brain and causes memory loss and dementia.<br/>
+美国礼来制药公司表示，正在寻求美国食品药品监督管理局（FDA）批准该这种名为多纳单抗的药物。如果获得批准，这将是第二种延缓阿尔茨海默病的治疗方法。阿尔茨海默氏症影响大脑，导致记忆力丧失和痴呆症。</p>
+<p>The FDA approved Leqembi, from Japanese drugmaker Eisai, earlier this month.<br/>
+本月早些时候，美国食品药品监督管理局批准了日本制药商卫材药业的仑卡奈单抗。</p>
+<p>"Finally there's some hope, right, that we can talk about," Lilly's Dr. John Sims told reporters Monday at the Alzheimer's Association International Conference in Amsterdam, the Netherlands.<br/>
+礼来公司的约翰·西姆斯博士周一在荷兰阿姆斯特丹举行的阿尔茨海默病协会国际会议上告诉记者：“终于有了一些希望，对吧，我们可以谈谈这个。”</p>
+<p>The drug does not cure the disease. Instead, it slows its progression by about four to seven months. But Sims noted that "it doesn't mean you can't have very meaningful treatments for patients."<br/>
+这种药治不了这种病。与之相反的是，它将其进展减缓了大约四到七个月。但西姆斯指出，“这并不意味着你不能为患者提供非常有意义的治疗。”</p>
+<p>Eli Lilly published the full results of its study of 1,700 patients in the Journal of the American Medical Association. It also presented its results at the Alzheimer's conference.<br/>
+礼来公司在《美国医学会杂志》上公布了其对1700名患者的研究结果。它还在阿尔茨海默氏症会议上介绍了其研究结果。</p>
+<p>Both donanemab and Leqembi are laboratory-made antibodies. The treatments are injected into the patients. The drugs target a protein buildup, called beta amyloid, in the brain of Alzheimer's patients.<br/>
+多纳单抗和仑卡奈单抗都是实验室制造的抗体。治疗药物被注射到病人体内。这些药物针对的是阿尔茨海默病患者大脑中一种被称为β淀粉样蛋白的蛋白质堆积。</p>
+<p>Both drugs come with serious safety concerns. Patients can experience brain swelling or bleeding. In the Lilly study, such side effects were linked to three deaths.<br/>
+这两种药物都存在严重的安全隐患。患者可能会出现脑肿胀或出血。在礼来的研究中，这种副作用与三例死亡有关。</p>
+<p>Dr. Liana Apostolova was the study investigator. She is also a professor in Alzheimer's Disease research at Indiana University School of Medicine. She said, "These side effects should not be taken lightly." But she added that, in most cases, the effects were well controlled by monitoring with magnetic resonance imaging (MRI) or by stopping using the drug.<br/>
+利娅娜·阿波斯托洛娃博士是该研究的研究人员。她还是印第安纳大学医学院阿尔茨海默病研究方面的教授。她说，“这些副作用不应掉以轻心。”但她补充说，在大多数情况下，通过磁共振成像监测或停止使用该药物，这种副作用都得到了很好的控制。</p>
+<p><strong>The Eli Lilly study<br/>
+礼来公司的研究</strong></p>
+<p>Lilly's study included people ages 60 to 85 who were in the early stages of Alzheimer's. Half of the study subjects received a monthly injection of donanemab for up to 18 months. The other half received an inactive substance, called a placebo.<br/>
+礼来公司的研究涉及了60至85岁的阿尔茨海默氏症早期患者。一半的受试者每月注射多纳单抗，持续时间长达18个月。另一半接受了一种被称为安慰剂的非活性物质。</p>
+<p>Patients were also switched to inactive substances if enough amyloid cleared out. The study found that it happened to half of the patients within a year.<br/>
+如果清除了足够多的淀粉样蛋白，患者也会改用非活性物质。研究发现，有一半患者在一年内发生了这种情况。</p>
+<p>Amyloid alone does not cause Alzheimer's. So researchers also studied the levels of tau, another protein that causes the disease in the brain. Patients with higher levels of tau are considered to be in the more advanced stages of Alzheimer's.<br/>
+单独的淀粉样蛋白不会引起阿尔茨海默氏症。因此，研究人员还研究了导致大脑疾病的另一种tau蛋白质的水平。tau水平较高的患者被认为处于阿尔茨海默氏症的晚期。</p>
+<p>The results: both groups declined during the 18-month study but the drug appears to work better for patients in earlier stages of the disease. Those with low to medium tau levels saw a 35- percent slower decline. For high tau patients, donanemab slowed the disease progression by about 17 percent.<br/>
+结果在为期18个月的研究中，两组患者的病情都有所减轻，但该药物似乎对疾病早期患者效果更好。那些tau水平为低到中等的患者病情延缓了35%。对于tau水平高的患者，多纳单抗将疾病进展减缓了约17%。</p>
+<p>Anne White is the president of neuroscience at Lilly. She said, "At the end of the trial, the average patient had been without drugs for seven months and yet they continued to benefit."<br/>
+安妮·怀特是礼来公司的神经科学总裁。她说：“在试验结束时，普通患者已经七个月没有服药了，但他们仍然受益。”</p>
+<p>Scientists say that, while these drugs may mark a new era in Alzheimer's treatment, huge questions remain about which patients should try them. Questions also remain about how much benefit patients will really experience.<br/>
+科学家们表示，尽管这些药物可能标志着阿尔茨海默病治疗的新时代，但哪些患者应该尝试这些药物仍然存在巨大的疑问。患者将真正获得多大好处也仍然存在疑问。</p>
+<p>The main safety concern is brain swelling or bleeding. These conditions often cause no symptoms but sometimes can be serious, even deadly.<br/>
+主要的安全问题是脑肿胀或出血。这些情况通常不会引起任何症状，但有时可能很严重，甚至致命。</p>
+<p>Another concern is that more than 90 percent of the study's patients were white. That means there is little data on how effective the treatment could be for other populations, said Alzheimer's specialist Jennifer Manly of Columbia University.<br/>
+另一个令人担忧的问题是，该研究90%以上的患者是白人。哥伦比亚大学的阿尔茨海默病专家詹妮弗·曼利说，这意味着几乎没有数据表明这种治疗方法对其他人群的有效性。</p>
+<p>Lilly expects the FDA to decide by the end of this year whether to approve donanemab. The company is also seeking approval from other health agencies worldwide.<br/>
+礼来公司预计美国食品药品监督管理局将在今年年底前决定是否批准多纳单抗。该公司也在寻求全球其他卫生机构的批准。</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Another Alzheimer's Drug Showing Promise]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.76]Another experimental Alzheimer's drug
+[00:04.44]has been shown to slow patients' worsening conditions,
+[00:08.60]researchers reported Monday.
+[00:11.80]The American drug company Eli Lilly
+[00:14.52]said it is seeking U.S. Food and Drug Administration
+[00:18.48](FDA) approval for the drug donanemab.
+[00:23.28]If approved, it would be the second Alzheimer's treatment
+[00:27.08]for delaying the disease.
+[00:30.04]Alzheimer's affects the brain and causes memory loss and dementia.
+[00:36.64]The FDA approved Leqembi,
+[00:39.04]from Japanese drugmaker Eisai, earlier this month.
+[00:44.36]"Finally there's some hope, right, that we can talk about,"
+[00:48.04]Lilly's Dr. John Sims told reporters Monday
+[00:51.72]at the Alzheimer's Association International Conference
+[00:55.76]in Amsterdam, the Netherlands.
+[00:59.36]The drug does not cure the disease.
+[01:01.96]Instead, it slows its progression by about four to seven months.
+[01:07.48]But Sims noted that "it doesn't mean
+[01:10.88]you can't have very meaningful treatments for patients."
+[01:15.52]Eli Lilly published the full results of its study
+[01:18.92]of 1,700 patients in the Journal of the American Medical Association.
+[01:26.20]It also presented its results at the Alzheimer's conference.
+[01:32.00]Both donanemab and Leqembi are laboratory-made antibodies.
+[01:36.56]The treatments are injected into the patients.
+[01:40.32]The drugs target a protein buildup,
+[01:43.12]called beta amyloid, in the brain of Alzheimer's patients.
+[01:48.40]Both drugs come with serious safety concerns.
+[01:52.44]Patients can experience brain swelling or bleeding.
+[01:57.00]In the Lilly study, such side effects were linked to three deaths.
+[02:03.08]Dr. Liana Apostolova was the study investigator.
+[02:07.96]She is also a professor in Alzheimer's Disease research
+[02:11.88]at Indiana University School of Medicine.
+[02:16.28]She said, "These side effects should not be taken lightly."
+[02:21.60]But she added that, in most cases,
+[02:24.44]the effects were well controlled
+[02:26.52]by monitoring with magnetic resonance imaging (MRI)
+[02:31.00]or by stopping using the drug.
+[02:34.56]Lilly's study included people ages 60 to 85
+[02:38.72]who were in the early stages of Alzheimer's.
+[02:42.56]Half of the study subjects received a monthly injection of donanemab
+[02:47.72]for up to 18 months.
+[02:51.08]The other half received an inactive substance, called a placebo.
+[02:57.04]Patients were also switched to inactive substances
+[03:00.60]if enough amyloid cleared out.
+[03:04.28]The study found that it happened to half of the patients within a year.
+[03:09.36]Amyloid alone does not cause Alzheimer's.
+[03:12.20]So researchers also studied the levels of tau,
+[03:16.08]another protein that causes the disease in the brain.
+[03:20.96]Patients with higher levels of tau
+[03:23.80]are considered to be in the more advanced stages of Alzheimer's.
+[03:29.32]The results: both groups declined during the 18-month study
+[03:35.16]but the drug appears to work better
+[03:37.32]for patients in earlier stages of the disease.
+[03:41.28]Those with low to medium tau levels saw a 35- percent slower decline.
+[03:49.12]For high tau patients,
+[03:51.28]donanemab slowed the disease progression by about 17 percent.
+[03:57.52]Anne White is the president of neuroscience at Lilly.
+[04:01.28]She said, "At the end of the trial,
+[04:03.84]the average patient had been without drugs
+[04:07.12]for seven months and yet they continued to benefit."
+[04:11.88]Scientists say that,
+[04:13.40]while these drugs may mark a new era in Alzheimer's treatment,
+[04:17.28]huge questions remain about which patients should try them.
+[04:23.44]Questions also remain
+[04:25.36]about how much benefit patients will really experience.
+[04:30.36]The main safety concern is brain swelling or bleeding.
+[04:35.08]These conditions often cause no symptoms
+[04:38.16]but sometimes can be serious, even deadly.
+[04:43.24]Another concern is that more than
+[04:45.32]90 percent of the study's patients were white.
+[04:49.40]That means there is little data
+[04:51.60]on how effective the treatment could be for other populations,
+[04:56.16]said Alzheimer's specialist Jennifer Manly of Columbia University.
+[05:03.00]Lilly expects the FDA
+[05:05.12]to decide by the end of this year whether to approve donanemab.
+[05:10.76]The company is also seeking approval
+[05:13.28]from other health agencies worldwide.
+[05:17.00]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登上台100天所取得成就盘点</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登上台100天所取得成就盘点" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202104/joe-biden-s-first-100-days-where-he-stands-on-key-promises.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登上台100天所取得成就盘点</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202104/joe-biden-s-first-100-days-where-he-stands-on-key-promises.mp3" id="mp3"></a>
+<a href="/static/lrc/joe-biden-s-first-100-days-where-he-stands-on-key-promises.lrc" id="lrc"></a>
+<a href="joe-biden-s-first--days-where-he-stands-on-key-promises-86757.html" id="CnPage" target="_blank"></a>
+<a href="us-to-share-its-astrazeneca-vaccine-supply-with-the-world-86756.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">President Joe Biden is nearing his 100th day in office as president of the United States. During his campaign, Biden promised to reach several goals in his first 100 days as leader.<br/>
+乔·拜登作为美国总统即将就任100天。在大选期间，拜登承诺在就职前100天要达成数个目标。
+<p>So far, his administration has centered its efforts on gaining control of the COVID-19 crisis. And Biden has honored most of his campaign promises connected to that issue.<br/>
+迄今为止，拜登政府一直将工作重心放在控制新冠肺炎危机上。拜登兑现了与该问题有关的大部分竞选承诺。</p>
+<p>The president also met a number of promised actions on climate change and the economy. But other issues have proved to be more difficult for the administration, including immigration. Biden is struggling with how to enact promised reforms in the face of a sharp increase in the number of foreign children seeking to cross the border. On some of his promises, Biden is waiting for Congress to act.<br/>
+拜登总统在气候变化与经济方面也实现了一些承诺。但是事实证明，包括移民在内的其它问题对政府来说更加困难。面对寻求越境的外国儿童人数急剧增加，拜登正在苦苦应对如何实施承诺的改革。在他的一些承诺上，拜登正等着国会的行动。</p>
+<p>Here is Biden's current position on major campaign promises:<br/>
+以下是拜登在重大竞选承诺方面的当前立场：</p>
+<p><strong>Immigration<br/>
+移民</strong></p>
+<p>Biden has completed seven of the seventeen promises he made for immigration.<br/>
+拜登已经完成了他做出的17项移民承诺中的7项。</p>
+<p>He sent Congress a bill that would offer an eight-year path to citizenship for people without documentation.<br/>
+他给国会送上了一份法案，该法案将为无证移民提供一条8年获得公民身份的途径。</p>
+<p>He ordered immigration agents to deport people who entered the US illegally only if they also have violated other laws.<br/>
+他下令移民机构只有当非法入境者同时还违反其它法律的情况下，才能将他们驱逐出境。</p>
+<p>He has taken steps to reunite immigrant families separated at the Mexican border. He protected children who arrived in the US illegally from deportation. He has also ended the travel ban for some Muslim-majority countries.<br/>
+他已经采取措施让墨西哥边境的离散家庭重新团聚。他保护非法入境儿童免遭驱逐出境。他还结束了对一些穆斯林占多数的国家的旅行禁令。</p>
+<p>Finally, he has ended work on a border wall that began with the Trump administration.<br/>
+最后，他结束了川普政府发起的边境墙工作。</p>
+<p>Nine of his other immigration promises are still in progress. He was unable to keep one of his promises. A federal judge in Texas did not permit Biden to freeze deportations for 100 days.<br/>
+他的其它9项移民承诺仍在进行当中。他无法兑现自己的一项承诺。德克萨斯州一位联邦法官不允许拜登将驱逐出境政策冻结100天。</p>
+<p><strong>Domestic policy<br/>
+国内政策</strong></p>
+<p>Biden fully honored his promise to permit transgender individuals to join the military.<br/>
+拜登完全兑现了允许跨性别人士参军的承诺。</p>
+<p>He decided against meeting his promise to create a police oversight board. After meeting with several rights groups and police representatives, Biden said such a board would not be productive.<br/>
+他决定不履行建立警察监督委员会的承诺。拜登在与几家人权组织以及警察代表会面后，表示这种委员会不会有效果。</p>
+<p>He also has not yet met his promise to restructure the Bureau of Alcohol, Tobacco, Firearms and Explosives and other Justice Department agencies to better enforce gun laws.<br/>
+他也尚未兑现要重组美国烟酒枪炮及爆炸物管理局以及其它司法部机构以便更好地执行枪支法律的承诺。</p>
+<p><strong>COVID-19<br/>
+新冠肺炎</strong></p>
+<p>Biden has successfully completed all of his COVID-19 promises.<br/>
+拜登已经成功实现了他所有关于新冠肺炎的承诺。</p>
+<p>The US rejoined the World Health Organization. He met his goal to administer 100 million vaccines, which was increased to a goal of 200 million. He pushed for a $1.9 trillion COVID-19 assistance bill which was passed by Congress.<br/>
+美国重新加入了世界卫生组织。他实现了接种1亿剂疫苗的目标，这个目标现在提高到了2亿剂。他推动了一项1.9万亿美元的新冠肺炎援助法案，并得到了国会通过。</p>
+<p><strong>Climate<br/>
+气候</strong></p>
+<p>Biden canceled the Keystone XL oil pipeline permit. He protected the Arctic National Wildlife Reserve. He rejoined the Paris climate agreement. Finally, he accepted the Kigali Amendment to the Montreal Protocol to reduce a harmful chemical called hydrofluorocarbons.<br/>
+拜登撤销了对Keystone XL 输油管道的许可。他保护了北极国家野生动物保护区。他重新加入了巴黎气候协定。最后，他接受了《（蒙特利尔议定书）基加利修正案》，以减少被称为氢氟烃的有害化学物质。</p>
+<p>He also created a world climate meeting for top officials where he persuaded nations to set lower emissions targets.<br/>
+他还为高层官员举办了一场世界气候大会，在会议上他说服各国设定了更低的排放目标。</p>
+<p>Biden will not permit new oil and gas structures on federal lands and offshore waters. He is also working to change back 100 public health and environmental rules set by Trump.<br/>
+拜登将不会批准在联邦土地和离岸水域上建造新的石油和天然气设施。他还致力于改回川普制定的100项公共卫生和环境法规。</p>
+<p><strong>Economy<br/>
+经济</strong></p>
+<p>Biden is working to cancel Trump's 2017 cuts to corporate tax rates.<br/>
+拜登正致力于取消川普2017年削减公司税率的决定。</p>
+<p>He has completed his goals to provide $2,000 in direct payments as part of COVID-19 aid. He also completed his goals to pause federal student debt payments and to order a review of where the US gets its supplies.<br/>
+他已经完成了自己的目标，作为新冠肺炎援助的一部分，向美国公民提供2000美元的直接援助。他还实现了自己暂停偿付联邦学生贷款，并下令审查美国供应来源的目标。</p>
+<p><strong>Foreign policy<br/>
+对外政策</strong></p>
+<p>Biden has had mixed success with completing his goals for foreign policy. The one goal he fully met was recognizing the events that happened to Armenians during WWI as genocide.<br/>
+拜登在实现外交目标政策方面取得了喜忧参半的成就。他完全实现了一个目标，将第一次世界大战期间发生在亚美尼亚人身上的事件视为种族灭绝。</p>
+<p>His other foreign policy goals are either in progress or are hard to measure. For example, he has moved toward putting human rights at the center of his foreign policy, but he is not consistent with US allies. He did not hold Saudi Arabia's crown prince, Mohammed bin Salman, responsible for the killing of US-based journalist Jamal Khashoggi.<br/>
+他的其它外交政策要么在进行中，要么难以衡量。例如，他已经推动将人权放在其外交政策的中心，但是他与美国的盟友并不一致。他没有让沙特王储穆罕默德·萨勒曼为杀害美国记者贾马尔·卡舒吉负责。</p>
+<p>He is working to end the US involvement in the wars in the Middle East. He is also working to improve relations with allies which suffered under the former Trump administration.<br/>
+他正致力于结束美国对中东战争的介入。他还致力于改善跟受到川普政府打击的盟友的关系。</p>
+<p>He has completed actions to reduce the support shown to dictators like Vladimir Putin and Kim Jong Un. Finally, he is working to rejoin the nuclear deal with Iran, but Iran is resisting.<br/>
+他已经采取了行动减少对普京和金正恩的支持。最后，他正致力于重新加入与伊朗核协议，但伊朗仍在抗拒。</p>
+<p>I'm Jonathan Evans.<br/>
+我是乔纳森·埃文斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Joe Biden’s First 100 Days: Where He Stands on Key Promises]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]President Joe Biden is nearing his 100th day in office
+[00:04.72]as president of the United States.
+[00:08.20]During his campaign, Biden promised to reach several goals
+[00:13.28]in his first 100 days as leader.
+[00:17.72]So far, his administration has centered its efforts
+[00:21.88]on gaining control of the COVID-19 crisis.
+[00:26.80]And Biden has honored most of his campaign promises
+[00:31.24]connected to that issue.
+[00:34.76]The president also met a number of promised actions
+[00:38.60]on climate change and the economy.
+[00:42.84]But other issues have proved to be more difficult for the administration,
+[00:47.84]including immigration.
+[00:51.36]Biden is struggling with how to enact promised reforms
+[00:55.80]in the face of a sharp increase in the number of foreign children
+[01:00.12]seeking to cross the border.
+[01:03.52]On some of his promises, Biden is waiting for Congress to act.
+[01:10.00]Here is Biden's current position on major campaign promises:
+[01:16.64]Biden has completed seven of the seventeen promises he made for immigration.
+[01:23.68]He sent Congress a bill that would offer an eight-year path
+[01:27.84]to citizenship for people without documentation.
+[01:32.88]He ordered immigration agents to deport people
+[01:36.52]who entered the US illegally only if they also have violated other laws.
+[01:43.88]He has taken steps to reunite immigrant families separated at the Mexican border.
+[01:51.08]He protected children who arrived in the US illegally from deportation.
+[01:57.68]He has also ended the travel ban for some Muslim-majority countries.
+[02:04.64]Finally, he has ended work on a border wall that began with the Trump administration.
+[02:12.64]Nine of his other immigration promises are still in progress.
+[02:18.20]He was unable to keep one of his promises.
+[02:22.08]A federal judge in Texas did not permit Biden to freeze deportations for 100 days.
+[02:31.44]Biden fully honored his promise to permit transgender individuals to join the military.
+[02:39.20]He decided against meeting his promise to create a police oversight board.
+[02:45.60]After meeting with several rights groups and police representatives,
+[02:50.48]Biden said such a board would not be productive.
+[02:55.44]He also has not yet met his promise to restructure the Bureau of Alcohol,
+[03:00.72]Tobacco, Firearms and Explosives
+[03:03.92]and other Justice Department agencies to better enforce gun laws.
+[03:10.60]Biden has successfully completed all of his COVID-19 promises.
+[03:16.28]The US rejoined the World Health Organization.
+[03:21.12]He met his goal to administer 100 million vaccines,
+[03:24.80]which was increased to a goal of 200 million.
+[03:29.84]He pushed for a $1.9 trillion COVID-19 assistance bill which was passed by Congress.
+[03:38.44]Biden canceled the Keystone XL oil pipeline permit.
+[03:44.16]He protected the Arctic National Wildlife Reserve.
+[03:49.28]He rejoined the Paris climate agreement.
+[03:52.96]Finally, he accepted the Kigali Amendment to the Montreal Protocol
+[03:58.16]to reduce a harmful chemical called hydrofluorocarbons.
+[04:03.32]He also created a world climate meeting for top officials
+[04:07.84]where he persuaded nations to set lower emissions targets.
+[04:13.76]Biden will not permit new oil and gas structures
+[04:17.80]on federal lands and offshore waters.
+[04:22.16]He is also working to change back 100 public health
+[04:26.16]and environmental rules set by Trump.
+[04:30.72]Biden is working to cancel Trump's 2017 cuts to corporate tax rates.
+[04:38.16]He has completed his goals to provide $2,000
+[04:42.00]in direct payments as part of COVID-19 aid.
+[04:46.92]He also completed his goals to pause federal student debt payments
+[04:52.32]and to order a review of where the US gets its supplies.
+[04:59.44]Biden has had mixed success with completing his goals for foreign policy.
+[05:06.44]The one goal he fully met was recognizing the events
+[05:10.52]that happened to Armenians during WWI as genocide.
+[05:16.76]His other foreign policy goals are either in progress or are hard to measure.
+[05:23.96]For example, he has moved toward putting human rights
+[05:27.92]at the center of his foreign policy, but he is not consistent with US allies.
+[05:36.00]He did not hold Saudi Arabia's crown prince, Mohammed bin Salman,
+[05:40.44]responsible for the killing of US-based journalist Jamal Khashoggi.
+[05:47.04]He is working to end the US involvement in the wars in the Middle East.
+[05:53.40]He is also working to improve relations with allies
+[05:57.60]which suffered under the former Trump administration.
+[06:01.88]He has completed actions to reduce the support shown
+[06:05.48]to dictators like Vladimir Putin and Kim Jong Un.
+[06:10.60]Finally, he is working to rejoin the nuclear deal with Iran,
+[06:15.96]but Iran is resisting.
+[06:19.28]I'm Jonathan Evans. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

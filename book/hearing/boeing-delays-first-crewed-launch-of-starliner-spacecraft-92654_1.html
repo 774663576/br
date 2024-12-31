@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 波音星际客机首次载人飞行被推迟</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 波音星际客机首次载人飞行被推迟" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/boeing-delays-first-crewed-launch-of-starliner-spacecraft.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>波音星际客机首次载人飞行被推迟</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/boeing-delays-first-crewed-launch-of-starliner-spacecraft.mp3" id="mp3"></a>
+<a href="/static/lrc/boeing-delays-first-crewed-launch-of-starliner-spacecraft.lrc" id="lrc"></a>
+<a href="boeing-delays-first-crewed-launch-of-starliner-spacecraft-92654.html" id="CnPage" target="_blank"></a>
+<a href="us-campus-protests-spread-to-europe-92653.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The first crewed test of Boeing's Starliner spacecraft was postponed Tuesday because of a problem with the rocket system.<br/>
+由于火箭系统出现问题，波音公司“星际客机”飞船的首次载人试飞于周二被推迟。</p>
+<p>Officials stopped the launch about two hours before the planned liftoff at NASA's Kennedy Space Center in Florida.<br/>
+官员们在美国宇航局佛罗里达州肯尼迪航天中心计划发射前两小时左右叫停了这次发射。</p>
+<p>Two astronauts from the American space agency NASA had just taken their final positions in the Starliner capsule when officials halted the countdown. The astronauts chosen for the flight are 61-year-old Barry "Butch" Wilmore and 58-year-old Sunita "Suni" Williams.<br/>
+美国宇航局的两名宇航员刚刚在“星际客机”太空舱中就位，官员们就停止了倒计时。被选中参加此次飞行的宇航员是61岁的巴里·“布奇”·威尔莫尔和58岁的苏妮塔·“苏尼”·威廉姆斯。</p>
+<p>The capsule will be carried to space by an Atlas V rocket. United Launch Alliance (ULA) built the rocket. ULA is a joint operation between Boeing and the American company Lockheed Martin.<br/>
+该太空舱将由宇宙神5号火箭运载到太空。联合发射联盟（ULA）制造了这枚火箭。联合发射联盟是波音公司和美国洛克希德·马丁公司的联营。</p>
+<p>ULA chief Tory Bruno said the problem involved an oxygen pressure-release valve on the Atlas V's second stage launch system. ULA officials could hear the problematic valve opening and closing.<br/>
+联合发射联盟负责人托利·布鲁诺表示，问题涉及宇宙神5号火箭第二级发射系统上的氧气压力释放阀。联合发射联盟官员可以听到故障阀门打开和关闭的声音。</p>
+<p>Bruno said the valve might need to be replaced. That would push a new launch date into next week. If investigations show the valve is still operable, a new launch could be set for as soon as Friday.<br/>
+布鲁诺说，这个阀门可能需要更换。这将把新的发射日期推到下周。如果调查显示该阀门仍然可以操作，最快可能在周五进行新的发射。</p>
+<p>It was the latest delay for Boeing's first test flight involving astronauts aboard the Starliner capsule. Bruno noted that other Atlas rockets have had similar valve trouble.<br/>
+这是波音公司首次载人星际客机太空舱试飞的最新延误。布鲁诺指出，其它宇宙神火箭也有类似的阀门故障。</p>
+<p>During those launches, the problem was quickly resolved by turning the valves off and back on. But the company is now facing stronger flight rules for trips that carry astronauts. "And so we stayed with the rules and the procedures, and scrubbed as a result," Bruno told reporters.<br/>
+在这些发射过程中，通过关闭和重新打开阀门，这个问题很快得到了解决。但该公司现在面临着更严格的载人飞行规则。布鲁诺告诉记者：“所以我们遵守了规则和程序，并因此取消了发射。”</p>
+<p>Steve Stich is NASA's commercial crew program leader. He admitted the decision to delay was a difficult one to make. "We're taking it one step at a time, and we're going to launch when we're ready and fly when it's safe to do so," he said.<br/>
+史蒂夫·斯蒂奇是美国宇航局商业机组项目负责人。他承认做出推迟发射的决定很难。他说：“我们正在一步一个脚印地进行，我们将在做好准备的时候发射，在安全的时候飞行。”</p>
+<p>The spacecraft completed its first uncrewed flight test to the International Space Station (ISS) in May of 2022. Since then, Boeing has experienced a series of technical difficulties with Starliner and its rocket system.<br/>
+该航天器于2022年5月完成了前往国际空间站的首次不载人飞行测试。自那以后，波音公司在星际客机及其火箭系统方面经历了一系列技术难题。</p>
+<p>NASA chose Boeing and a competitor, SpaceX, in 2024 to start transporting astronauts to and from the ISS after NASA's shuttle program ended. The private companies signed contracts with NASA worth billions of dollars.<br/>
+航天飞机项目结束后，美国宇航局选择了波音公司及其竞争对手太空探索技术公司于2024年开始运送宇航员往返国际空间站。这些私营公司与美国宇航局签订了价值数十亿美元的合同。</p>
+<p>Boeing has struggled to complete the testing process before it gets approval to start running official trips to the ISS. SpaceX, on the other hand, has been a dependable NASA partner since 2020, making regular trips to carry astronauts and supplies to the ISS.<br/>
+波音公司在获得批准开始正式前往国际空间站之前，一直在努力完成试飞程序。另一方面，太空探索技术公司自2020年以来一直是美国宇航局可靠的合作伙伴，定期运送宇航员和物资前往国际空间站。</p>
+<p>The efforts are part of NASA's plan to build a new generation of privately built spacecraft to carry its astronauts and others to the ISS, and after that to the moon and possibly Mars.<br/>
+这些努力是美国宇航局计划的一部分，该计划旨在建造新一代私人建造的航天器，将宇航员和其他人运送到国际空间站，然后运送到月球，可能还有火星。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Boeing Delays First Crewed Launch of Starliner Spacecraft]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The first crewed test of Boeing's
+[00:03.44]Starliner spacecraft was postponed Tuesday
+[00:08.60]because of a problem with the rocket system.
+[00:12.36]Officials stopped the launch about
+[00:15.56]two hours before the planned liftoff
+[00:18.80]at NASA's Kennedy Space Center in Florida.
+[00:22.88]Two astronauts from the American space agency NASA
+[00:28.48]had just taken their final positions
+[00:31.24]in the Starliner capsule
+[00:33.72]when officials halted the countdown.
+[00:36.48]The astronauts chosen for the flight
+[00:40.04]are 61-year-old Barry "Butch" Wilmore
+[00:44.36]and 58-year-old Sunita "Suni" Williams.
+[00:48.88]The capsule will be carried to space
+[00:52.24]by an Atlas V rocket.
+[00:54.96]United Launch Alliance (ULA) built the rocket.
+[01:00.40]ULA is a joint operation between Boeing
+[01:05.16]and the American company Lockheed Martin.
+[01:08.88]ULA chief Tory Bruno said
+[01:12.76]the problem involved an oxygen pressure-release valve
+[01:17.08]on the Atlas V's second stage launch system.
+[01:21.56]ULA officials could hear
+[01:24.64]the problematic valve opening and closing.
+[01:28.28]Bruno said the valve might need to be replaced.
+[01:33.28]That would push a new launch date into next week.
+[01:37.68]If investigations show the valve is still operable,
+[01:42.44]a new launch could be set for as soon as Friday.
+[01:46.84]It was the latest delay for Boeing's
+[01:50.28]first test flight involving astronauts
+[01:53.52]aboard the Starliner capsule.
+[01:56.44]Bruno noted that other Atlas rockets
+[02:01.00]have had similar valve trouble.
+[02:03.88]During those launches, the problem
+[02:06.92]was quickly resolved
+[02:08.40]by turning the valves off and back on.
+[02:11.92]But the company is now facing stronger flight rules
+[02:17.04]for trips that carry astronauts.
+[02:20.20]"And so we stayed with the rules and the procedures,
+[02:24.60]and scrubbed as a result," Bruno told reporters.
+[02:29.36]Steve Stich is NASA's commercial crew program leader.
+[02:34.92]He admitted the decision to delay
+[02:38.12]was a difficult one to make.
+[02:40.68]"We're taking it one step at a time,
+[02:43.88]and we're going to launch when we're ready
+[02:47.00]and fly when it's safe to do so," he said.
+[02:51.52]The spacecraft completed its first uncrewed flight test
+[02:56.80]to the International Space Station (ISS) in May of 2022.
+[03:03.20]Since then, Boeing has experienced
+[03:06.48]a series of technical difficulties
+[03:09.36]with Starliner and its rocket system.
+[03:13.44]NASA chose Boeing and a competitor,
+[03:17.28]SpaceX, in 2024
+[03:20.28]to start transporting astronauts
+[03:22.92]to and from the ISS
+[03:25.64]after NASA's shuttle program ended.
+[03:29.16]The private companies signed contracts
+[03:32.04]with NASA worth billions of dollars.
+[03:35.36]Boeing has struggled to complete
+[03:38.20]the testing process before it gets approval
+[03:42.20]to start running official trips to the ISS.
+[03:46.16]SpaceX, on the other hand,
+[03:48.80]has been a dependable NASA partner since 2020,
+[03:53.52]making regular trips to carry astronauts
+[03:57.16]and supplies to the ISS.
+[04:00.84]The efforts are part of NASA's plan
+[04:04.16]to build a new generation of privately built spacecraft
+[04:09.44]to carry its astronauts and others to the ISS,
+[04:14.48]and after that to the moon and possibly Mars.
+[04:19.56]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - One Person's Trash Is Another Person's Treasure</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, One Person's Trash Is Another Person's Treasure" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/one-person-s-trash-is-another-person-s-treasure.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>One Person's Trash Is Another Person's Treasure</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/one-person-s-trash-is-another-person-s-treasure.mp3" id="mp3"></a>
+<a href="/static/lrc/one-person-s-trash-is-another-person-s-treasure.lrc" id="lrc"></a>
+<a href="in-so-many-places-cats-are-the-stars-92878.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">10 August, 2024</span><br/>
+<p class="paragraph">And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>People around the world share many things in common. But we are also different from each other. Not only do we look, think, and act differently, but we also like different things. Even <strong>identical</strong> <strong>twins</strong> may look the same but are very different individuals.</p>
+<p>On today's program, we will look at a few expressions to describe how no person is exactly the same as another.</p><div class="contentImage"><img alt="FILE - Iris Hsueh (L) and Ian Ciou have a picture taken on October 14, 2023, at a garbage dump in Puli Township, Taiwan. The bride is serious about the environment and wants to make a statement with her wedding photos. (Photo by Handout/OWEN KANG/AFP)" src="https://files.21voa.com/gdb/01000000-0a00-0242-43d9-08dbe21a7a41_cx0_cy6_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Iris Hsueh (L) and Ian Ciou have a picture taken on October 14, 2023, at a garbage dump in Puli Township, Taiwan. The bride is serious about the environment and wants to make a statement with her wedding photos. (Photo by Handout/OWEN KANG/AFP)</span></div>
+<p>The first expression involves trash and treasure.</p>
+<p>When we say <u>one person's trash is another person's treasure</u>,<strong> </strong>we mean that something that one person may consider worthless could be highly prized or valued by someone else.</p>
+<p>Let's hear an example of how to use this expression:</p>
+<p><em>A: I really don't understand the appeal of Jackson Pollock's paintings. To me, they look like a team of m<i><i>onkey</i></i>s painted them!" </em></p>
+<p><em>B: I love Pollock's paintings. I see something new every time I look at them. </em></p>
+<p><em>A: Well, I guess it's true what they say, <u>one person's trash is another person's treasure</u>.</em></p>
+<p>Now, rubbish and garbage mean the same as trash. But, in this expression, we use trash because the “tr” in <u>trash</u> and <u>treasure</u> makes the expression sound more natural. It just sounds better.</p>
+<p>And, sometimes, we use the word "man" in place of "person" such as <u>one man's trash is another man's treasure</u>. Again it is just easier to say.</p>
+<p>Another expression with a similar meaning is <u>different strokes for different folks</u>.</p>
+<p>This also means that different things appeal to different people. But as a set expression, we do not say “different strokes for different people.” That just doesn't sound right.</p>
+<p><u>Different strokes for different folks</u> can also mean that people live in different ways and value different things.</p>
+<p>For example, a perfect evening for my friend is to go out and dance all night long. For me, a perfect evening is to stay at home with a book and a cup of tea. Neither is a better way to spend the evening. So, we should not judge. Or in other words, <u>different strokes for different folks</u>.</p>
+<p>When we want to say that we are all different and we like different things without judgment, we can also use the following expressions:</p>
+<p><u>It takes all kinds to make the world go round.</u></p>
+<p><u>It takes all kinds.</u></p>
+<p><u>To each his (her) own. </u></p>
+<p><u>Whatever floats your boat.</u></p>
+<p>They all mean ... whatever makes you happy!</p>
+<p>And all of these expressions have the same general meaning: We are all different and <strong>unique</strong>.</p>
+<p>And that's the end of this <em>Words and Their Stories</em>. Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>identical twin</strong> <em>– n.</em> either member of a pair of twins that are produced from a single egg and who look exactly alike</p>
+<p><strong>unique </strong><em>– adj. </em>being the only one of its kind</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:One Person's Trash Is Another Person's Treasure]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:08.12]And now, Words and Their Stories,
+[00:11.88]from VOA Learning English.
+[00:18.64]People around the world
+[00:20.76]share many things in common.
+[00:23.68]But we are also different from each other.
+[00:28.56]Not only do we look,
+[00:30.72]think, and act differently,
+[00:33.48]but we also like different things.
+[00:37.68]Even identical twins
+[00:40.00]may look the same
+[00:41.76]but are very different individuals.
+[00:45.92]On today's program,
+[00:47.60]we will look at a few expressions
+[00:50.20]to describe how no person
+[00:53.16]is exactly the same as another.
+[00:56.96]The first expression
+[00:58.88]involves trash and treasure.
+[01:03.24]When we say one person's trash
+[01:05.96]is another person's treasure,
+[01:08.32]we mean that something
+[01:10.64]that one person may consider worthless
+[01:14.00]could be highly prized
+[01:16.12]or valued by someone else.
+[01:19.76]Let's hear an example
+[01:21.68]of how to use this expression:
+[01:25.40]A: I really don't understand
+[01:27.08]the appeal of Jackson Pollock's paintings.
+[01:29.76]To me, they look like
+[01:31.64]a team of monkeys painted them!"
+[01:34.64]B: I love Pollock's paintings.
+[01:37.44]I see something new
+[01:38.80]every time I look at them.
+[01:41.68]A: Well, I guess it's true what they say,
+[01:44.56]one person's trash
+[01:46.04]is another person's treasure.
+[01:49.68]Now, rubbish and garbage
+[01:52.40]mean the same as trash.
+[01:55.24]But, in this expression,
+[01:57.48]we use trash
+[01:59.64]because the "tr" in trash
+[02:02.88]and treasure makes the expression
+[02:06.08]sound more natural.
+[02:08.52]It just sounds better.
+[02:11.44]And, sometimes, we use the word "man"
+[02:14.92]in place of "person"
+[02:17.24]such as one man's trash
+[02:19.68]is another man's treasure.
+[02:22.40]Again it is just easier to say.
+[02:26.48]Another expression with a similar meaning
+[02:29.60]is different strokes for different folks.
+[02:34.36]This also means that different things
+[02:37.40]appeal to different people.
+[02:40.68]But as a set expression,
+[02:43.00]we do not say
+[02:44.36]"different strokes for different people."
+[02:47.32]That just doesn't sound right.
+[02:51.16]Different strokes for different folks
+[02:53.60]can also mean that people
+[02:55.80]live in different ways
+[02:58.28]and value different things.
+[03:02.04]For example, a perfect evening
+[03:04.84]for my friend is to go out
+[03:07.72]and dance all night long.
+[03:11.52]For me, a perfect evening
+[03:14.04]is to stay at home with a book
+[03:16.80]and a cup of tea.
+[03:19.08]Neither is a better way to spend the evening.
+ [03:22.64]So, we should not judge.
+[03:25.40]Or in other words,
+[03:26.84]different strokes for different folks.
+[03:30.40]When we want to say
+[03:32.00]that we are all different
+[03:33.72]and we like different things without judgment,
+[03:37.68]we can also use the following expressions:
+[03:42.28]It takes all kinds to make the world go round.
+[03:46.16]It takes all kinds.
+[03:48.32]To each his own.
+[03:50.24]Or to each her own
+[03:52.64]Whatever floats your boat.
+[03:55.60]They all mean ...
+[03:56.92]whatever makes you happy!
+[03:59.80]And all of these expressions
+[04:01.84]have the same general meaning:
+[04:04.40]We are all different and unique.
+[04:06.96]And that's the end
+[04:09.76]of this Words and Their Stories.
+[04:12.28]Until next time, I'm Anna Matteo. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

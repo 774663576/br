@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 飓风是如何形成的？</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 飓风是如何形成的？" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201709/how-do-hurricanes-form.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>飓风是如何形成的？</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201709/how-do-hurricanes-form.mp3" id="mp3"></a>
+<a href="/static/lrc/how-do-hurricanes-form.lrc" id="lrc"></a>
+<a href="how-do-hurricanes-form-76573.html" id="CnPage" target="_blank"></a>
+<a href="oil-embargo-among-moves-considered-for-north-korea-76564.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Three powerful ocean storms threaten the Caribbean, the coast of the southeastern United States and southeastern Mexico.<br/>三场强烈的海洋风暴威胁到加勒比海、美国东南部和墨西哥东南部的海岸。
+<p>Hurricane Irma has struck Cuba and now threatens the state of Florida with strong winds and rain. The storm has caused deaths and widespread destruction on several Caribbean islands. <br/>飓风艾尔玛已经袭击了古巴，现在夹杂着狂风暴雨威胁到佛罗里达州。这场风暴已经在数个加勒比海岛造成了人员死亡和大面积破坏。</p>
+<p>Hurricane Katia is in the southern Gulf of Mexico. It is nearing Mexico's eastern coast. And Hurricane Jose is gaining strength in the Atlantic Ocean.<br/>飓风卡蒂亚位于墨西哥湾南部，这里临近墨西哥东海岸。飓风何塞正在大西洋上积聚力量。</p>
+<p>The three hurricanes come as the state of Texas recovers from Hurricane Harvey. The huge storm caused severe flooding and billions of dollars in damage in Houston, the country's fourth-largest city.<br/>这三场飓风的来临正值德克萨斯州从飓风哈维中恢复之际。飓风哈维给美国第四大城市休斯顿带来了严重洪水，并造成数十亿美元的损失。</p>
+<p>Hurricane season in the Atlantic Ocean goes from June 1 to November 30. And the month of September is the peak of storm activity.<br/>大西洋的飓风季从6月1日持续到11月30日。而9月份是风暴活动的高峰。</p>
+<p><strong>Hurricanes: a weather engine fueled by warm, moist air<br/>飓风：由湿热空气提供动力的气象“发动机”</strong></p>
+<p>Hurricanes are the most powerful storms in the Earth's atmosphere. The storms have different names depending on where they take place. Scientists call all these storms tropical cyclones.<br/>飓风是地球大气层中最为强烈的风暴。这些风暴的名称各异，它主要取决于风暴的发生地点。科学家称所有这些风暴为热带气旋。</p>
+<p>If the storms form over the Atlantic Ocean or eastern Pacific Ocean, they are called hurricanes. Storms that form in the western Pacific Ocean are known as typhoons. In the Indian Ocean, they are called cyclones.<br/>如果风暴形成于大西洋或东太平洋，它们就被称之为飓风。西太平洋形成的风暴被称之为台风。而在印度洋，它们被称之为旋风。</p>
+<p>Although they have different names, all these storms form in the same way.<br/>虽然名字各异，但是所有这些风暴形成的方式都一样。</p>
+<p>Scientists at the American space agency NASA describe tropical cyclones as huge weather "engines" that use warm, moist air as fuel. They can only form over warm, tropical waters near the equator.<br/>美国航天局的科学家称热带气旋是以湿热空气为动力的大型气象“发动机。”它们只能在赤道附近的温暖热带水域形成。</p>
+<p>A tropical cyclone develops when warm moist air near the surface of the ocean rises. This creates an area of unusually low air pressure.<br/>当海洋表面的湿热空气上升就会形成热带气旋，这会产生一个特殊的低气压区域。</p>
+<p>Higher-pressure air from surrounding areas pushes in to take the place of the warm, rising air. It becomes warmer and moister and rises, too.<br/>来自周围区域的高压空气涌入进来，取代温暖上升空气的位置，然后它们也会变成湿热空气上升。</p>
+<p>The rising, moist air goes high into the atmosphere, where temperatures are low. This creates wind. The moisture forms clouds. The developing weather system begins to spin because of the Earth's rotation.<br/>这种上升的潮湿空气向上进入到温度很低大气层之中，就会产生风，水分就形成云层。由于地球自转，这种发展中的气象系统也开始旋转。</p>
+<p>As the storm spins faster and faster, what is called an "eye" of the storm develops at its center. This is a calm area of very low pressure. Higher pressure air from above flows down into the eye.<br/>随着风暴转速越来越快，在它的中心就会形成“风眼”，这是一片气压极低的平静区域。来自上方的高压空气向下流入风眼。</p>
+<p><strong>Tropical cyclone categories—it's about wind speed<br/>热带气旋级别跟风速有关</strong></p>
+<p>When wind speeds reach about 63 kilometers per hour, meteorologists say a tropical storm has formed. When winds in the storm are measured at 119 kilometers per hour or above, a tropical storm officially becomes a category one "tropical cyclone," or in the Western Hemisphere, a hurricane.<br/>当风速达到每小时63公里，气象学家就称热带风暴已经形成。当风暴中测得的风速不低于每小时119公里，热带风暴就正式变为一级热带气旋。在西半球就是所谓飓风。</p>
+<p>Meteorologists use measurements of wind speed to place tropical cyclones in categories. When a hurricane's wind speed reaches 155 kilometers an hour, it is called category two.<br/>气象学家使用测得的风速给热带气旋分级别。当飓风的风速达到155公里每小时，它就被称之为二级飓风。</p>
+<p>The categories go up to category five, the most dangerous and catastrophic storm. A category-five storm has wind speeds measured at over 250 kilometers per hour. They can cause a storm surge, or a rise in water levels of more than five meters.<br/>飓风级别最高为五级，是最危险的灾难性风暴。五级风暴测得的风速可以达到250公里每小时以上，它们会导致暴风巨浪，或是导致水位升高超过5米。</p>
+<p>The National Oceanic and Atmospheric Administration, or NOAA, operates two satellites that track weather and storms in the eastern Pacific and Atlantic Oceans. NOAA provides maps from the (GOES) satellites online.<br/>美国国家海洋和大气管理局负责操作两颗跟踪东太平洋和大西洋海域气象和风暴的卫星。国家海洋和大气管理局在线提供了来自这些地球静止业务环境卫星的卫星云图。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·里特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How Do Hurricanes Form?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]Three powerful ocean storms threaten the Caribbean,
+[00:03.94]the coast of the southeastern United States and southeastern Mexico.
+[00:11.08]Hurricane Irma has struck Cuba
+[00:13.69]and now threatens the state of Florida with strong winds and rain.
+[00:19.84]The storm has caused deaths and widespread destruction on several Caribbean islands.
+[00:27.36]Hurricane Katia is in the southern Gulf of Mexico.
+[00:32.36]It is nearing Mexico's eastern coast.
+[00:36.28]And Hurricane Jose is gaining strength in the Atlantic Ocean.
+[00:42.56]The three hurricanes come as the state of Texas recovers from Hurricane Harvey.
+[00:48.80]The huge storm caused severe flooding and billions of dollars in damage
+[00:54.20]in Houston, the country's fourth-largest city.
+[00:59.28]Hurricane season in the Atlantic Ocean goes from June 1 to November 30.
+[01:05.92]And the month of September is the peak of storm activity.
+[01:12.72]Hurricanes are the most powerful storms in the Earth's atmosphere.
+[01:18.52]The storms have different names depending on where they take place.
+[01:24.52]Scientists call all these storms tropical cyclones.
+[01:30.20]If the storms form over the Atlantic Ocean or eastern Pacific Ocean, they are called hurricanes.
+[01:38.64]Storms that form in the western Pacific Ocean are known as typhoons.
+[01:45.68]In the Indian Ocean, they are called cyclones.
+[01:51.16]Although they have different names, all these storms form in the same way.
+[02:00.40]Scientists at the American space agency NASA describe tropical cyclones
+[02:07.44]as huge weather "engines" that use warm, moist air as fuel.
+[02:15.04]They can only form over warm, tropical waters near the equator.
+[02:22.12]A tropical cyclone develops when warm moist air near the surface of the ocean rises.
+[02:30.07]This creates an area of unusually low air pressure.
+[02:36.28]Higher-pressure air from surrounding areas
+[02:39.80]pushes in to take the place of the warm, rising air.
+[02:44.80]It becomes warmer and moister and rises, too.
+[02:50.32]The rising, moist air goes high into the atmosphere,
+[02:55.36]where temperatures are low. This creates wind.
+[03:00.68]The moisture forms clouds.
+[03:03.72]The developing weather system begins to spin because of the Earth's rotation.
+[03:11.20]As the storm spins faster and faster,
+[03:15.00]what is called an "eye" of the storm develops at its center.
+[03:21.44]This is a calm area of very low pressure.
+[03:26.28]Higher pressure air from above flows down into the eye.
+[03:31.92]When wind speeds reach about 63 kilometers per hour,
+[03:37.76]meteorologists say a tropical storm has formed.
+[03:43.88]When winds in the storm are measured at 119 kilometers per hour or above,
+[03:51.16]a tropical storm officially becomes a category one "tropical cyclone,"
+[03:58.00]or in the Western Hemisphere, a hurricane.
+[04:02.56]Meteorologists use measurements of wind speed
+[04:07.60]to place tropical cyclones in categories.
+[04:12.76]When a hurricane's wind speed reaches 155 kilometers an hour,
+[04:18.80]it is called category two.
+[04:22.72]The categories go up to category five,
+[04:26.60]the most dangerous and catastrophic storm.
+[04:31.60]A category-five storm has wind speeds measured at over 250 kilometers per hour.
+[04:40.16]They can cause a storm surge, or a rise in water levels of more than five meters.
+[04:49.85]The National Oceanic and Atmospheric Administration, or NOAA,
+[04:56.16]operates two satellites that track weather and storms
+[05:01.08]in the eastern Pacific and Atlantic Oceans.
+[05:05.40]NOAA provides maps from the (GOES) satellites online.
+[05:11.04]I'm Mario Ritter. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

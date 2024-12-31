@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Syllable Dropping in Speaking</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Syllable Dropping in Speaking" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/syllable-dropping-in-speaking.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Syllable Dropping in Speaking</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/syllable-dropping-in-speaking.mp3" id="mp3"></a>
+<a href="american-stories-chicken-little-90544.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">10 March 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about syllable dropping in American English pronunciation.</p>
+<p><strong>Question:</strong></p>
+<p>Hi, VOA Learning English,</p><div class="contentImage"><img alt="Ask a Teacher: Syllable Dropping in Speaking" src="https://files.21voa.com/gdb/01000000-0aff-0242-b924-08db20e0435b_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Syllable Dropping in Speaking</span></div>
+<p>I'm Herbert from Germany.</p>
+<p>Throughout my whole life speaking English, I did not realize that some vowels in words are "swallowed," like in the words "vegetable," "family" and "difference."</p>
+<p>Could you give a lecture on this topic?</p>
+<p>Thanks a lot,</p>
+<p>Herbert</p>
+<p><strong>Answer</strong></p>
+<p>Hi Herbert,</p>
+<p>This is an interesting question! Or is it interesting? Now you have us thinking! We do not "swallow" the vowels. That would be a little strange, but it creates a great image!</p>
+<p>So, why does it happen in English?</p>
+<p><strong>Syllables and vowels</strong></p>
+<p>First, let's talk about syllables and vowels.</p>
+<p>A syllable is part of a word that contains one vowel sound. For example, "cat" is a one-syllable word that contains one vowel sound. And "swallow", with two vowel sounds, has two syllables -<em>swa(l)</em> and <em>-lo</em>.</p>
+<p><strong>Stress and unstressed vowels</strong></p>
+<p>Every word in English has one stressed syllable. This is called word stress. The stressed syllable is longer, louder and clearer than the other syllables. The unstressed syllables then become shorter, softer, and less clear.</p>
+<p>Now, let's look at the word "family" with its three vowels of <em>a, i</em> and <em>y</em>. The stress is on the first syllable <em>-fam</em>. Over time the vowel <em>i </em>relaxes so much that we dropped the whole syllable and turned it into <em>-fam-ly.</em></p>
+<p>We say some of these words so often that we skip over the less important, unstressed vowels. As you said, "vegetable" becomes <em>vej-t<i>&amp;#</i>601;-b<i>&amp;#&lt;/I&gt;601;l &lt;/em&gt;and "difference" becomes &lt;em&gt;di-f(&lt;I&gt;&amp;#&lt;/I&gt;601;-)r&lt;I&gt;&amp;#&lt;/I&gt;601;n(t)s.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Let's look at a few more examples of words that lose unstressed vowels.&lt;/p&gt;
+&lt;p&gt;"Business" is pronounced with two syllables, &lt;em&gt;biz-n&lt;I&gt;&amp;#&lt;/I&gt;601;s&lt;/em&gt;, instead of three. The &lt;em&gt;i &lt;/em&gt;vowel sound is dropped. You do not want to pronounce it &lt;em&gt;bi-ze-n&lt;I&gt;&amp;#&lt;/I&gt;601;s. &lt;/em&gt;That is another three-syllable word "busyness."&lt;/p&gt;
+&lt;p&gt;"Evening" is pronounced with two syllables instead of three - &lt;em&gt;ev-ning&lt;/em&gt; not &lt;em&gt;e-ven-ing&lt;/em&gt;. And lastly, we have "Wednesday," the third day of the work week as &lt;em&gt;wenz-day&lt;/em&gt; not &lt;em&gt;wed-nes-day&lt;/em&gt;.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Speaking like a native&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can speak fast like a native speaker of American English by dropping syllables.&lt;strong&gt; &lt;/strong&gt; But remember to center more on the stressed vowel, rather than the dropping of the unstressed one.&lt;/p&gt;
+&lt;p&gt;In this exercise, I will pronounce all the syllables first, then drop the unstressed vowel.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Family (3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Family (2)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Difference (3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Difference (2)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Vegetable (4)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Vegetable (3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Please let us know if these explanations and examples have helped you, Herbert!&lt;/p&gt;
+&lt;p&gt;What question do you&lt;em&gt; &lt;/em&gt;have about American English? Send us an email at &lt;a class="wsw__a" href="mailto:learningenglish@voanews.com"&gt;learningenglish@voanews.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And that's &lt;em&gt;Ask a Teacher&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;I'm Faith Pirlo.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Faith Pirlo wrote this lesson for VOA Learning English.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;___________________________________________________________________&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="wsw__h2"&gt;&lt;strong&gt;Words in This Story&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;vowel&lt;/strong&gt; – &lt;em&gt;n&lt;/em&gt;. a speech sound made with your mouth open and your tongue in the middle of your mouth not touching your teeth, lips, etc.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;lecture &lt;/strong&gt;&lt;em&gt;– n. &lt;/em&gt;a talk or presentation by a professor or teacher&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pronunciation &lt;/strong&gt;–n. the sound of the way a word is said&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;stress&lt;/strong&gt; &lt;em&gt;–&lt;/em&gt; &lt;em&gt;adj&lt;/em&gt;. something that is stressed is louder or in a higher pitch when speaking&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;relaxed &lt;/strong&gt;&lt;em&gt;–&lt;/em&gt;&lt;strong&gt; &lt;/strong&gt;&lt;em&gt;adj.&lt;/em&gt; not tense or stressed&lt;strong style="font-size: 9pt;"&gt;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="reading-skills-definitions-and-transitions-90510.html" target=_blank&gt;Reading Skills: Definitions and Transitions&lt;/A&gt;   (23/3/3)&lt;/LI&gt;&lt;LI&gt;&lt;A href="disturbing-vs-irritating-90480.html" target=_blank&gt;Disturbing vs. Irritating&lt;/A&gt;   (23/2/24)&lt;/LI&gt;&lt;LI&gt;&lt;A href="made-and-prepositions-90444.html" target=_blank&gt;Made and Prepositions&lt;/A&gt;   (23/2/17)&lt;/LI&gt;&lt;LI&gt;&lt;A href="prediction-and-projection-90377.html" target=_blank&gt;Prediction and Projection&lt;/A&gt;   (23/2/3)&lt;/LI&gt;&lt;LI&gt;&lt;A href="how-to-use-avoid-prevent-90341.html" target=_blank&gt;How to Use Avoid, Prevent&lt;/A&gt;   (23/1/27)&lt;/LI&gt;&lt;LI&gt;&lt;A href="release-and-relief-90307.html" target=_blank&gt;Release and Relief&lt;/A&gt;   (23/1/20)&lt;/LI&gt;&lt;LI&gt;&lt;A href="to-do-or-create-90268.html" target=_blank&gt;To Do or Create?&lt;/A&gt;   (23/1/13)&lt;/LI&gt;&lt;LI&gt;&lt;A href="veggie-vegetarian-or-vegan-90235.html" target=_blank&gt;Veggie, Vegetarian, or Vegan?&lt;/A&gt;   (23/1/6)&lt;/LI&gt;&lt;LI&gt;&lt;A href="nation-vs-country-90204.html" target=_blank&gt;Nation or Country?&lt;/A&gt;   (22/12/30)&lt;/LI&gt;&lt;LI&gt;&lt;A href="able-or-ible-90176.html" target=_blank&gt;Able or Ible&lt;/A&gt;   (22/12/23)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></em></p></div></div></div></body></body></html>

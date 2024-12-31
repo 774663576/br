@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 传统课本重新回归芬兰校园</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Education Report, 传统课本重新回归芬兰校园" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/finnish-students-go-back-to-school-with-books-not-screens.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>传统课本重新回归芬兰校园</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/finnish-students-go-back-to-school-with-books-not-screens.mp3" id="mp3"></a>
+<a href="/static/lrc/finnish-students-go-back-to-school-with-books-not-screens.lrc" id="lrc"></a>
+<a href="finnish-students-go-back-to-school-with-books-not-screens-92988.html" id="CnPage" target="_blank"></a>
+<a href="spacex-crew-returns-to-earth-after-first-private-spacewalks-92985.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>This autumn, students in the Finnish town of Riihimaki headed back to school with backpacks full of books. This marks a change from recent years.<br/>
+今年秋天，芬兰里希马基镇的学生背着装满书籍的背包回到学校。这标志着近年来的一次变化。</p>
+<p>For the past 10 years, the Finnish government pushed laptops and other electronic devices in the classroom.<br/>
+在过去的10年里，芬兰政府在课堂上推广笔记本电脑和其他电子设备。</p>
+<p>Finland's public education system is known for its good results and its readiness to try new teaching methods. Until recently, many schools gave laptops for free to all students from as early as age 11.<br/>
+芬兰的公共教育体系以其良好的成绩和乐于尝试新教学方法而闻名。最近，许多学校向最小11岁的所有学生免费提供笔记本电脑。</p>
+<p>But Finnish parents and teachers have become increasingly concerned over the effect of screens on children.<br/>
+但芬兰的家长和老师越来越担心电子屏幕对孩子的影响。</p>
+<p>Riihimaki is a town of about 30,000 people. It sits 70 kilometers north of the capital, Helsinki. In 2018, the town's middle schools stopped using most books. But this school year, schools in Riihimaki are going back to pen and paper.<br/>
+里希马基是一个约有3万人的小镇。它位于首都赫尔辛基以北70公里处。2018年，该镇的中学停止使用大部分书籍。但本学年，里希马基镇的学校将回到纸和笔的时代。</p>
+<p>"Young people are using phones and digital devices so much these days that we don't want school to be one of the places where children are only staring at screens," said Maija Kaunonen, an English teacher at Pohjolanrinne middle school.<br/>
+Pohjolanrinne中学的英语老师麦杰亚·考诺宁说：“现在年轻人使用手机和数字设备的频率太高了，我们不希望学校成为孩子们只盯着屏幕的地方。”</p>
+<p>The distractions that come with the use of digital devices make many children restless and unable to give their full attention to learning, Kaunonen said.<br/>
+考诺宁说，使用数字设备带来的分心让许多孩子坐立不安，无法全神贯注于学习。</p>
+<p>She added, "Most students just did the exercises as quick as they could” so they could then move on to using social media.<br/>
+她补充道，“大多数学生只是尽可能快地做练习”，这样他们就可以继续使用社交媒体了。</p>
+<p>"And it took them no time at all to change tabs in the browser. So when the teacher came round to them, they could say: 'Yes, I was doing this exercise'."<br/>
+“他们在浏览器中切换窗口几乎不需要时间。所以当老师走过来时，他们可以说：‘是的，我正在做这个练习’。”</p>
+<p>Across Finland, children's learning results have been slowly getting worse in recent years. In answer, the government plans new laws to ban the use of personal devices, such as phones, during school hours to cut back on screen time.<br/>
+近年来，芬兰各地的儿童学习成绩逐渐恶化。作为回应，政府计划制定新的法律，禁止在上课时间使用手机等个人设备，以减少电子屏幕使用时间。</p>
+<p>Improved concentration<br/>
+提高注意力</p>
+<p>One of Kaunonen's students is 14-year-old Elle Sokka. She said she did not always pay attention to the school subjects when learning digitally. Instead, she moved to another web page.<br/>
+14岁的艾莉·苏卡是考诺宁的学生之一。她说，在数字化教学时，她并不总是将注意力放在学校科目上。相反，她转到了另一个网页。</p>
+<p>Eighth-graders Miko Mantila and Inka Warro, both 14, said their concentration has improved since books returned to the classrooms.<br/>
+14岁的八年级学生米克·曼蒂拉和因卡·瓦罗说，自从书本回到教室后，他们的注意力有所提高。</p>
+<p>"Reading, for one, is much easier and I can read much faster from books," Mantila said.<br/>
+曼蒂拉说：“首先阅读要容易得多，而且我从书本上读得更快。”</p>
+<p>"And if you have to do homework late at night, it's easier to go to sleep when you haven't just been looking at a device," Warro added.<br/>
+瓦罗补充道：“如果你必须在深夜做作业，那么当你不是一直盯着电子设备的时候就更容易入睡。”</p>
+<p>Minna Peltopuro is a psychologist working with the town on the change. She said the total screen time should be cut because Finnish teenagers currently stare at a screen for up to six hours each day on average. She added that too much use of electronic devices comes with both physical and mental risks, such as eye problems and growing anxiety.<br/>
+明娜·佩尔托普罗是一名与该镇合作进行改革的心理学家。她说，总屏幕使用时间应该减少，因为芬兰青少年目前平均每天盯着屏幕长达6个小时。她补充说，过度使用电子设备会带来身体和精神上的风险，比如视力问题和日益增长的焦虑。</p>
+<p>Peltopuro added that the brain is at risk when trying to do more than one thing at a time. "Especially at a young age, one cannot manage it well," she said.<br/>
+佩尔托普罗补充说，当试图同时做多件事时，大脑会面临风险。她说：“尤其是在年轻的时候，人们无法很好地应对它。”</p>
+<p>I'm Jill Robbins.<br/>
+我是吉尔·罗宾斯。(21VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Finnish Students Go Back to School with Books, Not Screens]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.88]This autumn,
+[00:02.92]students in the Finnish town of Riihimaki
+[00:05.96]headed back to school
+[00:07.88]with backpacks full of books.
+[00:10.16]This marks a change from recent years.
+[00:13.96]For the past 10 years,
+[00:15.48]the Finnish government pushed laptops
+[00:18.28]and other electronic devices in the classroom.
+[00:22.28]Finland's public education system
+[00:25.04]is known for its good results
+[00:27.16]and its readiness to try new teaching methods.
+[00:31.36]Until recently,
+[00:32.68]many schools gave laptops for free
+[00:35.16]to all students from as early as age 11.
+[00:39.92]But Finnish parents and teachers
+[00:42.32]have become increasingly concerned
+[00:44.96]over the effect of screens on children.
+[00:48.80]Riihimaki is a town of about 30,000 people.
+[00:53.52]It sits 70 kilometers north of the capital, Helsinki.
+[00:58.92]In 2018, the town's middle schools
+[01:02.32]stopped using most books.
+[01:05.04]But this school year, schools in Riihimaki
+[01:08.48]are going back to pen and paper.
+[01:12.00]"Young people are using phones
+[01:14.16]and digital devices so much these days
+[01:17.12]that we don't want school to be one of the places
+[01:20.28]where children are only staring at screens,"
+[01:23.56]said Maija Kaunonen, an English teacher
+[01:26.92]at Pohjolanrinne middle school.
+[01:30.80]The distractions that come with the use
+[01:33.00]of digital devices make many children restless
+[01:36.52]and unable to give their full attention
+[01:38.88]to learning, Kaunonen said.
+[01:42.52]She added, "Most students
+[01:45.24]just did the exercises as quick as they could"
+[01:48.08]so they could then move on to using social media.
+[01:52.52]"And it took them no time at all
+[01:54.20]to change tabs in the browser.
+[01:57.20]So when the teacher came round to them,
+[02:00.08]they could say: 'Yes, I was doing this exercise'."
+[02:05.20]Across Finland, children's learning results
+[02:08.04]have been slowly getting worse in recent years.
+[02:12.20]In answer, the government plans new laws
+[02:15.36]to ban the use of personal devices, such as phones,
+[02:18.76]during school hours to cut back on screen time.
+[02:23.40]One of Kaunonen's students
+[02:25.52]is 14-year-old Elle Sokka.
+[02:29.44]She said she did not always pay attention
+[02:31.96]to the school subjects
+[02:33.36]when learning digitally.
+[02:36.64]Instead, she moved to another web page.
+[02:40.12]Eighth-graders Miko Mantila
+[02:42.92]and Inka Warro, both 14,
+[02:46.12]said their concentration has improved
+[02:48.72]since books returned to the classrooms.
+[02:52.44]"Reading, for one, is much easier
+[02:54.68]and I can read much faster from books," Mantila said.
+[02:59.80]"And if you have to do homework late at night,
+[03:02.36]it's easier to go to sleep
+[03:04.32]when you haven't just been looking at a device," Warro added.
+[03:09.56]Minna Peltopuro is a psychologist
+[03:12.44]working with the town on the change.
+[03:15.96]She said the total screen time should be cut
+[03:19.44]because Finnish teenagers currently stare at a screen
+[03:22.88]for up to six hours each day on average.
+[03:27.28]She added that too much use of electronic devices
+[03:31.08]comes with both physical and mental risks,
+[03:34.04]such as eye problems and growing anxiety.
+[03:38.64]Peltopuro added that the brain is at risk
+[03:41.72]when trying to do more than one thing at a time.
+[03:45.48]"Especially at a young age,
+[03:47.28]one cannot manage it well," she said.
+[03:50.96]I'm Jill Robbins. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

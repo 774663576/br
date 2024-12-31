@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 盖茨基金会帮助非洲开发mRNA疫苗</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Health Report, 盖茨基金会帮助非洲开发mRNA疫苗" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202310/gates-foundation-helps-mrna-vaccine-development-in-africa.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>盖茨基金会帮助非洲开发mRNA疫苗</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202310/gates-foundation-helps-mrna-vaccine-development-in-africa.mp3" id="mp3"></a>
+<a href="/static/lrc/gates-foundation-helps-mrna-vaccine-development-in-africa.lrc" id="lrc"></a>
+<a href="gates-foundation-helps-mrna-vaccine-development-in-africa-91650.html" id="CnPage" target="_blank"></a>
+<a href="ugandan-business-turns-banana-fiber-into-sustainable-products-91647.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The Bill &amp; Melinda Gates Foundation announced last week that it will invest $40 million in African drug makers. The money will help produce new messenger RNA vaccines in Africa. The continent's people were the last to receive vaccinations against COVID-19 during the pandemic.<br/>
+比尔和梅琳达·盖茨基金会上周宣布，将向非洲制药商投资4000万美元。这笔钱将帮助在非洲生产新的信使核糖核酸疫苗。在大流行期间，非洲大陆的人民是最后一批接种新冠肺炎疫苗的人。</p>
+<p>The foundation said that its investment marks an important step forward in improving vaccine equity. It said making vaccines and getting them approved for use could take at least three more years.<br/>
+该基金会表示，其投资标志着在提高疫苗公平性方面迈出了重要一步。它表示，生产疫苗并获批使用可能至少还需要三年时间。</p>
+<p>"Whether it's for local diseases in Africa like Rift Valley (fever) or for global diseases like TB (tuberculosis), mRNA looks like a very promising approach," Bill Gates told the Associated Press.<br/>
+比尔·盖茨告诉美联社：“无论是针对非洲的局部疾病，如裂谷热，还是针对结核病，信使核糖核酸看起来都是一种非常有前景的方法。”</p>
+<p>The Microsoft founder added, during a visit to the Institut Pasteur in Dakar, Senegal, "And so it allows us to bring in lots of African capabilities to work on these vaccines, and then this can be scaled up."<br/>
+这位微软创始人在访问位于塞内加尔达喀尔市的巴斯德研究所时补充道，“因此，这使我们能够引入大量非洲能力来研究这些疫苗，然后可以扩大规模。”</p>
+<p>The announcement came as the foundation opened its yearly three-day Grand Challenges event. The gathering brought together scientists and public health researchers from around the world.<br/>
+值此消息宣布之际，该基金会一年一度的为期三天的“大挑战”活动拉开了帷幕。这次活动汇集了来自世界各地的科学家和公共卫生研究人员。</p>
+<p>Institut Pasteur, along with South Africa-based company Biovac, will be using an mRNA research and manufacturing process developed by Quantoom Biosciences in Belgium.<br/>
+巴斯德研究所和南非Biovac公司将使用比利时Quantoom生物科学公司开发的信使核糖核酸研发和制造工艺。</p>
+<p>The foundation is giving five million dollars to each vaccine manufacturer. It will award another $10 million to other companies not yet identified. The remaining $20 million is going to Quantoom "to further advance the technology and lower costs."<br/>
+该基金会向每家疫苗制造商捐赠500万美元。它将向其他尚未确定的其它公司再奖励1000万美元。剩下的2000万美元将用于Quantoom公司“进一步推进技术和降低成本”。</p>
+<p>Pfizer and its partner BioNTech along with Moderna used the mRNA technology to develop COVID-19 vaccines in record time. The medicine supplies genetic direction to human cells leading to antibody production to fight COVID-19.<br/>
+辉瑞公司及其合作伙伴BioNTech，连同莫德纳公司在打破记录的时间内使用mRNA技术开发了新冠肺炎疫苗。该药物为人类细胞提供基因方向，从而产生抗体来对抗新冠肺炎。</p>
+<p>Those COVID-19 mRNA vaccines were quickly pushed through approval processes and received emergency use permission during the pandemic. The new vaccines under development in Africa will take longer anywhere from three to seven years.<br/>
+这些新冠肺炎mRNA疫苗很快通过了审批程序，并在大流行期间获得了紧急使用许可。非洲正在研发的新疫苗需要三到七年的时间。</p>
+<p>Dr. Amadou Sall is chief executive officer at Institut Pasteur. He said the deal will help build vaccine self-reliance in Africa. The organization has been producing yellow fever shots since the 1930s. It now hopes mRNA technology can be used to produce vaccines for other diseases in Africa including Lassa fever, Rift Valley fever, and Crimean-Congo hemorrhagic fever.<br/>
+阿马杜·萨尔博士是巴斯德研究所的首席执行官。他说，该协议将有助于非洲建立疫苗自力更生的能力。自20世纪30年代以来，该组织一直在生产黄热病疫苗。它现在希望信使核糖核酸技术可以用于生产非洲其他疾病的疫苗，包括拉萨热、裂谷热和克里米亚-刚果出血热。</p>
+<p>"What we want is next time there is a pandemic — we hope it won't happen soon — Africa would be able to make its own vaccine, to contribute to the development, and make sure that we protect the population," Sall said. "What happened with COVID should never happen again in the sense that Africans should get vaccinated as a matter of equity."<br/>
+萨尔说：“我们希望下次疫情爆发时非洲将能够制造自己的疫苗，为发展做出贡献，并确保我们保护人民。当然我们希望下次疫情不会来得那么快。从非洲人应该公平接种疫苗的意义上讲，新冠肺炎的情况不应该再次发生。”</p>
+<p>Jose Castillo is the leader of Quantoom Biosciences. He said the mRNA technologies permit low- and middle-income countries "to become autonomous in terms of research and development."<br/>
+何塞·卡斯蒂略是Quantoom生物科学公司的负责人。他说，信使核糖核酸技术能够让中低收入国家“在研发方面实现自主”。</p>
+<p>With $8.3 billion to give away in 2023, the Gates Foundation is the world's largest private philanthropic donor. The organization has spent billions of dollars to vaccinate against polio, treat and prevent malaria and HIV and, more recently, to develop vaccines for diseases like cholera.<br/>
+盖茨基金会是世界上最大的私人慈善捐赠机构，它将在2023年捐出83亿美元。该组织已花费数十亿美元接种脊髓灰质炎疫苗，治疗和预防疟疾和艾滋病毒，最近还开发了霍乱等疾病的疫苗。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦弗。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Gates Foundation Helps mRNA Vaccine Development in Africa]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Bill &amp; Melinda Gates Foundation announced last week
+[00:06.04]that it will invest $40 million in African drug makers.
+[00:13.20]The money will help produce new messenger
+[00:16.68]RNA vaccines in Africa.
+[00:20.08]The continent's people were the last
+[00:23.72]to receive vaccinations against COVID-19 during the pandemic.
+[00:31.00]The foundation said that its investment
+[00:34.24]marks an important step forward
+[00:37.28]in improving vaccine equity.
+[00:41.04]It said making vaccines
+[00:43.72]and getting them approved for use
+[00:46.56]could take at least three more years.
+[00:50.80]"Whether it's for local diseases in Africa
+[00:54.32]like Rift Valley (fever)
+[00:56.88]or for global diseases like TB (tuberculosis),
+[01:02.04]mRNA looks like a very promising approach,"
+[01:06.64]Bill Gates told the Associated Press.
+[01:10.64]The Microsoft founder added,
+[01:13.12]during a visit to the Institut Pasteur in Dakar, Senegal,
+[01:18.16]"And so it allows us to bring in
+[01:21.28]lots of African capabilities
+[01:24.20]to work on these vaccines,
+[01:26.68]and then this can be scaled up."
+[01:30.68]The announcement came as the foundation
+[01:33.60]opened its yearly three-day Grand Challenges event.
+[01:39.48]The gathering brought together scientists
+[01:42.64]and public health researchers from around the world.
+[01:48.00]Institut Pasteur, along with South Africa-based company Biovac,
+[01:54.00]will be using an mRNA
+[01:57.00]research and manufacturing process
+[02:00.40]developed by Quantoom Biosciences in Belgium.
+[02:05.64]The foundation is giving five million dollars
+[02:09.56]to each vaccine manufacturer.
+[02:13.08]It will award another $10 million
+[02:16.68]to other companies not yet identified.
+[02:21.12]The remaining $20 million is going to Quantoom
+[02:25.80]"to further advance the technology and lower costs."
+[02:31.76]Pfizer and its partner BioNTech along with Moderna
+[02:36.44]used the mRNA technology
+[02:39.76]to develop COVID-19 vaccines in record time.
+[02:45.48]The medicine supplies genetic direction
+[02:49.20]to human cells leading to antibody production
+[02:53.44]to fight COVID-19.
+[02:56.92]Those COVID-19 mRNA vaccines
+[03:00.56]were quickly pushed through approval processes
+[03:04.40]and received emergency use permission
+[03:07.96]during the pandemic.
+[03:10.64]The new vaccines under development
+[03:13.00]in Africa will take longer
+[03:15.56]anywhere from three to seven years.
+[03:19.68]Dr. Amadou Sall is chief executive officer at Institut Pasteur.
+[03:26.76]He said the deal will help build
+[03:29.72]vaccine self-reliance in Africa.
+[03:34.00]The organization has been producing
+[03:37.08]yellow fever shots since the 1930s.
+[03:41.84]It now hopes mRNA technology
+[03:45.20]can be used to produce vaccines
+[03:48.24]for other diseases in Africa
+[03:50.68]including Lassa fever, Rift Valley fever,
+[03:54.88]and Crimean-Congo hemorrhagic fever.
+[03:59.64]"What we want is next time there is a pandemic —
+[04:03.08]we hope it won't happen soon —
+[04:05.64]Africa would be able to make its own vaccine,
+[04:10.08]to contribute to the development,
+[04:12.48]and make sure that we protect the population," Sall said.
+[04:18.76]"What happened with COVID should never happen again
+[04:22.88]in the sense that Africans should get vaccinated
+[04:26.72]as a matter of equity."
+[04:30.32]Jose Castillo is the leader of Quantoom Biosciences.
+[04:36.44]He said the mRNA technologies
+[04:39.96]permit low- and middle-income countries
+[04:43.72]"to become autonomous
+[04:45.80]in terms of research and development."
+[04:49.92]With $8.3 billion to give away in 2023,
+[04:56.08]the Gates Foundation is the world's
+[04:58.80]largest private philanthropic donor.
+[05:02.56]The organization has spent billions of dollars
+[05:06.80]to vaccinate against polio,
+[05:10.16]treat and prevent malaria and HIV
+[05:13.84]and, more recently, to develop vaccines
+[05:18.24]for diseases like cholera.
+[05:21.40]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

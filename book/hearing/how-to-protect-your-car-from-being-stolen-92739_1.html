@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 如何防止汽车被盗？</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 如何防止汽车被盗？" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/how-to-protect-your-car-from-being-stolen.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>如何防止汽车被盗？</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/how-to-protect-your-car-from-being-stolen.mp3" id="mp3"></a>
+<a href="/static/lrc/how-to-protect-your-car-from-being-stolen.lrc" id="lrc"></a>
+<a href="how-to-protect-your-car-from-being-stolen-92739.html" id="CnPage" target="_blank"></a>
+<a href="researchers-in-australia-develop-a-water-harvester-92738.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Most recent cars have an electronic key that lets the owner get into and start the car.<br/>
+大多数新款汽车都有一个电子钥匙，车主可以用它进入并启动汽车。</p>
+<p>The electronic key is called a "fob" to those who know about the technology. The fob sends a short-range signal to the car. As the owner gets close, the fob unlocks the door.<br/>
+对于那些了解这项技术的人来说，该电子钥匙被称为“遥控钥匙”。遥控钥匙向汽车发送近距离信号。当车主靠近时，遥控钥匙打开车门。</p>
+<p>But the new technology also makes it easier for criminals to open the car without the key.<br/>
+但这项新技术也使犯罪分子更容易在没有钥匙的情况下打开汽车。</p>
+<p>When you lock your car and take the key with you inside your home, the fob does not stop sending its signal.<br/>
+当你锁上车并把钥匙带到家里时，遥控钥匙不会停止发送信号。</p>
+<p>Thieves, who have special equipment known as scanners, will pass by streets with a lot of cars. If the scanner shows that a fob is sending a signal, the thieves use a device that clones the signal and opens the car doors.<br/>
+小偷拥有被称为扫描仪的特殊设备，他们会带着设备经过交通繁忙的街道。如果扫描仪显示有遥控钥匙正在发送信号，小偷就会使用一种设备来克隆该信号，然后打开车门。</p>
+<p>Government officials around the world have asked carmakers to warn car buyers of the risks of the new technology. They also have asked them to make the fobs more secure.<br/>
+世界各地的政府官员已要求汽车制造商向购车者警示这种新技术的风险。他们还要求汽车制造商提高遥控钥匙的安全性。</p>
+<p>Until then, what can you do to prevent your car from being stolen?<br/>
+在那之前，你能做些什么来防止你的车被偷？</p>
+<p>Steve Launchbury has some suggestions he shared with the Associated Press. He is the head engineer of automotive security company Thatcham Research based in Britain.<br/>
+Steve Launchbury与美联社分享了一些建议。他是英国汽车安全公司Thatcham Research的首席工程师。</p>
+<p><span style="font-weight: bold;">Place your key in a protective bag<br/>
+将钥匙放在保护袋中</span></p>
+<p>"It's relatively easy for drivers to protect themselves," he said.<br/>
+他说：“对司机来说，保护自己相对容易。”</p>
+<p>The first tip is to put your key into a protective container or bag when you get home. One kind is called a Faraday bag. They are not very costly. The bag is made from a special metal material called mesh that blocks the signal from the fob. Just do not forget to put any extra keys you have into that bag, too.<br/>
+第一个建议是回家后把钥匙放进一个保护性的容器或袋子里。有一种叫做法拉第袋。它们卖得不贵。这个袋子是由一种叫做网状物的特殊金属材料制成的，它可以阻挡来自遥控钥匙的信号。只是别忘了把备用钥匙也放进那个包里。</p>
+<p>Some advice that is easy to find online says people should put their keys into the microwave or freezer to prevent their signal from being stolen. Launchbury said that does not work and it could harm your key.<br/>
+网上常见的一些建议说，人们应该把钥匙放进微波炉或冰箱，以防止信号被盗。Launchbury说这不起作用，还可能会损坏你的钥匙。</p>
+<p><span style="font-weight: bold;">Get a steering wheel lock<br/>
+买把方向盘锁</span></p>
+<p>You may have seen large locks that go across the steering wheel in television advertisements many years ago. It turns out they are still useful. They may be considered "old school," but the presence of big locks that are easy to see makes car thieves turn away. The only problem is that you must take extra time to unlock the device and put it away before you can drive away.<br/>
+很多年前，你可能在电视广告中看到过方向盘上的大锁。事实证明它们仍然有用。它们可能被认为是“老派”，但显眼的大锁会让偷车贼望而却步。唯一的问题是，你开车驶离前必须额外花时间来打开方向盘锁并将其放好。</p>
+<p><span style="font-weight: bold;">Change the settings<br/>
+更改设置</span></p>
+<p>Some car makers permit owners to deactivate the signal sent out by the fob. For Ford, Honda and Audi, owners can use their car's touchscreen system to find the correct way to turn off the signal. For Toyota, you can turn off the signal by pressing a combination of buttons on the fob.<br/>
+一些汽车制造商允许车主停用遥控钥匙发出的信号。对于福特、本田和奥迪来说，车主可以使用汽车的触摸屏系统找到关闭信号的正确方法。对于丰田，您可以通过按下遥控钥匙上的组合按钮来关闭信号。</p>
+<p>Read your car's owner's manual to be sure how to do this.<br/>
+阅读车主手册以确定如何做到这一点。</p>
+<p>Some car makers include motion sensors on their key fobs. If the fob has not been moved in a while, the fob turns off.<br/>
+一些汽车制造商在他们的遥控钥匙上安装了运动传感器。如果遥控钥匙有一段时间没有移动，遥控钥匙将关闭。</p>
+<p>If you buy a used car, some experts suggest that you get your keys reprogrammed in case the earlier owner still has a key.<br/>
+如果你买了一辆二手车，一些专家建议你重新编程钥匙，以防前车主还有钥匙。</p>
+<p><span style="font-weight: bold;">New theft techniques<br/>
+新型盗窃技术</span></p>
+<p>Launchbury said some cars have a new system called a controller area network, or CAN. The network permits different parts, or components of the car to communicate with each other. He said some thieves are trying to join the CAN through some physical electronic connection to unlock the car. They can do this by removing a headlight and plugging in a device that lets them in the car's network.<br/>
+Launchbury说，一些汽车有一种称为控制器局域网（CAN）的新系统。该网络允许汽车的不同零部件相互通信。他说，一些小偷试图通过某种物理电子连接进入控制器局域网来解锁汽车。他们可以通过拆除前照灯，然后插入一个可以进入汽车网络的设备来实现这一点。</p>
+<p>The device can send a signal, such as "unlock" or "start" to the central system.<br/>
+该设备可以向中央系统发送信号，如“解锁”或“启动”。</p>
+<p>Launchbury said this is where the physical lock can cause thieves to change their mind and force them to move on. Owners can also consider electronic immobilizers. These devices prevent a car from moving even if a thief gets into the internal system. However, immobilizers can be costly.<br/>
+Launchbury说，这是物理锁可能导致小偷改变思路并迫使他们继续前行的地方。车主也可以考虑使用电子防盗器。即使小偷进入内部系统，这些装置也能防止汽车移动。然而，防盗器价格可能很贵。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How to Protect Your Car from Being Stolen]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Most recent cars have an electronic key
+[00:03.44]that lets the owner get into and start the car.
+[00:06.96]The electronic key is called a "fob"
+[00:10.56]to those who know about the technology.
+[00:13.44]The fob sends a short-range signal to the car.
+[00:18.60]As the owner gets close,
+[00:20.72]the fob unlocks the door.
+[00:23.16]But the new technology
+[00:25.96]also makes it easier for criminals
+[00:28.48]to open the car without the key.
+[00:30.76]When you lock your car
+[00:33.32]and take the key with you inside your home,
+[00:36.40]the fob does not stop sending its signal.
+[00:42.00]Thieves, who have special equipment
+[00:44.04]known as scanners,
+[00:45.48]will pass by streets with a lot of cars.
+[00:48.60]If the scanner shows
+[00:51.16]that a fob is sending a signal,
+[00:53.84]the thieves use a device
+[00:56.68]that clones the signal
+[00:58.64]and opens the car doors.
+[01:02.00]Government officials around the world
+[01:05.20]have asked carmakers
+[01:07.40]to warn car buyers of the risks
+[01:11.12]of the new technology.
+[01:13.24]They also have asked them
+[01:15.72]to make the fobs more secure.
+[01:18.88]Until then, what can you do
+[01:22.20]to prevent your car from being stolen?
+[01:25.80]Steve Launchbury has some suggestions
+[01:29.60]he shared with the Associated Press.
+[01:32.32]He is the head engineer
+[01:34.32]of automotive security company
+[01:36.28]Thatcham Research based in Britain.
+[01:40.44]"It's relatively easy for drivers
+[01:42.72]to protect themselves," he said.
+[01:44.60]The first tip is to put your key
+[01:47.84]into a protective container or bag
+[01:50.08]when you get home.
+[01:51.36]One kind is called a Faraday bag.
+[01:54.72]They are not very costly.
+[01:57.08]The bag is made
+[01:58.16]from a special metal material called mesh
+[02:01.68]that blocks the signal from the fob.
+[02:04.60]Just do not forget to put
+[02:07.28]any extra keys you have into that bag, too.
+[02:12.52]Some advice that is easy to find online
+[02:16.08]says people should put their keys
+[02:18.40]into the microwave or freezer
+[02:20.60]to prevent their signal from being stolen.
+[02:23.96]Launchbury said that does not work
+[02:26.64]and it could harm your key.
+[02:31.24]You may have seen large locks
+[02:33.84]that go across the steering wheel
+[02:36.08]in television advertisements many years ago.
+[02:39.20]It turns out they are still useful.
+[02:42.12]They may be considered "old school,"
+[02:45.20]but the presence of big locks
+[02:47.52]that are easy to see makes car thieves turn away.
+[02:51.00]The only problem is that you must
+[02:53.76]take extra time to unlock the device
+[02:56.44]and put it away before you can drive away.
+[03:01.00]Some car makers permit owners
+[03:03.36]to deactivate the signal sent out by the fob.
+[03:06.84]For Ford, Honda and Audi,
+[03:09.84]owners can use their car's touchscreen system
+[03:13.36]to find the correct way to turn off the signal.
+[03:16.40]For Toyota, you can turn off the signal
+[03:19.80]by pressing a combination of buttons on the fob.
+[03:23.88]Read your car's owner's manual
+[03:25.84]to be sure how to do this.
+[03:29.00]Some car makers include
+[03:30.76]motion sensors on their key fobs.
+[03:34.00]If the fob has not been moved in a while,
+[03:37.16]the fob turns off.
+[03:39.60]If you buy a used car,
+[03:41.24]some experts suggest
+[03:42.92]that you get your keys reprogrammed
+[03:45.56]in case the earlier owner still has a key.
+[03:50.60]Launchbury said some cars
+[03:53.04]have a new system
+[03:54.20]called a controller area network, or CAN.
+[03:58.40]The network permits different parts,
+[04:01.04]or components of the car
+[04:02.56]to communicate with each other.
+[04:04.60]He said some thieves are trying to join the CAN
+[04:09.04]through some physical electronic connection
+[04:11.68]to unlock the car.
+[04:13.20]They can do this by removing a headlight
+[04:16.44]and plugging in a device
+[04:18.40]that lets them in the car's network.
+[04:21.56]The device can send a signal,
+[04:23.32]such as "unlock" or "start" to the central system.
+[04:28.84]Launchbury said this is where the physical lock
+[04:31.84]can cause thieves to change their mind
+[04:34.68]and force them to move on.
+[04:36.48]Owners can also consider
+[04:39.00]electronic immobilizers.
+[04:41.72]These devices prevent a car from moving
+[04:44.72]even if a thief gets into the internal system.
+[04:47.84]However, immobilizers can be costly.
+[04:51.80]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

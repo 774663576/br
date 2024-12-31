@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - American Orchestra Shares Arabic Music, Culture</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, American Orchestra Shares Arabic Music, Culture" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/american-orchestra-shares-arabic-music-culture.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>American Orchestra Shares Arabic Music, Culture</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/american-orchestra-shares-arabic-music-culture.mp3" id="mp3"></a>
+<a href="us-supreme-court-rejects-race-consideration-in-college-admissions-91114.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">30 June 2023</span><br/>
+<p>Michael Ibrahim is busy building bridges. But his bridges are not made of steel. And they do not cross rivers. Instead, they are made of music and cross cultures.</p>
+<p>Ibrahim is the founder and director of the National Arab Orchestra (NAO). The group is based in the state of Michigan. It aims to <strong>preserve </strong>and share Arabic music and culture in the United States through its performances and education programs.</p>
+<p>"We want to be an organization that is sort of the cultural representative of the Arab-American community," Ibrahim said.</p><div class="contentImage"><img alt="The National Arab Orchestra (NAO)performs onstage with supporting chorus. (Courtesy NAO/David Schall)" src="https://files.21voa.com/gdb/01000000-0a00-0242-e353-08db789eacd4_cx0_cy13_cw0_w268_r1.jpg"/><br/><span class="imagecaption">The National Arab Orchestra (NAO)performs onstage with supporting chorus. (Courtesy NAO/David Schall)</span></div>
+<p>At an NAO <strong>concert</strong>, the <strong>orchestra</strong> quickly makes connections with its listeners. As the musicians begin to play, Ibrahim moves his body up and down like a dancer. Soon, <strong>audience</strong> members start moving to the music's <strong>rhythm</strong>.</p>
+<p>Suddenly, Ibrahim turns around and faces the audience. He urges them to <strong>clap</strong> their hands to the beat of the music. And he urges them to sing along with parts of a well-known song from Egypt or Lebanon.</p>
+<p>With each song, the bridge between the audience and the orchestra grows.</p>
+<p><strong>Decreasing fear and increasing awareness</strong></p>
+<p>Ibrahim spoke about the need to help people know more about the culture of Arab-Americans:</p>
+<p>"The Arab-American community had to face a lot of discrimination, just because they're different, like any other minority community in this country. And that was <strong>magnified</strong>, you know, after the events of September 11."</p>
+<p>He added that after the terror attacks of September 11, 2001, there was a lot of false information. He said, "There is a huge debate on the meaning of the word, ‘Arab', and what is Arab culture"</p>
+<p>"So we're doing this to bring awareness about the culture, build these bridges so that people can have a chance to <strong>engage with</strong> each other, and then that in turn makes the world just a much better and easier place to live in because people are less afraid. . ."</p>
+<p>He added, "I really love to share who I am, and I feel like the best way for me to do that is for me to share my culture. . .but I also am born here. And what is American culture if not just this giant melting pot of constant immigration into this country that makes it what it is?"</p>
+<p><strong>Beginnings</strong></p>
+<p>Ibrahim was born into a Syrian immigrant family in Michigan. He said he was able to connect to his family's culture through music and the arts. When he was 10, he spent a year living in Syria with his family.</p>
+<p>Back in the U.S., he learned to play the oud, a stringed instrument his father played. He then studied both Western and Arabic music.</p>
+<p>The NAO started in 2009 as a student musical group at the University of Michigan under Ibrahim's direction. Soon it doubled in size and became the Michigan Arab Orchestra in 2010. It changed its name and began playing as the NAO in 2014. In the 2022-2023 season, the orchestra played together at 12 events, including a performance at the Kennedy Center in Washington, D.C.</p>
+<p>Ibrahim noted that the group tries to represent all the countries of the Arab world today. But he said much of the music they play comes from Egypt, Lebanon, Israel, and Syria.</p>
+<p><strong>Musical elements</strong></p>
+<p>The musicians in the orchestra are <strong>diverse</strong>. Some were born in the Middle East and moved to the United States. Others are Arab-Americans born in the U.S. And some are from the U.S. but have no family connection to Arab countries.</p>
+<p>The tonal and rhythmic patterns central to Arabic music are different from Western music. So are some of the instruments the musicians play.</p>
+<p>Throughout almost every song, Arabic orchestras have musicians playing different kinds of hand drums and tambourines. This gives the music a strong rhythmic feel. Two kinds of lutes, the <em>oud</em> and the <em>buzuq</em>, are among the instruments that help give the music its special sound. Another important instrument is the <em>qanun</em>.</p>
+<p>Ibrahim arranges the music that the orchestra plays. That means he writes down what each instrument will play. Depending on the piece, this can take him anywhere from two weeks to two months to finish.</p>
+<p>One of the big goals of Ibrahim and its executive director, Sherri Richards, is to create a year-round school of Arabic music in the U.S.</p>
+<p>"We're keeping this culture alive and we're building on it and letting it grow in its own unique way in this part of the world," Ibrahim said. "You have to share it with everybody; you can't just keep if for yourself. So that's the cross-cultural work," he added.</p>
+<p>Along with concerts, another way the NAO shares its culture is with its Building Bridges Through Music program. This includes an after-school program teaching Arabic music in the public schools of Detroit, Michigan.</p>
+<p><strong>Supporting the arts </strong></p>
+<p>In January, the NAO concert in Washington, D.C. sold out in less than three hours. About 1,100 people attended the concert.</p>
+<p>Richards, the executive director of the NAO, said, "We have over 400,000 followers on YouTube, which is more than any other orchestra in the world..."</p>
+<p>"That," she added "really speaks to the reach and the popularity of the music and the orchestra."</p>
+<p>Ibrahim explained that the arts bring people together in special ways.</p>
+<p>"I guess there's a case to be made for the place of the arts in spreading democracy. With the arts you have the ability to bring people from a variety and diverse geographical makeup. . . It works. We've shown that for the last 15 years we've been doing it."</p>
+<p>Ibrahim shared a central reason for supporting the arts. "I think it's really important that people support the arts," he said, "because that's where the <strong>soul</strong> of humanity <strong>resides</strong>."</p>
+<p>I'm Jill Robbins. And I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this story for VOA Learning English. </em></p>
+<p>__________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>preserve </strong><em>-v. </em>to maintain or keep something safe and protected over a long period of time</p>
+<p><strong>concert </strong><em>-n. </em>a performance of music in front of an audience</p>
+<p><strong>orchestra </strong><em>-n. </em>a large group of musicians playing a variety of musical instruments, especially those used for classical music</p>
+<p><strong>audience </strong><em>-n. </em>people attending a public performance such as a concert, play, or speech</p>
+<p><strong>rhythm </strong><em>-n. </em>how a piece of music is organized in time</p>
+<p><strong>clap </strong><em>-v. </em>to hit the palms of the hands together, usually to express approval</p>
+<p><strong>magnify </strong><em>-v. </em>to make something seem larger or more important than normal</p>
+<p><strong>engage with </strong><em>-v. </em>to interact with</p>
+<p><strong>diverse </strong><em>-adj. </em>having variety or many types</p>
+<p><strong>soul </strong><em>-n. </em>the innermost part of a person's mind and spirit</p>
+<p><strong>reside </strong><em>-v. </em>to live or exist in a certain place</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

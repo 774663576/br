@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Describing Your Favorite Character</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Describing Your Favorite Character" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202209/describing-your-favorite-character.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Describing Your Favorite Character</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202209/describing-your-favorite-character.mp3" id="mp3"></a>
+<a href="artificial-intelligence-tool-aims-to-identify-predict-smells-89643.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">15 September 2022</span><br/>
+<p>Think about a time you talked about a favorite <strong>character</strong> in a book you had read. Maybe you spoke about the character in a <strong>literature </strong>class at school. Or, perhaps, you discussed the character with a friend or in a book group.</p>
+<p>How did you do it? Did you describe what they looked like? Did you tell what the character did in the story? Did you talk about why you liked the character?</p>
+<p>In today's <em>Everyday Grammar</em>, we will discuss one of my favorite characters, Mrs. Frisby. She is from the children's book, <em>Mrs. Frisby and the Rats of NIMH</em> by Robert C. O'Brien.</p>
+<div class="contentImage"><img alt="Everyday Grammar: Describing Your Favorite Character" src="https://files.21voa.com/gdb/09860000-0aff-0242-a0e6-08da969da47a_w268_r1.png"/><br/>
+<span class="imagecaption">Everyday Grammar: Describing Your Favorite Character</span></div>
+<p>Mrs. Frisby is a field mouse and a mother. Her mate, father to their children, has died. Mrs. Frisby needs help moving her family to their summer home.</p>
+<p>This week, we will consider a few areas when looking at Mrs. Frisby: the character's appearance or looks and her thoughts and speech. In a future Everyday Grammar, we will look at her actions and how other characters think about her.</p>
+<p><strong>The character's appearance </strong></p>
+<p>Often story writers use descriptive language such as adjectives to provide a mental picture of the character's appearance.</p>
+<p>Let us look at how Robert C. O'Brien describes Mrs. Frisby's appearance:</p>
+<p>With her forepaws and sharp teeth she pulled off a part of the <strong>husk</strong> from the top ear of corn...</p>
+<p>Here O'Brien describes Mrs. Frisby's physical appearance while she is actively seeking food for her children.</p>
+<p>"Forepaws" is a compound noun. "Fore" means front in this case. Paws are the animal's feet.</p>
+<p>Mrs. Frisby's front teeth are described with the adjective "sharp."</p>
+<p>When I think of Mrs. Frisby's physical appearance, I picture a small, light brown mouse with a white stomach.</p>
+<p><strong>The character's thoughts and speech</strong></p>
+<p>Another way to describe a character is through the thoughts and feelings of the character and what they say.</p>
+<p>In one event, Mrs. Frisby tries to save Jeremy, a crow or black bird who tied himself up in a fence. The two of them are in discussion.</p>
+<p>(Mrs. Frisby) "Why did you pick up the <strong>string</strong>?"</p>
+<p>The crow, who was very young indeed – in fact only a year old – said... "Because it was shiny."</p>
+<p>(Mrs. Frisby) "You knew better..."</p>
+<p>"Come down here," she said. "I'll get the string off."</p>
+<p>"How?" said the crow...</p>
+<p>"Don't argue. I have only a few minutes..."</p>
+<p>Mrs. Frisby is trying to understand how Jeremy got himself tied up in the fence.</p>
+<p>To do this Mrs. Frisby uses a wh-question of "why." She wants to know the reason why Jeremy is in this situation. This shows that Mrs. Frisby is very curious and is always questioning.</p>
+<p>Mrs. Frisby also uses the imperative or command form in the sentences:</p>
+<p>"Come down here..." and</p>
+<p>"Don't argue..."</p>
+<p>The structure for the imperative or command form is:</p>
+<p>Base form of main verb (no subject)</p>
+<p>We understand the subject of commands to be "you", but we do not need to write the subject when making the command.</p>
+<p>So instead of:</p>
+<p>"You come down here."</p>
+<p>Mrs. Frisby just says, "Come down here."</p>
+<p>Mrs. Frisby's mothering skills come out as she tries to help Jeremy, so she uses commands to tell Jeremy what to do.</p>
+<p>Thoughts of a character are just as important as what they say. If we know what a character thinks, this can help us understand what <strong>motivates</strong> the character.</p>
+<p>For example, before Mrs. Frisby offers to help Jeremy, we are given some understanding of what she thinks about him.</p>
+<p><strong>Birdbrain</strong>, thought Mrs. Frisby, and then recalled what her husband used to say: The size of the brain is no measure of its <strong>capacity</strong>.<em> </em></p>
+<p>Instead of using <strong>quotation</strong> marks ("...") that show speech, the author only uses verbs and commas to show what Mrs. Frisby is thinking.</p>
+<p>The two verbs are "thought" and "recalled." These verbs are used in the past tense to show Mrs. Frisby already had these thoughts and to help with telling the story.</p>
+<p>"Thought" is the <strong>irregular</strong> past tense of "think." "Recalled" is the <strong>regular</strong> past tense form of recall, which means to remember.</p>
+<p>Mrs. Frisby thinks that Jeremy is not very smart for getting tied up in the fence. Then she remembers a saying her husband had about brain power.</p>
+<p><strong>Final thoughts</strong></p>
+<p>In this week's report we looked at how to describe a character from a book. We considered how the author uses adjectives to describe Mrs. Frisby's appearance. We can think about the character's talks with other characters, like how Mrs. Frisby was questioning Jeremy or how she used commands. We even looked at her thoughts and memories.</p>
+<p>Here is how I would describe Mrs. Frisby so far with what we know about her:</p>
+<p>Mrs. Frisby is a small, brown field mouse and mother. She uses her sharp teeth when finding food for her children. Although Mrs. Frisby is a curious mouse, she always questions the situation. She uses her mothering skills to help others in need.</p>
+<p><strong>Homework assignment</strong></p>
+<p>Let's end this report by continuing our homework assignment. Use your favorite character from a book. Try to find where the character is described. What adjectives are used to describe their appearance?</p>
+<p>Next, look at where they are speaking. Find those quotation marks. What are they saying? Find parts in the story where the character's thoughts are shown. What are they thinking or remembering?</p>
+<p>Write these sections down and send them to us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>We may use your writing in a future report of Everyday Grammar.</p>
+<p>I'm Faith Pirlo. I'm Andrew Smith. And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p>Describe your favorite character in the comments below or write to us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p><strong>__________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>character </strong><em>– n.</em> a person (or animal) who appears in a story, book, play, movie, or television show</p>
+<p><strong>literature </strong><em>– n.</em> written works considered as having high quality and ideas of lasting and widespread interest</p>
+<p><strong>husk </strong><em>– </em><em>n.</em> the outside of something that has had its insides removed</p>
+<p><strong>paw </strong><em>– n.</em> the foot of an animal</p>
+<p><strong>fence </strong><em>– n. </em>a barrier (as of wood or wire) to prevent escape or entry or to mark a boundary</p>
+<p><strong>string</strong> - <em>n.</em> a long, thin piece of material that one uses to hang things or connect things together</p>
+<p><strong>motivate</strong><em>–v. </em>to give someone energy or encouragement to do something</p>
+<p><strong>birdbrain </strong>– <em>n</em>.<strong> </strong> a way to insult another person's intelligence by comparing it to the size of a bird's brain</p>
+<p><strong>capacity </strong>– <em>n</em>. the largest amount that something can hold</p>
+<p><strong>quotation</strong> <em>– n.</em> a group of words taken from a written work or speech and repeated by someone other than the writer or speaker</p>
+<p><strong>irregular </strong><em>– adj.</em> not following the usual rules about what should be done</p>
+<p><strong>regular</strong> – <em>adj</em>. following the normal patterns by which word forms</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

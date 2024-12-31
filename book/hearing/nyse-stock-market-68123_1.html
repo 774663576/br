@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国市场回暖但震荡继续</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美国市场回暖但震荡继续" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201602/nyse-stock-market.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国市场回暖但震荡继续</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201602/nyse-stock-market.mp3" id="mp3"></a>
+<a href="/static/lrc/nyse-stock-market.lrc" id="lrc"></a>
+<a href="nyse-stock-market-68123.html" id="CnPage" target="_blank"></a>
+<a href="clinton-wins-in-nevada-trump-in-south-carolina-68104.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>New York Stock Exchange traders are wondering which way a volatile financial market will move in the upcoming months.<br/>纽约证券交易所的交易员想要知道未来数月动荡的金融市场将会何去何从。</p>
+<p>Low oil prices combined with less demand around the world have weakened American stock prices.<br/>低油价与世界各地的需求减少结合已经削弱了美国的股价。</p>
+<p>By the close of trading last week, the Standard and Poor's 500 was down more than 6 percent this year. But the S&amp;P 500 Index rose 2.8 percent on Friday to rebound from a New Year's slump.<br/>截至上周末收盘，标准普尔500指数今年已经下跌了超过6%。但是上周五标准普尔500指数从新年暴跌中反弹上涨了2.8%。</p>
+<p>On Monday, the S&amp;P 500 was up 27 points to close at 1,945. The Dow Jones Average, the main measure of major American stocks, rose 228 points to close at 16,620.<br/>周一，标准普尔500指数上涨了27点，收于1945点。美国重要股市的主要衡量指标道琼斯指数上涨228点，收于16620点。</p>
+<p>Wall Street traders and analysts are looking at factors that would keep the market in the positive. But for now, Wall Street watchers expect extreme ups and downs.<br/>华尔街交易员和分析师正在研究可能保持市场积极的各种因素。但是目前，华尔街观察家预计市场会极度跌宕起伏。</p>
+<p>The term "choppy trade" is used often now on Wall Street. A choppy market occurs when prices swing up and down with no major price movement in either direction.<br/>震荡交易这个术语现在经常被用于华尔街。当价格上下浮动，任何一个方向未出现重大价格变化时就会进入震荡市场。</p>
+<p>NYSE's Peter Costa said: "I think there is more volatility in these markets. What you may see is choppy trade with 200- to 300-point swings in the Dow, and 40 in the S&amp;P 500 ... for at least the next couple months."<br/>纽约证券交易所的彼得·科斯塔（Peter Costa）表示，“我认为这些市场会更加波动。至少在未来数月，道琼斯指数会出现上下200点到300点的波动，标准普尔500指数会出现上下40点的波动。</p>
+<p>This week is an important one for the market. Financial reports on consumer spending should be released by Target, Macy's, Home Depot and Lowe's. The Consumer Confidence report is set to be released Tuesday.<br/>本周对市场来说是关键的一周。塔吉特百货、梅西百货、家得宝和劳氏公司将会发表消费者支出财务报告。消费者信心报告也将于周二发布。</p>
+<p>American retail leader Wal-Mart recently reported earnings below estimates and lowered its full-year sales guidance.<br/>美国零售业领导者沃尔玛最近公布了低于预期的收益，并下调了全年销售预期。</p>
+<p>Consumer spending is a key factor to watch as the fourth-quarter earnings season comes to a close, said market analyst Lindsey Bell.<br/>市场分析师林赛·贝尔（Lindsey Bell）表示，消费者支出被视为观察即将结束的第四季度财报季的关键因素。</p>
+<p>Another sector traders will contend with this week includes a gross national product report Friday.<br/>其他行业交易员将同本周作斗争，包括周五即将发布的国民生产总值报告。</p>
+<p>I'm Jonathan Evans.<br/>我是乔纳森·埃文斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]New York Stock Exchange traders are wondering
+[00:03.72]which way a volatile financial market will move in the upcoming months.
+[00:09.72]Low oil prices combined with less demand around the world
+[00:15.40]have weakened American stock prices.
+[00:19.48]By the close of trading last week,
+[00:22.40]the Standard and Poor's 500 was down more than 6 percent this year.
+[00:29.16]But the S&amp;P 500 Index rose 2.8 percent on Friday
+[00:36.32]to rebound from a New Year's slump.
+[00:40.40]On Monday, the S&amp;P 500 was up 27 points to close at 1,945.
+[00:50.44]The Dow Jones Average, the main measure of major American stocks,
+[00:55.84]rose 228 points to close at 16,620.
+[01:03.80]Wall Street traders and analysts are looking at factors
+[01:08.52]that would keep the market in the positive.
+[01:12.12]But for now, Wall Street watchers expect extreme ups and downs.
+[01:18.96]The term "choppy trade" is used often now on Wall Street.
+[01:25.28]A choppy market occurs when prices swing up and down
+[01:30.32]with no major price movement in either direction.
+[01:34.80]NYSE's Peter Costa said:
+[01:38.20]"I think there is more volatility in these markets
+[01:42.36]What you may see is choppy trade with
+[01:45.36]200- to 300-point swings in the Dow,
+[01:48.76]and 40 in the S&amp;P 500 ...
+[01:51.52]for at least the next couple months."
+[01:54.88]This week is an important one for the market.
+[01:58.60]Financial reports on consumer spending
+[02:01.72]should be released by Target, Macy's, Home Depot and Lowe's.
+[02:08.24]The Consumer Confidence report is set to be released Tuesday.
+[02:13.52]American retail leader Wal-Mart recently reported earnings below estimates
+[02:19.76]and lowered its full-year sales guidance.
+[02:23.60]Consumer spending is a key factor to watch
+[02:27.36]as the fourth-quarter earnings season comes to a close,
+[02:31.56]said market analyst Lindsey Bell.
+[02:35.04]Another sector traders will contend with this week
+[02:38.84]includes a gross national product report Friday.
+[02:43.16]I'm Jonathan Evans.
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

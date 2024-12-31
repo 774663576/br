@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 英国公投决定脱欧，卡梅伦辞职</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 英国公投决定脱欧，卡梅伦辞职" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201606/51voa-britain-votes-to-leave-the-european-union-david-cameron-resigns.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>英国公投决定脱欧，卡梅伦辞职</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201606/51voa-britain-votes-to-leave-the-european-union-david-cameron-resigns.mp3" id="mp3"></a>
+<a href="/static/lrc/51voa-britain-votes-to-leave-the-european-union-david-cameron-resigns.lrc" id="lrc"></a>
+<a href="britain-votes-to-leave-the-european-union-david-cameron-resigns-70274.html" id="CnPage" target="_blank"></a>
+<a href="supreme-court-rules-in-favor-of-race-based-college-admissions-affirmative-action-70248.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Britain's decision to leave the European Union prompted Prime Minister David Cameron to resign and markets to fall around the world.<br/>英国脱离欧盟的决定促使了卡梅伦首相辞职以及全球市场下跌。</p>
+<p>Final results in Thursday's historic referendum gave the "Leave" campaign 52 percent, while "Remain" took 48 percent. Voter turnout was reported high across Britain, even with heavy rain falling in many areas.<br/>周四这场历史性公投的最终结果是52%的选票支持“脱欧”，还有48%的选票支持“留欧”。据报道英国各地选民投票率很高，即使很多地区下着暴雨。</p>
+<p>The outcome shocked many within Britain and across the world since recent opinion polls showed a growing lead for "Remain."<br/>公投结果震惊了英国和世界各地的许多人，因为最新民意调查显示“留欧”的领先优势不断扩大。</p>
+<p>UK Independent Party Leader Nigel Farage was the most vocal voice in the anti-EU movement. He said the "Leave" win was "our independence day." He called the results "a victory for real people, a victory for ordinary people, a victory for decent people."<br/>英国独立党领袖法拉奇在这场反欧盟运动中叫得最响。他说，“脱欧”获胜是我们的独立日。他称这一结果是平民的胜利，是正派人士的胜利。</p>
+<p>The close vote showed how deeply divided Britons are on issues of immigration and sovereignty that became the focus of the "Leave" campaign.<br/>选票接近表明了英国人在移民和主权问题上存在很大分歧，这两大问题成为了脱欧运动的焦点。</p>
+<p><strong>Cameron: Britain needs "fresh leadership"<br/>卡梅伦：英国需要新领导人</strong></p>
+<p>Prime Minister Cameron addressed that divide outside the official residence at 10 Downing Street Friday morning.<br/>周五早上卡梅伦在唐宁街10号的官邸之外谈到了这一分歧。</p>
+<p>"The British people have made a very clear decision to take a different path, and as such, I think the country requires fresh leadership to take it in this direction." The Conservative Party prime minister said he planned to leave office by October.<br/>他说，“英国民众已经做出了明确且不同的选择，因此我认为英国需要新的领导人来带领我们的国家向前。”这位保守党首相表示他计划在今年10月前离任。</p>
+<p>Cameron campaigned for continued EU membership. He said an exit would lead to disastrous consequences for Britain's economy and national security.<br/>卡梅伦力争继续留在欧盟。他说，脱离欧盟将会给英国的经济和国家安全带来灾难性的后果。</p>
+<p>The "Leave" campaign focused on what it views as uncontrolled immigration to Britain. It argued that Britain cannot effectively regulate the number of immigrants because of current EU rules.<br/>脱欧运动重点关注它所认为的向英国无序移民。该运动认为，由于欧盟的现行规定，英国无法有效控制移民数量。</p>
+<p>The movement believes the Brussels-based EU imposes too many regulations in Britain. It also argued that EU leaders are not accountable to the British government or its citizens.<br/>该运动认为，总部位于布鲁塞尔的欧盟对英国强加了太多法规。它还认为，欧盟领导人对英国政府或公民不负责任。</p>
+<p>British media reported the leading contender to replace Cameron is former London mayor Boris Johnson. He is a Conservative member who served as leader of the "Leave" campaign.<br/>英国媒体报道取代卡梅伦的领跑者是前伦敦市长鲍里斯·约翰逊（Boris Johnson）。他是担任脱欧运动领袖的保守党成员。</p>
+<p>On Friday, Johnson complimented Cameron for showing "bravery" for calling the referendum. "I think that the electorate have searched in their hearts and answered as honestly as they can."<br/>约翰逊周五称赞卡梅伦下令举行公投展示了“勇气”。“我认为全体选民已经非常认真严肃地做出选择。”</p>
+<p>He added: "This does not mean the United Kingdom will be any way less united (or) any less European. We cannot turn our backs on Europe, we are part of Europe."<br/>他补充说，“这并不意味着英国会有任何不团结或欧洲味更少。我们不能背弃欧洲，我们是欧洲的一部分。”</p>
+<p>Top EU leaders said in a statement that Britain will officially remain a member until its exit negotiations are completed, probably in about two years.<br/>欧盟高级领导人在一份声明中表示，英国仍将是欧盟成员，直到其完成退出谈判，这大概需要耗时两年左右。</p>
+<p><strong>European leaders react<br/>欧洲领导人的反应</strong></p>
+<p>European Parliament President Martin Schulz told ITV News he "very much" regretted Britian's decision to leave the EU. But he added: "We must respect that and not speak about a crisis because we are well prepared." Schulz said the parliament will hold an emergency session Tuesday to look at next steps.<br/>欧洲议会议长舒尔茨对ITV新闻表示，他对英国退出欧盟的决定表示非常遗憾。但他补充说，“我们必须尊重这点，并且不会讨论危机，因为我们有充分准备。”舒尔茨表示，议会将会在周二召开紧急会议看看接下来的步骤。</p>
+<p>Britain's European neighbors also expressed regret at the results and some called for changes in the EU to prevent other countries from leaving.<br/>英国的欧洲邻居们也对这一结果表示遗憾。一些国家呼吁欧盟改革防止其它国家退出。</p>
+<p>German Chancellor Angela Merkel warned Europe not to draw any "quick and simple conclusions" that might create more division.<br/>德国总理默克尔警告说，欧盟不要做出任何快速和简单的结论，这可能会引发更多分歧。</p>
+<p>French President Francois Hollande said, "To move forward, Europe cannot act as before." In Italy, Foreign Minister Paolo Gentiloni said Britain's decision should be seen as a "wakeup" call to the rest of the EU.<br/>法国总统奥朗德表示，“欧洲要向前发展就不能因循守旧。”意大利外长保罗·真蒂洛尼(Paolo Gentiloni)表示，英国的决定应该被视为唤醒了欧盟其他国家。</p>
+<p>Analysts say the decision to quit the EU after four decades means Britain faces many uncertainties and will have to start building new trade relationships with the rest of Europe.<br/>分析人士表示，英国在历经四十多年后做出脱离欧盟的决定，意味着该国面临着许多不确定因素，并且将不得不同欧洲其它地区开始建设新的贸易关系。</p>
+<p><strong>World markets plunge<br/>全球股市暴跌</strong></p>
+<p>The British vote caused turmoil in financial markets around the world. Stocks went down in Europe, Asia and the United States. The British pound also fell to its lowest level since 1985.<br/>英国这次公投导致全球金融市场的动荡。欧洲、亚洲和美国的股市都有下跌。英镑也跌至1985年以来的最低水平。</p>
+<p>Bank of England Governor Mark Carney said there would be "a period of uncertainty and adjustment" after the result. But he added that Britain had planned for the possibility and is "well prepared." He said there would not be any immediate change in the way people travel or how goods and services can be sold.<br/>英格兰银行行长马克·卡尼（Mark Carney）表示，在公投结果公布之后，可能会有一段时间的不确定和调整。但他补充说，英国已经对各种可能性作出规划，是有备而来。他说，在人们的出行方式和商品服务的销售上不会有任何直接变化。</p>
+<p><strong>The rise of the right<br/>右翼的崛起</strong></p>
+<p>In other EU countries, political parties that favor immigration restrictions were quick to congratulate Britain. Many also called for holding similar referendums in their own countries.<br/>在其它欧盟国家，赞成限制移民的政党很快对英国表示祝贺。许多政党还呼吁在本国举行类似的公投。</p>
+<p>The leader of France's far-right National Front party, Marine Le Pen, called the vote a victory for liberty. She said she believes a similar referendum in France is a "democratic necessity."<br/>法国极右翼政党国民阵线领导人勒庞称这次投票是自由的胜利。她说，她认为在法国举行类似公投是民主制度的必然。</p>
+<p>Le Pen also said she plans to meet with other pro-independence movements in the European Parliament soon to discuss their next moves after Britain's decision.<br/>勒庞还表示，她计划很快会见欧洲议会中的其它独派运动，讨论他们在英国脱欧之后的下一步行动。</p>
+<p>Dutch anti-immigration leader Geert Wilders called for a referendum on EU membership in the Netherlands. Wilders is currently leading in opinion polls in the race for prime minister to be held next March.<br/>荷兰反移民领袖威尔德斯呼吁荷兰就欧盟成员资格举行公投。威尔德斯会参加明年三月举行的总理竞选，他目前在民意调查中领先。</p>
+<p>"It is time for a new start, relying on our own strength and sovereignty. Also in the Netherlands," he said.<br/>他说，“现在是时候依靠我们自己的力量和主权寻求新的开始。在荷兰亦是如此。”</p>
+<p>The leader of Italy's anti-immigration Northern League tweeted: "Hurrah for the courage of free citizens! Heart, brain and pride defeated lies, threats and blackmail."<br/>意大利反移民的北方联盟领导人在推特上表示，“自由公民们的勇气万岁！心、脑与自豪会打败谎言、威胁与要挟！”</p>
+<p>In Germany, Beatrix von Storch of Germany's rightwing populist party AfD, praised "Independence Day for Great Britain." She said the EU "has failed as a political union."<br/>德国右翼民粹主义政党Afd的贝娅特丽克丝·冯·斯托奇（Beatrix von Storch）赞扬了英国的独立日。她说，欧盟作为一个政治联盟已经破产。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.24]Britain's decision to leave the European Union
+[00:04.20]prompted Prime Minister David Cameron to resign
+[00:08.12]and markets to fall around the world.
+[00:12.96]Final results in Thursday's historic referendum
+[00:17.40]gave the "Leave" campaign 52 percent, while "Remain" took 48 percent.
+[00:25.36]Voter turnout was reported high across Britain,
+[00:29.28]even with heavy rain falling in many areas.
+[00:34.72]The outcome shocked many within Britain and across the world
+[00:39.96]since recent opinion polls showed a growing lead for "Remain."
+[00:46.80]UK Independent Party Leader Nigel Farage
+[00:52.20]was the most vocal voice in the anti-EU movement.
+[00:58.20]He said the "Leave" win was "our independence day."
+[01:04.52]He called the results "a victory for real people,
+[01:08.68]a victory for ordinary people, a victory for decent people."
+[01:15.28]The close vote showed how deeply divided Britons are
+[01:20.40]on issues of immigration and sovereignty
+[01:24.00]that became the focus of the "Leave" campaign.
+[01:29.32]Prime Minister Cameron addressed that divide
+[01:32.60]outside the official residence at 10 Downing Street Friday morning.
+[01:38.49]"The British people have made a very clear decision to take a different path,
+[01:43.58]and as such, I think the country requires fresh leadership to take it in this direction."
+[01:50.24]The Conservative Party prime minister said he planned to leave office by October.
+[01:57.24]Cameron campaigned for continued EU membership.
+[02:04.04]He said an exit would lead to disastrous consequences
+[02:09.08]for Britain's economy and national security.
+[02:13.80]The "Leave" campaign focused on what it views
+[02:18.88]as uncontrolled immigration to Britain.
+[02:23.56]It argued that Britain cannot effectively regulate
+[02:29.16]the number of immigrants because of current EU rules.
+[02:35.57]The movement believes the Brussels-based EU imposes too many regulations in Britain.
+[02:44.88]It also argued that EU leaders are not accountable
+[02:51.08]to the British government or its citizens.
+[02:56.32]British media reported the leading contender to replace Cameron
+[03:01.96]is former London mayor Boris Johnson.
+[03:06.76]He is a Conservative member who served as leader of the "Leave" campaign.
+[03:14.20]On Friday, Johnson complimented Cameron
+[03:18.28]for showing "bravery" for calling the referendum.
+[03:24.28]"I think that the electorate have searched in their hearts
+[03:28.36]and answered as honestly as they can."
+[03:32.80]He added: "This does not mean the United Kingdom
+[03:37.56]will be any way less united (or) any less European.
+[03:43.16]We cannot turn our backs on Europe, we are part of Europe."
+[03:48.36]Top EU leaders said in a statement
+[03:51.72]that Britain will officially remain a member
+[03:55.20]until its exit negotiations are completed, probably in about two years.
+[04:02.32]European Parliament President Martin Schulz told ITV News
+[04:09.64]he "very much" regretted Britian's decision to leave the EU.
+[04:16.32]But he added: "We must respect that and not speak about a crisis
+[04:22.94]because we are well prepared."
+[04:27.00]Schulz said the parliament will hold an emergency session Tuesday
+[04:32.24]to look at next steps.
+[04:34.68]Britain's European neighbors also expressed regret at the results
+[04:40.76]and some called for changes in the EU to prevent other countries from leaving.
+[04:48.76]German Chancellor Angela Merkel warned Europe
+[04:52.76]not to draw any "quick and simple conclusions" that might create more division.
+[04:59.76]French President Francois Hollande said,
+[05:06.32]"To move forward, Europe cannot act as before."
+[05:11.84]In Italy, Foreign Minister Paolo Gentiloni
+[05:16.24]said Britain's decision should be seen as a "wakeup" call to the rest of the EU.
+[05:23.48]Analysts say the decision to quit the EU after four decades
+[05:29.68]means Britain faces many uncertainties
+[05:33.36]and will have to start building new trade relationships with the rest of Europe.
+[05:39.52]The British vote caused turmoil in financial markets around the world.
+[05:46.04]Stocks went down in Europe, Asia and the United States.
+[05:51.16]The British pound also fell to its lowest level since 1985.
+[05:57.76]Bank of England Governor Mark Carney said there would be
+[06:02.84]"a period of uncertainty and adjustment" after the result.
+[06:08.60]But he added that Britain had planned for the possibility and is "well prepared."
+[06:15.58]He said there would not be any immediate change in the way people travel
+[06:21.68]or how goods and services can be sold.
+[06:25.76]In other EU countries, political parties that favor immigration restrictions
+[06:33.00]were quick to congratulate Britain.
+[06:36.80]Many also called for holding similar referendums in their own countries.
+[06:43.56]The leader of France's far-right National Front party,
+[06:49.12]Marine Le Pen, called the vote a victory for liberty.
+[06:54.84]She said she believes a similar referendum in France is a "democratic necessity."
+[07:04.04]Le Pen also said she plans to meet with other pro-independence movements
+[07:09.96]in the European Parliament soon to discuss their next moves after Britain's decision.
+[07:18.11]Dutch anti-immigration leader Geert Wilders
+[07:22.56]called for a referendum on EU membership in the Netherlands.
+[07:27.48]Wilders is currently leading in opinion polls in the race for prime minister to be held next March.
+[07:37.28]"It is time for a new start,
+[07:40.08]relying on our own strength and sovereignty.
+[07:44.00]Also in the Netherlands," he said.
+[07:48.08]The leader of Italy's anti-immigration Northern League tweeted:
+[07:52.92]"Hurrah for the courage of free citizens!
+[07:56.80]Heart, brain and pride defeated lies, threats and blackmail."
+[08:03.80]In Germany, Beatrix von Storch of Germany's rightwing populist party AfD,
+[08:12.52]praised "Independence Day for Great Britain."
+[08:17.48]She said the EU "has failed as a political union."
+[08:22.73]I'm Bryan Lynn.
+[08:25.68]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

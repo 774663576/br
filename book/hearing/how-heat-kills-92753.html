@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Heat Kills</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, How Heat Kills" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/how-heat-kills.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Heat Kills</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/how-heat-kills.mp3" id="mp3"></a>
+<a href="learn-some-wave-expressions-92752.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By </span><br/>
+<span class="datetime">01 July 2024</span><br/>
+<p>From VOA Learning English, this is the <em>Health &amp; Lifestyle</em> report.</p>
+<p>As temperatures and <strong>humidity </strong>rise outside, what happens inside the human body can become a life or death situation. And a difference of just a few degrees can mean living or dying.</p>
+<p>Researchers say the danger point outdoors for illness and death from ongoing heat is lower than experts once thought. This discovery comes from new information, including putting people in "hot boxes" to see what happens to them. We will talk about this process later in the story.</p>
+<div class="contentImage"><img (ap="" -="" 20,="" 2024.="" a="" alt="FILE" boris="" bus="" cool="" day="" for="" grdanoski)="" herself="" hot="" in="" june="" macedonia,="" north="" on="" photo="" skopje,="" src="https://files.21voa.com/gdb/01000000-0aff-0242-ce00-08dc979fb78d_w268_r1.jpg" to="" tries="" waiting="" while="" woman=""/></div>
+<p>At rest, the body's <strong>core</strong> <strong>temperature</strong> is about 37 degrees Celsius. That is only 4 degrees Celsius away from possible death from <strong>heatstroke</strong>.</p>
+<p>Several doctors and other experts explained to The Associated Press what happens to the human body in such heat.</p>
+<p>Ollie Jay is a professor of heat and health at the University of Sydney in Australia. That is where he runs the Thermal Ergonomics Laboratory. Jay explains that heat kills in three main ways.</p>
+<p><strong>Heatstroke</strong></p>
+<p>Usually the first way is heatstroke. This is a severe increase in body temperature that causes organs to fail. When the inner body gets too hot, the body redirects blood flow toward the skin to cool down. But that sends blood and oxygen away from the stomach and intestines.</p>
+<p>This can permit poisons normally found in the stomach and intestinal areas to get into the blood. Jay said this leads to organ failure and death.</p>
+<p><strong>Pressure on the heart</strong></p>
+<p>Number two is the bigger killer in heat – pressure on the heart. This is especially true for people who have <strong>cardiovascular</strong> disease. The danger starts with blood quickly flowing to the skin to help reduce body heat. That causes blood pressure to drop. The heart reacts by trying to pump more blood to keep you from passing out.</p>
+<p>Jay said, "You're asking the heart to do a lot more work than it usually has to do." For someone with a heart condition, he compared this situation to running for the bus with an injured leg. "Something (is) going to give," he warns.</p>
+<p>Dr. Neil Gandhi is emergency medicine director at Houston Methodist Hospital in Texas. He said during heat waves, anyone who comes in with a fever of 37.7 degrees Celsius or higher and no evidence of infection will be checked for <strong>heat exhaustion</strong> or the more serious heatstroke.</p>
+<p>Gandhi said he often sees temperatures greater than 40 to 40.5 degrees Celsius during extreme heat events. "Another degree or three and such a patient is at high risk of death," he added.</p>
+<p><strong>Dehydration</strong></p>
+<p>The third way heat kills is by lack of water in the body, or dehydration. As people <strong>sweat</strong>, they lose liquids to a point that can severely hurt kidneys, Professor Jay said. He added that dehydration also reduces blood flow and worsens cardiac problems.</p>
+<p>Renee Salas is a Harvard University professor of public health and an emergency room doctor at Massachusetts General Hospital. "Dehydration can be very dangerous and even deadly for everyone if it gets bad enough," Salas said. "But it is especially dangerous for those with medical conditions and on certain medications," she added.</p>
+<p><strong>How heat affects the brain</strong></p>
+<p>Heat also affects the brain. It can interfere with thinking and reasoning.</p>
+<p>Kris Ebi is a public health and climate professor at the University of Washington. She said one of the first signs that heat has become dangerous is mental <strong>confusion</strong>. However, the person suffering from the heat is unlikely to see it, she said. This becomes a bigger problem as people age.</p>
+<p>Many people may not realize their danger, Houston's Gandhi said. Dehydration can progress into shock. This causes organs to shut down from a lack of blood, oxygen, and nutrients.</p>
+<p>One definition of heatstroke is having a core body temperature of 40 degrees Celsius combined with mental confusion and difficulty thinking said Pennsylvania State University <strong>physiology</strong> professor W. Larry Kenney.</p>
+<p><strong>Wet bulb and hot box test</strong></p>
+<p>Some scientists use a complex measurement tool called wet bulb globe temperature. It records humidity, solar radiation, and wind. In the past, it was thought that a wet bulb reading of 35 Celsius (or 95 Fahrenheit) was the danger point.</p>
+<p>Kenney also runs a hot box laboratory and has done nearly 600 tests. He said his tests show the wet-bulb danger point is closer to 30.5 Celsius.</p>
+<p>And that temperature is for young healthy people. For older people, the danger point is a wet bulb temperature of 28 degrees Celsius, he said.</p>
+<p>He adds that the amount of moisture in the air, or humidity, plays a big part. "Humid<strong> </strong>heat waves kill a lot more people than dry heat waves," Kenney said.</p>
+<p>Heatstroke is an emergency. Medical workers try to cool a victim down within 30 minutes, Salas said. She's the professor and emergency room doctor in Massachusetts.</p>
+<p>The best treatment is a cold water bath. But Salas said that those baths are not always available. So, emergency rooms pump patients with cool fluids <strong>intravenously</strong>, apply cold water to the skin, put ice packs in armpits and groins, and place them on a cold mat with cold water running inside it.</p>
+<p>However, sometimes all these treatments do not work. Experts call it a silent killer: You do not see the damage happening.</p>
+<p>Much of the United States, Mexico, India, and the Middle East suffer through extreme heat waves. These heat events are worsened by human-caused climate change.</p>
+<p>Climate change made a killer heat wave in Mexico and the Southwest U.S. even warmer and also made it 35 times more likely to happen more often.</p>
+<p>Extreme heat in India has killed more than 100 people in the past three and a half months.</p>
+<p>And that's the <em>Health &amp; Lifestyle</em> report.</p>
+<p>I'm Anna Matteo.</p>
+<p>And I'm Andrew Smith.</p>
+<p><em>Seth Borenstein reported this story for The Associated Press Anna Matteo adapted it for VOA Learning English.</em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>humidity </strong><em>– n. </em>a moderate degree of wetness especially of the atmosphere<em> </em></p>
+<p><strong>core</strong> <strong>temperature</strong> <em>– n. </em>the temperature deep within a living bod</p>
+<p><strong>heatstroke </strong><em>– n. </em>a condition marked especially by the stopping of sweating, a high body temperature, and exhaustion that results from exposure to high temperature for a long time</p>
+<p><strong>cardiovascular</strong> <em>– adj. </em>of, relating to, or involving the heart and blood vessels</p>
+<p><strong>heat exhaustion</strong> <em>– n. </em>a condition marked by weakness, nausea, dizziness, and profuse sweating that results from physical exertion in a hot environment</p>
+<p><strong>dehydration </strong><em>– n. </em>an abnormal depletion of body fluids</p>
+<p><strong>sweat </strong><em>– v. </em>to give off salty moisture through the pores of the skin</p>
+<p><strong>confusion </strong><em>– n. </em>disturbance of consciousness characterized by inability to engage in orderly thought or by lack of power to distinguish, choose, or act decisively</p>
+<p><strong>physiology</strong> <em>– adj. </em>a branch of biology dealing with the processes and activities by which life is carried on and which are special features of the functioning of living things, tissues, and cells</p>
+<p><strong>intravenously </strong><em>– adv. </em>being within or entering by way of the veins</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

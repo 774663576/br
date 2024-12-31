@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Learn Some 'Wave' Expressions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Learn Some 'Wave' Expressions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/learn-some-wave-expressions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Learn Some 'Wave' Expressions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/learn-some-wave-expressions.mp3" id="mp3"></a>
+<a href="talking-about-what-we-see-in-space-92751.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">29 June 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Today we talk about something found in water – <u>waves</u>.</p>
+<p>Surfers are experts at riding waves in the ocean. But even if you have never been in the ocean or tried the sport of surfing, you can still <u>ride the waves</u>.</p>
+<div class="contentImage"><img alt="FILE - A surfer rides a wave as the color of the sky is reflected on the water in Navarre Beach, Fla., Monday, June 17, 2024. (AP Photo/Kiichiro Sato)" src="https://files.21voa.com/gdb/38cce799-d05e-40c0-afd7-e980ac23ded3_cx0_cy17_cw87_w268_r1.jpg"/><br/><span class="imagecaption">A surfer rides a wave as the color of the sky is reflected on the water in Navarre Beach, Fla., Monday, June 17, 2024. (AP Photo/Kiichiro Sato)
+</span></div>
+<p>If you <u>ride the wave</u> of something you gain from a widespread popularity or approval of something. The online dictionary <a class="wsw__a" href="https://www.merriam-webster.com/dictionary/ride%20a%2Fthe%20wave%20of">Merriam-Webster</a> defines it this way: "to experience a time when many people share a strong feeling or <strong>attitude</strong> about something at the same time."</p>
+<p>For example, let's say a woman runs for office but she doesn't have any political experience. She does, however, belong to a famous and popular political family. After she wins, many people say she <u>rode the wave</u> of her family's fame.</p>
+<p>But this expression doesn't always mean taking <strong>advantage</strong> of something in a bad way. For example, a sports team may want to <u>ride the wave</u> of their recent wins to keep on winning.</p>
+<p><u>Catching the wave</u> is a similar expression. If you <u>catch the wave,</u> you also take advantage of an <strong>opportunity</strong>. You are at the right place at the right time.</p>
+<p>Now, sometimes we aren't <u>riding or catching waves</u>, but <u>making waves</u> instead. When we <u>make waves</u> we do something that makes people notice us. Often they notice us in a bad way. And the <u>waves</u> we make cause problems -- similar to <u>waves</u> in water making trouble for boats and swimmers.</p>
+<p>Here's an example. If you start a new job, it is usually not a good idea to <u>make waves</u>. When you <u>make waves</u> you create trouble and interfere with usual business operations. We can also say to <u>rock the boat.</u> This also means to cause problems.</p>
+<p>We use the word "wave" in several phrasal verbs.</p>
+<p>Let's start by combining it with "on" and "off."</p>
+<p><u>Waving someone on</u> is the same thing as giving them a sign to keep moving. For example, when police officers direct traffic they <u>wave people on</u>. The police are guiding drivers or walkers across roads. <u>Waving someone on</u> can also mean to <strong>encourage</strong> someone. If your friend is running in a race, you can <u>wave them on</u> to the finish line.</p>
+<p>However, if you <u>wave something or someone off</u>, you cancel, <strong>dismiss,</strong> or refuse them. For example, when I offered help to the man who had fallen off his bike he just <u>waved me off.</u> He either didn't need or want my help or maybe was too <strong>embarrassed</strong> to accept it.</p>
+<p>You can also combine "wave" with "down." To <u>wave down</u> someone or something is also a signal to stop. For example, you can <u>wave down</u> a friend or wave down a taxicab.</p>
+<p>And if you <u>wave something or someone aside</u> you are either directing them or dismissing them. It depends on the situation.</p>
+<p>Now, let's hear some of these "wave" terms used in a short example.</p>
+<p><em>Once I invited a friend to a <strong>concert</strong>. The musical group was very popular. They were riding the <u>wave</u> of a similar but earlier rock and roll band. Many people would come to their concerts just to gather in the parking lot and listen to the music from a distance. And that is what happened during this concert.</em></p>
+<p><em>But this <strong>venue</strong> was different than most. It was outside and did not have a barrier around it. So, people without<strong> tickets </strong>started <strong>sneaking</strong> in. Someone would find a place where they could sneak in and wave on others to do the same. As a result the venue got so crowded that the security guards had to <u>wave</u> ticket-holders aside to a different entrance. And if you didn't have a ticket and hadn't snuck in, they just <u>waved you off.</u></em></p>
+<p><em>As my friend and I waited in line to enter, I warned her that the concert would be very crowded. But she <u>waved my concerns</u> aside. She didn't care. We went in anyway. But after the concert was over, I immediately <u>waved down</u> a taxi to go home. I had had enough of the large crowd.</em></p>
+<p>And that's all the time we have for this Words and Their Stories. Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English.</em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>attitude </strong><em>– n.</em><strong> </strong>a particular feeling or way of thinking about something</p>
+<p><strong>advantage </strong><em>– n. </em>superiority of position or condition</p>
+<p><strong>opportunity </strong><em>– n. </em>a favorable combination of circumstances, time, and place <strong>: </strong>a chance to better oneself</p>
+<p><strong>encourage</strong> <em>– v. </em>to inspire with courage, spirit, or hope</p>
+<p><strong>dismiss </strong><em>– v. </em>to send away <strong>: </strong>cause or allow to go</p>
+<p><strong>embarrassed </strong><em>– v. </em>feeling or showing a state of self-conscious confusion and distress</p>
+<p><strong>concert </strong><em>– n. </em>a public performance (as of music or dancing)</p>
+<p><strong>venue </strong><em>– n. </em>a place where events of a specific type are held</p>
+<p><strong>ticket </strong><em>– n. </em>a paper or token showing that a fare or admission fee has been paid</p>
+<p><strong>sneak</strong> <em>– v. </em>to go about in a sly or secret manner</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国即将实现接收一万名难民的目标</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 美国即将实现接收一万名难民的目标" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201608/us-may-reach-goal-of-accepting-10000-syrian-refugees.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国即将实现接收一万名难民的目标</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201608/us-may-reach-goal-of-accepting-10000-syrian-refugees.mp3" id="mp3"></a>
+<a href="/static/lrc/us-may-reach-goal-of-accepting-10000-syrian-refugees.lrc" id="lrc"></a>
+<a href="us-may-reach-goal-of-accepting--syrian-refugees-70942.html" id="CnPage" target="_blank"></a>
+<a href="words-and-their-stories-heard-it-rhough-the-grapevine-70929.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The United States is working to reach its goal of bringing 10,000 Syrian refugees to the country by the end of September. There has been an increase in the number of Syrian refugees entering the U.S. in the past three months.<br/>美国正在努力实现九月底前接收1万名难民的目标。过去三个月进入美国的叙利亚难民人数一直在增加。</p>
+<p>More than 8,000 people who fled violence and persecution in Syria have been resettled in the United States between October 1, 2015 and this week. The State Department's Refugee Processing Center says half are under the age of 14.<br/>从2015年10月1日到本周之间，8千多名逃离暴力和迫害的叙利亚难民已经被安置到美国。美国国务院难民处理中心表示，其中一半难民年龄在14岁以下。</p>
+<p>A few hundred Syrian refugees have entered the U.S. every month since last September. U.S. Secretary of State John Kerry announced a plan to welcome them.<br/>自去年九月起，每月都有数百名叙利亚难民进入美国。美国国务卿克里宣布了一项迎接难民的计划。</p>
+<p>Experts had said it would be difficult to reach the goal of bringing 10,000 Syrian refugees to the U.S. by the end of September. The previous year, 1,682 Syrian refugees entered the country.<br/>专家们曾表示，美国很难实现在9月底前接收1万名叙利亚难民的目标。过去一年里有1682名难民进入美国。</p>
+<p>But in February, the State Department created a center in Amman, Jordan to help refugees apply to enter the U.S. The application, interviews and medical and security investigations necessary before refugees can be accepted usually take 18 to 24 months. But American officials said having the new center would reduce that time to three months.<br/>但是今年2月份，美国国务院在约旦安曼建立了一个难民中心，帮助难民申请进入美国。难民接收前的申请、面试以及必要的医疗和安全检查通常需要18到24个时间。但是美国官员表示，这个新的难民中心会将这一时间缩短到3个月。</p>
+<p>In May, 1,069 Syrian refugees entered the United States. More than 2,000 entered in both June and July.<br/>今年5月份，1069名叙利亚难民进入美国。六月份和七月份都有2千多人进入美国。</p>
+<p>The 8,000 Syrian refugees who have entered so far have been sent to 38 states. Michigan has the most -- 887. California received 783, Arizona 651, Texas 565 and Pennsylvania 481.<br/>截至目前进入美国的8000名难民被送往38个州。密歇根州接收了最多的难民，887名。加州接收了783名。亚利桑那州接收了651名，德克萨斯州665名，宾夕法尼亚州481名。</p>
+<p>More refugees have been resettled in the United States than any other country. Almost 61,000 refugees have entered the U.S. since last October.<br/>被安置到美国的难民超过了任何其它国家。自去年以来已经有将近6.1万名难民进入了美国。</p>
+<p>Last year, Kerry also announced that the government would increase the number of refugees permitted into the U.S. from 70,000 to 85,000. The number is set by the president after he or she receives advice from the State Department. It will increase to 100,000 in the coming year.<br/>去年，克里还宣布，美国政府将把允许进入美国的难民人数从7万名提高到8.5万名。该数字是总统在接受国务院的建议后设定的。未来一年该数字将提高到10万名。</p>
+<p>But many more Syrians want to enter the United States. The United Nations High Commissioner for Refugees estimates 4.8 million Syrians have fled to Turkey, Lebanon, Jordan, Egypt and Iraq. The office says 6.6 million have been displaced within Syria.<br/>但是还有更多叙利亚人希望进入美国。联合国难民署估计有480万叙利亚人逃到了土耳其、黎巴嫩、约旦、埃及和伊拉克。该部门表示，叙利亚国内还有660万人已经流离失所。</p>
+<p>The Syrian civil war began in 2011. At that time, the U.S. was accepting only a few Syrian refugees every year. Millions of Syrians fleeing conflict and Islamic State violence across the country have been accepted by Lebanon, Jordan and Turkey.<br/>叙利亚内战始于2011年。当时，美国每年只接收很少的叙利亚难民。数百万逃离全国各地的冲突和伊斯兰国暴力的叙利亚人被黎巴嫩、约旦和土耳其接收。</p>
+<p>Many Republican governors have criticized the Obama administration's decision to accept more Syrian refugees. Several state legislatures have considered bills to slow or stop the resettlement of some or all refugees in their states.<br/>许多共和党州长都批评了奥巴马政府接受更多叙利亚难民的决定。一些州议会已经考虑通过立法来减慢或推迟该州部分或全部难民的重新安置。</p>
+<p>Some opponents of the refugee resettlement plan say they do not believe the security investigations of the refugees have been complete enough. The administration has said they are.<br/>难民安置计划的一些反对者表示，他们不相信对难民的安全调查已经充分完成了。当局表示已经充分完成。</p>
+<p>In early July, an Associated Press-GfK public opinion survey found that 69 percent of Republicans support a temporary ban on Muslim immigration. Fifty-two percent of Americans opposed such a ban; 45 percent supported it.<br/>七月初，美联社和GfK联合进行的民意调查显示，69%的共和党人支持临时禁止穆斯林移民。52%的美国人反对这样的禁令，另外还有45%的美国人支持这类禁令。</p>
+<p>In September, the U.N. General Assembly will meet to discuss refugee and migrant issues. Almost one million Syrians are seeking asylum in Europe.<br/>九月份联合国大会将开会讨论难民和移民问题。近1百万叙利亚人正在欧洲寻求庇护。</p>
+<p>I'm Christopher Jones-Cruise.<br/>我是克里斯托弗·琼斯 - 克鲁斯。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]The United States is working to reach its goal
+[00:04.38]of bringing 10,000 Syrian refugees to the country by the end of September.
+[00:10.78]There has been an increase in the number of Syrian refugees
+[00:15.59]entering the U.S. in the past three months.
+[00:19.56]More than 8,000 people who fled violence and persecution in Syria
+[00:27.08]have been resettled in the United States between October 1, 2015 and this week.
+[00:35.18]The State Department's Refugee Processing Center
+[00:39.70]says half are under the age of 14.
+[00:43.85]A few hundred Syrian refugees have entered the U.S. every month since last September.
+[00:52.87]U.S. Secretary of State John Kerry announced a plan to welcome them.
+[00:59.53]Experts had said it would be difficult to reach the goal
+[01:05.04]of bringing 10,000 Syrian refugees to the U.S. by the end of September.
+[01:11.75]The previous year, 1,682 Syrian refugees entered the country.
+[01:20.69]But in February, the State Department created a center in Amman, Jordan
+[01:27.09]to help refugees apply to enter the U.S.
+[01:31.11]The application, interviews and medical and security investigations necessary
+[01:39.55]before refugees can be accepted usually take 18 to 24 months.
+[01:46.84]But American officials said having the new center would reduce that time to three months.
+[01:55.77]In May, 1,069 Syrian refugees entered the United States.
+[02:04.18]More than 2,000 entered in both June and July.
+[02:09.77]The 8,000 Syrian refugees who have entered so far have been sent to 38 states.
+[02:19.85]Michigan has the most -- 887. California received 783,
+[02:29.21]Arizona 651, Texas 565 and Pennsylvania 481.
+[02:40.94]More refugees have been resettled in the United States than any other country.
+[02:48.67]Almost 61,000 refugees have entered the U.S. since last October.
+[02:56.74]Last year, Kerry also announced that the government
+[03:02.59]would increase the number of refugees permitted into the U.S. from 70,000 to 85,000.
+[03:12.23]The number is set by the president after he or she receives advice from the State Department.
+[03:21.82]It will increase to 100,000 in the coming year.
+[03:27.54]But many more Syrians want to enter the United States.
+[03:32.97]The United Nations High Commissioner for Refugees estimates
+[03:38.69]4.8 million Syrians have fled to Turkey, Lebanon, Jordan, Egypt and Iraq.
+[03:49.35]The office says 6.6 million have been displaced within Syria.
+[03:56.61]The Syrian civil war began in 2011.
+[04:01.47]At that time, the U.S. was accepting only a few Syrian refugees every year.
+[04:09.49]Millions of Syrians fleeing conflict and Islamic State violence across the country
+[04:17.43]have been accepted by Lebanon, Jordan and Turkey.
+[04:22.34]Many Republican governors have criticized the Obama administration's decision
+[04:29.92]to accept more Syrian refugees.
+[04:33.81]Several state legislatures have considered bills to slow
+[04:39.92]or stop the resettlement of some or all refugees in their states.
+[04:47.42]Some opponents of the refugee resettlement plan say they do not believe
+[04:54.32]the security investigations of the refugees have been complete enough.
+[05:00.22]The administration has said they are.
+[05:03.77]In early July, an Associated Press-GfK public opinion survey found
+[05:13.60]that 69 percent of Republicans support a temporary ban on Muslim immigration.
+[05:21.43]Fifty-two percent of Americans opposed such a ban; 45 percent supported it.
+[05:29.97]In September, the U.N. General Assembly will meet 
+[05:34.70]to discuss refugee and migrant issues.
+[05:39.40]Almost one million Syrians are seeking asylum in Europe.
+[05:45.39]I'm Christopher Jones-Cruise.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

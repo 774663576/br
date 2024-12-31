@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Research Shows How Early Humans Lived Before Agriculture</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, New Research Shows How Early Humans Lived Before Agriculture" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/new-research-shows-how-early-humans-lived-before-agriculture.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Research Shows How Early Humans Lived Before Agriculture</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/new-research-shows-how-early-humans-lived-before-agriculture.mp3" id="mp3"></a>
+<a href="orangutan-appears-to-use-plant-to-treat-wound-92657.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">08 May 2024</span><br/>
+<p>A recent study shows that people who lived in <strong>caves</strong> in North Africa had already started to add a lot of plants to their diet about 15,000 years ago.</p>
+<p>The researchers examined the remains of a group of people found in a cave near Taforalt in northeastern Morocco. The people were part of the Iberomaurusian culture, which lived in what is now Morocco and Libya from 25,000 to 11,000 years ago. Tests showed the remains were about 15,000 years old. Examinations of teeth and bones showed that the people ate meat from animals called Barbary sheep. But they also ate wild plants such as beans, oats, pine nuts, pistachios and sweet acorns.</p>
+<p>Zineb Moubtahij is a doctoral student in <strong>archaeology</strong> at the Max Planck Institute for Evolutionary Anthropology in Germany.</p><div class="contentImage"><img alt="A human tooth discovered at Taforalt Cave in Morocco in an undated photograph. (Heiko Temming/Handout via REUTERS)" src="https://files.21voa.com/gdb/a485efa7-e7f0-4cdb-8c8c-5cc311ba3798_cx7_cy2_cw81_w268_r1.jpg"/><br/><span class="imagecaption">A human tooth discovered at Taforalt Cave in Morocco in an undated photograph. (Heiko Temming/Handout via REUTERS)</span></div>
+<p>Before this research, Moubtahij said, most scientists believed people from this time mostly ate meat. "However, the evidence from Taforalt demonstrates that plants <strong>constituted</strong> a big part of the hunter-gatherers' <strong>menu</strong>," Moubtahij added.</p>
+<p>Klervia Jaouen of the French research organization CNRS co-wrote the study. Jaouen said the study "suggests that possibly several populations in the world already started to include <strong>substantial</strong> amounts of plants in their diet." The group of 13 international researchers <a class="wsw__a" href="https://www.nature.com/articles/s41559-024-02382-z#citeas">published</a> its findings in <em>Nature Ecology and Evolution</em>.</p>
+<p>The researchers noted the people from that time were dependent on wild plants. Agriculture had not been developed yet. They did, however, harvest wild plants in season and store extra amounts to eat later if food was not easily available.</p>
+<p>The researchers said the evidence of food storage means the people used the cave for large parts of the year. They did not walk long distances in search of food.</p>
+<p>Moubtahij said the researchers did not find evidence of seafood in the diets of the cave-<strong>dwellers</strong>. But they did find that babies among the group began to eat plants sooner than scientists first thought.</p>
+<p>The remains found in the cave included those of two babies. The researchers studied the baby teeth and found the children were offered plants to eat at about 12 months. They were fully <strong>weaned</strong> from breastmilk earlier than researchers thought.</p>
+<p>Researchers believe North Africa is an important area for study because it was the last stop before modern humans traveled out of Africa and into other parts of the world.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by Reuters.</em></p>
+<p>_____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cave </strong><em>–n.</em> a natural space that is underground</p>
+<p><strong>archaeology </strong><em>–n.</em> the study of ancient human life</p>
+<p><strong>constitute </strong><em>–v.</em> to make up or to form</p>
+<p><strong>menu </strong>–n. a list of things to eat at a restaurant</p>
+<p><strong>substantial </strong><em>–adj.</em> an amount of something that is likely to be noticed</p>
+<p><strong>dweller </strong>–n. a person who lives in a place</p>
+<p><strong>weaned </strong>–adj. to no longer drink mother's milk</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

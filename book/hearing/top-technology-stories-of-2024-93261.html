@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Top Technology Stories of 2024</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Top Technology Stories of 2024" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/top-technology-stories-of-2024.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Top Technology Stories of 2024</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/top-technology-stories-of-2024.mp3" id="mp3"></a>
+<a href="/static/lrc/top-technology-stories-of-2024.lrc" id="lrc"></a>
+<a href="expressions-for-new-year-s-resolution-93259.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">29 December, 2024</span><br/>
+<p>Throughout 2024, we saw further development of artificial intelligence (AI) systems and new legal action brought against technology companies. Here is a look back at some of the biggest tech stories we covered in 2024.</p>
+<p><strong>AI continues to expand</strong></p>
+<p>During the year, companies continued developing and deploying new AI tools.</p><div class="contentImage"><img alt="FILE - Google, Microsoft and Alphabet logos and AI Artificial Intelligence words are seen in this illustration from May 4, 2023. (REUTERS/Dado Ruvic/Illustration)" src="https://files.21voa.com/gdb/3ae36539-6083-4186-917d-a0367dde2d0c_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Google, Microsoft and Alphabet logos and AI Artificial Intelligence words are seen in this illustration from May 4, 2023. (REUTERS/Dado Ruvic/Illustration)</span></div>
+<p>Among these were a new set of AI offerings announced by American software company Microsoft. Officials <a class="wsw__a" href="https://www.21voa.com/a/microsoft-s-ai-agents-aim-to-take-over-many-human-duties/7876418.html">explained</a> the new tools included “personal agents” designed to help users complete business activities with little or no human involvement.</p>
+<p>Microsoft says it designed the agents to expand on so-called chatbots – AI tools that work by themselves to produce human-level writing or discussions. The company said it expects a full release of the agents sometime in 2025.</p>
+<p>In September, technology company Apple <a class="wsw__a" href="https://www.21voa.com/a/apple-launches-new-iphone-built-for-ai-/7780192.html">announced</a> it was launching several new iPhones equipped with special <strong>chips</strong> to support AI operations. Apple chief Tim Cook said the new models had been “designed for Apple Intelligence from the ground up.”</p>
+<p>We reported in October about an effort by researchers to use AI to improve existing weather prediction models. One system works by combining past weather predictions with modern methods to provide the most complete picture of weather and climate data.</p>
+<p><strong>More warnings AI's possible dangers</strong></p>
+<p>In California, three legislative measures were <a class="wsw__a" href="https://www.21voa.com/a/new-california-laws-aim-to-prevent-ai-harm-during-elections/7797015.html">enacted</a> to ban the use of AI tools to create false images and videos during election campaigns. One main goal was to fight deepfakes. These are pieces of video or audio created to make it appear that people in it are saying or doing things they never said or did. Deepfakes were used in several world election campaigns in 2024.</p>
+<p>In May, an international gathering of major AI developers and top government officials in Seoul <a class="wsw__a" href="https://www.21voa.com/a/business-political-leaders-agree-to-safely-develop-deploy-ai/7622826.html">agreed</a> on measures that aim to ensure that AI systems are safely built and deployed. Attendees from 16 different technology companies signed a promise to develop AI technology in ways that limit possible public harms.</p>
+<p><strong>US legal moves against tech companies</strong></p>
+<p>About one year ago, an American jury <a class="wsw__a" href="https://www.21voa.com/a/jury-rules-google-app-store-operates-as-monopoly/7396589.html">found</a> that Google's app store operates as an illegal monopoly. Then in August 2024, a federal judge ruled that Google had violated trade laws by operating its search engine as a <strong>monopoly</strong>. The ruling accused Google of paying smartphone makers to ensure that its search engine was set as the <strong>default</strong> system on new devices.</p>
+<p>As part of the case, the U.S. government proposed in November a series of measures to limit Google from anti-competition business activities. Google criticized the court's ruling as an example of government overreach. U.S. officials have long warned that TikTok presents national security concerns.</p>
+<p>Earlier this month, video sharing service TikTok <a class="wsw__a" href="file:///C:/Users/ckweaver/Downloads/TikTok%20has%20asked%20a%20U.S.%20appeals%20court%20to%20temporarily%20block%20a%20law%20requiring%20its%20parent%20company,%20ByteDance,%20to%20divest%20itself%20of%20the%20popular%20video%20sharing%20service,%20or%20face%20a%20U.S.%20ban">asked</a> a U.S. appeals court to block a law requiring its Chinese parent, ByteDance, to <strong>divest</strong> itself of TikTok or face a U.S. ban. The request came after the same court had upheld a law forcing ByteDance to sell TikTok by January 19 or face the ban. Lawyers for ByteDance and TikTok are seeking to have the U.S. Supreme Court rule on the case.</p>
+<p><strong>Self-driving tech</strong></p>
+<p>In May, U.S.-based Aurora Innovation <a class="wsw__a" href="https://www.21voa.com/a/driverless-trucks-set-to-hit-us-highways/7595728.html">said</a> it was preparing to launch a series of driverless trucks to transport goods on a major public highway. Company officials said it planned to begin the service in Texas, with 20 tractor-trailers transporting goods between Dallas and Houston. The company hopes to expand the service to thousands of tractor-trailers within three to four years.</p>
+<p><strong>Flying taxis</strong></p>
+<p>In October, the U.S. Federal Aviation Administration (FAA) <a class="wsw__a" href="https://www.21voa.com/a/us-agency-issues-final-rules-for-flying-air-taxis/7837729.html">announced</a> it had issued final rules for operating air taxis. It also set training and approval requirements for pilots. The FAA said air taxis belong to a kind of aircraft known as Advanced Air Mobility (AAM) flyers. They generally operate on their own on electrical power, with <strong>vertical</strong> take-off and landing abilities.</p>
+<p>FAA Administrator Mike Whitaker said such aircraft represent “the first new <strong>category</strong> of aircraft in nearly 80 years.” He added that the new rules are meant to mark the beginning of possible widespread AAM operations across the U.S. in the future.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English. </em></p>
+<p><strong>___________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>chip </strong><em>– n. </em>a very small slice of silicon containing electronic circuits (as for a computer)<strong> </strong></p>
+<p><strong>monopoly</strong><strong> </strong><em>– n.</em> complete control of the entire supply of goods or of a service in a certain area or market</p>
+<p><strong>default </strong><em>– adj. </em>what exists or usually happens if no changes are made</p>
+<p><strong>divest </strong><em>– v. </em>to sell something, especially a business or part of a business</p>
+<p><strong>vertical</strong><strong> </strong><em>– adj. </em>pointing straight up from a surface</p>
+<p><strong>category </strong><em>– n. </em>a group of people of things of a similar kind</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Top Technology Stories of 2024]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Throughout 2024,
+[00:02.40]we saw further development
+[00:04.96]of artificial intelligence (AI) systems
+[00:09.56]and new legal action brought
+[00:11.88]against technology companies.
+[00:14.68]Here is a look back at some of the biggest
+[00:18.12]tech stories we covered in 2024.
+[00:22.28]During the year, companies continued
+[00:25.76]developing and deploying new AI tools.
+[00:30.72]Among these were a new set of AI offerings
+[00:35.20]announced by American software company Microsoft.
+[00:40.08]Officials explained the new tools included
+[00:44.80]"personal agents" designed to help users
+[00:49.08]complete business activities
+[00:51.68]with little or no human involvement.
+[00:55.72]Microsoft says it designed the agents
+[01:00.52]to expand on so-called chatbots
+[01:04.44]– AI tools that work by themselves
+[01:08.12]to produce human-level writing or discussions.
+[01:12.68]The company said it expects
+[01:15.80]a full release of the agents sometime in 2025.
+[01:21.72]In September, technology company Apple announced
+[01:26.80]it was launching several new iPhones
+[01:30.32]equipped with special chips
+[01:33.48]to support AI operations.
+[01:37.36]Apple chief Tim Cook
+[01:39.84]said the new models had been "designed
+[01:43.60]for Apple Intelligence from the ground up."
+[01:47.64]We reported in October about an effort
+[01:51.80]by researchers to use AI to improve
+[01:55.76]existing weather prediction models.
+[01:59.24]One system works by combining
+[02:02.36]past weather predictions
+[02:04.64]with modern methods to provide the most
+[02:07.64]complete picture of weather and climate data.
+[02:12.04]In California, three legislative measures
+[02:16.56]were enacted to ban the use of AI tools
+[02:20.96]to create false images and videos
+[02:24.84]during election campaigns.
+[02:27.48]One main goal was to fight deepfakes.
+[02:31.92]These are pieces of video or audio
+[02:36.12]created to make it appear that people in it
+[02:39.96]are saying or doing things they never said or did.
+[02:44.84]Deepfakes were used
+[02:47.32]in several world election campaigns in 2024.
+[02:52.72]In May, an international gathering
+[02:56.40]of major AI developers
+[02:58.88]and top government officials in Seoul
+[03:02.48]agreed on measures that aim to ensure
+[03:06.48]that AI systems are safely built and deployed.
+[03:11.80]Attendees from 16 different technology companies
+[03:17.40]signed a promise to develop AI technology in ways
+[03:22.72]that limit possible public harms.
+[03:26.44]About one year ago, an American jury found
+[03:31.28]that Google's app store operates
+[03:34.04]as an illegal monopoly.
+[03:36.56]Then in August 2024, a federal judge ruled
+[03:42.76]that Google had violated trade laws
+[03:46.20]by operating its search engine as a monopoly.
+[03:50.48]The ruling accused Google
+[03:53.16]of paying smartphone makers
+[03:55.92]to ensure that its search engine
+[03:59.04]was set as the default system on new devices.
+[04:04.12]As part of the case,
+[04:06.68]the U.S. government proposed in November
+[04:10.44]a series of measures to limit Google
+[04:14.00]from anti-competition business activities.
+[04:18.16]Google criticized the court's ruling
+[04:21.84]as an example of government overreach.
+[04:25.76]U.S. officials have long warned
+[04:28.76]that TikTok presents national security concerns.
+[04:34.28]Earlier this month, video sharing service TikTok
+[04:39.36]asked a U.S. appeals court to block a law
+[04:44.08]requiring its Chinese parent, ByteDance,
+[04:48.36]to divest itself of TikTok or face a U.S. ban.
+[04:54.16]The request came after the same court
+[04:57.60]had upheld a law forcing ByteDance
+[05:01.00]to sell TikTok by January 19 or face the ban.
+[05:07.20]Lawyers for ByteDance and TikTok
+[05:11.40]are seeking to have the U.S. Supreme Court
+[05:15.12]rule on the case.
+[05:17.48]In May, U.S.-based Aurora Innovation
+[05:22.16]said it was preparing to launch
+[05:25.12]a series of driverless trucks
+[05:28.24]to transport goods on a major public highway.
+[05:32.40]Company officials said
+[05:34.88]it planned to begin the service in Texas,
+[05:38.88]with 20 tractor-trailers
+[05:41.48]transporting goods between Dallas and Houston.
+[05:45.96]The company hopes to expand the service
+[05:50.04]to thousands of tractor-trailers
+[05:53.08]within three to four years.
+[05:56.24]In October, the U.S. Federal Aviation Administration (FAA)
+[06:02.36]announced it had issued final rules
+[06:05.68]for operating air taxis.
+[06:08.88]It also set training and approval requirements for pilots.
+[06:14.52]The FAA said air taxis
+[06:18.00]belong to a kind of aircraft
+[06:20.60]known as Advanced Air Mobility (AAM) flyers.
+[06:26.76]They generally operate on their own
+[06:30.52]on electrical power, with vertical take-off
+[06:34.32]and landing abilities.
+[06:37.00]FAA Administrator Mike Whitaker
+[06:41.08]said such aircraft represent
+[06:44.08]"the first new category of aircraft
+[06:47.24]in nearly 80 years."
+[06:50.00]He added that the new rules
+[06:52.88]are meant to mark the beginning
+[06:55.00]of possible widespread AAM operations
+[06:59.68]across the U.S. in the future.
+[07:03.36]I'm Bryan Lynn. 
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

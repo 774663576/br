@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 全球首艘自主航行电动船将于明年推出</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 全球首艘自主航行电动船将于明年推出" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201707/worlds-first-electric-self-driving-ship-to-launch-next-year.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>全球首艘自主航行电动船将于明年推出</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201707/worlds-first-electric-self-driving-ship-to-launch-next-year.mp3" id="mp3"></a>
+<a href="/static/lrc/worlds-first-electric-self-driving-ship-to-launch-next-year.lrc" id="lrc"></a>
+<a href="worlds-first-electric-self-driving-ship-to-launch-next-year-75806.html" id="CnPage" target="_blank"></a>
+<a href="words-and-their-stories-to-err-is-human-75800.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Driverless technology will soon enter another major global industry: shipping.<br/>无人驾驶技术即将进入另一项全球重要行业：航运业。
+<p>Several companies recently announced plans to launch self-sailing ships to improve safety and efficiency.<br/>几家公司最近宣布计划推出无人驾驶船舶以提高安全性和效率。</p>
+<p>One of them is Norwegian chemical company Yara International. Yara has teamed up with another Norwegian company, Kongsberg, to build an autonomous cargo ship expected to launch next year. <br/>其中一家公司是挪威化工公司雅苒国际。雅苒国际已经跟另一家挪威公司康士伯联手建造一艘全自动货船，预计将于明年推出。</p>
+<p>Kongsberg developed the ship's electrical technology and autonomous control systems. <br/>康士伯开发了这艘船的电气技术和自动控制系统。</p>
+<p>The ship is fully electric to reduce air pollution. It is designed to carry cargo containers normally transported by truck. This means the ship will also improve road safety by replacing about 40,000 truck trips a year, the company said.<br/>这艘船是全电动以减少空气污染。它被设计用于搭载通常由卡车运输的货物集装箱。该公司表示，这意味着该船每年还能通过替代大约4万次卡车运输来提高道路安全性。</p>
+<p>The ships will be transporting shipments from Yara's main production plant to two ports where its materials are shipped to cities around the world.<br/>这些船只将把货物从雅苒国际的主要生产工厂运送到两家港口，该公司的物资将从这里运输到世界各地的城市。</p>
+<p>The company plans to operate the ships by remote control beginning sometime next year. By 2020, the ships should be loading and sailing themselves. While Yara's ships will be limited to Norway at first, the company plans to greatly expand its autonomous shipping operations in the coming years. <br/>该公司计划明年某个时间开始通过远程控制操作这些船只。到2020年，这些船只应当实现自主装船和航行。虽然雅苒公司的船只最初将被限制在挪威，但是该公司计划在未来几年里大力拓展其自主航运业务。</p>
+<p>Another company putting a high priority on self-sailing ships is the world's largest mining company, Australia's BHP Billiton. The company's Vice President of Freight, Rashpal Bhatti, recently spoke about the technology in a website post.<br/>另一家高度重视自主航行船舶的是全球最大矿业公司--澳大利亚的必和必拓公司。该公司货运副总裁拉谢帕尔·巴蒂(Rashpal Bhatti)最近在网站上谈到了这项技术。</p>
+<p>Bhatti said he believes automation will be one of the biggest changes for shipping in the future. "Autonomous vessels offer significant opportunities to improve safety and provide better efficiency outcomes to the marine supply chain." He added that self-sailing ships could become a reality within the next decade.<br/>巴蒂表示，他认为自动化将是未来航运业的最大变化之一。他说：“全自动船舶为提高安全性提供了重要的机会，也为海运供应链提供了更好的效益产出。”他补充说，自主航行船舶可能会在未来十年内成为现实。</p>
+<p>Rolls-Royce, the British automobile and engine manufacturer, is also developing unmanned shipping technologies. Oskar Levander is the company's head of marine operations. He told a conference last year, "This is happening. It's not if, it's when."<br/>英国汽车和发动机制造商罗尔斯·罗伊斯也在开发无人航运技术。奥斯卡尔·勒万德(Oskar Levander)是该公司船舶业务负责人。他去年在一次会议上表示：“这些正在发生，不是会不会发生，而是什么时候发生。”</p>
+<p>Levander said these autonomous ships could be controlled by remote operators from anywhere. He added that because these ships will be designed to be unmanned, they can be built smaller, more efficient and environmentally friendly.<br/>勒万德表示，这些全自动船舶可以从任何地方远程控制。他补充说，因为这些船舶将被设计为无人值守，所以可以建造得更小、更高效环保。</p>
+<p>In Japan, several shipping companies have invested hundreds of millions of dollars to develop self-sailing ships expected to hit the high seas by 2025. These ships will be equipped with technology to collect weather and sea data. They will then use the data to plan out the safest, shortest and most fuel-efficient route. <br/>在日本，几家航运公司已经投资了数百万美元用于开发自主航行船舶，并有望在2025年前进入公海。这些船舶将会配备用于收集天气和海洋数据的技术。然后它们会利用这些数据规划出最安全、最近和最省油的航线。</p>
+<p>Autonomous ships have also been developed for military use.<br/>全自动船舶也被开发用于军事用途。</p>
+<p>Last year, the U.S. Navy introduced a warship that can direct itself and be used to hunt enemy submarines. The 40-meter-long vessel is called Sea Hunter. It is powered by two diesel engines and does not carry weapons.<br/>去年，美国海军推出了一艘可以自主引导的军舰用于猎捕敌方潜艇。这艘40米长的船被称为“海上猎人”。它由两台柴油机驱动，不携带武器。</p>
+<p>Sea Hunter can sail for two to three months without a crew. It can operate at a cost of between $15,000 and $20,000 per day, far less than the amount required to run manned ships.<br/>“海上猎人”可以自主航行两到三个月时间。它每天的运作成本在1.5万到2万美元之间，远低于运行载人船只所需费用。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:World’s First Electric, Self-Driving Ship to Launch Next Year]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]Driverless technology will soon enter another major global industry: shipping.
+[00:09.48]Several companies recently announced plans
+[00:14.92]to launch self-sailing ships to improve safety and efficiency.
+[00:24.44]One of them is Norwegian chemical company Yara International.
+[00:32.08]Yara has teamed up with another Norwegian company, Kongsberg,
+[00:38.92]to build an autonomous cargo ship expected to launch next year.
+[00:47.32]Kongsberg developed the ship's electrical technology and autonomous control systems.
+[00:56.08]The ship is fully electric to reduce air pollution.
+[01:03.04]It is designed to carry cargo containers normally transported by truck.
+[01:11.12]This means the ship will also improve road safety
+[01:17.00]by replacing about 40,000 truck trips a year, the company said.
+[01:25.76]The ships will be transporting shipments from Yara's main production plant
+[01:32.20]to two ports where its materials are shipped to cities around the world.
+[01:40.40]The company plans to operate the ships by remote control beginning sometime next year.
+[01:49.68]By 2020, the ships should be loading and sailing themselves.
+[01:56.26]While Yara's ships will be limited to Norway at first,
+[02:02.47]the company plans to greatly expand
+[02:06.20]its autonomous shipping operations in the coming years.
+[02:12.31]Another company putting a high priority on self-sailing ships
+[02:18.84]is the world's largest mining company, Australia's BHP Billiton.
+[02:26.70]The company's Vice President of Freight, Rashpal Bhatti,
+[02:33.76]recently spoke about the technology in a website post.
+[02:40.24]Bhatti said he believes automation
+[02:43.70]will be one of the biggest changes for shipping in the future.
+[02:49.36]"Autonomous vessels offer significant opportunities to improve safety
+[02:56.60]and provide better efficiency outcomes to the marine supply chain."
+[03:04.28]He added that self-sailing ships could become a reality within the next decade.
+[03:12.98]Rolls-Royce, the British automobile and engine manufacturer,
+[03:19.72]is also developing unmanned shipping technologies.
+[03:25.92]Oskar Levander is the company's head of marine operations.
+[03:31.68]He told a conference last year, "This is happening. It's not if, it's when."
+[03:41.44]Levander said these autonomous ships
+[03:44.92]could be controlled by remote operators from anywhere.
+[03:50.48]He added that because these ships will be designed to be unmanned,
+[03:55.92]they can be built smaller, more efficient and environmentally friendly.
+[04:02.88]In Japan, several shipping companies have invested hundreds of millions of dollars
+[04:10.56]to develop self-sailing ships expected to hit the high seas by 2025.
+[04:19.68]These ships will be equipped with technology to collect weather and sea data.
+[04:26.48]They will then use the data to plan out the safest,
+[04:30.64]shortest and most fuel-efficient route.
+[04:35.51]Autonomous ships have also been developed for military use.
+[04:42.28]Last year, the U.S. Navy introduced a warship
+[04:46.16]that can direct itself and be used to hunt enemy submarines.
+[04:52.00]The 40-meter-long vessel is called Sea Hunter.
+[04:58.32]It is powered by two diesel engines and does not carry weapons.
+[05:04.13]Sea Hunter can sail for two to three months without a crew.
+[05:09.70]It can operate at a cost of between $15,000 and $20,000 per day,
+[05:18.24]far less than the amount required to run manned ships.
+[05:23.85]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

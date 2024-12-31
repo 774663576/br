@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - NASA Looks to Private Companies to Develop New Moon Vehicles</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, NASA Looks to Private Companies to Develop New Moon Vehicles" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/nasa-looks-to-private-companies-to-develop-new-moon-vehicles.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>NASA Looks to Private Companies to Develop New Moon Vehicles</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/nasa-looks-to-private-companies-to-develop-new-moon-vehicles.mp3" id="mp3"></a>
+<a href="in-india-some-say-natural-farming-is-answer-to-extreme-weather-92535.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">14 April 2024</span><br/>
+<p>The American space agency NASA has announced new efforts to develop and test vehicles designed to explore the moon.</p>
+<p>Earlier this month, NASA said it had chosen three private companies to design lunar explorers to be used as part of its Artemis program. Artemis aims to return astronauts to the moon for the first time since 1972. NASA has set a target landing date of September 2026 to place astronauts on the moon once again.</p>
+<p>NASA announced the names of three companies that will each propose designs for the new vehicles. They are Texas-based Intuitive Machines, Lunar Outpost of Colorado and Venturi Astrolab of California. The space agency <a class="wsw__a" href="https://www.nasa.gov/news-release/nasa-selects-companies-to-advance-moon-mobility-for-artemis-missions/">said</a> it will consider the designs of all three companies, but will only award one of them a development contract.</p><div class="contentImage"><img alt="This artist's concept depicts the design of NASA's Lunar Terrain Vehicle (LTV). (Image Credit: NASA)" src="https://files.21voa.com/gdb/01000000-0a00-0242-c920-08dc5b141b50_w268_r1.png"/><br/><span class="imagecaption">This artist's concept depicts the design of NASA's Lunar Terrain Vehicle (LTV). (Image Credit: NASA)</span></div>
+<p>NASA describes the explorer it wants built as a Lunar <strong>Terrain</strong> Vehicle (LTV). It said the contract involving the project would be worth up to $4.6 billion over 15 years. The winning company will be expected to produce a full demonstration vehicle.</p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>The company Intuitive Machines developed a private moon lander that <a class="wsw__a" href="https://www.21voa.com/a/private-spacecraft-makes-first-us-moon-landing-in-more-than-50-years/7500002.html">successfully touched down</a> on the moon in February. The company announced late last month that the lander, called Odysseus, had powered down permanently after carrying out several research experiments.</p>
+<p>Jacob Bleacher is NASA's chief exploration scientist. He told reporters the LTV will be an important step in establishing "a longer-term exploration and presence on the moon." He added, "I like to imagine the views and the <strong>vistas</strong> that the LTV will enable us to see from the surface of the moon."</p>
+<p>NASA said it will aim to launch the LTV for astronaut activities on the moon during Artemis V. This part of the Artemis program is currently set for 2030, NASA's latest budget request shows. NASA said it plans to test the vehicle on the surface of the moon before Artemis V arrives.</p>
+<p>Astronauts will use the LTV "to travel around the lunar surface, <strong>conducting</strong> scientific research during the agency's Artemis campaign at the moon and preparing for human missions to Mars," NASA said.</p>
+<p>NASA officials say the LTV will need to be able to survive the extreme conditions found at the Artemis landing site at the moon's South Pole. This will require the vehicle to have a strong and dependable power system and the latest in communications and navigation technologies.</p>
+<p>The vehicle will also need the ability to explore the moon on its own without astronaut drivers. The LTV will carry out exploration activities including transporting scientific equipment and collecting materials on the lunar surface. NASA said these abilities will permit astronauts to carry out research activities in a very wide area.</p>
+<p>"We will use the LTV to travel to<strong> locations </strong>we might not otherwise be able to reach on foot, increasing our ability to explore and make new scientific discoveries," Bleacher said.</p>
+<p>NASA said the contract includes technical services as well as equipment. The agency said all the companies chosen had agreed to carry out the agency's exact technical requirements for the LTV.</p>
+<p>Venturi Astrolab said its planned vehicle, called FLEX, is designed to carry two astronauts, support scientific exploration with a robotic arm...and withstand the extreme temperatures at the lunar South Pole."</p>
+<p>Lunar Outpost said it was working with partners including American companies Lockheed Martin, General Motors, Goodyear and Canada's MDA Space.</p>
+<p>Lunar Outpost leader Justin Cyrus told the French news agency AFP that the company plans to use its expertise in technology and the automotive industry "to provide a true off-road vehicle capable of <strong>allowing</strong> us to live and work on the surface of the moon."</p>
+<p>Lunar Outpost is planning to put a small, crewless explorer on the Moon later this year, as part of Intuitive Machines' next lander mission.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from NASA and Agence France-Presse. </em></p>
+<p><strong>___________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>terrain </strong><em>– n. </em>a particular kind of land</p>
+<p><strong>vista </strong><em>– n. </em>a pleasing view, especially one enjoyed from a high place</p>
+<p><strong>conduct </strong><em>– v.</em> to organize or do something</p>
+<p><strong>location </strong><em>– n. </em>a place or position; site</p>
+<p><strong>allow </strong><em>– v. </em>to permit</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

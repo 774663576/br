@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Gardening Words even English Speakers May Not Know</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Gardening Words even English Speakers May Not Know" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/gardening-words-even-english-speakers-may-not-know.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Gardening Words even English Speakers May Not Know</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/gardening-words-even-english-speakers-may-not-know.mp3" id="mp3"></a>
+<a href="/static/lrc/gardening-words-even-english-speakers-may-not-know.lrc" id="lrc"></a>
+<a href="scientists-use-quantum-computer-for-teleportation-experiment-90083.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">05 December 2022</span><br/>
+<p>Do you <strong>garden</strong> in English or another language?</p>
+<p>Associated Press writer Jessica Damiano spent 2022 writing about gardening. She wrote about how to prepare your plants and soil for the winter. She also gave advice on gardening in shady places, or areas without much direct sunlight. She gave guidance on issues as different as insect control and saving and storing seeds.</p>
+<p>Most recently Damiano wrote about the language of gardening, providing meanings to some unusual words used in the field.</p><div class="contentImage"><img alt="This July 2021 photo provided by Jessica Damiano shows newly harvested golden beets in Glen Head, N.Y. Beets and other root crops thrive in cool temperatures, making them ideal to plant in summer for a fall harvest. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/01460000-0aff-0242-bac8-08da64268ff0_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This July 2021 photo provided by Jessica Damiano shows newly harvested golden beets in Glen Head, N.Y. Beets and other root crops thrive in cool temperatures, making them ideal to plant in summer for a fall harvest. (Jessica Damiano via AP)</span></div>
+<p>For example, do you know what scarification is? Sounds like what happens when you see a ghost. But there are no ghosts in our gardens! Gardeners scarify seeds by making little cuts, or roughening, their hard outer covers. The act helps the seeds to germinate<strong>.</strong></p>
+<p>When a seed germinates it begins to grow.</p>
+<p>Another technical gardening term that sounds mysterious, even to many native English speakers, is xeriscaping. It simply describes a way to garden with plants that do not need much water.</p>
+<p>Damiano's words are even more difficult for people who do not speak English as a first language. Some of the gardening words are more commonly used in other ways.</p>
+<p>For example, how about the word broadcast? You might think of the word when you are watching a television program or listening to a report from Voice of America on the radio. However, in the gardening world, broadcast means to spread seeds over a large area instead of planting in single, straight lines.</p>
+<p>Damiano also includes the word amendment in her list. If you are familiar with VOA stories about the United States Constitution, you may think you know the word amendment. An amendment is a change to the constitution. For example, the first amendment guarantees freedom of speech, religion and the press.</p>
+<p>But in gardening, the word amendment has to do with material added to soil as a way to make it more fertile. <strong>Compost</strong> or animal waste is a soil amendment.</p>
+<p>Below, see Damiano's list of 35 "<strong>elusive</strong>" words all gardeners should know.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for VOA Learning English based on a story by Jessica Damiano of the Associated Press.</em></p>
+<p>_____________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Gardening Words to Know</strong></h2>
+<p><strong>Aerate</strong>- v. Poking holes into compacted soil with a garden fork or aeration machine to facilitate the flow of oxygen to plant roots.</p>
+<p><strong>Amendment</strong>-<strong> </strong>n. Organic matter such as compost or manure added to soil to improve its fertility, drainage, water retention or structure.</p>
+<p><strong>Annual</strong>- n.<strong> </strong>A plant that completes its lifecycle in one year, regardless of climate.</p>
+<p><strong>Bare root</strong>- Plants, typically roses, trees and shrubs, that are dug out of the ground and sold without soil or containers.</p>
+<p><strong>Biennial</strong>- n.<strong> </strong>A plant that completes its lifecycle in two years.</p>
+<p><strong>Bolting</strong>-<strong> </strong>v.<strong> </strong>Premature flowering of crops like lettuce and beets that renders them bitter or otherwise lessens their quality.</p>
+<p><strong>Botanical name</strong>- n. The name assigned to a plant using the Latin-based terminology developed by the Swedish botanist Carolus Linnaeus in the 1700s. Using a plant's botanical name (also referred to as its "scientific name") eliminates the risk of confusing it with other plants.</p>
+<p><strong>Broadcast</strong>- v. Spreading seeds over a large area, either by hand or machine, instead of planting in rows.</p>
+<p><strong>Cloche</strong>- n. A traditionally bell-shaped item placed over plants to protect them from insect or frost damage.</p>
+<p><strong>Cold frame</strong>- n. An enclosure placed around plants to create a greenhouse effect and extend the growing season.</p>
+<p><strong>Common name</strong>- n.<strong> </strong>A nickname used in certain circles or geographical regions to describe a plant. Because different plants can share a common name -- and one plant can have several -- their use can confuse gardeners.</p>
+<p><strong>Companion planting</strong>- v.<strong> </strong>Grouping specific plants together based on the benefits they provide for each other. Those benefits can include attracting pollinators, deterring pests or serving as a living trellis.</p>
+<p><strong>Deadheading</strong>- v.<strong> </strong>The practice of removing spent – or dead – flowers from a plant to encourage repeat blooming, prevent self-sowing or simply keep plants looking tidy.</p>
+<p><strong>Deciduous</strong>- adj. Plants, trees or shrubs that lose their leaves in autumn or winter.</p>
+<p><strong>Direct sow</strong>- v. Planting seeds directly into the garden rather than starting them in containers indoors and transplanting them outdoors later.</p>
+<p><strong>Ephemeral</strong>- adj. A plant that emerges and fades relatively quickly, often in spring.</p>
+<p><strong>Evergreen</strong>- n. Plants, trees or shrubs that do not lose their leaves in autumn or winter but remain green year-round.</p>
+<p><strong>Foliar feeding</strong>- v. Applying liquid fertilizer directly to leaves rather than soil.</p>
+<p><strong>Germination</strong>- n. The initial growth of a sprout from a seed.</p>
+<p><strong>Harden off</strong>- v. The process of gradually acclimating a plant to a different, usually harsher, climate, such as outdoors from indoors, in order to increase its resiliency.</p>
+<p><strong>Heirloom</strong>: adj. A plant in its original form that has not been hybridized or cross-pollinated with other species or varieties. Heirloom seeds reliably produce plants that "grow true" or hold the same characteristics as the plants from which they were collected.</p>
+<p><strong>Hill</strong>- v. The practice of mounding soil up against new above-ground growth, as is done with potato plants.</p>
+<p><strong>Hybrid</strong>- adj. A plant variety that has been deliberately cultivated in a controlled setting, usually by cross-pollinating, in order to acquire new, desirable characteristics such as bloom color, disease resistance, fragrance, size, hardiness, taste or shelf life, among others.</p>
+<p><strong>Naturalize</strong>- v. The practice of scattering seeds or bulbs in such a way that they either appear to have spread naturally or, in areas such as the lawn, where they are allowed to spread without boundaries.</p>
+<p><strong>Organic matter</strong>- n. Non-synthetic material, such as decomposed plants and animals, manure, compost and leaf mold, used to improve the fertility, structure and other attributes of soil.</p>
+<p><strong>Perennial</strong>- adj. Plants with a lifecycle that is longer than two years. Perennials may die back to the ground over winter and return year after year or remain evergreen throughout their lifespan.</p>
+<p><strong>pH</strong>- n. In gardening, the pH scale determines the acidity or alkalinity of soil, compost and water. The lower the reading, the more acidic the soil; the higher the reading, the more alkaline. A reading of 7.0 is considered neutral.</p>
+<p><strong>Pinching</strong>- n.<strong> </strong>The practice of using your thumb and index finger to remove small shoots and stems, usually to encourage the growth of side shoots.</p>
+<p><strong>Scarification</strong>- n. The act of scratching, cutting, nicking or otherwise lightly damaging the hard surface of a seed to facilitate germination.</p>
+<p><strong>Self-seeding</strong>- adj. A term used to describe plants that spread by dropping seeds onto the soil around them. Those seeds germinate, root and grow into more plants. Also called "self-sowing."</p>
+<p><strong>Side dress</strong>- v.<strong> </strong>To sprinkle a line of granular, powdered or pelleted fertilizer (or other amendments) alongside a row of plants rather than incorporate it into the soil or planting hole.</p>
+<p><strong>Stratification</strong>- n.<strong> </strong>The process of exposing seeds or bulbs to cold temperatures, typically in a refrigerator or freezer, to emulate the outdoor winter conditions necessary for successful spring germination.</p>
+<p><strong>Top dress</strong>- v. To apply fertilizer or amendments like compost or manure directly to the soil above and around plants.</p>
+<p><strong>Wet feet</strong>- adj. Wet roots, usually resulting from poorly draining or oversaturated soil.</p>
+<p><strong>Xeriscaping</strong>- v. The use of drought-tolerant plants in the landscape for water-conservation purposes. Also called "water-wise gardening."</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Gardening Words even English Speakers May Not Know]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Do you garden in English or another language?
+[00:03.24]Associated Press writer Jessica Damiano
+[00:07.00]spent 2022 writing about gardening.
+[00:11.20]She wrote about how to prepare your plants and soil for the winter.
+[00:16.40]She also gave advice on gardening in shady places
+[00:21.84]or areas without much direct sunlight.
+[00:24.72]She gave guidance on issues as different
+[00:28.32]as insect control and saving and storing seeds.
+[00:33.76]Most recently Damiano wrote about the language of gardening,
+[00:38.72]providing meanings to some unusual words used in the field.
+[00:44.60]For example, do you know what scarification is?
+[00:48.52]Sounds like what happens when you see a ghost.
+[00:52.56]But there are no ghosts in our gardens!
+[00:56.88]Gardeners scarify seeds by making little cuts,
+[01:01.76]or roughening, their hard outer covers.
+[01:06.08]The act helps the seeds to germinate.
+[01:09.12]When a seed germinates it begins to grow.
+[01:13.16]Another technical gardening term that sounds mysterious,
+[01:17.44]even to many native English speakers, is xeriscaping.
+[01:22.40]It simply describes a way to garden with plants
+[01:26.64]that do not need much water.
+[01:29.12]Damiano's words are even more difficult for people
+[01:32.88]who do not speak English as a first language.
+[01:35.96]Some of the gardening words
+[01:38.76]are more commonly used in other ways.
+[01:42.80]For example, how about the word broadcast?
+[01:46.48]You might think of the word
+[01:48.36]when you are watching a television program
+[01:50.88]or listening to a report from Voice of America on the radio.
+[01:55.44]However, in the gardening world,
+[01:58.72]broadcast means to spread seeds over a large area
+[02:02.20]instead of planting in single, straight lines.
+[02:06.64]Damiano also includes the word amendment in her list.
+[02:12.00]If you are familiar with VOA stories
+[02:14.32]about the United States Constitution,
+[02:16.84]you may think you know the word amendment.
+[02:20.60]An amendment is a change to the constitution.
+[02:24.32]For example, the first amendment guarantees
+[02:27.72]freedom of speech, religion and the press.
+[02:33.04]But in gardening, the word amendment has to do with material
+[02:37.52]added to soil as a way to make it more fertile.
+[02:41.20]Compost or animal waste is a soil amendment.
+[02:46.48]Below, see Damiano's list of 35 "elusive" words
+[02:52.24]all gardeners should know.
+[02:55.48]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

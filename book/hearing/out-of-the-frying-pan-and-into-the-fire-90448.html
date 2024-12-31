@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Out of the Frying Pan and Into the Fire</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Out of the Frying Pan and Into the Fire" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/out-of-the-frying-pan-and-into-the-fire.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Out of the Frying Pan and Into the Fire</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/out-of-the-frying-pan-and-into-the-fire.mp3" id="mp3"></a>
+<a href="/static/lrc/out-of-the-frying-pan-and-into-the-fire.lrc" id="lrc"></a>
+<a href="first-all-female-samba-school-to-compete-in-brazil-s-carnival-90446.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">18 February 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore idioms, or expressions, in the English language. We give examples and notes on usage. And, sometimes we even use them in short stories.</p>
+<p>Today we talk about bad situations. Sometimes we think a situation is very bad. We cannot imagine that it can get any worse. But then it does.</p><div class="contentImage"><img alt="People jump over a campfire as they take part in the Ivan Kupala festival in Belarusian state museum of folk architecture and rural lifestyle near the village Aziarco, July 4, 2020." src="https://files.21voa.com/gdb/99bdb33b-4b88-4546-9de6-74eddd0ef743_w268_r1.jpg"/><br/><span class="imagecaption">People jump over a campfire as they take part in the Ivan Kupala festival in Belarusian state museum of folk architecture and rural lifestyle near the village Aziarco, July 4, 2020.</span></div>
+<p>We have an expression for just that situation – <u>out of the frying pan and into the fire</u>.</p>
+<p>Imagine we are camping. The area is near a small river. So, for dinner, we decide to go fishing. Fish cooked over a campfire is a tasty meal indeed. We start the fire. We add butter and onions to the frying pan. When it heats up, we add the fish.</p>
+<p>In the frying pan, the fish is in a very bad situation. It <strong>flips</strong> violently back and forth. It tries to get out of the hot frying pan. Finally, the fish flips out of the frying pan but lands in the fire.</p>
+<p>The idiom <u>out of the frying pan and into the fire</u> means you leave a bad situation purposefully only to find yourself in a much worse situation. You thought you were improving it, but the opposite happened.</p>
+<p>Sometimes, this saying describes a choice between two equally difficult <strong>options</strong>.</p>
+<p>Here is another example. Let's say your friend complains about his job all the time. He says his <strong>commute</strong> to the office is too long and the pay is too low. You remind him that he gets great benefits, and he has the freedom to set his own hours. You tell him that no job is perfect. But he does not listen. He leaves his job and starts another one. When you talk to him a month later, this is how the conversation might go.</p>
+<p><em>A: Hey, how is the new job going?</em></p>
+<p><em>B: To be honest ... not so good.</em></p>
+<p><em>A: Oh no! What's wrong?</em></p>
+<p><em>B: Well, I used to set my own hours. My new job has a <strong>strict </strong>9-to-5 policy. </em></p>
+<p><em>A: Being about to set your own hours is a big plus. </em></p>
+<p><em>B: And my <strong>take-home</strong> pay might be more. But I have to pay so much more for health insurance. And I have to pay for a parking space. </em></p>
+<p><em>A: Sounds like you've jumped <u>out of the frying pan and into the fire.</u></em></p>
+<p><em>B: Please don't <strong>remind</strong> me. </em></p>
+<p>And here is a final note on usage. If the friend in this conversation simply said, "Sounds like you just jumped <u>out of the frying pan</u>," we would know they mean this expression.</p>
+<p>Some word experts say this phrase comes from very early Greek poetry. Those early poets used the expression to describe the process of trying to escape smoke and getting burned by the flames instead.</p>
+<p>And that's all the time we have for this<em> Words and Their Stories.</em></p>
+<p>Do you have a question about an idiom or expression? Send us an email to voalearningenglish.com and let us know!</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>flip </strong><em>– v.</em><strong> </strong>to toss so as to cause to turn over in the air</p>
+<p><strong>option </strong><em>– n. </em>something that may be chosen</p>
+<p><strong>commute</strong> <em>– n. </em>the distance covered from one place to another</p>
+<p><strong>strict </strong><em>– adj. </em>severe in discipline</p>
+<p><strong>take-home pay</strong> <em>– adj. </em>income remaining from salary or wages after deductions (as for income-tax withholding)</p>
+<p><strong>remind </strong><em>– v. </em>to put in mind of something <strong>: </strong>cause to remember</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Out of the Frying Pan and Into the Fire]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.52]And now, Words and Their Stories, from VOA Learning English.
+[00:18.36]On this program, we explore idioms, or expressions,
+[00:22.32]in the English language.
+[00:24.36]We give examples and notes on usage.
+[00:28.16]And, sometimes we even use them in short stories.
+[00:33.80]Today we talk about bad situations.
+[00:38.16]Sometimes we think a situation is very bad.
+[00:42.20]We cannot imagine that it can get any worse.
+[00:46.32]But then it does.
+[00:50.12]We have an expression for just that situation –
+[00:53.68]out of the frying pan and into the fire.
+[00:59.24]Imagine we are camping.
+[01:01.40]The area is near a small river.
+[01:04.72]So, for dinner, we decide to go fishing.
+[01:09.00]Fish cooked over a campfire is a tasty meal indeed.
+[01:14.56]We start the fire. We add butter and onions to the frying pan.
+[01:20.80]When it heats up, we add the fish.
+[01:23.96]In the frying pan, the fish is in a very bad situation.
+[01:29.36]It flips violently back and forth.
+[01:33.80]It tries to get out of the hot frying pan.
+[01:37.44]Finally, the fish flips out of the frying pan but lands in the fire.
+[01:45.60]The idiom out of the frying pan and into the fire
+[01:49.64]means you leave a bad situation purposefully
+[01:54.08]only to find yourself in a much worse situation.
+[01:59.68]You thought you were improving it,
+[02:02.16]but the opposite happened.
+[02:05.56]Sometimes, this saying describes a choice
+[02:09.24]between two equally difficult options.
+[02:14.16]Here is another example.
+[02:16.76]Let's say your friend complains about his job all the time.
+[02:22.76]He says his commute to the office is too long and the pay is too low.
+[02:29.48]You remind him that he gets great benefits,
+[02:32.72]and he has the freedom to set his own hours.
+[02:37.20]You tell him that no job is perfect.
+[02:40.60]But he does not listen.
+[02:44.24]He leaves his job and starts another one.
+[02:48.24]When you talk to him a month later,
+[02:51.48]this is how the conversation might go.
+[02:55.40]A: Hey, how is the new job going?
+[02:58.16]B: To be honest ... not so good.
+[03:01.40]A: Oh no! What's wrong?
+[03:04.24]B: Well, I used to set my own hours.
+[03:07.24]My new job has a strict 9-to-5 policy.
+[03:11.92]A: Being about to set your own hours is a big plus.
+[03:16.28]B: And my take-home pay might be more.
+[03:20.00]But I have to pay so much more for health insurance.
+[03:24.00]And I have to pay for a parking space.
+[03:27.72]A: Sounds like you've jumped out of the frying pan and into the fire.
+[03:32.44]B: Please don't remind me.
+[03:36.04]And here is a final note on usage.
+[03:39.64]If the friend in this conversation simply said,
+[03:43.36]"Sounds like you just jumped out of the frying pan,"
+[03:47.20]we would know they mean this expression.
+[03:52.04]Some word experts say this phrase comes from very early Greek poetry.
+[03:58.24]Those early poets used the expression to describe the process
+[04:03.32]of trying to escape smoke
+[04:06.04]and getting burned by the flames instead.
+[04:11.04]And that's all the time we have for this Words and Their Stories.
+[04:15.20]Do you have a question about an idiom or expression?
+[04:19.16]Send us an email to voalearningenglish.com and let us know!
+[04:25.76]Until next time ... I'm Anna Matteo.
+[04:28.72]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

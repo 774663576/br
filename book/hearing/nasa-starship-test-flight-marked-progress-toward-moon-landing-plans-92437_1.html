@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 星舰试飞标志着登月计划取得重大进展</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 星舰试飞标志着登月计划取得重大进展" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/nasa-starship-test-flight-marked-progress-toward-moon-landing-plans.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>星舰试飞标志着登月计划取得重大进展</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/nasa-starship-test-flight-marked-progress-toward-moon-landing-plans.mp3" id="mp3"></a>
+<a href="/static/lrc/nasa-starship-test-flight-marked-progress-toward-moon-landing-plans.lrc" id="lrc"></a>
+<a href="nasa-starship-test-flight-marked-progress-toward-moon-landing-plans-92437.html" id="CnPage" target="_blank"></a>
+<a href="historic-bridges-are-under-threat-from-modern-gps-92432.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The American space agency NASA says the recent test flight of SpaceX's Starship rocket demonstrated progress in several important areas even though the rocket was lost.<br/>
+美国宇航局表示，太空探索技术公司星舰火箭最近的试飞表明其在几个重大领域取得了进展，尽管火箭最后飞丢了。</p>
+<p>NASA is planning to use Starship to carry the first astronauts to the moon since the agency's Apollo 17 mission in 1972. But the spacecraft will have to pass additional testing before a moon mission.<br/>
+美国宇航局计划使用星舰搭载自1972年阿波罗17号任务以来的第一批宇航员登月。但在执行月球任务之前，航天器必须通过额外的测试。</p>
+<p>Such a mission would be part of NASA's Artemis program. The next planned trip in that program will be Artemis II, which is set for September 2025. NASA aims to send astronauts into orbit around the moon but will not attempt a landing on the lunar surface.<br/>
+这项任务是美国宇航局阿尔忒弥斯项目的一部分。该项目的下一次计划之旅将是阿尔忒弥斯2号任务，定于2025年9月发射升空。美国宇航局的目标是将宇航员送入绕月轨道，但不会尝试在月球表面着陆。</p>
+<p>Artemis III, planned for September 2026, will attempt to land astronauts on the surface of the moon. SpaceX's Starship rocket has been chosen for this mission.<br/>
+计划于2026年9月发射的阿尔忒弥斯3号任务将试图让宇航员登上月球表面。太空探索技术公司的星舰火箭已被选中执行此次任务。</p>
+<p>Both Artemis II and Artemis III have faced delays in planned launches.<br/>
+阿尔忒弥斯2号和阿尔忒弥斯3号都面临计划发射推迟。</p>
+<p>SpaceX's latest test flight of Starship took place on March 14. Starship was able to travel farther than ever before during the flight. But the rocket broke apart when attempting to re-enter Earth's atmosphere.<br/>
+太空探索技术公司最新的星舰试飞于3月14日进行。在这次飞行中，星舰比以往任何时候都能飞得更远。但火箭在试图重新进入地球大气层时解体了。</p>
+<p>At the time it broke apart, Starship was nearing a planned splashdown in the Indian Ocean, about one hour after launching from southern Texas.<br/>
+解体时间是星舰从德克萨斯州南部发射约一小时后，当时它正接近计划在印度洋溅落。</p>
+<p>During a live broadcast of the test flight, SpaceX confirmed that the rocket had been "lost" upon its re-entry attempt. Starship is designed to be reused.<br/>
+在试飞的现场直播中，太空探索技术公司证实该火箭在试图重返大气层时“飞丢”了。星舰被设计为可重复使用。</p>
+<p>Two Starship test flights last year both ended in explosions minutes after liftoff. By surviving for close to 50 minutes in its latest test, both SpaceX and NASA considered the effort a success.<br/>
+去年的两次星舰试飞都在升空几分钟后以爆炸告终。它在最新的试飞中维持了近50分钟，让太空探索技术公司和美国宇航局都认为这一努力是成功的。</p>
+<p>NASA chief Bill Nelson praised Starship's test after the launch on X. "Congrats to @SpaceX on a successful test flight! Starship has soared into the heavens. Together, we are making great strides through Artemis to return humanity to the Moon—then look onward to Mars."<br/>
+美国宇航局局长比尔·纳尔逊于发射后在X网站上赞扬了这次星舰试飞：“祝贺SpaceX试飞成功！‘星舰’飞上天了。我们一起在阿耳忒弥斯计划中取得了巨大进步，要让人类重返月球，然后飞向火星。”</p>
+<p>In a statement, NASA described the ways Starship's test brought the agency closer to being ready to fly astronauts to the moon.<br/>
+美国宇航局在一份声明中描述了星舰试飞如何使该机构更接近于准备好将宇航员送上月球。</p>
+<p>The space agency noted the rocket used its six Raptor engines to successfully separate from its first-stage Super Heavy booster. The Super Heavy itself was powered by 33 Raptor engines.<br/>
+美国宇航局指出，该火箭使用了六台猛禽发动机，成功地与第一级超重型助推器分离。超重型助推器本身由33台猛禽发动机提供动力。</p>
+<p>During a Starship launch test last April, several of the booster's 33 methane-fueled engines failed and the booster did not separate from the spacecraft. This caused the whole vehicle to explode and crash into the sea four minutes after liftoff.<br/>
+在去年4月的一次星舰发射测试中，助推器的33台甲烷燃料发动机中有几台出现故障，并且助推器没有与航天器分离。这导致整个火箭在升空四分钟后爆炸并坠入大海。</p>
+<p>SpaceX was able to double the length of the flight during another test in November. While all 33 engines fired and the booster fell away as planned, the flight ended in a pair of explosions, first the booster and then the spacecraft.<br/>
+太空探索技术公司在11月的另一次测试中将飞行距离增加了一倍。当33台发动机全部启动，助推器按计划分离时，飞行以两次爆炸结束，首先是助推器爆炸，然后是飞船爆炸。</p>
+<p>The U.S. Federal Aviation Administration (FAA) examined all the corrections made to Starship before approving the March 14 flight. The FAA said it was also investigating results of the latest flight.<br/>
+美国联邦航空管理局在批准3月14日的飞行之前，审查了对星舰的所有修正。美国联邦航空局表示，他们也在调查最近一次飞行的结果。</p>
+<p>The tests are important for NASA and SpaceX. They permit engineers "to test key systems and processes in flight scenarios" in an attempt to gather data to support the continued development of Starship, said Lisa Watson-Morgan. She is the Program Manager for the Starship program at NASA's Marshall Space Flight Center in Huntsville, Alabama.<br/>
+这些测试对美国宇航局和太空探索技术公司都很重要。丽莎·沃特森-摩根表示，这允许工程师“在飞行场景中测试关键系统和流程”，试图收集数据以支持星舰的持续开发。她是阿拉巴马州亨茨维尔市美国宇航局马歇尔太空飞行中心星舰项目的项目经理。</p>
+<p>SpaceX officials have said they plan to carry out at least six more test flights of Starship this year, if the company receives all necessary government approvals.<br/>
+太空探索技术公司官员表示，如果该公司获得所有必要的政府批准，他们计划今年至少再进行6次星舰试飞。</p>
+<p>I'm Bryan Lynn.<br/>
+我是布莱恩·林恩。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:NASA: Starship Test Flight Marked Progress toward Moon Landing Plans]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The American space agency NASA
+[00:03.44]says the recent test flight of SpaceX's Starship rocket
+[00:09.00]demonstrated progress in several important areas
+[00:13.16]even though the rocket was lost.
+[00:16.16]NASA is planning to use Starship
+[00:20.60]to carry the first astronauts to the moon
+[00:23.80]since the agency's Apollo 17 mission in 1972.
+[00:29.80]But the spacecraft will have to pass
+[00:32.84]additional testing before a moon mission.
+[00:37.16]Such a mission would be part of NASA's Artemis program.
+[00:42.72]The next planned trip in that program will be Artemis II,
+[00:48.00]which is set for September 2025.
+[00:52.20]NASA aims to send astronauts into orbit around the moon
+[00:57.40]but will not attempt a landing on the lunar surface.
+[01:01.40]Artemis III, planned for September 2026,
+[01:06.56]will attempt to land astronauts on the surface of the moon.
+[01:11.40]SpaceX's Starship rocket has been chosen for this mission.
+[01:17.08]Both Artemis II and Artemis III
+[01:21.48]have faced delays in planned launches.
+[01:25.32]SpaceX's latest test flight of Starship
+[01:29.76]took place on March 14.
+[01:32.60]Starship was able to travel
+[01:35.32]farther than ever before during the flight.
+[01:38.64]But the rocket broke apart
+[01:41.36]when attempting to re-enter Earth's atmosphere.
+[01:45.40]At the time it broke apart,
+[01:48.48]Starship was nearing a planned
+[01:51.08]splashdown in the Indian Ocean,
+[01:53.76]about one hour after launching from southern Texas.
+[01:58.12]During a live broadcast of the test flight,
+[02:02.04]SpaceX confirmed that the rocket
+[02:05.44]had been "lost" upon its re-entry attempt.
+[02:09.28]Starship is designed to be reused.
+[02:12.96]Two Starship test flights last year
+[02:16.44]both ended in explosions minutes after liftoff.
+[02:20.92]By surviving for close to 50 minutes in its latest test,
+[02:26.68]both SpaceX and NASA considered the effort a success.
+[02:32.04]NASA chief Bill Nelson praised Starship's test
+[02:37.12]after the launch on X.
+[02:39.48]"Congrats to @SpaceX on a successful test flight!
+[02:44.08]Starship has soared into the heavens.
+[02:47.16]Together, we are making great strides
+[02:49.96]through Artemis to return humanity
+[02:53.32]to the Moon—then look onward to Mars."
+[02:57.08]In a statement, NASA described
+[02:59.92]the ways Starship's test brought the agency closer
+[03:04.92]to being ready to fly astronauts to the moon.
+[03:08.48]The space agency noted
+[03:10.96]the rocket used its six Raptor engines
+[03:14.80]to successfully separate
+[03:16.72]from its first-stage Super Heavy booster.
+[03:20.68]The Super Heavy itself was powered
+[03:23.44]by 33 Raptor engines.
+[03:26.72]During a Starship launch test last April,
+[03:30.52]several of the booster's 33 methane-fueled engines failed
+[03:36.00]and the booster did not separate from the spacecraft.
+[03:39.88]This caused the whole vehicle to explode
+[03:43.76]and crash into the sea four minutes after liftoff.
+[03:48.28]SpaceX was able to double the length of the flight
+[03:52.80]during another test in November.
+[03:55.12]While all 33 engines fired
+[03:58.52]and the booster fell away as planned,
+[04:01.76]the flight ended in a pair of explosions,
+[04:05.20]first the booster and then the spacecraft.
+[04:08.80]The U.S. Federal Aviation Administration (FAA)
+[04:13.76]examined all the corrections made to Starship
+[04:17.68]before approving the March 14 flight.
+[04:21.12]The FAA said it was also
+[04:23.92]investigating results of the latest flight.
+[04:27.96]The tests are important for NASA and SpaceX.
+[04:32.16]They permit engineers "to test key systems
+[04:36.00]and processes in flight scenarios" in an attempt
+[04:40.28]to gather data to support
+[04:42.36]the continued development of Starship,
+[04:45.40]said Lisa Watson-Morgan.
+[04:48.24]She is the Program Manager for the Starship program
+[04:52.92]at NASA's Marshall Space Flight Center
+[04:56.44]in Huntsville, Alabama.
+[04:59.12]SpaceX officials have said they plan to carry out
+[05:03.32]at least six more test flights of Starship this year,
+[05:08.36]if the company receives all necessary
+[05:11.56]government approvals.
+[05:14.28]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

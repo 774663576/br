@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What White House Gardens Say about America</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, What White House Gardens Say about America" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/what-white-house-gardens-say-about-america.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What White House Gardens Say about America</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/what-white-house-gardens-say-about-america.mp3" id="mp3"></a>
+<a href="/static/lrc/what-white-house-gardens-say-about-america.lrc" id="lrc"></a>
+<a href="millions-infected-with-dengue-as-temperature-rises-91987.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">25 December 2023</span><br/>
+<p>The earliest presidents who lived in the White House did not want the large outdoor areas that the <strong>monarchs</strong> of Europe might enjoy.</p>
+<p>Marta McDowell is writer of <em>All the Presidents' Gardens. </em>She said, "You can understand that, given our democratic form of government." But she said she thinks that a visit to the home of the British royal family, Buckingham Palace, caused President John Kennedy to expand the White House <strong>gardens</strong>.</p>
+<p>From the start, presidents and their families influenced the 7.2 hectares of open space in the front and back of the White House differently. Their choices often showed their values and traditions of their day.</p><div class="contentImage"><img alt="FILE - A view of the restored Rose Garden at the White House in Washington, Saturday, Aug. 22, 2020. (AP Photo/Susan Walsh)" src="https://files.21voa.com/gdb/01000000-0aff-0242-637d-08dbfcd82e88_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - A view of the restored Rose Garden at the White House in Washington, Saturday, Aug. 22, 2020. (AP Photo/Susan Walsh)</span></div>
+<p>McDowell said that the White House is "really their home" while they are in office. She added that as long as they work with the historic plan of the gardens the National Park Service tries to meet the desires of the administration. The National Park Service oversees the gardens.</p>
+<p>John Quincy Adams, America's sixth president, worked in the garden. Theodore Roosevelt, the 26th president, took down glass structures called greenhouses that were first built by James Buchanan, the 15th president, in the 1850s.</p>
+<p>John Kennedy, the 35th president, redesigned one garden called the Rose Garden in the 1960s. First lady Michelle Obama, wife of the 44th president, built a food garden using plants and seeds from the home of Thomas Jefferson, the third president. Today, the garden has more than 50 kinds of vegetables.</p>
+<p>Pierre L'Enfant was the city planner and <strong>architect</strong> for America's first president, George Washington. At first, he planned for a 30-hectare presidential garden. However, as a believer in small government, Jefferson reduced the White House grounds to just 2 hectares. The gardens were expanded to the current 7.2 hectares</p>
+<p>Jefferson, like many Americans who had just freed themselves from a British monarch, was concerned about creating a new <strong>king</strong>.</p>
+<p>"Avoid <strong>palaces</strong> and gardens of palaces," William Thornton, a Washington city representative warned. "If you build a palace with gardens, I will find you a king."</p>
+<p>Over time, several different plants and flowers were planted at the White House. They include roses which have been around since at least Jefferson's time. They also include peonies, wanted by first lady first lady Nancy Reagan of the 40th president, and Texas bluebells, asked for by first lady Laura Bush of the 43rd president.</p>
+<p>Oak and elm trees have also been on the White House grounds almost since the beginning. One tree, a chestnut oak southeast of the White House, might be the oldest tree on the grounds. The White House says it has been around since 1800.</p>
+<p>McDowell says the White House gardens represent gardening tradition over time. First it followed designs in Europe, and then it was shaped by local traditions, the area, and the climate.</p>
+<p>But she said, "It's not that they are always the leader. In fact, sometimes they're following."</p>
+<p>The White house grounds were open to the public up until 1923. That was when Calvin Coolidge, the 30th president, permanently closed them to unapproved visitors.</p>
+<p>These days, the White House Garden planned visits for the public are usually available for the public twice a year, one weekend in the spring and again in autumn.</p>
+<p>McDowell said, "They are full of tradition. They're full of beauty."</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Dora Mekouar reported this story for Voice of America. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>monarch </strong>– <em>n</em>. a person (such as a king or queen) who rules a kingdom or empire</p>
+<p><strong>garden </strong>– <em>n</em>. an area of ground where plants (such as flowers or vegetables) are grown</p>
+<p><strong>architect </strong>– <em>n</em>. a person who designs buildings</p>
+<p><strong>king </strong>– <em>n</em>. a male ruler of a country who usually inherits his position and rules for life</p>
+<p><strong>palace </strong>– <em>n</em>. the official home of a king, queen, or president</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:What White House Gardens Say about America]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The earliest presidents who lived in the White House
+[00:04.64]did not want the large outdoor areas
+[00:08.32]that the monarchs of Europe might enjoy.
+[00:12.92]Marta McDowell is writer of
+[00:16.40]All the Presidents' Gardens.
+[00:20.00]She said, "You can understand that,
+[00:23.32]given our democratic form of government."
+[00:27.60]But she said she thinks that a visit
+[00:30.48]to the home of the British royal family,
+[00:34.04]Buckingham Palace, caused President John Kennedy
+[00:38.64]to expand the White House gardens.
+[00:42.44]From the start, presidents and their families
+[00:46.00]influenced the 7.2 hectares
+[00:49.92]of open space in the front and back
+[00:53.64]of the White House differently.
+[00:56.88]Their choices often showed their values
+[01:00.12]and traditions of their day.
+[01:03.64]McDowell said that the White House
+[01:06.16]is "really their home" while they are in office.
+[01:12.04]She added that as long as they work
+[01:14.92]with the historic plan of the gardens
+[01:18.36]the National Park Service
+[01:20.52]tries to meet the desires of the administration.
+[01:25.44]The National Park Service oversees the gardens.
+[01:30.60]John Quincy Adams, America's sixth president,
+[01:35.20]worked in the garden.
+[01:38.00]Theodore Roosevelt, the 26th president,
+[01:42.20]took down glass structures called greenhouses
+[01:46.20]that were first built by James Buchanan,
+[01:50.60]the 15th president, in the 1850s.
+[01:55.56]John Kennedy, the 35th president,
+[01:59.12]redesigned one garden
+[02:01.12]called the Rose Garden in the 1960s.
+[02:05.84]First lady Michelle Obama,
+[02:08.32]wife of the 44th president,
+[02:11.24]built a food garden using plants and seeds
+[02:15.40]from the home of Thomas Jefferson, the third president.
+[02:21.36]Today, the garden has more than
+[02:24.52]50 kinds of vegetables.
+[02:27.76]Pierre L'Enfant was the city planner
+[02:31.00]and architect for America's first president, George Washington.
+[02:37.88]At first, he planned for a 30-hectare presidential garden.
+[02:44.16]However, as a believer in small government,
+[02:48.36]Jefferson reduced the White House grounds
+[02:51.88]to just 2 hectares.
+[02:54.88]The gardens were expanded to the current 7.2 hectares
+[03:01.24]Jefferson, like many Americans
+[03:04.60]who had just freed themselves
+[03:06.68]from a British monarch,
+[03:08.80]was concerned about creating a new king.
+[03:13.68]"Avoid palaces and gardens of palaces,"
+[03:17.96]William Thornton, a Washington city representative warned.
+[03:24.48]"If you build a palace with gardens,
+[03:27.20]I will find you a king."
+[03:30.16]Over time, several different plants and flowers
+[03:33.84]were planted at the White House.
+[03:37.36]They include roses which have been around
+[03:40.68]since at least Jefferson's time.
+[03:44.52]They also include peonies,
+[03:46.80]wanted by first lady first lady Nancy Reagan
+[03:50.36]of the 40th president, and Texas bluebells,
+[03:55.00]asked for by first lady Laura Bush
+[03:58.40]of the 43rd president.
+[04:01.68]Oak and elm trees
+[04:03.48]have also been on the White House grounds
+[04:06.52]almost since the beginning.
+[04:09.84]One tree, a chestnut oak
+[04:12.44]southeast of the White House,
+[04:14.84]might be the oldest tree on the grounds.
+[04:19.16]The White House says it has been around since 1800.
+[04:24.92]McDowell says the White House gardens
+[04:27.92]represent gardening tradition over time.
+[04:32.32]First it followed designs in Europe,
+[04:35.40]and then it was shaped by local traditions,
+[04:38.84]the area, and the climate.
+[04:42.36]But she said, "It's not that they are always the leader.
+[04:46.80]In fact, sometimes they're following."
+[04:50.88]The White house grounds were open to the public
+[04:53.96]up until 1923.
+[04:57.64]That was when Calvin Coolidge,
+[05:00.00]the 30th president,
+[05:01.88]permanently closed them to unapproved visitors.
+[05:07.08]These days, the White House Garden
+[05:09.44]planned visits for the public
+[05:12.08]are usually available for the public twice a year,
+[05:16.84]one weekend in the spring
+[05:19.40]and again in autumn.
+[05:22.28]McDowell said, "They are full of tradition.
+[05:25.96]They're full of beauty."
+[05:28.84]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

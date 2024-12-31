@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登和爱犬团聚 养宠物传统重回白宫</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登和爱犬团聚 养宠物传统重回白宫" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202101/dogs-return-to-the-white-house.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登和爱犬团聚 养宠物传统重回白宫</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202101/dogs-return-to-the-white-house.mp3" id="mp3"></a>
+<a href="/static/lrc/dogs-return-to-the-white-house.lrc" id="lrc"></a>
+<a href="dogs-return-to-the-white-house-86186.html" id="CnPage" target="_blank"></a>
+<a href="oldest-known-grizzly-bear-in-yellowstone-park-dies-86185.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">President Joe Biden and first lady Jill Biden made two important additions to the White House over the weekend: their dogs.<br/>
+总统乔·拜登和第一夫人吉尔·拜登周末给白宫新添了两个重要角色：他们的狗。
+<p>German shepherds Champ and Major moved in on Sunday. The first lady announced the big development on Twitter. ‘Champ and Major have joined us in the White House!' she wrote on Monday.<br/>
+德国牧羊犬“冠军”和“少校”周日搬进白宫。第一夫人吉尔在推特上宣布了这一重大进展。她周一在推特上写道：“‘冠军’和‘少校’已经和我们在白宫团聚。”</p>
+<p>The two have quickly made their presence known. When reporters gathered Monday to watch the new president sign an executive order, Champ and Major could be heard barking outside. Photographers took videos and pictures of Champ and Major playing on the South Lawn of the White House.<br/>
+这两条狗很快就让人知道了它们的存在。当记者们周一聚在一起看着新总统签署行政命令时，就可以听到“冠军”和“少校”在外面咆哮。摄影师拍摄了“冠军”和“少校”在白宫南草坪玩耍的视频和照片。</p>
+<p>Their arrival marks a return of the tradition of "first pets." Many past presidents have brought their dogs or other popular pets to the White House. Donald Trump was the first president in many years to not have a pet during his time in office.<br/>
+它们的到来标志着“第一宠物”传统的回归。许多前任总统都将他们的狗或其它宠物带到白宫。川普是多年来首位在任职期间没有养宠物的总统。</p>
+<p>The Bidens adopted Major from an animal shelter in their home state of Delaware in 2018. Today, Major is the first shelter rescue dog to live at the White House. Adoption supporters have celebrated the history-making canine.<br/>
+拜登夫妇2018年在家乡特拉华州的一个动物收容所收养了“少校。”如今，“少校”成为了首只入主白宫的收容所救援犬。收养支持者庆贺了这只创造历史的狗。</p>
+<p>At the time of his adoption, the Delaware Humane Society posted on Facebook: "Today is Major's lucky day! Not only did Major find his forever home, but he got adopted by Vice President Joe Biden &amp; Dr. Jill Biden!"<br/>
+在这只狗被收养时，特拉华州人道主义协会在脸书上发文称：“今天是少校的幸运日。它不但找到了永远的家，而且还是被副总统乔·拜登和吉尔·拜登博士收养。”</p>
+<p>Major has gained national attention for a different reason, too. Late last year, then President-elect Biden broke his foot while playing with the young dog at his home in Wilmington, Delaware.<br/>
+“少校”还因其它原因引发了全国关注。去年年底，当时的候任总统拜登在特拉华州维明顿市的家中跟这只幼犬玩耍时弄伤了脚。</p>
+<p>Champ is already used to life in the political spotlight. At 12 years old, he was a part of the family when his owners had the titles of America's vice president and second lady.<br/>
+“冠军”已经习惯了在政治聚光中心的生活。当他的主人拥有美国副总统和第二夫人的头衔时，12岁的它已经是这个家庭的一员。</p>
+<p>One thing both of America's top dogs might have to get used to? A cat. The Bidens said they planned to get a cat shortly after their move to the White House.<br/>
+这两只美国头号犬只都需要适应的一件事情是什么？那就是一只猫。拜登夫妇表示，他们计划在搬入白宫不久后养一只猫。</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Dogs Return to the White House]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]President Joe Biden and first lady Jill Biden
+[00:04.68]made two important additions
+[00:07.76]to the White House over the weekend: their dogs.
+[00:12.76]German shepherds Champ and Major moved in on Sunday.
+[00:19.48]The first lady announced the big development on Twitter.
+[00:24.36]‘Champ and Major have joined us
+[00:27.12]in the White House!' she wrote on Monday.
+[00:31.32]The two have quickly made their presence known.
+[00:35.12]When reporters gathered Monday to watch the new president
+[00:39.36]sign an executive order, Champ and Major
+[00:43.60]could be heard barking outside.
+[00:47.04]Photographers took videos and pictures of Champ and Major
+[00:51.64]playing on the South Lawn of the White House.
+[00:55.68]Their arrival marks a return of the tradition of "first pets."
+[01:02.52]Many past presidents have brought their dogs
+[01:05.80]or other popular pets to the White House.
+[01:10.16]Donald Trump was the first president in many years
+[01:14.52]to not have a pet during his time in office.
+[01:19.08]The Bidens adopted Major from an animal shelter
+[01:23.08]in their home state of Delaware in 2018.
+[01:27.32]Today, Major is the first shelter rescue dog to live at the White House.
+[01:35.08]Adoption supporters have celebrated the history-making canine.
+[01:41.44]At the time of his adoption,
+[01:43.84]the Delaware Humane Society posted on Facebook:
+[01:48.00]"Today is Major's lucky day!
+[01:51.44]Not only did Major find his forever home,
+[01:55.64]but he got adopted by Vice President Joe Biden &amp; Dr. Jill Biden!"
+[02:02.96]Major has gained national attention for a different reason, too.
+[02:08.32]Late last year, then President-elect Biden broke his foot
+[02:13.76]while playing with the young dog at his home in Wilmington, Delaware.
+[02:19.88]Champ is already used to life in the political spotlight.
+[02:24.96]At 12 years old, he was a part of the family when his owners
+[02:30.76]had the titles of America's vice president and second lady.
+[02:36.64]One thing both of America's top dogs might have to get used to?
+[02:42.08]A cat.
+[02:43.76]The Bidens said they planned to get a cat
+[02:47.32]shortly after their move to the White House.
+[02:50.80]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Saturn’s Cassini to Dive Deep, Burn Up</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Saturn’s Cassini to Dive Deep, Burn Up" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201706/saturns-cassini-to-dive-deep-then-burn-up.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Saturn’s Cassini to Dive Deep, Burn Up</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201706/saturns-cassini-to-dive-deep-then-burn-up.mp3" id="mp3"></a>
+<a href="americas-presidents-abraham-lincoln-75420.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anne Ball</span><br/>
+<span class="datetime">04 June, 2017</span><br/>
+<p>Millions of kilometers from Earth, the Cassini spacecraft orbits the planet Saturn.</p>
+<p>Diving in between Saturn and its famous <strong>rings</strong>, Cassini is taking pictures and using up its fuel supply.</p>
+<p>Since 2004, the unmanned spacecraft has been studying the planet. As the first spacecraft to orbit Saturn, it has sent back many close-up pictures of the planet's surface, moons and rings.</p>
+<p><strong>The Grande Finale</strong></p>
+<p>Now Cassini has entered what the American space agency NASA calls <a class="underline" href="https://saturn.jpl.nasa.gov/science/overview/">The Grand Finale</a>. It is getting ready for a final project — to dive into Saturn's atmosphere until it burns up.</p>
+<div class="contentImage"><img alt="d" src="https://files.21voa.com/gdb/5b8a6cec-efb3-4833-93c4-7d339e1b000f_tv_w268_r1.jpg"/> </div>
+<p>Devin Walker is with the California Space Center. Walker spoke in a large, noisy room at the center.</p>
+<p>"Scientists and engineers have decided that instead of just letting it run out of fuel on its own and then not being able to control any of its instruments, they're going to <strong>manually</strong> and <strong>intentionally</strong> de-orbit the space craft."</p>
+<p>In other words, NASA will make Cassini crash into Saturn, on purpose. It will be the end of the spacecraft as it breaks apart while diving into the huge gaseous planet.</p>
+<p><strong>Simple life on Enceladus?</strong></p>
+<p>There are two reasons the space agency is doing this. When Cassini loses engine power, it will be out of control. That may mean it could cause it to hit Saturn's moon Enceladus. Why are scientists concerned about this? Because they think Enceladus might have some extremely simple life forms. Space researchers believe they could live in an ocean inside the moon.</p>
+<p>Amina Khan is a science writer for The Los Angeles Times newspaper. She says scientists worry about <strong>contaminating </strong>the moon, and possibly endangering that life.</p>
+<p>"Scientists are afraid that it's going to crash into Enceladus and there's some potential for contamination. You don't want to contaminate a place that could potentially host life if you want to actually go there and study it someday."</p>
+<p>And reason two that NASA is crashing the <strong>probe</strong> into the planet? Scientists hope to get up-close images of the planet that humans have been watching in the night sky since ancient times.</p>
+<p>Like the scientists, Devin Waller of the California Space Center is looking forward to the big event.</p>
+<p>"As soon as we hit the upper atmosphere the probe is going to start to fall apart. It will start to burn up, just because of the <strong>friction</strong> with the upper atmosphere, and so when the process starts, there's only a matter of time, but they're going to be sending back as much information as they can, as quickly as they can."</p>
+<p><strong>Cassini made space research history</strong></p>
+<p>But even before it goes, Cassini has already won a place in space research history. Launched in 1997, it reached Saturn in 2004. Since then Cassini has done plenty to increase our understanding of the planet and its moons. It discovered seven new moons orbiting Saturn that scientists did not know about.</p>
+<p>In addition, a scientific probe from Cassini landed on Titan, one of the largest moons. And now scientists believe Titan may be like Earth, with lakes, rivers, rain, clouds, mountains and possibly volcanos.</p>
+<p>At the end of April, the spacecraft took a first-ever dive through the small space between the planet and its rings, sending pictures and scientific <strong>data</strong> back to Earth.</p>
+<p>Jim Green noted at the time, "In the grandest tradition of exploration, NASA's Cassini spacecraft has once again <strong>blazed </strong>a trail." Green heads the American space agency's Planetary Science Division. He added that Cassini was "showing us new wonders and demonstrating where our <strong>curiosity</strong> can take us if we dare."</p>
+<p>There were also many fly-bys — or trips around — Enceladus, the most interesting moon. Cassini found evidence of a large ocean inside the moon. Scientists say that the salty water may contain <strong>microbial</strong> life — organisms that one can see only with a microscope. They also found that the moon has a very hot-spot at its southern pole, and from its surface it shoots out ice particles into space.</p>
+<p>Recent pictures taken of the planet's North Pole surprised scientists. They show a storm that changes color over time.</p>
+<p>For years to come, scientists will be studying the large amount of data Cassini sent back to Earth. Cassini's work has been a joint project with the American, European and Italian space agencies. The spacecraft is set to make its dive into Saturn on September 15.</p>
+<p>I'm Anne Ball.</p>
+<p><em>Anne Ball wrote this story for Learning English with information from VOA News and NASA. George Grow was the editor. We want to hear from you. Write to us in the Comments Section and visit us <a class="underline" href="http://www.21voa.com/">on 51VOA.COM</a>. </em></p>
+<p>_________________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>rings </strong><em>– n</em>. a round band</p>
+<p><strong>manually </strong><em>– adv.</em> operated or controlled with the hands or by a person</p>
+<p><strong>intentionally </strong><em>– adv.</em> done on purpose</p>
+<p><strong>contamination </strong><em>– n.</em> making something dangerous, dirty, or impure by adding something harmful or undesirable to it</p>
+<p><strong>probe </strong><em>– n.</em> a device that is used to obtain information from outer space and send it back to Earth</p>
+<p><strong>friction </strong><em>– n.</em> the force that causes a moving object to slow down when it is touching another object</p>
+<p><strong>data </strong><em>– n.</em> facts or information used usually to calculate, analyze, or plan something</p>
+<p><strong>blaze </strong><em>– v</em>. to move very quickly</p>
+<p><strong>curiosity </strong><em>– n. </em>the desire to learn or know more about something or someone</p>
+<p><strong>microbial </strong><em>– adj.</em> so small it can only be seen with a microscope</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

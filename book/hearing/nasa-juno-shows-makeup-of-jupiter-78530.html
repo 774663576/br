@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - NASA's Juno Spacecraft Shows the Makeup of Jupiter</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, NASA's Juno Spacecraft Shows the Makeup of Jupiter" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201804/nasa-juno-shows-makeup-of-jupiter.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>NASA's Juno Spacecraft Shows the Makeup of Jupiter</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201804/nasa-juno-shows-makeup-of-jupiter.mp3" id="mp3"></a>
+<a href="migrants-bring-attention-to-us-mexican-border-policies-78526.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Susan Shand</span><br/>
+<span class="datetime">04 April, 2018</span><br/>
+<h1 class="wsw__h1"></h1>
+<p>Scientists are finding that the inside of Jupiter is just as interesting as the part of the planet's atmosphere that we can see.</p>
+<p>At the center of the planet is a liquid mixture of the elements hydrogen and helium. Scientists say large atmospheric <strong>jet streams</strong> and unusual gravitational qualities also exist.</p>
+<p>Scientists have been closely studying information sent back to Earth from NASA's Juno spacecraft. It has been orbiting the <strong>solar system's</strong> largest planet since 2016.</p>
+<p>Juno is providing researchers with what they called a new understanding of Jupiter's structure.</p>
+<p>Until now, scientists have had little information about what is below Jupiter's thick red, brown, yellow and white clouds. </p>
+<p>"Juno is designed to look beneath these clouds," said Yohai Kaspi. He is a planetary science professor with the Weizmann Institute of Science in Israel. Kaspi led part of the research using Juno's new measurements of Jupiter's gravity. </p>
+<p>Luciano Iess is an aerospace engineering professor at Sapienza University of Rome. He also led part of the research.</p>
+<p>"On Jupiter, a gaseous planet without a solid surface, we can only gather information from orbit," he said.</p>
+<p>Jupiter is called a gas <strong>giant </strong>planet. Unlike Earth and Mars which are rocky planets, Jupiter is about 99 percent hydrogen and helium. Information sent by Juno showed that deeper under the surface, Jupiter's gas turns into a hot, dense metallic liquid. </p>
+<p>The scientists said Jupiter's jet streams form stripes around the planet moving about 3,000 km below the cloud tops. Deep inside, the planet is made of a liquid hydrogen and helium mixture that turns as if it were a solid body. </p>
+<div class="contentImage"><img _ewebeditor_ta_src="http%3A%2F%2Fimg.51voa.cn%2F1%2F09C15675-713D-453E-9086-0A4A5400195C_w268_r0.jpg" alt="This enhanced-color image of Jupiter's Great Red Spot was created by citizen Gerald Eichst&lt;I&gt;&amp;#&lt;/I&gt;228;dt using data from NASA's Juno spacecraft ( Credit: NASA/JPL-Caltech/SwRI/MSSS/Gerald Eichst&lt;I&gt;&amp;#&lt;/I&gt;228;dt.)" src="https://files.21voa.com/gdb/09C15675-713D-453E-9086-0A4A5400195C_w268_r0.jpg"/><br/><span class="imagecaption">This enhanced-color image of Jupiter's Great Red Spot was created by citizen Gerald Eichst<i>&amp;#</i>228;dt using data from NASA's Juno spacecraft ( Credit: NASA/JPL-Caltech/SwRI/MSSS/Gerald Eichst<i>&amp;#</i>228;dt.)</span></div>
+<p>Planetary scientist Tristan Guillot of the Université Côte d'Azur in Nice said the very center may be made of high-pressure and high-temperature rocks and perhaps water. He added, "but it is believed to be fluid as well, not solid,"</p>
+<p>Juno showed a small but important <strong>asymmetry</strong> between the gravitational field of Jupiter's northern and southern halves. Kaspi said this difference is driven by the large jet streams.</p>
+<p>The deeper the jet streams go, the more mass they contain, causing a strong effect on Jupiter's gravitational field, he said. </p>
+<p>The research was published in the journal Nature. </p>
+<p>Jupiter, the fifth planet from the sun, is much larger than the solar system's other planets, measuring about 143,000 kilometers around at its <strong>equator</strong>.</p>
+<p>The planet is big enough for 1,300 Earths to fit inside. </p>
+<p>I'm Susan Shand.</p>
+<p><em>Reuters reported this story. Susan Shand adapted it for Learning English. Mario Ritter was the editor.</em></p>
+<p><em>Write to us in the Comments Section or on 51VOA.COM. </em></p>
+<p><em>_______________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>jet stream </strong><em>– n. </em>a strong current of fast winds high above the Earth's surface </p>
+<p><strong>solar system </strong><em>- n.</em> our sun and the planets that move around it</p>
+<p><strong>giant </strong>– <em>n.</em> a thing that is very large, powerful,</p>
+<p><strong>ionize </strong>– <em>v. </em>to make an atom or group of atoms that has a positive or negative electric charge from losing or gaining one or more electrons</p>
+<p><strong>symmetry </strong><em>– n</em><strong>. </strong>the quality of something that has two sides or halves that are the same or very close in size, shape, and position</p>
+<p><strong>hemisphere </strong><em>– n. </em>half of the Earth</p>
+<p><strong>equator </strong><em>– n.</em> an imaginary circle around the middle of the Earth </p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

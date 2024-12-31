@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中科院发现沙漠苔藓可在火星存活</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Technology Report, 中科院发现沙漠苔藓可在火星存活" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/researchers-desert-moss-could-support-colonies-on-mars.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中科院发现沙漠苔藓可在火星存活</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/researchers-desert-moss-could-support-colonies-on-mars.mp3" id="mp3"></a>
+<a href="/static/lrc/researchers-desert-moss-could-support-colonies-on-mars.lrc" id="lrc"></a>
+<a href="researchers-desert-moss-could-support-colonies-on-mars-92781.html" id="CnPage" target="_blank"></a>
+<a href="boeing-admits-guilt-in-two-deadly-plane-crashes-92776.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>Scientists have identified a kind of desert moss that could help support possible colonies on Mars, a study by the Chinese Academy of Sciences showed recently.<br/>
+中国科学院最近的一项研究表明，科学家们已经发现了一种沙漠苔藓，它可能有助于支持火星上可能的殖民地。</p>
+<p>The moss - Syntrichia Caninervis - was able to survive Mars-like conditions of extreme dryness, very low temperatures and radiation, the research shows. The study appeared recently in the publication The Innovation.<br/>
+研究表明，这种齿肋赤藓能够在极端干燥、极低温度和辐射的类似火星的条件下生存下来。这项研究最近发表在《创新》杂志上。</p>
+<p>The moss could serve as the "basis for the establishment and maintenance of the ecosystem by contributing to oxygen production, carbon sequestration, and soil fertility,” the study said.<br/>
+该研究称，该苔藓可以作为“建立和维护生态系统的基础，促进氧气生产、碳固存和土壤肥力”。</p>
+<p>The paper added, "(It) can help drive the atmospheric, geological, and ecological processes required for other higher plants and animals” while helping to create new environments that could support long-term human settlement.<br/>
+该论文补充道，“它可以帮助推动其他高等动植物所需的大气、地质和生态过程”，同时帮助创造支持人类长期定居的新环境。</p>
+<p>The study shows that the moss could return quickly to health even after losing more than 98 percent of its cellular water. The plant was able to recover its normal operation seconds after getting water.<br/>
+研究表明，即使在失去98%以上的细胞水分后，该苔藓也能迅速恢复健康。该植物在获得水分几秒钟后就恢复了正常。</p>
+<p>The plant can also survive very low temperatures. It can recover or regenerate after being stored in a freezer at -80 degrees Celsius for five years. It can survive a month in liquid nitrogen, the researchers found.<br/>
+这种植物也能在极低的温度下存活。在-80摄氏度的冰箱中储存五年后，它可以恢复或再生。研究人员发现，它可以在液氮中存活一个月。</p>
+<p>Researchers collected the study plants from a desert in the Xinjiang Uygur Autonomous Region of China. The moss also grows in Tibet of China, the American state of California, the Middle East and polar areas.<br/>
+研究人员从中国新疆维吾尔自治区的沙漠中采集了这些研究植物。这种苔藓也生长在中国西藏、美国加利福尼亚州、中东和极地地区。</p>
+<p>China and the United States have announced a number of space exploration plans in recent years.<br/>
+近年来，中国和美国宣布了一系列太空探索计划。</p>
+<p>Chinese missions include launching a near-Earth asteroid probe Tianwen-2 next year, and Tianwen-3 around 2030 to collect material from Mars and bring it to Earth for study. Last month, a Chinese mission collected materials from the far side of the moon.<br/>
+中国的任务包括明年发射近地小行星探测器天问二号，2030年左右发射天问三号从火星收集材料并将其带到地球进行研究。上个月，中国的一个任务从月球背面收集了材料。</p>
+<p>The American space agency NASA has developed a 20-year plan for Mars exploration. It is investigating whether the red planet could support human population.<br/>
+美国国家航空航天局制定了一项为期20年的火星探测计划。它正在调查这颗红色星球是否能养活人类。</p>
+<p>I'm John Russell.<br/>
+我是约翰·拉塞尔。(21VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Researchers: Desert Moss Could Support Colonies on Mars]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Scientists have identified
+[00:03.52]a kind of desert moss
+[00:05.92]that could help support possible colonies on Mars,
+[00:10.60]a study by the Chinese Academy of Sciences showed recently.
+[00:16.44]The moss - Syntrichia Caninervis
+[00:20.64]- was able to survive Mars-like conditions
+[00:24.48]of extreme dryness, very low temperatures
+[00:28.28]and radiation, the research shows.
+[00:31.96]The study appeared recently
+[00:34.64]in the publication The Innovation.
+[00:38.36]The moss could serve as the "basis
+[00:41.48]for the establishment
+[00:43.16]and maintenance of the ecosystem
+[00:46.36]by contributing to oxygen production,
+[00:50.00]carbon sequestration,
+[00:52.24]and soil fertility," the study said.
+[00:56.00]The paper added,
+[00:58.04]"(It) can help drive the atmospheric,
+[01:01.28]geological, and ecological processes
+[01:05.20]required for other higher plants and animals"
+[01:09.64]while helping to create new environments
+[01:13.20]that could support long-term human settlement.
+[01:17.80]The study shows that the moss
+[01:20.16]could return quickly to health
+[01:22.60]even after losing more than 98 percent
+[01:26.48]of its cellular water.
+[01:28.68]The plant was able to recover its normal operation
+[01:33.72]seconds after getting water.
+[01:36.56]The plant can also survive very low temperatures.
+[01:41.12]It can recover or regenerate
+[01:44.12]after being stored in a freezer
+[01:46.96]at -80 degrees Celsius for five years.
+[01:52.40]It can survive a month in liquid nitrogen,
+[01:56.32]the researchers found.
+[01:58.24]Researchers collected the study plants
+[02:02.12]from a desert in the Xinjiang
+[02:05.00]Uygur Autonomous Region of China.
+[02:09.04]The moss also grows in Tibet of China,
+[02:12.80]the American state of California,
+[02:15.60]the Middle East and polar areas.
+[02:19.72]China and the United States have announced
+[02:23.16]a number of space exploration plans
+[02:26.76]in recent years.
+[02:28.44]Chinese missions include launching
+[02:31.92]a near-Earth asteroid probe Tianwen-2 next year,
+[02:37.04]and Tianwen-3 around 2030
+[02:41.12]to collect material from Mars
+[02:43.96]and bring it to Earth for study.
+[02:47.64]Last month, a Chinese mission collected materials
+[02:51.84]from the far side of the moon.
+[02:55.04]The American space agency NASA
+[02:58.68]has developed a 20-year plan for Mars exploration.
+[03:03.96]It is investigating whether the red planet
+[03:07.60]could support human population.
+[03:11.40]I'm John Russell.
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

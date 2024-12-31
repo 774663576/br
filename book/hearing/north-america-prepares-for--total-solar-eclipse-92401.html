@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - North America Prepares for 2024 Total Solar Eclipse</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, North America Prepares for 2024 Total Solar Eclipse" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/north-america-prepares-for-2024-total-solar-eclipse.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>North America Prepares for 2024 Total Solar Eclipse</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/north-america-prepares-for-2024-total-solar-eclipse.mp3" id="mp3"></a>
+<a href="/static/lrc/north-america-prepares-for-2024-total-solar-eclipse.lrc" id="lrc"></a>
+<a href="ai-adding-to-threat-of-election-disinformation-worldwide-92398.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">17 March 2024</span><br/>
+<p>A total solar eclipse will take place in North America on April 8. Millions of people will be able to fully experience the event, which is expected to darken the sky for more than four minutes.</p>
+<p>A total solar eclipse happens when the sun, moon and Earth perfectly line up. This results in sunlight being blocked. The quality of the observations will depend on weather and the position where people watch the eclipse from.</p>
+<p>The path of totality – meaning places where people will see a total blockage of the sun – will stretch across areas of Mexico, the United States and Canada. People in North America who are outside of this path will still be able to see a partial eclipse.</p><div class="contentImage"><img alt="The progression of a total solar eclipse is seen with the moon passing in front of the sun above Siem Reap in northwestern Cambodia, on Tuesday, Oct. 24, 1995. (AP Photo/Richard Vogel, File)" src="https://files.21voa.com/gdb/01000000-0aff-0242-7e80-08dc446b2d55_w268_r1.jpg"/><br/><span class="imagecaption">The progression of a total solar eclipse is seen with the moon passing in front of the sun above Siem Reap in northwestern Cambodia, on Tuesday, Oct. 24, 1995. (AP Photo/Richard Vogel, File)</span></div>
+<p>The American space agency NASA says the eclipse will begin over the South Pacific and reach Mexico's Pacific coast at around 11:07 a.m. Pacific Time. It will then enter the United States in Texas.</p>
+<p>The path of totality will then pass through a series of states before heading out from the northernmost state of Maine. The eclipse will enter Canada in Ontario and move across the nation before leaving northeastern Canada into the Atlantic.</p>
+<p>An estimated 44 million people live inside the 185-kilometer-wide path of totality, with about 32 million in the U.S.</p>
+<p>The eclipse is expected to last four minutes and 28 seconds, about twice as long as the one that darkened skies in 2017. The U.S. is not set to see another coast-to-coast total solar eclipse until 2045.</p>
+<p>NASA's eclipse watch program is led by Kelly Korreck. She told The Associated Press the eclipse will permit many people to experience the "wonder of the universe without going very far."</p>
+<p>People outside the path of totality will still be able to see a partial eclipse. The farther these people are from the path, the less the sun will be covered. For example, experts say Americans farthest from this path – such as in the northwestern cities of Seattle and Portland – will see about one-third of the sun blocked.</p>
+<p>As was the case with past eclipse events, people are being warned about the dangers of looking directly at the sun during the event. Since normal sunglasses are not considered effective protection, special eclipse glasses are suggested for eclipse watchers. The glasses should only be removed during moments when the sun's face is covered during complete totality.</p>
+<p>A total solar eclipse develops in several different parts, or stages. The event starts with a partial eclipse as the moon begins to pass between Earth and the sun. During this stage, a partial blockage leaves the sun looking a bit like a banana.</p>
+<p>During the next stage, called Baily's Beads, points of light from the sun shine around the moon's edges. This effect is produced by the moon's differing <strong>landscapes</strong>. NASA <a class="wsw__a" href="https://science.nasa.gov/eclipses/future-eclipses/eclipse-2024/what-to-expect/">notes</a> this stage is quite short and "may not last long enough to be <strong>noticeable</strong> to all observers of the total solar eclipse."</p>
+<p>In the Diamond Ring stage, a single bright spot appears along the lunar edge even as the sun's atmosphere leaves a ring of light around the moon. This effect – which comes right before totality – looks similar to a diamond ring.</p>
+<p>After totality, the other stages then repeat as the moon keeps moving along its path until the end of the eclipse.</p>
+<p>Total solar eclipses generally happen every few years, often in the middle of nowhere like the South Pacific or Antarctic. The next total solar eclipse will arrive in 2026. It will be observable along the northern edges of Greenland, Iceland and Spain.</p>
+<p>North America will not experience totality again until 2033, with that one only passing over Alaska. It will happen next in 2044, with totality limited to Western Canada and the U.S. states of Montana and North Dakota.</p>
+<p>The next coast-to-coast total solar eclipse in the U.S. is expected to happen in 2045. NASA says that one will stretch from Northern California to Cape Canaveral, Florida.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, Reuters and NASA. </em></p>
+<p><strong>_____________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>landscape </strong><em>– n. </em>all visible features of an area of land</p>
+<p><strong>notice </strong><em>– v. </em>the act of observing or paying attention to something</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:North America Prepares for 2024 Total Solar Eclipse]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A total solar eclipse will take place
+[00:03.64]in North America on April 8.
+[00:07.04]Millions of people will be able to
+[00:10.20]fully experience the event,
+[00:12.76]which is expected to darken the sky
+[00:16.24]for more than four minutes.
+[00:18.60]A total solar eclipse happens when the sun,
+[00:23.04]moon and Earth perfectly line up.
+[00:26.40]This results in sunlight being blocked.
+[00:30.44]The quality of the observations
+[00:33.16]will depend on weather
+[00:35.12]and the position where people watch the eclipse from.
+[00:39.60]The path of totality –
+[00:42.60]meaning places where people will see
+[00:45.24]a total blockage of the sun –
+[00:47.92]will stretch across areas of Mexico,
+[00:51.40]the United States and Canada.
+[00:54.36]People in North America who are outside of this path
+[00:59.64]will still be able to see a partial eclipse.
+[01:03.44]The American space agency NASA
+[01:07.44]says the eclipse will begin over the South Pacific
+[01:11.60]and reach Mexico's Pacific coast
+[01:15.08]at around 11:07 a.m. Pacific Time.
+[01:19.60]It will then enter the United States in Texas.
+[01:24.28]The path of totality
+[01:26.80]will then pass through a series of states
+[01:29.92]before heading out from the northernmost state of Maine.
+[01:34.68]The eclipse will enter Canada in Ontario
+[01:38.72]and move across the nation
+[01:40.96]before leaving northeastern Canada into the Atlantic.
+[01:45.88]An estimated 44 million people
+[01:49.56]live inside the 185-kilometer-wide
+[01:54.20]path of totality, with about 32 million in the U.S.
+[01:59.88]The eclipse is expected to last
+[02:03.40]four minutes and 28 seconds,
+[02:05.72]about twice as long as
+[02:07.96]the one that darkened skies in 2017.
+[02:11.72]The U.S. is not set to see another
+[02:15.24]coast-to-coast total solar eclipse until 2045.
+[02:21.24]NASA's eclipse watch program is led by Kelly Korreck.
+[02:27.16]She told The Associated Press
+[02:30.04]the eclipse will permit many people
+[02:33.16]to experience the "wonder of the universe
+[02:36.88]without going very far."
+[02:39.44]People outside the path of totality
+[02:42.92]will still be able to see a partial eclipse.
+[02:46.84]The farther these people are from the path,
+[02:50.24]the less the sun will be covered.
+[02:52.68]For example, experts say Americans
+[02:56.72]farthest from this path –
+[02:59.12]such as in the northwestern cities of Seattle and Portland –
+[03:03.80]will see about one-third of the sun blocked.
+[03:07.24]As was the case with past eclipse events,
+[03:11.36]people are being warned about the dangers of looking
+[03:15.20]directly at the sun during the event.
+[03:18.88]Since normal sunglasses are not
+[03:22.28]considered effective protection,
+[03:24.72]special eclipse glasses are suggested for eclipse watchers.
+[03:30.56]The glasses should only be removed
+[03:33.60]during moments when the sun's face
+[03:36.16]is covered during complete totality.
+[03:39.64]A total solar eclipse develops
+[03:42.64]in several different parts, or stages.
+[03:46.56]The event starts with a partial eclipse
+[03:49.92]as the moon begins to pass between Earth and the sun.
+[03:54.52]During this stage, a partial blockage
+[03:58.12]leaves the sun looking a bit like a banana.
+[04:01.80]During the next stage, called Baily's Beads,
+[04:06.00]points of light from the sun
+[04:08.40]shine around the moon's edges.
+[04:11.00]This effect is produced
+[04:13.48]by the moon's differing landscapes.
+[04:16.00]NASA notes this stage is quite short
+[04:20.28]and "may not last long enough to be noticeable
+[04:24.12]to all observers of the total solar eclipse."
+[04:28.36]In the Diamond Ring stage,
+[04:31.24]a single bright spot appears along the lunar edge
+[04:35.52]even as the sun's atmosphere leaves
+[04:38.28]a ring of light around the moon.
+[04:41.56]This effect – which comes right before totality –
+[04:45.64]looks similar to a diamond ring.
+[04:48.48]After totality, the other stages then repeat
+[04:53.32]as the moon keeps moving along its path
+[04:56.48]until the end of the eclipse.
+[04:58.96]Total solar eclipses generally happen every few years,
+[05:03.76]often in the middle of nowhere
+[05:06.24]like the South Pacific or Antarctic.
+[05:09.92]The next total solar eclipse will arrive in 2026.
+[05:15.72]It will be observable along the northern edges
+[05:19.28]of Greenland, Iceland and Spain.
+[05:23.08]North America will not experience totality again
+[05:27.52]until 2033, with that one only passing over Alaska.
+[05:33.60]It will happen next in 2044,
+[05:36.72]with totality limited to Western Canada
+[05:40.56]and the U.S. states of Montana and North Dakota.
+[05:45.04]The next coast-to-coast total solar eclipse in the U.S.
+[05:50.32]is expected to happen in 2045.
+[05:54.16]NASA says that one will stretch from Northern California
+[05:59.64]to Cape Canaveral, Florida.
+[06:02.28]I'm Bryan Lynn. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Five Apps for Helpful Gardening Information</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Five Apps for Helpful Gardening Information" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/five-apps-for-helpful-gardening-information.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Five Apps for Helpful Gardening Information</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/five-apps-for-helpful-gardening-information.mp3" id="mp3"></a>
+<a href="rising-sea-levels-mean-daily-water-struggle-on-india-shore-90697.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">10 April 2023</span><br/>
+<p>There are many <strong>apps</strong> that use mobile phone cameras and other devices that might surprise <strong>gardeners</strong>.</p>
+<p>They can provide expert gardening planning and planting advice. They may help with unwanted insects, diseases and to identify plants and insects. Some apps even use new technologies like artificial intelligence (AI) and <strong>augmented</strong> reality.</p>
+<p>Jessica Damiano writes about gardening for the Associated Press. Recently, she identified some apps she considers useful for gardeners. Free, dependable apps like the ones she suggested can provide valuable information as you develop your garden. Here are some examples:</p><div class="contentImage"><img alt="This combination of images show gardening apps, from left, the Seed to Spoon mobile gardening app, the Google Lens app, and Apple's AI-powered Visual Look Up feature to identify flowers. (Park Seed's From Seed to Spoon/Google/Apple via AP)" src="https://files.21voa.com/gdb/e37d99be-e7a8-4a41-94b2-1a90dbc79f1f_w268_r1.jpg"/><br/><span class="imagecaption">This combination of images show gardening apps, from left, the Seed to Spoon mobile gardening app, the Google Lens app, and Apple's AI-powered Visual Look Up feature to identify flowers. (Park Seed's From Seed to Spoon/Google/Apple via AP)</span></div>
+<p><a class="wsw__a" href="https://www.inaturalist.org/pages/seek_app" target="_blank"><strong>Seek by iNaturalist</strong></a></p>
+<p>Seek is an app from the website iNaturalist. Seek was created by the California Academy of Sciences and the National Geographic Society. To use it, simply take a picture or point your camera at a plant, insect, or animal and you will get important information about it.</p>
+<p>Information the app can offer is usually taken from Wikipedia. It includes target's scientific name, common name, seasonal nature, and a description of its appearance, among other information.</p>
+<p>Results are based on similar pictures from users around the world. If the app cannot identify your photo, it will ask other users to identify it.</p>
+<p>You can also find lists of plants, insects and animals in your area, add your observations, and connect with experts.</p>
+<p>The app is offered for free in the Apple App store and in Google Play. It even includes games.</p>
+<p><a class="wsw__a" href="https://www.seedtospoon.net/" target="_blank"><strong>From Seed to Spoon</strong></a></p>
+<p>From Seed to Spoon helps users grow crops. You can add which fruits and vegetables you would like to grow on a <strong>virtual</strong> "Grow Box" from a list of images. It will then give seed-starting, transplanting, and harvesting dates for those plants based on your <strong>location</strong> using satellite data.</p>
+<p>The free version of the app also provides information on each crop's requirements for temperature, sunlight, water, and fertilizer. It includes information on saving seeds, which plants work best together, dealing with unwanted insects, meal ideas, and links to videos.</p>
+<p>Park Seed, which owns the app, will also suggest products for each plant sold by the company. There is also a paid version. The paid version provides real-time answers to your questions from an AI "Growbot," an individualized calendar and more.</p>
+<p>Find it in the Apple App Store, on Google Play, and at <a class="wsw__a" href="file:///C:/Users/gstachel/Documents/VOA%20Pieces/app.seedtospoon.net">app.seedtospoon.net</a>.</p>
+<p><a class="wsw__a" href="https://www.picturethisai.com/" target="_blank"><strong>PictureThis</strong></a><strong> </strong></p>
+<p>PictureThis will identify your plant and provide information about it from a picture on your phone's camera. It will show health information, its scientific name, where it can be found, common uses, harvesting time, and how to produce new plants from your existing plant. It also will show sunlight, soil, water, and fertilizer requirements.</p>
+<p>The app also provides answers to commonly asked questions about the plant. And you can share photos and plant descriptions with friends by message.</p>
+<p>After using all the provided free identifications, you will be asked to watch advertisements or share the app to earn more. Or you can pay $29.99 a year for the paid version. The paid version provides treatment information for sick plants. It also includes plant-care guides, access to a team of experts at any time, and unlimited plant identifications. The free version will, however, identify a disease from a picture of a sick plant.</p>
+<p>Find it in the Apple App Store or on Google Play.</p>
+<p><a class="wsw__a" href="https://lens.google/" target="_blank"><strong>Google Lens</strong></a></p>
+<p>Google Lens uses image recognition technology to identify plants, trees, animals, and insects. It shows Google search results from the Google search engine.</p>
+<p>It can be found on the Google app or by the Google Search bar in your mobile <strong>browser</strong> on Android and Apple products. Then, touch the camera image and choose a photo from your phone's photo history. Lens can also be used to identify other objects, places, and to compare products to buy online. The tool is free.</p>
+<p><a class="wsw__a" href="https://support.apple.com/guide/iphone/visual-identify-objects-photos-iph21c29a1cf/ios"><strong>Apple Visual Look Up</strong></a></p>
+<p>Apple Visual Look Up is an AI <strong>feature</strong> for iPhone and iPad. It will identify plants, flowers, insects, birds, and other animals shown in any photo. Using an Apple product running iOS16 or iPadOS16, you can use the feature by choosing a photo in your phone, then touching the "info" image below it. It is the letter "I" in a circle with stars above it.</p>
+<p>The tool works directly with other apps like Mail, Messages and Notes. Just lightly touch an image to expand it, then touch the starred "i." The app also works in the Safari browser by touching and holding any photo.</p>
+<p>The app will show details about the image, including a "Look Up" choice. It will place the photo in a grouping, like insects, or plants.</p>
+<p>Choose Siri Knowledge for details about the subject and similar images found online. If there is not a star above "info," Visual Look Up is not available for that photo. The feature is free.</p>
+<p>I'm Faith Pirlo. And I'm Gregory Stachel.</p>
+<p><em>Yiannis Kourtoglou reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>________________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>garden </strong>– <em>n. </em>an area of ground where plants (such as flowers or vegetables) are grown</p>
+<p><strong>gardener </strong><em>–n.</em> a person who cares for a garden</p>
+<p><strong>augmented </strong>–adj. increase, expanded, having added abilities</p>
+<p><strong>app</strong><strong> </strong>– <em>n.</em><strong> </strong>a computer program that performs a special function</p>
+<p><strong>virtual </strong><em>–n.</em> on the internet, not actually a real thing</p>
+<p><strong>location </strong><em>–n.</em> the physical place where something is</p>
+<p><strong>browser</strong><strong> </strong>– <em>n.</em><strong> </strong>a computer program that is used to find and look at information on the Internet</p>
+<p><strong>feature</strong><strong> </strong>– <em>n.</em><strong> </strong>an interesting or important part, quality, or ability</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

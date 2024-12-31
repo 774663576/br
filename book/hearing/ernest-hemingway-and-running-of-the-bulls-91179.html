@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ernest Hemingway and Running of the Bulls</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Ernest Hemingway and Running of the Bulls" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/ernest-hemingway-and-running-of-the-bulls.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ernest Hemingway and Running of the Bulls</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/ernest-hemingway-and-running-of-the-bulls.mp3" id="mp3"></a>
+<a href="/static/lrc/ernest-hemingway-and-running-of-the-bulls.lrc" id="lrc"></a>
+<a href="new-handbook-highlights-ways-to-develop-tech-ethically-91176.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">12 July 2023</span><br/>
+<p>Ernest Hemingway, the Nobel Prize-winning American writer, first visited the Spanish city of Pamplona 100 years ago in July.</p>
+<p>In July, people celebrate the feast of Saint Fermin in Pamplona where the traditional "running of the bulls" takes place. The event started more than seven hundred years ago. For nine days, people come to the northern Spanish city for bull running, bullfighting and partying.</p>
+<p>The festival affected Hemingway so deeply that he returned eight times between 1924 and 1959.</p><div class="contentImage"><img alt="A fighting bull runs among revelers during the San Ferm&lt;I&gt;&amp;#&lt;/I&gt;237;n fiestas in Pamplona, Spain, July 11, 2023. (AP Photo/Alvaro Barrientos)" src="https://files.21voa.com/gdb/01000000-0a00-0242-2a8d-08db830117f7_cx0_cy1_cw0_w268_r1.jpg"/><br/><span class="imagecaption">A fighting bull runs among revelers during the San Ferm<i>&amp;#</i>237;n fiestas in Pamplona, Spain, July 11, 2023. (AP Photo/Alvaro Barrientos)</span></div>
+<p>Here is a description of what happens at the start of the bull running:</p>
+<p>The bells would toll eight times. A rocket would be lit. And the bulls would charge out of the <strong>gate</strong>. At that moment, a crowd of runners wearing white clothes and red <strong>scarves</strong> would start to run. They would look back, move and dance to avoid being <strong>gored</strong> by the charging bull's horns. Onlookers would cheer them on from <strong>balconies</strong> above.</p>
+<p>In 1926, Hemingway wrote his first book, <em>The Sun Also Rises. </em>He wrote about his experiences in Pamplona and established himself as the voice of what became known as the "Lost Generation," a generation of people affected deeply by the events of World War I.</p>
+<p>"I can't stand it to think my life is going so fast and I'm not really living it," says one character in the book.</p>
+<p>"Nobody ever lives their life all the way up except bull-fighters," is the answer.</p>
+<p><strong>Present-day Pamplona</strong></p>
+<p>Bill Hillmann is a 41-year-old English professor from Chicago. He first read <em>The Sun Also Rises</em> while he was in college at the age of 20. When he turned to the last page, he said he knew two things: He wanted to become a writer, and he would run in front of Pamplona's bulls someday.</p>
+<p>Hillmann's first running of the bulls was in 2005. He has been running ever since. "I got here, and I was just <strong>blown away</strong> by it. It was everything in the book but times ten...It was bigger. It was wilder. It was <strong>crazier</strong>," he told Reuters.</p>
+<p>He has been gored twice, in 2014 and 2017, but that has not lessened his interest. "I've basically been kind of following Hemingway's <strong>ghost</strong> around...I'm a little bit <strong>haunted</strong> by him," Hillmann added.</p>
+<p>Sixty-nine-year-old Cheryl Mountcastle first read <em>The Sun Also Rises </em>at her New Orleans high school in Louisiana. For the past 24 years, she has <strong>rented</strong> the same apartment in Pamplona for the festival with her family. She said the book does not give details about another side of the festival - such as sharing food and dancing in the street.</p>
+<p>Leontxi Arrieta is one of the few remaining Pamplona natives who met Hemingway. The 91-year-old tells Reuters that Hemingway and his fourth wife, Mary Welsh, stayed at her house. It was on their last visit to the festival in 1959, two years before Hemmingway's death.</p>
+<p>Arrieta remembered that Hemingway wrote, drank vodka, and shocked the family by removing the <strong>crucifixes</strong> from the wall and putting them away.</p>
+<p><strong>What has changed?</strong></p>
+<p>Last year, 1.7 million people came to the festival, also known as Sanfermines. They left 1,200 tons of broken glass and other waste behind. A place on a balcony with a good view of the bull-running event can cost $220 per person.</p>
+<p>Pamplona native Miguel Izu has written about the festival's links to Hemingway. He believes the writer's influence on its popularity has not been as large as people say.</p>
+<p>"Before Hemingway, <strong>tourists</strong> were already coming, especially from France," Izu explained.</p>
+<p>However, Izu acknowledges that Pamplona is still using Hemingway to gain attention. "We made him into a sort of Sanfermines <strong>icon</strong>," he said.</p>
+<p>But not every foreigner at the festival has been coming because of Hemingway. Australian William Kappal and his friends learned about Sanfermines by watching YouTube.</p>
+<p>Asked if they had ever heard of Hemingway, Kappal said "Nah. Should we look him up?"</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Hai Do adapted this report for VOA Learning English from a Reuters story by Susana Vera and David Latona. </em></p>
+<p>______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>gate</strong><strong> </strong><em>–n. </em>a large door</p>
+<p><strong>scarf</strong> <em>–n.</em> (pl. scarves) a piece of cloth worn around the neck</p>
+<p><strong>gore </strong>–v. to wounded by the horns of an animal</p>
+<p><strong>balcony </strong>–n. a raised structure on the side of a building from which people can look at the street below</p>
+<p><strong>blow away </strong><em>–v. (phrasal, informal)</em> to be really affected by something; impressed</p>
+<p><strong>crazy </strong>–adj. wild, uncontrolled, not mentally healthy</p>
+<p><strong>ghost </strong>–n. the spirit of a person who has died</p>
+<p><strong>haunted </strong>–adj. to feel the presence of someone's spirit or of some feeling again and again</p>
+<p><strong>rent </strong><em>–v.</em> to pay for the use of a living place, device or vehicle for a period of time</p>
+<p><strong>crucifix </strong>–n. a model of a cross with Jesus Christ crucified on it; a special religious image of the crucifixion of Jesus Christ</p>
+<p><strong>tourist </strong>–n. a person who travels for pleasure</p>
+<p><strong>icon </strong>–n. a person who is famous for his or her relationship with a place, thing or event</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Ernest Hemingway and Running of the Bulls]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.84]Ernest Hemingway, the Nobel Prize-winning American writer,
+[00:05.92]first visited the Spanish city of Pamplona 100 years ago in July.
+[00:12.52]In July, people celebrate the feast of Saint Fermin in Pamplona
+[00:17.28]where the traditional "running of the bulls" takes place.
+[00:22.72]The event started more than seven hundred years ago.
+[00:26.48]For nine days, people come to the northern Spanish city
+[00:30.56]for bull running, bullfighting and partying.
+[00:35.40]In July, people celebrate the feast of Saint Fermin in Pamplona
+[00:40.68]where the traditional "running of the bulls" takes place.
+[00:44.88]The event started more than seven hundred years ago.
+[00:48.68]For nine days, people come to the northern Spanish city
+[00:52.88]for bull running, bullfighting and partying.
+[00:57.48]The festival affected Hemingway so deeply
+[01:00.52]that he returned eight times between 1924 and 1959.
+[01:07.92]Here is a description of what happens at the start of the bull running:
+[01:13.24]The bells would toll eight times. A rocket would be lit.
+[01:19.00]And the bulls would charge out of the gate.
+[01:22.24]At that moment, a crowd of runners wearing white clothes
+[01:26.84]and red scarves would start to run.
+[01:30.24]They would look back, move and dance
+[01:33.56]to avoid being gored by the charging bull's horns.
+[01:38.08]Onlookers would cheer them on from balconies above.
+[01:43.04]In 1926, Hemingway wrote his first book, The Sun Also Rises.
+[01:50.32]He wrote about his experiences in Pamplona and established himself
+[01:55.16]as the voice of what became known as the "Lost Generation,"
+[01:59.44]a generation of people affected deeply by the events of World War I.
+[02:05.64]"I can't stand it to think my life is going so fast
+[02:09.72]and I'm not really living it," says one character in the book.
+[02:15.72]"Nobody ever lives their life all the way up
+[02:18.76]except bull-fighters," is the answer.
+[02:22.80]Bill Hillmann is a 41-year-old English professor from Chicago.
+[02:28.24]He first read The Sun Also Rises while he was in college at the age of 20.
+[02:34.80]When he turned to the last page, he said he knew two things:
+[02:39.08]He wanted to become a writer,
+[02:41.68]and he would run in front of Pamplona's bulls someday.
+[02:47.16]Hillmann's first running of the bulls was in 2005.
+[02:51.96]He has been running ever since.
+[02:54.28]"I got here, and I was just blown away by it.
+[02:58.68]It was everything in the book but times ten...It was bigger.
+[03:03.00]It was wilder. It was crazier," he told Reuters.
+[03:09.04]He has been gored twice, in 2014 and 2017,
+[03:14.04]but that has not lessened his interest.
+[03:18.20]"I've basically been kind of following Hemingway's ghost around...
+[03:22.36]I'm a little bit haunted by him," Hillmann added.
+[03:26.72]Sixty-nine-year-old Cheryl Mountcastle first read The Sun Also Rises
+[03:31.84]at her New Orleans high school in Louisiana.
+[03:35.92]For the past 24 years,
+[03:38.04]she has rented the same apartment in Pamplona
+[03:40.80]for the festival with her family.
+[03:44.36]She said the book does not give details about another side of the festival -
+[03:49.16]such as sharing food and dancing in the street.
+[03:53.84]Leontxi Arrieta is one of the few remaining
+[03:56.76]Pamplona natives who met Hemingway.
+[04:00.60]The 91-year-old tells Reuters that Hemingway
+[04:04.32]and his fourth wife, Mary Welsh, stayed at her house.
+[04:09.32]It was on their last visit to the festival in 1959,
+[04:13.80]two years before Hemmingway's death.
+[04:17.48]Arrieta remembered that Hemingway wrote, drank vodka,
+[04:21.80]and shocked the family
+[04:24.24]by removing the crucifixes from the wall and putting them away.
+[04:29.32]Last year, 1.7 million people came to the festival,
+[04:33.72]also known as Sanfermines.
+[04:37.84]They left 1,200 tons of broken glass and other waste behind.
+[04:44.36]A place on a balcony with a good view of the bull-running event
+[04:48.44]can cost $220 per person.
+[04:52.64]Pamplona native Miguel Izu
+[04:54.88]has written about the festival's links to Hemingway.
+[04:58.32]He believes the writer's influence on its popularity
+[05:02.64]has not been as large as people say.
+[05:06.32]"Before Hemingway, tourists were already coming,
+[05:09.68]especially from France," Izu explained.
+[05:13.68]However, Izu acknowledges that Pamplona
+[05:16.80]is still using Hemingway to gain attention.
+[05:21.32]"We made him into a sort of Sanfermines icon," he said.
+[05:27.32]But not every foreigner at the festival
+[05:29.80]has been coming because of Hemingway.
+[05:33.24]Australian William Kappal and his friends
+[05:36.16]learned about Sanfermines by watching YouTube.
+[05:40.76]Asked if they had ever heard of Hemingway,
+[05:43.32]Kappal said "Nah. Should we look him up?"
+[05:46.96]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

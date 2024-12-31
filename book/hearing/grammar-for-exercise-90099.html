@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar for Exercise</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar for Exercise" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/grammar-for-exercise.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar for Exercise</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/grammar-for-exercise.mp3" id="mp3"></a>
+<a href="indonesia-to-ban-sex-outside-of-marriage-90092.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">08 December 2022</span><br/>
+<p>Do you like to "work out?"</p>
+<p>What do you do to "warm up" for exercise?</p>
+<p>Do you enjoying walking, dancing, or running?</p><div class="contentImage"><img alt="Everyday Grammar: Grammar for Exercise" src="https://files.21voa.com/gdb/09410000-0a00-0242-8534-08dad7de1b54_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Grammar for Exercise</span></div>
+<p>In today's <em>Everyday Grammar</em>, we will look at how we can express ways we exercise. You will learn about common phrasal verbs to describe our actions and gerunds for kinds of exercises.</p>
+<p>Let's begin with phrasal verbs.</p>
+<p><strong>Phrasal verbs</strong></p>
+<p>Phrasal verbs have a verb and either a preposition or an adverb called a<strong> </strong>particle. A particle is a short word. Phrasal verbs can be made up of one particle or two. A phrasal verb has a meaning different from that of the verb alone. Phrasal verbs can often be separated from the particle by a noun or pronoun.</p>
+<p>Some of the most common exercise phrases in English are phrasal verbs.</p>
+<p>Let's take a look at some of them.</p>
+<p>"Work out" is a transitive verb. meaning to do physical exercise to make your body strong or healthy. A transitive verb can take a direct object.</p>
+<p><em>She works out her legs every day at the gym.</em></p>
+<p>"Warm up" means to prepare for exercise by doing light exercise to increase your heart rate and warm your body.</p>
+<p><em>Emily warms up by walking on the <strong>treadmill</strong>.</em></p>
+<p>"Cool down" is the opposite of warm up. After intense exercise, you need to cool down your body to let your heart rate decrease naturally.</p>
+<p><em>I like to cool down by stretching my muscles.</em></p>
+<p>"Work off" means to get rid of <strong>stress</strong>, emotions, energy, or even food by doing physical activity.</p>
+<p><em>I need to work off that apple <strong>pie</strong> I had at Thanksgiving. Let's go to the gym!</em></p>
+<p><em>I had such a stressful day at work, I can't wait to work that off at dance class tonight!</em></p>
+<p>"Try out (for)" means you compete for a spot on a team.</p>
+<p><em>Tatiana tried out for the football<strong> </strong>team in August. She will play her first game this weekend!</em></p>
+<p>"Pass out" means you feel sick and fall down or faint.</p>
+<p><em>If I don't drink enough water before I do an intense workout, I always feel like I'm going to pass out.</em></p>
+<p><em>She passed out near the end of the finish line because she was <strong>dehydrated</strong>.</em></p>
+<p>"Give up" means that you stop what you are doing and do not continue.</p>
+<p><em>He had to give up playing basketball last year after he hurt his knee.</em></p>
+<p><strong>Gerunds</strong></p>
+<p>Gerunds are formed from verbs, but they work like a noun in a sentence. We use the ending -ing to create a gerund. Gerunds express actions or states of being. There are several gerunds that we use to express kinds of exercise.</p>
+<p>For example, "walking" is a gerund.</p>
+<p>We take the base form of the verb and add -ing.</p>
+<p>Walk + ending -ing = walking</p>
+<p><em>Walking is one of the best activities for your health.</em></p>
+<p>Other common gerunds for working out include:</p>
+<p>"Jogging"<em> </em>is like running but with an easier pace.</p>
+<p><em>Tyler enjoys jogging on the weekends.</em></p>
+<p>"Running"<em> </em>is faster and there may be more purpose behind it, like planning for a race.</p>
+<p><em>Running a <strong>marathon</strong> is very hard work.</em></p>
+<p>"Lifting" refers to a form of strength exercise where one lifts heavy weights with their muscles.</p>
+<p><em>Taylor started lifting weights last year.</em></p>
+<p>"Dancing" is moving the body to music.</p>
+<p><em>She loves dancing because it's creative and gets her heart rate up.</em></p>
+<p>"Training" involves doing exercise in preparation for an event or goal.</p>
+<p><em>Jo not only does strength training, but she also trains in dance.</em></p>
+<p>"Spinning" is indoor bicycling.</p>
+<p><em>There's spinning at this gym.</em></p>
+<p><strong>Practice </strong></p>
+<p>Let's combine the phrasal verbs and gerunds to create sentences for describing exercise activities.</p>
+<p>For example, you could say:</p>
+<p><em>I warm up by dancing.</em></p>
+<p>Here I use the preposition "by" to tell the means of how I warm up.</p>
+<p>You could also say:</p>
+<p><em>Dancing warms me up.</em></p>
+<p>Here the phrasal verb is split up by the personal pronoun "me."</p>
+<p><strong>Final thoughts</strong></p>
+<p>Today we looked at common expressions for exercise. We can use phrasal verbs like "work out" and "cool down" to describe our actions. We use a base verb plus a preposition to create a phrasal verb which can be divided by either a noun or pronoun.</p>
+<p>Another verb-like structure we examined are gerunds. Gerunds work like nouns in sentences but are formed by placing the ing-ending on verbs. Since gerunds describe actions, they are perfect for describing exercises that we do to stay happy and healthy.</p>
+<p>Let's end this report with some homework.</p>
+<p>Are there any other phrasal verbs or gerunds that you use to describe exercise?</p>
+<p>Use phrasal verbs or gerunds to describe how you exercise. Try to combine both to create a sentence!</p>
+<p>Share your results in the comments!</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>_____________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>treadmill</strong> – <em>n</em>. a machine with a moving part that you can walk or run on for exercise</p>
+<p><strong>stress </strong><em>– n.</em><strong> </strong>a physical, chemical, or emotional factor that causes bodily or mental tension and may be involved in causing some diseases</p>
+<p><strong>pie – </strong><em>n.</em><strong> </strong>a food consisting of a pastry crust and a filling, as of fruit or meat</p>
+<p><strong>dehydrated </strong><em>– adj.</em> describes the removal of water or liquid from something, such as food<strong> </strong></p>
+<p><strong>marathon</strong> <em>– n. </em>a long run of about 42 kilometers, a hard task that lasts a long time</p>
+<p> </p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

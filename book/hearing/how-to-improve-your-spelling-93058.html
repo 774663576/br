@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Improve Your Spelling</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, How to Improve Your Spelling" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/how-to-improve-your-spelling.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Improve Your Spelling</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/how-to-improve-your-spelling.mp3" id="mp3"></a>
+<a href="weather-experts-we-cannot-control-hurricanes-93057.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">11 October, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Guillermo in Argentina about how to spell words in English.</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/4ec92eba-4c0f-40d5-9a0e-3106d24bba11_w268_r1.png"/></div>
+<p>When I hear some new words in English, I can find their meaning, but for me, the spelling is always difficult. Can you please give me [some] advice?</p>
+<p>Thank you,</p>
+<p>Guillermo</p>
+<p><strong>Answer</strong></p>
+<p>I'm happy to answer this question, Guillermo.</p>
+<p>English spelling can be difficult for several reasons. For many letters in the English alphabet, a letter can represent several sounds.</p>
+<p>Let's listen to the sound the letter “A” makes in each of the following six words:</p>
+<p><em>cat</em></p>
+<p><em>day</em></p>
+<p><em>father</em></p>
+<p><em>ball</em></p>
+<p><em>many</em></p>
+<p><em>attack</em></p>
+<p>Can you hear the difference between the two letters “A” of the last word? Let's listen again.</p>
+<p><em>attack</em></p>
+<p>The first syllable made the quick schwa sound “/<strong><i>&amp;#</i>601;/</strong>”.</p>
+<p>Because an English letter can make different sounds, words that have similar spellings can sound different from each other, as in these examples:</p>
+<p><em>lemon </em>and<em> demon</em></p>
+<p><em>daughter </em>and<em> laughter</em></p>
+<p><em>war </em>and<em> far</em></p>
+<p>In addition, words that have different spellings can sound the same. These are called homophones, as in these examples:</p>
+<p><em>pause </em>and<em> paws</em></p>
+<p><em>rode </em>and<em> road</em></p>
+<p><em>deer </em>and<em> dear</em></p>
+<p>But that's not all. In many words, some letters are silent—they are not pronounced at all, like the letter “b” at the end of the word “climb”.</p>
+<p>You can see from all of the above examples that you cannot only use the sounds of words to know how to spell them. So, what should you do?</p>
+<p><strong>Spelling rules</strong></p>
+<p>Fortunately, English does have some general rules for spelling.</p>
+<p>For example, a famous rule that children learn in school is “<em>I</em> before <em>e</em> except after <em>c.”</em> This gives us the spelling of words such as:</p>
+<p><em>piece</em></p>
+<p><em>niece</em></p>
+<p><em>receive</em></p>
+<p>But be careful! There are still many words in English that break the spelling rules. The word “science,” for example, breaks the “I before e” rule. For words such as these, you simply have to memorize how to spell them. And how can you do that?</p>
+<p><strong>Memorizing words</strong></p>
+<p>The best way to help your memory is to read as much as possible and practice writing. Writing can test how well you know how to spell. Most computer programs also include a spell-checker, where misspelled words are underlined in a color. This helps you see any spelling mistakes you have made and also shows you the correct spelling.</p>
+<p><strong>Recognizing patterns</strong></p>
+<p>In addition to rules, there are spelling <strong>patterns</strong>. You can group words into the pattern they follow. For example, some words that have the spelling -ough include:</p>
+<p><em>rough, tough, cough, though, </em>and <em>bought</em>.</p>
+<p>Notice, however, that with these examples, the letters -ough made three different vowel sounds:</p>
+<p><em>rough, cough, though</em></p>
+<p>This again shows the need to memorize spellings because the sound of the word will not always tell you how to spell it.</p>
+<p><strong>Having fun</strong></p>
+<p>Lastly, becoming good at spelling can be enjoyable. Think of it like a game or other activity you enjoy. Over time, you will feel good as you learn to spell more and more words. There are many books, websites, and apps designed for spelling practice. Try to use these and practice your spelling.</p>
+<p>For our readers and listeners, what are your questions about American English? We'd like to hear from you. Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>. And please include where you are from in your email, too.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>pattern </strong>–n. a regular or repeated happening</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

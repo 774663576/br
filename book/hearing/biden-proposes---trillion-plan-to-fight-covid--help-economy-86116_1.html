@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登提出1.9万亿美元计划以抗击新冠病毒并帮助经济复苏</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 拜登提出1.9万亿美元计划以抗击新冠病毒并帮助经济复苏" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202101/biden-proposes-1-9-trillion-plan-to-fight-covid-19-help-economy.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登提出1.9万亿美元计划以抗击新冠病毒并帮助经济复苏</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202101/biden-proposes-1-9-trillion-plan-to-fight-covid-19-help-economy.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-proposes-1-9-trillion-plan-to-fight-covid-19-help-economy.lrc" id="lrc"></a>
+<a href="biden-proposes---trillion-plan-to-fight-covid--help-economy-86116.html" id="CnPage" target="_blank"></a>
+<a href="french-wines-return-from-year-in-space-86115.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">President-elect Joe Biden is proposing a coronavirus action plan that centers on mass vaccination in the United States and more financial assistance to help the economy. The plan could cost as much as $1.9 trillion dollars.<br/>
+候任总统乔·拜登提出了一项新冠病毒行动计划，集中围绕在美国大规模接种疫苗并推出更大规模财政援助以帮助经济复苏。该计划可能会耗资高达1.9万亿美元。
+<p>Biden sees the pandemic as the country's biggest problem. He said last week, "That's my No. 1 concern, to get the virus under control."<br/>
+拜登将这场大流行视为美国面临的最大的问题。他上周表示：“控制新冠病毒是我的第一要务。”</p>
+<p>The plan aims to speed up vaccination of Americans by delivering more vaccine and working closely with states and local communities to get shots into the arms of more people.<br/>
+该计划旨在通过提供更多疫苗，并与各州以及地方社区紧密合作为更多人接种疫苗，从而加快美国人的疫苗接种速度。</p>
+<p>Biden has set a goal of giving out 100 million shots in his first 100 days. Right now, the U.S. is vaccinating almost one million people a day, but it needs to get up to two million to reach Biden's goal.<br/>
+拜登已经制定了在上任百日内提供1亿剂疫苗的目标。目前，美国每天为近100万人接种疫苗，但是需要达到每日接种200万才能实现拜登的目标。</p>
+<p>Biden has said the plan would have "billions of dollars" to speed up vaccination. He is also asking Americans to look past their sense of pandemic fatigue. He wants a commitment to wearing masks, practicing social distancing, and avoiding large indoor gatherings.<br/>
+拜登表示，该计划将有数十亿美元用于加速疫苗接种。他还要求美国人摆脱他们对大流行的疲劳感。他希望人们承诺戴口罩、保持社交距离并避免大型室内聚会。</p>
+<p>The president-elect wants Congress to send more money to American states to help reopen schools and to avoid laying off teachers, police officers and health workers.<br/>
+拜登希望国会向美国各州提供更多资金以协助学校重新开放，并避免解雇教师、警察和医务工作者。</p>
+<p>Biden's incoming White House economic adviser, Brian Deese, told Reuters the measures may include direct payments of $1,400 to most Americans.<br/>
+拜登即将上任的白宫经济顾问布莱恩·迪斯对路透社表示，此举可能包括向大多数美国人发放1400美元直接补贴。</p>
+<p><strong>A nation divided<br/>
+国家分裂</strong></p>
+<p>The plan comes as a divided nation is experiencing the pandemic's most dangerous wave yet. So far, more than 380,000 Americans have died.<br/>
+该计划是在一个分裂的国家正经历着大流行迄今最为危险一波疫情的时刻发布的。截至目前已经有超过38万美国人丧生。</p>
+<p>Biden hopes his plan will put the country on the path to recovery by the end of his first 100 days. "It's going to be hard," Biden said Monday after he got his second vaccine dose. "It's not going to be easy. But we can get it done."<br/>
+拜登希望他的计划能够在他上任100天结束时使美国走上复苏的道路。拜登周一在接种第二针疫苗后表示：“这会很难，这不会太容易，但是我们可以实现这个目标。”</p>
+<p>Senate Democratic leader Chuck Schumer of New York said the Biden COVID-19 plan will be the new Congress's first action this year.<br/>
+来自纽约的参议院民主党领袖查克·舒默表示，拜登的新冠病毒计划将是新一届国会今年的第一项行动。</p>
+<p>But the biggest question for Biden is if he can "win the hearts and minds of the American people to follow his lead," said Dr. Leana Wen. She is a public health expert and emergency physician.<br/>
+温·莱纳博士表示，但是对拜登来说最大的问题在于，他是否能够“赢得美国人的民心民意以追随他的领导。”她是一名公共卫生专家和急诊医生。</p>
+<p>Under the Trump administration, more than 29 million doses of vaccine have been sent but only 10.3 million have gotten the first of two shots.<br/>
+在川普政府的领导下，美国已经发出了超过2900万剂疫苗，但是只有1030万人接种了需要打两针的这种疫苗的第一针。</p>
+<p>Biden wants to quickly increase that number by working closely with states and local communities to get more people vaccinated.<br/>
+拜登希望通过与各州和当地社区的紧密合作，为更多人接种，从而迅速提升接种人数。</p>
+<p>It will need cooperation "at all levels, as well as resources," said Dr. Nadine Gracia. She is the executive vice president of the nonpartisan Trust for America's Health.<br/>
+纳丁·格拉西亚博士说，这需要在各个层面以及资源上的合作。她是无党派美国健康基金会的执行副总裁。</p>
+<p>Experts say, however, that the biggest problem may be public suspicion about the vaccine. Research shows it is a big problem, especially among Black Americans.<br/>
+然而专家们表示，最大的问题可能是公众对疫苗的怀疑。研究表明，这是一个大问题，尤其是在美国黑人当中。</p>
+<p>"It's important to...work to earn trust and build vaccine confidence in communities," said Gracia.<br/>
+格拉西亚表示：“重要的是努力赢得信任并建立各社区对疫苗的信心。”</p>
+<p>I'm Susan Shand.<br/>
+我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Proposes $1.9 Trillion Plan to Fight COVID-19, Help Economy]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]President-elect Joe Biden is proposing a coronavirus action plan
+[00:09.28]that centers on mass vaccination in the United States
+[00:14.64]and more financial assistance to help the economy.
+[00:19.96]The plan could cost as much as $1.9 trillion dollars.
+[00:27.48]Biden sees the pandemic as the country's biggest problem.
+[00:32.48]He said last week, "That's my No. 1 concern, to get the virus under control."
+[00:41.08]The plan aims to speed up vaccination of Americans
+[00:45.64]by delivering more vaccine and working closely with states
+[00:50.84]and local communities to get shots into the arms of more people.
+[00:57.52]Biden has set a goal of giving out 100 million shots in his first 100 days.
+[01:05.12]Right now, the U.S. is vaccinating almost one million people a day,
+[01:11.40]but it needs to get up to two million to reach Biden's goal.
+[01:17.28]Biden has said the plan would have "billions of dollars" to speed up vaccination.
+[01:24.16]He is also asking Americans to look past their sense of pandemic fatigue.
+[01:31.40]He wants a commitment to wearing masks, practicing social distancing,
+[01:37.52]and avoiding large indoor gatherings.
+[01:42.04]The president-elect wants Congress to send more money to American states
+[01:48.24]to help reopen schools and to avoid laying off
+[01:53.16]teachers, police officers and health workers.
+[01:57.84]Biden's incoming White House economic adviser, Brian Deese,
+[02:03.20]told Reuters the measures may include direct payments of $1,400 to most Americans.
+[02:13.56]The plan comes as a divided nation is experiencing
+[02:18.56]the pandemic's most dangerous wave yet.
+[02:22.16]So far, more than 380,000 Americans have died.
+[02:28.16]Biden hopes his plan will put the country on the path to recovery
+[02:33.84]by the end of his first 100 days.
+[02:37.20]"It's going to be hard," Biden said Monday after he got his second vaccine dose.
+[02:44.72]"It's not going to be easy. But we can get it done."
+[02:50.16]Senate Democratic leader Chuck Schumer of New York
+[02:54.48]said the Biden COVID-19 plan will be the new Congress's first action this year.
+[03:02.48]But the biggest question for Biden is
+[03:05.80]if he can "win the hearts and minds of the American people
+[03:10.16]to follow his lead," said Dr. Leana Wen.
+[03:14.72]She is a public health expert and emergency physician.
+[03:20.04]Under the Trump administration, more than 29 million doses of vaccine
+[03:26.04]have been sent but only 10.3 million have gotten the first of two shots.
+[03:33.48]Biden wants to quickly increase that number by working closely
+[03:38.36]with states and local communities to get more people vaccinated.
+[03:44.08]It will need cooperation "at all levels, as well as resources," said Dr. Nadine Gracia.
+[03:53.12]She is the executive vice president of the nonpartisan Trust for America's Health.
+[04:00.36]Experts say, however, that the biggest problem
+[04:03.60]may be public suspicion about the vaccine.
+[04:07.00]Research shows it is a big problem, especially among Black Americans.
+[04:13.36]"It's important to...work to earn trust
+[04:16.88]and build vaccine confidence in communities," said Gracia.
+[04:22.72]I'm Susan Shand. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

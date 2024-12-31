@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - AI App Helps People with ADHD</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, AI App Helps People with ADHD" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/ai-app-helps-people-with-adhd.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>AI App Helps People with ADHD</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/ai-app-helps-people-with-adhd.mp3" id="mp3"></a>
+<a href="a-man-jailed-for-poaching-now-protects-zimbabwe-s-natural-resources-92945.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">02 September, 2024</span><br/>
+<p>From VOA Learning English, this is the <em>Health &amp; Lifestyle</em> report.</p>
+<p>Becky Litvintchouk did not think she would be able to finish the many tasks needed to start her own business. She has Attention Deficit Hyperactivity Disorder, or ADHD. It affects every part of her life and hurts her ability to <strong>focus</strong> on one thing at a time.</p>
+<p>So, two years ago, she turned to artificial intelligence, or AI. She uses an app called Claude. It helps her decide which contracts are the best for her cleaning-wipes business, GetDirty. Using the app means she does not need to read each contract, word for word. She also created business plans by telling the <strong>generative</strong> AI bot what her goals were. It then created steps for her to reach them.</p><div class="contentImage"><img alt="Entrepreneur Becky Litvintchouk works on her computer at a co-working space on Monday, Aug. 12, 2024, in New York. (AP Photo/Andres Kudacki)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-5ed1-08dcc6ac6364_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Entrepreneur Becky Litvintchouk works on her computer at a co-working space on Monday, Aug. 12, 2024, in New York. (AP Photo/Andres Kudacki)</span></div>
+<p>“It's been just massively <strong>instrumental</strong>. I probably would not be where I am today,” Litvintchouk said of using AI.</p>
+<p>People with ADHD experience difficulties with focusing, organizing and controlling<strong> </strong>urges. Experts say generative AI tools can help them finish tasks more quickly.</p>
+<p>However, they also warn that such tools should not replace traditional treatments for ADHD. Some experts also have concerns about possibly using AI too much. They also worry about privacy risks.</p>
+<p><strong>Will apps replace ADHD treatment?</strong></p>
+<p>John Mitchell is an associate professor at Duke University School of Medicine in North Carolina. He said that AI apps should be used as “one tool in a toolbox.” AI should not take the place of traditional treatments, such as developing organizational skills or taking medications.</p>
+<p>He compared using AI to help ADHD with swimming and staying alive in the water. “If you're kind of <strong>treading water</strong> in your job and AI's a <strong>life</strong> <strong>preserver</strong>, well, that's great you're staying above water.” But, he added, “you still don't know how to swim.”</p>
+<p><strong>What else can the apps do?</strong></p>
+<p>Litvintchouk, a married mother of four living in New York City, dropped out of high school and left the workforce. Research shows that these things are more likely to happen to people with ADHD.</p>
+<p>Aside from helping with her business, she uses ChatGPT to help with food shopping. Food shopping and meal planning are tasks that can be difficult for people with ADHD because these tasks require organizational skills.</p>
+<p>After sharing her method with another mom with ADHD, she decided more people needed to know about it. She started making videos on TikTok about the AI tools she uses to help with her ADHD struggles.</p>
+<p>Generative AI tools can help people with ADHD break down big tasks into smaller, more doable steps. Chatbots can offer advice for specific things and make people feel like they are talking with a real person. Some AI apps can also help with reminders and productivity.</p>
+<p>Software engineer Bram de Buyser said he created Goblin.tools with his <strong>neurodivergent</strong> friends in mind. The tool's most popular feature is the “magic to-do.” A user can enter a task and the bot will create a to-do list. It can even break down large items on the list into smaller tasks.</p>
+<p>“I'm not trying to build a cure,” de Buyser said, “but something that helps them out (for) two minutes out of the day that they would otherwise struggle with.”</p>
+<p><strong>What kinds of problems could apps create?</strong></p>
+<p>Russell Fulmer is a professor at Husson University in the northeastern state of Maine. He described the research around AI and ADHD as “<strong>inconclusive</strong>.” In other words, the results of its usefulness are still not known.</p>
+<p>Experts say they see how AI can have a positive effect on the lives of people with anxiety and ADHD. But, Fulmer said, such tools may not work well for everyone, including people of color with ADHD. He pointed to chatbot responses that have been racist and unfair toward certain groups of people at times.</p>
+<p>Valese Jones is a publicist and founder of Sincerely Nicole Media. She was <strong>diagnosed</strong> with ADHD as a child. She uses AI bots to help with reading and responding to emails as well as proofreading public relations plans. But chatbot responses do not always go along with who she really is.</p>
+<p>“There are <strong>cadences</strong> in my writing where you can kind of pick up on the fact that I'm southern, and that's on purpose,” said Jones, who is Black. She purposefully writes in a way that shows her culture. However, the responses she gets back from bots often do not show that.</p>
+<p>Software engineer de Buyser said that using AI chatbots as a personal assistant has a big upside: They are never tired and never sleep.</p>
+<p>The downside? They also create privacy issues. When you give an AI chatbot your personal information, emails, calendar and personal writings, you are giving it to a big company, he warned.</p>
+<p>And that's the <em>Health &amp; Lifestyle</em> report.</p>
+<p>I'm Anna Matteo.</p>
+<p>And I'm Andrew Smith.</p>
+<p><em>Kenya Hunter reported this story for The Associated Press. Anna Matteo adapted the story for Learning English.</em></p>
+<p>____________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>focus</strong> <em>-n.</em> a center of activity, attraction, or attention</p>
+<p><strong>generative </strong><em>-adj. </em>having the power or function of generating, originating, producing, or reproducing</p>
+<p><strong>instrumental </strong><em>-adj. </em>serving as a crucial means, agent, or tool</p>
+<p><strong>tread water </strong><em>-v. </em>while in deep water a person float in an upright position by moving their legs slightly</p>
+<p><strong>life</strong> <strong>preserver </strong><em>-n. </em>a device (such as a life jacket or life buoy) designed to save a person from drowning by providing buoyancy in water</p>
+<p><strong>neurodivergent </strong><em>-adj. </em>having or relating to a disorder or condition (such as autism spectrum disorder, attention deficit disorder, dyslexia, or obsessive-compulsive disorder) that impacts the way the brain processes information : exhibiting or characteristic of variations in typical neurological development</p>
+<p><strong>inconclusive </strong><em>-adj. </em>leading to no conclusion or definite result</p>
+<p><strong>diagnose </strong><em>-n.</em> to recognize (something, such as a disease) by signs and symptoms</p>
+<p><strong>cadence </strong><em>-n. </em>a rhythmic sequence or flow of sounds in language</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

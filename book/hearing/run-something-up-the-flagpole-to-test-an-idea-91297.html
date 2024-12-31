@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Run Something Up the Flagpole' to Test an Idea</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Run Something Up the Flagpole' to Test an Idea" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/run-something-up-the-flagpole-to-test-an-idea.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Run Something Up the Flagpole' to Test an Idea</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/run-something-up-the-flagpole-to-test-an-idea.mp3" id="mp3"></a>
+<a href="americas-presidents-benjamin-harrison-91296.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">05 August 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Great ideas can be the <strong>lifeblood </strong>of any project. That means they can bring a project to life or even back from the dead. From redesigning a home to creating an educational product, <strong>bold</strong>, creative ideas are valuable.</p><div class="contentImage"><img alt="FILE - Flags of member nations at NATO headquarters." src="https://files.21voa.com/gdb/01000000-0aff-0242-e62f-08db343e7c1a_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Flags of member nations at NATO headquarters.</span></div>
+<p>But often even a great idea needs a little work. It may need <strong>tweaking</strong>,<strong> </strong>meaning you need to make<strong> </strong>small changes. So, before sharing an idea with a large group, we may want to share it with a smaller group. We can test it out first, before putting the idea into action.</p>
+<p>But first, let's talk about getting that big idea.</p>
+<p>You may have heard of brainstorming. This is an idea-creating activity. When we brainstorm, we say ideas as quickly as we think of them.</p>
+<p>In informal situations, we can call this <u>throwing spaghetti at the wall</u>. Why, you may ask? Well, cooked spaghetti is sticky. If spaghetti is cooked enough, it will stick when you throw it against the wall. If it is not cooked enough, it might not stick.</p>
+<p>Good ideas stick too. In brainstorming, we often say we throw ideas around. And the good ones stay or stick. But as we said earlier, even if an idea sticks, we may want to test it out before sharing it with a large group of people.</p>
+<p>That is when we can <u>run it up the flagpole</u>. Running an idea, plan, or proposal up the flagpole is a way to test interest or get <strong>feedback</strong>. The full phrase is "run it up the flagpole and see if anyone salutes." Military members <strong>salute</strong> when our flag is present and when they hear the first note of the national anthem.</p>
+<p>Let's listen to an example: If you are the leader of a project, you could say to your team, "I like that plan. But it is risky. Let's run it up the flagpole before <strong>pitching</strong> it to the boss." In other words, you want to get more opinions before making the plan official.</p>
+<p>Here is another example: When writing these stories, I often run my ideas up a flagpole. I respect the opinions of my co-workers and often take their suggestions <u>on board</u> – meaning I take them into consideration. So, I like bouncing ideas off them.</p>
+<p>And that is a more common way to express this idea. <u>Bouncing something off someone</u> is a way to know their thoughts. You are asking their opinion and are looking to see their reaction. Bouncing ideas around is a good way to <strong><u>gauge</u></strong><u> interest</u> – to find out what people think.</p>
+<p>So, the next time you have an idea, and you are unsure about it, run it up the flagpole! Bounce it off some friends! With the right people, you will soon know if it is good, bad, or needs work.</p>
+<p>And that is all the time we have for this <em>Words and Their Stories</em>. Until next time...</p>
+<p>I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p><em><i>&amp;#</i>173;<i>&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;&lt;I&gt;&amp;#&lt;/I&gt;173;___________________________________________________&lt;/em&gt;&lt;/p&gt;
+&lt;h2 class="wsw__h2"&gt;Words in This Story&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;lifeblood &lt;/strong&gt;&lt;em&gt;–n&lt;/em&gt;. the most important part of something&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;bold &lt;/strong&gt;&lt;em&gt;–adj.&lt;/em&gt; strong, clear and without fear&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;tweak &lt;/strong&gt;&lt;em&gt;–v. &lt;/em&gt;to change something a little to improve it&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;feedback &lt;/strong&gt;–n. advice or criticism given to a person or group providing a product or service&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;salute &lt;/strong&gt;&lt;em&gt;–v. &lt;/em&gt;to honor (a person, a nation, an event, etc.) by a conventional military or naval ceremony&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pitch in &lt;/strong&gt;&lt;em&gt;–v. &lt;/em&gt;to contribute to a common task&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;gauge &lt;/strong&gt;–v. to judge the qualities of someone or something&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="beating-a-dead-horse-is-pointless-91262.html" target=_blank&gt;'Beating a Dead Horse' Is Pointless&lt;/A&gt;   (23/7/29)&lt;/LI&gt;&lt;LI&gt;&lt;A href="seeing-double-91228.html" target=_blank&gt;Seeing 'Double'?&lt;/A&gt;   (23/7/22)&lt;/LI&gt;&lt;LI&gt;&lt;A href="to-sink-or-swim-is-up-to-you-91193.html" target=_blank&gt;'To Sink or Swim' Is Up to You&lt;/A&gt;   (23/7/15)&lt;/LI&gt;&lt;LI&gt;&lt;A href="differences-between-board-on-board-and-aboard-91158.html" target=_blank&gt;Differences Between Board, on Board, Aboard&lt;/A&gt;   (23/7/8)&lt;/LI&gt;&lt;LI&gt;&lt;A href="words-and-their-stories-american-versus-british-english-91130.html" target=_blank&gt;American English vs. British English&lt;/A&gt;   (23/7/3)&lt;/LI&gt;&lt;LI&gt;&lt;A href="all-thumbs-91124.html" target=_blank&gt;'All Thumbs'&lt;/A&gt;   (23/7/1)&lt;/LI&gt;&lt;LI&gt;&lt;A href="in-the-hot-seat-is-not-where-you-want-to-be-91086.html" target=_blank&gt;'In The Hot Seat' Is Not Where You Want to Be&lt;/A&gt;   (23/6/24)&lt;/LI&gt;&lt;LI&gt;&lt;A href="are-you-prepared-to-see-how-the-sausage-is-made-91053.html" target=_blank&gt;Are You Prepared 'to See How the Sausage Is Made'?&lt;/A&gt;   (23/6/17)&lt;/LI&gt;&lt;LI&gt;&lt;A href="let-s-zero-in-on-number-expressions-91019.html" target=_blank&gt;Let's 'Zero In On' Number Expressions&lt;/A&gt;   (23/6/10)&lt;/LI&gt;&lt;LI&gt;&lt;A href="clean-as-a-whistle-90981.html" target=_blank&gt;'Clean As a Whistle'&lt;/A&gt;   (23/6/3)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></em></p></div></div></div></body></body></html>

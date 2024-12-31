@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 巴西欢迎难民</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 巴西欢迎难民" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201608/brazil-welcomes-refugees.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>巴西欢迎难民</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201608/brazil-welcomes-refugees.mp3" id="mp3"></a>
+<a href="/static/lrc/brazil-welcomes-refugees.lrc" id="lrc"></a>
+<a href="brazil-welcomes-refugees-71124.html" id="CnPage" target="_blank"></a>
+<a href="big-eyed-purple-squid-71118.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Fleeing places such as Syria, Iraq and Afghanistan is not easy because few countries will accept refugees.<br/>逃离叙利亚、伊拉克和阿富汗等地区并不容易，因为很少有国家会接收难民。
+<p>Several of the countries that do welcome refugees are in South America. Over the past five years, Brazil has been the place where refugees arrive and stay – or at least live temporarily -- before they are sent to Europe or the United States.<br/>真正欢迎难民的几个国家都在南美洲。过去5年，巴西一直是难民抵达和停留的地点，或者至少是在被送往欧美前的临时停留地点。</p>
+<p>Ahmad Hamada is one of those refugees. Seven days a week, he sells Arab food in the Botafogo neighborhood of Rio de Janeiro.<br/>Ahmad Hamada就是这些难民中的一位。他一周7天都在里约热内卢的博塔弗戈街区销售阿拉伯食品。</p>
+<p>"Here in Brazil, no person [helps you], gives you money, give[s] you [a] house," he said. "You must work. No work, cannot eat here."<br/>他说，“这里是巴西，没人会帮你，给你钱，给你房子。你必须工作，在这里不工作就没吃的。”</p>
+<p>Hamada is a Palestinian who grew up in Syria and Lebanon. He decided to flee the conflicts in the Middle East 11 months ago. He wanted to go to Europe and believed he could get there by going first to Brazil.<br/>Hamada是一位在叙利亚和黎巴嫩长大的巴勒斯坦人。11个月前他决定逃离中东的冲突。他想去欧洲，并且相信他可以通过先到巴西然后去欧洲。</p>
+<p>Before Europe began to accept large numbers of refugees, Brazil was one of the few countries that would give Syrians and Palestinians a visa. Since 2013, thousands of refugees have entered Brazil. Many of them hope to be sent to Europe.<br/>在欧洲开始接收大量难民前，巴西是少数几个会给叙利亚人和巴勒斯坦人签证的国家之一。自2013年以来，成千上万的难民进入了巴西。他们中很多人希望被送去欧洲。</p>
+<p>Ahmad was one of them. But he says immigration officers attacked him in Rome and returned him to Brazil. He says he woke up on a plane, guarded by four Italian police officers. He said his hands and legs were in chains.<br/>Ahmad就是其中的一位。但他表示，入境工作人员在罗马攻击他，并且把他遣返回了巴西。他说，他醒来时在飞机上，有4名意大利警察看管他。他说他的手脚被铐住了。</p>
+<p>Refugees who arrive in Rio de Janeiro are often sent to the Sao Joao church. It is led by Father Alex Coelho Sampaio.<br/>抵达里约热内卢的难民通常被送到圣若昂教堂。该教堂由亚历克斯·科埃略·桑帕约（Alex Coelho Sampaio）神父主持。</p>
+<p>Father Sampaio operates The House of Support for Refugees in buildings behind the church. He says Brazil has, for many years, accepted those who are being persecuted or are fleeing conflict.<br/>桑帕约神父在教堂后面运营了难民援助屋。他说巴西多年来接收了那些被迫害或逃离冲突的人们。</p>
+<p>"Brazil for many years has had an open-door policy and that was true after the Second World War, for example," he said. "And at the moment, in particular, regarding Syrian refugees, we are receiving quite a lot."<br/>他说，“多年来巴西一直持开放政策。例如在二战之后就是这么做的。而现在我们尤其接收了很多叙利亚难民。”</p>
+<p>Father Sampaio says at one time he was caring for so many Syrians that the refugees had to sleep on mattresses on the floor. With his help, some have gone to Europe and others have remained in Brazil. He now cares for 35 refugees. Three are Syrians. They include Ahmad Barour, from Damascus.<br/>桑帕约神父表示，有段时间他照顾了很多叙利亚人，以至于难民们不得不睡到地板的床垫上。在他的帮助下，有些人去了欧洲，其他人则留在巴西。他现在照顾着35位难民，其中3位是叙利亚人，包括来自大马士革的Ahmad Barour。</p>
+<p>"I would love to go to Europe, Britain, a country that is democratic," Barour said. "Everybody is equal -- no discrimination between black, white, stranger, or native. They respect everybody."<br/>Barbour表示，“我很想去英国，这是一个民主的国家。在这个国家人人平等，无论黑人、白人、陌生人还是本地人。他们尊重每个人。”</p>
+<p>For now, he is happy to stay in Brazil. He says he earns enough money to buy food. And he says he has friends. But he says someday he hopes to visit his sister in Denmark.<br/>现在他很高兴留在巴西。他说他赚的钱足够买食物。他还表示他有朋友。但他表示，他希望有一天可以去看他在丹麦的姐姐。</p>
+<p>I'm Pete Musto.<br/>我是皮特·穆斯托。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]Fleeing places such as Syria, Iraq and Afghanistan
+[00:05.77]is not easy because few countries will accept refugees.
+[00:11.25]Several of the countries that do welcome refugees are in South America.
+[00:18.54]Over the past five years, Brazil has been the place
+[00:23.64]where refugees arrive and stay – or at least live temporarily
+[00:28.96]-- before they are sent to Europe or the United States.
+[00:33.85]Ahmad Hamada is one of those refugees.
+[00:38.79]Seven days a week, he sells Arab food in the Botafogo neighborhood of Rio de Janeiro.
+[00:47.75]"Here in Brazil, no person [helps you], gives you money, give[s] you [a] house," he said.
+[00:54.36]"You must work. No work, cannot eat here."
+[01:00.68]Hamada is a Palestinian who grew up in Syria and Lebanon.
+[01:06.95]He decided to flee the conflicts in the Middle East 11 months ago.
+[01:13.06]He wanted to go to Europe and believed he could get there by going first to Brazil.
+[01:20.19]Before Europe began to accept large numbers of refugees,
+[01:25.70]Brazil was one of the few countries that would give Syrians and Palestinians a visa.
+[01:33.17]Since 2013, thousands of refugees have entered Brazil.
+[01:39.26]Many of them hope to be sent to Europe.
+[01:43.28]Ahmad was one of them.
+[01:46.31]But he says immigration officers attacked him in Rome and returned him to Brazil.
+[01:53.78]He says he woke up on a plane, guarded by four Italian police officers.
+[02:01.36]He said his hands and legs were in chains.
+[02:05.98]Refugees who arrive in Rio de Janeiro are often sent to the Sao Joao church.
+[02:14.68]It is led by Father Alex Coelho Sampaio.
+[02:19.91]Father Sampaio operates The House of Support for Refugees in buildings behind the church.
+[02:28.55]He says Brazil has, for many years,
+[02:32.92]accepted those who are being persecuted or are fleeing conflict.
+[02:38.01]"Brazil for many years has had an open-door policy
+[02:43.31]and that was true after the Second World War, for example," he said.
+[02:48.75]"And at the moment, in particular, regarding Syrian refugees,
+[02:53.53]we are receiving quite a lot."
+[02:56.35]Father Sampaio says at one time he was caring for so many Syrians
+[03:02.83]that the refugees had to sleep on mattresses on the floor.
+[03:07.87]With his help, some have gone to Europe and others have remained in Brazil.
+[03:14.66]He now cares for 35 refugees. Three are Syrians.
+[03:21.27]They include Ahmad Barour, from Damascus.
+[03:25.81]"I would love to go to Europe, Britain, a country that is democratic," Barour said.
+[03:33.08]"Everybody is equal -- no discrimination between black,
+[03:38.09]white, stranger, or native. They respect everybody."
+[03:43.16]For now, he is happy to stay in Brazil.
+[03:47.57]He says he earns enough money to buy food.
+[03:51.88]And he says he has friends.
+[03:54.73]But he says someday he hopes to visit his sister in Denmark.
+[04:00.66]I'm Pete Musto.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

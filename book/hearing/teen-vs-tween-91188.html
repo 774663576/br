@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Teen vs. Tween</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Teen vs. Tween" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/teen-vs-tween.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Teen vs. Tween</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/teen-vs-tween.mp3" id="mp3"></a>
+<a href="ohio-museum-shows-history-of-television-technology-91187.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">14 July 2023</span><br/>
+<p>Hi there. This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "teen" and "tween."</p>
+<p><strong>Question:</strong></p>
+<p>Hello VOA Learning English,</p><div class="contentImage"><img alt="Ask a Teacher: Teen vs. Tween" src="https://files.21voa.com/gdb/01000000-c0a8-0242-b925-08db821da151_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Teen vs. Tween</span></div>
+<p>I am Abdirohim from Somalia. Could you kindly explain and further explore the differences and usage between these two words: "tweens" and "teens?''</p>
+<p>Thanks,</p>
+<p>Abdirohim</p>
+<p><strong>Answer: </strong></p>
+<p>Thanks for you for this interesting question, Abdirohim! Both words refer to very young people.</p>
+<p>There are major differences in the ages of these two groups. Let's look not only at the meanings of these two words but also how they were made. Let's start with "teen."</p>
+<p><strong>Teen</strong></p>
+<p>The word "teen" is a noun that means a young person from ages thirteen to nineteen. We get this word from the ending of the numbers, like thirteen, fourteen, fifteen, and so on.</p>
+<p><em>Many teens enjoy hanging out with their friends. </em></p>
+<p><em>When he was a teen, he loved the Beatles music.</em></p>
+<p>
+We combine "teen" with "age" to make "teenage," an adjective that describes someone who is in their teens.</p>
+<p><em>The movie "Mean Girls" is about a group of teenage girls in high school.</em></p>
+<p>We can also add an "-er" ending to "teenage" to make another noun with the same meaning as "teen."</p>
+<p><em>Some teenagers like to go against their parents.</em></p>
+<p>Now, let's move on to "tween."</p>
+<p><strong>Tween</strong></p>
+<p>The word "tween" is a <strong>blend</strong> of the two words "teen" and "between."</p>
+<p>It is a special blend word since it combines not only the spellings of the two words but the meanings as well. The word is used to describe the age group between a child and a teenager. The earliest age for "tweens" is eight or nine years old, and the oldest age goes up to twelve.</p>
+<p><em>Many tweens go to a middle school after completing <strong>elementary </strong>and before going to high school. </em></p>
+<p><em>Maria looks after tweens who are not old enough to be by themselves. </em></p>
+<p>We also call this group of young people "preteens," with the prefix "pre" to mean "before."</p>
+<p>A fun fact about the history of "tween" is that it may have come from JRR Tolkien who wrote <em>The Lord of the Ring</em> books. Some say he came up with "tween" to describe an in-between age for his <strong>characters</strong> called "hobbits."</p>
+<p>Please let us know if these explanations and examples have helped you, Abdirohim.</p>
+<p>Do you know any other blend words in English or have a question about them? You can send these and other questions you have about American English to our email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_____________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>blend</strong> – <em>n. a word made by combining parts of two words</em></p>
+<p><strong>elementary</strong> – <em>adj. </em>relating to or teaching the basic subjects of education</p>
+<p><strong>character </strong><em>–n. </em>a person who appears in a story, for example in a book or television show</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

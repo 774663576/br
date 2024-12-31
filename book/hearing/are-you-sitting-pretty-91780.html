@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Are You 'Sitting Pretty'?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Are You 'Sitting Pretty'?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/are-you-sitting-pretty.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Are You 'Sitting Pretty'?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/are-you-sitting-pretty.mp3" id="mp3"></a>
+<a href="/static/lrc/are-you-sitting-pretty.lrc" id="lrc"></a>
+<a href="strikes-end-but-when-will-hollywood-get-back-to-normal-91777.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">11 November 2023</span><br/>
+<p>And now, <em>Words and Their Stories</em>, from VOA Learning English.</p>
+<p>Today we talk about being in a good place. And we begin with an old American pop singer.</p>
+<p>When Karen Carpenter sings about being "<u>on top of the world</u>," she describes feeling happy, thankful, and being in a great place.</p><div class="contentImage"><img alt="FILE - In its window seat aboard the Royal Albatross, a luxury tall ship, this cat is definitely sitting pretty, August 13, 2023. (Photo by Roslan RAHMAN / AFP) " src="https://files.21voa.com/gdb/4570b7b6-3b96-474d-8e6c-6c1dfee751a5_cx0_cy8_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - In its window seat aboard the Royal Albatross, a luxury tall ship, this cat is definitely sitting pretty, August 13, 2023. (Photo by Roslan RAHMAN / AFP) </span></div>
+<p>If you are <u>on top of the world</u>, you are in a great position. You are happy with life.</p>
+<p>When things are really <u>going your way</u>, you can also say you are <u>sitting pretty</u>. <u>Sitting pretty</u>, means you are in a very favorable situation. You love your job. You have a nice home. And your finances are in good order.</p>
+<p>This expression can also mean you are in a good, safe, and secure position. You don't need to worry about the future.</p>
+<p>It can also mean you are in an <strong>advantageous</strong> position. For example, when a friend of mine bought property, she found herself in a price war with another buyer. However, she was <u>sitting pretty</u> for several reasons: She offered a big <strong>down payment</strong> and a <strong>flexible</strong> move-in date.</p>
+<p>This example shows how <u>sitting pretty</u> can have a little difference in meaning than other similar expressions. It can suggest that you are in a good situation, especially when others are not.</p>
+<p>As we said, we have other expressions that mean about the same thing as being <u>on top the world</u> and <u>sitting pretty</u>. If you are in a great situation and have a favorable position, you can also say you <u>have it made</u>. You are <u>ahead of the game</u>. You are <u>going places</u>.</p>
+<p>If you feel great about your life and just feel great in general, you might say you are <u>on cloud nine</u>. The origin of this cloud expression comes from the field of agriculture. The <em>Farmer's Almanac</em> explains that scientists wanted to make recording cloud observations easier. So, they rated clouds zero to nine. Zero represented the lowest clouds and nine the highest clouds.</p>
+<p>Word experts say this is where the expression <u>to be on cloud nine</u> probably comes from. If you're <u>on cloud nine</u> you'll be very high up which may also describe your feelings.</p>
+<p>And that's all the time we have for this <em>Words and Their Stories.</em></p>
+<p>When it comes to your English studies, we hope all of you are <u>on cloud nine.</u></p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>advantageous</strong> – <em>adj</em>. helpful; favorable</p>
+<p><strong>down payment</strong> – <em>n</em>. a part of the full price paid at the time of purchase or delivery with the balance to be paid later</p>
+<p><strong>flexible</strong> – <em>adj</em>. readily changed or changing</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Are You 'Sitting Pretty'?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:07.84]And now, Words and Their Stories,
+[00:11.04]from VOA Learning English.
+[00:18.88]Today we talk about being in a good place.
+[00:23.24]And we begin with an old American pop singer.
+[00:28.84]When Karen Carpenter sings
+[00:30.84]about being "on top of the world,"
+[00:33.36]she describes feeling happy,
+[00:36.48]thankful, and being in a great place.
+[00:41.24]If you are on top of the world,
+[00:43.60]you are in a great position.
+[00:46.20]You are happy with life.
+[00:49.08]When things are really going your way,
+[00:51.76]you can also say you are sitting pretty.
+[00:55.68]Sitting pretty, means you are in
+[00:58.44]a very favorable situation.
+[01:02.00]You love your job.
+[01:03.76]You have a nice home.
+[01:05.56]And your finances are in good order.
+[01:09.68]This expression can also mean
+[01:12.12]you are in a good, safe, and secure position.
+[01:15.80]You don't need to worry about the future.
+[01:19.96]It can also mean you are in
+[01:22.36]an advantageous position.
+[01:25.12]For example, when a friend of mine bought property,
+[01:28.84]she found herself in a price war with another buyer.
+[01:34.48]However, she was sitting pretty for several reasons:
+[01:38.72]She offered a big down payment
+[01:41.72]and a flexible move-in date.
+[01:45.60]This example shows how sitting pretty
+[01:48.20]can have a little difference in meaning
+[01:50.76]than other similar expressions.
+[01:53.68]It can suggest that you are in a good situation,
+[01:58.28]especially when others are not.
+[02:02.16]As we said, we have other expressions
+[02:04.92]that mean about the same thing
+[02:06.96]as being on top the world and sitting pretty.
+[02:12.08]If you are in a great situation
+[02:14.68]and have a favorable position,
+[02:17.32]you can also say you have it made.
+[02:20.48]You are ahead of the game.
+[02:23.24]You are going places.
+[02:26.88]If you feel great about your life
+[02:29.32]and just feel great in general,
+[02:31.36]you might say you are on cloud nine.
+[02:35.88]The origin of this cloud expression
+[02:38.60]comes from the field of agriculture.
+[02:42.16]The Farmer's Almanac explains
+[02:44.76]that scientists wanted to make
+[02:47.32]recording cloud observations easier.
+[02:50.88]So, they rated clouds zero to nine.
+[02:54.96]Zero represented the lowest clouds
+[02:58.92]and nine the highest clouds.
+[03:03.08]Word experts say this is where the expression
+[03:06.32]to be on cloud nine probably comes from.
+[03:10.64]If you're on cloud nine
+[03:12.76]you'll be very high up
+[03:14.56]which may also describe your feelings.
+[03:19.44]And that's all the time we have
+[03:21.36]for this Words and Their Stories.
+[03:23.76]When it comes to your English studies,
+[03:26.44]we hope all of you are on cloud nine.
+[03:30.12]Until next time ... I'm Anna Matteo.
+[03:34.20]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

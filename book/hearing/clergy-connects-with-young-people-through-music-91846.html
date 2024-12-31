@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Clergy Connects with Young People through Music</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Clergy Connects with Young People through Music" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/clergy-connects-with-young-people-through-music.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Clergy Connects with Young People through Music</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/clergy-connects-with-young-people-through-music.mp3" id="mp3"></a>
+<a href="/static/lrc/clergy-connects-with-young-people-through-music.lrc" id="lrc"></a>
+<a href="ukrainians-in-israel-face-war-conditions-again-91841.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">25 November 2023</span><br/>
+<p>Guilherme Peixoto, a religious official in northern Portugal, has been busy this month. He celebrated religious services, watched over remembrances for the dead, and prepared electronic music for his next international DJ performance.</p>
+<p>DJ, short for disc jockey, is a person who plays recorded music on the radio or at a gathering.</p>
+<p>For this 49-year-old Catholic <strong>priest</strong>, music has become an important way to reach people at a time when religion is becoming less popular — especially among young people.</p><div class="contentImage"><img alt="FILE - Roman Catholic priest Guilherme Peixoto, on video screen, plays techno music to help pilgrims wake up at Parque Tejo in Lisbon on Aug. 6, 2023, where Pope Francis will preside over a mass celebrating the 37th World Youth Day later in the day. (AP Photo/Ana Brigida)" src="https://files.21voa.com/gdb/ad2cd7f0-9c2e-49d8-8642-0617f8c9dd4d_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Roman Catholic priest Guilherme Peixoto, on video screen, plays techno music to help pilgrims wake up at Parque Tejo in Lisbon on Aug. 6, 2023, where Pope Francis will preside over a mass celebrating the 37th World Youth Day later in the day. (AP Photo/Ana Brigida)</span></div>
+<p>"With electronic music, I can take some message, I can be where young people are," Peixoto said recently. "They can think, ‘If it's possible for a priest to be DJ, it's possible for me to like music, and festivals, and be Christian.'"</p>
+<p>Peixoto became more well known when the organizers of World Youth Day in Lisbon asked him to "wake up the <strong>pilgrims</strong>" at 7 a.m. before Pope Francis' open-air Mass in August.</p>
+<p><strong>Past </strong></p>
+<p>When Peixoto was first sent to the village of Laúndos in the mid-2000s, the area needed money to pay for work done on the main church. But local people were tired of normal activities such as bake sales and door-knocking campaigns to raise money. So Peixoto called on the youth music groups to start <strong>karaoke</strong> events for support.</p>
+<p>Within a few years, debts were paid off, church repairs were completed, and Peixoto was taking professional DJ classes</p>
+<p>"In the beginning it was strange, but now it's the norm. They understood the priest is also a person," said Tania Campos, who was born and raised in Laúndos.</p>
+<p>Food and drink sales, as well as other <strong>donations</strong>, all go back to the church, which is readying for a big building project: a new center for youth activities.</p>
+<p>"This is why I'm happy to be here," said Andreia Flores, who belongs to Peixoto's second parish in the nearby village of Amorim. "<strong>Faith </strong>is to make others happy."</p>
+<p>For Peixoto, DJing has become an important way to spread religious messages.</p>
+<p>"I'm making these messages arrive where the church is not," he said of performances such as one at a recent Halloween festival with some 30,000 people. There, he re-mixed electronic dance beats with words from Pope Francis' statements about protecting the environment.</p>
+<p>Peixoto added with a laugh, "It's not so much — two-three sentences from the Pope — but if I wasn't there, it's no sentence. It's like a small seed, and the Holy Spirit will do his work."</p>
+<p>In fact, it was another document from Pope Francis, telling religious officials to go find "the lost sheep," that pushed Peixoto to work harder on his music skills. The hope was that music could become a way to reach those who might never step inside a church.</p>
+<p><strong>The future </strong></p>
+<p>In Portugal, about half of young people say they have no religion. Most participate less in services, have less confidence in the Church, and pray less than older generations, says a recent study by the Catholic Portuguese University in Braga.</p>
+<p>Peixoto plans to continue to develop his DJ skills to bring a Christian message to people who might have never heard of Jesus — while remaining committed to all regular church activities.</p>
+<p>"It's very important to me to not only be the priest DJ, but be the <strong>shepherd </strong>of the community," Peixoto said recently. "The world is not so closed to Jesus. But you need to speak the language."</p>
+<p>I'm John Russell.</p>
+<p><em>Giovanna Dell'Orto reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>____________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>priest</strong> <em>– n.</em> a person who has the authority to lead or perform ceremonies in some religions and especially in some Christian religions</p>
+<p><strong>pilgrim </strong>–<em> n.</em> someone who travels to a holy place</p>
+<p><strong>karaoke </strong><em>– n.</em> a form of entertainment in which people sing the words to the songs they choose</p>
+<p><strong>donation </strong><em>– n.</em> something (such as money or food) that you give in order to help an organization</p>
+<p><strong>faith</strong> <em>– n.</em> strong religious feelings or beliefs</p>
+<p><strong>shepherd </strong>–<em> n.</em> a person who takes care of sheep — sometimes used figuratively</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Clergy Connects with Young People through Music]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Guilherme Peixoto,
+[00:02.24]a religious official in northern Portugal,
+[00:05.72]has been busy this month.
+[00:08.00]He celebrated religious services,
+[00:11.00]watched over remembrances for the dead,
+[00:14.48]and prepared electronic music
+[00:17.16]for his next international DJ performance.
+[00:21.12]DJ, short for disc jockey,
+[00:24.96]is a person who plays recorded music
+[00:27.96]on the radio or at a gathering.
+[00:31.32]For this 49-year-old Catholic priest,
+[00:34.92]music has become an important way to reach people
+[00:39.16]at a time when religion is becoming less popular
+[00:43.20]— especially among young people.
+[00:45.76]"With electronic music, I can take some message,
+[00:50.16]I can be where young people are," Peixoto said recently.
+[00:54.72]"They can think, ‘If it's possible for a priest to be DJ,
+[01:00.04]it's possible for me to like music,
+[01:02.68]and festivals, and be Christian.'"
+[01:06.72]Peixoto became more well known
+[01:09.20]when the organizers of World Youth Day in Lisbon
+[01:13.64]asked him to "wake up the pilgrims" at 7 a.m.
+[01:18.16]before Pope Francis' open-air Mass in August.
+[01:23.04]When Peixoto was first sent to the village
+[01:26.32]of Laúndos in the mid-2000s,
+[01:29.56]the area needed money to pay
+[01:32.12]for work done on the main church.
+[01:34.96]But local people were tired of normal activities
+[01:39.24]such as bake sales and door-knocking campaigns to raise money.
+[01:44.60]So Peixoto called on the youth music groups
+[01:48.36]to start karaoke events for support.
+[01:51.64]Within a few years, debts were paid off,
+[01:55.44]church repairs were completed,
+[01:57.80]and Peixoto was taking professional DJ classes.
+[02:01.80]"In the beginning it was strange, but now it's the norm.
+[02:06.36]They understood the priest is also a person,"
+[02:09.88]said Tania Campos,
+[02:11.72]who was born and raised in Laúndos.
+[02:14.88]Food and drink sales, as well as other donations,
+[02:19.52]all go back to the church,
+[02:21.84]which is readying for a big building project:
+[02:25.40]a new center for youth activities.
+[02:28.32]"This is why I'm happy to be here," said Andreia Flores,
+[02:33.56]who belongs to Peixoto's second parish
+[02:36.36]in the nearby village of Amorim.
+[02:39.52]"Faith is to make others happy."
+[02:42.76]For Peixoto, DJing has become an important way
+[02:46.88]to spread religious messages.
+[02:49.76]"I'm making these messages arrive
+[02:52.24]where the church is not," he said of performances
+[02:55.88]such as one at a recent Halloween festival
+[02:59.36]with some 30,000 people.
+[03:01.88]There, he re-mixed electronic dance beats
+[03:06.12]with words from Pope Francis' statements
+[03:09.20]about protecting the environment.
+[03:11.96]Peixoto added with a laugh, "It's not so much
+[03:16.00]— two-three sentences from the Pope
+[03:18.68]— but if I wasn't there, it's no sentence.
+[03:21.80]It's like a small seed,
+[03:23.96]and the Holy Spirit will do his work."
+[03:27.60]In fact, it was another document from Pope Francis,
+[03:32.00]telling religious officials to go find "the lost sheep,"
+[03:36.04]that pushed Peixoto to work harder on his music skills.
+[03:41.28]The hope was that music
+[03:43.28]could become a way to reach those
+[03:45.76]who might never step inside a church.
+[03:49.16]In Portugal, about half of young people
+[03:53.00]say they have no religion.
+[03:55.32]Most participate less in services,
+[03:58.96]have less confidence in the Church,
+[04:01.68]and pray less than older generations,
+[04:05.08]says a recent study
+[04:07.12]by the Catholic Portuguese University in Braga.
+[04:11.84]Peixoto plans to continue to develop his DJ skills
+[04:16.32]to bring a Christian message
+[04:18.80]to people who might have never heard of Jesus
+[04:22.44]— while remaining committed
+[04:24.12]to all regular church activities.
+[04:26.96]"It's very important to me to not only be the priest DJ,
+[04:32.52]but be the shepherd of the community," Peixoto said recently.
+[04:37.52]"The world is not so closed to Jesus.
+[04:41.28]But you need to speak the language."
+[04:45.20]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

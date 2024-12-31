@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 尼泊尔夏尔巴人27次珠峰登顶创下纪录</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 尼泊尔夏尔巴人27次珠峰登顶创下纪录" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/nepali-sherpa-climbs-mount-everest-for-a-record-27th-time.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>尼泊尔夏尔巴人27次珠峰登顶创下纪录</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/nepali-sherpa-climbs-mount-everest-for-a-record-27th-time.mp3" id="mp3"></a>
+<a href="/static/lrc/nepali-sherpa-climbs-mount-everest-for-a-record-27th-time.lrc" id="lrc"></a>
+<a href="nepali-sherpa-climbs-mount-everest-for-a-record-th-time-90892.html" id="CnPage" target="_blank"></a>
+<a href="many-missing-after-strong-storm-hits-western-myanmar-bangladesh-90887.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>A Nepalese Sherpa mountain guide has regained the record for most climbs of Mount Everest. On Wednesday morning, 53-year-old Kami Rita Sherpa reached the top of the 8,849-meter mountain for the 27th time. He was guiding a climber along the traditional southern route.<br/>
+一名尼泊尔夏尔巴登山向导重新夺得攀登珠峰的纪录。周三早上，53岁的凯米·瑞塔·夏尔帕第27次登上了这座高度8849米山峰的顶部。 他正在传统的南线给一名登山者领路。</p>
+<p>Three days earlier, another Nepali, Pasang Dawa Sherpa, reached the top for the 26th time, tying Kami Rita's earlier record, set last year.<br/>
+3天前，另一名尼泊尔人帕桑·达瓦·夏尔帕第26次登顶，追平了凯米·瑞塔去年创下的纪录。</p>
+<p>The season's first groups of climbers reached the summit over the weekend. Earlier, Sherpa guides had placed ropes and made paths for the hundreds of people expected during the climbing season.<br/>
+本季的第一组登山者在周末登顶。之前，夏尔巴向导已经放置了绳索，并为这个攀登季预期的数百人开辟道路。</p>
+<p>May is the best month to climb Everest because of weather conditions. But there are only a few time periods during the month with good weather on the highest part of the mountain. After May, the summer rainy season arrives, bringing snow and clouds. This makes the mountain too dangerous to climb.<br/>
+由于天气条件，5月是攀登珠峰的最佳月份。但是这个月只有几个时间段，山顶的天气良好。5月之后，夏季雨季到来，带来雪和云。这使得珠峰过于危险无法攀登。</p>
+<p>Climbers generally reach Everest base camp in April. They spend the next weeks training to prepare their bodies for the extreme altitude.<br/>
+登山者通常在4月到达珠峰大本营。他们在接下来的几周时间进行训练，让身体适应高海拔。</p>
+<p>To prepare the path up the mountain, Sherpas begin placing, or "fixing" ropes, at the end of March or early April.<br/>
+为了准备好登顶的道路，夏尔巴人在3月底或4月初开始固定绳索。</p>
+<p>By the first or second week of May, climbers are usually trying to reach the top. However, this year's climbing was delayed after an accident with three Sherpas. They fell into a deep hole in the ice in the dangerous Khumbu Ice Fall area above base camp. Rescuers have not been able to find them.<br/>
+到5月的第一周或第二周，登山者通常会试图登顶。但是今年在3名夏尔巴人发生事故后，攀登被推迟。这3人掉进了大本营上方危险的昆布冰瀑的一个深洞里。 救援人员没能找到他们。</p>
+<p>This year the Nepali government issued a record 478 permits to climb Everest. Critics say this is dangerous. They argue that some of the climbers are inexperienced and that the path near the mountain's top can become too crowded. This can slow movement and increase the risk of dying.<br/>
+今年，尼泊尔政府发布了创纪录的478个允许攀登珠峰的许可证。批评家称这很危险。他们认为，一些登山者没有经验，并且山顶附近的道路可能变得太拥挤了。这会减慢运动并增加死亡的风险。</p>
+<p>In 2019, nine exhausted climbers died on Everest after lines built up of climbers going up and down.<br/>
+2019年，在路上挤满了上上下下的登山者之后，有9名疲惫的登山者在珠峰死亡。</p>
+<p>Kami Rita first climbed Everest in 1994 and has been making the trip nearly every year since then.<br/>
+凯米·瑞塔于1994年首次攀登珠峰，此后几乎每年都在走这条路线。</p>
+<p>Sherpas are known for their climbing skills, and many make a living guiding foreign clients up Everest and other mountains.<br/>
+夏尔巴人以攀登技巧而闻名，许多人以指导外国客户登上珠峰和其它山脉谋生。</p>
+<p>Garrett Madison of the U.S.-based Madison Mountaineering company has climbed Everest 12 times. Five of these climbs were with Kami Rita. Speaking by telephone from Everest base camp, he told Reuters it was "very inspirational to see a local climber continue pushing the limits on Mount Everest."<br/>
+美国麦迪逊登山公司的加勒特·麦迪逊（Garrett Madison）已经12次攀登珠峰。其中5次是跟凯米·瑞塔一起。他在珠峰大本营通过电话告诉路透社，“看到当地登山者继续推动攀登珠峰的极限非常鼓舞人心。”</p>
+<p>Kami Rita's father was among the first Sherpa guides. In addition to Everest, Rita has climbed several other peaks that are among the world's highest, including K-2, Cho-Oyu, Manaslu and Lhotse.<br/>
+凯米·瑞塔的父亲是第一批夏尔巴向导之一。除了珠峰，瑞塔还攀登了其它几座全球最高的山峰，包括乔戈里峰、卓奥友峰、马纳斯鲁峰和洛子峰。</p>
+<p>I'm Andrew Smith.<br/>
+我是安德鲁·史密斯。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Nepali Sherpa Climbs Mount Everest for a Record 27th Time]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.16]A Nepalese Sherpa mountain guide
+[00:04.40]has regained the record for most climbs of Mount Everest.
+[00:12.12]On Wednesday morning, 53-year-old Kami Rita Sherpa
+[00:18.00]reached the top of the 8,849-meter mountain for the 27th time.
+[00:28.76]He was guiding a climber along the traditional southern route.
+[00:35.08]Three days earlier, another Nepali, Pasang Dawa Sherpa,
+[00:40.80]reached the top for the 26th time,
+[00:44.52]tying Kami Rita's earlier record, set last year.
+[00:50.68]The season's first groups of climbers
+[00:54.56]reached the summit over the weekend.
+[00:58.36]Earlier, Sherpa guides had placed ropes and made paths
+[01:04.68]for the hundreds of people expected during the climbing season.
+[01:11.00]May is the best month to climb Everest because of weather conditions.
+[01:18.16]But there are only a few time periods
+[01:21.88]during the month with good weather on the highest part of the mountain.
+[01:28.16]After May, the summer rainy season arrives,
+[01:32.36]bringing snow and clouds.
+[01:36.60]This makes the mountain too dangerous to climb.
+[01:42.16]Climbers generally reach Everest base camp in April.
+[01:47.92]They spend the next weeks training
+[01:51.16]to prepare their bodies for the extreme altitude.
+[01:56.84]To prepare the path up the mountain,
+[01:59.60]Sherpas begin placing, or "fixing" ropes,
+[02:04.28]at the end of March or early April.
+[02:07.36]By the first or second week of May,
+[02:11.32]climbers are usually trying to reach the top.
+[02:16.88]However, this year's climbing was delayed
+[02:21.08]after an accident with three Sherpas.
+[02:26.52]They fell into a deep hole in the ice
+[02:30.00]in the dangerous Khumbu Ice Fall area above base camp.
+[02:37.04]Rescuers have not been able to find them.
+[02:42.04]This year the Nepali government issued
+[02:45.00]a record 478 permits to climb Everest.
+[02:50.64]Critics say this is dangerous.
+[02:55.16]They argue that some of the climbers are inexperienced
+[02:59.96]and that the path near the mountain's top can become too crowded.
+[03:07.24]This can slow movement and increase the risk of dying.
+[03:14.20]In 2019, nine exhausted climbers
+[03:18.92]died on Everest after lines built up of climbers going up and down.
+[03:26.24]Kami Rita first climbed Everest in 1994
+[03:31.04]and has been making the trip nearly every year since then.
+[03:37.64]Sherpas are known for their climbing skills,
+[03:41.24]and many make a living guiding foreign clients
+[03:45.36]up Everest and other mountains.
+[03:49.96]Garrett Madison of the U.S.-based Madison Mountaineering company
+[03:55.96]has climbed Everest 12 times.
+[04:00.24]Five of these climbs were with Kami Rita.
+[04:03.96]Speaking by telephone from Everest base camp,
+[04:08.32]he told Reuters it was "very inspirational
+[04:13.20]to see a local climber continue pushing the limits on Mount Everest."
+[04:20.40]Kami Rita's father was among the first Sherpa guides.
+[04:27.60]In addition to Everest, Rita has climbed several other peaks
+[04:33.00]that are among the world's highest,
+[04:36.08]including K-2, Cho-Oyu, Manaslu and Lhotse.
+[04:44.04]I'm Andrew Smith. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

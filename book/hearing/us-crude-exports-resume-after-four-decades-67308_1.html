@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国四十年后重启原油出口</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美国四十年后重启原油出口" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201601/us-crude-exports-resume-after-four-decades.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国四十年后重启原油出口</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201601/us-crude-exports-resume-after-four-decades.mp3" id="mp3"></a>
+<a href="/static/lrc/us-crude-exports-resume-after-four-decades.lrc" id="lrc"></a>
+<a href="us-crude-exports-resume-after-four-decades-67308.html" id="CnPage" target="_blank"></a>
+<a href="voa-study-questions-67297.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The U.S. made its first export of crude oil in four decades last Thursday.<br/>美国上周四做出了该国近四十年来第一次原油出口。</p>
+<p>The exports were banned in the mid-1970s. That ban was lifted a few weeks ago.<br/>上世纪70年代中期美国禁止了原油出口。该禁令于数周前被取消。</p>
+<p>The Arab Oil Embargo began in 1973. Arab nations who produce oil dramatically limited their shipments to the U.S. This was done to punish the U.S. over its military support for Israel.<br/>阿拉伯石油禁运始于1973年。生产石油的阿拉伯国家大幅度限制了对美国的出货量。这是为了惩罚美国对以色列的军事援助。</p>
+<p>The Arab cartel later expanded the embargo to other countries, and oil prices soared worldwide. By 1974, the price of oil had risen from $3 per barrel to nearly $12 globally. U.S. prices were much higher.<br/>阿拉伯卡特尔组织随后将禁运扩大到其它国家，全球油价飙升。到了1974年，全球范围内石油价格已经从3美元每桶涨到将近12美元。美国油价比这还高。</p>
+<p>The embargo had many short- and long-term effects on global politics and the global economy.<br/>禁运对全球政治和经济产生了许多短期和长期的影响。</p>
+<p>The skyrocketing prices led to a drop in demand for oil. Countries looked to alternative energy sources such as natural gas, nuclear energy and coal, says the Gale Encyclopedia of U.S. Economic History.<br/>价格暴涨导致了石油需求下降。盖尔美国经济史百科全书表示，各国将目光转向了天然气、核能、煤炭等替代能源。</p>
+<p>Oil-producing nations outside the Middle East increased their production and relied more on domestic supply.<br/>中东以外的石油生产国增加了产量，并更多依靠国内供应。</p>
+<p>"The embargo set U.S. energy policy on a path that still guides us 40 years later," wrote Robert Rapier in an article on the website Oilprice.com. That website reports oil and energy news.<br/>罗伯特·雷比尔（Robert Rapier）在Oilprice.com网站上的一篇文章中写道，“禁运让美国能源政策在四十年后还未改变。”该网站从事石油和能源消息的报道。</p>
+<p>Every president since Nixon has made energy security a top priority, he continued. But each president has dealt with the problem in different ways.<br/>他还说，自尼克松以来的每位总统都将能源安全视为重中之重。但是每位总统处理这一问题的方式不同。</p>
+<p>President Barack Obama has looked for energy sources apart from imported oil, such as natural gas from wells in the U.S.<br/>奥巴马总统曾经从进口石油之外寻找能源，例如来自美国油井的天然气。</p>
+<p>In addition, the U.S. produces 9.2 million barrels of oil per day, close to 10 percent of the world oil supply, according to the U.S. Energy Information Agency.<br/>此外根据美国能源信息署的说法，美国每天生产920万桶石油，接近全球石油供应的10%。</p>
+<p>Oil prices are near an 11-year low, reports the Oil Price Information Service. U.S. oil now sells for around $37 per barrel. The Organization of Petroleum Exporting Countries (OPEC) is currently selling its oil for about $32 per barrel.<br/>油价资讯服务公司报道称，石油目前接近11年来新低。美国石油目前售价在37美元每桶。石油输出国组织目前以大约32美元每桶的价格销售其石油。</p>
+<p>OPEC is an organization of 12 oil-exporting nations. Its members are Algeria, Angola, Ecuador, Iran, Iraq, Kuwait, Libya, Nigeria, Qatar, Saudi Arabia, United Arab Emirates and Venezuela.<br/>石油输出国组织包括12家石油出口国，它们分别是阿尔及利亚、安哥拉、厄瓜多尔、伊朗、伊拉克、科威特、利比亚、尼日利亚、卡塔尔、沙特阿拉伯、阿联酋和委内瑞拉。</p>
+<p>I'm Mary Gotschall.<br/>我是玛丽·歌切尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.64]The U.S. made its first export of crude oil in four decades last Thursday.
+[00:08.24]The exports were banned in the mid-1970s.
+[00:12.56]That ban was lifted a few weeks ago.
+[00:16.72]The Arab Oil Embargo began in 1973.
+[00:21.52]Arab nations who produce oil dramatically limited their shipments to the U.S.
+[00:28.48]This was done to punish the U.S. over its military support for Israel.
+[00:34.96]The Arab cartel later expanded the embargo to other countries,
+[00:40.28]and oil prices soared worldwide.
+[00:44.28]By 1974, the price of oil had risen from $3 per barrel to nearly $12 globally.
+[00:54.44]U.S. prices were much higher.
+[00:56.95]The embargo had many short- and long-term effects on global politics and the global economy.
+[01:05.96]The skyrocketing prices led to a drop in demand for oil.
+[01:11.52]Countries looked to alternative energy sources
+[01:15.12]such as natural gas, nuclear energy and coal,
+[01:20.04]says the Gale Encyclopedia of U.S. Economic History.
+[01:25.16]Oil-producing nations outside the Middle East increased their production and relied more on domestic supply.
+[01:34.28]"The embargo set U.S. energy policy on a path that still guides us 40 years later,"
+[01:42.60]wrote Robert Rapier in an article on the website Oilprice.com.
+[01:48.88]That website reports oil and energy news.
+[01:53.12]Every president since Nixon has made energy security a top priority, he continued.
+[02:00.96]But each president has dealt with the problem in different ways.
+[02:06.24]President Barack Obama has looked for energy sources apart from imported oil,
+[02:12.92]such as natural gas from wells in the U.S.
+[02:18.20]In addition, the U.S. produces 9.2 million barrels of oil per day,
+[02:25.80]close to 10 percent of the world oil supply,
+[02:30.08]according to the U.S. Energy Information Agency.
+[02:34.32]Oil prices are near an 11-year low,
+[02:38.12]reports the Oil Price Information Service.
+[02:41.72]U.S. oil now sells for around $37 per barrel.
+[02:48.36]The Organization of Petroleum Exporting Countries (OPEC)
+[02:52.40]is currently selling its oil for about $32 per barrel.
+[02:58.04]OPEC is an organization of 12 oil-exporting nations.
+[03:03.12]Its members are Algeria, Angola, Ecuador, Iran, Iraq, Kuwait,
+[03:12.92]Libya, Nigeria, Qatar, Saudi Arabia, United Arab Emirates and Venezuela.
+[03:23.00]I'm Mary Gotschall.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

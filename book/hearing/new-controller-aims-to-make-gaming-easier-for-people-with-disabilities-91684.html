@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Controller Aims to Make Gaming Easier for People with Disabilities</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, New Controller Aims to Make Gaming Easier for People with Disabilities" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202310/new-controller-aims-to-make-gaming-easier-for-people-with-disabilities.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Controller Aims to Make Gaming Easier for People with Disabilities</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202310/new-controller-aims-to-make-gaming-easier-for-people-with-disabilities.mp3" id="mp3"></a>
+<a href="/static/lrc/new-controller-aims-to-make-gaming-easier-for-people-with-disabilities.lrc" id="lrc"></a>
+<a href="researchers-build-first-tool-to-discover-supernovas-91682.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">23 October 2023</span><br/>
+<p>Paul Lane uses his mouth and face to push buttons and guide his virtual car on <em>Gran Turismo</em>,<em> </em>a game on the PlayStation 5. It is how he has been playing for the past 23 years, after a car accident left him unable to use his fingers.</p>
+<p>Playing video games has long been difficult for people with disabilities. The controllers for the PlayStation, Xbox or Nintendo can be very hard, or even impossible, to use for people with limited mobility.</p>
+<p>As part of the gaming industry's efforts to fix the problem, Sony has worked with Lane and others to develop the new Access controller for PlayStation. Other companies, including Microsoft, and even people with <strong>3-D</strong> printers have also created their own <strong>accessible</strong> controllers.</p><div class="contentImage"><img alt="Paul Amadeus Lane uses a Sony Access controller to play a PlayStation 5 video game at Sony Interactive Entertainment headquarters Thursday, Sept. 28, 2023, in San Mateo, Calif. (AP Photo/Godofredo A. V&lt;I&gt;&amp;#&lt;/I&gt;225;squez)" src="https://files.21voa.com/gdb/01000000-0aff-0242-7973-08dbd0afeb44_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Paul Amadeus Lane uses a Sony Access controller to play a PlayStation 5 video game at Sony Interactive Entertainment headquarters Thursday, Sept. 28, 2023, in San Mateo, Calif. (AP Photo/Godofredo A. V<i>&amp;#</i>225;squez)</span></div>
+<p>"I was big into sports before my injury," said Cesar Flores. The 30-year-old has used a wheelchair since a car accident eight years ago. He also worked with Sony on the controller. "And when I play video games, it reminds me that I'm still human. It reminds me that I'm still one of the guys."</p>
+<p>Putting the traditional controller aside, Lane, 52, switches to the Access. It is round and <strong>customizable</strong> and can rest on a table or wheelchair <strong>tray.</strong> It can be customized in many ways, depending on what the user needs. That includes switching buttons and thumbsticks, programming special controls and combining two controllers to be used as one. As Lane plays <em>Gran Turismo</em>, he uses the back of his hand on the controller.</p>
+<p>Lane and other gamers have been working with Sony since 2018 to help design the Access controller. The idea was to create something that could work for many people with different needs, rather than centering on any particular disability.</p>
+<p>Mark Barlet is the founder and executive director of the nonprofit AbleGamers. He said his organization has been supporting gamers with disabilities for nearly 20 years. AbleGamers also helped both Sony and Microsoft with their controllers.</p>
+<p>"The last five years I have seen the game accessibility movement go from (independent) <strong>studios</strong> working on some features to triple-A games being able to be played by people who identify as blind," he said. "In five years, it's been <strong>breathtaking</strong>."</p>
+<p>PlayStation's Access controller will go on sale worldwide on December 6 and cost $90 in the U.S.</p>
+<p>Alvin Daniel of PlayStation said the device was designed with three ideas in mind to make it usable for as many players as possible.</p>
+<p>First, the player does not have to hold the controller to use it. It can lay flat on a table or wheelchair tray, for example. It was important for it to fit on a wheelchair tray, since once something falls off the tray, it might be impossible for the player to pick it up without help. It also had to be <strong>durable</strong> for this same reason.</p>
+<p>Second, it is much easier to press the buttons than on the common controller. It comes with buttons in different sizes and shapes so people can experiment with shaping it the way it works best for them. The third is the thumbsticks, which can also be changed depending on what works for the person using it.</p>
+<p>After his accident, Lane stopped gaming for seven years. For someone who began playing video games as a young child, "it was a <strong>void</strong>" in his life, he said.</p>
+<p>"Having gaming and having an <strong>opportunity</strong> to game at a very high level, to be able to do it again, it is like a reunion, (like losing) a close <strong>companion</strong> and being able to reunite with that person again."</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Dan Novak adapted this story for VOA Learning English based on reporting by The Associated Press. </em></p>
+<p class="CxSpMiddle"><em>______________________________________________</em></p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>3-D </strong><em>— n. </em>made in a way that causes an image to appear to be three-dimensional</p>
+<p class="CxSpMiddle"><strong>accessible </strong><em>— adj. </em>able to be used or obtained</p>
+<p class="CxSpMiddle"><strong>customize </strong><em>— v. </em>to change in order to fit the needs or requirements of a person, business, etc.</p>
+<p class="CxSpMiddle"><strong>tray </strong><em>— n. </em> a thin, flat, and often rectangular piece of plastic, metal, wood, etc., that has a low rim and that is used for carrying things</p>
+<p class="CxSpMiddle"><strong>studio </strong><em>— n. </em>the building or room where an artist works</p>
+<p class="CxSpMiddle"><strong>breathtaking </strong><em>— adj. </em>very great or surprising</p>
+<p class="CxSpMiddle"><strong>durable </strong><em>— adj. </em>staying strong and in good condition over a long period of time</p>
+<p class="CxSpMiddle"><strong>void </strong><em>— n. </em>a large empty space</p>
+<p class="CxSpMiddle"><strong>opportunity </strong><em>— n. </em>an amount of time or a situation in which something can be done</p>
+<p class="CxSpMiddle"><strong>companion </strong><em>— n. </em>a person or animal you spend time with or enjoy being with</p>
+<p class="CxSpMiddle"> </p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New Controller Aims to Make Gaming Easier for People with Disabilities]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:02.04]Paul Lane uses his mouth and face
+[00:05.28]to push buttons and guide his virtual car
+[00:08.36]on Gran Turismo, a game on the PlayStation 5.
+[00:13.32]It is how he has been playing for the past 23 years,
+[00:17.40]after a car accident left him unable to use his fingers.
+[00:23.16]Playing video games has long been difficult
+[00:25.64]for people with disabilities.
+[00:28.72]The controllers for the PlayStation, Xbox or Nintendo
+[00:33.04]can be very hard, or even impossible,
+[00:36.24]to use for people with limited mobility.
+[00:40.08]As part of the gaming industry's efforts to fix the problem,
+[00:43.84]Sony has worked with Lane and others
+[00:47.16]to develop the new Access controller for PlayStation.
+[00:51.92]Other companies, including Microsoft,
+[00:54.48]and even people with 3-D printers
+[00:57.28]have also created their own accessible controllers.
+[01:01.92]"I was big into sports before my injury," said Cesar Flores.
+[01:07.60]The 30-year-old has used a wheelchair
+[01:10.04]since a car accident eight years ago.
+[01:13.28]He also worked with Sony on the controller.
+[01:16.48]"And when I play video games,
+[01:18.68]it reminds me that I'm still human.
+[01:21.04]It reminds me that I'm still one of the guys."
+[01:25.24]Putting the traditional controller aside,
+[01:27.92]Lane, 52, switches to the Access.
+[01:31.72]It is round and customizable
+[01:34.60]and can rest on a table or wheelchair tray.
+[01:38.80]It can be customized in many ways,
+[01:41.24]depending on what the user needs.
+[01:44.68]That includes switching buttons and thumbsticks,
+[01:48.20]programming special controls
+[01:51.04]and combining two controllers to be used as one.
+[01:55.76]As Lane plays Gran Turismo,
+[01:58.28]he uses the back of his hand on the controller.
+[02:02.28]Lane and other gamers
+[02:03.72]have been working with Sony since 2018
+[02:06.52]to help design the Access controller.
+[02:10.00]The idea was to create something
+[02:12.04]that could work for many people with different needs,
+[02:15.24]rather than centering on any particular disability.
+[02:20.04]Mark Barlet is the founder and executive director
+[02:23.36]of the nonprofit AbleGamers.
+[02:27.08]He said his organization
+[02:29.00]has been supporting gamers with disabilities
+[02:31.76]for nearly 20 years.
+[02:34.64]AbleGamers also helped both
+[02:36.76]Sony and Microsoft with their controllers.
+[02:40.56]"The last five years
+[02:41.92]I have seen the game accessibility movement
+[02:44.68]go from (independent) studios working on some features
+[02:48.76]to triple-A games being able to be played
+[02:51.88]by people who identify as blind," he said.
+[02:56.48]"In five years, it's been breathtaking."
+[02:59.60]PlayStation's Access controller
+[03:02.80]will go on sale worldwide on December 6
+[03:06.04]and cost $90 in the U.S.
+[03:10.04]Alvin Daniel of PlayStation
+[03:12.20]said the device was designed with three ideas in mind
+[03:16.04]to make it usable for as many players as possible.
+[03:20.64]First, the player does not have to hold the controller to use it.
+[03:25.64]It can lay flat on a table or wheelchair tray, for example.
+[03:30.48]It was important for it to fit on a wheelchair tray,
+[03:33.76]since once something falls off the tray,
+[03:36.36]it might be impossible
+[03:37.96]for the player to pick it up without help.
+[03:41.40]It also had to be durable for this same reason.
+[03:45.24]Second, it is much easier to press the buttons
+[03:48.60]than on the common controller.
+[03:51.44]It comes with buttons in different sizes and shapes
+[03:54.64]so people can experiment
+[03:56.32]with shaping it the way it works best for them.
+[04:00.00]The third is the thumbsticks, which can also be changed
+[04:03.96]depending on what works for the person using it.
+[04:07.76]After his accident, Lane stopped gaming for seven years.
+[04:12.40]For someone who began playing video games as a young child,
+[04:16.08]"it was a void" in his life, he said.
+[04:19.84]"Having gaming and having an opportunity
+[04:22.40]to game at a very high level,
+[04:24.60]to be able to do it again, it is like a reunion,
+[04:28.88](like losing) a close companion
+[04:30.64]and being able to reunite with that person again."
+[04:34.72]I'm Jill Robbins. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

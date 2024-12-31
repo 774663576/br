@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Summarize</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, How to Summarize" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/how-to-summarize.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Summarize</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/how-to-summarize.mp3" id="mp3"></a>
+<a href="south-korea-s-kimchi-threatened-by-warming-weather-92956.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">06 September, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Yutaro in Japan about how to summarize what you hear or read.</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/ffd46340-4068-4ddf-9eee-82598b433e09_w268_r1.png"/></div>
+<p>I enjoy listening to VOA Learning English every night. I have a question about "summarizing." How do I summarize a speech, paper, or other <strong>text</strong> I've listened to? I have to improve my summary skills to pass the upcoming entrance exam.</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing to us, Yutaro. I'm happy to answer this question.</p>
+<p>“Summarize” is the verb form of the word “summary.” A summary briefly explains the main ideas of a piece of writing or a speech but does not include all the details. It is often only one or two <strong>paragraphs</strong> long.</p>
+<p>Being able to summarize is a useful skill to have, not only for passing exams but also for working in professions. To summarize well, you need to separate the main ideas from less important details.</p>
+<p>You can use the following method to do this:</p>
+<p>First, read or listen to the material one time without writing any notes. This will help your mind <strong>focus </strong>on understanding the ideas. Next, read or listen again. But this time, write notes and be sure to identify the main ideas along with some details. You can mark main ideas by putting a star next to them, underlining them, or using a colored pen to mark them.</p>
+<p>Next, take a separate piece of paper and try to write only the main ideas. Then, decide which details are necessary to include so that the main ideas are clear. Remember, in a summary, you cannot include every detail. This is sometimes difficult to do at first and requires careful thought.</p>
+<p>If you can, let a few hours pass between the time when you first take notes and the time when you write the main ideas. This is a good way to see if you can remember and organize the main points in your mind.</p>
+<p>You can also try the following method to prepare a summary:</p>
+<p>Try to explain the material as if you were talking about it with your friends or family. In those situations, you would naturally just focus on the main ideas and possibly add a few important details. <strong>Practice</strong> explaining the ideas by speaking out loud. When you speak, you will probably discover the things you can explain clearly and those things you need to <strong>check</strong> again.</p>
+<p>Finally, you can write the summary, keeping in mind the way you presented the main ideas when you spoke about them.</p>
+<p>For our readers and listeners, do you have a question about American English? Send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>text</strong><strong> </strong>–n. written words; a piece of writing</p>
+<p><strong>paragraph </strong><em>–n. </em>usually a group of sentences that explain one idea</p>
+<p><strong>focus</strong> <em>–v.</em> to direct your attention on something</p>
+<p><strong>practice</strong> –v. to do a task several times in an effort to learn it and to do it better</p>
+<p><strong>check</strong><strong> </strong>–v. to look or read over something you have already done to make sure it is correct</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

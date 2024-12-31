@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中美贸易协定引来不同回应</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 中美贸易协定引来不同回应" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201705/mixed-reaction-us-china-trade-deal.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中美贸易协定引来不同回应</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201705/mixed-reaction-us-china-trade-deal.mp3" id="mp3"></a>
+<a href="/static/lrc/mixed-reaction-us-china-trade-deal.lrc" id="lrc"></a>
+<a href="mixed-reaction-us-china-trade-deal-75231.html" id="CnPage" target="_blank"></a>
+<a href="basquiat-painting-sells-for--million-75212.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Business leaders are reacting to a new trade deal between the United States and China.<br/>商界领袖对中美两国之间新的贸易协定作出了回应。
+<p>The deal includes initial agreements on agricultural trade, financial services, investment and energy.<br/>这项协议包括农业贸易、金融服务、投资和能源方面的初步协议。</p>
+<p>Some observers say the agreements do little to help the United States, and fail to deal with issues concerning the Chinese market. But others say the trade deal is evidence of progress.<br/>一些观察人士认为，这些协议对美国的帮助很小，没有解决涉及中国市场的问题。但是其他人表示，该贸易协定是取得进展的明证。</p>
+<p>The deal is part of the 100-day plan announced after a meeting between the Chinese and U.S. presidents last month. The plan opens up Chinese markets, mostly for finance industries and industries based on commodities, such as mining and agriculture.<br/>该协议是中美两国领导人上个月会晤后公布的百日计划的一部分。该计划为金融行业以及矿产和农业等大宗商品行业开辟了中国市场，</p>
+<p>Robert Atkinson is president of the Information Technology and Innovation Foundation. He said the trade deal fails to identify issues facing advanced industries that are important to America's economic future.<br/>罗伯特·阿特金森（Robert Atkinson）是信息技术和创新基金会会长。他说，该贸易协定未能解决对美国经济未来至关重要的优势产业所面临的问题。</p>
+<p>In a statement, Atkinson said the deal gives China the ability "to use its massive foreign reserves to buy up American companies in advanced industries." He urged the administration of President Donald Trump to stop thinking mainly about the U.S. trade deficit with China.<br/>阿特金森在一份声明中表示，该协议使中国有能力“利用其庞大的外汇储备来收购优势行业的美国公司。”他督促川普政府不要考虑美国对华贸易逆差。</p>
+<p>Atkinson wants U.S. officials instead to consider two-way trade and demand real changes in Chinese policies toward American knowledge- and technology-based industries.<br/>阿特金森希望美国官员相反要考虑到双边贸易，并要求中国对美国以知识和技术为基础的行业做出政策上的真正改变。</p>
+<p><strong>The deal means nothing<br/>协议意义不大</strong></p>
+<p>Derek Scissors is with the American Enterprise Institute, a public policy research group in Washington. He said the trade deal means almost nothing since China has promised to reduce restrictions on American businesses before.<br/>史剑道(Derek Scissors)就职于美国企业研究所，这是华盛顿一家公共政策研究组织。他说，该贸易协定几乎没有任何意义，因为中国以前就承诺过减少对美国企业的限制。</p>
+<p>Scissors does not think that the U.S. trade deficit with China will be reduced this year. He urged the Trump administration to pressure China to reduce the amount of money it gives to state-owned companies. He noted if that happens, foreign businesses will be able to capture a larger share of the Chinese market.<br/>史剑道认为今年美国对华贸易逆差不会减少。他督促川普政府向中国施加压力使其减少对国有企业的补贴。他指出，如果实现这点，外国企业就能在中国市场占据很大份额。</p>
+<p>Scissors also wants the administration to work on reducing Chinese involvement in the theft of intellectual property. He said the United States should threaten action against China as a way to cut down on the illegal copying of American products.<br/>史剑道还希望美国政府努力减少中国人卷入盗窃知识产权。他说，美国应该要威胁对中国采取行动，以此减少中国非法山寨美国产品。”</p>
+<p><strong>Small steps forward...<br/>小进展</strong></p>
+<p>Christopher Balding is a professor with the Peking University HSBC Business School. He said the deal between China and the United States is not a major agreement. But he thinks it is a step forward for the Trump administration.<br/>克里斯托弗·鲍尔丁（Christopher Balding）是北京大学汇丰商学院的教授。他说中美两国之间的这项协定不算是一项重大协定。但他认为这是川普政府向前迈出的一步。</p>
+<p>Balding told VOA that China has used what others have called a "delay-and-diversion" policy and has waited for years to do what it promises to do. He said some of the promises were made when China became a member of the World Trade Organization in 2000.<br/>鲍尔丁对美国之音表示，中国采用了他人所谓的“拖延和转移”政策，等待多年才实现其承诺。他说，有些承诺是中国2000年加入世贸组织时许下的。</p>
+<p>Balding said the United States does not have the ability to force China to open its market. But he said China appears to react to the messages written by Trump on the social networking website Twitter. He said those Tweets may give the U.S. some untraditional influence in pushing China.<br/>鲍尔丁表示，美国无力迫使中国开放市场。但他表示，中国似乎对川普在社交媒体网站推特上发表的信息作了回应。他说，这些推文可能在推动中国方面赋予了美国一些非传统的影响力。</p>
+<p>C.Y. Huang is a partner at the financial services company FCC Partners. He said it is important for American companies to demand full access to the Chinese market. But he warned that the Americans are being beaten by their fast-growing Chinese competitors.<br/>黄齐元(C.Y. Huang)是蓝涛亚洲 (FCC Partners) 金融服务公司的合伙人。他说，要求全面进入中国市场对美国企业来说非常重要。但他警告说，美国人开始受到发展迅速的中国对手的打击。</p>
+<p>"China is no longer afraid of opening up its market and competition from the United States," Huang told VOA.<br/>黄齐元对美国之音表示，“中国不再害怕开放市场同美国竞争。”</p>
+<p><strong>Deal might reduce U.S. trade deficit with China<br/>协议可能会减少美国对华逆差</strong></p>
+<p>The Trump administration says the trade deal is a major one. U.S. Commerce Secretary Wilbur Ross said China will open its market to American beef exports by the middle of July. At the same time, the United States will begin to permit imports of cooked poultry from China.<br/>川普政府表示，该贸易协定是一项重大成就。美国商务部长威尔伯·罗斯（Wilbur Ross）表示，中国将在7月中旬向美国牛肉出口商开放市场。与此同时，美国将允许从中国进口熟禽类制品。</p>
+<p>China will also let American-owned companies working in the country provide credit rating and electronic payment services. China's UnionPay already controls much of the electronic payment services in the country.<br/>中国还将允许美资企业在该国提供信用评级和电子支付业务。中国银联已经控制了该国大部分电子支付业务。</p>
+<p>Ross said the trade deal will help to reduce the U.S. trade deficit with China -- which reached $347 billion last year.<br/>罗斯表示，该贸易协定将有助于减少美国对华逆差，去年这一数字达到了3470亿美元。</p>
+<p>"This is more than has been done in the whole history of U.S.-China relations on trade," Ross told reporters at the White House. He said the deal will go a long way to reducing the trade deficit.<br/>罗斯在白宫对记者表示，“这比整个中美贸易关系历史期间所做的还要多。”他说，该协议对减少贸易逆差将会大有帮助。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·里特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Mixed Reaction to US-China Trade Deal]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]Business leaders are reacting to a new trade deal
+[00:03.92]between the United States and China.
+[00:07.40]The deal includes initial agreements on agricultural trade,
+[00:13.12]financial services, investment and energy.
+[00:18.68]Some observers say the agreements do little to help the United States,
+[00:24.48]and fail to deal with issues concerning the Chinese market.
+[00:30.12]But others say the trade deal is evidence of progress.
+[00:35.15]The deal is part of the 100-day plan announced
+[00:40.48]after a meeting between the Chinese and U.S. presidents last month.
+[00:47.12]The plan opens up Chinese markets, mostly for finance industries
+[00:53.68]and industries based on commodities, such as mining and agriculture.
+[01:01.60]Robert Atkinson is president of the Information Technology and Innovation Foundation.
+[01:09.24]He said the trade deal fails to identify issues  facing advanced industries
+[01:16.56]that are important to America's economic future.
+[01:21.44]In a statement, Atkinson said the deal gives China the ability
+[01:27.64]"to use its massive foreign reserves
+[01:30.84]to buy up American companies in advanced industries."
+[01:36.60]He urged the administration of President Donald Trump
+[01:40.96]to stop thinking mainly about the U.S. trade deficit with China.
+[01:46.56]Atkinson wants U.S. officials instead to consider two-way trade
+[01:53.44]and demand real changes in Chinese policies
+[01:58.08]toward American knowledge- and technology-based industries.
+[02:04.08]The deal means nothing Derek Scissors is with the American Enterprise Institute,
+[02:09.24]a public policy research group in Washington.
+[02:14.28]He said the trade deal means almost nothing since China has promised
+[02:20.20]to reduce restrictions on American businesses before.
+[02:26.56]Scissors does not think that the U.S. trade deficit with China will be reduced this year.
+[02:34.16]He urged the Trump administration to pressure China
+[02:38.44]to reduce the amount of money it gives to state-owned companies.
+[02:44.48]He noted if that happens, foreign businesses
+[02:48.80]will be able to capture a larger share of the Chinese market.
+[02:55.32]Scissors also wants the administration to work on reducing Chinese involvement
+[03:01.96]in the theft of intellectual property.
+[03:06.32]He said the United States should threaten action against China
+[03:11.60]as a way to cut down on the illegal copying of American products.
+[03:18.71]Christopher Balding is a professor with the Peking University HSBC Business School.
+[03:28.08]He said the deal between China and the United States is not a major agreement.
+[03:35.60]But he thinks it is a step forward for the Trump administration.
+[03:41.92]Balding told VOA that China
+[03:45.44]has used what others have called a "delay-and-diversion" policy
+[03:51.44]and has waited for years to do what it promises to do.
+[03:57.24]He said some of the promises were made
+[04:00.39]when China became a member of the World Trade Organization in 2000.
+[04:08.08]Balding said the United States does not have the ability to force China to open its market.
+[04:16.92]But he said China appears to react to the messages written by Trump
+[04:23.16]on the social networking website Twitter.
+[04:26.68]He said those Tweets may give the U.S. some untraditional influence in pushing China.
+[04:37.52]C.Y. Huang is a partner at the financial services company FCC Partners.
+[04:46.08]He said it is important for American companies
+[04:50.12]to demand full access to the Chinese market.
+[04:55.00]But he warned that the Americans are being beaten
+[04:58.68]by their fast-growing Chinese competitors.
+[05:03.64]"China is no longer afraid of opening up its market
+[05:07.88]and competition from the United States," Huang told VOA.
+[05:14.60]The Trump administration says the trade deal is a major one.
+[05:20.28]U.S. Commerce Secretary Wilbur Ross said China will open its market
+[05:26.36]to American beef exports by the middle of July.
+[05:31.48]At the same time, the United States
+[05:34.40]will begin to permit imports of cooked poultry from China.
+[05:40.80]China will also let American-owned companies working in the country
+[05:46.16]provide credit rating and electronic payment services.
+[05:52.00]China's UnionPay already controls much of the electronic payment services in the country.
+[06:00.72]Ross said the trade deal will help to reduce the U.S. trade deficit with China
+[06:07.44]-- which reached $347 billion last year.
+[06:13.72]"This is more than has been done in the whole history of U.S.-China relations on trade,"
+[06:20.84]Ross told reporters at the White House.
+[06:24.68]He said the deal will go a long way to reducing the trade deficit.
+[06:32.80]I'm Mario Ritter. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

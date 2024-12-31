@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Straight from the Horse's Mouth'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Straight from the Horse's Mouth'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/straight-from-the-horse-s-mouth.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Straight from the Horse's Mouth'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/straight-from-the-horse-s-mouth.mp3" id="mp3"></a>
+<a href="/static/lrc/straight-from-the-horse-s-mouth.lrc" id="lrc"></a>
+<a href="taylor-swift-headed-to-this-law-school-in-theory-91743.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">04 November 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On today's show, we will be talking about an animal that is as impressive and beautiful as it is useful -- the horse.</p><div class="contentImage"><img alt="FILE - Abraham Gajon, 31, a paramedic, pets a horse named Linda during a therapy session at Miguel Hidalgo's center in Mexico City, Mexico on October 16, 2020. (REUTERS/Edgard Garrido)" src="https://files.21voa.com/gdb/093e0000-0a00-0242-30ba-08da05d73da4_cx0_cy7_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Abraham Gajon, 31, a paramedic, pets a horse named "Linda" during a therapy session at Miguel Hidalgo's center in Mexico City, Mexico on October 16, 2020. (REUTERS/Edgard Garrido)</span></div>
+<p>Today's expression is <u>straight from the horse's mouth</u>. "Straight from the horse's mouth" is about the way we get information and — with this expression — that means directly.</p>
+<p>When we hear something from the source, we can say we heard it <u>first-hand</u>. It is coming from a <strong>primary </strong>source.</p>
+<p>When we use this expression, we can drop the word "straight" if necessary. So, if you hear something <u>from the horse's mouth</u>, you hear it from the person who has direct personal knowledge of the information.</p>
+<p>For example, a co-worker of mine, Andrew, likes to play the piano. But don't take my word for it, let's hear it straight from the horse's mouth.</p>
+<p><em>ANDREW: I really like to play the piano. </em></p>
+<p>Thanks, Andrew!</p>
+<p>The opposite of this expression would be <u>through the </u><a class="wsw__a" href="file:///C:/Users/mritter/Downloads/The%20opposite%20of%20this%20expression%20would%20be%20through%20the%20grapevine.%20That%20is%20a%20very%20indirect%20way%20to%20get%20information">grapevine</a>. That is a very indirect way to get information.</p>
+<p>Now, let's talk about <strong>origin</strong>. Experts are not sure how this expression started. However, there are two common explanations.</p>
+<p>One traditional explanation is about buying horses. Before buying a horse, a possible buyer would look into the horse's mouth. This is because you can tell a bit about a horse's health and age from its <strong>gums</strong> and teeth.</p>
+<p>Another explanation involves horse racing. At the horse races, people talk about which horses will win and which ones will lose. The most valuable opinions are from the people who know the horses the best – the riders and trainers. Since you can't ask the horse, these people are the next best thing. "Straight from the horse's mouth" suggests the most knowledgeable source of information.</p>
+<p>So, this expression can also mean from a <strong>reliable </strong>source. The information is coming from a trustworthy person. It may even be the <strong>definitive </strong>source, meaning the best authority.</p>
+<p>Now, let's hear the expression used in another example:</p>
+<p><em>A: Hey, guess what? Stella is moving to Toronto! She's so excited.</em></p>
+<p><em>B: Are you sure? She just bought a house a year ago. </em></p>
+<p><em>A: She told me herself last night over dinner. </em></p>
+<p><em>B: I just can't believe it. I mean, she also just got a <strong>promotion</strong> and a raise at her job. It doesn't make sense. </em></p>
+<p><em>A: Well, whether it makes sense or not, that's what she told me. </em></p>
+<p><em>B: Maybe you misheard her. </em></p>
+<p><em>A: I didn't. I heard it straight from the horse's mouth – Stella's!</em></p>
+<p>And that's all the time we have on the show today.</p>
+<p>If anyone asks you where you learned this expression, tell them you heard it <u>straight from the horse's mouth</u> – from VOA Learning English.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this story for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2"> </h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>primary </strong><em>–adj.</em> happening or coming first</p>
+<p><strong>gums </strong><em>–n. (pl.)</em> the tissue inside the mouth around the teeth<strong> </strong></p>
+<p><strong>reliable </strong>–adj. able to be trusted to provide what is needed; dependable</p>
+<p><strong>definitive </strong>–adj. considered final or settled as the best or most correct</p>
+<p><strong>promotion</strong><strong> </strong>–n. an increase in job rank or position</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'Straight from the Horse's Mouth']
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]And now, Words and Their Stories,
+[00:12.12]from VOA Learning English.
+[00:15.12]On today's show, we will be talking about an animal
+[00:23.92]that is as impressive and beautiful
+[00:26.96]as it is useful -- the horse.
+[00:32.08]Today's expression is straight from the horse's mouth.
+[00:37.48]"Straight from the horse's mouth"
+[00:39.64]is about the way we get information
+[00:42.60]and — with this expression — that means directly.
+[00:49.00]When we hear something from the source,
+[00:51.92]we can say we heard it first-hand.
+[00:54.40]It is coming from a primary source.
+[00:58.92]When we use this expression,
+[01:01.12]we can drop the word "straight" if necessary.
+[01:04.16]So, if you hear something from the horse's mouth,
+[01:07.76]you hear it from the person
+[01:10.04]who has direct personal knowledge of the information.
+[01:15.52]For example, a co-worker of mine,
+[01:18.32]Andrew, likes to play the piano.
+[01:21.72]But don't take my word for it,
+[01:24.08]let's hear it straight from the horse's mouth.
+[01:27.08]ANDREW: I really like to play the piano.
+[01:30.32]Thanks, Andrew!
+[01:32.08]The opposite of this expression
+[01:34.36]would be through the grapevine.
+[01:36.60]That is a very indirect way to get information.
+[01:42.84]Now, let's talk about origin.
+[01:45.20]Experts are not sure how this expression started.
+[01:49.60]However, there are two common explanations.
+[01:53.60]One traditional explanation
+[01:56.24]is about buying horses.
+[01:59.48]Before buying a horse,
+[02:01.32]a possible buyer would look into the horse's mouth.
+[02:05.60]This is because you can tell a bit about a horse's health
+[02:09.84]and age from its gums and teeth.
+[02:14.80]Another explanation involves horse racing.
+[02:19.68]At the horse races, people talk about
+[02:23.12]which horses will win and which ones will lose.
+[02:27.80]The most valuable opinions
+[02:30.04]are from the people who know the horses the best –
+[02:33.12]the riders and trainers.
+[02:37.20]Since you can't ask the horse,
+[02:39.56]these people are the next best thing.
+[02:43.64]"Straight from the horse's mouth" suggests
+[02:46.60]the most knowledgeable source of information.
+[02:51.20]So, this expression can also mean
+[02:54.04]from a reliable source.
+[02:57.16]The information is coming from a trustworthy person.
+[03:01.92]It may even be the definitive source,
+[03:06.20]meaning the best authority.
+[03:10.36]Now, let's hear the expression used in another example:
+[03:15.32]A: Hey, guess what?
+[03:16.60]Stella is moving to Toronto!
+[03:18.56]She's so excited.
+[03:20.44]B: Are you sure?
+[03:22.36]She just bought a house a year ago.
+[03:25.04]A: She told me herself last night over dinner.
+[03:27.88]B: I just can't believe it.
+[03:30.64]I mean, she also just got a promotion
+[03:34.24]and a raise at her job.
+[03:36.40]It doesn't make sense.
+[03:38.76]A: Well, whether it makes sense or not,
+[03:40.88]that's what she told me.
+[03:42.68]B: Maybe you misheard her.
+[03:45.20]A: I didn't.
+[03:46.28]I heard it straight from the horse's mouth – Stella's!
+[03:51.52]And that's all the time we have on the show today.
+[03:55.04]If anyone asks you where you learned this expression,
+[03:59.04]tell them you heard it straight from the horse's mouth –
+[04:02.68]from VOA Learning English.
+[04:06.44]Until next time, I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

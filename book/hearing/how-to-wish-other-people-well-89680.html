@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How to Wish Other People Well</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, How to Wish Other People Well" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202209/how-to-wish-other-people-well.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How to Wish Other People Well</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202209/how-to-wish-other-people-well.mp3" id="mp3"></a>
+<a href="states-prepare-to-reduce-use-of-colorado-river-water-89679.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By VOA</span><br/>
+<span class="datetime">22 September 2022</span><br/>
+<p>Imagine you are talking with a friend. Your friend tells you that they have a big test or job<strong> interview </strong>coming up soon.</p>
+<p>This is a good time to wish them well.</p>
+<p>But how do you do so?</p><div class="contentImage"><img alt="Everyday Grammar " src="https://files.21voa.com/gdb/0c520000-0aff-0242-1112-08da9c9340f0_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar </span></div>
+<p>In today's Everyday Grammar, we will explore a point of connection between grammar and social situations. You will learn about polite, friendly ways to wish other people well.</p>
+<p><strong>Fragments and complete sentences </strong></p>
+<p>Social situations provide us with many opportunities to wish other people well. Such wishes can come in the form of sentence fragments or complete sentences.</p>
+<p>A fragment is a kind of incomplete sentence – it is missing part of the subject or <strong>predicate</strong>. In general, fragments that wish other people well are missing the subject.</p>
+<p>Consider, for example, the phrase "good luck," which is used to say that you hope someone will succeed. "Good luck" has an adjective, "good," and a noun, "luck."</p>
+<p>But the phrase suggests something more. It suggests something like this: "I wish you good luck."</p>
+<p>In any case, English speakers often just use the phrase, "good luck."</p>
+<p>So, a person might say, "Good luck with the job interview!"</p>
+<p>In terms of complete sentences, English speakers often use verbs such as "wish" or "hope."</p>
+<p>For example, a person might say,</p>
+<p>"I hope the job interview goes well tomorrow."</p>
+<p>Or</p>
+<p>"I wish you the best of luck with your job interview tomorrow."</p>
+<p>English speakers also use complete sentences to make affirmations - expressions of belief in the other person. Such expressions of belief are another way to show kindness or warmth to other people.</p>
+<p>For example, a person might say,</p>
+<p>"I know you are worried about the test tomorrow, but I also know you are up for the <strong>challenge</strong>!"</p>
+<p>Or</p>
+<p>"The job interview will be easy. You're going to do great!"</p>
+<p><strong>Activity </strong></p>
+<p>Let's take some time to work with these ideas. Take these three words and form a statement that wishes someone well.</p>
+<p>Luck test next week</p>
+<p>Pause the audio while you are considering your answer.</p>
+<p>Here is one possible answer:</p>
+<p>"Good luck with the test next week!"</p>
+<p>Now imagine that a friend tells you the following:</p>
+<p>"I'm so worried about tomorrow - I have a difficult math test!"</p>
+<p>What should you say to your friend? Pause the audio to consider your answer.</p>
+<p>Here is one possible answer:</p>
+<p>"I hope the test goes well tomorrow!"</p>
+<p>Here are two other possible answers that involve affirmations:</p>
+<p>"I know you are worried about the test, but I also know that you will do great!"</p>
+<p>"The test will be easy for you. I know you will do great!"</p>
+<p><strong>Closing thoughts </strong></p>
+<p>Today's report explored a few ways to wish others well. There are, of course, many other ways to do so.</p>
+<p>The next time you are listening to English speakers, pay careful attention to how they wish each other well. Make careful note of the kinds of words and phrases that they use. Ask yourself if they are using fragments or complete sentences.</p>
+<p>We will close this report with some wishes for our listeners.</p>
+<p>Good luck with your English studies. We wish you continued success on the path of language learning.</p>
+<p>I'm John Russell.</p>
+<p>________________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in The Story </strong></h2>
+<p><strong>interview<em> </em></strong><em>– n.</em> a formal meeting with someone who is being considered for a job or other position</p>
+<p><strong>predicate </strong><em>– n. grammar: </em>the part of a sentence that expresses what is said about the subject</p>
+<p><strong>challenge</strong><em>—n.</em> a difficult task or problem</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

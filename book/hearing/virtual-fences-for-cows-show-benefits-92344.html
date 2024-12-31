@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Virtual Fences for Cows Show Benefits</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Virtual Fences for Cows Show Benefits" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/virtual-fences-for-cows-show-benefits.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Virtual Fences for Cows Show Benefits</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/virtual-fences-for-cows-show-benefits.mp3" id="mp3"></a>
+<a href="locals-worried-about-olympic-surfing-event-in-tahiti-92334.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">06 March 2024</span><br/>
+<p>In the American state of Florida, <strong>rancher</strong> Jim Strickland can see his cows at any time, day or night. To do this, all he needs is his phone.</p>
+<p>Strickland uses virtual fencing to watch and control the movements of his animals. The system, based on Global Positioning Satellite (GPS) technology, can help Strickland and researchers improve <strong>grazing</strong> lands, <strong>preserve</strong> wildlife and save time and labor for workers. It can also help improve animal health.</p>
+<p>Strickland has been using the system for about six months. He told VOA Learning English he has already seen many good results with the new technology.</p><div class="contentImage"><img alt="Cattle wear Vence GPS tracking collars connected to a virtual fence system. (Courtesy photo Merck &amp; Co., Inc.)" src="https://files.21voa.com/gdb/01000000-0aff-0242-e466-08dc3b075f76_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Cattle wear Vence GPS tracking collars connected to a virtual fence system. (Courtesy photo Merck &amp; Co., Inc.)</span></div>
+<p>"It has exceeded by far my expectations."</p>
+<p><strong>How it works</strong></p>
+<p>Virtual fencing uses radio signals to make an <strong>invisible</strong> fence. This means you cannot see the fence.</p>
+<p>This keeps animals within, or outside of, certain areas. The signals come from nearby mobile phone towers. The signals can also come from base stations that can be moved using a small truck.</p>
+<p>Each animal wears a <strong>collar</strong> around its neck. The collar has a radio signal receiver and a <strong>GPS</strong> device that shows the animal's location.</p>
+<p>Ranchers train livestock to connect a sound with a small electric shock. When an animal gets close to a virtual fence, its collar makes a warning sound. If the animal moves even closer to the fence, it receives a shock. In this way, livestock quickly learn to stay away from the fence.</p>
+<p>Ranchers can change the virtual fence boundaries quickly by using a phone App or computer. And livestock quickly learn the new boundaries.</p>
+<p>Strickland and his coworkers can use their phones even while on horseback to move cattle from one area to another. All they need to do is change the virtual fence lines.</p>
+<p>"And every 30 minutes, that line will move down; it will literally drive those cows down."</p>
+<p><strong>Benefits of virtual fencing </strong></p>
+<p>Physical fences take time, labor and money to build. It can be difficult to put them in areas such as rocky and hilly land, wet areas, or places with thick vegetation. Over time, fences need to be fixed or new ones need to be built.</p>
+<p>When hurricane Ian hit Florida last year, it destroyed four houses and 45 kilometers of physical fence on the land where Strickland works. But the cell towers for the virtual fence system kept working.</p>
+<p>Physical fences can also harm wild animals by making it difficult for them to move within and to areas they need for survival.</p>
+<p>The Nature Conservancy (TNC) is a U.S-based environmental non-profit organization. It has partnered with cattle ranches in the states of Kansas, New Mexico and Colorado to research the effects of virtual fencing.</p>
+<p>William Burnidge is Deputy Director of TNC's North America Regenerative Grazing Lands Strategy. He said that by changing fence boundaries, the systems prevent animals from eating too much vegetation within one area. This helps plants regenerate, or grow again.</p>
+<p>He added that virtual fences could help protect rare plants and areas near rivers and streams. They could also support conservation of wild animals, improve the health of animals and help ranch workers have a better quality of life.</p>
+<p>Strickland works with partners at Florida Conservation Group and the University of Florida. With virtual fences, they can carefully control grazing. This helps them research the effects of grazing patterns on the growth of young cows, birth rates, and even the effects on nesting birds.</p>
+<p>They also plan to research how grazing can affect the release of carbon dioxide gas into the atmosphere. In Florida and other places, fields are sometimes burned to prepare them for future grazing. The burning releases carbon. Virtual fences may help reduce burning by better controlling where and how long cattle graze.</p>
+<p>Both Strickland and Burnidge note that, unlike physical fences, livestock cannot not get injured by a virtual fence.</p>
+<p>The GPS collars also let ranchers watch for animals that may be having problems. For example, if the system shows that a cow has not moved for many hours, it may be sick or injured.</p>
+<p><strong>Other research and developing countries</strong></p>
+<p>In the northwestern state of Oregon, researchers from the U.S. Department of Agriculture and Oregon State University studied how virtual fencing can prevent cows from grazing on recently burned land. Cattle can easily damage burned areas and the young plants that grow there.</p>
+<p>The Oregon study showed that cows without virtual fence collars ate nearly 70 percent of the plants available to them in a burned area. However, cows with collars spent very little time in the burned area and ate less than three percent of the plants available to them.</p>
+<p><strong>Reducing costs</strong></p>
+<p>Although virtual fencing systems have benefits, they can be costly. A collar for just one animal can cost around $50 each year or more. And <strong>portable</strong> base stations cost $10,000 or more.</p>
+<p>Researchers are looking for ways to lower costs and bring the technology to developing countries.</p>
+<p>Last year, the Bezos Earth Fund awarded $9.9 million to Cornell University's College of Agriculture and Life Sciences to develop low-cost virtual fencing. The university plans to test new systems in Kenya, Mongolia, Argentina, Brazil and Colombia.</p>
+<p>But in some areas, virtual fencing may not be the best solution, Burnidge said. When Burnidge visited Kenya, he saw many workers who closely follow and take care of livestock. Virtual fences could cause some of these workers to lose their jobs.</p>
+<p><strong>Great interest in the new technology</strong></p>
+<p>Still, Burnidge said, many people want to learn more about the technology. "The amount of interest in the ranching community, I've never seen anything comparable," he said.</p>
+<p>And Strickland said they are already working on more ways virtual fencing can be used.</p>
+<p>"Now we're seeing so many things. Once you start down the road of new technology, then it starts expanding . . . It's like, what can we do next?" he said.</p>
+<p>I'm Andrew Smith. And I'm Anna Matteo.</p>
+<p><em>Andrew Smith wrote this story for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>rancher </strong><em>-n.</em> a person who owns or manages a large farm, especially one with animals such as cows, sheep, and goats</p>
+<p><strong>graze </strong><em>-v.</em> the eating of grass or other plants in fields by animals</p>
+<p><strong>preserve </strong><em>-v.</em> to keep something safe for future use</p>
+<p><strong>invisible </strong><em>-adj.</em> unable to be seen, not visible</p>
+<p><strong>collar </strong><em>-n.</em> a ring worn around the neck of an animal</p>
+<p><strong>GPS </strong><em>-n.</em> <em>(acronym </em><strong>Global Positioning Satellite</strong><em>) </em>a system for finding and tracking locations on earth using satellite technology</p>
+<p><strong>portable </strong><em>-adj.</em> able to be moved or carried from one place to another</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

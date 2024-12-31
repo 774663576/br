@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 谷歌在首尔开设东亚首个谷歌校园</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 谷歌在首尔开设东亚首个谷歌校园" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201505/se-econ-google-campus-seoul-14may15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>谷歌在首尔开设东亚首个谷歌校园</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201505/se-econ-google-campus-seoul-14may15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-google-campus-seoul-14may15.lrc" id="lrc"></a>
+<a href="google-opens-first-asian-campus-in-seoul-62896.html" id="CnPage" target="_blank"></a>
+<a href="free-trade-deal-fails-in-us-senate-vote-62826.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The American technology company Google recently set up its first campus in Asia. The campus opened last Friday in Seoul, South Korea. Google officials want the training center to support entrepreneurs who are starting up new Internet businesses. They hope this will lead to more Korean high technology programs in the world market. In return, the company wants more ties to the Korean market.<br/>美国科技公司谷歌最近在亚洲开设了该公司首个谷歌校园。该校园于上周五在韩国首尔市正式开放。谷歌官员希望该培训中心能够为开办新互联网企业的创业者提供支持。他们希望这能给世界市场带来更多的韩国高科技项目。作为回报，该公司希望更加同韩国市场建立更多联系。</p>
+<p>"Campus Seoul, A Google Space" is small compared to Google's headquarters in Mountain View, California. The company controls a large number of buildings and green spaces in what is known as Silicon Valley.<br/>“首尔谷歌校园”同加州山景城的谷歌总部相比起来很小。该公司在硅谷控制了大片的建筑和绿地。</p>
+<p>Google's new campus can be found in an office building in Seoul's Gangnam neighborhood. It will have 2,000 square meters of open office space for Korean Internet entrepreneurs to work.<br/>谷歌的新校园位于首尔市江南区的一座办公楼内。它能为韩国的互联网创业者提供2千平方米的开放式办公空间用于办公。</p>
+<p>Google's expectations for the campus, however, are much bigger than the relatively small space. The company wants to make it a place for new ideas in Asia.<br/>然而谷歌对该校园的期望去比这相对较小的办公室空间大得多。该公司希望它能成为亚洲新想法的诞生地。</p>
+<p>Mary Grove is director of Google for Entrepreneurs. She says that at Campus Seoul, Internet program developers will get support, mentoring, possible contacts, and help finding investors. She says the company is providing this supportive environment without cost. She thinks this will also help Google gain entry to the Korean market.<br/>玛丽·格罗夫（Mary Grove）是谷歌创业项目负责人。她说，在首尔校园，网络程序开发人员将获得支持、指导、可能的接触，以及帮助寻找投资者。她说该公司提供的这种支持环境不收取任何费用。她认为这也能帮助谷歌进入韩国市场。</p>
+<p>"Google benefits when start-ups succeed as well. We understand the more start-ups that are created, companies do come on line, use the Internet, use Google, use Google products. It benefits us as well."<br/>“当创业公司成功之际，谷歌也能从中受益。我们知道，诞生的创业公司越多，使用互联网，使用谷歌，使用谷歌产品的公司就会越多。我们也能从中受益。”</p>
+<p>South Korea is one of the few countries in the world where Google is not the top Internet search engine. The Korean company Naver has a larger market share.<br/>韩国是全球少数几个谷歌并非最大互联网搜索引擎的国家之一。韩国的Naver占据了较大的市场份额。</p>
+<p>Google operates similar centers in London and Tel Aviv, but this is the company's first campus in East Asia.<br/>谷歌在伦敦和特拉维夫也运营着类似的培训中心，但这是该公司在东亚的首个校园。</p>
+<p>Google says its London campus has helped startup companies created 18,000 new jobs and get over $110 million dollars in investments.<br/>谷歌表示，该公司旗下的伦敦校园已经帮助创业公司创造了1.8万个新的就业机会，并获得了超过1.1亿美元的投资。</p>
+<p>One of the Campus Seoul members is April Kim. She started an Internet-based translation service called Chatting Cat. She says she likes the workspace and conference areas.<br/>April Kim是谷歌首尔校园的学员之一。她开办了一种基于互联网，名为Chatting Cat的翻译服务。她说她喜欢这个工作场所和会议区。</p>
+<p>She adds that people at the campus can share information and concerns with others there, and they can provide motivation for each other.<br/>她补充说，校园入驻者可以同这里的其他人分享信息和兴趣点。他们也能给彼此提供动力。</p>
+<p>Google decided on Seoul because it has some of the fastest Internet speeds, and many talented, well-educated engineers. The city also has one of the highest percentages of smart phone users in the world.<br/>谷歌决定将校园设在首尔是因为这里有着最快的网速，并且有很多有才华、受过良好教育的工程师。该市智能手机用户的比例也是全球最高。</p>
+<p>Jung-min Lim is the director of Campus Seoul. He says the South Korean government has also made it easier to launch new businesses.<br/>Jung-min Lim是首尔校园的负责人。他说，韩国政府也已经降低了开办新公司的难度。</p>
+<p>He says a few years ago the government cancelled many rules for new businesses and provided policies supporting start-ups.<br/>他说，政府几年前取消了很多针对新公司的规定，并为创业公司提供了政策支持。</p>
+<p>South Korean President Park Geun-Hye attended the opening of Campus Seoul. In 2013, her administration provided $3 billion to assist new high-tech companies grow and compete around the world.<br/>韩国总统朴槿惠参加了首尔校园的揭幕式。2013年，她统治下的韩国政府拨了30亿美元用于帮助新型高科技公司成长和在全球竞争。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Google Opens First Asian Campus in Seoul]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]The American technology company Google
+[00:04.46]recently set up its first campus in Asia.
+[00:08.25]The campus opened last Friday in Seoul, South Korea.
+[00:13.04]Google officials want the training center
+[00:16.12]to support entrepreneurs
+[00:18.31]who are starting up new Internet businesses.
+[00:21.95]They hope this will lead to more Korean high technology programs
+[00:26.38]in the world market.
+[00:28.73]In return, the company wants more ties to the Korean market.
+[00:34.86]"Campus Seoul, A Google Space" is small
+[00:39.90]compared to Google's headquarters in Mountain View, California.
+[00:44.78]The company controls a large number of buildings
+[00:48.67]and green spaces in what is known as Silicon Valley.
+[00:53.70]Google's new campus can be found
+[00:56.64]in an office building in Seoul's Gangnam neighborhood.
+[01:00.88]It will have 2,000 square meters of open office space
+[01:05.72]where Korean Internet entrepreneurs can work.
+[01:10.00]Google's expectations for the campus,
+[01:13.51]however, are much bigger than the relatively small space.
+[01:17.79]The company wants to make it a place for new ideas in Asia.
+[01:23.73]Mary Grove is director of Google for Entrepreneurs.
+[01:30.06]She says that at Campus Seoul,
+[01:33.51]Internet program developers will get support,
+[01:36.79]mentoring, possible contacts, and help finding investors.
+[01:43.08]She says the company is providing this supportive environment without cost.
+[01:49.81]She thinks this will also help Google gain entry to the Korean market.
+[01:56.34]"Google benefits when start-ups succeed as well.
+[01:59.53]We understand the more start-ups that are created,
+[02:01.97]companies do come on line, use the Internet, use Google, use Google products.
+[02:06.41]It benefits us as well."
+[02:08.10]South Korea is one of the few countries in the world
+[02:11.90]where Google is not the top Internet search engine.
+[02:16.19]The Korean company Naver has a larger market share.
+[02:21.32]Google operates similar centers in London and Tel Aviv,
+[02:26.95]but this is the company's first campus in East Asia.
+[02:31.19]Google says its London campus has helped startup companies
+[02:35.52]created 18,000 new jobs and get over $110 million dollars in investments.
+[02:43.56]One of the Campus Seoul members is April Kim.
+[02:47.79]She started an Internet-based translation service called Chatting Cat.
+[02:54.12]She says she likes the workspace and conference areas.
+[02:58.90]She adds that people at the campus
+[03:04.38]can share information and concerns with others there,
+[03:08.91]and they can provide motivation for each other.
+[03:12.80]Google decided on Seoul because it has some of the fastest Internet speeds,
+[03:19.58]and many talented, well-educated engineers.
+[03:23.27]The city also has one of the highest percentages of smart phone users in the world.
+[03:30.50]Jung-min Lim is the director of Campus Seoul.
+[03:35.03]He says the South Korean government has also made it easier to launch new businesses.
+[03:42.71]He says a few years ago the government cancelled many rules for new businesses
+[03:50.47]and provided policies supporting start-ups.
+[03:54.21]South Korean President Park Geun-Hye attended the opening of Campus Seoul.
+[04:01.89]In 2013, her administration provided $3 billion
+[04:07.02]to assist new high-tech companies grow and compete around the world.
+[04:13.36]I'm Mario Ritter.
+[04:15.60].
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

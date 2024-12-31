@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Ants Can Perform Amputations to Save Lives</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Ants Can Perform Amputations to Save Lives" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/ants-can-perform-amputations-to-save-lives.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Ants Can Perform Amputations to Save Lives</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/ants-can-perform-amputations-to-save-lives.mp3" id="mp3"></a>
+<a href="man-regains-his-voice-with-the-help-of-a-rare-medical-operation-92800.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">14 July, 2024</span><br/>
+<p>Human doctors perform amputations, or removal of an arm, leg, or finger, after a serious injury. The purpose of this action is to prevent infection or disease. But humans are not alone in doing them.</p>
+<p>New research shows that some ants perform amputations on injured ants to help them survive an injury. The behavior was documented in Florida carpenter ants, also known by their scientific name <em>Camponotus floridanus. </em>The reddish-brown insect is about 1.5 cm long. They live in parts of the southeastern United States.</p>
+<p><strong>Lifesaving care</strong></p><div class="contentImage"><img alt="Two carpenter ants are seen in a laboratory at the University of Lausanne. The ant on the right is caring for the leg wound of the other. (Bart Zijlstra/Handout via REUTERS)" src="https://files.21voa.com/gdb/01000000-0aff-0242-1cfe-08dc9d20b4ae_w268_r1.jpg"/><br/><span class="imagecaption">Two carpenter ants are seen in a laboratory at the University of Lausanne. The ant on the right is caring for the leg wound of the other. (Bart Zijlstra/Handout via REUTERS)</span></div>
+<p>Scientists said they observed these ants treating injured ants in the colony in two ways. They either cleaned the wound using their mouthparts or amputated the <strong>limb</strong>, or leg, by biting it off. The choice of care depended on the injury's location. When it was further up the leg, they always amputated. When it was further down, they never amputated.</p>
+<p>Erik Frank of the University of Würzburg in Germany is the lead writer of the research. It appeared recently in the publication <em>Current Biology</em>. Frank said the study describes “for the first time how a non-human animal uses amputations on another individual to save their life."</p>
+<p>He believes “that the ants' 'medical system' to care for the injured is the most <strong>sophisticated</strong> in the animal kingdom,” and compares well to human medicine.</p>
+<p><strong>Decision made after injury</strong></p>
+<p>The researchers studied injuries to the upper part of the leg, the <em>femur</em>, and the lower part, the <em>tibia.</em> Such injuries are commonly found in different kinds of ants while fighting and hunting among insects and animals.</p>
+<p>However, they watched the ants in a laboratory.</p>
+<p>Frank said that the ants “decide between amputating the leg or spending more time caring for the wound. How they decide this, we do not know. But we do know why the treatment differs.”</p>
+<p>It has to do with the flow of hemolymph, the bluish-green fluid equivalent to blood in most <strong>invertebrates</strong>, or animals without a backbone.</p>
+<p><strong>Timing is important</strong></p>
+<p>"Injuries further down the leg have an increased hemolymph flow,” Frank said. So harmful bacteria can enter the body after only five minutes. An amputation would not help infection after that time.</p>
+<p>He continued, “Injuries further up the leg have a much slower hemolymph flow, giving enough time for timely and effective amputations.”</p>
+<p>In either case, the ants first cleaned the wound using fluids from their mouth. The amputation process itself takes at least 40 minutes and sometimes more than three hours. The ants keep biting the patient at the shoulder.</p>
+<p>The study found that after an upper leg injury, an ant who experiences amputation has a survival rate of 90 to 95 percent. For lower leg injuries in which just cleaning was performed, the survival rate was about 75 percent, compared to about 15 percent for injuries that received no care.</p>
+<p>Ants can function well without one of their six legs. And only female ants perform the treatment of wounds by cleaning or amputation.</p>
+<p>"All worker ants are female. Males play only a minor <strong>role</strong> in ant colonies," Frank said.</p>
+<p><strong>Why do the ants do this?</strong></p>
+<p>So why do ants do these amputations?</p>
+<p>Frank said, "There is a very simple <strong>evolutionary</strong> reason for caring for the injured. It saves resources.” He noted that if an ant could be saved with little effort to remain productive, “there is a very high value of doing so.”</p>
+<p>“At the same time, if an individual is too heavily injured, the ants will not care for her, but rather leave her behind to die," Frank added.</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Will Dunham reported this story for Reuters. Jill Robbins adapted it for Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>limb</strong><em> – n.</em> a leg or arm</p>
+<p><strong>sophisticated</strong> – <em>adj.</em> highly developed and complex</p>
+<p><strong>invertebrate </strong>– <em>n.</em> a type of animal that does not have a backbone</p>
+<p><strong>role</strong> – <em>n.</em> the part that someone has in a family, society, or other group</p>
+<p><strong>evolution</strong> – <em>n</em>. a theory that the differences between modern plants and animals are because of changes that happened by a natural process over a very long time</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

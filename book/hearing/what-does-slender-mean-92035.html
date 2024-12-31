@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Does Slender Mean?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, What Does Slender Mean?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/what-does-slender-mean.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Does Slender Mean?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/what-does-slender-mean.mp3" id="mp3"></a>
+<a href="forest-service-moving-trees-to-save-them-92030.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">05 January 2024</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we answer a question from Nirmala about the meaning of the word "slender."</p>
+<p><strong>Question:</strong></p>
+<p>Hello Teacher,</p><div class="contentImage"><img alt="Ask a Teacher: What Does Slender Mean? " src="https://files.21voa.com/gdb/01000000-0aff-0242-8cb4-08dc0d53a6ab_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: What Does Slender Mean? </span></div>
+<p>I'm Nirmala.</p>
+<p>What does the word "slender" mean?</p>
+<p>Thank you,</p>
+<p>Nirmala</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing to us, Nirmala!</p>
+<p>As the year starts, many people make new goals. A large number of them center on losing weight. This is a great time for this question! We will talk about the word "slender" and offer some <strong>synonyms</strong> to help you compare and understand this word better.</p>
+<p><strong>Slender</strong></p>
+<p>The word "slender" is an adjective.</p>
+<p>The first meaning has to do with body shape. Something slender is small around, especially in comparison to its length. A slender person has no extra fat and little roundness, usually in an appealing way.</p>
+<p>In other words, slender has a positive <strong>connotation </strong>when used to describe a person. The word "skinny" on the other hand, suggests an underweight condition that is not appealing.</p>
+<p><em>The slender girl could walk through the narrow opening in the fence. </em></p>
+<p><em>Many cultures considered a long, slender neck beautiful.</em></p>
+<p>Some synonyms that you can use in place of "slender" include "slim," "lean" and "thin." These words all have a more positive association to them than "skinny." But what separates them from "slender" is the idea that "slender" also includes the association of "<strong>graceful</strong>."</p>
+<p>Slender can also be used to describe non-physical things.</p>
+<p><em>The mayoral candidate won by a slender number of votes. </em></p>
+<p>In that sentence, slender means small.</p>
+<p><em>Spending money is slender just before payday. </em></p>
+<p>In that one, it means limited.</p>
+<p><em>The slender glass tube was all that protected the rare <strong>sample</strong>.</em></p>
+<p>In that last sentence, slender means small but also suggests a delicate, or easily breakable, quality.</p>
+<p>Please let us know if these explanations and examples have helped you, Nirmala.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>___________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>synonym </strong><em>–</em> <em>n</em>. a word that is similar in meaning to another word</p>
+<p><strong>connotation</strong><em> – n. </em>the feelings or ideas that words give in addition to their meanings</p>
+<p><strong>sample </strong><em>– n. </em>a part (as a set of individuals chosen from a whole population) used for investigating the whole</p>
+<p><strong>graceful </strong><em>– n. </em>n form or action: pleasing or attractive in line, proportion, or movement</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

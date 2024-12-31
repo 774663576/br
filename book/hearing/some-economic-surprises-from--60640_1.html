@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 2014年经济意外事件回顾</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 2014年经济意外事件回顾" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201501/se-econ-economic-surprises-08jan15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>2014年经济意外事件回顾</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201501/se-econ-economic-surprises-08jan15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-economic-surprises-08jan15.lrc" id="lrc"></a>
+<a href="some-economic-surprises-from--60640.html" id="CnPage" target="_blank"></a>
+<a href="western-diet-bad-for-human-health-environment-60604.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>2014 was a year of several economic surprises. On today's program, we look back at some of them. First on our list, is the unexpected drop in the price of oil that began in June.<br/>2014年是经济上充满意外的一年。在今天的节目中，我们将会回顾其中一些经济意外事件。首当其冲的是石油价格从今年六月开始意外下降。</p>
+<p><strong>Oil Prices Decrease<br/>石油价格下跌</strong></p>
+<p>Often, low oil prices fuel growth, but this year the price drop has helped some countries while hurting others. Increased American oil production is one reason for the drop in oil prices.<br/>通常情况下，低油价能够推动经济增长，但今年的价格下跌帮助了一些国家而又损害了另一些国家。美国石油产量增加是油价下跌的原因之一。</p>
+<p>Experts say slowing economies in China and Europe have reduced demand for oil. Japan's economy also slowed and then went into recession. Increasing supply and decreasing demand usually result in falling prices.<br/>专家们表示，中国和欧洲经济放缓降低了对石油的需求。日本经济也放慢然后进入衰退。供给增加和需求下降通常会导致价格下跌。</p>
+<p>In the past, the Organization of Petroleum Exporting Countries, OPEC, has reacted to price drops by decreasing production. But this year that did not happen. At OPEC's meeting in November, members chose to leave production levels unchanged.<br/>在过去，石油输出国组织欧佩克早已通过降低产量应对价格下跌。但今年这种情况并未发生。欧佩克11月份会议上，各成员国选择保持石油产量水平不变。</p>
+<p><strong>Russian Economy Slows from Oil Prices, Sanctions<br/>俄罗斯经济因为油价和制裁放缓</strong></p>
+<p>The huge drop in the price of oil this year helped create another major story: Russia's slowing economy.<br/>石油价格大跌还导致了另一个重大新闻：俄罗斯的经济增长放缓。</p>
+<p>Russian officials said they expect the country's economy to shrink in 2015, or go into recession. Two reasons for this are reduced income from oil sales and the effects of restrictions placed on Russia because of its actions in Ukraine.<br/>俄罗斯官员表示，他们预计2015年该国经济会萎缩，或进入衰退。而两大原因是由于石油销售收入减少，以及各国就俄罗斯在乌克兰行动采取的限制措施的影响。</p>
+<p>The exchange rate for Russia's currency, the ruble, has dropped sharply against the dollar. In mid-December, the European Union agreed to increase sanctions against Russia. They include restrictions on finance and tourism in Crimea.<br/>俄罗斯货币卢布对美元的汇率已经大幅下跌。12月中旬，欧盟同意增加对俄罗斯的制裁。其中包括对克里米亚金融和旅游的限制。</p>
+<p><strong>US Economy Shows Signs of Improvement<br/>美国经济出现提升迹象</strong></p>
+<p>The U.S. economy showed signs of strengthening this year. The Department of Commerce says the U.S. economy grew at a rate of 5 percent from July to September.<br/>美国经济今年出现增强的迹象。美国商务部表示，今年7到9月，美国经济增长速度达5%。</p>
+<p>Also, 2014 saw the Dow Jones Industrial Index -- a widely reported stock market measure -- extended above 18,000 for the first time.<br/>此外，2014年道琼斯工业指数也首次攀升到18000点。</p>
+<p>And the human face of America's central bank changed in 2014. The U.S. Senate confirmed Janet Yellen to lead the Board of Governors of the U.S. Federal Reserve System in January. She is the first woman to lead the nation's central bank in its 100-year history.<br/>而2014年美国央行也变脸了。美国参议员批准耶伦负责美国联邦储备委员会。她是美国央行100年历史中首位女领导人。</p>
+<p><strong>Other Economic Events...<br/>其它经济事件</strong></p>
+<p>And in a major surprise, President Barack Obama announced an end to sanctions against Cuba. The change in policy will permit increase trade in financial dealings between the two countries. The United States cut diplomatic relations with Cuba in 1961.<br/>而另一项重大意外是奥巴马总统宣布结束对古巴的制裁。这一政策变化将使得两国之间的金融交易得以增加。美国于1961年断绝了和古巴的外交关系。</p>
+<p>And that is the Economics Report from VOA Learning English. You can find more reports at 21voa.com. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。更多新闻请访问21voa.com。我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Some Economic Surprises from 2014]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.30]2014 was a year of several economic surprises. 
+[00:11.05]On today's program, we look back at some of them. 
+[00:15.36]First on our list, 
+[00:17.46]is the unexpected drop in the price of oil that began in June.
+[00:23.00]Often, low oil prices fuel growth, 
+[00:27.16]but this year the price drop 
+[00:29.91]has helped some countries while hurting others. 
+[00:33.27]Increased American oil production 
+[00:36.83]is one reason for the drop in oil prices.
+[00:40.39]Experts say slowing economies in China and Europe 
+[00:45.42]have reduced demand for oil. 
+[00:48.06]Japan's economy also slowed and then went into recession. 
+[00:54.06]Increasing supply and decreasing demand 
+[00:57.94]usually result in falling prices.
+[01:01.21]In the past, 
+[01:02.89]the Organization of Petroleum Exporting Countries, OPEC, 
+[01:07.78]has reacted to price drops by decreasing production. 
+[01:12.45]But this year that did not happen. 
+[01:15.82]At OPEC's meeting in November, 
+[01:19.10]members chose to leave production levels unchanged.
+[01:23.69]The huge drop in the price of oil this year 
+[01:27.67]helped create another major story: Russia's slowing economy.
+[01:33.50]Russian officials said 
+[01:36.58]they expect the country's economy to shrink in 2015, 
+[01:41.48]or go into recession. 
+[01:43.78]Two reasons for this are reduced income from oil sales 
+[01:49.44]and the effects of restrictions placed on Russia 
+[01:53.91]because of its actions in Ukraine.
+[01:56.82]The exchange rate for Russia's currency, the ruble, 
+[02:02.31]has dropped sharply against the dollar. 
+[02:05.10]In mid-December, 
+[02:07.33]the European Union agreed to increase sanctions against Russia. 
+[02:12.23]They include restrictions on finance and tourism in Crimea.
+[02:18.44]The U.S. economy showed signs of strengthening this year. 
+[02:24.36]The Department of Commerce 
+[02:27.08]says the U.S. economy grew at a rate of 5 percent 
+[02:31.47]from July to September.
+[02:33.47]Also, 2014 saw the Dow Jones Industrial Index -- 
+[02:39.46]a widely reported stock market measure -- 
+[02:42.60]extended above 18,000 for the first time.
+[02:47.44]And the human face of America's central bank changed in 2014. 
+[02:55.34]The U.S. Senate confirmed Janet Yellen 
+[02:59.27]to lead the Board of Governors 
+[03:01.27]of the U.S. Federal Reserve System in January. 
+[03:05.60]She is the first woman to lead the nation's central bank 
+[03:10.69]in its 100-year history.
+[03:13.12]And in a major surprise, 
+[03:16.05]President Barack Obama announced an end to sanctions against Cuba. 
+[03:22.22]The change in policy will permit increase trade 
+[03:26.69]in financial dealings between the two countries. 
+[03:30.50]The United States cut diplomatic relations with Cuba in 1961.
+[03:37.82]And that is the Economics Report from VOA Learning English. 
+[03:44.63]You can find more reports at 51voa.com. I'm Mario Ritter.
+[03:53.42]更多听力请访问51voa.com
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

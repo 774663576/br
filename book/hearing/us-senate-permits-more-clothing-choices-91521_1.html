@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国参议院放宽着装要求</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 美国参议院放宽着装要求" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/us-senate-permits-more-clothing-choices.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国参议院放宽着装要求</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/us-senate-permits-more-clothing-choices.mp3" id="mp3"></a>
+<a href="/static/lrc/us-senate-permits-more-clothing-choices.lrc" id="lrc"></a>
+<a href="us-senate-permits-more-clothing-choices-91521.html" id="CnPage" target="_blank"></a>
+<a href="strange-looking-tomato-can-still-be-tasty-91519.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><p>The U.S. Senate's majority leader said this week that the legislative body will no longer enforce a dress code on its floor. A dress code is a set of rules about what may and may not be worn.<br/>
+美国参议院多数党领袖本周表示，该立法机构将不再强制执行着装规定。着装规定是一套关于可以穿什么和不可以穿什么的规则。</p>
+<p>Senator Chuck Schumer, the majority leader, said in a statement, "Senators are able to choose what they wear on the Senate floor. I will continue to wear a suit."<br/>
+多数党领袖、参议员查克·舒默在一份声明中说：“参议员可以选择他们在参议院的穿着。我将继续穿西装。”</p>
+<p>The change comes after Senator John Fetterman, a Democrat from Pennsylvania, has been voting from the doorways of the Senate to avoid violating the dress code. While other senators wear business clothes or dresses in the Capitol building, Fetterman usually wears informal clothes like shorts at work.<br/>
+此前，宾夕法尼亚州民主党参议员约翰·费特曼一直在参议院门口参加投票，以避免违反着装规定。当其他参议员在国会大厦穿着职业装或正装时，费特曼通常在工作时穿着短裤等非正式服装。</p>
+<p>Schumer did not talk about Fetterman in his statement about the dress code. But the loosening of the dress code will only apply to senators, not other employees.<br/>
+舒默在关于着装规定的声明中没有提及费特曼。但放宽着装规定只适用于参议员，而不适用于其他雇员。</p>
+<p>During his campaign for the U.S. Senate, Fetterman suffered a stroke, a serious medical condition that happens when the brain does not get enough oxygen from the blood. Earlier this year, Fetterman checked himself into a hospital for treatment on depression.<br/>
+费特曼在竞选美国参议员期间中风，当大脑无法从血液中获得足够的氧气时就会发生这种严重的疾病。今年年初，费特曼住进了一家医院接受抑郁症治疗。</p>
+<p>When Fetterman returned from treatment, he started wearing more informal clothes, which he says make him more comfortable.<br/>
+当费特曼治疗结束后，他开始穿非正式服装，他说这让他更舒服。</p>
+<p>The changes in dress code were met with disapproval from some of the Senate's more formal members.<br/>
+着装规定的改变遭到了参议院一些较庄重议员的反对。</p>
+<p>Kansas Sen. Roger Marshall, a Republican, said it is a "sad day in the Senate" and that the people who Fetterman and Schumer represent should be embarrassed.<br/>
+堪萨斯州共和党参议员罗杰·马歇尔表示，这是“参议院令人悲伤的一天”，费特曼和舒默所代表的人群应该感到尴尬。</p>
+<p>Republican Sen. Susan Collins of Maine agreed, arguing that the new rules discredit what the Senate represents. "I plan to wear a bikini tomorrow to the Senate floor," Collins joked. A bikini is what one wears when swimming.<br/>
+缅因州共和党参议员苏珊·柯林斯对此表示赞同，认为新规定不符合参议院的形象。柯林斯开玩笑说：“我计划明天穿比基尼去参议院。”比基尼是游泳时穿的。</p>
+<p>Fetterman said he was not sure if he would start making use of the new rules just yet. He said it is nice to have them as a choice, but he plans to not use them very often and not overuse them.<br/>
+费特曼表示，他还不确定自己是否会开始利用新规则。他说，有选择总是好事，但他计划不经常利用它们，也不过度利用它们。</p>
+<p>Fetterman said of his critics, "They're freaking out, I don't understand it." He said there are more important things they should be working on instead of what he wears.<br/>
+费特曼谈到他的批评者时说：“他们吓坏了，我对此很是不明白。”他说，他们应该做一些更重要的事情，而不是盯着他的穿着。</p>
+<p>Not all Republicans were troubled by the change. Missouri Sen. Josh Hawley was wearing jeans on Monday evening. He says he normally wears informal clothes when he flies in from his home state for the first votes of the week.<br/>
+并非所有共和党人都对这一变化感到不安。密苏里州参议员乔什·霍利周一晚上穿着牛仔裤。他说，当他从家乡飞过来参加一周的首次投票时，他通常会穿着非正式的衣服。</p>
+<p>"Now I can vote from the Senate floor on Mondays," Hawley said, noting that he usually wears a suit and tie every other day. A tie is a piece of formal clothing.<br/>
+霍利说：“现在周一我可以在参议院投票了，”他指出，他通常每隔一天就穿西装打领带。领带是正装配饰。</p>
+<p>Nearby, Connecticut Sen. Chris Murphy was also without a tie. The Democrat said he has gotten in trouble with the Senate's official clothes police, called Sergeant-at-Arms, in the past for not wearing a tie on the floor.<br/>
+邻近的康涅狄格州参议员克里斯·墨菲也不打领带。这位民主党人说，他过去曾因在参议院不打领带而与“纠仪长”发生过冲突。</p>
+<p>"They would tell us when we were doing it wrong," Murphy said.<br/>
+墨菲说：“他们会在我们穿错时告诉我们。”</p>
+<p>It is unclear if the rules for more formal wear were actually written down anywhere. But Schumer's statement means employees will no longer criticize senators for their choice of clothing or ask them to vote from the doorway.<br/>
+目前尚不清楚正式着装要求是否有明文规定。但舒默的声明意味着员工将不再批评参议员的服装选择，也不再要求他们在门口参加投票。</p>
+<p>"I think we should all want to be more comfortable," Fetterman told a group of reporters on Monday. He added that now that they have that choice, and if people want to wear a suit, "... then that's great."<br/>
+费特曼周一对记者们说：“我认为我们应该都想更舒适。”他补充说，现在他们有了这样的选择，如果人们想穿西装，“……那就太好了。”</p>
+<p>I'm Gregory Stachel.<br/>
+我是格雷戈里·施塔赫尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Senate Permits More Clothing Choices]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The U.S. Senate's majority leader
+[00:03.40]said this week that the legislative body
+[00:07.28]will no longer enforce a dress code on its floor.
+[00:12.72]A dress code is a set of rules
+[00:15.40]about what may and may not be worn.
+[00:19.52]Senator Chuck Schumer, the majority leader, said in a statement,
+[00:25.00]"Senators are able to choose
+[00:27.56]what they wear on the Senate floor.
+[00:29.84]I will continue to wear a suit."
+[00:33.88]The change comes after Senator John Fetterman,
+[00:37.80]a Democrat from Pennsylvania,
+[00:40.28]has been voting from the doorways
+[00:43.00]of the Senate to avoid violating the dress code.
+[00:47.92]While other senators wear business clothes
+[00:51.08]or dresses in the Capitol building,
+[00:53.84]Fetterman usually wears informal clothes like shorts at work.
+[01:00.04]Schumer did not talk about Fetterman
+[01:02.64]in his statement about the dress code.
+[01:06.36]But the loosening of the dress code
+[01:08.76]will only apply to senators, not other employees.
+[01:14.20]During his campaign for the U.S. Senate,
+[01:17.24]Fetterman suffered a stroke, a serious medical condition
+[01:22.08]that happens when the brain
+[01:23.88]does not get enough oxygen from the blood.
+[01:28.00]Earlier this year, Fetterman checked himself into a hospital
+[01:32.76]for treatment on depression.
+[01:36.00]When Fetterman returned from treatment,
+[01:39.12]he started wearing more informal clothes,
+[01:42.12]which he says make him more comfortable.
+[01:46.56]The changes in dress code were met with disapproval
+[01:50.52]from some of the Senate's more formal members.
+[01:54.96]Kansas Sen. Roger Marshall, a Republican,
+[01:58.96]said it is a "sad day in the Senate"
+[02:02.64]and that the people who Fetterman
+[02:04.96]and Schumer represent should be embarrassed.
+[02:09.64]Republican Sen. Susan Collins of Maine agreed,
+[02:13.60]arguing that the new rules discredit
+[02:16.48]what the Senate represents.
+[02:19.48]"I plan to wear a bikini tomorrow
+[02:22.12]to the Senate floor," Collins joked.
+[02:26.04]A bikini is what one wears when swimming.
+[02:29.40]Fetterman said he was not sure
+[02:32.76]if he would start making use of the new rules just yet.
+[02:38.20]He said it is nice to have them as a choice,
+[02:41.80]but he plans to not use them very often and not overuse them.
+[02:47.92]Fetterman said of his critics,
+[02:50.20]"They're freaking out, I don't understand it."
+[02:54.48]He said there are more important things
+[02:56.72]they should be working on instead of what he wears.
+[03:01.32]Not all Republicans were troubled by the change.
+[03:05.36]Missouri Sen. Josh Hawley was wearing jeans on Monday evening.
+[03:12.08]He says he normally wears informal clothes
+[03:15.16]when he flies in from his home state for the first votes of the week.
+[03:21.20]"Now I can vote from the Senate floor on Mondays," Hawley said,
+[03:25.56]noting that he usually wears a suit and tie every other day.
+[03:31.36]A tie is a piece of formal clothing.
+[03:34.88]Nearby, Connecticut Sen. Chris Murphy was also without a tie.
+[03:42.12]The Democrat said he has gotten in trouble
+[03:45.00]with the Senate's official clothes police,
+[03:47.72]called Sergeant-at-Arms,
+[03:50.28]in the past for not wearing a tie on the floor.
+[03:54.96]"They would tell us when we were doing it wrong," Murphy said.
+[04:00.32]It is unclear if the rules for more formal wear
+[04:04.28]were actually written down anywhere.
+[04:07.56]But Schumer's statement means employees
+[04:10.72]will no longer criticize senators
+[04:12.92]for their choice of clothing or ask them to vote from the doorway.
+[04:19.04]"I think we should all want to be more comfortable,"
+[04:22.44]Fetterman told a group of reporters on Monday.
+[04:26.84]He added that now that they have that choice,
+[04:30.12]and if people want to wear a suit, "... then that's great."
+[04:35.20]I'm Gregory Stachel. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

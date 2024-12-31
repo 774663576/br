@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 拜登总统宣布控枪新措施</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, This is America, 拜登总统宣布控枪新措施" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202104/biden-announces-new-gun-control-measures.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>拜登总统宣布控枪新措施</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202104/biden-announces-new-gun-control-measures.mp3" id="mp3"></a>
+<a href="/static/lrc/biden-announces-new-gun-control-measures.lrc" id="lrc"></a>
+<a href="biden-announces-new-gun-control-measures-86631.html" id="CnPage" target="_blank"></a>
+<a href="brazil-records---daily-covid-deaths-for-first-time-86630.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">American President Joe Biden announced new measures Thursday aimed at decreasing gun violence, which he called "an epidemic and an international embarrassment."<br/>
+美国总统拜登周四宣布了减少枪支暴力的新措施，他称枪支暴力是一场流行病，在国际上令美国难堪。
+<p>Two mass shootings in the United States last month killed 18 people. One attack took place at a food store in Boulder, Colorado. The other happened at three businesses in and near Atlanta, Georgia.<br/>
+上个月美国发生了两起大规模枪击事件，造成18人死亡。其中一起袭击发生在科罗拉多州博尔德市的一家食品商店。另一起袭击发生在乔治亚州亚特兰大市内及附近的三家公司内。</p>
+<p>Speaking from the White House, Biden said he learned that five more people were killed "just last night" in South Carolina. He told families and survivors of gun violence, "We're absolutely determined to make change."<br/>
+拜登在白宫发表讲话称，他获悉就在昨晚又有5人在南卡罗莱纳州被杀。他对枪支暴力的受害家庭及幸存者表示：“我们绝对有决心做出改变。”</p>
+<p><strong>The Biden plan<br/>
+拜登方案</strong></p>
+<p>Biden said the Justice Department will issue a rule to stop the quickly increasing number of "ghost guns." These guns are often put together from available parts in as little as 30 minutes. They are not registered weapons and often cannot be traced by law enforcement. USA Today reported that ghost guns have been used in at least three recent shootings in California.<br/>
+拜登表示，司法部将出台一项规定，以阻止数量迅速增长的“幽灵枪支。”这些枪支通常在短短30分钟内就可以从可用零件组装成功。它们并非注册武器，通常无法被执法部门追查到。据《今日美国》报道，最近加州至少有3起枪击事件使用了“幽灵枪支”。</p>
+<p>The Justice Department is also planning to issue a new rule on a device called a stabilizing brace. The device can make a handgun work more like a rifle, a deadlier firearm. The new rule would make it difficult to register the weapon.<br/>
+司法部还计划针对一种被称为稳定支撑器的装置出台新规。这种装置可以使手枪更接近更为致命的步枪。这项新规定还将使得注册武器变得更难。</p>
+<p>Biden also said the Justice Department will begin issuing yearly reports on illegal sales of firearms.<br/>
+拜登还表示，司法部将开始发布枪支非法销售的年度报告。</p>
+<p>The president also announced a so-called "red flag" measure. It permits civilians and local law enforcement to seek legal firearms seizures from people they think pose a threat.<br/>
+拜登还宣布了一项被称为“示警红旗”的规定。它允许文职人员和地方执法部门可以从他们认为构成威胁的人那里缉获合法枪支。</p>
+<p>"Red flag laws can stop mass shooters before they can act out their violent plans," Biden said.<br/>
+拜登表示：“红旗法可以在枪手实施其大规模暴力计划前阻止他们。”</p>
+<p>The president noted that his administration is also investing in local communities to help prevent gun violence. He said that gun violence is severely hurting America's children, including those who do not experience direct involvement.<br/>
+拜登指出，他领导的政府还将投资于当地社区帮助防止枪支暴力。他说，枪支暴力正在严重伤害美国的儿童，包括没有直接受影响的儿童。</p>
+<p>And, Biden announced his nomination of David Chipman to serve as Director of the U.S. Bureau of Alcohol, Tobacco, and Firearms, or ATF. Chipman worked at the agency for 25 years and is now an advisor to a gun-control organization.<br/>
+拜登还宣布提名大卫·奇普曼担任美国酒精、烟草和枪支管理局局长。奇普曼在该机构工作了25年，现在是一家控枪组织的顾问。</p>
+<p>While at ATF, Chipman worked to stop a gun trafficking group that sent illegal firearms from Virginia to New York. He also served on the ATF's special weapons defense team.<br/>
+奇普曼在美国酒精、烟草和枪支管理局任职期间努力制止了一家枪支贩运集团将非法武器从弗吉尼亚州运到纽约。他还曾在该局的特种武器防卫队服役。</p>
+<p>Chipman is a gun owner.<br/>
+奇普曼是枪支拥有者。</p>
+<p>Acting directors have headed the ATF for years. If confirmed, Chipman will become the agency's first permanent leader since 2015.<br/>
+美国酒精、烟草和枪支管理局多年来都由代理局长领导。如果获得国会通过，奇普曼将成为该机构自2015年以来的第一位正式领导人。</p>
+<p><strong>NRA quick to denounce<br/>
+美国步枪协会迅速谴责</strong></p>
+<p>The National Rifle Association moved quickly to denounce Biden's gun-control measures. The organization said Thursday, "These actions could require Americans to surrender lawful property," adding that states might use the measure to increase firearm seizures. The group said on Twitter, "It's time to STAND and FIGHT!"<br/>
+美国步枪协会迅速采取行动谴责了拜登的枪支管制措施。该组织周四表示：“这些举动是要求美国人交出合法财产，”并称各州可能会利用这些措施来加大枪击缉获量。该组织在推特上表示：“是时候站出来反抗了。”</p>
+<p>John Feinblatt, president of Everytown for Gun Safety, praised the administration's new measures as a starting point for dealing with gun violence. The new laws, he said, "begin to make good on President Biden's promise to be the strongest gun safety president in history."<br/>
+“每城枪支安全”组织负责人约翰·费恩布拉特称赞政府的新措施是应对枪支暴力的起点。他说，新法律将开始兑现拜登总统成为史上最严控枪总统的承诺。</p>
+<p>In his speech, Biden noted some limitations of his executive orders. He asked the Senate to immediately pass current bills from the House of Representatives that require background checks and longer waiting periods on gun purchases.<br/>
+拜登在讲话中指出了其行政命令的一些局限性。他要求参议院立即通过来自众议院的现行法案，即要求进行背景调查，并延长购买枪支的等待期。</p>
+<p>"They have offered plenty of thoughts and prayers, but they have passed not a single federal law to reduce gun violence," Biden said. "Enough prayers. Time for action."<br/>
+拜登表示：“他们提出了很多想法和祈祷，但他们没有通过一项单独的联邦法律来减少枪支暴力。祈祷够多了，该行动了。”</p>
+<p>I'm Caty Weaver.<br/>
+我是凯蒂·韦孚。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Biden Announces New Gun Control Measures]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]American President Joe Biden announced new measures Thursday
+[00:05.60]aimed at decreasing gun violence,
+[00:08.80]which he called "an epidemic and an international embarrassment."
+[00:15.60]Two mass shootings in the United States last month killed 18 people.
+[00:22.00]One attack took place at a food store in Boulder, Colorado.
+[00:26.60]The other happened at three businesses in and near Atlanta, Georgia.
+[00:33.84]Speaking from the White House, Biden said he learned
+[00:37.88]that five more people were killed "just last night" in South Carolina.
+[00:44.76]He told families and survivors of gun violence,
+[00:48.72]"We're absolutely determined to make change."
+[00:52.84]Biden said the Justice Department will issue a rule
+[00:57.68]to stop the quickly increasing number of "ghost guns."
+[01:02.64]These guns are often put together from available parts
+[01:07.76]in as little as 30 minutes.
+[01:11.04]They are not registered weapons
+[01:13.56]and often cannot be traced by law enforcement.
+[01:18.24]USA Today reported that ghost guns
+[01:22.04]have been used in at least three recent shootings in California.
+[01:27.92]The Justice Department is also planning to issue a new rule
+[01:32.24]on a device called a stabilizing brace.
+[01:36.40]The device can make a handgun work more like a rifle, a deadlier firearm.
+[01:43.60]The new rule would make it difficult to register the weapon.
+[01:49.04]Biden also said the Justice Department
+[01:51.92]will begin issuing yearly reports on illegal sales of firearms.
+[01:58.80]The president also announced a so-called "red flag" measure.
+[02:04.36]It permits civilians and local law enforcement
+[02:08.48]to seek legal firearms seizures
+[02:12.16]from people they think pose a threat.
+[02:16.12]"Red flag laws can stop mass shooters
+[02:19.48]before they can act out their violent plans," Biden said.
+[02:25.16]The president noted that his administration
+[02:28.16]is also investing in local communities to help prevent gun violence.
+[02:34.80]He said that gun violence is severely hurting America's children,
+[02:40.28]including those who do not experience direct involvement.
+[02:46.08]And, Biden announced his nomination of David Chipman to serve as Director
+[02:52.28]of the U.S. Bureau of Alcohol, Tobacco, and Firearms, or ATF.
+[02:59.72]Chipman worked at the agency for 25 years
+[03:03.72]and is now an advisor to a gun-control organization.
+[03:09.24]While at ATF, Chipman worked to stop a gun trafficking group
+[03:14.52]that sent illegal firearms from Virginia to New York.
+[03:19.84]He also served on the ATF's special weapons defense team.
+[03:25.00]Chipman is a gun owner.
+[03:28.04]Acting directors have headed the ATF for years.
+[03:32.20]If confirmed, Chipman will become
+[03:35.48]the agency's first permanent leader since 2015.
+[03:41.20]The National Rifle Association moved quickly
+[03:44.76]to denounce Biden's gun-control measures.
+[03:48.52]The organization said Thursday,
+[03:51.16]"These actions could require Americans
+[03:54.60]to surrender lawful property," adding that states
+[03:59.44]might use the measure to increase firearm seizures.
+[04:04.40]The group said on Twitter, "It's time to STAND and FIGHT!"
+[04:10.28]John Feinblatt, president of Everytown for Gun Safety,
+[04:15.04]praised the administration's new measures
+[04:18.12]as a starting point for dealing with gun violence.
+[04:22.84]The new laws, he said,
+[04:24.92]"begin to make good on President Biden's promise
+[04:28.76]to be the strongest gun safety president in history."
+[04:34.04]In his speech, Biden noted some limitations of his executive orders.
+[04:40.72]He asked the Senate to immediately pass current bills
+[04:45.52]from the House of Representatives that require background checks
+[04:49.80]and longer waiting periods on gun purchases.
+[04:54.20]"They have offered plenty of thoughts and prayers,
+[04:57.84]but they have passed not a single federal law
+[05:01.68]to reduce gun violence," Biden said.
+[05:05.00]"Enough prayers. Time for action."
+[05:09.04]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

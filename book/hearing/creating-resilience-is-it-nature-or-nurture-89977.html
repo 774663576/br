@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Creating Resilience: Is It Nature or Nurture?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Creating Resilience: Is It Nature or Nurture?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/creating-resilience-is-it-nature-or-nurture.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Creating Resilience: Is It Nature or Nurture?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/creating-resilience-is-it-nature-or-nurture.mp3" id="mp3"></a>
+<a href="italy-cheers-discovery-of-ancient-bronze-statues-89975.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">14 November 2022</span><br/>
+<p>There is a growing debate among scientists about how people face difficulties and recover from them.</p>
+<p>The word resilience describes the ability to deal with <strong>stress</strong> and to recover from it.</p>
+<p>The researchers are asking, ‘why do some people recover and others struggle after <strong>traumatic</strong> events such as child abuse, gun violence or the spread of disease?'</p><div class="contentImage"><img alt="Steeve Biondolillo stands for a portrait in a library at Northwest Nazarene University in Nampa, Idaho on Friday, Oct. 7, 2022. Majoring in social work, he envisions a career working with the needy, helping to give back and nurture others. (AP Photo/Kyle Green)" src="https://files.21voa.com/gdb/093181c3-fbfc-4f43-bab6-22967e34b764_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Steeve Biondolillo stands for a portrait in a library at Northwest Nazarene University in Nampa, Idaho on Friday, Oct. 7, 2022. Majoring in social work, he envisions a career working with the needy, helping to give back and nurture others. (AP Photo/Kyle Green)</span></div>
+<p>They want to know whether the ability to recover from stress is in our nature, in our genes,<strong> </strong>or in the way we were brought up by our parents, how we were <strong>nurtured</strong>.</p>
+<p>Research suggests that both nature and nurture are responsible for creating resilience. But researchers say neither guarantees recovery from hardship.</p>
+<p>The American Psychological Association says anyone can learn resilience through kinds of behaviors, thoughts and actions. But that it is not always easy.</p>
+<p>In the mid-1990s, research in the United States connected <strong>negative</strong> childhood experiences with problems in adulthood, like poor mental and physical health. The research also said that each additional negative experience increased risk later on.</p>
+<p>Many studies have tried to answer, ‘Why some children are more at risk for some bad experiences than others?'</p>
+<p>Dr. Thomas Boyce is a researcher and treats children in California. He wanted to find the answer to that question because of his own family.</p>
+<p>He was very close to his younger sister. They experienced a difficult childhood. As they grew up, Boyce's life seemed to progress, but his sister experienced struggles and mental problems.</p>
+<p>Boyce said he discovered one in five children have a higher biological response to stress. He said they show signs of too much activity in the brain's <strong>fight-or-flight response</strong> and in stress <strong>hormones</strong>.</p>
+<p>Observers say that children like these have higher rates of physical and mental problems when raised in a stressful family environment.</p>
+<p>Boyce said that additional evidence suggests that these sensitive children do very well with nurturing and supportive parenting.</p>
+<p>Ananda Amstadter is a researcher at Virginia Commonwealth University in Richmond. She studies traumatic stress and genetics, the study of genes. She said that her research suggests genes and environment equally influence resilience. She said that there is no single resilience gene and that many genes are probably involved.</p>
+<p>Terrie Moffitt and Avshalom Caspi are researchers at Duke University in the state of North Carolina. They have found a connection between differences in genes that help to control emotions and a higher risk for depression or bad behavior in children who experience abuse.</p>
+<p>Dr. Dennis Charney studies ways to overcome difficulties in life; he also works at Mount Sinai Health system in the state of New York. He said that our "genes are not <strong>destiny</strong>."</p>
+<p>Trauma can affect the development of areas in the brain that control <strong>anxiety</strong> and fear. Treatments like talk therapy and medication can help people who have experienced trauma. Charney also said that a loving family, good friends and a positive experience in school could correct the negative effects.</p>
+<p>Steeve Biondolillo is now a 19-year-old college student. He spent his early life in Haiti. His family was poor and he experienced other trauma.</p>
+<p>At the age of four, his biological parents sent him to an <strong>orphanage</strong> where he lived for three years. He said this experience was traumatic for him.</p>
+<p>"I didn't really understand what was happening,'' he said, "I just got thrown into a big house full of other<strong> kids</strong>.''</p>
+<p>He said that he remembers feeling afraid and alone. He thought he would have to live there forever.</p>
+<p>Then came the 2010 Haiti earthquake. The disaster killed more than 100,000 people and destroyed the capital and other towns.</p>
+<p>"All the hope that I had suddenly<strong> vanished</strong>,'' Biondolillo said.</p>
+<p>Biondolillo survived and he was <strong>adopted</strong> by an American family that took him to the United States. His new life gave him many opportunities. But he was still frightened by past traumas from Haiti.</p>
+<p>His adoptive parents wanted to help, so they got him and his brother involved in an after-school program at the local Boys &amp; Girls Club where they could have fun. The adults there were supportive, and he talked about his experiences. He said that they made him feel supported and loved.</p>
+<p>Now Steeve is in his second year of college. He is studying social work. He wants to give back to society by helping and nurturing others.</p>
+<p>Biondolillo said that his life has been a path from being a fearful child to a "proud young man with big goals and a big future.''</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Lindsey Tanner wrote this article for The Associated Press. Faith Pirlo adapted it for Learning English. </em></p>
+<p><em>__________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>stress </strong><em>– n. </em>a state of mental tension and worry caused by problems in your life, work, etc.</p>
+<p><strong>traumatic </strong><em>– adj. </em>causing someone to become very upset in a way that can lead to serious mental and emotional problems</p>
+<p><strong>trait </strong><em>– n.</em> a quality that makes one person or thing different from another</p>
+<p><strong>negative </strong><em>– adj. </em>emphasizing the bad side of a person, situation, or thing</p>
+<p><strong>fight-or-flight response </strong>– <em>n. (psychology)</em> the reaction of the sympathetic nervous system to a stressful event, which prepares the body to either fight or flee a situation</p>
+<p><strong>hormone </strong>– <em>n.</em> one of several chemicals produced in the body that influence growth and development</p>
+<p><strong>destiny </strong><em>– n. </em>what will happen in the future; the thing that someone or something will experience in the future</p>
+<p><strong>anxiety </strong>– <em>n</em>. fear and nervousness about what might happen</p>
+<p><strong>orphanage</strong> – <em>n.</em> a place where children whose parents have died can live and be cared for</p>
+<p><strong>kids </strong>– <em>n</em>. <em>(informal)</em> children</p>
+<p><strong>vanish</strong> <em>– v.</em> to disappear</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

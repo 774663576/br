@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Awareness vs. Consciousness</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Awareness vs. Consciousness" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/awareness-vs-consciousness.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Awareness vs. Consciousness</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/awareness-vs-consciousness.mp3" id="mp3"></a>
+<a href="three-phrasal-verbs-with-along-91498.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">15 September 2023</span><br/>
+<p>Hi there! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "awareness" and "consciousness."</p>
+<p><strong>Question:</strong></p>
+<p>Dear teacher,</p><div class="contentImage"><img alt="Awareness vs. Consciousness " src="https://files.21voa.com/gdb/01000000-0a00-0242-1d4a-08dbb52e44ff_w268_r1.png"/><br/><span class="imagecaption">Awareness vs. Consciousness </span></div>
+<p>I am Mayer from Colombia. I hope you are well.</p>
+<p>I would like to know the difference between the words, "awareness" and "consciousness."</p>
+<p>Thanks a lot,</p>
+<p>Mayer</p>
+<p><strong>Answer</strong></p>
+<p>Thanks for this wonderful question, Mayer.</p>
+<p>"Awareness" and "consciousness" share somewhat similar definitions.</p>
+<p>The <em>Merriam-Webster</em> dictionary defines "awareness" as having knowledge and understanding that something is happening or exists. And it defines "consciousness" as being aware of things around you or something within oneself.</p>
+<p>But these two words can have many different meanings.</p>
+<p>Let's look at each one more closely.</p>
+<p><strong>Awareness</strong></p>
+<p>"Awareness" is a noun that comes from the adjective "aware." When you are aware of something, you know or you have a sense that something exists. For example:</p>
+<p><em>Many drivers have no awareness of other cars in their blind spots, areas around the car that they cannot easily see. </em></p>
+<p><em>In <strong>yoga</strong>, your mind and your body connect to bring awareness to places of pain so that you can ease it. </em></p>
+<p>We often talk about "awareness" of social or political causes or beliefs. This is one of the meanings that is shared with "consciousness."</p>
+<p><em>World Pangolin Day is celebrated on February 18th to raise more awareness for these animals.</em></p>
+<p>Let's move on to "consciousness."</p>
+<p><strong>Consciousness</strong></p>
+<p>"Consciousness" is a noun that has several meanings. It comes from the adjective "conscious." When you are "conscious," you are awake and can think and make decisions for yourself.</p>
+<p><em>When you are asleep, you are not conscious. </em></p>
+<p>Your "consciousness" is your physical and mental state of being conscious or awake.</p>
+<p><em>She lost consciousness after she fell and hit her head. </em></p>
+<p>Your "consciousness" also includes your mind and thoughts.</p>
+<p><em>Don't let his bad feelings cloud your consciousness. </em></p>
+<p>And lastly, "consciousness" is the belief that people can have, or it can be an interest or knowledge of certain ideas.</p>
+<p><em>Greta Thunberg helped younger people to have more interest in climate consciousness and activism. </em></p>
+<p>Please let us know if these explanations and examples have helped you, Mayer.</p>
+<p>Do you have a question about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>yoga </strong><em>– n. </em>a system of exercises for gaining bodily or mental control and well-being</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

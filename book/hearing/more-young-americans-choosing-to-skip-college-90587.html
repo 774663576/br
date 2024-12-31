@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - More Young Americans Choosing to Skip College</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, More Young Americans Choosing to Skip College" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/more-young-americans-choosing-to-skip-college.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>More Young Americans Choosing to Skip College</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/more-young-americans-choosing-to-skip-college.mp3" id="mp3"></a>
+<a href="americas-presidents-james-madison-90584.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">18 March 2023</span><br/>
+<p>Three years ago, COVID-19 restrictions caused major changes to the way students experienced college. Instead of learning in classrooms, they took classes online. Instead of living on <strong>campus</strong>, many students lived at home. The changes made some young people wonder whether a college education was worth it.</p>
+<p>Today, most college classes are back to normal. Yet, some young people who decided to delay going to college because of the pandemic are still choosing not to go to school. The rising costs of higher education and fears of student debt are among the reasons more young people are choosing not to attend college.</p>
+<p>Instead, they are working. Many believe it is the right decision for them.</p><div class="contentImage"><img alt="Boone Willams, 20, left, brazes a copper pipe during a second-year apprentice training program class at the Plumbers and Pipefitters Local Union 572 facility in Nashville, Tenn. (AP Photo/Mark Zaleski)" src="https://files.21voa.com/gdb/8f9ef94f-8c7b-47af-a50a-e5157ce4f2cd_w268_r1.jpg"/><br/><span class="imagecaption">Boone Willams, 20, left, brazes a copper pipe during a second-year apprentice training program class at the Plumbers and Pipefitters Local Union 572 facility in Nashville, Tenn. (AP Photo/Mark Zaleski)</span></div>
+<p>The National Student Clearinghouse notes that the number of people going to college in the U.S. dropped by eight percent from 2019 to 2022.</p>
+<p>Labor experts are concerned that the drop will hurt the U.S. economy in the long term. A drop in college <strong>graduates</strong> will reduce the number of workers in career areas from health care to information technology.</p>
+<p>Yet, some people who work in education see recent high school graduates as "different." Jamia Stokes works for SCORE, an education group in the state of Tennessee. She said students are more realistic about "the way they work, about the way they spend their time and their money."</p>
+<p>Some young people are choosing work over college because they can find jobs that pay well right after high school.</p>
+<p>The Associated Press spoke to young people in Tennessee who are of college age, but not in school. Most are working. One is considering going to college.</p>
+<p><strong>Mia Woodard</strong></p>
+<p>Mia Woodard lives in Jackson, a small town in Tennessee between Memphis and Nashville. Woodard said she remembers sitting in her bedroom and trying to fill out college applications online. Today, she wonders if she sent them in successfully.</p>
+<p>She said she never heard back from any of the colleges. She wonders whether her weak Wi-Fi signal caused the applications to not get sent. Or maybe, she said, she simply failed to provide the right information.</p>
+<p>Woodard said she did not have much support from her school. "It might be because they didn't believe in me," she said.</p>
+<p>Woodard had hoped to be the first in her family to get a college degree. Today, she works at a restaurant and lives with her dad. She is looking for a second job so she can get her own place to live. She said there is still a chance she will continue her education. Her hope is to study <strong>culinary</strong> arts.</p>
+<p><strong>Grayson Hart</strong></p>
+<p>Grayson Hart also lives in Jackson. He said he always imagined going to college. He wanted to be an actor or a teacher. He thought college was the best way to reach his goals. But he changed his mind during the pandemic.</p>
+<p>One year after finishing high school, he is not in college. He applied to schools but decided not to go. Instead, he is running a theater program for children in Jackson.</p>
+<p>He said he changed his mind about college because he spent one year doing a lot of learning on his own during the pandemic. He said he felt free without the responsibilities of going to school.</p>
+<p>Hart said he wondered why he should pay a lot of money to attend college in return for a piece of paper (a diploma) "that isn't going to help with what I'm doing now?"</p>
+<p>Hart said he is not sure what is next for him. "I do worry about the future and what that may look like for me," he said. "But right now, I'm trying to remind myself that I am good where I'm at, and we'll take it one step at a time."</p>
+<p><strong>Boone Williams </strong></p>
+<p>Three years ago, Boone Williams was the kind of student who looked like he was on his way to college. He took difficult classes and got good grades in high school. He was thinking about studying animal science.</p>
+<p>But when the pandemic closed schools and moved classes online, he said he lost interest. Instead of attending online classes, he went to work at local farms. He worked with horses and cows.</p>
+<p>"I was <strong>focusing</strong> on making money rather than going to school," he said.</p>
+<p>Today he is not in college. Instead, he works on <strong>plumbing</strong> jobs and is taking classes at night to learn from experts in a trade <strong>union </strong>in Nashville.</p>
+<p>He does not make much money right now. But he hopes to earn more in the future as he gets more experience.</p>
+<p>He thinks he will one day earn more than some of his classmates who did go to college.</p>
+<p>"In the long run, I'm going to be way more <strong>set</strong> than any of them," he said.</p>
+<p><strong>What next?</strong></p>
+<p>The lack of interest in college is concerning, especially among minority and low-<strong>income</strong> students. Among students from Tennessee who finished high school in 2021, only 35 percent of Hispanic students and 44 percent of Black students entered college. Over half of white students went to college.</p>
+<p>But there is some thought that interest in college is going up. There was a small increase in the number of students going to college in 2022 compared to the year before. Still, the total number is far lower than before the pandemic.</p>
+<p>Tennessee already had a problem getting students to continue their education after high school. In 2014, the state made community college free. More and more students started going to college. But today, the number is at its lowest since at least 2009.</p>
+<p>Vicki Bunch is the head of workforce development for a business group in Jackson. She said she thinks the number of students will stay low so long as they can get paid well right after high school.</p>
+<p>Students agreed. They said easy access to jobs and concerns about borrowing money have made college seem less appealing.</p>
+<p>I'm Dan Friedell. And I'm Caty Weaver.</p>
+<p><em>Dan Friedell adapted this story for VOA Learning English based on a report by the Associated Press.</em></p>
+<p>_______________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>campus </strong><em>–n. </em>the location of a college or school</p>
+<p><strong>graduate </strong><em>–n. </em>a person who has completed a school program and earned a degree</p>
+<p><strong>culinary </strong><em>–adj. </em>having to do with working in kitchens or preparing food</p>
+<p><strong>focus </strong><em>–n. </em>to center one's attention or mind on something</p>
+<p><strong>plumbing </strong><em>–n. </em>the pipes in homes and buildings that carry water in and out</p>
+<p><strong>union </strong><em>–n. </em>a working group of people with similar skills or training that negotiates for jobs together</p>
+<p><strong>set </strong><em>–adj. </em>the state of being comfortable or without major worries</p>
+<p><strong>income </strong><em>–n. </em>the amount of money someone makes in order to live each year</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

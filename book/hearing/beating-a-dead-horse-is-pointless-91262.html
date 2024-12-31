@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'Beating a Dead Horse' Is Pointless</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'Beating a Dead Horse' Is Pointless" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/beating-a-dead-horse-is-pointless.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'Beating a Dead Horse' Is Pointless</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/beating-a-dead-horse-is-pointless.mp3" id="mp3"></a>
+<a href="americas-presidents-grover-cleveland-91259.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">29 July 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give examples, notes on usage, and sometimes we even use them in short stories.</p>
+<p>Today's idiom does not sound nice. In fact, it sounds quite <strong>cruel.</strong></p><div class="contentImage"><img alt="FILE - National Treasure, right, with jockey John Velazquez, beats Blazing Sevens, with jockey Irad Ortiz Jr., wins the 148th Preakness Stakes horse race at Pimlico Race Course, May 20, 2023, in Maryland. (AP Photo/Julio Cortez)" src="https://files.21voa.com/gdb/01000000-0aff-0242-d855-08db598cfa59_w268_r1.jpg"/><br/><span class="imagecaption">FILE - National Treasure, right, with jockey John Velazquez, beats Blazing Sevens, with jockey Irad Ortiz Jr., wins the 148th Preakness Stakes horse race at Pimlico Race Course, May 20, 2023, in Maryland. (AP Photo/Julio Cortez)</span></div>
+<p>Today, we talk about <u>beating a dead horse</u>.</p>
+<p>Why would anyone do something as pointless as beating a dead animal? Well, that is how we use the expression: to describe something that is a useless thing to do. You are just wasting your time. It is not productive. There is no point.</p>
+<p>Merriam-Webster's online dictionary says this expression comes from the mid-19th century. Back then, some people may have beaten horses to make them go faster. At the time, this was often thought of as an acceptable practice.</p>
+<p>But <u>beating a dead horse</u> would be pointless – because it's dead. No amount of beating will change that fact. We often use this expression in the <strong>negative</strong>. We say things like "I don't want to beat horse ..." or "Not to beat a dead horse..."</p>
+<p>Now, if you are a horse lover and don't want to talk about beating one, please do not worry. We have many other expressions and idioms that have a similar meaning.</p>
+<p><em>Let's say your friend talks about the same problem. They do not take your advice and they do not seem to want to accept any solution. If you don't want to say to them, "Now you're just beating a dead horse," you can say, "Look, we've <u>gone over the same ground</u> and nothing has changed. So, can we please change the topic?"</em></p>
+<p>When you go over the same ground, you talk about the same thing over and over again.</p>
+<p>There is another expression with the word "ground" that means the same thing as "beat a dead horse." If I have a problem and talk about it too much, I have <u>run it into the ground</u>. Running something into the ground means you have talked about to death. You have talked about it <strong><u>ad nauseam</u></strong>. This means you are making other people sick over it.</p>
+<p>So, it is not a good idea <u>to <strong>dwell</strong> <strong>on</strong> an old topic</u>. Hearing about the same thing over and over again is tiring. Many people have lost good friends from <strong><u>belaboring</u></strong><u> a point or an issue.</u></p>
+<p>And that is all the time we have for this Words and Their Stories.</p>
+<p>But join us again! We explore so many expressions and idioms in this program. In fact, each week we teach new ones. Not to beat a dead horse, but we really are a great resource for learning English.</p>
+<p>Until next time ... I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>__________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cruel </strong><em>– adj.</em><strong> </strong><span style="color:#212529">ready to hurt others <strong>: </strong>without humane feelings</span></p>
+<p><strong>negative </strong><em>– adj</em>. showing <span style="color:#212529">the opposite of something else</span></p>
+<p><strong>ad nauseam </strong><em>– adv. </em>to a sickening or excessive degree</p>
+<p><strong>dwell</strong> <strong>on </strong><em>– phrasal v. </em><span style="color:#212529">to think or talk about (something) for a long time</span></p>
+<p><strong>belabor </strong><em>– v. </em><span style="color:#212529">to explain or insist on excessively</span></p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

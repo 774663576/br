@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - NASA: Mars Lander Picked Up First-Ever ‘Marsquake’</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, NASA: Mars Lander Picked Up First-Ever ‘Marsquake’" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201904/nasa-mars-lander-picked-up-first-ever-marsquake-.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>NASA: Mars Lander Picked Up First-Ever ‘Marsquake’</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201904/nasa-mars-lander-picked-up-first-ever-marsquake-.mp3" id="mp3"></a>
+<a href="out-of-a-drawer-comes-a-vicious-ancient-beast-81940.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">26 April, 2019</span><br/>
+<p>The American space agency NASA says its Mars lander has noted what scientists believe was the first "marsquake" ever recorded. </p>
+<p>The <strong>seismic</strong> signal was measured and recorded on April 6 by NASA's <a class="wsw__a" href="https://www.21voa.com/a/us-space-agency-returns-to-mars-with-insight-lander/4668627.html" target="_blank">InSight lander</a>, the space agency announced this week. InSight landed on Mars in November 2018. Its goal is to explore the inside of the red planet and measure <strong>geological</strong> conditions. </p>
+<p>The likely marsquake was picked up by a special device called a seismometer, which is used to measure seismic waves. The device was built for InSight by France's national space agency.</p>
+<p>The seismometer was designed to be extremely sensitive. It aims to differentiate between seismic signals coming from inside Mars and activity coming from above the surface, such as wind or meteorite movements.</p>
+<div class="contentImage"><img alt="This illustration made available by NASA in 2018 shows the InSight lander drilling into Mars. InSight, short for Interior Exploration using Seismic Investigations, Geodesy and Heat Transport, launched from Vandenberg Air Force Base on Saturday, May 5, 201" src="https://files.21voa.com/gdb/3945ECA1-F0DE-484E-80CE-FF6B6E3D50A8_w268_r1.jpg"/><br/><span class="imagecaption">This illustration made available by NASA in 2018 shows the InSight lander drilling into Mars. InSight, short for Interior Exploration using Seismic Investigations, Geodesy and Heat Transport, launched from Vandenberg Air Force Base on Saturday, May 5, 201</span></div>
+<p>"This is the first recorded <strong>trembling</strong> that appears to have come from inside the planet," NASA's Jet Propulsion Laboratory (JPL) <a class="wsw__a" href="https://www.jpl.nasa.gov/news/news.php?feature=7383" target="_blank">said in a statement</a>. The laboratory is based in Pasadena, California.</p>
+<p>Scientists will continue to examine the recording in an attempt to confirm the exact cause of the signal. </p>
+<p>The InSight exploration team <a class="wsw__a" href="http://www.ipgp.fr/en/insight-mission-listen-to-the-heartbeat-of-mars-0" target="_blank">released audio</a> of the possible marsquake. For comparison purposes, the audio begins with what NASA scientists say is the sound of wind on Mars.</p>
+<p>This is followed by a rising sound thought to be the marsquake.</p>
+<p>Scientists say the recorded activity was comparable to a 2.5-strong earthquake on our own planet. Such a small earthquake would likely not even be felt on Earth's surface. Seismically active areas in the United States, like southern California for example, experience many similarly small earthquakes each week.</p><span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close"><span class="ico ico-close m-0"></span></span>
+<p>
+<p>But Bruce Banerdt, an investigator with the JPL, believes even the small measurement marks an important new beginning. He said InSight's instrument had already been working effectively to collect "background noise" since landing on Mars. </p>
+<p>"But this first event officially kicks off a new field: Martian seismology," Banerdt said.</p>
+<p>Philippe Lognonné is a geophysics and planetary science professor at the University Paris Diderot in France. He was a lead researcher on the InSight seismometer project. He told the Reuters news agency that the Mars results were very similar to quake activity measured on other planets. "So we are very <strong>confident</strong> that this is a marsquake," he said. Lognonné predicted that, in the future, InSight would measure quakes 50 to 100 times larger than the one on April 6.</p>
+<p>Quakes on earth happen along <strong>faults</strong> created by the movement of <strong>tectonic plates</strong>. Mars and Earth's moon do not have tectonic plates, but they still experience quakes.</p>
+<p>Repeated changes in temperature and size of material inside the planets can create pressure over time. When this pressure becomes intense enough to break the planet's outer <strong>crust</strong>, it causes a quake.</p>
+<p>Banerdt said InSight's new finding is a continuation of experiments that began with NASA's Apollo space program in the 1960s. Apollo astronauts put five seismometers on the moon that measured thousands of quakes between 1969 and 1977. NASA says scientists were able to use that information to learn many new things about the inside of the moon.</p>
+<p>Now, the NASA team hopes InSight's seismometer can provide scientists with valuable <a class="wsw__a" href="https://www.21voa.com/a/mars-researchers-find-first-evidence-of-planet-wide-groundwater-system/4809960.html" target="_blank">information about Mars</a> – and <a class="wsw__a" href="https://www.21voa.com/a/nasa-private-companies-to-make-next-moon-landing/4681551.html" target="_blank">other planets, too.</a> "By studying the deep <strong>interior </strong>of Mars, they hope to learn how other rocky worlds, including Earth and the Moon, formed," NASA said in a statement.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from the Associated Press, Reuters and NASA. Ashley Thompson was the editor.</em></p>
+<p><em>We want to hear from you. Write to us in the Comments section, and </em><a class="wsw__a" href="http://www.21voa.com" target="_blank"><em>visit 51VOA.COM</em></a><em>.</em></p>
+<p><strong>_____________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>seismic</strong> – <em>adj.</em> relating to or caused by an earthquake</p>
+<p><strong>geological</strong> – <em>adj.</em> relating to the study of rocks, soil and the physical structure of the Earth</p>
+<p><strong>tremble </strong>– <em>n.</em> to shake</p>
+<p><strong>confident </strong>– <em>adj.</em> certain about one's ability to do things well</p>
+<p><strong>fault </strong>– <em>n.</em> a crack in the Earth's crust</p>
+<p><strong>tectonic plates </strong>– <em>n.</em> plates that make up the surface of the Earth</p>
+<p><strong>crust </strong>– <em>n.</em> hard, dry layer on the surface of something</p>
+<p><strong>interior </strong>– <em>n.</em> the inside part of something</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Cuban Dancer Performing again with Help from Specialists</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Cuban Dancer Performing again with Help from Specialists" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202208/cuban-dancer-performing-again-with-help-from-specialists.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Cuban Dancer Performing again with Help from Specialists</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202208/cuban-dancer-performing-again-with-help-from-specialists.mp3" id="mp3"></a>
+<a href="/static/lrc/cuban-dancer-performing-again-with-help-from-specialists.lrc" id="lrc"></a>
+<a href="aid-moving-in-pakistan-as-seasonal-floods-affect-tens-of-millions-89565.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">30 August 2022</span><br/>
+<p>A rare medical problem almost <strong>crippled</strong> Cuban dancer Yankiel Vásquez. But a team of <strong>physiotherapists</strong> helped him recover. The 29-year-old Vásquez is again dancing with Cuba's National Ballet.</p>
+<p>Vásquez is from the town of Mantua in rural western Cuba. He joined the ballet in 2011. But shortly after he started, he became sick with Guillain-Barré <strong>syndrome</strong>. That disease of the <strong>immune</strong> <strong>system</strong> attacks the nerves. It sometimes makes a person unable to move their arms or legs.</p>
+<p>When Vásquez was sick, he thought his dream of dancing with the ballet was finished.</p>
+<div class="contentImage"><img alt="A ballet dancer speaks to Chilean Kinesiologist Mauro Model in a physiotherapy room at a ballet's school in Havana, Cuba, August 18, 2022. (REUTERS/Alexandre Meneghini)" src="https://files.21voa.com/gdb/edac728f-b9b3-40cd-8748-3cdf398a951f_cx0_cy3_cw99_w268_r1.jpg"/><br/>
+<span class="imagecaption">A ballet dancer speaks to Chilean Kinesiologist Mauro Model in a physiotherapy room at a ballet's school in Havana, Cuba, August 18, 2022. (REUTERS/Alexandre Meneghini)</span></div>
+<p>Vásquez said, "It took me several months to learn to walk again." He had to recover physically and mentally. He said the recovery process was "intense."</p>
+<p>This year he returned to the National Ballet, where he is now a "first dancer." This means he has reached an <strong>elite</strong> level in the ballet. Vásquez said: "Reaching ‘first dancer' is what one dreams of as a child."</p>
+<p>Cuba's National Ballet began in 1948. It is one of the world's most famous ballet companies. For many years, a school linked to the ballet has helped its students dance in many places around the world.</p>
+<p>The Cuban National Ballet has 70 dancers. The company also has a team of physiotherapists who help the dancers stay healthy. The team helped Vásquez become healthy again.</p>
+<p>A team of physiotherapists from Chile recently arrived as well. They are helping the dancers prepare for performances. And they are sharing their knowledge with the Cuban team of physiotherapists.</p>
+<p>Viengsay Valdés is director of the National Ballet of Cuba. She noted that physical exercises are very important. "A dancer is like an athlete. The importance of having physical preparation is essential," she said.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Nelson Acosta and Mario Fuentes reported this story for Reuters. Andrew Smith adapted it for VOA Learning English.</em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>crippled</strong> <em>–adj.</em> unable to walk or move legs and arms</p>
+<p><strong>physiotherapist </strong><em>-n. </em>a health care worker who helps restore, improve, or preserve physical movement and function</p>
+<p><strong>syndrome </strong><em>-n. </em> a medical problem or condition, characterized by a group of physical changes and symptoms</p>
+<p><strong>immune system</strong><em>-n. </em>the system in the body of a person or animal that protects against infection</p>
+<p><strong>elite </strong><em>-adj. </em>among the best or at a very high level compared with others</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Cuban Dancer Performing again with Help from Specialists]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]A rare medical problem almost crippled Cuban dancer Yankiel Vásquez.
+[00:07.44]But a team of physiotherapists helped him recover.
+[00:11.60]The 29-year-old Vásquez is again dancing with Cuba's National Ballet.
+[00:18.24]Vásquez is from the town of Mantua in rural western Cuba.
+[00:23.80]He joined the ballet in 2011.
+[00:27.32]But shortly after he started, he became sick with Guillain-Barré syndrome.
+[00:34.04]That disease of the immune system attacks the nerves.
+[00:38.84]It sometimes makes a person unable to move their arms or legs.
+[00:45.04]When Vásquez was sick, he thought his dream
+[00:48.48]of dancing with the ballet was finished.
+[00:51.64]Vásquez said, "It took me several months to learn to walk again."
+[00:57.92]He had to recover physically and mentally.
+[01:01.36]He said the recovery process was "intense."
+[01:06.16]This year he returned to the National Ballet,
+[01:09.60]where he is now a "first dancer."
+[01:12.72]This means he has reached an elite level in the ballet.
+[01:17.32]Vásquez said: "Reaching ‘first dancer'
+[01:21.04]is what one dreams of as a child."
+[01:23.92]Cuba's National Ballet began in 1948.
+[01:28.48]It is one of the world's most famous ballet companies.
+[01:33.04]For many years, a school linked to the ballet
+[01:37.24]has helped its students dance in many places around the world.
+[01:42.24]The Cuban National Ballet has 70 dancers.
+[01:46.24]The company also has a team of physiotherapists
+[01:50.36]who help the dancers stay healthy.
+[01:53.24]The team helped Vásquez become healthy again.
+[01:56.80]A team of physiotherapists from Chile recently arrived as well.
+[02:03.64]They are helping the dancers prepare for performances.
+[02:08.08]And they are sharing their knowledge
+[02:10.36]with the Cuban team of physiotherapists.
+[02:13.80]Viengsay Valdés is director of the National Ballet of Cuba.
+[02:19.68]She noted that physical exercises are very important.
+[02:24.36]"A dancer is like an athlete.
+[02:27.04]The importance of having physical preparation is essential," she said.
+[02:33.80]I'm Andrew Smith. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

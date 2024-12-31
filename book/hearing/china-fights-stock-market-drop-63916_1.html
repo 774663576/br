@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中国全力维护股市稳定</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 中国全力维护股市稳定" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201507/china-fights-stock-market-drop.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中国全力维护股市稳定</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201507/china-fights-stock-market-drop.mp3" id="mp3"></a>
+<a href="/static/lrc/china-fights-stock-market-drop.lrc" id="lrc"></a>
+<a href="china-fights-stock-market-drop-63916.html" id="CnPage" target="_blank"></a>
+<a href="what-is-this-thing-called-words-and-their-stories-63901.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>China's stock markets have lost nearly $3 trillion from their peak in June. As a result, the government has introduced new measures hoping to stop weeks of declining prices.<br/>六月份，中国股市已经从顶峰跌去了近3万亿美元。因此中国政府已经出台新措施希望阻止股价数周的下跌。</p>
+<p>In an effort to avoid further losses, hundreds of companies listed on China's stock exchanges filed papers to suspend trading. By Thursday, the stocks of more than 1,400 mainland companies had been suspended. That is about 40 percent of the market.<br/>为了避免进一步损失，数百家在中国股市上市的公司提交文件申请暂停交易。截至上周四，1400多家内地企业股票停牌，占到了股市上市公司总量的40%。</p>
+<p>China's Securities Regulatory Commission blamed the losses partly on a "panic sentiment" and "irrational selling." Chinese state media have blamed short-sellers, traders who profit from falling prices, people spreading rumors and foreign investors. The government then put in place a number of measures to calm the stock markets.<br/>中国证监会将这一损失部分归咎于“恐慌情绪”和“非理性抛售。”中国官方媒体则指责从股价下跌中获利的卖空者，散布谣言者以及外国投资者。然后中国政府制订了一系列措施来稳定股市。</p>
+<ul>
+<li>The government agency that oversees the country's biggest state-run companies has told them not to sell shares. Instead, it told them to buy more to keep the market stable.<br/>负责监督该国大型国有企业的政府机构（国资委）已经指示他们不要减持。相反，国资委要求国有企业增持股票以维护市场稳定。 
+<li>The country's central bank promised to "offer (an) abundant liquidity supply for security brokers." That means it would make loans to stock traders, called brokers, to make sure they have enough money to carry out trades.<br/>中国央行承诺向券商提供充裕的流动性。这意味着央行会向券商提供贷款确保他们拥有足够资金进行交易。 
+<li>Chinese officials also have lent $42 billion to brokerages to buy shares. And the government moved to permit insurance companies to invest larger amounts of money in stocks.<br/>中国有关部门还借给券商420亿美元用来购买股票。同时政府进一步允许保险公司向股市大幅投资。</li></li></li></ul>
+<p><strong>How Chinese stocks rose in 2014<br/>2014年中国股市如何上涨</strong></p>
+<p>China's stock markets rose in late 2014 after the central bank cut interest rates for the first time in more than two years. A new trading link between the Shanghai and Hong Kong stock exchanges added to increased market activity. Higher "margin trading," in which investors do not have to deposit the full cost of their stock trades in order to buy the shares, also fueled gains.<br/>2014年年底，央行开始了两年多以来的首次降息，自此之后，中国股市开始上涨。上海和香港股市新开通的交易联系（即沪港通）进一步提高了市场活动性。高度融资融券使得投资者无需存入股票交易的全额资金，这也助长了涨势。</p>
+<p>In the twelve months before June 12 of this year, the total value of stocks traded on the Chinese market increased by more than 150 percent.<br/>在今年6月12日前的12个月里，中国股票总市值增加了150%以上。</p>
+<p>But as the market peaked in early June, the government tightened rules on margin trading. Investors then began to sell their holdings to protect their profits.<br/>但是随着6月初市场见顶，中国政府收紧了融资融券交易规则。投资者随后开始抛售其持有的股票以保护他们的收益。</p>
+<p><strong>Treasury Secretary Urges Market Reforms to Continue<br/>美国财长督促继续市场改革</strong></p>
+<p>U.S. Treasury Secretary Jack Lew spoke about China's answer to its stock market problems at the Brookings Institution in Washington last week.<br/>美国财政部长杰克·卢(Jack Lew)上周在华盛顿布鲁金斯学会谈到了中国对其股市问题的回应。</p>
+<p>He said China's markets are not fully integrated into the world financial system. Mr. Lew says Chinese officials have a strong commitment to market reforms where they have clearly set out a plan. He said the speed at which the reforms are put in place remains a question.<br/>他说，中国市场尚未完全融入世界金融体系。中国官员郑重承诺市场改革，并且已经明确制定了计划。他说，改革到位的速度仍然是一个疑问。</p>
+<p>"The question isn't their commitment to the goal. The question is the pace at which they implement it and do they do it fast enough for it to be effective. I hope this is not something that slows down the pace of reform...They've got a set of policies that they've outlined which, if they implement them, I think will make China's economy much stronger in the future."<br/>“现在的问题不是他们对目标的承诺，问题在于他们实现承诺的速度，以及他们是否足够迅速使其奏效。我希望这不会减缓改革步伐。他们已经勾画了一系列政策，如果这些政策得以实现，我认为将会使中国经济在未来更加强劲。”</p>
+<p>Mr. Lew said China is moving from a centralized, industrial economy to a more market-based economy powered by consumer spending. This, he said, would lead to slower more sustainable growth and improve the lives of the Chinese people while lifting the world economy. He warned of slowing the reform process.<br/>卢先生表示，中国正从一个集中的工业化经济转向由消费支出驱动的更为市场化的经济。他说，这会在提升世界经济的同时，给中国带来更加缓慢但可持续的增长并改善中国人们的生活。他警告说改革进程可能会放缓。</p>
+<p>"If the reaction is to put the brakes on reforms, that will slow that process."<br/>“如果回应是在改革上刹车，就会延缓这一进程。”</p>
+<p><strong>Markets recover slightly<br/>市场略有回升</strong></p>
+<p>Investors welcomed the government actions to stop the decline. On Friday, Chinese stock markets regained some of the losses from the past few weeks.<br/>投资者对政府救市表示欢迎。上周五，中国股市从过去几个星期的损失中有所恢复。</p>
+<p>However, stocks from many Chinese companies are still suspended from trading. Other investors believe prices may fall again once the suspended shares resume trading.<br/>然而，许多中国企业的股票仍在停牌。有投资者认为，一旦这些停牌股票复牌，股价可能再一次下跌。</p>
+<p>In a report on Friday, Bank of America wrote that the stock market crash would hit the Chinese economy in time and "will likely hurt consumption down the road."<br/>美国银行在周五的一份报告中写道，股价大跌早晚会打击中国经济，并可能会伤害未来的消费。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">
+[00:00.32]China's stock markets have lost nearly $3 trillion from their peak in June.
+[00:06.76]As a result, the government has introduced new measures
+[00:11.24]hoping to stop weeks of declining prices.
+[00:16.12]In an effort to avoid further losses,
+[00:19.28]hundreds of companies listed on China's stock exchanges
+[00:24.00]filed papers to suspend trading.
+[00:27.80]By Thursday, the stocks of more than 1,400 mainland companies had been suspended.
+[00:35.56]That is about 40 percent of the market.
+[00:40.60]China's Securities Regulatory Commission
+[00:43.84]blamed the losses partly on a "panic sentiment" and "irrational selling."
+[00:50.76]Chinese state media have blamed short-sellers,
+[00:54.36]traders who profit from falling prices,
+[00:57.72]people spreading rumors and foreign investors.
+[01:01.88]The government then put in place a number of measures to calm the stock markets.
+[01:09.68]The government agency that oversees the country's biggest state-run companies
+[01:15.24]has told them not to sell shares.
+[01:18.56]Instead, it told them to buy more to keep the market stable.
+[01:24.16]The country's central bank
+[01:26.64]promised to "offer (an) abundant liquidity supply for security brokers."
+[01:32.44]That means it would make loans to stock traders, called brokers,
+[01:37.32]to make sure they have enough money to carry out trades.
+[01:42.40]Chinese officials also have lent $42 billion to brokerages to buy shares.
+[01:49.52]And the government moved to permit insurance companies
+[01:53.80]to invest larger amounts of money in stocks.
+[01:57.72]How Chinese stocks rose in 2014
+[01:59.21]China's stock markets rose in late 2014
+[02:03.28]after the central bank cut interest rates for the first time in more than two years.
+[02:09.84]A new trading link between the Shanghai and Hong Kong stock exchanges
+[02:15.40]added to increased market activity.
+[02:19.52]Higher "margin trading," in which investors do not have to deposit
+[02:24.84]the full cost of their stock trades
+[02:27.64]in order to buy the shares, also fueled gains.
+[02:32.32]In the twelve months before June 12 of this year,
+[02:36.12]the total value of stocks traded on the Chinese market
+[02:40.44]increased by more than 150 percent.
+[02:44.52]But as the market peaked in early June,  the government tightened rules on margin trading.
+[02:52.28]Investors then began to sell their holdings to protect their profits.
+[02:57.80]Treasury Secretary Urges Market Reforms to Continue
+[02:58.98]U.S. Treasury Secretary Jack Lew
+[03:02.20]spoke about China's answer to its stock market problems
+[03:06.52]at the Brookings Institution in Washington last week.
+[03:11.52]He said China's markets are not fully integrated into the world financial system.
+[03:18.96]Mr. Lew says Chinese officials
+[03:22.12]have a strong commitment to market reforms
+[03:25.60]where they have clearly set out a plan.
+[03:29.56]He said the speed at which the reforms are put in place remains a question.
+[03:36.40]"The question isn't their commitment to the goal. The question is the pace at which they implement it and do they do it fast enough for it to be effective.
+[03:43.96]I hope this is not something that slows down the pace of reform...
+[03:47.72]They've got a set of policies that they've outlined
+[03:51.28]which, if they implement them, I think will make China's economy much stronger in the future."
+[03:56.93]Mr. Lew said China is moving from a centralized, industrial economy
+[04:02.84]to a more market-based economy powered by consumer spending.
+[04:09.00]This, he said, would lead to slower more sustainable growth and improve the lives of the Chinese people
+[04:17.68]while lifting the world economy. He warned of slowing the reform process.
+[04:24.20]"If the reaction is to put the brakes on reforms, that will slow that process."
+[04:29.48]Investors welcomed the government actions to stop the decline.
+[04:35.00]On Friday, Chinese stock markets regained some of the losses from the past few weeks.
+[04:42.28]However, stocks from many Chinese companies are still suspended from trading.
+[04:49.28]Other investors believe prices may fall again once the suspended shares resume trading.
+[04:58.00]In a report on Friday, Bank of America wrote that the stock market crash
+[05:03.60]would hit the Chinese economy in time
+[05:07.08]and "will likely hurt consumption down the road."
+[05:11.52]I'm Mario Ritter.
+[05:14.48]Words in This Story
+[05:16.52]peak – v. to reach its highest point; to reach the top
+[05:22.76]rumor(s) –n. stories about others
+[05:27.20]passed between people which may not be true, but are spread anyway
+[05:32.96]stable –adj. not easily changed, solid
+[05:39.44]abundant – adj. having a large supply of something
+[05:45.64]margin trading – n. using borrowed money to buy securities
+[05:52.68]deposit – n. money placed in a bank or held with a financial institution like a brokerage
+[06:00.80]integrated –adj. integrate –v.
+[06:06.24]to bring different things or people together into a group that works together
+[06:13.00]implement –v. to put a plan into action; to put something into place
+[06:20.00]consumer –n. a person who buys and uses products in an economy                                                                                          
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

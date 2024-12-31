@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Grammar and Cleaning, Part 2</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Grammar and Cleaning, Part 2" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/grammar-and-cleaning-part-2.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Grammar and Cleaning, Part 2</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/grammar-and-cleaning-part-2.mp3" id="mp3"></a>
+<a href="study-suggests-links-between-fracking-health-in-children-91391.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">24 August 2023</span><br/>
+<p>Cleaning is one of those activities that we have to do. But what kinds of words and structures do we use to talk about this common activity?</p>
+<p>In today's<em> Everyday Grammar</em>, we will explore a few ways to talk about cleaning. This lesson builds on the ideas of a recent lesson that explored verbs and objects.</p>
+<p>Today we will explore phrasal verbs that connect to cleaning.</p><div class="contentImage"><img alt="Everyday Grammar" src="https://files.21voa.com/gdb/01000000-0aff-0242-08ed-08dba4b87241_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar</span></div>
+<p><strong>Phrasal verbs </strong></p>
+<p>Phrasal verbs are groups of words. They include a verb and another short word or words. Together, these groups of words take on a different meaning from what the individual words suggest.</p>
+<p>There are many phrasal verbs in English. But we only use a small number of these when we talk about cleaning.</p>
+<p>In this lesson, we will explore three phrasal verbs that connect with cleaning. All of them involve the short word "up."</p>
+<p>The phrasal verbs are "clean up," "pick up," and "wash up." Let's explore each of these in turn.</p>
+<p><strong>Clean up </strong></p>
+<p>"Clean up" has a few closely related meanings. It means to remove dirt or waste. It also means to make a room clean and orderly.</p>
+<p>"Clean up" comes in a few different forms. Sometimes we use clean up without a noun or noun<strong> phrase</strong> after it, as in:</p>
+<p><em>"Let's take some time to clean up."</em></p>
+<p>But we often use a noun or noun phrase with clean up, as in "clean up something."</p>
+<p>So, you might say:</p>
+<p><em>"I need to clean up the kitchen."</em></p>
+<p>Or,</p>
+<p><em>"He needs to clean up his room."</em></p>
+<p>In our example, the noun phrases "the kitchen" and "his room" come after the phrasal verb.</p>
+<p>But you should know that sometimes we use the noun or noun phrase in between "clean" and the short word "up," as in "clean something up."</p>
+<p>So, you might hear a person say:</p>
+<p><em>"She needs to clean this mess up."</em></p>
+<p>You might be worried about these two forms – the one in which the noun or noun phrase comes in the middle of the phrasal verb and the one in which the noun or noun phrase comes after it.</p>
+<p>The good news is that your meaning will still be understood<strong> regardless </strong>of which form you choose.</p>
+<p>In other words, these two statements have the same basic meaning in most situations:</p>
+<p><em>"She needs to clean this mess up."</em></p>
+<p>And,</p>
+<p><em>"She needs to clean up this mess."</em></p>
+<p><strong>Pick up </strong></p>
+<p>Our second phrasal verb is "pick up." "Pick up" has a few different meanings in different situations. But when we are talking about cleaning, we use it to mean the action of lifting something from the floor, ground, or other low surface.</p>
+<p>Once again, we use "pick up" with a noun or noun phrase. And just like "clean up," "pick up" can have the noun phrase come after the phrasal verb or in the middle of the phrasal verb.</p>
+<p>So, you might hear a person say:</p>
+<p><em>"Could you pick up those toys?"</em></p>
+<p>Or,</p>
+<p><em>"Could you pick those toys up?"</em></p>
+<p>Once again, the two forms have the same meaning although the grammar — the noun phrase placement — is a little different.</p>
+<p>Here is another example. Imagine a situation in which a little baby has thrown some toys on the ground. A person might say:</p>
+<p><em>"I will pick up the toys."</em></p>
+<p>Or,</p>
+<p><em>"I will pick the toys up."</em></p>
+<p><strong>Wash up </strong></p>
+<p>Our final phrasal verb is "wash up."</p>
+<p>When we talk about cleaning, we generally use "wash up" in the sense of washing your hands, face, or dishes.</p>
+<p>So, you might hear a person say:</p>
+<p><em>"I need to wash up before we go to the concert."</em></p>
+<p>Or,</p>
+<p><em>"We need to wash up the dishes before we go to bed."</em></p>
+<p><strong>The ending is important </strong></p>
+<p>An important point about phrasal verbs. The short word at the end of the phrasal verb <strong>determines</strong> the meaning. So, by paying careful attention to the short word or words, you will improve your ability to use the correct phrasal verb at the right time.</p>
+<p>That is why we chose to use phrasal verbs only with "up" for this lesson. Now, whenever you talk about cleaning, you will remember that you can use several phrasal verbs that end in "up," - clean up, pick up, and wash up.</p>
+<p>I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for VOA Learning English. </em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>phrase</strong><em> – n. </em>a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>regardless </strong><em>– adv.</em> without being affected by (something)</p>
+<p><strong>determine </strong><em>– v.</em> to establish (something) exactly; to be the cause of or reason for (something)</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 《奥本海默》和《可怜的东西》领跑奥斯卡提名</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Arts &amp; Culture, 《奥本海默》和《可怜的东西》领跑奥斯卡提名" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/oppenheimer-and-poor-things-lead-oscar-nominations.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>《奥本海默》和《可怜的东西》领跑奥斯卡提名</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/oppenheimer-and-poor-things-lead-oscar-nominations.mp3" id="mp3"></a>
+<a href="/static/lrc/oppenheimer-and-poor-things-lead-oscar-nominations.lrc" id="lrc"></a>
+<a href="oppenheimer-and-poor-things-lead-oscar-nominations-92123.html" id="CnPage" target="_blank"></a>
+<a href="unwanted-plants-threaten-crops-in-north-central-us-92121.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Oppenheimer, the film about the lead scientist in the American project to create a nuclear weapon, led the Academy Awards, or Oscars, with 13 nominations on Tuesday.<br/>
+《奥本海默》是一部关于美国制造核武器项目首席科学家的电影，周二该电影以13项提名领跑奥斯卡奖。</p>
+<p>The three-hour film was expected to be a top candidate for best picture. Oppenheimer also received nominations for best director for Christopher Nolan, lead actor for Cillian Murphy and supporting actors for Emily Blunt and Robert Downey, Jr. The film also received nominations for several production categories such as film editing and sound.<br/>
+这部三小时的影片有望成为最佳影片的头号候选。《奥本海默》的克里斯托弗·诺兰获得最佳导演提名，西里安·墨菲获得男主角提名，艾米丽·布朗特和小罗伯特·唐尼获得男配角提名。该片还获得了电影剪辑和配乐等多个制作类别的提名。</p>
+<p>Nolan is known as one of the top directors working in Hollywood today, but he has never won the award for director. None of his movies have won best picture. Experts say this may be his year to win both awards.<br/>
+诺兰被称为当今好莱坞最顶尖的导演之一，但他从未获得过最佳导演奖。他的电影也从未获得最佳影片奖。专家表示，今年可能是他包揽两项大奖的一年。</p>
+<p>Nolan told the Associated Press, "... getting this kind of recognition from the academy, I don't know what to say, really. It certainly confirms our faith in what studio filmmaking can be."<br/>
+诺兰告诉美联社，“……得到学院的这种认可，我真的不知道该说什么。这肯定证实了我们对片厂电影制作的信念。”</p>
+<p>Nine other films were nominated for best picture this year. They are Barbie, Poor Things, Killers of the Flower Moon, The Holdovers, Maestro, American Fiction, Past Lives, Anatomy of a Fall and The Zone of Interest.<br/>
+今年还有9部电影获得最佳影片提名。它们是《芭比》、《可怜的东西》、《花月杀手》、《留校联盟》、《音乐大师》、《美国小说》、《过往人生》、《坠落的审判》和《利益区域》。</p>
+<p>After Oppenheimer, the films with the most nominations were Poor Things with 11 and Killers of the Flower Moon with 10.<br/>
+在《奥本海默》之后，获得提名最多的电影是《可怜的东西》（11项）和《花月杀手》（10项）。</p>
+<p>Poor Things is a film about a Victorian-era woman brought back to life by a scientist and stars Emma Stone. She was nominated for best actress, along with Annette Bening in Nyad, Lily Gladstone in Killers of the Flower Moon, Sandra Huller in Anatomy of a Fall and Carey Mulligan in Maestro.<br/>
+《可怜的东西》是一部关于一位维多利亚时代的女性的电影，这位女性由一位科学家复活，并由艾玛·斯通主演。斯通与《奈德》中的安妮特·贝宁、《花月杀手》中的莉莉·格莱斯顿、《坠落的审判》中的桑德拉·惠勒和《音乐大师》中的凯莉·穆里根一起获得了最佳女主角提名。</p>
+<p>Barbie was the most successful movie in 2023. Greta Gerwig's film based on the famous toy brought in over $1.4 billion around the world. It received eight nominations. Gerwig, however, was not nominated for best director.<br/>
+《芭比》是2023年最成功的电影。格蕾塔·葛维格根据这个著名玩偶拍摄的电影在全球带来了超过14亿美元的收入。它获得了八项提名。然而，葛维格并没有获得最佳导演提名。</p>
+<p>Barbie received nominations for best picture, best supporting actor (Ryan Gosling as Ken) and two nominations for best song.<br/>
+芭比娃娃获得了最佳影片、最佳男配角提名（瑞安·高斯林饰演肯）和两项最佳歌曲的提名。</p>
+<p>The best director nominees were Nolan, Justine Triet of Anatomy of a Fall, Martin Scorsese of Killers of the Flower Moon, Yorgos Lanthimos of Poor Things and Jonathan Glazer of Zone of Interest. Scorsese was nominated in the category for the 10th time.<br/>
+最佳导演提名者是诺兰、《坠落的审判》的茹斯汀·特里耶、《花月杀手》的马丁·斯科塞斯、《穷东西》的欧格斯·兰斯莫斯和《利益区域》的乔纳森·格雷泽。斯科塞斯是第10次获得该奖项提名。</p>
+<p>The nominees for best international film were Society of the Snow, (from Spain); The Zone of Interest, (from Great Britain); The Teachers' Lounge (from Germany); Io Capitano (of Italy); and Perfect Days (from Japan).<br/>
+最佳国际影片的提名者是来自西班牙的《绝境盟约》、来自英国的《利益区域》、来自德国《教师休息室》、来自意大利的《我是船长》和来自日本的《完美的日子》。</p>
+<p>Experts say this year's group of nominees reflects a return to the traditional idea that films should be shown first in movie theaters before going to streaming services such as Netflix, Apple TV+ or Amazon Prime Video.<br/>
+专家表示，今年的提名电影群体反映了对传统观念的回归，即电影应该先在电影院上映，然后再到Netflix、Apple TV+或亚马逊Prime Video等流媒体服务。</p>
+<p>All of the top films spent at least one month in movie theaters first. Netflix was the top streaming video service with 18 nominations led by its film Maestro. That film tells the story of American composer Leonard Bernstein, and it stars actor Bradley Cooper, who also wrote and directed the movie.<br/>
+所有顶级电影都会先在影院上映至少一个月。Netflix凭借其电影《音乐大师》等电影获得18项提名，位居流媒体视频服务榜首。这部电影讲述了美国作曲家伦纳德·伯恩斯坦的故事，主角布拉德利·库珀也是这部电影的编剧和导演。</p>
+<p>The host of the awards broadcast on March 10 will be American late-night television presenter Jimmy Kimmel.<br/>
+3月10日举行的颁奖典礼将由美国午夜电视节目主持人吉米·金梅尔主持。</p>
+<p>I'm Dan Friedell.<br/>
+我是丹·弗里德尔。(51VOA.COM原创翻译，请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:‘Oppenheimer’ and ‘Poor Things’ Lead Oscar Nominations]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Oppenheimer, the film about the lead scientist
+[00:04.16]in the American project to create a nuclear weapon,
+[00:08.44]led the Academy Awards, or Oscars,
+[00:12.32]with 13 nominations on Tuesday.
+[00:16.32]The three-hour film was expected
+[00:20.16]to be a top candidate for best picture.
+[00:23.76]Oppenheimer also received nominations
+[00:26.88]for best director for Christopher Nolan,
+[00:31.28]lead actor for Cillian Murphy
+[00:34.20]and supporting actors
+[00:36.20]for Emily Blunt and Robert Downey, Jr.
+[00:39.76]The film also received nominations
+[00:43.56]for several production categories
+[00:46.48]such as film editing and sound.
+[00:49.76]Nolan is known as one of the top directors
+[00:53.84]working in Hollywood today,
+[00:55.84]but he has never won the award for director.
+[00:59.24]None of his movies have won best picture.
+[01:03.20]Experts say this may be his year
+[01:06.92]to win both awards.
+[01:09.12]Nolan told the Associated Press,
+[01:12.24]"... getting this kind of recognition from the academy,
+[01:15.84]I don't know what to say, really.
+[01:18.16]It certainly confirms our faith
+[01:20.88]in what studio filmmaking can be."
+[01:25.08]Nine other films were nominated
+[01:27.76]for best picture this year.
+[01:29.72]They are Barbie, Poor Things,
+[01:33.12]Killers of the Flower Moon, The Holdovers,
+[01:37.56]Maestro, American Fiction, Past Lives,
+[01:42.72]Anatomy of a Fall and The Zone of Interest.
+[01:47.84]After Oppenheimer, the films with
+[01:50.64]the most nominations were Poor Things with 11
+[01:55.08]and Killers of the Flower Moon with 10.
+[01:59.08]Poor Things is a film about a Victorian-era woman
+[02:04.04]brought back to life by a scientist and stars Emma Stone.
+[02:09.80]She was nominated for best actress,
+[02:12.80]along with Annette Bening in Nyad,
+[02:16.00]Lily Gladstone in Killers of the Flower Moon,
+[02:19.92]Sandra Huller in Anatomy of a Fall
+[02:23.84]and Carey Mulligan in Maestro.
+[02:27.84]Barbie was the most successful movie in 2023.
+[02:32.84]Greta Gerwig's film based on the famous toy
+[02:37.68]brought in over $1.4 billion around the world.
+[02:42.20]It received eight nominations.
+[02:46.12]Gerwig, however, was not nominated for best director.
+[02:51.64]Barbie received nominations for best picture,
+[02:55.92]best supporting actor (Ryan Gosling as Ken)
+[03:00.76]and two nominations for best song.
+[03:04.40]The best director nominees were Nolan,
+[03:07.76]Justine Triet of Anatomy of a Fall,
+[03:11.52]Martin Scorsese of Killers of the Flower Moon,
+[03:15.88]Yorgos Lanthimos of Poor Things
+[03:20.04]and Jonathan Glazer of Zone of Interest.
+[03:23.84]Scorsese was nominated
+[03:25.68]in the category for the 10th time.
+[03:30.36]The nominees for best international film
+[03:34.36]were Society of the Snow, (from Spain);
+[03:38.32]The Zone of Interest, (from Great Britain);
+[03:41.16]The Teachers' Lounge (from Germany);
+[03:44.36]Io Capitano (of Italy);
+[03:47.56]and Perfect Days (from Japan).
+[03:51.88]Experts say this year's group of nominees
+[03:55.80]reflects a return to the traditional idea
+[03:59.00]that films should be shown first in movie theaters
+[04:02.96]before going to streaming services such as Netflix,
+[04:07.68]Apple TV+ or Amazon Prime Video.
+[04:11.48]All of the top films spent
+[04:14.36]at least one month in movie theaters first.
+[04:18.04]Netflix was the top streaming video service
+[04:22.00]with 18 nominations led by its film Maestro.
+[04:26.96]That film tells the story
+[04:28.72]of American composer Leonard Bernstein,
+[04:32.72]and it stars actor Bradley Cooper,
+[04:35.48]who also wrote and directed the movie.
+[04:38.68]The host of the awards broadcast on March 10
+[04:42.56]will be American late-night
+[04:44.48]television presenter Jimmy Kimmel.
+[04:46.88]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - A Small US Town Teaches English to Immigrants’ Children</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, A Small US Town Teaches English to Immigrants’ Children" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202211/a-small-us-town-teaches-english-to-immigrants-children.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>A Small US Town Teaches English to Immigrants’ Children</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202211/a-small-us-town-teaches-english-to-immigrants-children.mp3" id="mp3"></a>
+<a href="what-russia-s-suspension-of-ukrainian-grain-deal-could-mean-89899.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">01 November 2022</span><br/>
+<p>A community in the southern state of Alabama is experimenting to find a better way to teach students who are learning English as their second language. To reach its goal, the school <strong>district</strong> is hiring more local, Spanish-speaking workers.</p>
+<p>More than half of the 2,500 students in Russellville City School district are Hispanic. About 25 percent of them are learning English.</p>
+<p>The district is using federal aid money aimed at helping communities hurt by the COVID-19 pandemic.</p><div class="contentImage"><img alt="Lety Vargas, a newly hired English Language teacher at Russellville Elementary School coaches students, Aug. 9, 2022. (Rebecca Griesbach/AL.com via AP)" src="https://files.21voa.com/gdb/013b0000-0aff-0242-18ee-08dab8433474_w268_r1.jpg"/><br/><span class="imagecaption">Lety Vargas, a newly hired English Language teacher at Russellville Elementary School coaches students, Aug. 9, 2022. (Rebecca Griesbach/AL.com via AP)</span></div>
+<p>Kathy Alfaro is one of the teachers. She was a Spanish teacher, but took a new job teaching children the English language. Students learning English are called EL students.</p>
+<p>Russellville at times has struggled to find the workers and money needed to help EL students. It usually takes five years of intensive study to help a student learn English and perform well in a regular classroom. Russellville hopes to help its students and be a model for the rest of the country.</p>
+<p>"We were trying to teach an increasing number of EL students with <strong>predominantly</strong> white teachers that speak English," said <strong>Superintendent</strong> Heath Grimes. "And I'm like, ‘Why are we not using resources that we have in our community?'"</p>
+<p>As a group, English learners performed lower on language <strong>proficiency</strong> tests during the pandemic. Experts said that may be because many students did not have good online classes. Schools may have struggled to teach English by video link.</p>
+<p>But test scores at Russellville schools have improved. Across the district, the percentage of students who met language requirements increased from 46 percent in 2019 to 61 percent in 2022. At the two elementary schools, <strong>proficiency</strong> increased by nearly 30 percentage points.</p>
+<p>Grimes said the increase was likely because of new EL teachers and aides.</p>
+<p>The non-profit group Education Trust found that some of the nation's largest districts used pandemic aid money to give jobs to bilingual employees. Bilingual describes a person who can speak two languages.</p>
+<p><strong>Federal aid is ending</strong></p>
+<p>However, federal aid money is starting to be used up and schools are preparing for budget cuts. Some experts warn against reducing support for EL programs.</p>
+<p>Carlos Alemán is the director of the Hispanic Interest Coalition of Alabama. He said that as federal money is no longer available, the state should "review what it can do to make sure that these programs can remain in place."</p>
+<p>Russellville school officials are working on ways to keep the new positions. They are also hoping the state will increase long-term funding for EL education.</p>
+<p>State support for English language programs is limited, but growing. The state legislature approved $2.9 million for schools with large numbers of students learning English as a second language in 2018. That amount grew to $16 million last year. Leaders at the Alabama State Department of Education are asking for more money in this year's budget for EL specialists.</p>
+<p>Supporters say money for EL students often falls short, especially in rural districts.</p>
+<p>"It takes a lot more money to educate a child that does not speak your language," said state Representative Jamie Kiel, a Russellville lawmaker of the Republican Party. He has called for spending more money on EL students in the state budget.</p>
+<p>At West Elementary in Russellville, Elizabeth Alonzo is in her second year as an EL assistant. She said there were few bilingual teachers in her school when she was growing up.</p>
+<p>"Whenever I started kindergarten, I didn't know a word of English, so I struggled a lot," Alonzo said. "That was one of the reasons why I wanted to do this, because I want to help those students."</p>
+<p>I'm Jill Robbins</p>
+<p><em>Dan Novak adapted this story based on reporting by The Associated Press.</em></p>
+<p><em>_______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>district </strong><em>— n. </em>an area established by a government for official government business</p>
+<p><strong>predominantly </strong>–adv. mainly, mostly</p>
+<p><strong>superintendent </strong><em>— n. </em>a person who supervises an organization or department</p>
+<p><strong>proficiency </strong><em>— n. </em>skillful or good enough at doing something</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

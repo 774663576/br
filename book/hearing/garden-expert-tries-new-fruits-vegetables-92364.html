@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Garden Expert Tries New Fruits, Vegetables</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Garden Expert Tries New Fruits, Vegetables" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202403/garden-expert-tries-new-fruits-vegetables.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Garden Expert Tries New Fruits, Vegetables</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202403/garden-expert-tries-new-fruits-vegetables.mp3" id="mp3"></a>
+<a href="dip-your-toes-or-take-the-plunge-92363.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Gregory Stachel</span><br/>
+<span class="datetime">10 March 2024</span><br/>
+<p>Jessica Damiano says crops like tomatoes, garlic, chives, basil, parsley, thyme, and sage have been permanent plants in her <strong>garden</strong> for ages. Damiano, a gardening expert who writes for The Associated Press, says every year, she experiments with new – or new to her – crops.</p>
+<p>Many do not stay in her garden for long, like the Voyager tomatoes that lack taste or the goji berries she could not seem to eat. But others, like 8-ball zucchini, rainbow Swiss chard, and golden beets have earned permanent homes in her raised beds.</p>
+<p>This year's new introductions are available in seed <strong>catalogs</strong> in the U.S.</p><div class="contentImage"><img alt="This image provided by Baker Creek Heirloom Seed Co. shows Lila Lu Sang carrots, which are deep purple on the outside and bright orange on the inside. (Baker Creek Heirloom Seed Co./rareseeds.com via AP)" src="https://files.21voa.com/gdb/673143a3-5d61-4aac-8711-ae45eb5d8372_w268_r1.jpg"/><br/><span class="imagecaption">This image provided by Baker Creek Heirloom Seed Co. shows Lila Lu Sang carrots, which are deep purple on the outside and bright orange on the inside. (Baker Creek Heirloom Seed Co./rareseeds.com via AP)</span></div>
+<p>Four small apple trees from Plants Nouveau called Blushing Delight, Golden Treat, Tangy Green, and Tasty Red, work well for people like Damiano who have limited garden space. The trees grow to 2.5 to 3 meters tall and just a meter wide. And they will even grow in containers. You can plant two different kinds for cross-<strong>pollination</strong> and fruit production.</p>
+<p>Another crop, Love Gourmansun beefsteak tomatoes from Burpee, is available in two different kinds that each produce 28-gram, heart-shaped fruits. Choose between Red and a yellow-red fruit called Sunrise. They grow in similar ways and taste similar, but have different disease resistance.</p>
+<p>Damiano said she tested another crop from Burpee called Prism Sweet Peppers last summer. She said the sweet, bell-shaped fruits grew well in her garden. The productive plants also added beauty to her garden, as the crop turned from light green to orange and then red as the fruit aged. The result was many different colors of fruits on the plants at any one time.</p>
+<p>The crop Quick Snack cucumbers are the newest addition to PanAm Seed's Kitchen Minis collection. They are small enough to be grown in a hanging basket or even indoors since they do not require pollination. The small cucumbers are <strong>crisp</strong> and sweet.</p>
+<p>The Pastel Duo baby turnip seed mix, introduced from Japan by Renee's Garden, grows small, round roots in colors like pink and white. Both colors have a <strong>mild</strong>, sweet taste and thin skin that does not need to be removed.</p>
+<p>Damiano says her Genovese basil plants often get the disease downy mildew more often than not. She said she is looking forward to growing Noga Prospera Active DMR <strong>organic </strong>basil, produced by Genesis Seeds. The plants are sold as "highly resistant" to the disease. But they are also slow to flower, which she says is another problem she often deals with in the height of the summer's heat.</p>
+<p>Finally, the crop Lila Lu Sang carrots offered by Baker Seeds are just about as eye-catching as vegetables can get. They have a deep purple color on the outside and a bright orange color on the inside. But they are more than what one sees: they contain the gains of both purple and orange carrots. They are sweet, tasty and full of nutrients.</p>
+<p>I'm Gregory Stachel.</p>
+<p><em>Jessica Damiano reported this story for The Associated Press. Gregory Stachel adapted it for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>garden </strong><em>– n. </em>an area of ground where plants (such as flowers or vegetables) are grown</p>
+<p><strong>catalog </strong><em>– n. </em>a book containing a list of things that you can buy or use and often pictures</p>
+<p><strong>pollinate </strong><em>– v.</em> to give (a plant) pollen from another plant of the same kind so that seeds will be produced</p>
+<p><strong>crisp </strong><em>– adj.</em> pleasantly firm and making a sharp sound when chewed or crushed</p>
+<p><strong>mild </strong><em>– adj. </em>not strong or harsh in taste</p>
+<p><strong>organic </strong><em>– adj.</em> grown or made without the use of artificial chemicals</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

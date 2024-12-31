@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 马术在中国愈发热门</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 马术在中国愈发热门" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201503/interest-in-horse-riding-grows-in-china.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>马术在中国愈发热门</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201503/interest-in-horse-riding-grows-in-china.mp3" id="mp3"></a>
+<a href="/static/lrc/interest-in-horse-riding-grows-in-china.lrc" id="lrc"></a>
+<a href="interest-in-horse-riding-grows-in-china-61846.html" id="CnPage" target="_blank"></a>
+<a href="a-year-later-no-word-on-malaysia-airlines-flight-mh-61829.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Across Asia, the increase in sales of high-priced goods and services has been partly fueled by the rise of China's middle class. Among the activities enjoyed by some wealthy Chinese is the ownership of horses. The quality of life tied to horses and horse ownership has become a new sign of success among a small, but growing group of people in China.<br/>高价商品和服务在亚洲销售增加一直是部分得益于中国中产阶级的崛起。中国富人热衷的活动就包括购买马匹。和马匹相关的生活质量以及拥有马匹已经成为一小撮不断增长的中国人群体新的成功标志。</p>
+<p>Sports involving horses have not always been permitted in China. Former Chinese leader Mao Zedong banned horse racing in 1949.<br/>涉及马匹的运动在中国并非一直被允许。前任中国领导人毛泽东于1949年禁止了赛马。</p>
+<p>More than 60 years later, race tracks, polo fields and jockey clubs are opening for business in Chinese cities. And, there is a rising number of horses imported from overseas.<br/>60多年过去了，赛马场、马球场和骑士俱乐部开始在中国各个城市经营。而且海外进口马匹越来越多。</p>
+<p>Maiken Jaeschke is with Equestrian Globe, a German company that imports horses into China. It also builds equestrian facilities and sells riding gear and equipment.<br/>Maiken Jaeschke就职于环球马术，这家德国公司将马匹进口到中国。它还建立了马术设施，并销售骑具和装备。</p>
+<p>"China has seen a huge increase in the equestrian world and the equestrian market in general, and the interest in horses and horse sports over the last 10 years or five years, intensively."<br/>“中国已经在马术界和普通马术市场有了巨大增长。而且最近5到10年对马匹和马术运动的兴趣更加深入。”</p>
+<p>China now has 25 horse racing tracks and 300 equestrian clubs. Land developers are building a $2 billion equestrian center in the city of Tianjin. It is called the Tianjin Equine Culture City. The developers have promised to build 4,000 stables to house horses. They have also said they will build a state-of-the-art medical center for the animals, 150 trainer offices and training areas. The development also will include a racecourse, clubhouse and an international equestrian college.<br/>目前中国拥有25家赛马场和300家马术俱乐部。土地开发商正在天津兴建一家投资20亿美元的马术中心。它被称为天津驭马文化城。开发商已经承诺修建4000个马厩。他们还表示将修建一个最先进的马匹医疗中心，150处教练办公室和培训场地。开发项目还将包括一家赛马场和体育会所，以及一家国际马术学院。</p>
+<p>Shen Ge lives in Beijing. He buys horses. His 15-year-old daughter, Shen Qing, is one of the youngest competitive riders in China. She competes internationally in show jumping.<br/>申格（Shen Ge，音译）居住在北京。他购买了一些马匹。他15岁的女儿申青（Shen Qing，音译）是中国最年轻的竞技性骑手之一。她在国际上参加马术障碍赛的竞赛。</p>
+<p>Shen Ge says there is a real interest in equestrian sports in China. But bad dealings between European horse sellers and Chinese buyers have damaged trust in the international market.<br/>申格表示，中国对马术运动真感兴趣。但是欧洲马匹卖家和中国买家之间的糟糕交易破坏了国际市场的信任。</p>
+<p>He notes examples of Chinese buyers attempting to negotiate deals for horses, and then canceling contracts at the last minute. He says some buyers even disappeared after a horse was sent to China, and the seller had already spent thousands of dollars on shipping.<br/>他举例说，中国买家试图洽谈马匹生意，然后在最后一分钟取消合同。他说，一些买家甚至在马匹被运往中国，卖家已经花了几千美元运费后玩失踪。</p>
+<p>Such stories do not concern American David Snodgrass. He brought the first American quarter horses to China. He says the Chinese market for quarter horses has increased in the past few years.<br/>这类新闻并没有让美国人大卫·斯诺德格拉斯（David Snodgrass）担忧。他将第一匹美国夸特马带到了中国。他说，过去几年夸特马的中国市场已经有所增长。</p>
+<p>"We work in saddlebreds and standardbreds and with those breeds we've seen steady growth over the last three or four years."<br/>“我们经营骑乘马和标准竞赛用马。我们已经看到过去三到四年这些马匹品种的稳定增长。”</p>
+<p>Horse sellers say the market will only grow as interest in the sport increases.<br/>马匹卖家表示，该市场只会随着人们对这项运动兴趣的增加而扩大。</p>
+<p>Shen Ge has built his career in business marketing. He says his love of horses keeps him in the stables during most of his free time. He has passed this interest to his daughter, Shen Qing. He says she represents the future of the Chinese equestrian market. This month Qing will travel to Italy for yet another international jumping competition.<br/>申格在市场营销创办了他的事业。他说他对马匹的热爱让他大部分空闲时间都在马厩里。他已经将这种兴趣传给了他的女儿申青。他说，她代表了中国马术市场的未来。本月，申青将前往意大利参加另一场国际马术障碍赛的比赛。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Interest in Horse Riding Grows in China]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]Across Asia, the increase
+[00:02.10]in sales of high-priced goods and services
+[00:05.19]has been partly fueled by the rise of China's middle class.
+[00:10.02]Among the activities enjoyed by some wealthy Chinese
+[00:14.07]is the ownership of horses.
+[00:16.60]The quality of life tied to horses and horse ownership
+[00:21.34]has become a new sign of success among a small,
+[00:24.91]but growing group of people in China.
+[00:28.49]Sports involving horses have not always been permitted in China.
+[00:34.34]Former Chinese leader Mao Zedong banned horse racing in 1949.
+[00:41.24]More than 60 years later, race tracks, polo fields
+[00:46.39]and jockey clubs are opening for business in Chinese cities.
+[00:51.43]And, there is a rising number of horses imported from overseas.
+[00:57.08]Maiken Jaeschke is with Equestrian Globe,
+[01:02.46]a German company that imports horses into China.
+[01:06.39]It also builds equestrian facilities
+[01:09.61]and sells riding gear and equipment.
+[01:12.78]"China has seen a huge increase in the equestrian world
+[01:17.32]and the equestrian market in general,
+[01:19.19]and the interest in horses and horse sports
+[01:22.44]over the last 10 years or five years, intensively."
+[01:28.92]China now has 25 horse racing tracks
+[01:33.06]and 300 equestrian clubs. 
+[01:36.02]Land developers are building a $2 billion equestrian center
+[01:41.30]in the city of Tianjin.
+[01:43.49]It is called the Tianjin Equine Culture City.
+[01:48.51]The developers have promised to build 4,000 stables to house horses.
+[01:55.01]They have also said they will build
+[01:57.80]a state-of-the-art medical center for the animals,
+[02:01.71]150 trainer offices and training areas.
+[02:06.72]The development also will include a racecourse,
+[02:11.41]clubhouse and an international equestrian college.
+[02:16.63]Shen Ge lives in Beijing. He buys horses.
+[02:23.28]His 15-year-old daughter, Shen Qing,
+[02:26.54]is one of the youngest competitive riders in China.
+[02:30.59]She competes internationally in show jumping.
+[02:34.97]Shen Ge says there is a real interest in equestrian sports in China.
+[02:42.36]But bad dealings between European horse sellers and Chinese buyers
+[02:48.39]have damaged trust in the international market.
+[02:52.40]He notes examples of Chinese buyers attempting to negotiate deals for horses,
+[02:59.97]and then canceling contracts at the last minute.
+[03:03.92]He says some buyers even disappeared after a horse was sent to China,
+[03:10.45]and the seller had already spent thousands of dollars on shipping.
+[03:15.31]Such stories do not concern American David Snodgrass.
+[03:21.49]He brought the first American quarter horses to China. 
+[03:26.01]He says the Chinese market for quarter horses
+[03:29.98]has increased in the past few years.
+[03:33.32]"We work in saddlebreds and standardbreds and with those breeds
+[03:39.99]we've seen steady growth over the last three or four years."
+[03:46.55]Horse sellers say the market will only grow as interest in the sport increases.
+[03:52.96]Shen Ge has built his career in business marketing.
+[03:57.32]He says his love of horses keeps him in the stables
+[04:02.12]during most of his free time.
+[04:04.55]He has passed this interest to his daughter, Shen Qing.
+[04:09.10]He says she represents the future of the Chinese equestrian market.
+[04:15.44]This month Qing will travel to Italy
+[04:19.17]for yet another international jumping competition.
+[04:23.55]I'm Mario Ritter.
+[04:25.69]
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

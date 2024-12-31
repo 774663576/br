@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - American Music Legend Quincy Jones Dies at 91</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, American Music Legend Quincy Jones Dies at 91" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/american-music-legend-quincy-jones-dies-at-91.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>American Music Legend Quincy Jones Dies at 91</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/american-music-legend-quincy-jones-dies-at-91.mp3" id="mp3"></a>
+<a href="at-2-4-meters-rioux-is-world-s-tallest-teenager-93117.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">04 November, 2024</span><br/>
+<p>One of the biggest names in America's music industry – Quincy Jones – has died at the age of 91. A family statement said Jones passed away Sunday night surrounded by family members at his home in the Bel Air neighborhood of Los Angeles.</p>
+<p>Jones is known for working with many top names in the music industry, including superstars Michael Jackson, Frank Sinatra and Ray Charles. Throughout his 65-year career, he worked with hundreds of other music artists.</p>
+<p>Jones' publicist Arnold Robinson said in a statement, “Tonight, with full but broken hearts, we must share the news of our father and brother Quincy Jones' passing.” It added, “And although this is an incredible loss for our family, we celebrate the great life that he lived and know there will never be another like him.”</p><div class="contentImage"><img (photo="" 2018,="" 7,="" alt="FILE - Music producer Quincy Jones poses for a portrait to promote his documentary " ap,="" by="" chris="" during="" festival="" file)"="" film="" in="" invision="" on="" pizzello="" quincy"="" sept.="" src="https://files.21voa.com/gdb/3942d3ab-85cf-4f68-938c-6c6529fe13c1_w268_r1.jpg" the="" toronto="" toronto.=""/><br/><span class="imagecaption">FILE - Music producer Quincy Jones poses for a portrait to promote his documentary "Quincy" during the Toronto Film Festival on Sept. 7, 2018, in Toronto. (Photo by Chris Pizzello/Invision/AP, File)</span></div>
+<p>Born in Chicago in 1933, Jones said an early music influence was the <strong>hymns </strong>his mother used to sing around the house. Early on, he played music, the trumpet, and led others in band music.</p>
+<p>As a very young man, Jones used to run with <strong>gangs</strong> on the South Side of Chicago. But he later rose to the top of show business, becoming one of the first Black business leaders in Hollywood. Later, he established himself as a major <strong>composer</strong> and producer.</p>
+<p>Jones shaped recordings by jazz greats such as Miles Davis and produced hits for Sinatra and Ella Fitzgerald. And he helped organize the 1985 money-raising event for Africa that resulted in the song <em>We Are the World</em>. The song went on to become one of the biggest hits of its time.</p>
+<p>Jones composed music for <em>Roots</em> and <em>In the Heat of the Night</em>. He also organized President Bill Clinton's first inaugural celebration in 1993. Jones also wrote several movie <strong>scores</strong> and co-produced the film <em>The Color Purple</em>. In addition, he co-produced the highly successful 1990s television show <em>The Fresh Prince of Bel-Air</em>, which launched the career of Will Smith.</p>
+<p>Jones's work with superstar Michael Jackson still represents one of his most lasting successes. He and Jackson made three wildly popular albums: <em>Off the Wall</em> in 1979, <em>Thriller</em> in 1982, and <em>Bad</em> in 1987.</p>
+<p><em>Thriller</em> sold more than 20 million copies in 1983 alone. It helped Jackson become the first major Black artist to have a video played on MTV and influenced countless other performers. Jones later explained, “Michael had the look and the voice, and I had every sound you can think of.”</p>
+<p>Jones was known for keeping company with presidents and foreign leaders, movie stars and musicians, <strong>philanthropists</strong> and business leaders. His circle of friends included some of the most famous people of the 20th century, including artist Pablo Picasso, Pope John Paul II and Nelson Mandela.</p>
+<p>The list of Jones' honors and awards fills 18 pages in his 2001 autobiography <em>Q</em>. The book made him a best-selling writer. He won a total of 27 Grammy Awards, as well as two honorary Academy Awards and an Emmy for the television series <em>Roots</em>.</p>
+<p>Jones also received France's Legion d'Honneur, the Rudolph Valentino Award from the Republic of Italy and a Kennedy Center honor for his influence over American culture. He was the subject of a 1990 documentary called "<em>Listen Up: The Lives of Quincy Jones,</em>" as well as the 2018 film <em>Quincy</em>, directed by his daughter, Rashida Jones.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>The Associated Press, Reuters and VOA News reported on this story. Bryan Lynn adapted the reports for VOA Learning English.</em></p>
+<p><strong>_____________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>hymn </strong><em>– n. </em>a song sung by Christians to praise God</p>
+<p><strong>gang </strong><em>– n.</em> a group of young people who spend time together, often fighting with other groups and behaving poorly</p>
+<p><strong>composer </strong><em>– n. </em>a person who writes music</p>
+<p><strong>score </strong><em>– n.</em> a printed piece of music</p>
+<p><strong>philanthropist </strong><em>– adj. </em>someone who gives money to people who need hel</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

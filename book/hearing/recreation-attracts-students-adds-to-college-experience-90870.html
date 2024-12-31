@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Recreation Attracts Students, Adds to College Experience</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Recreation Attracts Students, Adds to College Experience" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/recreation-attracts-students-adds-to-college-experience.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Recreation Attracts Students, Adds to College Experience</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/recreation-attracts-students-adds-to-college-experience.mp3" id="mp3"></a>
+<a href="americas-presidents-zachary-taylor-90869.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">13 May 2023</span><br/>
+<p>When GianMarco Douglas was thinking about which medical school to attend earlier this year, he had a number of things in mind.</p>
+<p>He wanted to go to a school that offered a good education, friendly students and financial aid.</p>
+<p>He was considering schools such as the University of Pittsburgh in Pennsylvania, Emory University in Atlanta, Georgia and Case Western Reserve University in Cleveland, Ohio. All of those schools fit his requirements.</p><div class="contentImage"><img alt="People play basketball at Cleveland State University's recreation center. (Dan Friedell/VOA)" src="https://files.21voa.com/gdb/01000000-0aff-0242-122a-08db44edd135_w268_r1.jpg"/><br/><span class="imagecaption">People play basketball at Cleveland State University's recreation center. (Dan Friedell/VOA)</span></div>
+<p>But he also hoped to find a university that offered good <strong>recreational</strong> activities. He likes playing friendly games of basketball – known as pick-up games – with other students in his free time.</p>
+<p>Douglas started doing that when he was an <strong>undergraduate</strong> student at Emory University.</p>
+<p>He discovered that he could make friends with students from his classes through basketball.</p>
+<p>"One thing about basketball is that, I noticed, in comparison to other sports it allows like a good bit of <strong>socialization</strong>. The <strong>court</strong> isn't very big. It's a good balance between playing a very active sport but also having enough of a break to socialize."</p>
+<p>The basketball games resulted in invitations to parties and other events. Between games, students even traded information about professors and classes.</p>
+<p>Douglas has visited friends and family in Italy. Based on seeing what university life is like there, he thinks international students who are thinking about studying in the U.S. would be surprised by the recreation <strong>opportunities</strong>.</p>
+<p><strong>Even e-sports</strong></p>
+<p>In Cleveland, Ohio, at Cleveland State University, there is a large recreation center. The center takes up four floors of a building across the street from the school's college of engineering. It includes swimming pools, basketball courts, weight-training equipment, courts for racquet sports and rooms for classes in activities like yoga and boxing. There is even an area for <strong>e-sports</strong> competitions.</p>
+<p>Michelle Rieger is the senior associate director of programming and operations for the recreation center. She said it makes sense that Douglas, the future medical student, would also want to know about recreational <strong>opportunities</strong>. She said research by the National Intramural-Recreational Sports Association, or NIRSA, shows that 68 percent of students say the campus recreation center is part of the reason why they choose their school.</p>
+<p>Rieger said Cleveland State has long been known as a "commuter school." That means many students come to the university buildings to take classes and then go home. But she said the recreation center is "a big <strong>wow</strong> <strong>factor</strong> for them." Some students even decide to live in university housing so they can use the recreation center more often.</p>
+<p>NIRSA's research suggests that not only does a good recreation center, or <strong>gym,</strong> help students decide to attend a school, but it also keeps them in school.</p>
+<p>In a city like Cleveland, where the weather can be cold and snowy for much of the school year, it is good to have an indoor place for students to spend time. Rieger said that is important for international students who come from warm parts of the world.</p>
+<p>"A lot of times, people who aren't used to it, the weather, they don't want to leave their room. So, we do try to do things indoors for them as well as outdoors to get them moving. And try to do a number of different programs just to <strong>entice</strong> them and really get them to feel like they belong here and that there's a community here so that they want to keep coming, not just for the wellness, the physical wellness <strong>aspect</strong>, but for that social wellness and the mental wellbeing as well."</p>
+<p>Cleveland State offers students many off-campus recreational opportunities. Students can go on camping and hiking trips. They can also learn how to use watercraft, such as canoes, kayaks and paddleboards. Cleveland is home to an important river and is on Lake Erie, one of America's Great Lakes.</p>
+<p>However, not every student goes on those kinds of trips. NIRSA notes that the majority of students center their time on weight training, <strong>fitness</strong> equipment such as <strong>treadmills</strong> and open play – like the pick-up basketball games Douglas enjoys.</p>
+<p><strong>‘The joy of recreating'</strong></p>
+<p>The school offers recreational activities to keep students involved in campus activities. One recent morning, a message board had announcements for a racquet sport called pickleball, a fitness club meeting and a club event for a video game called Rocket League.</p>
+<p>Rieger said she wants to make sure the recreation center is "a friendly place for everyone, where they can come in and just experience the joy of recreating."</p>
+<p>Feeling at ease was important for Oman Pokhrel, who was lifting weights there recently. Pokhrel is from Nepal and lived in Cleveland for almost 10 years before attending Cleveland State. He is in his first year of criminal justice and business studies.</p>
+<p>He comes to the gym nearly every day to lift weights and run.</p>
+<p>"I do think people are friendly and enjoy themselves here," he said. Pokhrel said he sees how the recreation center could influence some students.</p>
+<p>Pokhrel can get some exercise before or after class, and it is cost-free. Before starting at Cleveland State, he spent extra money to go to a <strong>martial arts</strong> gym in his community.</p>
+<p>"I love going to the gym and lifting weights, I do think having a gym here for me does clear my mind. I feel lighter and faster than I was last year," he said.</p>
+<p><strong>‘You might be surprised'</strong></p>
+<p>Douglas is the student who attended Emory. He starts medical school later this year at Case Western Reserve University. He said it was surprising how much he valued his time playing basketball with friends during college. He said it is not necessary to be a great athlete to join a pick-up game at a college recreation center.</p>
+<p>He offered some advice for international students who may walk past a campus <strong>bulletin board</strong> and wonder about the activities advertised.</p>
+<p>"They should really inquire into those things instead of maybe just seeing an advertisement and like ignoring it. I feel like they would end up perhaps enjoying several of these activities more than expected and make very good friendships."</p>
+<p>I'm Dan Friedell. And I'm Faith Pirlo.</p>
+<p><em>Dan Friedell wrote this story for Learning English.</em></p>
+<p>___________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>recreational </strong><em>–adj. </em>related to something people do to be at ease, to have fun and to exercise</p>
+<p><strong>undergraduate </strong><em>–adj. </em>a student at a college or university who has not yet received their degree</p>
+<p><strong>socialization </strong><em>–n. </em>the process of educating someone to live in a society</p>
+<p><strong>court </strong><em>–n. </em>an area in which some sports such as tennis or basketball are played</p>
+<p><strong>opportunity </strong><em>–n. </em>a chance to do something</p>
+<p><strong>e-sport </strong><em>–n. </em>an electronic sport usually like a video game</p>
+<p><strong>wow factor </strong><em>–n. (informal) </em>something that greatly impresses someone</p>
+<p><strong>gym </strong><em>–n. </em>a place to get physical exercise or practice a sport</p>
+<p><strong>entice </strong><em>–v. </em>to get someone interested in doing something</p>
+<p><strong>aspect </strong><em>–n. </em>a part of something else</p>
+<p><strong>fitness </strong><em>–n. </em>using exercise to improve your physical health</p>
+<p><strong>treadmill </strong><em>–n. </em>a machine with a motorized belt people run on for exercise</p>
+<p><strong>martial arts </strong><em>–n. </em>several forms of self-defense that are widely practiced as sports</p>
+<p><strong>bulletin board </strong><em>–n. </em>a board in a public place where people place announcements</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

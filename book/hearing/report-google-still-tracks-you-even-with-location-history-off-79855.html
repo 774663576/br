@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Report: Google Still Tracks You Even with Location History Off</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Report: Google Still Tracks You Even with Location History Off" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201808/report-google-still-tracks-you-even-with-location-history-off.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Report: Google Still Tracks You Even with Location History Off</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201808/report-google-still-tracks-you-even-with-location-history-off.mp3" id="mp3"></a>
+<a href="un-ecuador-struggling-to-deal-with-venezuelan-refugees-79854.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">15 August, 2018</span><br/>
+<p>Many Android and iPhone owners use Google services on their mobile devices. Some of these services use <strong>GPS</strong> technology to collect information about the places people go. </p>
+<p>One of the most widely used <strong>location</strong> services is <a class="wsw__a" href="https://www.google.com/maps" target="_blank">Google Maps</a>. When someone uses Google Maps, information about times and locations are recorded and stored.</p>
+<p>Google also uses <strong>tracking</strong> tools with other services. Weather <strong>apps</strong>, for example, are designed to identify a user's location to provide local weather information. Even some Google internet searches can result in the collection of information about exactly where a person was when the search was made.</p>
+<p>Google says it collects the data to improve localized experiences for its users. But such practices have also raised privacy concerns. Privacy activists have called on Google and other major technology companies to make it easier for users to turn off location services if they do not want to be tracked. </p>
+<p>An investigation by the Associated Press, or AP, suggests this process is not as easy as it might seem. The investigation found that Google continues to collect location information even on users who have changed their privacy settings. </p>
+<p>The AP says the results of its investigation were confirmed by computer science researchers at <a class="wsw__a" href="https://www.princeton.edu/" target="_blank">Princeton University</a> in the American state of New Jersey.</p>
+<p>Google's influence in the <a class="wsw__a" href="https://www.android.com/intl/en_in/phones/pixel/" target="_blank">mobile device industry</a> is far-reaching. About two billion people worldwide use Google-developed Android devices. In addition, hundreds of millions of iPhone owners use Google for maps or for making searches.</p>
+<div class="contentImage"><img alt="In this Wednesday, Aug. 8, 2018, photo a mobile phone displays a user's travels in New York. (AP Photo/Seth Wenig)" src="https://files.21voa.com/gdb/39B5900A-159B-4B4A-A010-F1CBE7B8AF69_w268_r0.jpg"/><br/>
+<span class="imagecaption">In this Wednesday, Aug. 8, 2018, photo a mobile phone displays a user's travels in New York. (AP Photo/Seth Wenig)</span></div>
+<p>
+<p>In some ways, Google is clear about asking permission to use location information. For example, Google Maps will seek approval from a user to give the app <strong>access</strong> to locations so it can provide directions. If a user agrees to let Google collect location information over time, Google Maps will show this history in a "timeline" that shows the person's daily movements.</p>
+<p>Google also has a "Location History" setting, which it explains <a class="wsw__a" href="https://support.google.com/accounts/answer/3118687?hl=en">on its support page</a>. The company says any user can turn off Location History at any time. "With Location History off, the places you go are no longer stored," Google states. The company says when Location History is turned off for a user's <strong>account</strong>, it is turned off for all devices linked to that Google account.</p>
+<p>But the AP investigation found this does not appear to be true. It found that Google continued to save location history even if a user had turned off Location History. Turning off Location History only stopped Google from creating a timeline of locations the user had visited.</p>
+<p>One of the tests the AP carried out involved Princeton privacy researcher <a class="wsw__a" href="https://www.esat.kuleuven.be/cosic/people/gunes-acar/" target="_blank">Gunes Acar</a>. The news agency was able to track his movements and identify visited locations – including his home – over several days in the New York City area. </p>
+<p>Acar was carrying an Android phone with Location History turned off.</p>
+<p>Other Princeton researchers confirmed the AP's test findings on multiple mobile devices.</p>
+<p><a class="wsw__a" href="https://twitter.com/jonathanmayer?lang=en" target="_blank">Jonathan Mayer</a> is a Princeton computer scientist and former technologist with the Federal Communications Commission. He disagrees with Google's methods for storing location data, which he says can be unclear for users.</p>
+<p>"If you're going to allow users to turn off something called ‘Location History,' then all the places where you <strong>maintain</strong> location history should be turned off," Mayer said. "That seems like a pretty <strong>straightforward</strong> position to have."</p>
+<p>In answer to a request for comment from the AP, Google said it uses several location tracking tools. </p>
+<p>"There are a number of different ways that Google may use location to improve people's experience, including: Location History, Web and App Activity, and through device-level Location Services," the company said in a statement. </p>
+<p>Google says users can stop the saving of all location markers by turning off another setting. That setting, however, is not clearly identified as being connected to location tracking. The setting is called "Web and App Activity." It is <strong>activated</strong> on new devices. The tool stores different kinds of information from Google apps and websites to a user's Google account. </p>
+<p><strong>How to prevent further tracking</strong></p>
+<p>The easiest way to block further location tracking on any device is to go to the website <a class="wsw__a" href="https://myactivity.google.com/myactivity">myactivity.google.com</a>, which permits users to change Google account settings. On the upper left drop-down list, go to "Activity Controls." Turn off both "Web &amp; App Activity" and "Location History." This should prevent exact location markers from being stored to your Google account.<em> </em></p>
+<p>I'm Bryan Lynn.</p>
+<p><em><u>Detailed directions on how to turn off these tools for iOS and Android operating systems can be found <a class="wsw__a" href="https://www.apnews.com/b031ee35d4534f548e43b7575f4ab494/How-to-find-and-delete-where-Google-knows-you've-been">here</a>. </u></em></p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on a report from the Associated Press and other sources. Ashley Thompson was the editor.</em></p><div id="bottom"><!-- 51-content-bottom -->
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+<p><em>We want to hear from you. Write to us in the Comments section, and </em><a class="wsw__a" href="http://www.21voa.com" target="_blank"><em>visit 51VOA.COM</em></a><em>.</em></p>
+<p>_____________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>GPS </strong>– <em>n.</em> abbreviation for Global Positioning System: a system of computers and satellites used to identify where users are</p>
+<p><strong>location </strong>– <em>n.</em> place or position</p>
+<p><strong>tracking </strong>– <em>n.</em> the recording of locations or progress of a person or thing</p>
+<p><strong>app </strong>– <em>n.</em> computer program designed to do a specific task or set of related or connected tasks</p>
+<p><strong>access </strong>– <em>n.</em> way of being able to use or get something</p>
+<p><strong>account </strong>– <em>n.</em> an arrangement in which a person uses internet or service of a particular company</p>
+<p><strong>maintain </strong>– <em>v.</em> keep something going in a consistent way</p>
+<p><strong>straightforward </strong>– <em>adj.</em> easy to do or understand</p>
+<p><strong>activate</strong> – v. make something start working</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 迪拜豪华酒店跨年夜失火</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 迪拜豪华酒店跨年夜失火" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201512/luxury-skyscraper-burns-in-dubai.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>迪拜豪华酒店跨年夜失火</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201512/luxury-skyscraper-burns-in-dubai.mp3" id="mp3"></a>
+<a href="/static/lrc/luxury-skyscraper-burns-in-dubai.lrc" id="lrc"></a>
+<a href="luxury-skyscraper-burns-in-dubai-67171.html" id="CnPage" target="_blank"></a>
+<a href="bill-cosby-charged-with-sexual-assault-67139.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Authorities say everyone has been evacuated from a luxury hotel in Dubai that was still burning early Friday.<br/>有关当局表示，周五早些时候所有人都被从迪拜一家失火的豪华酒店里疏散了出来。</p>
+<p>The city's police chief says all residents were out of the 63-story hotel, known as "The Address."<br/>该市警察局长表示，所有住客都从这座63层高的阿德里斯酒店走了出来。</p>
+<p>The hotel had been packed with people celebrating New Year's Eve when fire broke out at about 9:30 p.m., (about 1730 UTC). At least 14 people were injured.<br/>该酒店在大约晚间9点半开始起火时，里面挤满了庆祝新年的人。至少有14人受伤。</p>
+<p>The hotel stands across from the world's tallest skyscraper, the Burj Khalifa. The Burj Khalifa is more than 800 meters tall. It is the center of spectacular fireworks along the Dubai waterfront for New Year's. Fireworks went on as planned.<br/>该酒店位于世界最高摩天大楼哈利法塔的对面。哈利法塔高达八百多米，它是沿着迪拜海滨进行的一场壮观新年烟花表演的中心。烟花表演继续按计划进行。</p>
+<p>Flames quickly moved through more than 20 stories of the hotel. It could be seen for kilometers in all directions.<br/>火焰迅速窜到了该酒店20多层楼，方圆几公里都能看到。</p>
+<p>Within 30 minutes, flames raced to the top of the hotel tower, and the sky was full of thick black smoke. Burning pieces of the hotel fell to the ground from the tower.<br/>半个小时之后火焰就窜到了酒店楼顶。天空布满了浓浓的黑烟。一些燃烧的残骸从大楼掉落到地面。</p>
+<p>Witnesses said tens of thousands of people were crowded into the downtown area near the blazing hotel and the Burj Khalifa.<br/>目击者表示，当时有成千上万人挤在这座着火的酒店和哈利法塔附近的市中心地带。</p>
+<p>Authorities in the United Arab Emirates said earlier Thursday that thousands of security personnel were on duty because of the New Year's events.<br/>阿联酋当局周四早些时候表示，有数千名保安人员值班保障新年活动。</p>
+<p>I'm Kathleen Struck.<br/>我是凯瑟琳·斯嘉克。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.12]Authorities say everyone has been evacuated
+[00:03.96]from a luxury hotel in Dubai
+[00:06.88]that was still burning early Friday.
+[00:11.04]The city's police chief says all residents
+[00:14.80]were out of the 63-story hotel,
+[00:18.68]known as "The Address."
+[00:22.28]The hotel had been packed
+[00:24.76]with people celebrating New Year's Eve
+[00:28.04]when fire broke out at about 9:30 p.m., (about 1730 UTC).
+[00:32.65]At least 14 people were injured.
+[00:35.90]The hotel stands across from the world's tallest skyscraper, the Burj Khalifa.
+[00:42.96]The Burj Khalifa is more than 800 meters tall.
+[00:48.48]It is the center of spectacular fireworks
+[00:52.00]along the Dubai waterfront for New Year's.
+[00:55.92]Fireworks went on as planned.
+[00:59.52]Flames quickly moved through more than 20 stories of the hotel.
+[01:05.24]It could be seen for kilometers in all directions.
+[01:10.12]Within 30 minutes, flames raced to the top of the hotel tower,
+[01:15.44]and the sky was full of thick black smoke.
+[01:19.44]Burning pieces of the hotel fell to the ground from the tower.
+[01:26.32]Witnesses said tens of thousands of people
+[01:30.00]were crowded into the downtown area
+[01:33.20]near the blazing hotel and the Burj Khalifa.
+[01:37.68]Authorities in the United Arab Emirates
+[01:41.44]said earlier Thursday that thousands of security personnel
+[01:46.44]were on duty because of the New Year's events.
+[01:50.76]I'm Kathleen Struck.
+[01:52.56]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

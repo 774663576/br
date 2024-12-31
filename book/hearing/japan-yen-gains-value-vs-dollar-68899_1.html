@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 日元对美元升值</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 日元对美元升值" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201604/japan-yen-gains-value-vs-dollar.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>日元对美元升值</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201604/japan-yen-gains-value-vs-dollar.mp3" id="mp3"></a>
+<a href="/static/lrc/japan-yen-gains-value-vs-dollar.lrc" id="lrc"></a>
+<a href="japan-yen-gains-value-vs-dollar-68899.html" id="CnPage" target="_blank"></a>
+<a href="scientists-could-be-closer-to-aids-cure-68865.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>The Japanese yen has risen to its highest value in relation to the United States dollar in one and one half years.<br/>日元兑美元已经上涨至1年半以来的最高水平。</p>
+<p>The yen is increasing in value on foreign exchange markets; yet Japanese finance officials have supported policies aimed at limiting its rise.<br/>日元在外汇市场开始升值，然而日本财务官员一直支持限制日元升值的政策。</p>
+<p>The appreciating value of the yen could hurt Japan's efforts to increase inflation in the country. Some experts think rising prices could strengthen economic growth in the world's third largest economy.<br/>日元升值可能会影响日本提高国内通胀水平的努力。有专家认为，价格上涨可以增强日本这个第三大经济体的经济增长。</p>
+<p>Japan's money has traded at about 111 yen to one U.S. dollar in recent days. The yen has also risen in value against other major currencies, including the euro.<br/>最近几天，日元汇率维持在111日元兑1美元左右。日元兑其它主要货币也有所升值，其中包括欧元在内。</p>
+<p>The yen's value has increased almost nine percent on foreign exchange markets this year. That is the biggest increase among the Group of 10 industrial countries during that period.<br/>今年日元在外汇市场已经升值了近9%。这是同期工业化十国集团之中最大的增幅。</p>
+<p>The group includes Belgium, Britain, Canada, France, Germany, Italy and Japan. The Netherlands, Sweden, Switzerland and the United States are also members.<br/>该集团包括比利时、英国、加拿大、法国、德国、意大利和日本。荷兰、瑞典、瑞士和美国也是成员国。</p>
+<p>The Group of 10 has agreed to cooperate on economic and monetary issues with the International Monetary Fund.<br/>十国集团已经同意在经济和货币问题上同国际基金组织保持合作。</p>
+<p>Japanese officials have said they may be willing to take additional measures to fight the rising value of the yen.<br/>日本官员曾表示，他们可能愿意采取更多措施来对抗日元升值。</p>
+<p>Japanese Chief Cabinet Secretary Yoshihide Suga said the government is closely watching changes in foreign exchange values.<br/>日本内阁官房长官菅义伟表示，政府正密切关注外汇汇率的变化。</p>
+<p>The governor of Japan's central bank, Haruhiko Kuroda, has repeatedly said that the Bank of Japan may cut interest rates it controls.<br/>日本央行行长黑田东彦曾多次表示，日本央行可能会降低它所控制的利率。</p>
+<p>Demand for widely traded currencies like the yen often increases when stock prices drop. That can cause the value of such currencies to rise on international markets.<br/>当股票价格下跌时，对日元这类广泛交易货币的需求通常会提高。这会导致这类货币在国际市场上升值。</p>
+<p>However, the Bloomberg News service reports that the currencies of commodity-exporting countries like Australia and South Africa have dropped in value. Such countries sell a large amount of agricultural products and unprocessed minerals to overseas buyers.<br/>然而，彭博新闻社报道称，澳大利亚和南非这类商品出口型国家的货币已经贬值。这类国家向海外买家出售大量农产品和未加工矿石。</p>
+<p>The Bank of Japan is seeking to raise inflation to a target rate of two percent a year. The bank has increased the amount of money available to private Japanese banks.<br/>日本央行正在寻求提高通胀到每年2%的目标水平。该行已经增加了日本私营银行可获得的资金量。</p>
+<p>The Bank of Japan also has set a negative interest rate for the money commercial banks hold with it. Both moves are meant to encourage banks to lend more to businesses and individuals.<br/>日本央行还将商业银行存入该行的资金定为负利率。这两项举措都是为了鼓励银行多向企业和个人发放贷款。</p>
+<p>However, Japan's rate of inflation remains near zero percent. That can be a sign of limited demand for goods and services.<br/>然而，日本的通胀率仍然维持在接近于零的水平，这可能是商品和服务需求有限的一个标志。</p>
+<p>The Swiss franc has also increased in value against the U.S. dollar. That increases the cost of the country's exports and may hurt Switzerland's economic competitiveness.<br/>瑞士法郎兑美元也在升值，这增加了该国的出口成本，并可能会伤害瑞士的经济竞争力。</p>
+<p>The president of Switzerland's central bank said his bank's policy of negative interest rates has been "indispensable" for limiting the rising value of the franc.<br/>瑞士央行总裁表示，该行的负利率政策对限制瑞士法郎升值一直都是必不可少的。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:01.56]The Japanese yen has risen to its highest value
+[00:05.80]in relation to the United States dollar in one and one half years.
+[00:13.12]The yen is increasing in value on foreign exchange markets;
+[00:18.60]yet Japanese finance officials have supported policies aimed at limiting its rise.
+[00:26.36]The appreciating value of the yen
+[00:30.28]could hurt Japan's efforts to increase inflation in the country.
+[00:36.24]Some experts think rising prices could strengthen economic growth
+[00:42.20]in the world's third largest economy.
+[00:46.44]Japan's money has traded at about 111 yen to one U.S. dollar in recent days.
+[00:56.04]The yen has also risen in value against other major currencies, including the euro.
+[01:03.92]The yen's value has increased almost nine percent on foreign exchange markets this year.
+[01:12.72]That is the biggest increase among the Group of 10 industrial countries during that period.
+[01:20.48]The group includes Belgium, Britain, Canada, France, Germany, Italy and Japan.
+[01:30.40]The Netherlands, Sweden, Switzerland and the United States are also members.
+[01:39.72]The Group of 10 has agreed to cooperate on economic and monetary issues
+[01:46.92]with the International Monetary Fund.
+[01:51.44]Japanese officials have said they may be willing to take additional measures
+[01:56.48]to fight the rising value of the yen.
+[01:59.96]Japanese Chief Cabinet Secretary Yoshihide Suga
+[02:05.11]said the government is closely watching changes in foreign exchange values.
+[02:12.08]The governor of Japan's central bank, Haruhiko Kuroda,
+[02:17.24]has repeatedly said that the Bank of Japan may cut interest rates it controls.
+[02:24.80]Demand for widely traded currencies like the yen
+[02:28.80]often increases when stock prices drop.
+[02:32.68]That can cause the value of such currencies to rise on international markets.
+[02:40.36]However, the Bloomberg News service reports that the currencies of
+[02:45.48]commodity-exporting countries like Australia
+[02:49.36]and South Africa have dropped in value.
+[02:53.36]Such countries sell a large amount of agricultural products
+[02:58.48]and unprocessed minerals to overseas buyers.
+[03:03.64]The Bank of Japan is seeking to raise inflation to a target rate of two percent a year.
+[03:11.96]The bank has increased the amount of money available to private Japanese banks.
+[03:18.68]The Bank of Japan also has set a negative interest rate
+[03:23.16]for the money commercial banks hold with it.
+[03:27.20]Both moves are meant to encourage banks to lend more to businesses and individuals.
+[03:36.20]However, Japan's rate of inflation remains near zero percent.
+[03:42.48]That can be a sign of limited demand for goods and services.
+[03:50.00]The Swiss franc has also increased in value against the U.S. dollar.
+[03:56.28]That increases the cost of the country's exports
+[04:00.36]and may hurt Switzerland's economic competitiveness.
+[04:05.28]The president of Switzerland's central bank
+[04:08.48]said his bank's policy of negative interest rates
+[04:12.52]has been "indispensable" for limiting the rising value of the franc.
+[04:19.12]I'm Mario Ritter.
+[04:21.44]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Thanksgiving and English Grammar</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Thanksgiving and English Grammar" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202411/thanksgiving-and-english-grammar.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Thanksgiving and English Grammar</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202411/thanksgiving-and-english-grammar.mp3" id="mp3"></a>
+<a href="what-are-the-good-effects-of-walking-93169.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By John Russell</span><br/><span class="datetime">21 November, 2024</span><br/>
+<p>Every year around the Thanksgiving holiday, a strange ceremony happens in Washington, DC. The president stands outside the White House, gives a brief speech and then officially pardons a turkey.</p>
+<p>A pardon is a declaration that someone will not be punished.</p>
+<p>You might be asking yourself, "What is the connection between turkeys, Thanksgiving and grammar?"</p><div class="contentImage"><img alt="everyday grammar - thanksgiving and stative verbs " src="https://files.21voa.com/gdb/13C7BB45-AAD5-4C6C-B105-CF27EF766749_w268_r1.jpg"/><br/><span class="imagecaption">everyday grammar - thanksgiving and stative verbs </span></div>
+<p>In today's report, we explore what turkeys can teach you about English verbs.</p>
+<p>In particular, we will show you how Thanksgiving can teach you to use<strong> stative</strong> verbs. We will also show you the difference between stative and <strong>progressive</strong> verbs.</p>
+<p><strong>What is a stative verb?</strong></p>
+<p>The term stative verb refers to a verb that has a stative meaning. In other words, these verbs show or describe conditions or situations that do not do anything but exist.</p>
+<p>Verbs that commonly have a stative meaning include:</p>
+<p>-verbs that show emotional states, such as love and <strong>dislike</strong>;</p>
+<p>-verbs that describe sense perceptions, such as smell or taste;</p>
+<p>-verbs that show existence, such as seem or look.</p>
+<p>In the present tense, a verb with a stative meaning is generally used in its simple form. "I love turkey," or "Americans like turkey" are two examples.</p>
+<p>Verbs that have stative meanings are generally not used in the progressive tense. So, you will probably not hear a native speaker say, "I am loving turkey," or "Americans are liking turkey."</p>
+<p><strong>Thanksgiving and stative verbs</strong></p>
+<p>Do not fear: we can use our Thanksgiving example to make the point clearer.</p>
+<p>Imagine you are at an American store. You hear a conversation between a customer and a store employee. The customer wants to buy a turkey that weighs 10 pounds, or 4.5 kilograms.</p>
+<p>Unlike the turkey from the pardoning ceremony, this turkey will have a sad fate: the dinner table.</p>
+<p>The conversation you hear might go like this:</p>
+<p><em>Customer: How much does that turkey weigh?</em></p>
+<p><em>Butcher: It weighs 10 pounds.</em></p>
+<p><em>Customer: How much does it cost?</em></p>
+<p><em>Butcher: It costs 20 dollars.</em></p>
+<p>In the dialogue, you can hear two examples of stative verbs: weigh and cost.</p>
+<p>The butcher said, "The turkey weighs 10 pounds,” and "The turkey costs 20 dollars." In both cases, the verbs have a stative meaning: The butcher is describing a condition or situation that simply exists – the weight and cost of the turkey.</p>
+<p>Now imagine you are eating Thanksgiving dinner with an American family. You might hear any one of the following sentences:</p>
+<p><em>"I love turkey!"</em></p>
+<p><em>"I dislike turkey."</em></p>
+<p><em>"The turkey smells wonderful!"</em></p>
+<p><em>"The food tastes great!"</em></p>
+<p><em>"The turkey seems undercooked."</em></p>
+<p><em>"The turkey looks awful."</em></p>
+<p>All these sentences include stative verbs. You might notice that the verbs are also in the simple present form.</p>
+<p><strong>Why not use a progressive verb?</strong></p>
+<p>So, why would an English speaker not say, "The turkey is seeming undercooked," or, "I am disliking turkey?"</p>
+<p>Susan Conrad and Douglas Biber are two English grammar experts. They say that, in general, English speakers use the progressive tense only when the subject of the verb actively controls the state or action.</p>
+<p>In addition, English speakers generally use the progressive only when the verb describes an action or state that happens over an extended period of time.</p>
+<p>So, you would not hear an English speaker say, "The turkey is seeming undercooked" because the subject of the verb, the turkey, does not control its state – being undercooked.</p>
+<p>For the same reason, you would not hear an English speaker say, "I am disliking turkey," because the verb's subject, <em>I</em>, probably does not have control over the action of disliking turkey.</p>
+<p>Now, some verbs can have stative and progressive meanings.</p>
+<p>Consider these examples:</p>
+<p><em>"The food tastes good."</em></p>
+<p><em>"The president is tasting the food."</em></p>
+<p>In the first sentence, the food does not control whether it is good or bad. As a result, the verb <em>taste </em>has a stative meaning because it simply describes the condition of the food.</p>
+<p>In the second sentence, "The president is tasting the food," the subject of the verb, <em>the president</em>, has control over his action.</p>
+<p>In addition, the action takes place over an extended period of time: the president must think about tasting food, then raise the food to his mouth, then consider its quality. So, you could say that the verb taste in this example has a progressive meaning.</p>
+<p><strong>What can you do?</strong></p>
+<p>The next time you are reading or listening to the news, pay special attention to the verbs.</p>
+<p>Notice when the progressive form is used, and when the simple form is used. Then ask yourself why. Does the verb's subject control the action? Does the action occur over an extended period of time? Or does the verb simply describe a condition that exists?</p>
+<p>If you are still confused about whether you should use a simple or progressive verb in your own conversations, Conrad and Biber have one tip that might help you.</p>
+<p>They say that in conversations, English speakers use simple verbs around 120 times in every 1,000 words.</p>
+<p>Progressive verbs are much less common: they appear fewer than 20 times in every 1,000 words.*</p>
+<p>I'm Alice Bryant.</p>
+<p>And I'm John Russell.</p>
+<p><em>John Russell wrote this lesson for Learning English.</em></p>
+<p><em>* See Conrad, Susan and Biber, Douglas. Real Grammar: A Corpus-Based Approach to English. Pearson-Longman. 2009. Pgs. 4-6</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>stative </strong><em>– adj.</em> expressing a state, condition, or relation</p>
+<p><strong>progressive</strong> <em>– adj.</em> of or relating to the progressive tense of a verb</p>
+<p><strong>dislike</strong> <em>– v.</em> to not like (something or someone)</p>
+<p><strong>undercooked </strong><em>– adj.</em> not cooked enough</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 因凡蒂诺成为国际足联新主席</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 因凡蒂诺成为国际足联新主席" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201602/infantino-fifa-presidency.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>因凡蒂诺成为国际足联新主席</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201602/infantino-fifa-presidency.mp3" id="mp3"></a>
+<a href="/static/lrc/infantino-fifa-presidency.lrc" id="lrc"></a>
+<a href="infantino-fifa-presidency-68207.html" id="CnPage" target="_blank"></a>
+<a href="us-china-agree-on-proposed-sanction-against-north-korea-68191.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Gianni Infantino of Switzerland is the new FIFA president.<br/>来自瑞士的詹尼·因凡蒂诺(Gianni Infantino)成为了国际足联新任主席。</p>
+<p>Infantino won after the organization voted a second time on Friday in Zurich.<br/>因凡蒂诺在国际足联周五在苏黎世举行的第二轮投票中胜出。</p>
+<p>Infantino takes over world soccer's governing body two years before the next World Cup.<br/>他在下届世界杯前两年接管了这家世界足球管理机构。</p>
+<p>FIFA is stuck in a bribery and corruption scandal from last year. Authorities in both Switzerland and the United States are investigating FIFA's finances. They are looking at how money is spent and how World Cup tournaments are awarded.<br/>国际足联去年陷入了贿赂和腐败丑闻之中。瑞士和美国当局都在调查国际足联的财务状况。他们正在审核国际足联的钱是怎么花的，以及世界杯比赛是如何奖励的。</p>
+<p>Infantino finished ahead of three other candidates. He defeated Sheikh Salman of Bahrain 115 to 88 in the second vote.<br/>因凡蒂诺以领先其他三名候选人结束投票。他在第二轮投票中以115比88票击败了来自巴林的谢赫·萨勒曼（Sheikh Salman）。</p>
+<p>Infantino will replace Sepp Blatter, another Swiss, who was banned by FIFA's ethics committee late in 2015. He made unauthorized payments to a colleague.<br/>因凡蒂诺将接替另一位瑞士人塞普·布拉特（Sepp Blatter）的位置。布拉特2015年末被国际足联道德委员会查禁，因为他向一位同事进行了未经授权的付款。</p>
+<p>Blatter led the organization since 1998 and served five terms.<br/>布拉特自1998年以来连续五届担任国际足联主席。</p>
+<p>Infantino is the general secretary of UEFA, the organization that runs soccer in Europe. He is 45.<br/>因凡蒂诺是欧足联秘书长，现年45岁。欧足联负责运营欧洲足球。</p>
+<p>Infantino spoke in Spanish, English, French and Italian during his campaign speech, appealing to FIFA members in their own languages. He promised to restore the image and respect of FIFA, saying "everyone in the world will applaud us."<br/>因凡蒂诺在竞选演说中用西班牙语、英语、法语和意大利语发言，他用国际足联成员国自己的语言向他们发起呼吁。他承诺恢复国际足联的形象和尊重，并表示“世界人每个人都会为我们鼓掌”。</p>
+<p>Infantino will serve the remainder of Blatter's final term until May 2019. Then there will be another election.<br/>因凡蒂诺将出任巴拉特剩余的任期，直到2019年5月。届时国际足联会再次进行选举。</p>
+<p>FIFA did more on Friday than just vote for a new president. It made some anti-corruption reforms. A president can no longer serve more than three four-year terms. There will be independent spending reviews. And the executive committee will now be called the FIFA Council, and reserve more positions for women.<br/>国际足联周五不仅仅是选出了新主席，该组织还进行了一些反腐败改革。国际足联主席的任期不能超过三届，每届为4年。另外还将会对支出进行独立审查。同时执行委员会现在将改称为国际足联理事会，并将为女性保留更多位置。</p>
+<p>The next World Cup will be held two years from now, in Russia.<br/>下届世界杯将于两年后在俄罗斯举行。</p>
+<p>I'm Dan Friedell.<br/>我是丹·费里德尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]Gianni Infantino of Switzerland is the new FIFA president.
+[00:06.60]Infantino won after the organization voted a second time on Friday in Zurich.
+[00:14.44]Infantino takes over world soccer's governing body
+[00:19.40]two years before the next World Cup.
+[00:23.76]FIFA is stuck in a bribery and corruption scandal from last year.
+[00:30.08]Authorities in both Switzerland and the United States
+[00:35.24]are investigating FIFA's finances.
+[00:38.76]They are looking at how money is spent
+[00:42.68]and how World Cup tournaments are awarded.
+[00:46.88]Infantino finished ahead of three other candidates.
+[00:51.40]He defeated Sheikh Salman of Bahrain 115 to 88 in the second vote.
+[01:00.48]Infantino will replace Sepp Blatter, another Swiss,
+[01:06.48]who was banned by FIFA's ethics committee late in 2015.
+[01:12.32]He made unauthorized payments to a colleague.
+[01:17.01]Blatter led the organization since 1998 and served five terms.
+[01:24.32]Infantino is the general secretary of UEFA,
+[01:28.84]the organization that runs soccer in Europe. He is 45.
+[01:34.88]Infantino spoke in Spanish, English, French and Italian
+[01:41.61]during his campaign speech,
+[01:44.32]appealing to FIFA members in their own languages.
+[01:48.76]He promised to restore the image and respect of FIFA,
+[01:53.76]saying "everyone in the world will applaud us."
+[01:58.48]Infantino will serve the remainder of Blatter's final term until May 2019.
+[02:07.12]Then there will be another election.
+[02:10.44]FIFA did more on Friday than just vote for a new president.
+[02:15.01]It made some anti-corruption reforms.
+[02:19.16]A president can no longer serve more than three four-year terms.
+[02:25.12]There will be independent spending reviews.
+[02:30.00]And the executive committee will now be called the FIFA Council,
+[02:36.64]and reserve more positions for women.
+[02:40.04]The next World Cup will be held two years from now, in Russia.
+[02:45.32]I'm Dan Friedell.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

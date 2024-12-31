@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Famous Book by Dr. Seuss about Christmas Gets a New Version</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Famous Book by Dr. Seuss about Christmas Gets a New Version" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/famous-book-by-dr-seuss-about-christmas-gets-a-new-version.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Famous Book by Dr. Seuss about Christmas Gets a New Version</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/famous-book-by-dr-seuss-about-christmas-gets-a-new-version.mp3" id="mp3"></a>
+<a href="scientists-study-brown-bear-frozen-for---years-90486.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">26 February 2023</span><br/>
+<p>The famous children's book, <em>How the Grinch Stole Christmas,</em> by the writer known as Dr. Seuss, will get a follow-up story, or <strong>sequel</strong>, later this year.</p>
+<p>The new book is likely to be called <em>How the Grinch Lost Christmas</em> and will be released in September.</p>
+<p>It was not written by Dr. Seuss, whose real name was Theodor Geisel. The famous writer of children's books died in 1991 at the age of 87.</p><div class="contentImage"><img alt="An image from the upcoming sequel to the original Christmas book from Dr. Seuss about the famous Grinch character. (Photo/TM &amp; &lt;I&gt;&amp;#&lt;/I&gt;169; 2023 Dr. Seuss Enterprises, L.P., All Rights Reserved, via AP)" src="https://files.21voa.com/gdb/76e08e28-983e-4695-bda1-bfe4a7680537_cx0_cy3_cw0_w268_r1.jpg"/><br/><span class="imagecaption">An image from the upcoming sequel to the original Christmas book from Dr. Seuss about the famous Grinch character. (Photo/TM &amp; <i>&amp;#</i>169; 2023 Dr. Seuss Enterprises, L.P., All Rights Reserved, via AP)</span></div>
+<p>Instead, it will be written by Alastair Heim, an <strong>author</strong> who has worked on other books in the Dr. Seuss "universe."</p>
+<p>The person who draws the pictures to go along with the story is called an illustrator. For the new book, the illustrator is Aristides Ruiz. He worked on a series of books based on Dr. Seuss's<em> The Cat in the Hat </em>for about 20 years.</p>
+<p>Heim wrote a message to the Associated Press about the chance to work on a story created by the famous author.</p>
+<p>"All throughout writing the story, I couldn't fully believe that I was actually getting to play in the amazing creative <strong>sandbox</strong> Dr. Seuss created all those decades ago," Heim wrote in an email.</p>
+<p>Ruiz called the job of working on the new book "difficult and <strong>daunting</strong>," because it is such a big part of the Christmas tradition in the U.S.</p>
+<p><em>How the Grinch Stole Christmas</em> came out in 1957 and sold 10 million copies in North America alone. It has been <strong>translated</strong> into many languages. There was a television version and two movie versions, all with famous actors playing the <strong>character</strong> or performing the voice of the Grinch.</p>
+<p>The new book will come out in September.</p>
+<p>In the first book, the Grinch tries to ruin Christmas for all the people who live in Who-ville by stealing their <strong>presents</strong> and <strong>decorations</strong>. In the end, he discovers the holiday is not about gifts and large meals but spending time with family and friends.</p>
+<p>In the new book, the Grinch wants to win an award for decorating a large Christmas tree. He gets caught up in the competition until he learns from Cindy-Lou Who that Christmas is not all about winning.</p>
+<p>Geisel created many books, including <em>The Cat in the Hat</em> and <em>Green Eggs and Ham</em>.</p>
+<p>Some of his books are no longer published. They have been described by critics as racist because they do not like the images in them. But his work is still popular. The magazine <em>Forbes</em> ranks Geisel as one of the wealthiest dead people. That means the organization that oversees his works still makes a lot of money.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Dan Friedell adapted this story for VOA Learning English based on a report by the Associated Press.</em></p>
+<p>______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>author </strong><em>–n. </em>a person who writes books</p>
+<p><strong>sandbox </strong><em>–n. </em>an area or container filled with sand where a child plays with toys</p>
+<p><strong>daunting </strong><em>–adj. </em>difficult or worrisome</p>
+<p><strong>translate </strong>–v. to change written work from one language to another</p>
+<p><strong>character </strong><em>–n. </em>a person in a story</p>
+<p><strong>present </strong><em>–n. </em>a gift</p>
+<p><strong>decoration </strong><em>–n. </em>something created to make a building or room look nice for a celebration, such as balloons, lights or ribbons</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

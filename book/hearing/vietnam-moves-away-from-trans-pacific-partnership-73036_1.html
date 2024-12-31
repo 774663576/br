@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 越南抛弃TPP贸易协议</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 越南抛弃TPP贸易协议" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201612/vietnam-moves-away-from-trans-pacific-partnership.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>越南抛弃TPP贸易协议</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201612/vietnam-moves-away-from-trans-pacific-partnership.mp3" id="mp3"></a>
+<a href="/static/lrc/vietnam-moves-away-from-trans-pacific-partnership.lrc" id="lrc"></a>
+<a href="vietnam-moves-away-from-trans-pacific-partnership-73036.html" id="CnPage" target="_blank"></a>
+<a href="iran-air-signs-deal-with-boeing-73014.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The election of Donald Trump as president of the United States has caused Vietnam to look for new trade deals.<br/>川普赢得美国大选已经促使越南开始寻找新的贸易协议。 
+<p>Vietnam wants to support exports to keep its economy strong if the U.S. Congress fails to approve the planned U.S.-led Trans Pacific Partnership. President-elect Trump also has been highly critical of the trade deal, known as the TPP.<br/>如果美国国会不批准计划由美国主导的《跨太平洋伙伴关系协议》，越南想要（通过这些新的贸易协议）支持出口以保持该国经济强劲。候任总统川普也高度批评了被称之为TPP的这项贸易协议。</p>
+<p>Now, Vietnamese officials are taking steps to keep their country's factories from being hurt if the TPP is not put in place.<br/>现在，越南官员正在采取措施确保如果TPP协议无法落实防止该国工厂受到不利影响。</p>
+<p>Vietnam's economy has been dependent on the export of manufactured goods since the 1980s. Last year, Vietnam's economy grew 6.7 percent.<br/>自20世纪80年代以来，越南的经济一直依赖于制成品出口。去年，越南经济增长了6.7％。</p>
+<p>Because the future of the TPP is unclear, observers say, Vietnamese trade officials are seeking markets for their country's manufactured goods. These markets include China, Russia and the European Union.<br/>观察人士表示，由于TPP协议的未来不明确，越南贸易官员正在为该国的制成品寻找市场，其中就包括中国、俄罗斯和欧盟。</p>
+<p>Twelve nations agreed to the TPP trade deal. Trump has said he will try to remove the United States from the agreement, which was signed in February after 10 years of negotiations. The nations that are a part of the TPP represent 40 percent of the global economy.<br/>12个国家同意了TPP贸易协议。川普曾声称他会设法让美国退出这项协议。该协议历经了10年谈判并于今年2月签署，TPP成员国占到了全球经济的40%。</p>
+<p>Four of the 12 nations, including Vietnam, are in Southeast Asia. Experts believe Vietnam would have been one of the nations that gained the most from the agreement. But Vietnamese officials have worried since the middle of this year that the U.S. Congress would not approve the agreement before its time limit ends in February 2018.<br/>包括越南在内的12个国家中有4个在东南亚。专家认为，越南将是该协议的最大受益方之一。但是越南官员自今年年中以来就担忧美国国会可能不会在2018年2月截止日期前批准该协议。</p>
+<p>Oscar Mussons advises international businesses for the Dezan Shira &amp; Associates company in Ho Chi Minh City.<br/>奥斯卡·穆森斯（Oscar Mussons）在协力管理咨询有限公司（Dezan Shira &amp; Associates consultancy）驻胡志明市办事处提供国际业务咨询。</p>
+<p>He said, "I think they were already aware the TPP wouldn't work out. I think Vietnam already has lots of free trade agreements signed."<br/>他说，“我认为越南已经意识到TPP协议可能无法生效了。我认为越南已经签署了很多自由贸易协议（来作为替代）。”</p>
+<p>Experts believe the TPP would have increased the size of Vietnam's economy, which is now about $193.6 billion. Trade deals permit exporters to pay lower tariffs or even avoid them when shipping goods into a country that is a trade partner.<br/>专家认为，TPP协议原本可以提升越南的经济规模。目前越南的经济规模为1936亿美元。贸易协议允许出口商将货物运往贸易伙伴国家时缴纳更低的关税，甚至免税。</p>
+<p>International companies that own factories in Vietnam include Intel, Samsung Electronics and major Japanese carmakers.<br/>在越南拥有工厂的国际公司包括英特尔、三星电子和日本主要汽车制造商。</p>
+<p>Vietnam exports an estimated $29.9 billion in goods to the United States. That is more than it exports to any other country. American companies want to expand their operations in Vietnam because their Chinese operations are becoming increasingly costly.<br/>越南向美国出口了大约价值299亿美元的货物，超过了该国向任何其它国家的出口额。美国企业希望扩大在越南的业务，因为他们中国业务的成本开始变得越来越昂贵。</p>
+<p>But about a month after the TPP trade agreement was signed, financial experts in Vietnam began to predict that the U.S. Congress might not approve it.<br/>但是在TPP贸易协议签署大约一个月之后，越南金融专家就开始预测美国国会可能不会批准TPP协议。</p>
+<p>In August, a group led by the Vietnamese deputy prime minister decided to delay the country's approval of the deal until other countries do so. Its next chance to approve the deal will come early next year.<br/>今年8月，越南副总理领导的一个小组决定该国推迟批准该协议，直到有其它国家批准再做决定。越南下一次批准该协议的时机或将是明年年初。</p>
+<p>Vietnam and the EU completed negotiations on a trade deal this year. In October, Vietnam joined the five-member, Russian-led Eurasian Economic Union. The agreement gives Vietnam access to a market of 181 million people.<br/>越南和欧盟今年完成了一项贸易协议谈判。 今年10月，越南加入了由俄罗斯领导的欧亚经济联盟五国。该协议使越南得以进入一个包括1.18亿人口的市场。</p>
+<p>Vietnam also is part of 16 free-trade deals, including agreements signed by Southeast Asia's 10-member ASEAN trading group of countries. ASEAN has agreements with China, India and Japan.<br/>越南参与了16项贸易协议，其中包括东盟十国贸易集团签署的协议（越南属于东盟）。东盟同中国、印度和日本签有协议。</p>
+<p>Louie Nguyen started and is the editor of the news website VietnamAdvisors. He believes Vietnam will begin to pay more attention to trade agreements with smaller markets.<br/>路易·阮（Louie Nguyen）是新闻网站“越南顾问”的创始人兼编辑。他认为越南将开始更多地关注同更小市场的贸易协议。</p>
+<p>"I think the fact that Vietnam has not ratified the TPP is one indication. It would make sense that they would be sending out trade groups doing research in markets that are less competitive," he said.<br/>他说：“我认为越南尚未批准TPP显示了一种迹象，越南如果派一些贸易团体到竞争较小的市场去考察将是合乎情理的。”</p>
+<p>Vietnam is also likely to be part of the Chinese-led Regional Comprehensive Economic Partnership. The trade deal would include India. Neither China nor India is part of the TPP. Experts say it will take several years for negotiations to be completed. They consider the Regional Comprehensive Economic Partnership China's answer to the TPP.<br/>越南也可能参与由中国牵头的《区域全面经济伙伴关系》。该贸易协议将会包括印度。中国和印度都不是TPP协议的一部分。专家表示，谈判尚需耗时数年才能完成。他们认为《区域全面经济伙伴关系》是中国对TPP协议的回应。</p>
+<p>Fiachra MacCana leads research at the stock trading company Ho Chi Minh City Securities. MacCana says many people are disappointed that the TPP seems to be headed for defeat, but few are surprised. He says another trade deal will be negotiated that will easily take the place of the TPP.<br/>菲亚克拉·麦坎纳（Fiachra MacCana）在胡志明证券公司主导研究。麦坎纳表示，很多人对TPP协议似乎要失败很是失望，但是很少有人会惊讶。他说，另一项将要谈判的贸易协议会轻松取代TPP协议。</p>
+<p>MacCana says Vietnam's economy will be affected if the TPP does not go forward, but it will not be hurt too much.<br/>麦坎纳表示，如果TPP协议止步不前，越南的经济将会受到影响，但是不会受到太大伤害。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·里特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Vietnam Moves Away From Trans-Pacific Partnership]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.72]The election of Donald Trump as president of the United States
+[00:05.64]has caused Vietnam to look for new trade deals.
+[00:10.40]Vietnam wants to support exports to keep its economy strong
+[00:16.44]if the U.S. Congress fails to approve the planned U.S.-led Trans Pacific Partnership.
+[00:25.72]President-elect Trump also has been highly critical of the trade deal, known as the TPP.
+[00:34.92]Now, Vietnamese officials are taking steps to keep their country's factories
+[00:42.52]from being hurt if the TPP is not put in place.
+[00:48.60]Vietnam's economy has been dependent on the export of manufactured goods since the 1980s.
+[00:58.60]Last year, Vietnam's economy grew 6.7 percent.
+[01:05.72]Because the future of the TPP is unclear, observers say,
+[01:11.64]Vietnamese trade officials are seeking markets for their country's manufactured goods.
+[01:19.68]These markets include China, Russia and the European Union.
+[01:26.84]Twelve nations agreed to the TPP trade deal.
+[01:32.12]Trump has said he will try to remove the United States from the agreement,
+[01:37.76]which was signed in February after 10 years of negotiations.
+[01:44.80]The nations that are a part of the TPP represent 40 percent of the global economy.
+[01:53.64]Four of the 12 nations, including Vietnam, are in Southeast Asia.
+[02:01.00]Experts believe Vietnam would have been one of the nations
+[02:05.88]that gained the most from the agreement.
+[02:09.68]But Vietnamese officials have worried since the middle of this year
+[02:14.80]that the U.S. Congress would not approve the agreement before its time limit ends in February 2018.
+[02:25.88]Oscar Mussons advises international businesses
+[02:30.36]for the Dezan Shira &amp; Associates company in Ho Chi Minh City.
+[02:36.04]He said, "I think they were already aware the TPP wouldn't work out.
+[02:43.88]I think Vietnam already has lots of free trade agreements signed."
+[02:51.72]Experts believe the TPP would have increased the size of Vietnam's economy,
+[02:58.20]which is now about $193.6 billion.
+[03:05.16]Trade deals permit exporters to pay lower tariffs or even avoid them
+[03:11.84]when shipping goods into a country that is a trade partner.
+[03:16.68]International companies that own factories in Vietnam include Intel,
+[03:23.96]Samsung Electronics and major Japanese carmakers.
+[03:30.28]Vietnam exports an estimated $29.9 billion in goods to the United States.
+[03:39.16]That is more than it exports to any other country.
+[03:44.92]American companies want to expand their operations in Vietnam
+[03:50.80]because their Chinese operations are becoming increasingly costly.
+[03:58.40]But about a month after the TPP trade agreement was signed,
+[04:03.64]financial experts in Vietnam began to predict that the U.S. Congress might not approve it.
+[04:12.60]In August, a group led by the Vietnamese deputy prime minister
+[04:19.04]decided to delay the country's approval of the deal until other countries do so.
+[04:26.72]Its next chance to approve the deal will come early next year.
+[04:33.44]Vietnam and the EU completed negotiations on a trade deal this year.
+[04:40.68]In October, Vietnam joined the five-member, Russian-led Eurasian Economic Union.
+[04:49.40]The agreement gives Vietnam access to a market of 181 million people.
+[04:57.84]Vietnam also is part of 16 free-trade deals,
+[05:02.92]including agreements signed by Southeast Asia's 10-member ASEAN trading group of countries.
+[05:12.40]ASEAN has agreements with China, India and Japan.
+[05:18.76]Louie Nguyen started and is the editor of the news website VietnamAdvisors.
+[05:28.72]He believes Vietnam will begin to pay more attention to trade agreements with smaller markets.
+[05:37.12]"I think the fact that Vietnam has not ratified the TPP is one indication.
+[05:45.88]It would make sense that they would be sending out trade groups
+[05:51.16]doing research in markets that are less competitive," he said.
+[05:57.48]Vietnam is also likely to be part of the Chinese-led Regional Comprehensive Economic Partnership.
+[06:05.88]The trade deal would include India.
+[06:09.44]Neither China nor India is part of the TPP.
+[06:14.64]Experts say it will take several years for negotiations to be completed.
+[06:22.60]They consider the Regional Comprehensive Economic Partnership China's answer to the TPP.
+[06:32.60]Fiachra MacCana leads research at the stock trading company Ho Chi Minh City Securities.
+[06:41.52]MacCana says many people are disappointed
+[06:45.68]that the TPP seems to be headed for defeat, but few are surprised.
+[06:52.60]He says another trade deal will be negotiated
+[06:57.40]that will easily take the place of the TPP.
+[07:01.96]MacCana says Vietnam's economy will be affected if the TPP does not go forward,
+[07:10.84]but it will not be hurt too much.
+[07:15.24]I'm Mario Ritter.
+[07:16.84]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

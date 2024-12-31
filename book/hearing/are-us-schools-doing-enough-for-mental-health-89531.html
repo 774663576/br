@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Are US Schools Doing Enough for Mental Health?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Are US Schools Doing Enough for Mental Health?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202208/are-us-schools-doing-enough-for-mental-health.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Are US Schools Doing Enough for Mental Health?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202208/are-us-schools-doing-enough-for-mental-health.mp3" id="mp3"></a>
+<a href="how-to-cut-down-on-mosquitoes-89525.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">23 August 2022</span><br/>
+<p>For 9-year-old Leah Rainey, the school day now begins with what her teacher calls an "emotional check-in."</p>
+<p>"It's great to see you. How are you feeling?" a voice comes from her laptop. It asks her to choose an <strong>emoji</strong> that represents how she feels: Happy. Sad. Worried. Angry. Frustrated. Calm. Silly. Tired.</p>
+<p>Depending on her answer, Leah gets a few more questions: Have you eaten breakfast? Are you hurt or sick? Is everything okay at home? Is someone at school being unkind?</p>
+<div class="contentImage"><img alt="A student at Lakewood Elementary School in Cecilia, Ky., uses her laptop to participate in an emotional check-in at the start of the school day, Thursday, Aug. 11, 2022. (AP Photo/Timothy D. Easley)" src="https://files.21voa.com/gdb/019e0000-0aff-0242-2646-08da84369f2f_cx0_cy4_cw99_w268_r1.jpg"/><br/>
+<span class="imagecaption">A student at Lakewood Elementary School in Cecilia, Ky., uses her laptop to participate in an emotional check-in at the start of the school day, Thursday, Aug. 11, 2022. (AP Photo/Timothy D. Easley)</span></div>
+<p>On a recent day, Leah chose "silly." But she said she struggled with sadness during online learning.</p>
+<p>Leah is in the fourth grade at Lakewood Elementary School in the American state of Kentucky. This year, all 420 students there will start their days the same way. The school is one of thousands across the United States using technology to measure students' state of mind and warn teachers of anyone who might be struggling.</p>
+<p>The tool that Leah Rainey and other Lakewood students use for "emotional check-in" is called Closegap. Rachel Miller is the founder of Closegap. She said interest in the technology exploded because of the coronavirus pandemic. She said more than 3,600 American schools will be using the technology this year.</p>
+<p><strong>Disagreement over social-emotional learning</strong></p>
+<p>In some ways, this year marks a return to pre-pandemic normalcy in the U.S. Most school systems have lifted face-covering requirements. Most have also ended social distancing rules. But the pandemic's long-lasting effects remain. Among them are the effects of loneliness and distant learning on children's emotional well-being.</p>
+<p>School systems across the country are using federal pandemic money to <strong>hire</strong> more mental health specialists. They are also using the money to expand classes that deal with emotional health.</p>
+<p>The class, called social-emotional learning, or SEL, has become the latest area of disagreement in education.</p>
+<p>Some American parents say SEL classes are used to teach ideas about race, <strong>gender</strong> and sexuality. And they take time away from the more traditional classes.</p>
+<p>Asra Nomani is a parent from Fairfax County in Virginia. She said, "Social-emotional well-being has become an excuse to intervene in the lives of children in the most <strong>intimate</strong> of ways that are both dangerous and irresponsible."</p>
+<p>But educators say the class helps students deal with pressure and emotions. And it will help them in the classroom and life.</p>
+<p>Dan Domenech is the executive director of the national School Superintendents Association. He said, "We are finally beginning to recognize that school is more than just teaching the kids reading, writing and <strong>arithmetic</strong>." Just as a hungry child cannot learn, Domenech added, a child with a troubled mind cannot pay attention to schoolwork.</p>
+<p><strong>Have we done enough?</strong></p>
+<p>A recent report by the U.S. Centers for Disease Control and Prevention found that 44 percent of high school students said they experienced "<a class="wsw__a" href="https://www.cdc.gov/mmwr/volumes/71/su/su7103a3.htm?s_cid=su7103a3_w#T2_down" target="_blank">feelings of sadness or hopelessness</a>" during the pandemic.</p>
+<p>President Joe Biden's administration recently announced over $500 million in assistance to expand mental health services in the country's schools. The money is in addition to federal and state money that schools have received to deal with pandemic-related needs.</p>
+<p>Claire Chi is an 11th-grade student at State College Area High School in central Pennsylvania. She described the government's efforts as "temporary." Last year, her school added emergency counseling and therapy dogs, among other supports. But most of that help lasted a day or two, Chi said.</p>
+<p>That's "not really a mental health investment for students," she said. This year, her school has added more counselors and plans mental health training for all 10th graders.</p>
+<p>Many schools, however, are having trouble hiring counselors.</p>
+<p>Goshen Junior High School in northwest Indiana has been struggling to replace a counselor who left last year. Jan Desmarais-Morse, one of two counselors left at the school, said, "One person trying to meet the needs of 500 students? It's impossible."</p>
+<p>The American School Counselor Association recommends having one counselor for every 250 students. But few states in the country have that. For the 2021 school year, only two states — New Hampshire and Vermont — met that goal. That information is based on data from the National Center for Education Statistics.</p>
+<p><em>The Associated Press </em>found that some states have a very low number of counselors: Arizona averages one counselor for every 716 students. In Michigan, it is one for every 638 students. And in Minnesota, it is one for every 592 students.</p>
+<p><strong>Take a break</strong></p>
+<p>Lakewood Elementary school has used federal money to create "take-a-break" corners in each classroom. School counselor Shelly Kerr said students use the corner to learn to deal with concerns and worries. The school plans to build a "Reset Room" this autumn to create a safe area where students can speak with a counselor.</p>
+<p>Houston, Texas, has one of the largest school systems in the country. There are 277 schools and nearly 200,000 students. Students are asked each morning to hold up their fingers showing how they feel. One finger means a child is hurting deeply; five means they feel great. Houston teachers now give mindfulness lessons. Two dogs -- a Chihuahua named Luci and a cockapoo named Omi -- have joined the school system's crisis team.</p>
+<p>Houston also built relaxation rooms, known as Thinkeries, at 10 schools last year. The rooms cost about $5,000 each. Data show that schools with these rooms saw a 62 percent decrease in calls to a crisis line last year. The school system says it is building more Thinkeries this year.</p>
+<p>In Irvine, California, an artist was busy painting images on the wall of a room called a "Well Space" at University High School. The room is designed to have an un-school-like feel. When school starts this week, counselors and mental health specialists will be in the Well Space to meet with students.</p>
+<p>The goal of the Well Space is to normalize the idea of students asking for help and to give students a place to reset.</p>
+<p>Tammy Blakeley is the Irvine school system's director of student support services. She said, "If they can re-center and refocus, they can then, after a short break, go back into their classrooms and be prepared for deeper learning."</p>
+<p>I'm Dan Novak.</p>
+<p>And I'm Dorothy Gundy.</p>
+<p><em>Jocelyn Gecker and Dylan Lovan reported this story for The Associated Press. Hai Do adapted the story for Learning English.</em></p>
+<p>_____________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>emoji</strong> - n. digital image used to express an idea, emotion, etc..</p>
+<p><strong>hire</strong> - v. to give work or a job to someone</p>
+<p><strong>gender</strong> - n. a person's own sense of being male, female, some combination or neither</p>
+<p><strong>intimate</strong> - adj. very personal and private</p>
+<p><strong>arithmetic</strong> - n. a branch of math that deals with numbers and their addition, subtraction, multiplication and division</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

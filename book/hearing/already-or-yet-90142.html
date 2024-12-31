@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Already or Yet?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Already or Yet?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/already-or-yet.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Already or Yet?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/already-or-yet.mp3" id="mp3"></a>
+<a href="grammar-for-exercise-part--90135.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">16 December 2022</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the differences between "yet" and "already."</p>
+<p><strong>Question</strong></p>
+<p>Dear Learning English,</p><div class="contentImage"><img alt="Ask a Teacher: Already or Yet?" src="https://files.21voa.com/gdb/022a0000-0aff-0242-00f7-08dadeef3437_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Already or Yet?</span></div>
+<p>I can learn a lot from you. I have a question about the difference between "already" and "yet."</p>
+<p>For example:</p>
+<p><em>Have you already finished your homework?</em></p>
+<p><em>Have you finished your homework yet?</em></p>
+<p>Which sentence is natural?</p>
+<p>Is there any difference in meaning between these two sentences?</p>
+<p>Thank you,</p>
+<p>Hiroyuki from Japan</p>
+<p><strong>Answer </strong></p>
+<p>This is a great question, Hiroyuki! We answered a question a few weeks back about the differences between "yet" and "still." Thank you for bringing "already" into the discussion.</p>
+<p>Your example sentences are in question form, which highlights some slight differences between the two words.</p>
+<p>Both questions are "natural," as in native English speakers would use both these questions. The difference between them comes from how and why we use them.</p>
+<p>Let's look and "yet" and "already" by themselves, then we will look at the differences in your questions.</p>
+<p><strong>Yet</strong></p>
+<p>"Yet" is an adverb and is often used at the end of a statement or question. We use "yet" in connection with expected actions. We often use "yet" in questions and negative statements.</p>
+<p>Here's an example:</p>
+<p><em>Class starts in five minutes and I haven't gotten out of bed yet.</em></p>
+<p>The use of "yet" expresses the idea that the student might be late for class. It connects the class time to their current state.</p>
+<p>When we use "yet" in questions, we are unsure if the action has been completed or not and we are checking either way by asking a yes or no question. Here is an example:</p>
+<p><em>Question: You are moving next month! Have you found an <strong>apartment</strong> yet?</em></p>
+<p><em>Answer: Not yet. I am still looking at places.</em></p>
+<p>By using "yet" in the question, we guess that the person answering the question has not completed the action up to this point in time.</p>
+<p><strong>Already</strong></p>
+<p>"Already" is an adverb and we use it before the verb in a sentence.</p>
+<p>We use "already" for actions that we expect to occur or have occurred depending on if we use "already" in a statement or question.</p>
+<p>When we use "already" in statements the action has occurred.</p>
+<p><em>The paper is <strong>due</strong> tomorrow and I've already written it. </em></p>
+<p>When we use "already" in a question, we are suggesting that the action may be complete. We want confirmation or denial in an answer.</p>
+<p><em>Question: You are moving next month! Did you already find an apartment? </em></p>
+<p><em>Answer: Yep, we found a place last week! </em></p>
+<p><strong>Your two questions</strong></p>
+<p>Now let's look at your two questions.</p>
+<ol>
+<li><em>Have you already finished your homework?</em></li>
+<li><em>Have you finished your homework yet?</em></li>
+</ol>
+<p>In the first question, the questioner may believe that the listener has finished thew homework by using already. Once again, it is just a guess.</p>
+<p>In the second question, by using "yet," the questioner is not sure if the homework has been completed or not.</p>
+<p><em>Please let us know if these explanations and examples have helped you, </em>Hiroyuki!</p>
+<p>What question do <em>you </em>have about American English? Send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a></p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>_____________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>occur</strong> – <em>v</em>. to happen</p>
+<p><strong>apartment</strong> – <em>n. </em>a room or set of rooms rented as a home</p>
+<p><strong>essay </strong>– <em>n</em>. a piece of writing that tells a person's thoughts or opinions about a subject</p>
+<p><strong>guess </strong>– v. to form an opinion or give an answer about something when you do not know much or anything about it</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

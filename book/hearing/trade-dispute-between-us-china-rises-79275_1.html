@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中美之间的贸易争端加剧</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 中美之间的贸易争端加剧" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201806/trade-dispute-between-us-china-rises.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中美之间的贸易争端加剧</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201806/trade-dispute-between-us-china-rises.mp3" id="mp3"></a>
+<a href="/static/lrc/trade-dispute-between-us-china-rises.lrc" id="lrc"></a>
+<a href="trade-dispute-between-us-china-rises-79275.html" id="CnPage" target="_blank"></a>
+<a href="world-cup-predictions-spain-brazil-germany-or-russia-79263.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">United States President Donald Trump announced a 25 percent tariff on $50 billion worth of Chinese goods on Friday.<br/>美国总统川普周五宣布对价值500亿美元的中国商品征收25%的关税。
+<p>China quickly answered with its own tariffs on American goods.<br/>中国很快以对美国商品征收关税作为回应。</p>
+<p>The moves increase the trade dispute between the world's two largest economies.<br/>此举加剧了世界最大的两个经济体之间的贸易争端。</p>
+<p>In a statement Friday morning, the president said the tariffs were necessary to prevent "unfair transfer of American technology and intellectual property to China."<br/>川普在周五早上的一份声明中表示，关税对于阻止“美国技术和知识产权不公平地转往中国”来说是很必要的。</p>
+<p>The Office of the U.S. Trade Representative said the tariffs will start on July 6.<br/>美国贸易代表办公室表示，这些关税将于7月6日开始生效。</p>
+<p>China's Commerce Ministry answered quickly to the U.S. taxes on Chinese imports. The ministry announced Friday that it will immediately add tariffs of "equal scale and equal strength" on U.S. products.<br/>中国商务部迅速回应了美国对中国进口商品征收关税。该部门周五宣布会立即对美国产品增加“同等规模和力度”的关税。</p>
+<p>The ministry statement gave no details. But China had earlier released a list of $50 billion in U.S. products that would face tariffs, including beef, whiskey and soybeans. If tariffs are placed on those products, they would likely affect farmers and rural supporters of president Trump.<br/>该部门的声明尚未提供任何细节。但是中国早些时候公布过一份价值500亿美元的可能面临关税的美国产品清单，其中包括牛肉、威士忌和大豆。如果对这些产品征收关税，可能会影响到农民以及川普在农村的支持者。</p>
+<p>The statement also said China was not going forward with deals to buy more American goods. In May, Chinese officials had promised to buy more American farm goods, natural gas and other products to narrow China's large trade surplus with the United States.<br/>这份声明还称，中国不会推进购买更多美国商品的相关协议。今年5月份，中国官员承诺会购买更多的美国农产品、天然气等产品，以缩小中国对美国的巨大贸易顺差。</p>
+<p>Trump has blamed the trade imbalance between the two countries for the loss of American jobs. In March, while signing an order calling for tariffs on China's imports, the president said "It is the largest deficit of any country in the history of our world."<br/>川普指责两国之间的贸易失衡导致美国失去就业机会。今年3月，川普在签署一份要求对中国进口产品征收关税的命令时表示：“这是全球历史上任何国家面临的最大贸易逆差。"</p>
+<p>China's trade surplus with the U.S. last year was about $375 billion. Trump said that with the increased tariffs he hopes to cut the trade deficit with China by $100 billion.<br/>中国去年同美国的贸易顺差为3750亿美元。川普表示，通过提高关税，他希望将美国同中国的贸易逆差减少1000亿美元。</p>
+<p>The tariffs were in response to complaints that China requires or pressures foreign companies to hand over technology. American officials say they have targeted products that might benefit from Chinese industrial policies.<br/>这些关税是为了回应中国要求或迫使外国公司转让技术的投诉。美国官员表示他们已经瞄准了可能受益于中国工业政策的产品。</p>
+<p>American businesses, however, are worried that rising trade tensions will hurt U.S. economic growth.<br/>然而美国企业担心贸易紧张局势不断加剧会伤害美国经济增长。</p>
+<p>Thomas Donohue is president of the U.S. Chamber of Commerce. He said tariffs place "the cost of China's unfair trade practices squarely on the shoulders of American consumers, manufacturers, farmers, and ranchers."<br/>托马斯·多诺霍（Thomas Donohue）是美国商会的主席。他表示，这些关税将”中国不公平贸易的成本直接加到了美国消费者、制造商、农民和牧场主的身上。”</p>
+<p>Gary Cohn was formerly a top economic adviser for the president. At an event sponsored by The Washington Post, he added, "If you end up with a tariff battle, you will end up with price inflation, and you could end up with consumer debt."<br/>加里·科恩（Gary Cohn）曾是川普总统的首席经济顾问。在《华盛顿邮报》发起的一项活动中，他补充道：”如果你最终打起一场关税战，结果就会造成物价上涨。最后会有更多消费者举债。“</p>
+<p>The U.S. had earlier announced tariffs on steel and aluminum imports from Canada, Japan, Mexico and Europe. The announcement led major American allies to promise their own trade measures to answer the American import taxes.<br/>美国早些时候宣布对来自加拿大、日本、墨西哥和欧洲的进口钢材和铝征收关税。这一公告导致美国主要盟国誓言要以自己的贸易措施来回应美国的进口税。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·里特。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Trade Dispute between US, China Rises]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.36]United States President Donald Trump announced a 25 percent tariff
+[00:06.64]on $50 billion worth of Chinese goods on Friday.
+[00:13.00]China quickly answered with its own tariffs on American goods.
+[00:20.52]The moves increase the trade dispute
+[00:23.55]between the world's two largest economies.
+[00:28.72]In a statement Friday morning, the president said the tariffs
+[00:33.65]were necessary to prevent "unfair transfer of American technology
+[00:40.26]and intellectual property to China."
+[00:43.88]The Office of the U.S. Trade Representative said the tariffs will start on July 6.
+[00:55.12]China's Commerce Ministry answered quickly
+[00:58.80]to the U.S. taxes on Chinese imports.
+[01:03.56]The ministry announced Friday that it will immediately add tariffs
+[01:09.32]of "equal scale and equal strength" on U.S. products.
+[01:17.12]The ministry statement gave no details.
+[01:21.24]But China had earlier released a list of $50 billion in U.S. products
+[01:28.56]that would face tariffs, including beef, whiskey and soybeans.
+[01:37.20]If tariffs are placed on those products,
+[01:40.76]they would likely affect farmers and rural supporters of president Trump.
+[01:48.68]The statement also said China was not going forward
+[01:53.36]with deals to buy more American goods.
+[01:57.84]In May, Chinese officials had promised
+[02:01.45]to buy more American farm goods,  natural gas and other products
+[02:08.01]to narrow China's large trade surplus with the United States.
+[02:15.12]Trump has blamed the trade imbalance between the two countries
+[02:20.44]for the loss of American jobs.
+[02:24.56]In March, while signing an order calling for tariffs on China's imports,
+[02:31.48]the president said "It is the largest deficit of any country
+[02:37.28]in the history of our world."
+[02:42.24]China's trade surplus with the U.S. last year was about $375 billion.
+[02:52.68]Trump said that with the increased tariffs
+[02:56.92]he hopes to cut the trade deficit with China by $100 billion.
+[03:05.04]The tariffs were in response to complaints that China requires
+[03:10.64]or pressures foreign companies to hand over technology.
+[03:17.36]American officials say they have targeted products that might benefit
+[03:22.84]from Chinese industrial policies.
+[03:27.64]American businesses, however, are worried that rising trade tensions
+[03:33.56]will hurt U.S. economic growth.
+[03:38.04]Thomas Donohue is president of the U.S. Chamber of Commerce.
+[03:44.68]He said tariffs place "the cost of China's unfair trade practices
+[03:51.48]squarely on the shoulders of American consumers,
+[03:56.24]manufacturers, farmers, and ranchers."
+[04:02.88]Gary Cohn was formerly a top economic adviser for the president.
+[04:09.88]At an event sponsored by The Washington Post, he added,
+[04:15.33]"If you end up with a tariff battle,
+[04:18.72]you will end up with price inflation,
+[04:22.24]and you could end up with consumer debt."
+[04:27.56]The U.S. had earlier announced tariffs on steel and aluminum imports
+[04:33.80]from Canada, Japan, Mexico and Europe.
+[04:38.84]The announcement led major American allies
+[04:43.38]to promise their own trade measures
+[04:46.40]to answer the American import taxes.
+[04:53.60]I'm Mario Ritter.
+[04:55.68]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

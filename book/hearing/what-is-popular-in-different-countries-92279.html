@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Is Popular in Different Countries?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, What Is Popular in Different Countries?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/what-is-popular-in-different-countries.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Is Popular in Different Countries?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/what-is-popular-in-different-countries.mp3" id="mp3"></a>
+<a href="report-language-traditions-central-to-national-identity-92278.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">22 February 2024</span><br/>
+<p>In a recent <a class="wsw__a" href="https://www.21voa.com/a/what-is-popular-in-your-country-/7488370.html" target="_blank">lesson</a>, we asked our readers and listeners to write to us about what is popular in their country.</p>
+<p>In today's lesson, we will explore some of what was written to us. Our audience will be the guides of our imaginative tour of cultures around the world. We will learn about English grammar on the way.</p>
+<p><strong>Turkey </strong></p><div class="contentImage"><img alt="Everyday Grammar " src="https://files.21voa.com/gdb/01000000-0a00-0242-8477-08dc33422395_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar </span></div>
+<p>Let's start with a message from a friend in Turkey.</p>
+<p><em>Greetings from Turkey, I am Furkan. </em></p>
+<p><em>I think, K<i>&amp;#</i>305;vanc Tatl<i>&amp;#&lt;/I&gt;305;tug is a popular in Turkey. Because the whole country knows him. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Furkan wrote a very clear message. Our main suggestion is to remove a couple of words and add a little more explanation.&lt;/p&gt;
+&lt;p&gt;We can take out the words "I think." We can also remove the part about the "whole country knows him."&lt;/p&gt;
+&lt;p&gt;When we say someone is popular, we can &lt;strong&gt;assume&lt;/strong&gt; that many or most people in a place know about the person.&lt;/p&gt;
+&lt;p&gt;You could also explain a little more deeply why Kivanc Tatlitug is popular. For example, you might say he is handsome, talented, and so on.&lt;/p&gt;
+&lt;p&gt;So, you might update the message to something like this:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;K&lt;I&gt;&amp;#&lt;/I&gt;305;vanc Tatl&lt;I&gt;&amp;#&lt;/I&gt;305;tug is popular in Turkey &lt;u&gt;because he is handsome, talented, and wealthy&lt;/u&gt;. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Venezuela &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now let's examine part of a message from Gorka in Venezuela. Gorka says this about baseball, a popular sport in the country:&lt;/p&gt;
+&lt;p&gt;
+&lt;em&gt;... this sport is practiced by people of all ages and in all the states of the country. There are many baseball schools, some of them &lt;strong&gt;sponsored&lt;/strong&gt; by American baseball organizations.&lt;br&gt;
+Every year more that one hundred Venezuelan baseball players go to USA to play in the MLB or other related leagues.&lt;br&gt;
+Not surprisingly these players inspire younger baseball players to follow their steps. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Gorka wrote an excellent description. Our main suggestion is to pay careful attention to short words.&lt;/p&gt;
+&lt;p&gt;Instead of "that" we can use "than," as in "more than one hundred Venezuelan baseball players." And we want to add "the" in front of "USA" like this:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Every year, more &lt;u&gt;than&lt;/u&gt; one hundred Venezuelan baseball players &lt;u&gt;go to the USA&lt;/u&gt; to play in the MLB or other related leagues. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;A final word about the last sentence from Gorka. While it is correct to say "follow their steps," in this situation, we often say "follow in their footsteps." We use "follow in their footsteps" when someone does something before us and we follow what they did. For example:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If your father is a doctor and you become a doctor, you could say that you are &lt;u&gt;following in your father's footsteps&lt;/u&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Japan &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now let's turn to Japan. An unnamed reader sent us this note about a popular food.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Most popular food in Japan is RAMEN. I think because Ramen has huge kinds of taste. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The message is clear and to the point. Once again, we need to pay special attention to short words and remove a few other words. We need to include the word "the" at the beginning of the message, as in:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;u&gt;The&lt;/u&gt; most popular food in Japan is ramen. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;While the meaning of "huge kinds of taste" is understandable, we might instead use different structures to express the same idea. For example, English speakers might say that the taste is complex, bold, or rich. We might update the entire message to something like this:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The most popular food in Japan is ramen because it &lt;u&gt;has a rich, complex taste. &lt;/u&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Spain &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Finally, Rafael from Spain writes to us. He notes that he does not like the most popular sport, soccer. Rafael ends his message with the following:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;... Since I don't like soccer, I feel a little weirdo. But not as much as you, John, who are in love with grammar!&lt;br&gt;
+Thank you very much for your teaching, John,&lt;br&gt;
+See you soon! &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Rafael wrote a very light-hearted, humorous message. The main correction needed is to add the word "like" after the verb "feel" and remove the word "little." So, the statement could become:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Since I don't like soccer, I feel &lt;u&gt;like&lt;/u&gt; a weirdo. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;A quick note about the term "weirdo." We often use it in a negative, or disapproving, way. So, you should be careful about using it. If you choose to use the term, make sure that the person it is directed at understands that you are not being serious.&lt;/p&gt;
+&lt;p&gt;Rafael's message, for example, clearly used the word in a joking manner. Still, his point is correct:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I am a grammar weirdo.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;And that's Everyday Grammar.&lt;/p&gt;
+&lt;p&gt;I'm John Russell.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;John Russell wrote this lesson for VOA Learning English. &lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;______________________________________________&lt;/p&gt;
+&lt;h2 class="wsw__h2"&gt;Words in This Story&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;assume &lt;/strong&gt;&lt;em&gt;– v.&lt;/em&gt; to think that something is true or probably true&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;sponsor &lt;/strong&gt;&lt;em&gt;– v.&lt;/em&gt; to give money to an athlete for training, clothes, equipment, etc.,&lt;/p&gt;
+
+
+&lt;/div&gt;
+&lt;div class="list"&gt;
+&lt;div class="list_title"&gt;Related Articles&lt;div id="gotop"&gt;&lt;a href="#"&gt;go top&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ol&gt;&lt;LI&gt;&lt;A href="what-is-popular-in-your-country-92243.html" target=_blank&gt;What Is Popular in Your Country?&lt;/A&gt;   (24/2/15)&lt;/LI&gt;&lt;LI&gt;&lt;A href="ways-to-say-goodbye-92205.html" target=_blank&gt;Ways to Say 'Goodbye'&lt;/A&gt;   (24/2/8)&lt;/LI&gt;&lt;LI&gt;&lt;A href="a-trip-around-the-world-92171.html" target=_blank&gt;A Trip Around the World&lt;/A&gt;   (24/2/1)&lt;/LI&gt;&lt;LI&gt;&lt;A href="population-overpopulation-underpopulation-92133.html" target=_blank&gt;Population, Overpopulation, Underpopulation&lt;/A&gt;   (24/1/25)&lt;/LI&gt;&lt;LI&gt;&lt;A href="language-and-mental-health-92099.html" target=_blank&gt;Language and Mental Health&lt;/A&gt;   (24/1/18)&lt;/LI&gt;&lt;LI&gt;&lt;A href="the-grammar-of-share-social-economic-uses-92065.html" target=_blank&gt;The Grammar of ‘Share:’ Social, Economic Uses&lt;/A&gt;   (24/1/11)&lt;/LI&gt;&lt;LI&gt;&lt;A href="personification-adjectives-in-take-me-home-country-roads-92029.html" target=_blank&gt;Personification, Adjectives in 'Take Me Home, Country Roads'&lt;/A&gt;   (24/1/4)&lt;/LI&gt;&lt;LI&gt;&lt;A href="grammar-and-new-year-s-resolutions-92001.html" target=_blank&gt;Grammar and New Year’s Resolutions&lt;/A&gt;   (23/12/28)&lt;/LI&gt;&lt;LI&gt;&lt;A href="grammar-and-figurative-language-in-take-me-home-country-roads-91973.html" target=_blank&gt;Grammar, Language in 'Take Me Home, Country Roads'&lt;/A&gt;   (23/12/21)&lt;/LI&gt;&lt;LI&gt;&lt;A href="grammar-for-a-gift-giving-season-91942.html" target=_blank&gt;Grammar for a Gift-giving Season&lt;/A&gt;   (23/12/14)&lt;/LI&gt;&lt;/ol&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class="clearing"&gt;&lt;/div&gt;
+&lt;div id="footer"&gt;
+&lt;div id="copyright"&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;</i></em></p></div></div></div></body></body></html>

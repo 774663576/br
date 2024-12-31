@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Describing Your Birthday</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Describing Your Birthday" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202208/describing-your-birthday.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Describing Your Birthday</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202208/describing-your-birthday.mp3" id="mp3"></a>
+<a href="us-states-will-get-less-water-in-dry-weather-89498.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">18 August 2022</span><br/>
+<p>Last week, my <strong>niece</strong> and I celebrated our birthdays together. We both turned 35 years old in the beginning of August. Her birthday is just a few days before mine. We celebrated by going to a lake and having lunch outside.</p>
+<p>I had such a wonderful birthday.</p>
+<p>Today, on Everyday Grammar, we will learn to describe our birthdays.</p>
+<div class="contentImage"><img alt="Everyday Grammar: Describing Your Birthday" src="https://files.21voa.com/gdb/019e0000-0aff-0242-f2de-08da80763c93_w268_r1.png"/><br/>
+<span class="imagecaption">Everyday Grammar: Describing Your Birthday</span></div>
+<p><strong>When is your birthday?</strong></p>
+<p>When people ask us the question "When is your birthday?" we can answer a few different ways.</p>
+<p>We can use the season (spring, summer, autumn/fall, or winter), the month, or the day.</p>
+<p>My birthday is in the summer.</p>
+<p>Her father's birthday is in March.</p>
+<p>Last Sunday was her birthday.</p>
+<p>His birthday is the 4th of May.</p>
+<p>Remember that word "birthday" is different from "birthdate." "Birthdate" is the exact date, like December, 7th, 1997. The word "birthday" can be the date, or you can answer more generally.</p>
+<p>For example,</p>
+<p>My niece's birthday is in August.</p>
+<p>Her birthdate is August 3rd.</p>
+<p><strong>How old are you? What age are you turning? </strong></p>
+<p>When we want to say how old we are, we can use the present or future verb tenses depending on when our birthdays are. We can use the past tense with the verb "turn."</p>
+<p>If we are talking about a future birthday, say next year or in a few months, we can answer the question of "How old will you be?" with:</p>
+<p>I will be + (age). Or...</p>
+<p>I'll be + (number) years old.</p>
+<p>In 2023, I will be 36 years old.</p>
+<p>On your birthday, you can use the present tense.</p>
+<p>Deborah is 55 today.</p>
+<p>For the past tense, we can use the structure of the verb "be" + age (years old), but we generally use it to talk about past ages in <strong>reference</strong> to something else.</p>
+<p>We can also use the verb "turn" to talk about how old we are. In this way "turn" means to reach or pass a certain age. Therefore, we can use the past tense with "turn" for talking about birthdays. For example:</p>
+<p>I turned 35 this year.</p>
+<p>This means that my birthday was in the past. I am still considered to be 35 years old after my birthday.</p>
+<p>In the present tense, we can use "turn" to say that a birthday is "today." As in,</p>
+<p>Brad turns 60 today.</p>
+<p>And to express a future birthday, we can use the same form, the present tense.</p>
+<p>Kristen turns 41 this year.</p>
+<p>This means that sometime this year (the near future), Kristen will be 41 years old.</p>
+<p>We can use the <strong>modal verb</strong> of "will" with "turn" to express a future birthday.</p>
+<p>I will turn 36 next year.</p>
+<p><strong>What do you want to do for your birthday?</strong></p>
+<p>When talking about making plans for a birthday, someone may ask you: "What do you want to do for your birthday?"</p>
+<p>You can answer with ideas of plans that you would like to do.</p>
+<p>You can use the expressions:</p>
+<p>"I want to..." or "I would like to..." to be more polite.</p>
+<p>You can even use the expression "I + be going to" if you have already made the plans, yourself.</p>
+<p>She wants to go to a French restaurant for her birthday.</p>
+<p>I'm going to celebrate with my friends later.</p>
+<p>If your birthday has already past, someone may ask you,</p>
+<p>"How was your birthday?"</p>
+<p>You can answer by describing your birthday with an adjective.</p>
+<p>My birthday party was wonderful.</p>
+<p>Then they may ask you:</p>
+<p>"What did you do for your birthday?"</p>
+<p>You can answer in the past tense:</p>
+<p>For my birthday this year, we went to an <strong>amusement park</strong>.</p>
+<p><strong>What do you want for/on your birthday? </strong></p>
+<p>If someone wants to get you a gift for your birthday they may ask you:</p>
+<p>"What do you want for your birthday?"</p>
+<p>"What do you want on your birthday?"</p>
+<p>If you want something <em>for</em> your birthday that means a gift, generally.</p>
+<p>If you want something <em>on</em> your birthday that could be a party or to make some type of plans to celebrate on the actual date.</p>
+<p>On my birthday next year, I would like to go to the countryside.</p>
+<p>Please don't buy me anything for my birthday.</p>
+<p><strong>What did you get for/on your birthday? </strong></p>
+<p>After your birthday, people may ask what you received as a gift for your birthday:</p>
+<p>"What did you get for your birthday?"</p>
+<p>"What do you get on your birthday?"</p>
+<p>You could say that you got or received something.</p>
+<p>I got a cat for my birthday.</p>
+<p>Or you could say what you got and who gave it to you.</p>
+<p>My mom sent me a lovely birthday card in the mail.</p>
+<p>Here is how you might tell about another's birthday:</p>
+<p>Her husband gave her jewelry for her birthday.</p>
+<p><strong>Homework</strong></p>
+<p>Let's end this report with a homework assignment. In 5-8 sentences, write about your birthday this year. Try to use ideas that you have learned about in today's report. You can use the question headings as your guide! Remember to use the correct verb tense depending on when your birthday is.</p>
+<p>Send your writing to our email address: learningenglish@voanews.com</p>
+<p>We will select one piece of writing and provide feedback and suggestions in a future report!</p>
+<p>I'm Faith Pirlo</p>
+<p>And I'm Jill Robbins.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p>Describe your birthday. Tell us about your birthday in the comments below or write to us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p><strong>_____________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>niece </strong><em>–n. </em>the daughter of your brother or sister<strong> </strong></p>
+<p><strong>reference </strong><em>–n. </em>the act of mentioning something in speech or in writing</p>
+<p><strong>modal verbs</strong> <em>– n. (grammar)</em> verbs that are used to express possibility, ability, or necessity.</p>
+<p><strong>amusement park</strong> - n. a place that has many games and rides (such as roller coasters and merry-go-rounds) for entertainment</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

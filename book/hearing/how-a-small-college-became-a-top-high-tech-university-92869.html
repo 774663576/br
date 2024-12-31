@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How a Small College Became a Top High-tech University</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, How a Small College Became a Top High-tech University" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202408/how-a-small-college-became-a-top-high-tech-university.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How a Small College Became a Top High-tech University</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202408/how-a-small-college-became-a-top-high-tech-university.mp3" id="mp3"></a>
+<a href="severe-drought-returns-to-the-amazon-earlier-than-expected-92868.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Hai Do</span><br/><span class="datetime">06 August, 2024</span><br/>
+<p>A measure begun 40 years ago by South Dakota lawmakers and state higher education leaders has turned a small rural college into one of the top high-tech universities in the United States.</p>
+<p>It began at a time when the future of Dakota State College itself was in question.</p>
+<p>In 1984, the South Dakota Board of Regents, which oversees the school, was under pressure to cut its budget. It closed one college and turned it into a prison.</p><div class="contentImage"><img alt="MadLabs research facility of Dakota State University is a hub for cyber research. (Bart Pfankuch / South Dakota News Watch)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-2ebd-08dcb2212e2d_cx0_cy4_cw0_w268_r1.jpg"/><br/><span class="imagecaption">MadLabs research facility of Dakota State University is a hub for cyber research. (Bart Pfankuch / South Dakota News Watch)</span></div>
+<p>Soon after, a new law went into effect. The measure put technology at the center of all Dakota State's study programs.</p>
+<p>The decision to reinvent a teacher's college founded in 1881 in a rural city of 6,000 people seemed risky. But, at around the same time, Citibank, a major financial services company, decided to headquarter its credit card business in Sioux Falls, a city near the college.</p>
+<p>José-Marie Griffiths is the current president of Dakota State University (DSU). The school changed its name from college to university in 1989.</p>
+<p>Griffiths said Citibank was looking for computer programmers, and “somebody came up with the idea that, well, we could turn this college that's <strong>fumbling</strong> a little bit into a computer school with software development and engineering.”</p>
+<p>Griffiths told <a class="wsw__a" href="https://www.sdnewswatch.org/dakota-state-university-madison-cybsersecurity-program-growth/">South Dakota News Watch</a>, “That way, we could supply the needed programmers to the Sioux Falls workforce for Citibank and <strong>ultimately</strong> for others....”</p>
+<p><strong>Change was not fully supported at first</strong></p>
+<p>Lynette Molstad Gorder was teaching at DSU 40 years ago when the change to a high-tech campus began. She said, at first, some members of the college community were unsure about the change, and its effect on people and programs.</p>
+<p>“Later on we looked upon it as a welcome opportunity,” she said. “It was kind of hazy (at first) and then all of a sudden, it just clicked.”</p>
+<p>Suddenly, computers replaced pens, pencils and typewriters in classrooms. And later, the move into computer science and then cyber security, she said.</p>
+<p>The jump into technology at DSU started with a bachelor's degree in computer science using teaching materials from IBM. The teaching of computer science and software development along with industry partnership laid the groundwork for what was to come, Griffiths said.</p>
+<p>With a mix of private and public money, the university expanded the school and its offerings.</p>
+<p>In 2004, the National Security Agency named DSU a Center of Academic Excellence in computer security, one of the first in the nation.</p>
+<p>The number of students has also risen steadily, from 867 in 1985 to 3,509 in 2023. The university said DSU now offers 44 degrees, including seven master's degrees and four doctoral programs.</p>
+<p>In 2017, DSU started Madison Cyber Labs with money from the state and local businesses. It expanded research at the university to include cyber security, machine learning, and artificial intelligence, among others.</p>
+<p>The school is now planning an expansion into Sioux Falls itself. The plan includes partnerships with another research center and a cyber academy program for high school students.</p>
+<p>DSU is also pushing the state for more money to start a new center for quantum computing.</p>
+<p><strong>Opportunities for DSU graduates</strong></p>
+<p>Jen Easterly is director of the federal Cybersecurity and Infrastructure Security Agency. She was the lead speaker at a DSU cybersecurity event last March.</p>
+<p>Easterly said that before she visited Madison, she had been hearing increasing discussion on the national level about the growth and<strong> innovation</strong> taking place at DSU.</p>
+<p>She said, “The ideas generated at forums like this are just further proof that it doesn't matter the size of the university. ...”</p>
+<p>Alexis Kulm graduated from DSU in December of 2022. She studied cyber operations there.</p>
+<p>The 23-year-old said she liked the small-town feel of the college. She took classes in web and network design, computer programming and malware analysis. All of them, she said, helped prepare her for the cyber workplace.</p>
+<p>“You get a strong real-world education in your classes,” Kulm said.</p>
+<p>Kulm also said she had several job offers after graduating. She chose Sanford Health, a company in Sioux Falls. It has a partnership with the university to increase employment opportunities for DSU graduates.</p>
+<p>Kulm is not the only DSU graduate to stay in South Dakota. Jon Waldman and Chad Knutson were in the class of 2006. Soon after graduating, they set up a business together right in Madison. Their 90-employee company SBS CyberSecurity serves the banking industry in 49 states.</p>
+<p>Waldman said DSU has “a commitment to innovation” that makes it easy for students to remain on top of the always-changing cyber technology and security industry.</p>
+<p>I'm Caty Weaver.</p>
+<p>And I'm Mario Ritter Jr. </p>
+<p><em>Bart Pfankuch reported this story for </em><a class="wsw__a" href="https://www.sdnewswatch.org/" target="_blank"><em>South Dakota News Watch</em></a><em> and distributed it through a partnership with The Associated Press. Hai Do adapted the story for VOA Learning English</em><em>.</em></p>
+<p><em>______________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>fumble</strong> - v. to handle something clumsily or awkwardly</p>
+<p><strong>ultimately</strong> - adv. at the end of the process</p>
+<p><strong>innovation</strong> - n. new idea, method</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

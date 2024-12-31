@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 纽约世贸中心重新开业</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 纽约世贸中心重新开业" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201411/se-econ-world-trade-center-13nov14.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>纽约世贸中心重新开业</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201411/se-econ-world-trade-center-13nov14.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-world-trade-center-13nov14.lrc" id="lrc"></a>
+<a href="world-trade-center-reopens-for-business-in-nyc-59611.html" id="CnPage" target="_blank"></a>
+<a href="progress-made-in-fight-against-ebola-59436.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>Thirteen years have past since the September 11th, 2001 terrorist attacks that destroyed the World Trade Center in New York City. Now its replacement has opened for business. One World Trade Center is America's tallest building at 104 levels or storeys. The company Conde Nast Publishing recently moved into offices there. <br/>距离2001年9月11日纽约世贸中心被毁已经过去13年了。现在，世贸中心的替代建筑重新开业。世贸中心一号大楼以104层成为美国最高的建筑。康泰纳仕出版公司最近搬进了这栋楼里的办公室。</p>
+<p>Conde Nast says it will have 2,300 employees spread among 24 floors of the building. The building still raises safety concerns among some people who remember what happened on the site. But those arriving for work, soon after Conde Nast offices opened, expressed no concerns about being safe.<br/>康泰纳仕公司表示，该公司将有2300名员工分布在这栋建筑的24个楼层里。这栋建筑还引起了一些人的安全担忧，他们还记得这里发生过什么。但在康泰纳仕办公室开放后不久到这里工作的这些人表示不担心安全问题。</p>
+<p>"There's plenty of security here. You feel safe, at least I do," said Austin Parker.<br/>“这里很有保障。你觉得安全吗？至少我觉得安全。”奥斯汀·帕克表示。</p>
+<p>"You know it's a tragedy what happened in 2001, but I think it's a great tribute to America what they've come back and done. I'm proud to work here," said MaryAnne Cacey.<br/>“你知道，2001年这里发生了一起悲剧。但我认为重建这里是在向美国致敬。我在这里工作很自豪。”玛丽安娜·凯西表示。</p>
+<p>Conde Nast employee says working at one World Trade Center was an inspiration. <br/>康泰纳仕员工说，在世贸中心一号大楼工作是一种鼓舞。</p>
+<p>On the day the building opened for business, Conde Nast, the New York and New Jersey Port Authority and Construction Company Officials praised the new skyscraper.<br/>大楼开业的当天，康泰纳仕公司、纽约新泽西港务局以及建筑公司官员称赞了这栋新的摩天大楼。</p>
+<p>Charles Townsend is Conde Nast's Chief Executive. <br/>查尔斯·汤森德（Charles Townsend）是康泰纳仕公司首席行政官。</p>
+<p>"This is a terrific day for lower Manhattan, a wonderful day for New York City and an absolutely great day for Conde Nast," said Townsend.<br/>汤森德表示，“这对曼哈顿下城，对纽约市，对康泰纳仕公司来说，都是美好的一天。”</p>
+<p>Steve Plate is director of One World Trade Center construction. He noted how important it was to rebuild what was lost.<br/>史蒂夫·普雷特(Steve Plate)是世贸中心一号大楼建筑公司的负责人。他指出重建被毁的世贸大楼非常重要。</p>
+<p>"We give you back as a gift of remembrance, of people we lost that fateful day but also of the wonder of how people pull together to make such a wonderful thing , a wonderful structure in their memory," said Plate.<br/>普雷特说，“我们把它作为对911遇难者的纪念，也作为对人们齐心协力共建的记忆中的原世贸中心建筑奇迹的纪念。”</p>
+<p>One World Trade Center is 541 meters high. There are 279,000 square meters of space within the building. 60 percent of the space has been rented or leased by a number of publishing, technology and communications companies. <br/>世贸中心一号大楼高541米，建筑面积27.9万平方米。其中60%的面积已经被众多出版、科技和通信公司所租用。</p>
+<p>One World Trade Center cost $3.9 billion to build. It is one of the world's costliest structures. The One World Trade Center website says the structure uses the newest safety and security systems. <br/>世贸中心一号大楼耗资39亿美元打造。它是全球最昂贵的建筑之一。世贸中心一号大楼网站表示，这栋建筑采用了最新的安保系统。</p>
+<p>And that's the Economics Report for VOA Learning English. For more of our programs, go to our website 21voa.com. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。更多节目请访问我们的网站21voa.com。我是马里奥·里特（Mario Ritte）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:World Trade Center Reopens for Business in NYC]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:06.44]Thirteen years have past since the September 11th, 
+[00:11.87]2001 terrorist attacks 
+[00:14.81]that destroyed the World Trade Center in New York City. 
+[00:19.53]Now its replacement has opened for business. 
+[00:24.56]One World Trade Center is America's tallest building 
+[00:30.44]at 104 levels or storeys. 
+[00:34.87]The company Conde Nast Publishing recently moved into offices there.
+[00:42.97]Conde Nast says it will have 2,300 employees 
+[00:49.79]spread among 24 floors of the building. 
+[00:54.13]The building still raises safety concerns 
+[00:58.37]among some people who remember 
+[01:01.26]what happened on the site. 
+[01:03.46]But those arriving for work, 
+[01:07.09]soon after Conde Nast offices opened, 
+[01:10.72]expressed no concerns about being safe.
+[01:15.15]"There's plenty of security here. 
+[01:18.59]You feel safe, at least I do," said Austin Parker. 
+[01:21.28]"You know it's a tragedy what happened in 2001, 
+[01:25.11]but I think it's a great tribute to America 
+[01:29.76]what they've come back and done. 
+[01:31.60]I'm proud to work here," said MaryAnne Cacey.
+[01:33.89]Conde Nast employee says 
+[01:39.99]working at one World Trade Center was an inspiration.
+[01:44.72]On the day the building opened for business, Conde Nast, 
+[01:56.26]the New York and New Jersey Port Authority 
+[02:00.37]and Construction Company Officials praised the new skyscraper.
+[02:05.86]Charles Townsend is Conde Nast's Chief Executive.
+[02:11.84]"This is a terrific day for lower Manhattan, 
+[02:15.42]a wonderful day for New York City 
+[02:18.06]and an absolutely great day for Conde Nast," said Townsend.
+[02:22.09]Steve Plate is director of One World Trade Center construction. 
+[02:27.27]He noted how important it was to rebuild what was lost.
+[02:34.18]"We give you back as a gift of remembrance, 
+[02:38.23]of people we lost that fateful day but also 
+[02:41.86]of the wonder of how people pull together 
+[02:44.15]to make such a wonderful thing , 
+[02:46.88]a wonderful structure in their memory," said Plate.
+[02:50.52]One World Trade Center is 541 meters high. 
+[02:55.69]There are 279,000 square meters 
+[03:00.52]of space within the building. 
+[03:02.51]60 percent of the space has been rented 
+[03:06.84]or leased by a number of publishing, 
+[03:09.83]technology and communications companies.
+[03:13.81]One World Trade Center cost $3.9 billion to build. 
+[03:21.07]It is one of the world's costliest structures. 
+[03:25.65]The One World Trade Center website says 
+[03:30.29]the structure uses the newest safety and security systems.
+[03:35.97]And that's the Economics Report for VOA Learning English. 
+[03:42.29]For more of our programs, go to our website 51voa.com. 
+[03:51.95]I'm Mario Ritter.
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

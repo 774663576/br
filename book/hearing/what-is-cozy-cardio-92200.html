@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Is 'Cozy Cardio?'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, What Is 'Cozy Cardio?'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/what-is-cozy-cardio.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Is 'Cozy Cardio?'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/what-is-cozy-cardio.mp3" id="mp3"></a>
+<a href="damage-atop-damage-atmospheric-river-storms-strike-california-again-92196.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">07 February 2024</span><br/>
+<p>A new kind of exercise idea is becoming popular in the United States. Social media is bringing attention to "<strong>cozy</strong> cardio." It means doing light <strong>cardiovascular</strong> exercise at home.</p>
+<p><strong>Physical inactivity and "cozy cardio" </strong></p>
+<p>Physical inactivity is a problem in the United States. The most recent data from the Centers for Disease Control and Prevention (CDC) says 25 percent of Americans reported they had not done any physical activity in the past month.</p><div class="contentImage"><img alt="FILE - Hope Zuckerbrow, founder of the cozy cardio wellness movement, shows her workout set-up, including a walking pad, smoothie and remote control for watching television. (Hope Zuckerbrow via AP)" src="https://files.21voa.com/gdb/3fb7ea5a-47ed-48a1-bd62-4854542b63e7_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Hope Zuckerbrow, founder of the cozy cardio wellness movement, shows her workout set-up, including a walking pad, smoothie and remote control for watching television. (Hope Zuckerbrow via AP)</span></div>
+<p>The CDC says that one in two American adults do not get enough cardiovascular exercise. Inactivity can have serious health effects. So, many Americans are looking to develop a new exercise<strong> habit</strong>.</p>
+<p><strong>Cozy cardio </strong></p>
+<p>"Cozy cardio" has gained popularity as an easy and painless way to increase physical activity levels. This method of calorie burning has gained popularity on TikTok and Instagram ever since a woman named Hope Zuckerbrow began posting videos in late 2022.</p>
+<p>Cozy cardio involves walking in place by using a small <strong>treadmill</strong> or "walking pad."</p>
+<p>No <strong>gym</strong> payments are involved.</p>
+<p>"I get so many messages from men and women – so many people – saying something along the lines of ‘thank you so much for...<strong>flipping</strong> my mindset on what I thought exercise is supposed to be,'" Zuckerbrow said. "This feels so doable."</p>
+<p><strong>Building the habit </strong></p>
+<p>Supporters say what is important about "cozy cardio" is the setup.</p>
+<p>You wear comfortable clothes and organize your environment to your liking. You can light candles, have a healthy drink, or even put on a favorite TV show or movie.</p>
+<p>Alex Montoye of Alma College said, for some people, easy exercise such as "cozy cardio" could help them develop an exercise habit.</p>
+<p>Montoye said for people who would otherwise watch TV while sitting, walking can help them make progress. That is especially true if exercise becomes a habit.</p>
+<p>People struggle to make healthy habits last over time. That is why<strong> </strong>cozy exercise is such a good idea, said Catherine Sanderson of Amherst College in Massachusetts. She wrote the health book, <em>The Positive Shift: Mastering Mindset to Improve Happiness, Health, and Longevity.</em></p>
+<p>"It fits in with a lot of what we know about how to get people to actually maintain behavior change," Sanderson said.</p>
+<p>Along with removing the barriers to exercise, she said, "It very much <strong>relies on</strong> what psychologists would call <strong>positive reinforcement</strong> — the idea of, 'It's not just that I'm exercising...I'm <strong>tapping into</strong> something I want to be doing already."</p>
+<p>As cozy cardio becomes more popular, Zuckerbrow said she hears from people who did not realize they could enjoy easy exercise.</p>
+<p>Alyssa Royse, owner of Rocket Community Fitness in Seattle, has been mixing workouts at her gym and cozy exercise at home. Some days she turns off the sound on her Peloton exercise bicycle and watches TV because it takes her "brain somewhere else."</p>
+<p>"Too many people look at exercise as an all-or-nothing thing," Royse said. "It doesn't give people room to just be where they are today. And I think that's incredibly important."</p>
+<p>I'm John Russell.</p>
+<p><em>Melissa Rayworth reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>cozy </strong><em>– adj.</em> pleasant, warm</p>
+<p><strong>cardiovascular</strong><em> –adj.</em> related to the heart and blood vessels in the body — especially exercises that cause the heart to beat faster</p>
+<p><strong>habit</strong><em> – n.</em> something that a person does often in a regular and repeated way</p>
+<p><strong>treadmill</strong> <em>– n.</em> an exercise machine which has a large belt that moves around while a person walks or runs on it</p>
+<p><strong>gym</strong> <em>–n.</em> a building, often a business, that contains exercise equipment and space for activities and classes</p>
+<p><strong>flip</strong> <em>–v. </em>to turn upside down</p>
+<p><strong>rely on </strong><em>– phrasal verb </em>to need (someone or something) for support, help, etc.: to depend on (someone or something)</p>
+<p><strong>positive reinforcement</strong> –<em> n. (psychology)</em> the process of rewarding good behavior so that it is more likely to be repeated in the future</p>
+<p><strong>tap into </strong><em>–v. (phrasal)</em> to make use of something; to get something of value from</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

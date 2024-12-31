@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - The Story of Santa Claus</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, The Story of Santa Claus" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/the-story-of-santa-claus.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>The Story of Santa Claus</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/the-story-of-santa-claus.mp3" id="mp3"></a>
+<a href="/static/lrc/the-story-of-santa-claus.lrc" id="lrc"></a>
+<a href="scientists-create-biocomputer-with-lab-grown-brain-tissue-91955.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content"><span class="byline">By Hai Do</span><br/>
+<span class="datetime">18 December 2023</span><br/>
+<p>Santa Claus is someone who will remain in the hearts of children forever. He is the make-believe person who brings toys and other gifts to children at Christmas. To grown-ups, he is a special symbol of good will and selfless giving.<br/>
+<br/>
+Santa Claus also has some other names, like Saint Nicholas, Kris Kringle and Pelznickel.</p>
+<p>The Santa Claus we talk about in the United States flies from his home at the North Pole on Christmas Eve to bring toys and gifts to children. The happy, white-bearded man is dressed in red. He usually flies on a <strong>sleigh</strong> led by his reindeer. Santa enters each home through the <strong>chimney</strong> and fills children's stockings with toys and gifts.</p>
+<p>This modern image of Santa Claus largely comes from Clement Clark Moore's famous poem, <em>A Visit from St. Nicholas.</em></p>
+<div class="contentImage"><img alt="A man dressed as Santa Claus waves during the 97th Macy's Thanksgiving Day Parade in Manhattan, New York City, U.S., November 23, 2023. (REUTERS/Mike Segar)" src="https://files.21voa.com/gdb/85ad8313-4d64-40d1-a70d-404bc29466ed_cx0_cy1_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">A man dressed as Santa Claus waves during the 97th Macy's Thanksgiving Day Parade in Manhattan, New York City, U.S., November 23, 2023. (REUTERS/Mike Segar)</span></div>
+<p><em>‘Twas the night before Christmas, when all through the house<br/>
+Not a creature was stirring, not even a mouse;<br/>
+The stockings were hung by the chimney with care,<br/>
+In hopes that St. Nicholas soon would be there;...</em></p>
+<p><em>He spoke not a word, but went straight to his work,<br/>
+And filled all the stockings; then turned with a jerk,<br/>
+And laying his finger aside of his nose,<br/>
+And giving a nod, up the chimney he rose;</em></p>
+<p>Santa Claus is believed to have come from the story of St. Nicholas. He was a 4th-century clergy in the Mediterranean port city of Myra, part of modern-day Turkey. It is said that St. Nicholas gave away all his wealth to help the poor and the sick. <a class="wsw__a" href="https://www.history.com/topics/christmas/santa-claus#santa-claus-around-the-world">History.com</a><em> </em>says St. Nicholas became known as the protector of children and sailors. It adds that he was the most popular saint in Europe.</p>
+<p>In the 18th century, Dutch immigrants brought the story of Saint Nikolaas and the tradition of gift-giving to New York City. The Dutch said his name very quickly. It sounded like "Sinterklaas." When English speakers said this word, it sounded like Santa Claus.</p>
+<p>German immigrants working as farmers in the American state of Pennsylvania also knew of Saint Nikolaas. But they called him Pelznickel. This word came from "pelz," meaning fur in German, and "nickel" for Nicholas. Saint Nikolaasor became a man dressed in fur who came once a year with gifts for good children.</p>
+<p>Pelznickel became part of a celebration honoring the Christkindl, as the Germans called the child of Christ. After some time, Christkindl became "Kris Kringle." That is another name you will hear for Santa Claus.</p>
+<p>A Santa-liked <strong>figure</strong> is known as Father Christmas in Britain and Père Noel in France. In Scandinavia, an elf named Jultomten was thought to deliver gifts in a sleigh drawn by goats. In Italy, a woman called La Befana rides a broomstick down the chimneys of homes to bring toys for lucky children.</p>
+<p>The image of Santa Claus as we now see him came from Thomas Nast. He was an American painter born in Bavaria, Germany.</p>
+<p>Nast remembered that, when he was a little boy, a kind old man would give toys and cakes to the children on Christmas. So, when Nast painted Santa Claus, he looked like the old man from his childhood.</p>
+<p>Nast painted Santa as a short, fat, <strong>jolly</strong> old man with a long beard. He wore a red suit with white fur. He also gave Santa a North Pole workshop, elves, and a wife, Mrs. Claus. Through the years, Nast's painting has remained the most popular picture of Santa Claus.</p>
+<p>American children write letters to Santa hoping to be on his "nice list" for Christmas gifts. On Christmas Eve, they leave cookies and milk for Santa and carrots for his reindeer: Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, Blitzen and "the most famous reindeer of all," Rudolph.</p>
+<p>I'm Ashley Thompson.</p>
+<p><em>Hai Do wrote this story with additional material from VOA Learning English and History.com.</em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>sleigh</strong> - n. a large, open vehicle that is usually pulled by a horse (or reindeer) over snow or ice.</p>
+<p><strong>chimney</strong> - n. a part of a building through which smoke rises into the air</p>
+<p><strong>figure</strong> - n. a person</p>
+<p><strong>jolly</strong> - adj. happy and cheerful</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:The Story of Santa Claus]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Santa Claus is someone who will remain
+[00:03.00]in the hearts of children forever.
+[00:05.40]He is the make-believe person
+[00:08.60]who brings toys and other gifts to children at Christmas.
+[00:13.16]To grown-ups, he is a special symbol of
+[00:16.40]good will and selfless giving.
+[00:19.64]Santa Claus also has some other names,
+[00:22.76]like Saint Nicholas, Kris Kringle and Pelznickel.
+[00:28.52]The Santa Claus we talk about in the United States
+[00:32.40]flies from his home at the North Pole on Christmas Eve
+[00:36.84]to bring toys and gifts to children.
+[00:40.20]The happy, white-bearded man is dressed in red.
+[00:45.16]He usually flies on a sleigh led by his reindeer.
+[00:49.48]Santa enters each home through the chimney
+[00:53.28]and fills children's stockings with toys and gifts.
+[00:57.32]This modern image of Santa Claus largely
+[01:01.12]comes from Clement Clark Moore's
+[01:03.44]famous poem, A Visit from St. Nicholas.
+[01:06.68]‘Twas the night before Christmas, when all through the house
+[01:12.48]Not a creature was stirring, not even a mouse;
+[01:16.04]The stockings were hung by the chimney with care,
+[01:19.56]In hopes that St. Nicholas soon would be there;...
+[01:23.36]He spoke not a word, but went straight to his work,
+[01:27.48]And filled all the stockings; then turned with a jerk,
+[01:31.44]And laying his finger aside of his nose,
+[01:35.08]And giving a nod, up the chimney he rose;
+[01:39.92]Santa Claus is believed
+[01:41.64]to have come from the story of St. Nicholas.
+[01:45.20]He was a 4th-century clergy
+[01:48.40]in the Mediterranean port city of Myra,
+[01:51.48]part of modern-day Turkey.
+[01:54.72]It is said that St. Nicholas gave away all his wealth
+[01:58.64]to help the poor and the sick.
+[02:01.28]History.com says St. Nicholas
+[02:04.32]became known as the protector of children and sailors.
+[02:09.28]It adds that he was the most popular saint in Europe.
+[02:13.68]In the 18th century, Dutch immigrants
+[02:17.48]brought the story of Saint Nikolaas
+[02:19.88]and the tradition of gift-giving to New York City.
+[02:24.04]The Dutch said his name very quickly.
+[02:27.44]It sounded like "Sinterklaas."
+[02:30.36]When English speakers said this word,
+[02:33.44]it sounded like Santa Claus.
+[02:37.08]German immigrants working as farmers
+[02:39.68]in the American state of Pennsylvania
+[02:42.24]also knew of Saint Nikolaas.
+[02:45.20]But they called him Pelznickel.
+[02:48.08]This word came from "pelz," meaning fur in German,
+[02:52.00]and "nickel" for Nicholas.
+[02:54.84]Saint Nikolaasor became a man dressed in fur
+[02:58.84]who came once a year with gifts for good children.
+[03:03.40]Pelznickel became part of a celebration
+[03:06.64]honoring the Christkindl,
+[03:08.52]as the Germans called the child of Christ.
+[03:13.36]After some time, Christkindl became "Kris Kringle."
+[03:17.84]That is another name you will hear for Santa Claus.
+[03:23.40]A Santa-liked figure is known as
+[03:25.96]Father Christmas in Britain
+[03:27.96]and Père Noel in France.
+[03:31.08]In Scandinavia, an elf named Jultomten
+[03:35.60]was thought to deliver gifts in a sleigh drawn by goats.
+[03:40.24]In Italy, a woman called La Befana
+[03:44.28]rides a broomstick down the chimneys of homes
+[03:47.68]to bring toys for lucky children.
+[03:52.08]The image of Santa Claus as we now see him
+[03:55.24]came from Thomas Nast.
+[03:57.64]He was an American painter born in Bavaria, Germany.
+[04:03.52]Nast remembered that, when he was a little boy,
+[04:07.44]a kind old man would give toys
+[04:10.76]and cakes to the children on Christmas.
+[04:13.68]So, when Nast painted Santa Claus,
+[04:17.12]he looked like the old man from his childhood.
+[04:21.32]Nast painted Santa as a short,
+[04:24.56]fat, jolly old man with a long beard.
+[04:28.48]He wore a red suit with white fur.
+[04:31.88]He also gave Santa a North Pole workshop,
+[04:35.68]elves, and a wife, Mrs. Claus.
+[04:40.12]Through the years, Nast's painting has remained
+[04:42.92]the most popular picture of Santa Claus.
+[04:46.60]American children write letters to Santa
+[04:49.40]hoping to be on his "nice list" for Christmas gifts.
+[04:53.84]On Christmas Eve, they leave cookies and milk for Santa
+[04:57.96]and carrots for his reindeer:
+[05:00.52]Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner, Blitzen
+[05:05.92]and "the most famous reindeer of all," Rudolph.
+[05:10.72]I'm Ashley Thompson.
+[05:12.96]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

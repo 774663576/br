@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - New Video of the Wreck of the Titanic Released</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, New Video of the Wreck of the Titanic Released" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/new-video-of-the-wreck-of-the-titanic-released.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>New Video of the Wreck of the Titanic Released</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/new-video-of-the-wreck-of-the-titanic-released.mp3" id="mp3"></a>
+<a href="/static/lrc/new-video-of-the-wreck-of-the-titanic-released.lrc" id="lrc"></a>
+<a href="turkish-children-learn-to-deal-with-deadly-quake-90441.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">16 February 2023</span><br/>
+<p>The size of the ship and the shoes seized Robert Ballard's attention when he saw the wreckage of the Titanic from a submarine deep below the sea.</p>
+<p>"The first thing I saw coming out of the <strong>gloom</strong>...was this wall, this giant wall of...steel that rose over 100 and some <strong>feet</strong> above us," Ballard told the Associated Press. "I never looked down at the Titanic. I looked up at the Titanic. Nothing was small."</p>
+<p>In 1986, Ballard and a group of explorers from the Woods Hole Oceanographic Institution helped find the famous passenger ship. The Titanic struck a huge piece of ice and sank in the North Atlantic Ocean in 1912. This week, Woods Hole released a video of the wreckage recorded by the explorers more than three kilometers below the ocean's surface.</p>
+<div class="contentImage"><img alt="In this image from the Woods Hole Oceanographic Institution, an underwater remote vehicle examines an open window of the Titanic in 1986." src="https://files.21voa.com/gdb/01000000-0aff-0242-8384-08db103edc9c_cx0_cy5_cw0_w268_r1.jpg"/><br/>
+<span class="imagecaption">In this image from the Woods Hole Oceanographic Institution, an underwater remote vehicle examines an open window of the Titanic in 1986.</span></div>
+<p>Ballard saw the Titanic's windows. "It was like people looking back at us. It was pretty <strong>haunting</strong> actually," he said. There were no human remains left, but he saw shoes, including what appeared to be the shoes of a mother and a baby.</p>
+<p>"After the Titanic sank, those that went into the water that didn't have <strong>lifejackets</strong> died of <strong>hypothermia</strong> and their bodies came raining down," he said.</p>
+<p>The Titanic sank after hitting an iceberg in the early morning hours of April 15, 1912. The vessel was on its first trip from Southampton, England, to New York City.</p>
+<p>The Woods Hole team, in partnership with the French Research Institute for Exploitation of the Sea, discovered the final resting place of the ship in 3,780 meters of water on September 1, 1985, using an underwater camera. The newly released video was from a second research trip the following year.</p>
+<p>There had been earlier efforts to find the sunken ship. But the 1985 discovery and the 1986 trip were made possible by underwater vehicles that could withstand the severe conditions, said Woods Hole engineer Andy Bowen.</p>
+<p>"The water is near freezing temperatures and probably the biggest <strong>challenge</strong> is the <strong>remoteness</strong> of the <strong>location</strong>, and in particular the <strong>harsh</strong> environment with regard to the pressure our equipment is exposed to," he said.</p>
+<p>"We had a small memorial service for all those that had died. But we were there, we were at this spot," Ballard said.</p>
+<p>The video is part of the 25th-anniversary release of the Academy Award-winning movie <em>Titanic</em>.</p>
+<p>"More than a <strong>century</strong> after the loss of Titanic, the human stories embodied in the great ship continue to <strong>resonate</strong>," James Cameron, the film's director, said in a statement.</p>
+<p>Ballard said the story of the Titanic continues to interest people to this day for many reasons. It was at the time the world's largest passenger ship and was supposed to be unsinkable. Its passengers included some of the world's wealthiest and most famous people. After it sank, the world heard remarkable stories of heroism and bravery by the crew and passengers.</p>
+<p>He said: "I think everyone wonders in their own mind ‘If I were there, what would I have done?'"</p>
+<p>I'm Mario Ritter, Jr.</p>
+<p><em>Rodrique Ngowi and Mark Pratt reported this story for the Associated Press. Hai Do adapted it for VOA Learning English. </em></p>
+<p>______________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>gloom</strong><strong> </strong><em>–n. </em>partial or total darkness</p>
+<p><strong>feet</strong> <em>–v.</em> <em>(pl.)</em> an English unit of measurement equal to .3 meters</p>
+<p><strong>haunting</strong> <em>–adj.</em> sad or beautiful in a way that is unforgettable</p>
+<p><strong>lifejacket </strong><em>–n.</em> a device that floats and is worn to prevent people from drowning</p>
+<p><strong>hypothermia </strong><em>–n. (medical)</em> a condition in which the body's temperature becomes too low</p>
+<p><strong>challenge </strong><em>–n.</em> a difficult problem</p>
+<p><strong>remoteness </strong><em>–n.</em> the state of being far away from anything or anyone</p>
+<p><strong>location </strong><em>–n.</em> the place of something</p>
+<p><strong>century </strong><em>–n.</em> one hundred years</p>
+<p><strong>resonate </strong><em>–v.</em> to have a special meaning or importance to someone in a way that lasts</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:New Video of the Wreck of the Titanic Released]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The size of the ship and the shoes
+[00:04.04]seized Robert Ballard's attention
+[00:06.88]when he saw the wreckage of the Titanic
+[00:10.60]from a submarine deep below the sea.
+[00:14.48]"The first thing I saw coming out of the gloom...was this wall,
+[00:19.32]this giant wall of...steel that rose over 100 and some feet above us,"
+[00:27.36]Ballard told the Associated Press.
+[00:31.16]"I never looked down at the Titanic.
+[00:34.16]I looked up at the Titanic. Nothing was small."
+[00:40.08]In 1986, Ballard and a group of explorers
+[00:44.76]from the Woods Hole Oceanographic Institution
+[00:48.56]helped find the famous passenger ship.
+[00:52.60]The Titanic struck a huge piece of ice
+[00:56.12]and sank in the North Atlantic Ocean in 1912.
+[01:02.40]This week, Woods Hole released a video of the wreckage
+[01:07.44]recorded by the explorers
+[01:10.52]more than three kilometers below the ocean's surface.
+[01:16.64]Ballard saw the Titanic's windows.
+[01:19.96]"It was like people looking back at us.
+[01:23.40]It was pretty haunting actually," he said.
+[01:27.96]There were no human remains left, but he saw shoes,
+[01:32.76]including what appeared to be the shoes of a mother and a baby.
+[01:38.28]"After the Titanic sank, those that went into the water
+[01:43.64]that didn't have lifejackets died of hypothermia
+[01:48.08]and their bodies came raining down," he said.
+[01:53.08]The Titanic sank after hitting an iceberg
+[01:56.44]in the early morning hours of April 15, 1912.
+[02:02.92]The vessel was on its first trip
+[02:05.28]from Southampton, England, to New York City.
+[02:10.16]The Woods Hole team, in partnership
+[02:13.28]with the French Research Institute for Exploitation of the Sea,
+[02:18.76]discovered the final resting place of the ship
+[02:22.36]in 3,780 meters of water on September 1, 1985,
+[02:30.24]using an underwater camera.
+[02:32.96]The newly released video
+[02:35.56]was from a second research trip the following year.
+[02:41.28]There had been earlier efforts to find the sunken ship.
+[02:45.96]But the 1985 discovery and the 1986 trip
+[02:51.48]were made possible by underwater vehicles
+[02:55.32]that could withstand the severe conditions,
+[02:58.96]said Woods Hole engineer Andy Bowen.
+[03:04.76]"The water is near freezing temperatures
+[03:07.44]and probably the biggest challenge
+[03:10.24]is the remoteness of the location,
+[03:13.08]and in particular the harsh environment with regard
+[03:17.88]to the pressure our equipment is exposed to," he said.
+[03:23.56]"We had a small memorial service for all those that had died.
+[03:29.20]But we were there, we were at this spot," Ballard said.
+[03:35.72]The video is part of the 25th-anniversary release
+[03:40.28]of the Academy Award-winning movie Titanic.
+[03:45.20]"More than a century after the loss of Titanic,
+[03:48.84]the human stories embodied in the great ship
+[03:52.60]continue to resonate," James Cameron,
+[03:56.40]the film's director, said in a statement.
+[04:00.60]Ballard said the story of the Titanic
+[04:04.32]continues to interest people to this day for many reasons.
+[04:10.64]It was at the time the world's largest passenger ship
+[04:15.12]and was supposed to be unsinkable.
+[04:19.24]Its passengers included some of the world's wealthiest
+[04:23.52]and most famous people.
+[04:26.64]After it sank, the world heard remarkable stories of heroism
+[04:32.08]and bravery by the crew and passengers.
+[04:35.76]He said: "I think everyone wonders in their own mind
+[04:41.36]‘If I were there, what would I have done?'"
+[04:46.28]I'm Mario Ritter, Jr. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

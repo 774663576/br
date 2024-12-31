@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - It’s 'Kind of Just' Hedging</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, It’s 'Kind of Just' Hedging" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/it-s-kind-of-just-hedging.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>It’s 'Kind of Just' Hedging</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/it-s-kind-of-just-hedging.mp3" id="mp3"></a>
+<a href="scientists-find-world-s-oldest-cave-painting-in-indonesia-92785.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Jill Robbins</span><br/><span class="datetime">11 July, 2024</span><br/>
+<p>This week on <em>Everyday Grammar</em>, we answer a question from Kyosuke, a loyal reader in Japan, who asks:</p>
+<p><em>I have a question about the article "<a class="wsw__a" href="https://www.21voa.com/a/when-colleges-close-some-students-never-go-back/7660952.html">When Colleges Close, Some Students Never Go Back</a>." It reads, “It <strong>kind</strong> <strong>of</strong> just saps your <strong>motivation</strong> to do anything.” I was not able to understand the structure and meaning of this sentence. What is the subject and what is the verb? Especially, I didn't realize (the meaning of) "it kind of just.”</em></p>
+<p>The story Kyosuke read told about how the University of the Arts in Philadelphia closed suddenly. That affected a lot of students. One first-year student there was unsure of his next steps. He said he did not know where to start looking for another place to study. Let us look at the structure of the statement first.</p><div class="contentImage"><img src="https://files.21voa.com/gdb/01000000-0aff-0242-17cd-08dc9f85bdf7_w268_r1.png"/></div>
+<p><em>It kind of just saps your motivation to do anything.</em></p>
+<p>The subject is “It” -- a pronoun that refers to the school closing. The verb is “sap” which means to use up the supply of something. We often use it to talk about reducing energy or strength. Here is an example:</p>
+<p>Waiting in the long line at the store sapped my energy.</p>
+<p>In the student's statement, the verb “sap” has a direct object – motivation. He is saying that he has less desire now to apply to other schools.</p>
+<p><strong>Qualifiers</strong></p>
+<p>The next part of the statement is “kind of.” This phrase is in the group of words we call “<strong>qualifiers</strong>.” A qualifier is a word, usually an adjective or adverb, that changes the meaning of another word or phrase. Some qualifiers strengthen the force of a statement, like “very” and “too.” Others weaken the force, like “somewhat” and “seem.”</p>
+<p>In his statement, the student uses “kind of just” before the verb “sap” to show he is not firmly saying that the event has had this effect. We can say he is <strong>hedging</strong>. A “hedge” in language is often a way to express uncertainty or reduce the force of a statement.</p>
+<p><strong>Kind of</strong></p>
+<p>For example, if you do not want to stay at a party you might tell a friend:</p>
+<p><em>I'm kind of tired, can we leave the party a little early?</em></p>
+<p>You are not saying you are very tired and need to leave immediately; you simply want to introduce the idea of leaving early. Using “kind of” is one way that speakers preserve their relationships with others. For example, a friend asks you if you like the band playing at an event. You might answer:</p>
+<p><em>Their music is okay, but it's kind of loud for me.</em></p>
+<p>You might think the music is much too loud, or even bad, but if your friend likes it, you do not want to hurt their feelings. So, you can hedge, or protect their feelings, by using “kind of.”</p>
+<p><strong>Just</strong></p>
+<p>Another part of the statement our reader asked about is the word “just.” It is also a qualifier. “Just” can change the meaning of the words that follow. In such a case, it can mean “nothing more than” or “only.” For example, if you are at an event with a friend, they might ask:</p>
+<p><em>Why do you keep checking the time? Aren't you enjoying the show?</em></p>
+<p>You might answer,</p>
+<p><em>I just don't want to miss the last bus. It's getting late.</em></p>
+<p>I hope this helps you understand the expression better, Kyosuke. Do you have a question about English Grammar? Write to us at <a class="wsw__a" href="21voa.com">21voa.com</a>.</p>
+<p>And that's <em>Everyday Grammar</em>!</p>
+<p>I'm Jill Robbins.</p>
+<p><em>Jill Robbins wrote this lesson for VOA Learning English.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>kind of</strong> – <em>adv</em>. to a moderate degree; somewhat, more or less</p>
+<p><strong>motivation </strong>– <em>n. </em>a force or influence that causes someone to do something</p>
+<p><strong>qualifier</strong> <em>– </em><em>n. (grammar)</em> a word (such as an adjective or adverb) or phrase that describes another word or group of words</p>
+<p><strong>hedge </strong>– <em>v.</em> to avoid giving a promise or direct answer</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

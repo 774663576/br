@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Kerry: 'We Are Brussels'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, In the News, Kerry: 'We Are Brussels'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201603/kerry-says-we-are-brussels.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Kerry: 'We Are Brussels'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201603/kerry-says-we-are-brussels.mp3" id="mp3"></a>
+<a href="detainees-freed-from-gitmo-said-to-spread-terror-68718.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Christopher Jones-Cruise</span><br/>
+<span class="datetime">25 March, 2016</span><br/>
+<p>U.S. Secretary of State John Kerry met with the Belgian Prime Minister on Friday to support Belgium after terrorist attacks there killed dozens and wounded hundreds this week.</p>
+<p>Kerry spoke in English, French and Flemish, saying, "We are Brussels." A similar expression was used after attacks in Paris to show support for the victims.</p>
+<p>Kerry said, "We will not be intimidated. We will not be deterred" by terrorists. He said the international community will work until it has eliminated "your cowardice from the face of the Earth."</p>
+<p>More than 30 people were killed and 260 wounded in the attacks. The Islamic State terrorist group has claimed responsibility.</p>
+<div class="contentImage"><img alt="US Secretary of State John Kerry lays a wreath at the Brussels airport in honor of the victims of Tuesday's terror attacks, March 25, 2016. (C. Saine / VOA) " src="https://files.21voa.com/gdb/D3BB16EB-4278-433E-953B-E6250F325979_mw268_s_n.jpg"/><br/><span class="imagecaption">US Secretary of State John Kerry lays a wreath at the Brussels airport in honor of the victims of Tuesday's terror attacks, March 25, 2016. (C. Saine / VOA) </span></div>
+<p>On Friday, officials said two Dutch citizens living in New York City were among the dead. The two, Alexander and Sascha Pinczowski, were killed when a bomb exploded at the Brussels airport.</p>
+<p>Two Americans, Justin Shults and his wife Stephanie, from Kentucky, have not been heard from since the attacks, reported NBC News.</p>
+<p>Belgian federal prosecutors say six suspects have been detained. They continue to investigate the Belgian and Paris attacks. They said they believe the militants lived in Brussels.</p>
+<p>Netherlands Interior Minister Ronald Plasterk said, "Everybody feels the attack on Belgium was an attack on Europe and the values we stand for together. Europe has been under attack before. But we've always defended liberty and democracy and we will do that together."</p>
+<p>Michael Hayden is the former director of the U.S. National Security Agency and the CIA. He told VOA the Brussels attack was "almost inevitable. I realize that's a pretty dramatic word, but if you look at what has happened -- the soft targets, the transportation targets, the maximum civilian casualties -- [it's] something we could see."</p>
+<p>Hayden also said it is "certainly not the last" attack the Islamic State terrorist group will carry out. He says the group has a "network that seems to be active and thriving in the heart of Europe."</p>
+<p>Hayden said European intelligence and security agencies should increase the amount of information they share.</p>
+<p>I'm Christopher Jones-Cruise.</p>
+<p><em>Correspondents Marissa Melton, Lisa Bryant and William Gallo reported this story. Christopher Jones-Cruise adapted it for VOA Learning English.</em></p>
+<p><em>We want to hear from you. Write to us in the Comments Section, or visit 51VOA.COM.</em></p>
+<p>_____________________________________________________________</p>
+<h2>Words in This Story</h2>
+<p><strong>metro</strong> <em>– n.</em> the name often given to a city's underground train system, also called a subway</p>
+<p><strong>intimidate </strong><em>– v. </em>to make (someone) afraid</p>
+<p><strong>deter </strong><em>– v. </em>to prevent (something) from happening</p>
+<p><strong>implement </strong><em>– v. </em>to begin to do or use (something, such as a plan); to make (something) active or effective</p>
+<p><strong>inevitable </strong><em>– adj. </em>sure to happen</p>
+<p><strong>thrive </strong><em>– v. </em>to grow or develop successfully; to flourish or succeed</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

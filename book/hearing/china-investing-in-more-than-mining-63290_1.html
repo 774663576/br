@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 中国对澳大利亚投资加大</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 中国对澳大利亚投资加大" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201506/se-econ-china-investing-in-au-07jun15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>中国对澳大利亚投资加大</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201506/se-econ-china-investing-in-au-07jun15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-china-investing-in-au-07jun15.lrc" id="lrc"></a>
+<a href="china-investing-in-more-than-mining-63290.html" id="CnPage" target="_blank"></a>
+<a href="plankton-more-important-than-scientists-thought-63289.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>Chinese investment in Australia has moved to the real estate market and infrastructure. It is yet another sign that Australia's once strong mining industry is weakening, as Chinese businesses look for new places to invest.<br/>中国在澳大利亚投资已经转移到房地产市场和基础设施领域。中国企业寻找新的投资场所也是澳大利亚曾经强盛的采矿业正在衰减的另一个标志。</p>
+<p>For the first time, almost half of all Chinese investment in Australia is in real estate. Spending on roads, bridges and other infrastructure has also increased.<br/>所有中国在澳大利亚投资的近一半是房地产，这还是第一次。道路、桥梁等基础设施上的投资支出也在不断增加。</p>
+<p>Private businesses from China are also investing more than state-owned enterprises.<br/>中国民营企业投资也超过了国有企业。</p>
+<p>The findings are contained in a report called "Demystifying Chinese Investment in Australia." It comes from accounting company KPMG Australia, the University of Sydney Business School and the China Studies Center.<br/>这一调查结果包含在《解密中国在澳大利亚投资》报告中。该报告来自澳大利亚毕马威会计事务所，悉尼工商学院以及中国研究中心。</p>
+<p>Hans Hendrischke is a professor of Chinese Business and Management at the University of Sydney Business School. He says the study provides examples of what he calls new patterns of interest.<br/>Hans Hendrischke是悉尼工商学院中国商业与管理教授。他说，这项研究报告为他所说的利益新格局提供了例证。</p>
+<p>"The most striking feature was the change in Chinese investment composition – that is the shift from big projects in the mining and resources area to this huge increase in real estate, and other industries where the Chinese traditionally had not been too strong, such as leisure and construction. They have bought one of the biggest cinema chains in Australia and one of the two biggest construction firms, John Holland."<br/>“最突出的特点是中国投资组合的变化，它们从采矿和资源领域的大项目转移到了房地产和其它中国传统上从未做强的行业，例如休闲行业和建筑行业。他们收购了澳大利亚最大的连锁影院中的一家，以及收购了两家最大的建筑公司之一的荷兰约翰公司。”</p>
+<p>Australia's mining industry was expanding a few years ago. Now, the rate of growth appears to be slowing. Chinese companies with money to spend have looked to real estate as a place to invest. However, Australia's Foreign Investment Review Board must approve what properties the companies can buy.<br/>澳大利亚采矿业几年前正在扩张。现在增长速度出现了放缓迹象。有钱可投的中国企业将投资目光转向了房地产。然而，这些公司可以购买什么样的不动产必须得到澳大利亚投资审查委员会批准。</p>
+<p>Phil Harris is the managing director of Harris Real Estate in Adelaide. He says Chinese buyers are inflating prices in Australia's major cities.<br/>菲尔·哈里斯（Phil Harris）是阿德莱德哈里斯房地产公司的总经理。他说，中国买家抬高了澳大利亚主要城市的房价。</p>
+<p>"There is absolutely no question that it is having a dramatic effect on property prices in particular areas of both Melbourne and Sydney. I have colleagues who own real estate offices in both of those marketplaces, and in some of those markets they are seeing 80 percent of all purchases – now even 100 percent of purchases in certain areas are going to Chinese buyers. There is no question it is having an effect on property prices."<br/>“毫无疑问，它们对墨尔本和悉尼特定区域的房价产生了巨大影响。我有同行在这些交易市场拥有房地产公司。有些市场的80%的交易，特定区域甚至100%的交易都是中国买家。毫无疑问它对房产价格产生了影响。”</p>
+<p>Last year, the Chinese invested $8.3 billion in Australia. The combination of real estate, leisure serves and infrastructure projects made up 79 percent of new Chinese business in the country. That compares with just 11 percent for mining.<br/>去年，中国人在澳大利亚投资了83亿美元。房地产、休闲服务和基础设施项目一共占到了中国在澳大利亚新业务的79%。相比之下，采矿业只占到11%。</p>
+<p>While real estate is the most popular investment, there is growing interest, too, in Australian agriculture. Andrew Forrest got rich from mining businesses. He says Chinese investment is helping to increase the productivity of farming.<br/>而房地产是最受欢迎的投资。同时中国对澳大利亚农业的投资兴趣也在加大。安德鲁·福雷斯特（Andrew Forrest）从采矿生意中发家。他说，中国投资有助于提高农业生产效率。</p>
+<p>"So far, Chinese investment into Australia - agriculture - has been well received and they're capable of being a strong and passive partner in projects of massive scale which our capital alone could not develop."<br/>“截至目前，进入澳大利亚农业的中国投资受到欢迎。他们能够成为单靠我们资金无法发展的大规模项目的强大和被动合作伙伴。”</p>
+<p>The falling value of the Australian dollar has made investments in the country more appealing. Easing of Australian visa rules has also attracted investment.<br/>澳元汇率下跌已经使得该国投资更具吸引力。澳洲签证政策的宽松也吸引了投资。</p>
+<p>Doug Ferguson is head of KPMG Australia's Asia Business Group. He co-wrote the report on China's investment in Australia. He says Chinese investment is good news.<br/>道格·弗格森（Doug Ferguson）是澳大利亚毕马威亚太业务部门的负责人。他参与撰写了这份中国在澳大利亚投资的报告。他说，中国投资是个好消息。</p>
+<p>"I think it is very important for our economy to be able to successfully move the structure away from mining, gas and power into sectors that have more, maybe, enduring long-term benefit to the broader economy, which I think real estate, which leisure and tourism and agri business (and) food offers, and that is exactly what is happening, so it is very good news."<br/>“我认为这对我们的经济结构脱离采矿、天然气和电力，进入房地产、休闲行业、旅游、农业以及食品供应这些可能更具长久利益的广泛经济来说非常重要。而这些正在发生，所以这是大好消息。”</p>
+<p>China is the sixth largest foreign investor in Australia. The United States and Britain invest more, although Chinese spending is growing fastest.<br/>中国是澳大利亚第六大外国投资者。虽然中国投资增长迅猛，但还是美国和英国投资最多。</p>
+<p>The flow of money from China is a politically sensitive issue, especially purchases of real estate and farms. Last weekend, Australian nationalists demonstrated and burned flags near China's diplomatic offices in Sydney. They were protesting what they described as a "foreign invasion."<br/>中国资金流是一个敏感的政治问题，尤其是购买房地产和农场。上周末，澳大利亚民族主义者在中国驻悉尼使馆附近示威抗议他们所说的“外来入侵者”。</p>
+<p>And that's the VOA Learning English Economics Report. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:China Increases Investment in Australia]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English,
+[00:02.67]this is the Economics Report.
+[00:05.62]Chinese investment in Australia
+[00:08.48]has moved to the real estate market and infrastructure.
+[00:13.21]It is yet another sign
+[00:15.15]that Australia's once strong mining industry is weakening,
+[00:20.33]as Chinese businesses look for new places to invest.
+[00:25.20]For the first time, almost half
+[00:28.63]of all Chinese investment in Australia is in real estate.
+[00:33.18]Spending on roads, bridges and other infrastructure has also increased.
+[00:40.08]Private businesses from China are also investing more than state-owned enterprises.
+[00:47.79]The findings are contained in a report
+[00:51.00]called "Demystifying Chinese Investment in Australia."
+[00:55.61]It comes from accounting company KPMG Australia,
+[01:00.90]the University of Sydney Business School and the China Studies Center.
+[01:06.88]Hans Hendrischke is a professor of Chinese Business and Management
+[01:12.19]at the University of Sydney Business School.
+[01:15.17]He says the study provides examples of what he calls new patterns of interest.
+[01:22.86]"The most striking feature was the change in Chinese investment composition
+[01:27.70]– that is the shift from big projects in the mining
+[01:31.67]and resources area to this huge increase in real estate,
+[01:36.88]and other industries where the Chinese traditionally had not been too strong,
+[01:40.68]such as leisure and construction.
+[01:42.67]They have bought one of the biggest cinema chains in Australia
+[01:46.39]and one of the two biggest construction firms, John Holland."
+[01:48.85]Australia's mining industry was expanding a few years ago.
+[01:53.40]Now, the rate of growth appears to be slowing.
+[01:57.15]Chinese companies with money to spend have looked to real estate as a place to invest.
+[02:04.95]However, Australia's Foreign Investment Review Board
+[02:09.14]must approve what properties the companies can buy.
+[02:13.37]Phil Harris is the managing director of Harris Real Estate in Adelaide.
+[02:19.17]He says Chinese buyers are inflating prices in Australia's major cities.
+[02:26.12]Last year, the Chinese invested $8.3 billion in Australia.
+[02:32.82]The combination of real estate, leisure serves and infrastructure projects
+[02:39.16]made up 79 percent of new Chinese business in the country.
+[02:45.43]That compares with just 11 percent for mining.
+[02:50.49]While real estate is the most popular investment,
+[02:55.35]there is growing interest, too, in Australian agriculture.
+[03:00.46]Andrew Forrest got rich from mining businesses.
+[03:04.58]He says Chinese investment is helping to increase the productivity of farming.
+[03:11.68]"So far, Chinese investment into Australia - agriculture - has been well received
+[03:15.98]and they're capable of being a strong and passive partner
+[03:18.75]in projects of massive scale which our capital alone could not develop."
+[03:23.34]The falling value of the Australian dollar
+[03:26.84]has made investments in the country more appealing. E
+[03:30.83]asing of Australian visa rules has also attracted investment.
+[03:37.45]Doug Ferguson is head of KPMG Australia's Asia Business Group.
+[03:44.84]He co-wrote the report on China's investment in Australia.
+[03:51.28]He says Chinese investment is good news.
+[03:56.16]"I think it is very important for our economy to be able
+[04:00.65]to successfully move the structure away from mining, gas and power
+[04:04.94]into sectors that have more, maybe,
+[04:08.15]enduring long-term benefit to the broader economy,
+[04:11.76]which I think real estate, which leisure and tourism
+[04:14.53]and agri business (and) food offers,
+[04:16.32]and that is exactly what is happening, so it is very good news."
+[04:19.59]China is the sixth largest foreign investor in Australia.
+[04:24.42]The United States and Britain invest more,
+[04:28.96]although Chinese spending is growing fastest.
+[04:33.60]The flow of money from China is a politically sensitive issue,
+[04:38.55]especially purchases of real estate and farms.
+[04:43.03]Last weekend, Australian nationalists demonstrated
+[04:48.08]and burned flags near China's diplomatic offices in Sydney.
+[04:53.39]They were protesting what they described as a "foreign invasion."
+[04:58.99]And that's the VOA Learning English Economics Report.
+[05:04.40]I'm Mario Ritter.
+[05:05.86].
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

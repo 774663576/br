@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - 'State-of-the-Art' Is the Best of Its Time</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, 'State-of-the-Art' Is the Best of Its Time" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/state-of-the-art.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>'State-of-the-Art' Is the Best of Its Time</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/state-of-the-art.mp3" id="mp3"></a>
+<a href="/static/lrc/state-of-the-art.lrc" id="lrc"></a>
+<a href="landmines-causing-more-casualties-in-ukraine-and-myanmar-91809.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Anna Matteo</span><br/>
+<span class="datetime">18 November 2023</span><br/>
+<p class="CxSpFirst">And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p class="CxSpMiddle">On this program we explore words and expressions in the English language. We give definitions, examples, and notes on usage. Sometimes we use them in short <strong>conversations</strong>.</p>
+<p class="CxSpMiddle">When it comes to learning a language, using words in conversations is not a <u>state-of-the-art</u> learning method. It is a traditional method that has stood the test of time because it works.</p><div class="contentImage"><img alt="Humanoid robot Figure 01 is demonstrated at Figure AI's test facility in Sunnyvale, Calif., Tuesday, Oct. 3, 2023. " src="https://files.21voa.com/gdb/5cc53d5c-87ca-4ba7-8e43-707a8a0ca075_cx0_cy5_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Humanoid robot Figure 01 is demonstrated at Figure AI's test facility in Sunnyvale, Calif., Tuesday, Oct. 3, 2023. </span></div>
+<p class="CxSpMiddle">So, what method would be considered state-of-the-art? Talking with an artificial intelligence robot or using some other <u>cutting edge</u> computer technology would be considered state-of-the-art. It would be the newest and best available.</p>
+<p class="CxSpMiddle">The phrase "state-of-the-art" also describes the highest level of development.</p>
+<p class="CxSpMiddle">We can use state-of-the-art to describe advancements in scientific fields. Any major scientific progress can be described as state of the art.</p>
+<p class="CxSpMiddle">State-of-the-art can also be called <u>top of the line</u> or <u>best in its class</u>.</p>
+<p class="CxSpMiddle">We can also say something is the <strong>pinnacle</strong> of technology, or the <strong>peak</strong> of performance if it is state-of-the-art. Another way to express this thought is to say it is on the <strong>forefront</strong> of technology, development or advancement in a particular field.</p>
+<p class="CxSpMiddle">Something that is state-of-the-art is innovative.</p>
+<p class="CxSpMiddle">These terms all have a similar meaning: something is the <u>latest and greatest</u>.</p>
+<p class="CxSpMiddle">Some word experts say this phrase originated in the early 20th century. It is now very commonly used in both formal and informal situations.</p>
+<p class="CxSpMiddle">Now, let's hear some of these terms used in a conversation between two friends.</p>
+<p class="CxSpMiddle"><em>A: Wow, what do you have there?</em></p>
+<p class="CxSpMiddle"><em>B: This is my new coffee machine. It is state-of-the-art.</em></p>
+<p class="CxSpMiddle"><em>A: I can see that! It's really impressive. </em></p>
+<p class="CxSpMiddle"><em>B: It has an on/off setting that I can control from my phone. </em></p>
+<p class="CxSpMiddle"><em>A: You can start your coffee from across town. </em></p>
+<p class="CxSpMiddle"><em>B: Yes, I can! The bean container is split into four parts. So, I can have different kinds of coffee. </em></p>
+<p class="CxSpMiddle"><em>A: That is a great innovation!</em></p>
+<p class="CxSpMiddle"><em>B: It gets better. This machine is the pinnacle of coffee technology! Its state-of-the-art technology can also steam milk and add a choice of five different flavorings.</em></p>
+<p class="CxSpMiddle"><em>A: Well, enough talking! Let's have a cup of coffee! I'll take mine with caramel flavor and extra frothy milk. </em></p>
+<p class="CxSpMiddle"><em>B: Um, yeah. That's going to have to wait for a bit. </em></p>
+<p class="CxSpMiddle"><em>A: Why?</em></p>
+<p class="CxSpMiddle"><em>B: I don't know how to use it yet. But I will after I read this 20-page instruction book. </em></p>
+<p class="CxSpMiddle"><em>A: Got it. I can help. But first ... I'll go get us some coffee. </em></p>
+<p class="CxSpMiddle">And that's the end of this Words and Their Stories.</p>
+<p class="CxSpMiddle">Until next time ... I'm Anna Matteo.</p>
+<p class="CxSpMiddle"> </p>
+<p class="CxSpMiddle"><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p class="CxSpMiddle">______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>conversation –</strong>n. An informal talk between two or more people</p>
+<p class="CxSpMiddle"><strong>pinnacle –</strong>n. the highest point of something</p>
+<p class="CxSpMiddle"><strong>peak –</strong>n. the top of something, such as a mountain, that comes to a sharp point</p>
+<p class="CxSpMiddle"><strong>forefront –</strong>n. the leading position</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:'State-of-the-Art' Is the Best of Its Time]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]And now, Words and Their Stories,
+[00:10.64]from VOA Learning English.
+[00:14.28]On this program we explore
+[00:20.36]words and expressions in the English language.
+[00:25.24]We give definitions, examples,
+[00:28.44]and notes on usage.
+[00:30.56]Sometimes we use them in short conversations.
+[00:35.60]When it comes to learning a language,
+[00:38.56]using words in conversations
+[00:41.08]is not a state-of-the-art learning method.
+[00:44.56]It is a traditional method
+[00:47.16]that has stood the test of time because it works.
+[00:53.08]So, what method would be considered state-of-the-art?
+[00:58.20]Talking with an artificial intelligence robot
+[01:01.96]or using some other cutting edge computer technology
+[01:06.00]would be considered state-of-the-art.
+[01:09.08]It would be the newest and best available.
+[01:14.68]The phrase "state-of-the-art"
+[01:17.08]also describes the highest level of development.
+[01:22.72]We can use state-of-the-art
+[01:25.04]to describe advancements in scientific fields.
+[01:29.84]Any major scientific progress
+[01:32.20]can be described as state of the art.
+[01:35.20]State-of-the-art can also be called top of the line
+[01:40.28]or best in its class.
+[01:44.20]We can also say something is the pinnacle of technology,
+[01:48.48]or the peak of performance
+[01:51.52]if it is state-of-the-art.
+[01:54.72]Another way to express this thought
+[01:57.16]is to say it is on the forefront of technology,
+[02:01.00]development or advancement in a particular field.
+[02:06.48]Something that is state-of-the-art is innovative.
+[02:11.76]These terms all have a similar meaning:
+[02:14.72]something is the latest and greatest.
+[02:19.56]Some word experts say this phrase originated
+[02:23.00]in the early 20th century.
+[02:26.32]It is now very commonly used
+[02:28.64]in both formal and informal situations.
+[02:33.68]Now, let's hear some of these terms
+[02:36.20]used in a conversation between two friends.
+[02:40.24]A: Wow, what do you have there?
+[02:43.16]B: This is my new coffee machine.
+[02:46.44]It is state-of-the-art.
+[02:50.24]A: I can see that! It's really impressive.
+[02:53.68]B: It has an on/off setting
+[02:55.32]that I can control from my phone.
+[02:58.12]A: You can start your coffee from across town.
+[03:01.80]B: Yes, I can!
+[03:04.00]The bean container is split into four parts.
+[03:10.04]So, I can have different kinds of coffee.
+[03:13.64]A: That is a great innovation!
+[03:16.60]B: It gets better.
+[03:18.32]This machine is the pinnacle of coffee technology!
+[03:23.88]Its state-of-the-art technology
+[03:27.32]can also steam milk and
+[03:30.12]add a choice of five different flavorings.
+[03:34.44]A: Well, enough talking!
+[03:36.44]Let's have a cup of coffee!
+[03:38.32]I'll take mine with caramel flavor and extra frothy milk.
+[03:42.68]B: Um, yeah. That's going to have to wait for a bit.
+[03:48.60]A: Why?
+[03:49.72]B: I don't know how to use it yet.
+[03:52.00]But I will after I read this 20-page instruction book.
+[03:56.96]A: Got it. I can help.
+[03:59.80]But first ... I'll go get us some coffee.
+[04:04.24]And that's the end of this Words and Their Stories.
+[04:07.00]Until next time ... I'm Anna Matteo. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

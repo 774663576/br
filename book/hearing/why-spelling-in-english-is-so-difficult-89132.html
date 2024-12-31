@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Why Spelling in English Is so Difficult</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Why Spelling in English Is so Difficult" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202206/why-spelling-in-english-is-so-difficult.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Why Spelling in English Is so Difficult</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202206/why-spelling-in-english-is-so-difficult.mp3" id="mp3"></a>
+<a href="group-of-us-lawmakers-place-blame-for-january--capitol-attack-on-trump-89127.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">11 June 2022</span><br/>
+<p>Recently, 14-year-old Harini Logan won the Scripps National Spelling Bee in the United States. She correctly spelled 22 words during a 90-second spell-off.</p>
+<p>The words included phreatophyte, excimer, saccharose, and finally the winning word "moorhen," which means a female, red grouse bird.</p>
+<p>Most Americans, however, would find it difficult to spell any of these words!</p>
+<div class="contentImage"><img alt="Harini Logan, 14, from San Antonio, Texas, participates in the final round on her way to winning the annual Scripps National Spelling Bee held at National Harbor in Oxon Hill, Maryland, U.S., June 2, 2022. (REUTERS/Jonathan Ernst)" src="https://files.21voa.com/gdb/c2c17261-6184-4603-9e05-df3d3ecf839b_w268_r1.jpg"/><br/>
+<span class="imagecaption">Harini Logan, 14, from San Antonio, Texas, participates in the final round on her way to winning the annual Scripps National Spelling Bee held at National Harbor in Oxon Hill, Maryland, U.S., June 2, 2022. (REUTERS/Jonathan Ernst)</span></div>
+<p>From an early age, native English speakers know there are clear differences between how words are pronounced and how they are spelled. But they do not know that the difference is<strong> unique</strong> to English among major languages.</p>
+<p>Languages like Italian or Finnish can be spelled more easily because each letter of the alphabet matches to one sound. Students studying these languages can have 90 percent reading <strong>accuracy</strong> after the first year. That information comes from Philip Seymore in the British Journal of Psychology.</p>
+<p>In English, many letters of the alphabet have two or more sounds. This is why even after years of learning, students of English are still far below Italian or Finnish students in reading accuracy.</p>
+<p><strong>History of the English language </strong></p>
+<p>English started as a Germanic language. It is most closely connected to German and Dutch, especially in grammar and basic vocabulary.</p>
+<p>During the Norman invasion in the 12th century, Old English was spoken but French was used in government and legal documents. And Latin was used in religious and educational activities. As a result, more French and Latin words entered the English language.</p>
+<p>The <strong>printing press </strong><span style="color:#212529">was invented in the late 1400s. This helped to establish English spelling and strengthen the connection between how English is spoken and how it is written. The English of today is how the language was written at the time.</span></p>
+<p><span style="color:#212529">However, the spoken language started to change in the 1500s with the pronunciation of all long vowels, especially in southern England.</span></p>
+<p><span style="color:#212529">For example, the word "bite" was pronounced closer to "beet" in 1400, before changing through the years to its current sound. The effect was that the English language had old spellings, but new sounds.</span></p>
+<p><strong><span style="color:#212529">One letter, many sounds</span></strong></p>
+<p><span style="color:#212529">English has 26 letters in the alphabet, but over 44 individual sounds depending on the variation of spoken English.</span></p>
+<p><span style="color:#212529">There are several sounds represented by only one letter.</span></p>
+<p><span style="color:#212529">For example, the letter "C" can sound like an "S" as in "city." And it also sounds like a "K" as in "cat."</span></p>
+<p><span style="color:#212529">If that is not hard enough, let's try to pronounce the letter "X" as /ks/ in "box", as /gz/ in "exam" and just /z/ in "xylophone."</span></p>
+<p><strong><span style="color:#212529">So many ways to sound a vowel</span></strong></p>
+<p><span style="color:#212529">There are only 5 or 6 vowel letters in the English alphabet. They include A, E, I, O, U, and sometimes Y. But there are 20 different ways to sound them! For example, a double "o" sound in English can be pronounced as /u/, as in the word "boot" or /</span><strong><i>&amp;#</i>650;/ </strong><span style="color:#212529">as in the word "book". </span></p>
+<p><span style="color:#212529">These sounds are formed by air moving through the mouth and throat freely. In the study of language, called linguistics, teachers use a drawing to represent the mouth and show where vowels are formed.</span></p>
+<p><span style="color:#212529">At the center is the most common vowel sound of "uhhh." It is the most relaxed and natural sound. It takes almost no effort of the tongue or throat to create the sound.</span></p>
+<p><span style="color:#212529">Brian M. Sietsema is an Associate Pronouncer for the Scripps National Spelling Bee. He observes that since it takes little effort, the sound "uhhh" often makes its way into pronunciations.</span></p>
+<p><span style="color:#212529">For example, the word "please" often turns into "PUH-lease" when someone is trying to call attention.</span></p>
+<p><span style="color:#212529">This is another reason why spelling in English is so difficult! </span></p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Jonathan Evans.</p>
+<p><em>Travis Hartman</em><em> reported this story for Reuters. Faith Pirlo adapted it for VOA Learning English. </em></p>
+<p><em>____________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>unique<strong> </strong></strong><em><span style="color:#222f3a">– adj.</span></em><span style="color:#222f3a"> used to say that something or someone is unlike anything or anyone else</span></p>
+<p><strong>accuracy<strong> </strong></strong><span style="color:#222f3a">– <em>n</em>.<strong><span style="color:#222f3a"> </span></strong><strong> </strong>the ability to work without making mistakes</span></p>
+<p><strong>printing press<strong> </strong></strong><em><span style="color:#222f3a">– n. </span></em><span style="color:#222f3a">a machine that prints books, newspapers, magazines, and similar materials in large numbers</span></p>
+<p><strong>vowels</strong><span style="color:#222f3a"> <em>–</em> <em>n</em>. speech sounds made with your mouth open and your tongue in the middle of your mouth not touching your teeth, lips, etc.</span></p>
+<p><strong><span style="color:#212529">consonants</span></strong><strong> </strong><em><span style="color:#222f3a">– n.</span></em><span style="color:#222f3a"> a speech sound (such as /p/, /d/, or /s/) that is made by partly or completely stopping the flow of air breathed out from the mouth</span></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

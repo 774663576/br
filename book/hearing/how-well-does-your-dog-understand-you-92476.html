@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Well Does Your Dog Understand You?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, How Well Does Your Dog Understand You?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/how-well-does-your-dog-understand-you.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Well Does Your Dog Understand You?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/how-well-does-your-dog-understand-you.mp3" id="mp3"></a>
+<a href="/static/lrc/how-well-does-your-dog-understand-you.lrc" id="lrc"></a>
+<a href="scientists-identify-building-blocks-of-milky-way-92475.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By John Russell</span><br/>
+<span class="datetime">01 April 2024</span><br/>
+<p>Dog owners know that their dogs understand and answer commands such as "sit" and "stay." Many believe that dogs also understand words connected to their favorite objects. "Bring me your ball" will often result in exactly that.</p>
+<p>But science has had trouble determining whether dogs and other animals truly create a mental image in their minds when they hear the name of an object. Such an action would suggest a deeper understanding of language, like the kind that humans have.</p>
+<p>A new study in Hungary has found that beyond being able to answer commands like "roll over," dogs can learn to link words with exact objects. This is a relationship with language called <strong>referential understanding</strong> that has been unproven in dogs.</p><div class="contentImage"><img alt="Houdini, a border collie plays with his frisbee at the City Park in Budapest, Hungary, on March 27, 2024. A new study in Hungary has found that dogs can learn to associate words with specific objects beyond being able to learn how to perform commands. (AP Photo/Denes Erdos)
+" src="https://files.21voa.com/gdb/01000000-0aff-0242-c172-08dc524bdeaf_cx0_cy0_cw86_w268_r1.jpg"/><br/><span class="imagecaption">Houdini, a border collie plays with his frisbee at the City Park in Budapest, Hungary, on March 27, 2024. A new study in Hungary has found that dogs can learn to associate words with specific objects beyond being able to learn how to perform commands. (AP Photo/Denes Erdos)
+</span></div>
+<p>"When we are talking about objects, objects are <strong>external</strong> to the dogs, and dogs have to learn that words refer, they stand for something that is external to them," said Marianna Boros. She is a co-lead writer of the study.</p>
+<p>The study, which has been <strong>peer-reviewed</strong>, appeared recently in the science publication called Current Biology. It involved 18 dogs and a non-invasive <strong>EEG</strong> procedure using electrodes attached to dogs' heads to measure brain activity and record brain waves.</p>
+<p>Dog owners participating in the study would play an audio clip in which they said the name of their dog's toy — like "ball" or "frisbee" — and then they would show the dog an object. The researchers measured the dogs' brain activity when the object in the recording matched the object that was displayed and also when it differed.</p>
+<p>"We expected that if a dog really understands the meaning of the object's word, it will expect to see that object. And if the owner shows a different one, there will be a so-called surprise reaction in the brain," Boros said.</p>
+<p>She added, "and this is exactly what we found."</p>
+<p>The study found a different brain <strong>pattern</strong> when the dogs were shown an object that matched the word compared to when it did not. The finding suggests the animals created a mental image of an object based on hearing the word for it.</p>
+<p>Lilla Magyari, also a co-lead writer of the study, said that while other animals have been shown to have some degree of referential understanding of language, those animals have usually been highly trained to do so.</p>
+<p>In dogs, she said, the findings show that such abilities appear to be inborn and require no special training or talent.</p>
+<p>The study supports ideas about "language <strong>evolution</strong> which actually say that referential understanding is not necessarily unique to humans," added Magyari.</p>
+<p>While the study has received praise, some experts have expressed doubt about its findings.</p>
+<p>Clive Wynne of Arizona State University said in a post on Facebook that he believes that all the study shows is that dogs respond to <strong>stimuli</strong>. Wynne does not believe the dogs understand the meaning of exact words.</p>
+<p>Scientists believe the first dogs began to be kept by humans up to 30,000 years ago. The animals have lived closely alongside us ever since. But whether dogs gain the ability to understand referential language during that evolution remains unclear.</p>
+<p>I'm John Russell.</p>
+<p><em>Justin Spike reported on this story for the Associated Press. John Russell adapted it for VOA Learning English. </em></p>
+<p>__________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>referential understanding</strong> - n. ability to connect words with objects</p>
+<p><strong>external</strong> – adj. existing or occurring outside your mind</p>
+<p><strong>peer-review</strong> – n. a process by which a scholarly work (such as a paper or a research proposal) is checked by a group of experts in the same field</p>
+<p><strong>EEG</strong> – n. a machine that detects and records the electrical activity of the brain<br/>
+<strong>pattern</strong> – n. the regular or repeated way in which something happens</p>
+<p><strong>evolution</strong> – n. the process by which changes in plants and animals happen over time</p>
+<p><strong>stimulus</strong> – n. something that causes a change or a reaction</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:How Well Does Your Dog Understand You?]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Dog owners know that their dogs understand
+[00:04.56]and answer commands such as "sit" and "stay."
+[00:08.64]Many believe that dogs also understand words connected
+[00:13.48]to their favorite objects.
+[00:15.72]"Bring me your ball" will often result in exactly that.
+[00:20.40]But science has had trouble determining
+[00:23.40]whether dogs and other animals
+[00:25.76]truly create a mental image in their minds
+[00:29.56]when they hear the name of an object.
+[00:32.96]Such an action would suggest
+[00:34.92]a deeper understanding of language,
+[00:37.84]like the kind that humans have.
+[00:41.20]A new study in Hungary
+[00:43.40]has found that beyond being able to
+[00:46.24]answer commands like "roll over,"
+[00:49.00]dogs can learn to link words with exact objects.
+[00:54.04]This is a relationship with language
+[00:57.44]called referential understanding
+[01:00.16]that has been unproven in dogs.
+[01:03.88]"When we are talking about objects,
+[01:06.72]objects are external to the dogs,
+[01:10.08]and dogs have to learn that words refer,
+[01:13.28]they stand for something that is external to them,"
+[01:17.00]said Marianna Boros.
+[01:19.52]She is a co-lead writer of the study.
+[01:23.32]The study, which has been peer-reviewed,
+[01:27.16]appeared recently in the science publication
+[01:30.40]called Current Biology.
+[01:32.72]It involved 18 dogs
+[01:35.88]and a non-invasive EEG procedure
+[01:39.56]using electrodes attached to dogs' heads
+[01:43.52]to measure brain activity and record brain waves.
+[01:47.84]Dog owners participating in the study
+[01:51.16]would play an audio clip
+[01:53.12]in which they said the name of their dog's toy —
+[01:56.60]like "ball" or "frisbee" —
+[01:58.76]and then they would show the dog an object.
+[02:02.40]The researchers measured the dogs' brain activity
+[02:06.24]when the object in the recording matched
+[02:09.24]the object that was displayed
+[02:11.48]and also when it differed.
+[02:14.04]"We expected that if a dog really understands
+[02:17.84]the meaning of the object's word,
+[02:20.20]it will expect to see that object.
+[02:23.48]And if the owner shows a different one,
+[02:26.56]there will be a so-called
+[02:28.44]surprise reaction in the brain," Boros said.
+[02:32.76]She added, "and this is exactly what we found."
+[02:37.72]The study found a different brain pattern
+[02:40.52]when the dogs were shown an object
+[02:42.92]that matched the word compared to when it did not.
+[02:46.96]The finding suggests the animals created
+[02:50.60]a mental image of an object
+[02:52.84]based on hearing the word for it.
+[02:55.36]Lilla Magyari, also a co-lead writer of the study,
+[03:00.96]said that while other animals
+[03:03.36]have been shown to have some degree
+[03:06.00]of referential understanding of language,
+[03:09.04]those animals have usually been highly trained to do so.
+[03:14.00]In dogs, she said, the findings
+[03:17.60]show that such abilities appear to be inborn
+[03:21.76]and require no special training or talent.
+[03:25.52]The study supports ideas about "language evolution
+[03:29.56]which actually say that referential understanding
+[03:33.32]is not necessarily unique to humans," added Magyari.
+[03:38.20]While the study has received praise,
+[03:41.52]some experts have expressed doubt about its findings.
+[03:46.16]Clive Wynne of Arizona State University
+[03:49.72]said in a post on Facebook
+[03:52.08]that he believes that all the study shows
+[03:55.24]is that dogs respond to stimuli.
+[03:58.76]Wynne does not believe the dogs
+[04:01.04]understand the meaning of exact words.
+[04:04.64]Scientists believe the first dogs
+[04:07.40]began to be kept by humans up to 30,000 years ago.
+[04:12.20]The animals have lived closely alongside us ever since.
+[04:17.20]But whether dogs gain the ability
+[04:19.80]to understand referential language
+[04:22.20]during that evolution remains unclear.
+[04:25.64]I'm John Russell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

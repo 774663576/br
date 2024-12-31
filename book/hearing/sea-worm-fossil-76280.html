@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Scientists Discover Fossil of Strange Sea Worm</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Scientists Discover Fossil of Strange Sea Worm" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201708/sea-worm-fossil.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Scientists Discover Fossil of Strange Sea Worm</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201708/sea-worm-fossil.mp3" id="mp3"></a>
+<a href="words-and-their-stories-eat-crow-76279.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">12 August, 2017</span><br/>
+<p>Scientists found a prehistoric ancestor of an arrow worm among a group of <strong>fossils</strong> at two national parks in Canada.</p>
+<p>The fossils were found in what is now British Columbia, but was once an ocean.</p>
+<p>The sea worm was 10 centimeters long and had 50 <strong>spines</strong> on its head. The spines could close suddenly to capture smaller sea creatures, like shrimp.</p>
+<div class="contentImage"><img alt="Capinatator praetermissus was an ancient sea worm that ate smaller creatures like shrimp. Fossils of the worm were found in British Columbia." src="https://files.21voa.com/gdb/144F9199-2638-41A2-8091-5CA0215187FB_cx0_cy2_cw0_w268_r1.jpg"/><br/><span class="imagecaption">Capinatator praetermissus was an ancient sea worm that ate smaller creatures like shrimp. Fossils of the worm were found in British Columbia.</span></div>
+<p>The scientists reported their discovery in the journal <a class="underline" href="http://www.cell.com/current-biology/fulltext/S0960-9822(17)30860-6" target="_blank">Current Biology</a> in early August.</p>
+<p>They are calling the creature Capinatator praetermissus. They say it lived 500 million years ago and is very different from anything alive now. </p>
+<p>Capinatator means "<strong>grasping</strong> swimmer."</p>
+<p>Derek Briggs is a scientist from Yale University. He led the expedition. He said the creature was larger than today's similar worms. The arrow worms of today have teeth instead of spines.</p><span class="sticky-element__close-btn sticky-element__swipe-el" title="close"><span class="ico ico-close"></span></span>
+<p>
+<p>Briggs said the worm was probably a good <strong>predator</strong> because it had so many spines.</p>
+<p>The scientists said it is difficult to find evidence of these prehistoric worms because their bodies <strong>decayed</strong> so quickly. But this discovery was in such good shape, they were able to make a good guess about how the worm looked.</p>
+<p>Researchers were able to make a detailed drawing and an <strong>animation </strong>of how they think the worm moved in the ocean.</p>
+<p>Doug Erwin works for the Smithsonian Institution in Washington, D.C. He was not involved in the research. He said the discovery will help scientists better understand the worms and other life from this ancient period.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on reporting by the Associated Press. Caty Weaver was the editor.</em></p>
+<p><em>What do you think about these worms? We want to know. Write to us in the Comments Section or on <a class="underline" href="http://www.21voa.com" target="_blank">51VOA.COM</a>. </em></p>
+<p>_____________________________________________________________</p>
+<h2><strong>Words in This Story</strong></h2>
+<p><strong>fossil </strong><em>– n.</em> something (such as a leaf, skeleton, or footprint) that is from a plant or animal which lived in ancient times and that you can see in some rocks</p>
+<p><strong>grasp </strong><em>– v.</em> to take and hold (something) with your fingers, hands, etc.</p>
+<p><strong>spine</strong> <em>– n.</em> a sharp, pointed part on an animal or plant</p>
+<p><strong>predator</strong> <em>– n.</em> an animal that lives by killing and eating other animals: an animal that preys on other animals</p>
+<p><strong>decay</strong> <em>– v.</em> to be slowly destroyed by natural processes: to be slowly broken down by the natural processes that destroy a dead plant or body</p>
+<p><strong>animation</strong><em>– n.</em> a way of making a movie by using a series of drawings, computer graphics, or photographs of objects (such as puppets or models) that are slightly different from one another and that when viewed quickly one after another create the appearance of movement</p></p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

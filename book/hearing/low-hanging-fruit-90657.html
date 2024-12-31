@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Low-hanging Fruit</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Low-hanging Fruit" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202304/low-hanging-fruit.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Low-hanging Fruit</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202304/low-hanging-fruit.mp3" id="mp3"></a>
+<a href="/static/lrc/low-hanging-fruit.lrc" id="lrc"></a>
+<a href="estimate-shows-india-could-quit-coal-for--billion-90656.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">01 April 2023</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Have you ever gone to a farm or an <strong>orchard</strong> to <strong>pick</strong> fruit? Was all of the fruit easy to pick, or were some pieces easier to reach than others? Perhaps there were some apples in a tree that were too high for you to reach. And maybe you saw that others had picked the easiest fruit to reach before you.</p>
+<p>Today's <em>Words and Their Stories,</em> however, is not about fruit, but about ideas.</p><div class="contentImage"><img alt="FILE - Apple hanging on a tree in Sopore town of Baramulla district of Jammu and Kashmir. (Picture for VOA by Bilal Hussain)" src="https://files.21voa.com/gdb/022a0000-0aff-0242-4d37-08dad35da7f9_cx0_cy6_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Apple hanging on a tree in Sopore town of Baramulla district of Jammu and Kashmir. (Picture for VOA by Bilal Hussain)</span></div>
+<p>If you are the first person to arrive at an apple tree during harvest time, you can easily find some <u>low-hanging fruit</u>. These are the apples that are on the <strong>branches</strong> closest to the ground. <u>Low-hanging fruit</u> describes the most <strong>obvious</strong> or easiest things to do to help you reach a goal.</p>
+<p>The problem with <u>low-hanging fruit</u> is that it is easy for others to get there first, too.</p>
+<p>People who try to create new music, TV shows, or movies sometimes face this problem. They might believe that the best <strong>melodies</strong> and story ideas have already been taken.</p>
+<p>Some songwriters or scriptwriters might say that the creative <u>low-hanging fruit </u>has already been picked.</p>
+<p>When most of the fruit, ideas, or things that we desire have already been taken, we can say that the remains are <u>slim pickings</u>. This means there are only a few useful things left to choose from.</p>
+<p>And, when almost nothing of value remains, we are <u>scraping the bottom of the barrel</u>. That means we are trying to get the last little bits. There is <u>nothing but scraps</u> left.</p>
+<p>"Scraps" are small, unwanted pieces that remain at the end of a process, like bits of food remaining after making or eating a meal. The scraps are often given to animals or thrown away. So, if you have <u>nothing but scraps</u>, it means you have the least valuable things, worth almost nothing to most people.</p>
+<p>When there is nothing left of something we need, like water, we must solve the problem. One answer is to dig a well to reach water underground. Some wells can last for many years, but others <u>run dry</u>. When <u>the well has run dry</u>, there is nothing left.</p>
+<p>Paul Simon is a famous American songwriter. In 2007, he told a reporter, "I think there's a certain reservoir of melody that you are born with, and in the beginning, you <strong>draw on</strong> that. And then after a while, a relatively short while, you use it up."</p>
+<p>A reservoir is a place where water is stored, such as a pool, a <strong>pond</strong>, or a lake. Simon added that when the artist has used all that is in the reservoir, he or she needs to expand their skills. Otherwise, their creative <u>well is going to run dry</u>.</p>
+<p>So far, we have talked about running out of ideas. But what happens if you get lucky and find a lot of something valuable, like oil or gold?</p>
+<p>In those cases, you have <u>hit the mother lode</u>. The term <u>mother lode</u> came from California after gold was discovered there in 1848. It describes a narrow area of rock in the state about 190 kilometers in length. This rock was the source, or "mother," of the gold found in rivers and streams in the area.</p>
+<p>Is VOA Learning English your mother lode for learning new idioms and expressions? Let us know in the comments below. And be sure to keep reading <em>Words and Their Stories</em>!</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>pick </strong><em>-v. </em>to select and take something</p>
+<p><strong>orchard </strong><em>-n. </em>an area of land on which fruit trees are grown</p>
+<p><strong>branches </strong><em>-n. </em>the parts of a tree that grow from its trunk and have leaves, fruit, or flowers on them.</p>
+<p><strong>obvious </strong><em>-adj. </em>easily seen or understood</p>
+<p><strong>melody </strong><em>-n. </em>the main notes that make a song or tune</p>
+<p><strong>draw on </strong><em>-v. (phrasal) </em>to utilize or to take from a quantity or source</p>
+<p><strong>pond </strong><em>-n. </em>a small body of water</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Low-hanging Fruit]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:06.16]And now, Words and Their Stories,
+[00:10.92]from VOA Learning English.
+[00:14.08]Have you ever gone to a farm
+[00:23.16]or an orchard to pick fruit?
+[00:27.20]Was all of the fruit easy to pick,
+[00:30.92]or were some pieces easier to reach than others?
+[00:36.52]Perhaps there were some apples in a tree
+[00:39.92]that were too high for you to reach.
+[00:44.12]And maybe you saw that others had picked
+[00:48.32]the easiest fruit to reach before you.
+[00:52.88]Today's Words and Their Stories, however,
+[00:56.12]is not about fruit, but about ideas.
+[01:01.20]If you are the first person to arrive
+[01:04.76]at an apple tree during harvest time,
+[01:08.28]you can easily find some low-hanging fruit.
+[01:13.00]These are the apples that are on the branches
+[01:16.28]closest to the ground.
+[01:19.32]Low-hanging fruit describes the most obvious
+[01:23.24]or easiest things to do to help you reach a goal.
+[01:29.40]The problem with low-hanging fruit
+[01:32.72]is that it is easy for others to get there first, too.
+[01:39.56]People who try to create new music,
+[01:42.68]TV shows, or movies
+[01:45.88]sometimes face this problem.
+[01:49.68]They might believe that the best melodies
+[01:53.00]and story ideas have already been taken.
+[01:58.56]Some songwriters or scriptwriters
+[02:01.88]might say that the creative low-hanging fruit
+[02:06.32]has already been picked.
+[02:09.52]When most of the fruit, ideas,
+[02:12.96]or things that we desire have already been taken,
+[02:17.88]we can say that the remains are slim pickings.
+[02:24.32]This means there are only a few
+[02:27.52]useful things left to choose from.
+[02:31.56]And, when almost nothing of value remains,
+[02:36.80]we are scraping the bottom of the barrel.
+[02:41.56]That means we are trying to get the last little bits.
+[02:47.12]There is nothing but scraps left.
+[02:50.64]"Scraps" are small, unwanted pieces
+[02:54.64]that remain at the end of a process,
+[02:57.64]like bits of food remaining after making
+[03:01.72]or eating a meal.
+[03:04.96]The scraps are often
+[03:06.52]given to animals or thrown away.
+[03:10.40]So, if you have nothing but scraps,
+[03:14.24]it means you have the least valuable things,
+[03:18.44]worth almost nothing to most people.
+[03:23.92]When there is nothing left of something we need,
+[03:28.16]like water, we must solve the problem.
+[03:33.92]One answer is to dig a well
+[03:36.92]to reach water underground.
+[03:40.56]Some wells can last for many years,
+[03:43.88]but others run dry.
+[03:48.08]When the well has run dry,
+[03:50.84]there is nothing left.
+[03:54.76]Paul Simon is a famous American songwriter.
+[04:00.16]In 2007, he told a reporter,
+[04:04.88]"I think there's a certain reservoir of melody
+[04:09.00]that you are born with,
+[04:10.92]and in the beginning, you draw on that.
+[04:14.64]And then after a while,
+[04:17.56]a relatively short while, you use it up."
+[04:22.28]A reservoir is a place where water is stored,
+[04:27.12]such as a pool, a pond, or a lake.
+[04:33.00]Simon added that
+[04:35.16]when the artist has used all that is in the reservoir,
+[04:39.56]he or she needs to expand their skills.
+[04:45.20]Otherwise, their creative well
+[04:48.32]is going to run dry.
+[04:51.64]So far, we have talked about running out of ideas.
+[04:57.44]But what happens if you get lucky
+[05:00.52]and find a lot of something valuable,
+[05:04.20]like oil or gold?
+[05:08.16]In those cases, you have hit the mother lode.
+[05:14.12]The term mother lode came from California
+[05:17.76]after gold was discovered there in 1848.
+[05:23.88]It describes a narrow area of rock in the state
+[05:28.08]about 190 kilometers in length.
+[05:33.32]This rock was the source, or "mother,"
+[05:37.84]of the gold found in rivers
+[05:40.48]and streams in the area.
+[05:44.44]Is VOA Learning English
+[05:46.76]your mother lode for learning
+[05:49.28]new idioms and expressions?
+[05:51.68]Let us know in the comments below.
+[05:56.40]And be sure to keep reading
+[05:58.88]Words and Their Stories!
+[06:02.48]I'm Andrew Smith. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Study Says the Brain Remembers Thousands of Faces</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Study Says the Brain Remembers Thousands of Faces" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201810/study-says-the-brain-remembers-thousands-of-faces.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Study Says the Brain Remembers Thousands of Faces</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201810/study-says-the-brain-remembers-thousands-of-faces.mp3" id="mp3"></a>
+<a href="why-indonesia-children-are-not-growing-80470.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Anne Ball</span><br/>
+<span class="datetime">14 October, 2018</span><br/>
+<p>Some people claim they "never forget a face." But what does that saying mean? Is there really no limit to the number of faces a person can remember?</p>
+<p>A new study has found that, on <strong>average</strong>, people can remember as many as 5,000 faces.</p>
+<p>That number comes from a group of researchers at the University of York in England. They published their findings on facial recognition this month in the Proceedings of The Royal Society B, Biological Sciences.</p>
+<p>There have been many studies recently on facial recognition technology. But the authors of this study say theirs is the first time that scientists have been able to put a number to the abilities of humans to recognize faces.</p>
+<p>The research team tested people on how many faces they could remember from their personal lives and in the media. They also tested them to see how many famous faces they recognized. </p>
+<p>Rob Jenkins works in the psychology department at the University of York. He said the researchers' study centered on "the number of faces people actually know."</p>
+<p>He said the researchers were not able to discover whether there is a "limit on how many faces the brain can <strong>handle</strong>."</p>
+<div class="contentImage"><img alt="FILE - Facial recognition technology is used to screen people before they visit the Statue of Liberty in New York, US." src="https://files.21voa.com/gdb/73526805-1DC0-4A21-986B-0DD664A9B675_w268_r0.jpg"/><br/><span class="imagecaption">FILE - Facial recognition technology is used to screen people before they visit the Statue of Liberty in New York, US.</span></div>
+<p><strong>How does facial recognition help humans?</strong></p>
+<p>Jenkins said the ability to tell individual people apart is "clearly important."</p>
+<p>Throughout history, humans have mostly lived in small groups of around one hundred individuals. But in today's modern world of big cities, computers, televisions and social media, we meet and deal with thousands of people.</p>
+<p>The study suggests our facial recognition abilities help us to deal with the many different faces we see on the screens, as well as those we know, like family and friends.</p>
+<p>The results of the study give a<strong> baseline</strong> for comparing the "facial vocabulary" of humans with facial recognition <strong>software</strong>.</p>
+<p>Scientists have been working on computer technology to remember and identify faces since the 1960s. Today, facial recognition technology is used in many ways, including by law enforcement agencies to prevent crime and violence.</p>
+<p>Governments use it to keep secret areas secure and, in extreme cases, control populations. Some governments use the software to watch people and find out where they go and what they do.</p>
+<p>Even Facebook uses facial recognition. For example, when you "tag," or name, a friend, Facebook technology may recognize the person's face from a different picture you had shared before.</p>
+<p>For the human study, people spent one hour writing down as many faces from their personal lives as possible. Some examples may include people they went to school with, people they work with and family members. Then, they wrote down famous faces they know, such as actors, politicians and other public people. </p>
+<p>At first, they found it easy to come up with many faces. But by the end of the hour, they found it harder to think of new ones. Their change in speed let the researchers estimate when they would have run out of faces completely.</p>
+<p><strong>1,000 to 10,000 faces remembered</strong></p>
+<p>People who took part in the study were also shown thousands of photographs of famous people. Researchers asked them which ones they recognized. To make sure they knew these people, researchers required them to recognize two different photos of each famous person. </p>
+<p>The results showed that the participants knew between 1,000 and 10,000 faces. </p>
+<p>How do they explain such a wide <strong>range</strong>?</p>
+<p>Jenkins said one explanation may be that some people have a natural ability for remembering faces. "There are differences in how much attention people pay to faces and how well they process the information," he said.</p>
+<p>Jenkins also said it could be because of different social environments. Some people may have grown up in more populated places. So, they may have had more social contact throughout their lives.</p>
+<p>The people in the study included 25 men and women students from two universities. They were between 18 and 61 years old.</p>
+<p>Researchers think age may be an interesting area for further research.</p>
+<p>"It would be interesting to see whether there is a <strong>peak</strong> age for the number of faces we know", Jenkins said. He said it is possible that we gather more faces throughout our lifetime. But, he added, there also may be an age at which we start to find it harder to remember all of those faces.</p>
+<p>I'm Anne Ball.</p>
+<p><em>Anne Ball adapted this story for Learning English. Ashley Thompson was the editor. We want to hear from you. Write to us in the Comments Section. </em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>handle </strong><em>– v.</em> to deal with or act on</p>
+<p><strong>baseline </strong><em>– n.</em> information that is used as a starting point by which to compare other information</p>
+<p><strong>software </strong><em>– n.</em> the programs that run on a computer and perform certain functions</p>
+<p><strong>range </strong><em>– n.</em> a series of numbers that includes the highest and lowest possible amounts</p>
+<p><strong>participant </strong><em>– n. </em>a person who is involved in an activity or event: a person who participates in an activity or event </p>
+<p><strong>peak</strong><em> – adj. </em>at the highest point or level</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

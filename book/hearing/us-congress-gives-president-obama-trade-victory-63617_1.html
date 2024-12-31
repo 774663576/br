@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 美国国会通过“快速审批权”法案 奥巴马获得重大胜利</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 美国国会通过“快速审批权”法案 奥巴马获得重大胜利" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201506/us-congress-gives-president-obama-trade-victory.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>美国国会通过“快速审批权”法案 奥巴马获得重大胜利</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201506/us-congress-gives-president-obama-trade-victory.mp3" id="mp3"></a>
+<a href="/static/lrc/us-congress-gives-president-obama-trade-victory.lrc" id="lrc"></a>
+<a href="us-congress-gives-president-obama-trade-victory-63617.html" id="CnPage" target="_blank"></a>
+<a href="in-the-news-june--63613.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>The United States Congress has given President Barack Obama a powerful tool to get trade deals approved. Congress approved what is called "fast track" authority to help Mr. Obama and future presidents negotiate trade agreements. The expanded powers are designed to protect proposed agreements from congressional changes.<br/>美国国会已经给奥巴马总统提供了一项让贸易协议获得批准的强大工具。国会批准了所谓的“快车道”审批权以帮助奥巴马以及继任者谈判贸易协定。这项扩大的权力旨在防止国会修改拟议协议。</p>
+<p>Wednesday night, the Senate voted on Trade Promotion Authority, or TPA.<br/>周三晚上，参议院就贸易促进权进行了投票。</p>
+<p>Colorado Senator Cory Gardner spoke on the Senate floor.<br/>科罗拉多州参议员科里·加德纳在参议院发表讲话。</p>
+<p>"Is any member wishing to change their vote? On this vote, the ayes are 60, and the nays are 38. The motion to concur in the House amendment to the Senate amendment HR 2146 is agreed to."<br/>他说，“是否有任何参议员想要修改投票？在这次投票中，有60人赞成38人反对。参议院2146号修正案获得通过。”</p>
+<p>The bill's approval increases chances for two of the biggest trade deals in U.S. history. Under TPA, the Trans-Pacific Partnership and the Transatlantic Trade and Investment Partnership would be approved with simple-majority votes in Congress. Lawmakers could not amend the agreements.<br/>该法案的批准提升了美国历史上最大两项贸易协定的通过机会。根据贸易促进权，跨太平洋伙伴关系和跨大西洋贸易和投资伙伴关系在国会只需要简单多数票就能通过，而且议员们不能修改这些协议。</p>
+<p>The House of Representatives has already approved the TPA bill. President Obama is expected to sign it into law.<br/>美国众议院已经批准了贸易促进权法案。奥巴马总统预计将签署它成为法律。</p>
+<p>Two weeks ago, TPA's supporters feared the bill would not get congressional approval. House members blocked trade legislation by voting down a re-training bill for American workers displaced by foreign competition. House Democratic Leader Nancy Pelosi announced on Wednesday she would vote for the measure. She had led House Democrats in opposing it earlier this month. She spoke after the Senate was prepared to support the retraining legislation.<br/>两周前，贸易促进权的支持者还担心该法案无法获得国会批准。众议院议员否决了一项重新培训由于外国竞争而失去工作的工人的贸易立法。众议院民主党领袖南希·佩洛西周三宣布，她将会投票支持该项措施。本月早些时候，她曾率领众议院民主党议员反对它。她在国会准备支持再培训立法时做出上述表态。</p>
+<p>The sudden increase in support for free trade saddened its opponents, like Independent Senator Bernie Sanders. "It's a great day for the big-money interests, not a great day for working families," he said. Mr. Sanders added, "This trade agreement will continue the policies that have cost us millions of decent-paying jobs."<br/>自由贸易支持度突然增加让独立参议员伯尼·桑德斯这样的反对者非常不爽。他说，“这对大资金利益来说是一个伟大的日子，但是对工薪家庭来说肯定不是。”桑德斯补充说，“这份贸易协定会让已经消耗了我们数百万高薪就业岗位的政策继续下去。”</p>
+<p>Environmental groups and labor unions also oppose "fast track" authority. Jim Hoffa heads the Teamsters Union, which represents American truck drivers. He said that "History shows it makes no sense to give a quick up-or-down vote to bad trade deals like the TPP that will only ship jobs overseas and lower wages in the U.S."<br/>环保团体和工会也反对快车道授权。吉姆·霍法领导着代表美国卡车司机的卡车司机联盟。他说，“历史证明给TPP这类贸易协定提供快速审批权毫无意义，它只会把就业岗位送到国外，并降低美国的薪水。”</p>
+<p>The trade battle produced rare, political alliances in Washington. On this issue, President Obama has had strong support from Republican congressional leaders. Yet the Republican leaders work against the president's proposals on almost every other issue. TPA sharply divided Democratic lawmakers. They were the targets of serious lobbying efforts from activists on both sides.<br/>该贸易争斗造就了华盛顿难得的政治联盟。在这个问题上，奥巴马总统获得了共和党国会领导人的大力支持。然而共和党领导人反对奥巴马几乎所有的其它提议。快速审批权在民主党议员中分化严重。他们是双方活动人士游说的努力目标。</p>
+<p>And that's the Economics Report. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是马里奥·理特(Mario Ritter)。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:US Congress Gives President Obama a Trade Victory]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:05.14]The United States Congress has given President Barack Obama 
+[00:10.72]a powerful tool to get trade deals approved. 
+[00:14.81]Congress approved what is called "fast track" authority 
+[00:20.98]to help Mr. Obama and future presidents negotiate trade agreements. 
+[00:27.58]The expanded powers are designed to protect 
+[00:32.48]proposed agreements from congressional changes.
+[00:36.30]Wednesday night, the Senate voted on Trade Promotion Authority, or TPA.
+[00:45.16]Colorado Senator Cory Gardner spoke on the Senate floor.
+[00:51.02]"Is any member wishing to change their vote? On this vote, 
+[00:58.24]the ayes are 60, and the nays are 38. 
+[01:01.17]The motion to concur in the House amendment to the Senate amendment HR 2146 is agreed to."
+[01:06.40]The bill's approval increases chances 
+[01:10.27]for two of the biggest trade deals in U.S. history. 
+[01:14.43]Under TPA, the Trans-Pacific Partnership and the Transatlantic Trade 
+[01:22.57]and Investment Partnership would be approved 
+[01:25.87]with simple-majority votes in Congress. 
+[01:29.63]Lawmakers could not amend the agreements.
+[01:34.19]The House of Representatives has already approved the TPA bill. 
+[01:40.75]President Obama is expected to sign it into law.
+[01:45.92]Two weeks ago, TPA's supporters 
+[01:50.76]feared the bill would not get congressional approval. 
+[01:54.51]House members blocked trade legislation by voting down a re-training bill 
+[02:02.04]for American workers displaced by foreign competition. 
+[02:06.56]House Democratic Leader Nancy Pelosi announced on Wednesday 
+[02:12.49]she would vote for the measure. 
+[02:15.65]She had led House Democrats in opposing it earlier this month. 
+[02:20.77]She spoke after the Senate was prepared to support the retraining legislation.
+[02:28.26]The sudden increase in support for free trade saddened its opponents, 
+[02:34.29]like Independent Senator Bernie Sanders. 
+[02:37.59]"It's a great day for the big-money interests, 
+[02:42.21]not a great day for working families," he said. 
+[02:46.38]Mr. Sanders added, "This trade agreement will continue the policies 
+[02:52.56]that have cost us millions of decent-paying jobs."
+[02:56.87]Environmental groups and labor unions also oppose "fast track" authority. 
+[03:04.37]Jim Hoffa heads the Teamsters Union, which represents American truck drivers. 
+[03:12.51]He said that "History shows it makes no sense to give a quick up-or-down vote 
+[03:20.42]to bad trade deals like the TPP 
+[03:24.35]that will only ship jobs overseas and lower wages in the U.S."
+[03:30.70]The trade battle produced rare, political alliances in Washington. 
+[03:37.15]On this issue, President Obama has had strong support from Republican congressional leaders. 
+[03:45.56]Yet the Republican leaders work against the president's proposals on almost every other issue. 
+[03:53.81]TPA sharply divided Democratic lawmakers. 
+[03:59.10]They were the targets of serious lobbying efforts from activists on both sides.
+[04:06.40]And that's the Economics Report. I'm Mario Ritter.
+[04:11.60]更多听力请访问51voa.com
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

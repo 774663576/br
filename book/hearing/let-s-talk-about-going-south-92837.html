@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Let's Talk about 'Going South'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Let's Talk about 'Going South'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202407/let-s-talk-about-going-south.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Let's Talk about 'Going South'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202407/let-s-talk-about-going-south.mp3" id="mp3"></a>
+<a href="new-french-stamps-smell-like-baguettes-92836.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">27 July, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Today, we talk about those times when things do not go as planned. All the planning in the world does not guarantee that your plans will happen the way you had planned.</p>
+<p>Things can happen that are outside of your control. To talk about those times when things go <strong>awry</strong>, American English has two directional expressions: <u>go south</u> and <u>go sideways</u>.</p><div class="contentImage"><img (ap="" alt="Passengers crowd the international flights departure area of Rome's Fiumicino airport, July 19, 2024. Many flights were delayed or canceled due to the worldwide internet outage. This unexpected event caused many trips to " borgia)"="" go="" gregorio="" photo="" south."="" src="https://files.21voa.com/gdb/01000000-0aff-0242-5457-08dcacc51d98_w268_r1.jpg"/><br/><span class="imagecaption">Passengers crowd the international flights departure area of Rome's Fiumicino airport, July 19, 2024. Many flights were delayed or canceled due to the worldwide internet outage. This unexpected event caused many trips to "go south." (AP Photo/Gregorio Borgia)</span></div>
+<p><strong>To go south</strong></p>
+<p>Let's start with <u>go south</u>. If something <u>goes south</u>, it stops working or falls apart. It can also mean that something decreases in value or loses quality. We often use it to describe a situation where everything has gone wrong.</p>
+<p>If your career <u>goes south</u>, you need to look for a new job. If your new computer <u>goes south</u>, it stops working. If a relationship <u>goes south</u>, the two people are heading toward a <strong>breakup</strong>.</p>
+<p>And if a trip <u>goes south</u>, one bad thing after another happens. You miss your plane, your passport gets stolen, and the hotel loses your <strong>reservation</strong>. That makes for a vacation that has <u>gone south</u>.</p>
+<p>Now, let's hear two friends use this expression.</p>
+<p><em>A: So, how is your friend's new bakery doing? She opened it earlier this year, right?</em></p>
+<p><em>B: She did. But then she ran into trouble. Her investor pulled out. And then her head baker quit. So, her business <u>went south</u> pretty quickly after that. </em></p>
+<p><em>A: Oh, I'm sorry to hear that. But I'm not surprised. You need a lot of money up front to start a business. And for a bakery ... you definitely need a baker.</em></p>
+<p><em>B: Well it didn't help that another bakery with lower prices opened down the street. Her business was bound to <u>go south</u> after that. </em></p>
+<p><strong>To go sidesways</strong></p>
+<p><strong>Sideways </strong>is another direction you don't want your projects or efforts to go. As a direction word, sideways means to go to either side – not forward or backward.</p>
+<p>As an <strong>idiomatic</strong> expression, to <u>go sideways</u> also means things do not go as planned. But this expression can be used a little differently from <u>going south</u>. Often when things <u>go sideways</u>, they go wrong in strange ways. In other words, things get <strong>weird</strong>.</p>
+<p>Sometimes you want things to <u>go sideways</u>. For example, a good story often <u>goes sideways</u>. You think it's going to go in one direction but then there is a <strong>plot twist</strong>. Situations change and the story goes in an unexpected direction. Used this way, <u>going sideways</u> is a good thing.</p>
+<p>But what about on a family camping trip? Let's hear this expression used in that situation.</p>
+<p><em>A: How was your family camping trip? </em></p>
+<p><em>B: It was okay. But some really strange things happened. Nature things...</em></p>
+<p><em>A: Tell me more. What happened?</em></p>
+<p><em>B: Well, the first night a raccoon stole all my food. The second night while I slept, spiders spun webs all over my tent while I slept. And then on the third day while I was swimming in the lake, a fish bit me!</em></p>
+<p><em>A: That IS a lot of weird nature stuff. I didn't even know fish could bite.</em></p>
+<p><em>B: Me neither! But I guess on a camping trip that's <u>gone sideways</u> ... anything is possible!</em></p>
+<p>And that's the end of this Words and Their Stories.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>awry </strong><em>-adv. </em>off the correct or expected course</p>
+<p><strong>breakup </strong><em>-n. </em>to end a romance</p>
+<p><strong>reservation </strong><em>-n. </em>an arrangement to have something (as a motel room or a seat on a plane) held for one's use</p>
+<p><strong>sideways </strong><em>-adj. or -adv. </em>from one side viewed the stage sideways : with one side forward turn sideways : to one side</p>
+<p><strong>idiomatic </strong><em>-adj. </em>of, relating to, or conforming to <strong>idiom</strong> <em>-n. </em>an expression that cannot be understood from the meanings of its separate words but must be learned as a whole</p>
+<p><strong>weird</strong> <em>-adj. </em>very unusual or strange</p>
+<p><strong>plot twist </strong><em>– n. </em>a writing device that introduces a big change in the direction or expected outcome of the plot in a story</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

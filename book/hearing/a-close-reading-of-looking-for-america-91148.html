@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - A Close Reading of 'Looking for America'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, A Close Reading of 'Looking for America'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202307/a-close-reading-of-looking-for-america.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>A Close Reading of 'Looking for America'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202307/a-close-reading-of-looking-for-america.mp3" id="mp3"></a>
+<a href="in-japan-job-leaving-agents-help-people-quit-their-jobs-91146.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">06 July 2023</span><br/>
+<p>In today's Everyday Grammar we do a close reading of Lana Del Rey's 2019 song, <em>Looking for America</em>. The song explores different places in the United States, American culture and even fireworks.</p>
+<p><strong>What is a close reading? </strong></p>
+<p>A close reading is a deep reading of a story. It is seeking greater understanding beyond the main idea. It is often used in literature to understand the writer's <strong>intentions</strong> by looking at the details. With a close reading we can look at the grammar of the text, cultural elements, and poetic devices.</p><div class="contentImage"><img alt="Everyday Grammar: A close reading of part of a Lana Del Rey song, ‘Looking for America.'" src="https://files.21voa.com/gdb/01000000-c0a8-0242-84dc-08db7d99af11_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: A close reading of part of a Lana Del Rey song, ‘Looking for America.'</span></div>
+<p>As we read "Looking for America" we will talk about <strong>location</strong>, American culture and grammar. Let's discuss the last two parts of the song.</p>
+<p><strong>Looking for America</strong></p>
+<p><em>I flew back to New York City </em></p>
+<p><em>Missed that Hudson River line </em></p>
+<p><em>Took a train up to Lake Placid </em></p>
+<p><em>That's another place and time, where </em></p>
+<p><em>I used to go to <strong>drive-ins </strong>and listen to the <strong>blues</strong> </em></p>
+<p><em>So many things that I think twice about before I do, no </em></p>
+<p><em>I'm still looking for my own version of America </em></p>
+<p><em>One without the gun, where the flag can freely fly </em></p>
+<p><em>No bombs in the sky, only fireworks when you and I <strong>collide</strong> </em></p>
+<p><em>It's just a dream I had in mind </em></p>
+<p><strong>Finding meaning</strong></p>
+<p>In the second verse she sings about the East Coast, particularly the state of New York.</p>
+<p><em>I flew back to New York City </em></p>
+<p><em>Missed that Hudson River line </em></p>
+<p><em>Took a train up to Lake Placid </em></p>
+<p>She sings about three places: New York City, the Hudson River, and Lake Placid. These places are important for her. She was born in the city and came back to it as a young adult, but her family raised her in upstate New York, Lake Placid.</p>
+<p><em>Took a train up to Lake Placid</em></p>
+<p><em>That's another place and time, </em></p>
+<p>She sings of Lake Placid as "another place and time." This could signify personal memories of growing up there. But the lines also suggest that the town itself is frozen in time.</p>
+<p>No Lana Del Rey song is complete without notes about American culture. In line five, she sings about listening to blues music and going to drive-in movies. Both activities are <strong>nostalgic</strong>.</p>
+<p><em>I used to go to drive-ins and listen to the blues </em></p>
+<p><em>So many things that I think twice about before I do</em></p>
+<p>Del Rey sings that now she "thinks twice" about all the things she once did without a care. To "think twice" about something means that you reconsider your actions or thoughts. We normally think twice about something before we do it, so we do not make a mistake.</p>
+<p><em>I'm still looking for my own version of America</em></p>
+<p>In line seven, she uses the present continuous <strong>tense</strong> to say that her search for the peaceful, easy America she once knew continues. Her use of the adverb "still" suggests a long search. She sings what she hopes the future will be like in lines eight and nine.</p>
+<p><em>One without the gun, where the flag can freely fly</em></p>
+<p><em>No bombs in the sky, only fireworks when you and I collide</em></p>
+<p>The "bombs" are <strong>contrasted</strong> with "fireworks." A line in the U.S. national anthem <em>The Star-Spangled Banner</em> tells of "the bombs bursting in air," during a war. But the light from the bursts showed that the American flag was still flying. It was proof that the U.S. had not been defeated.</p>
+<p>Fireworks are always celebratory and they are very important to the observation of America's Independence Day anniversary on July fourth.</p>
+<p>And lastly, we have the verb "collide," which means to come together by force, to crash. It can also be used to describe a clash of opinions.</p>
+<p><em>No bombs in the sky, only fireworks when you and I collide</em></p>
+<p>"Bombs" are <strong>negative</strong>, and the "fireworks" are <strong>positive</strong>. So, if the singer and the other person come together, only good things are possible. If there is a difference of opinion and they "collide," the experience will still be productive.</p>
+<p><em>It's just a dream I had in mind </em></p>
+<p>In Del Rey's final line, she talks about her dream of a peaceful America. When we keep something "in mind" we keep that thing in our close memory. We may not even realize that we are thinking about it often but if we keep it "in mind" it will affect our choices and decisions.</p>
+<p>The line suggests the idea of the "American dream." This is the idea that anyone, of any background, can find opportunity and success in the United States based on his or her own ability and skills.</p>
+<p><strong>Final thoughts</strong></p>
+<p>In today's <em>Everyday Grammar,</em> we learned about close readings and found the details of Lana Del Rey's song "Looking for America." We looked at her use of location, her references to American culture, and even some grammatical elements like the present continuous tense and the double meaning of the verb "collide." In a future episode, we will look at some of the sounds and <strong>rhymes</strong> of the song.</p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Andrew Smith.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>_______________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>intention </strong><em>— n. </em>the thing that you plan to do or achieve</p>
+<p><strong>location </strong><em>-n. </em>a place</p>
+<p><strong>drive-ins</strong> – <em>n</em>. places where people watch movies in their cars</p>
+<p><strong>blues</strong> – <em>n</em>. musical genre created by African Americans in the Southern United States</p>
+<p><strong>collide </strong><em>— v. </em>the action of two (or more) objects crashing into each other</p>
+<p><strong>genre</strong> <em>–n. </em>a kind or group of literature or art that has similar qualities</p>
+<p><strong>nostalgic </strong><em>–adj. </em>the feeling of both pleasure and sadness of remembering the past</p>
+<p><strong>tense</strong> – <em>n</em>. a form of a verb that is used to show when an action happened</p>
+<p><strong>contrast</strong> – v. to compare two things to show their differences</p>
+<p><strong>negative</strong><em> </em>–<em> adj. </em>having harmful or undesirable effects</p>
+<p><strong>positive </strong>– <em>adj. </em>having good and/or hopeful effects</p>
+<p><strong>rhyme </strong><em>– v.</em> to have two or more words that end in the same sound</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

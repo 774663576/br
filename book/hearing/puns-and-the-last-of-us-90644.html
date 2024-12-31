@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Puns and The Last of Us</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Puns and The Last of Us" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202303/puns-and-the-last-of-us.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Puns and The Last of Us</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202303/puns-and-the-last-of-us.mp3" id="mp3"></a>
+<a href="tensions-rise-at-ukraine-s-historic-religious-center-90641.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">30 March 2023</span><br/>
+<p>The popular television series, <em>The Last of Us</em>, is based on a video game series with the same name. In it, teenager Ellie and middle-aged man Joel are survivors of a disastrous pandemic. They travel together across an extremely dangerous, violent America to try to reach safety. A <strong>fungal </strong>infection has destroyed much of humanity. Ellie is <strong>immune</strong> and may be the only hope to develop a vaccine.</p>
+<p>During their travels, they often have to fight murderous <strong>zombies</strong>, security forces and robbers. Along the way, Ellie finds a book of word jokes, called puns. She reads some of the puns to Joel, who does not think they are so funny.</p>
+<p>Today, we will explore three kinds of puns from Ellie's book, their meanings, and how puns are created.</p><div class="contentImage"><img alt="Everyday Grammar: Puns and The Last of Us" src="https://files.21voa.com/gdb/01000000-0aff-0242-244b-08db2f10afb4_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Puns and The Last of Us</span></div>
+<p><strong>What are puns? </strong></p>
+<p>A pun is a kind of <strong>figurative</strong> language<strong> </strong>that uses a play of similarly sounding or similarly spelled words to create humor. Puns are used in writing but we also hear them in everyday speech.</p>
+<p>Three kinds of puns are based on the difference between the sounds, spellings, and meanings of the words used.</p>
+<p><strong>Homophonic puns </strong></p>
+<p>The first kind of pun is made with homophones or words that sound the same or very similar but have different meanings and spellings.</p>
+<p>In <em>The Last of Us</em>, Ellie shares a pun about a <strong>mermaid </strong>in math class:</p>
+<p><em>"What did the mermaid wear to math class? An algae bra!"</em></p>
+<p>Here the play on words is the homophones "algae bra" and "algebra." A bra is a piece of clothing. Algae are water plants. And "algebra" is a kind of math.</p>
+<p>It is funny to picture a mermaid going to math class to study algebra in her algae bra.</p>
+<p>Although Joel does not find that pun funny, Ellie thinks it is <strong>hilarious</strong>.</p>
+<p><strong>Homographic puns</strong></p>
+<p>The next type of pun is a homographic pun. If words are homographic, they are spelled the same, but have different meanings.</p>
+<p>Ellie reads Joel another pun out of her book. This time it is a homographic one!</p>
+<p><em>"I stayed up all night wondering where the sun went... And then it <strong>dawned</strong> on me."</em></p>
+<p>Here the pun is with the word "dawn." The first meaning of "dawn" as a verb is to grow lighter as the sun rises in the morning. If someone would stay up all night, they would see the dawn.</p>
+<p>The next meaning of "dawn" is "to begin to think or understand something." If something dawns on you, you think about it in the moment. If someone is staying up all night and thinking about something, they might realize it in the morning, or it might dawn on them.</p>
+<p><strong>Compound puns</strong></p>
+<p>And lastly, we have<strong> </strong>compound or double puns. Compound or double puns have two plays on words within the same pun. The puns could be homophonic, homographic or both!</p>
+<p>When Ellie first finds the book of puns, she starts off with this double pun:</p>
+<p><em>"It doesn't matter how much you push the <strong>envelope</strong>; it'll still be <strong>stationery</strong>."</em></p>
+<p>This pun includes the idiom "to push the envelope," which means to go beyond the usual or acceptable limits by doing something new, dangerous, or divisive.</p>
+<p>An envelope is also something that contains a letter for mailing.</p>
+<p>The second half of the pun includes the word "stationery." "Stationery" is equipment used to write letters, including pens, paper and, yes, envelopes.</p>
+<p>There is another word that sounds the same, but has a different meaning, "stationary" ending in "-ary" instead of an "-ery." "Stationary," "-ary," is an adjective that means still or without movement.</p>
+<p>When we first hear this pun, because speakers understand the idiom "to push the envelope" they think the joke is going to go one way. Then they hear the second half of the pun, and they realize it is about literal envelopes, this is where the double meaning comes in.</p>
+<p><em>"No matter how much you push the envelope, it will still be stationary."</em></p>
+<p>The first meaning is that the envelope will not physically move, by using the adjective "stationary" that ends in "-ary."</p>
+<p><em>"No matter how much you push the envelope, it will still be stationery."</em></p>
+<p>The second meaning uses the plural noun of "stationery" that ends in "-ery," the letter writing materials. The meaning of this pun is that we cannot change envelopes because they will always be included in a box of stationery.</p>
+<p><strong>Final thoughts</strong></p>
+<p>In today's <em>Everyday Grammar</em> report, we learned about three kinds of puns. One is homophonic. It uses words that sound alike, but have different meanings. Another kind of pun is homographic, meaning words spelled the same, but having different meanings. The final kind are the double puns or compound pun. Compound puns use two or more puns into one to create multiple meanings.</p>
+<p>Are you like Joel, who does not find much humor in the puns? Or are you like Ellie, who gets a good laugh at these jokes?</p>
+<p>Let us know! Or tell us if you know other puns in English! Write to us in the comments or send us an email, <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a><u>.</u></p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Caty Weaver.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>______________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>fungus</strong> – <em>n.</em> a kind of plant without leaves that gets its food from other living or delaying things</p>
+<p><strong>zombie</strong> <em>– n.</em> a dead body that walks around, as portrayed in fictional stories</p>
+<p><strong>figurative </strong>– <em>adj</em>. used with a meaning that is different from the basic meaning</p>
+<p><strong>mermaid</strong> – <em>n</em>. an imaginary sea creature that has a woman's head and body and a fish's tail instead of legs</p>
+<p><strong>hilarious</strong> – <em>adj</em>. very funny</p>
+<p><strong>dawn</strong> – <em>v</em>. to grow lighter as the sun rises in the morning; to begin to think or understand something</p>
+<p><strong>envelope </strong>– <em>n. </em>an enclosing cover for a letter, card – at the Academy Awards, the winning name is written on a card in an envelope.</p>
+<p><strong>stationery</strong> <i>&amp;#</i>173;– <em>n. </em>paper that is used for writing letters and that usually has matching envelopes</p>
+<p><strong>controversial </strong><em>– adj. </em>causing a lot of disagreement or argument</p>
+<p><strong>literal </strong><em>– adj.</em><strong> </strong>following the ordinary or usual meaning of the words</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

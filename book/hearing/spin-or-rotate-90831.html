@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Spin or Rotate?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Spin or Rotate?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/spin-or-rotate.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Spin or Rotate?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/spin-or-rotate.mp3" id="mp3"></a>
+<a href="us-company-aims-to-reopen-a-retired-nuclear-power-plant-90826.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">05 May 2023</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we will answer a question about the difference between "spin" and "rotate."</p>
+<p><strong>Question:</strong></p>
+<p>Dear teacher,</p><div class="contentImage"><img alt="Ask a Teacher: Spin or Rotate" src="https://files.21voa.com/gdb/01000000-0aff-0242-6da9-08db4cbd5cca_w268_r1.png"/><br/><span class="imagecaption">Ask a Teacher: Spin or Rotate</span></div>
+<p>My name is Alex! I'm from Russia! Your content is a part of the learning English process for me, so I'd love to ask you a question about a couple English words that make me confused.</p>
+<p>What is the exact difference between "spin" and "rotate"?</p>
+<p>Thank you for your time,</p>
+<p>Aleksandr</p>
+<p><strong>Answer </strong></p>
+<p>This is an interesting question, Alex. "Spin" and "rotate" as verbs both involve circular movement. They are <strong>synonyms</strong>, but there may be situations when one sounds better than the other.</p>
+<p>Let's start with "rotate."</p>
+<p>"Rotate" is a verb that means to turn in a circular motion around a center point.</p>
+<p>The verb can take a direct object or not.</p>
+<p><em>The earth rotates around the sun. (no direct object)</em></p>
+<p><em>I rotated the <strong>globe </strong>on the desk to find Helsinki, Finland. (direct object)</em></p>
+<p>When we think of "rotate," we might consider the action of "rotating" to be slower than "spinning."</p>
+<p>Rotate also has another meaning. "Rotate" can mean to take turns or to pass or change something in a series.</p>
+<p><em>We should rotate our car's <strong>tires</strong> every 5,000 to 7,000 miles.</em></p>
+<p>Now let's look at "spin."</p>
+<p>The verb "spin" also means to turn in a circular motion on a center point, much like "rotate." But we typically think of "spin" as being faster than "rotate."</p>
+<p><em>The dancer spins fast on one foot.</em></p>
+<p>"Spin" also has two other specific meanings as verbs. The first one means to make fiber into thread or <strong>yarn</strong>.</p>
+<p><em>She spins <strong>wool</strong> from sheep into yarn using a spinning wheel.</em></p>
+<p>The second meaning is when insects like spiders make thread from their bodies to create <strong>webs</strong>.</p>
+<p><em>In the book Charlotte's Web, Charlotte, the spider spins a web with the words "Some Pig" in it for her friend, Wilber.</em></p>
+<p>"Spin" can also be a noun with several meanings. Those meanings connect to the verbal meanings above.</p>
+<p>A "spin" is a fast turn.</p>
+<p>It can also mean a quick or fun ride in a vehicle.</p>
+<p><em>Let's take the car out for a quick spin!</em></p>
+<p>"Spin" can also mean mental confusion or physical <strong>dizziness</strong>. There was a popular song in the 1980s about this kind of spinning.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>__________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>synonyms </strong>– <em>n</em>. a word that is similar in meaning to another word</p>
+<p><strong>globe</strong> – <em>n</em>. model of the earth</p>
+<p><strong>tire </strong><em>– n.</em> a rubber ring that usually contains air and that fits around the wheel of a car or bicycle</p>
+<p><strong>yarn </strong>– <em>n</em>. thread used for knitting, weaving, or sewing</p>
+<p><strong>wool</strong> <em>– n.</em> the soft, thick hair of sheep and some other animals</p>
+<p><strong>web </strong>– <em>n. </em>a net made from silk threads woven together by a spider</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

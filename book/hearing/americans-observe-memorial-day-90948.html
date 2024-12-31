@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Americans Observe Memorial Day</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Americans Observe Memorial Day" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202305/americans-observe-memorial-day.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Americans Observe Memorial Day</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202305/americans-observe-memorial-day.mp3" id="mp3"></a>
+<a href="picture-book-explains-bird-dinosaur-connection-90947.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Hai Do</span><br/>
+<span class="datetime">28 May 2023</span><br/>
+<p>Memorial Day is a national holiday observed in the United States on the last Monday in May. This year, Memorial Day falls on May 29.</p>
+<p>It is a day when Americans honor the men and women who have died fighting in America's wars. For most Americans, it also marks the unofficial start of summer. It is a popular weekend for vacationing.</p>
+<p><strong>Memorial Day tradition</strong></p><div class="contentImage"><img alt="Members of the 3rd U.S. Infantry Regiment also known as The Old Guard place flags in front of each headstone at Arlington National Cemetery in Arlington, Thursday, May 25, 2023, to honor the Nation's fallen military heroes ahead of Memorial Day. (AP Photo/Andrew Harnik)" src="https://files.21voa.com/gdb/01000000-0aff-0242-b950-08db5d389118_w268_r1.jpg"/><br/><span class="imagecaption">Members of the 3rd U.S. Infantry Regiment also known as The Old Guard place flags in front of each headstone at Arlington National Cemetery in Arlington, Thursday, May 25, 2023, to honor the Nation's fallen military heroes ahead of Memorial Day. (AP Photo/Andrew Harnik)</span></div>
+<p>Memorial Day traditions include the observance at Arlington National <strong>Cemetery</strong>. It is the most famous burial place in America.</p>
+<p>The tradition began on May 30th, 1868, when flowers were placed on the graves of Union and Confederate soldiers in the cemetery. It was called <strong>Decoration</strong> Day back then.</p>
+<p>Since 1948, on the Thursday before Memorial Day, soldiers from the 3rd US Infantry, The Old Guard, have placed small American flags in front of every headstone in the cemetery.</p>
+<p>Lines of simple white headstones mark the soldiers' graves. But the 80-hectare cemetery also serves as a burial place for people of national and historical importance.</p>
+<p>Two presidents are buried there: William Howard Taft and John F. Kennedy. Other well-known people buried at the cemetery include world <strong>champion</strong> boxer Joe Louis, North Pole explorer Robert E. Peary and the seven astronauts who died in the Space Shuttle Challenger explosion.</p>
+<p>Nearly 4,000 former slaves are also buried at Arlington National Cemetery. One of them is James Parks. He dug the first graves in the cemetery.</p>
+<p><strong>Vietnam Veterans Memorial</strong></p>
+<p>The best-known memorial in the nation's capital, however, is the Vietnam Veterans Memorial, which opened in 1982.</p>
+<p>In 1980, a group of former soldiers announced a competition to design a memorial. The winner was Maya Lin, a 21-year-old student at Yale University in New Haven, Connecticut.</p>
+<p>Lin designed a memorial formed by two walls of black stone about 76 meters long. The walls meet to form a V. The names of more than <a class="wsw__a" href="https://www.vvmf.org/News/2020-Name-Additions-and-Status-Changes-on-the-Vietnam-Veterans-Memorial/">58,000</a> Americans killed or declared missing-in-action are cut into the stone.</p>
+<p>Almost any time of day, you can see people looking for the name of a family member or friend who died in the war. Once they find the name, many rub a pencil on paper over the letters to copy it.</p>
+<p>Many people leave remembrances at the Vietnam Veterans Memorial.</p>
+<p><strong>Other lesser-known memorials</strong></p>
+<p>After the success of the Vietnam Veterans Memorial, Congress approved a memorial to the Korean War veterans, which opened in July of 1995. The Korean War lasted from 1950 to 1953. The memorial honors those who died. It also honors those who survived.</p>
+<p>One of the lesser-known memorials on the National Mall in Washington, D.C., is often called "the temple." The round stone structure honors people from the District of Columbia who died in World War I. The war was fought from 1914 to 1918.</p>
+<p><strong>World War II Memorial</strong></p>
+<p>Between the Lincoln Memorial and the Washington Monument on the National Mall is the World War II Memorial. The U.S. entered the war after Japan bombed the Navy base at Pearl Harbor, Hawaii, on December 7th, 1941.</p>
+<p>Sixteen million men and women served in the American military between 1941 and 1945. More than 400,000 died.</p>
+<p>The World War II Memorial is built of bronze and granite. In the center, at ground level, is a round pool of water. When the sun is just right, rainbows of color dance in the air. Fifty-six stone pillars rise around the pool. They represent each of the American states and territories, plus the District of Columbia, at the time of the war.</p>
+<p>There are not yet memorials for soldiers who died in America's most recent wars – in Iraq and Afghanistan. The soldiers are buried in Section 60 of Arlington Cemetery. The section is often called "the saddest place in America."</p>
+<p>On Memorial Day, Americans are called to stop for one minute at three o'clock local time for the National Moment of Remembrance to honor the soldiers who have died in service to the country, no matter what wars they served in.</p>
+<p>I'm Caty Weaver.</p>
+<p>And I'm Mario Ritter, Jr.</p>
+<p><em>Shelley Gollust, Jerilyn Watson, Christopher Jones-Cruise, and Hai Do wrote this story for VOA Learning English. </em></p>
+<p>_________________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>getaway</strong> - n. a short vacation</p>
+<p><strong>cemetery</strong> - n. a place where dead people are buried</p>
+<p><strong>decoration</strong> - n. a medal or award</p>
+<p><strong>champion</strong> - n. someone that has won a contest in sports</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

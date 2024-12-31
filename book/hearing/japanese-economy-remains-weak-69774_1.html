@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 日本经济仍然疲软</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 日本经济仍然疲软" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201605/japanese-economy-remains-weak.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>日本经济仍然疲软</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201605/japanese-economy-remains-weak.mp3" id="mp3"></a>
+<a href="/static/lrc/japanese-economy-remains-weak.lrc" id="lrc"></a>
+<a href="japanese-economy-remains-weak-69774.html" id="CnPage" target="_blank"></a>
+<a href="brazil-juca-dilma-machado-69754.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Japan is struggling with its economy as the country hosts the yearly meeting of the G-7 industrialized nations.<br/>日本举办七国集团年度会议之际，该国经济正举步维艰。</p>
+<p>Japan has the world's third-largest economy, behind the U.S. and China. Many countries copied Japan when it had a strong and growing economy.<br/>日本是位居美国和中国之后的全球第三大经济体。当日本经济强劲并不断增长之时，有很多国家效仿日本。</p>
+<p>Japan has been dealing with deflation for many years. Deflation is "a decrease in the amount of available money or credit in an economy that causes prices to go down." Deflation can often cause a recession.<br/>日本多年来一直在处理通缩问题。通货紧缩是指经济体中的可用资金或信贷量下降导致价格下跌。通缩往往会导致经济衰退。</p>
+<p>The population in Japan is growing older and the country is not diverse. Most people in the country are ethnic Japanese. Last year, people in Japan criticized Miss Japan, Ariana Miyamoto, for not being "Japanese enough." She has a Japanese mother and a black American father.<br/>日本人口正在不断老化，该国也不具备多元化人口。日本大多数居民是日裔。去年，日本人批评日本小姐阿丽亚娜·宫本（Ariana Miyamoto）不是纯正的日本人。她母亲是日本人，父亲是美国黑人。</p>
+<p>Many Japanese also do not support mass immigration, which other countries have used to make up for, or balance, the effects of a declining and aging population.<br/>很多日本人也不支持大规模移民，其它国家都用这招来弥补或平衡人口下降或老龄化的影响。</p>
+<p><strong>Savings vs. spending<br/>储蓄与消费</strong></p>
+<p>Takuji Okubo is the managing director of Japan Macro Advisors. He says Japanese Prime Minister Shinzo Abe does not understand problems in the labor market or with pensions. He says the prime minister "has been just unable to tackle any reforms."<br/>日本宏观顾问公司总经理大久保卓治（Takuji Okubo）表示，日本首相安倍晋三并不了解劳动力市场的问题，也不了解养老金问题。他说，“安倍晋三一直无法进行任何改革。”</p>
+<p>Many of Japan's public pension plans do not have enough money to make payments. This has caused many families to believe the plans will fail, so they save a lot of money.<br/>许多日本公共养老金计划没有足够资金来发放养老金。这已经导致很多家庭认为这些计划会失败，所以他们存了很多钱。</p>
+<p>The average Japanese family has about $164,000 in savings. That is much higher than that of families in other developed countries.<br/>日本普通家庭大约有16.4万美元的存款。这比其它发达国家家庭要高得多。</p>
+<p>Young Japanese working in their first jobs do not earn a lot of money, so they do not have much to spend. And people who are retired and have savings are worried about their monthly payments, so they are not spending money either.<br/>日本年轻人的第一份工作赚不到很多钱，所以他们没有太多消费。而已经退休并有存款的人担心他们每月的养老金，所以他们也不花钱。</p>
+<p>Manabu Goto operates a small, 50-year-old food store in Tokyo.<br/>后藤学(Manabu Goto) 在东京经营一家有着50年历史的小食品店。</p>
+<p>Goto has opened the store on weekends and added more products. He wants to attract more customers and convince them to spend more money.<br/>后藤学已经在周末营业并增加了很多产品。他希望吸引更多客户并说服他们花更多的钱。</p>
+<p>However, he says the policies of the prime minister have "failed to get citizens to spend because people are uncertain about the future. So the government needs to try something else."<br/>然而他表示，“安倍晋三的政策未能促进市民消费，因为人们对未来不确定。所以政府有必要尝试其它方法。”</p>
+<p><strong>Structural changes are needed<br/>需要结构性改革</strong></p>
+<p>Martin Schulz is a senior economist at the Fujitsu Research Institute. He says the Japanese "market is shrinking overall. It makes it very difficult to get it moving again. This requires some major structural changes and these take time."<br/>马丁·舒尔茨（Martin Schulz）是富士通研究所的高级经济师。他说，“日本市场整体正在萎缩，这使得很难让它再次活跃起来。这需要一些重大的结构性改革，而这些需要时间。”</p>
+<p>Among the needed changes, he says, are: to open the economy, to change the structure of the farming industry and to help Japanese companies invest in Southeast Asia. He says these changes will help the Japanese economy improve over a 10 to 15-year period.<br/>他说，这些所需的改革包括开放经济、改变养殖业结构并帮助日本公司在东南亚投资。他说这些改革将有助于日本经济在一个10到15年的周期内得到提升。</p>
+<p>William Saito is an advisor for the Japanese Cabinet. He says "it's just confidence. If you look at the last 20 years -- the economic fundamentals, the infrastructure, government politics -- these things haven't actually changed."<br/>威廉·斋藤（William Saito）是日本内阁的一位顾问。他说，“这只是信心问题。如果回顾过去20年的经济基本面、基础设施和政府政治等，其实这些东西并未真正改变。”</p>
+<p>Shin Fukushige is a managing director for the technology company Seikoware. He says, "there has been a huge improvement in psychology" in the past ten years. But it is difficult for many Japanese who begin new businesses to convince workers to join their companies."<br/>Seikoware科技公司总经理申福冈(Shin Kufushige)表示，过去十年我们在心理上取得了巨大进步，但是对很多开创新业务的日本人来说，很难说服员工加入他们的公司。</p>
+<p>Many of Japan's large companies were created many years ago. But many large and successful companies in the United States were created in the past 20 or 30 years, including Apple and Google. This has helped the American economy grow.<br/>日本的很多大公司都创办于很多年前。但是美国很多大型的成功企业都创办于过去20年或30年，其中包括谷歌公司和苹果公司。而这有助于美国的经济增长。</p>
+<p>Experts are asking how to help Japan's old and slow-moving economy grow. Some of them believe actions have already been taken that will show results in the years ahead.<br/>专家在追问如何帮助日本陈腐而又发展缓慢的经济取得增长。有人认为已经采取的措施将会在未来显现效果。</p>
+<p><strong>What to watch for<br/>看点</strong></p>
+<p>After the G-7 meeting this week, many people will closely watch the actions of the Bank of Japan. The bank's leaders want people to wait a few more months for recent government measures to take effect. If these measures are not successful, the bank could take strong action. Some experts hope the bank will place fees on savings and force companies to sharply increase wages.<br/>本周的七国集团会议之后，很多人将会密切关注日本央行的行动。日本央行行长希望人们等待数月，等待政府最近采取的措施显现效果。如果这些措施不成功，日本央行可能会采取有力措施。一些专家希望日本央行对存款收费，并迫使企业大幅提高工资。</p>
+<p>However, the other G-7 nations do not want Japan's government to lower the value of its currency -- the yen. That would make the country's exported products less costly and could hurt the economies of other countries.<br/>然而，七国集团的其它国家不希望日本政府进一步让日元贬值。因为这会导致日本出口产品的成本更低，并可能会损害其它国家的经济。</p>
+<p>I'm Mario Ritter.<br/>我是马里奥·理特。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.16]Japan is struggling with its economy
+[00:03.56]as the country hosts the yearly meeting of the G-7 industrialized nations.
+[00:10.72]Japan has the world's third-largest economy,
+[00:14.44]behind the U.S. and China.
+[00:17.72]Many countries copied Japan when it had a strong and growing economy.
+[00:24.80]Japan has been dealing with deflation for many years.
+[00:29.44]Deflation is "a decrease in the amount of available money or credit
+[00:35.64]in an economy that causes prices to go down."
+[00:40.40]Deflation can often cause a recession.
+[00:45.08]The population in Japan is growing older
+[00:48.64]and the country is not diverse.
+[00:51.88]Most people in the country are ethnic Japanese.
+[00:55.40]Last year, people in Japan criticized Miss Japan,
+[01:00.36]Ariana Miyamoto, for not being "Japanese enough."
+[01:05.84]She has a Japanese mother and a black American father.
+[01:11.76]Many Japanese also do not support mass immigration,
+[01:16.48]which other countries have used to make up for,
+[01:19.96]or balance, the effects of a declining and aging population.
+[01:26.40]Takuji Okubo is the managing director of Japan Macro Advisors.
+[01:34.76]He says Japanese Prime Minister Shinzo Abe
+[01:38.80]does not understand problems the labor market or with pensions.
+[01:44.72]He says the prime minister "has been just unable to tackle any reforms."
+[01:52.56]Many of Japan's public pension plans do not have enough money to make payments.
+[02:00.92]This has caused many families to believe the plans will fail,
+[02:05.96]so they save a lot of money.
+[02:09.52]The average Japanese family has about $164,000 in savings.
+[02:17.12]That is much higher than that of families in other developed countries.
+[02:23.08]Young Japanese working in their first jobs do not earn a lot of money,
+[02:29.36]so they do not have much to spend.
+[02:32.80]And people who are retired and have savings are worried about their monthly payments,
+[02:39.76]so they are not spending money either.
+[02:44.16]Manabu Goto operates a small, 50-year-old food store in Tokyo.
+[02:51.12]Goto has opened the store on weekends and added more products.
+[02:56.48]He wants to attract more customers
+[02:59.32]and convince them to spend more money.
+[03:02.80]However, he says the policies of the prime minister have
+[03:07.56]"failed to get citizens to spend
+[03:10.60]because people are uncertain about the future.
+[03:14.44]So the government needs to try something else."
+[03:19.88]Martin Schulz is a senior economist at the Fujitsu Research Institute.
+[03:26.28]He says the Japanese "market is shrinking overall.
+[03:31.44]It makes it very difficult to get it moving again.
+[03:35.36]This requires some major structural changes and these take time."
+[03:43.24]Among the needed changes, he says, are:
+[03:46.48]to open the economy, to change the structure of the farming industry
+[03:52.60]and to help Japanese companies invest in Southeast Asia.
+[03:58.36]He says these changes will help the Japanese economy improve
+[04:04.20]over a 10 to 15-year period.
+[04:08.72]William Saito is an advisor for the Japanese Cabinet.
+[04:14.24]He says "it's just confidence.
+[04:17.56]If you look at the last 20 years
+[04:20.40]-- the economic fundamentals, the infrastructure, government politics
+[04:26.00]-- these things haven't actually changed."
+[04:29.76]Shin Fukushige is a managing director for the technology company Seikoware.
+[04:38.00]He says, "there has been a huge improvement in psychology" in the past ten years.
+[04:45.12]But it is difficult for many Japanese who begin new businesses
+[04:50.32]to convince workers to join their companies."
+[04:56.12]Many of Japan's large companies were created many years ago.
+[05:01.96]But many large and successful companies in the United States
+[05:06.80]were created in the past 20 or 30 years, including Apple and Google.
+[05:14.16]This has helped the American economy grow.
+[05:18.24]Experts are asking how to help Japan's old and slow-moving economy grow.
+[05:25.64]Some of them believe actions have already been taken
+[05:29.84]that will show results in the years ahead.
+[05:34.72]After the G-7 meeting this week,
+[05:37.60]many people will closely watch the actions of the Bank of Japan.
+[05:43.60]The bank's leaders want people to wait a few more months
+[05:47.78]for recent government measures to take effect.
+[05:52.12]If these measures are not successful,
+[05:55.04]the bank could take strong action.
+[05:58.80]Some experts hope the bank will place fees on savings
+[06:03.48]and force companies to sharply increase wages.
+[06:09.12]However, the other G-7 nations do not want Japan's government
+[06:14.72]to lower the value of its currency -- the yen.
+[06:19.00]That would make the country's exported products less costly
+[06:24.72]and could hurt the economies of other countries.
+[06:29.56]I'm Mario Ritter.
+[06:32.56]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

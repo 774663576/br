@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Early Childhood Education Programs at Risk</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Early Childhood Education Programs at Risk" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202401/early-childhood-education-programs-at-risk.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Early Childhood Education Programs at Risk</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202401/early-childhood-education-programs-at-risk.mp3" id="mp3"></a>
+<a href="woman-cat-help-others-through-therapy-92017.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">02 January 2024</span><br/>
+<p>The United Nations Educational, Scientific and Cultural Organization (UNESCO) says "The period from birth to eight years old is one of <strong>remarkable</strong> brain development for children." The organization adds that it represents an important time for their development and education.</p>
+<p>The U.S. National Institutes of Health says that supporting children's early learning can lead to higher test scores and a better chance of staying in school and going to college. Studies even suggest early learning can lead to fewer <strong>teen</strong> pregnancies, improved mental health, and a longer life.</p>
+<p><strong>Early learning in OECD countries</strong></p><div class="contentImage"><img alt="FILE - Elijah Rollings, 2, plays with a train set at Bumble Art Studio daycare center in Astoria, Ore., Friday, Sept. 2, 2022. (AP Photo/Craig Mitchelldyer)" src="https://files.21voa.com/gdb/01000000-0aff-0242-ac7c-08dc0b0435db_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Elijah Rollings, 2, plays with a train set at Bumble Art Studio daycare center in Astoria, Ore., Friday, Sept. 2, 2022. (AP Photo/Craig Mitchelldyer)</span></div>
+<p>The Organization for Economic Cooperation and Development (OECD) is made up of 38 democracies with market-based economies. The organization aims to build better policies for better lives.</p>
+<p>In a recent education <a class="wsw__a" href="https://www.oecd-ilibrary.org/sites/0a156279-en/index.html?itemId=/content/component/0a156279-en#:~:text=The%20highest%20enrolment%20rates%20of,primary%20education%20across%20OECD%20countries.">study</a>, the OECD found that most of its member countries provide care or education for children under 5. In countries, including Belgium, Denmark, France, Hungary, Iceland, Israel, Norway, Spain and Britain, at least 95 percent of 3-year-olds are <strong>enrolled</strong> in an early education program.</p>
+<p>However, within OECD countries, there can be a large difference in enrollment. In the United States, for example, 80 percent of 3 to 5-year-olds in the capital city of Washington, D.C. are enrolled in early education programs. That is compared to 46 percent in the western state of North Dakota.</p>
+<p>The differences also exist in European countries like Greece, Lithuania, and Switzerland. Places with higher rates of women in the workforce usually have higher rates of enrollment for children under 3.</p>
+<p><strong>Child care and kindergarten</strong></p>
+<p>During the pandemic, the U.S. government provided an additional $24 billion to help child care programs nationwide. The funding finally ended last October.</p>
+<p>The Century Foundation is a research organization in New York City. It <a class="wsw__a" href="https://tcf.org/content/report/child-care-cliff/">estimates</a> that one-third of the programs could close as a result. That affects more than 2.2 million children. The organization says that child care is important for the economy at large since child care permits parents to stay at work.</p>
+<p>Around the world, governments invest little in early childhood education, UNESCO says. About 6.6 percent of education budgets are put toward early education programs, 2 percent in poor countries. That is well below the target of 10 percent by 2030 suggested by the children's organization UNICEF.</p>
+<p>In the U.S., parents can choose to put their children at age 5 in <strong>kindergarten</strong> or a child care program.</p>
+<p>Kindergarten enrollment has dropped since the COVID-19 pandemic. Concerned about the virus or wanting to avoid online school, hundreds of thousands of families delayed the start of school for their young children.</p>
+<p><em>The Associated Press</em> found that kindergarten enrollment remained down 5.2 percent in the 2022-2023 school year compared with the 2019-2020 school year.</p>
+<p>Deborah Stipek is a former head of the Graduate School of Education at Stanford University. She said kindergarten is where children learn to follow directions, learn good <strong>behavior</strong>, and get used to learning. Stipek said missing that year of school can put kids at a <strong>disadvantage</strong>.</p>
+<p>Last year, Aylah went to a children's program that met mainly outdoors instead of enrolling in kindergarten in the state of California. Aylah now has to <strong>adjust</strong> to being inside a classroom and learning the right way to hold a pencil.</p>
+<p>"It's harder. Way, way harder," Aylah said of the new way she learned to hold a pencil.</p>
+<p>Still, her mother Hannah Levy says it was the right decision to skip kindergarten. She wanted Aylah to enjoy being a child. There is plenty of time, she reasoned, for her daughter to develop study skills.</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English, with additional reporting from the Associated Press.</em></p>
+<p class="CxSpMiddle"><em>_________________________________________________</em></p>
+<p class="CxSpMiddle"> </p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>remarkable </strong><em>— adj. </em>unusual or surprising</p>
+<p class="CxSpMiddle"><strong>teen </strong><em>— n. </em>someone who is between 13 and 19 years old</p>
+<p class="CxSpMiddle"><strong>enroll </strong><em>— v. </em>to enter as a member of or participant in something</p>
+<p class="CxSpMiddle"><strong>kindergarten </strong><em>— n. </em>a school or class for very young children</p>
+<p class="CxSpMiddle"><strong>behavior </strong><em>— n. </em>the way a person or animal acts or behaves</p>
+<p class="CxSpMiddle"><strong>disadvantage </strong><em>— n. </em>something that makes someone or something worse or less likely to succeed than others</p>
+<p class="CxSpMiddle"><strong>adjust </strong><em>— v. </em> to change in a minor way so that it works better</p>
+<p class="CxSpMiddle"> </p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

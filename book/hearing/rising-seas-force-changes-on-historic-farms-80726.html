@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Rising Seas Force Changes on Historic Farms</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Science in the News, Rising Seas Force Changes on Historic Farms" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201811/rising-seas-force-changes-on-historic-farms.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Rising Seas Force Changes on Historic Farms</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201811/rising-seas-force-changes-on-historic-farms.mp3" id="mp3"></a>
+<a href="us-national-average-data-removed-from-college-scorecard-80722.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Susan Shand</span><br/>
+<span class="datetime">11 November, 2018</span><br/>
+<p>Looking out the window of his Ford truck, Bob Fitzgerald sees large, undesirable plants growing in the fields.</p>
+<p>Visitors to his neighborhood in Princess Anne, Maryland mainly see dying forests and empty farmland.</p>
+<p>Fitzgerald says the land has been in his family since the 17<sup>th</sup> century.</p>
+<p>"I'd say in the next 20 years, you're going to lose a very high percentage of that land, that's going to be unfit to farm."</p>
+<p>The land around the Chesapeake Bay has been sinking for hundreds of years. But climate change is making things worse. As sea levels rise, salt water is entering rivers and other waterways. As a result, the ground is becoming too salty for crops to grow.</p>
+<p>Maryland's Eastern <strong>Shore</strong> is home to some of the oldest farms in North America. Fitzgerald's dates back to 1666. He says he has seen big changes during his life.</p>
+<p>"You just can't believe how it's taking things over in the last 15 or 20 years. I can show you land around here that people raised <strong>tomatoes</strong> on when I was a little boy. And now it's gone."</p>
+<p>Around the world, scientists warn that coastal farms are under threat from rising seas and salt water. A World Bank report estimates that rice production in coastal areas of Bangladesh may fall by 15 percent by the year 2050. Another study found that hundreds of millions of people will be forced to move inland because of rising waters.</p>
+<p>Kate Tully wants to keep Eastern Shore farmers in business as the seas rise.</p>
+<p>Tully is an<strong> agroecologist</strong> with the University of Maryland. She has seen the forests filled with pine trees killed by the increasingly salty soil. When she started looking at maps, she said, "I realized that a lot of the land...was farms." She started talking to farmers and asking if this was an issue on farms.</p>
+<p>It was, but "a lot of people hadn't really been talking about it" outside their own communities, she said.</p>
+<p>The United States Department of Agriculture gave Tully and other researchers $1.1 million to study the problem. She and her team hope to give farmers ways to stay on their land. She told VOA they are testing different crops on pieces of land around the Eastern Shore.</p>
+<p>"Sorghum is my new favorite crop because it can grow without rain and it can grow with lots of rain. So this is actually a pretty, looks like a pretty good option."</p>
+<p>The grain crop may be a good choice to feed the nearly 600 million <strong>chickens</strong> raised in the area each year. As farmers know, chickens can deal with salt, dry weather conditions and heavy rains.</p>
+<div class="contentImage"><img alt="Kate Tully is a farm ecologist at the University of Maryland. She hopes to help farmers hold on to their land as the sea encroaches." src="https://files.21voa.com/gdb/CE3CDC67-8313-40F9-8EF4-91A7C9AA44C1_w268_r0.jpg"/><br/><span class="imagecaption">Kate Tully is a farm ecologist at the University of Maryland. She hopes to help farmers hold on to their land as the sea encroaches.</span></div>
+<p>Tully's group is also testing other kinds of grain and a few crops that they believe can grow in the salt.</p>
+<p>Yet just being able to grow a crop is not enough. The crop has to be profitable. So an economist on the team will be looking at the numbers.</p>
+<p>But continuing to farm the land may not be the best plan of action. Some people believe the land should be given back to nature. They say the fields should be turned into wetlands, which are popular with <strong>duck</strong> hunters.</p>
+<p>"There's money in duck hunting," Tully said. Hunting organizations will pay farmers for a permit to hunt on their land. Farmers could earn a lot of money from duck hunters, she said.</p>
+<p>Tully and her team are just getting started. It will be a few years before they really understand how to save the farms. They have proposals for what will help communities that have been farming this land for hundreds of years.</p>
+<p>"There's a lot of history there. And as these seas rise, some of that history is going underwater."</p>
+<p>I'm Susan Shand.</p>
+<p><em>VOA's Steve Baragona reported this story. Susan Shand adapted his story for Learning English. George Grow was the editor.</em></p>
+<p><em>________________________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>shore </strong>– <em>n.</em> the land along the edge of an area of water</p>
+<p><strong>tomato</strong> – <em>n.</em> a round, soft, red fruit that is eaten raw or cooked</p>
+<p><strong>agroecologist</strong> <em>– n.</em> one who is an expert in modern farm systems</p>
+<p><strong>sorghum </strong><em>– n.</em> a type of grass that is grown for food</p>
+<p><strong>chicken</strong> <em>– n.</em> a bird that is raised by people for its eggs and meat</p>
+<p><strong>duck </strong><em>– n.</em> any one of many different kinds of birds that swim and have a flat beak</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

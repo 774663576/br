@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - It Has Never Been More Costly to See the Super Bowl</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, It Has Never Been More Costly to See the Super Bowl" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202402/it-has-never-been-more-costly-to-see-the-super-bowl.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>It Has Never Been More Costly to See the Super Bowl</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202402/it-has-never-been-more-costly-to-see-the-super-bowl.mp3" id="mp3"></a>
+<a href="/static/lrc/it-has-never-been-more-costly-to-see-the-super-bowl.lrc" id="lrc"></a>
+<a href="elon-musk-s-neuralink-announces-first-human-implant-92162.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">01 February 2024</span><br/>
+<p><strong>Tickets</strong> for the American football Super Bowl game are among the hardest to get in all of sports. Because of that, some websites that buy and re-sell tickets have set prices for the upcoming game in Las Vegas, Nevada at almost $10,000.</p>
+<p>The National Football League championship game between the Kansas City Chiefs and San Francisco 49ers is on Sunday, February 11.</p>
+<p>The Chiefs won last year's Super Bowl. They feature star quarterback Patrick Mahomes and Travis Kelce, the boyfriend of singer Taylor Swift. Many people believe Swift will fly to the game after performing in Japan only one day earlier.</p><div class="contentImage"><img alt="FILE - Kansas City Chiefs players and staff celebrate after the NFL Super Bowl 57 football game against the Philadelphia Eagles, February 12, 2023, in Glendale, Arizona. (AP Photo/Seth Wenig)" src="https://files.21voa.com/gdb/15bbfd37-1b4f-47c8-8a70-57ecf60ea954_cx0_cy10_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - Kansas City Chiefs players and staff celebrate after the NFL Super Bowl 57 football game against the Philadelphia Eagles, February 12, 2023, in Glendale, Arizona. (AP Photo/Seth Wenig)</span></div>
+<p>The 49ers are one of the most popular teams in the western part of the U.S. Las Vegas is a busy, <strong>tourist</strong> city known for its hotels and <strong>casinos</strong>. It is the first-ever Super Bowl in Las Vegas. For many years, the league did not want to have games in Las Vegas because the city permits sports gambling. That changed when the Oakland Raiders moved to Las Vegas to play in a new stadium before the 2020 season.</p>
+<p>The combination of two well-known teams plus a city that many people like to visit means tickets on a website called TickPick are in high demand. They are re-selling for almost double last year's cost. The Chiefs defeated the Philadelphia Eagles in the Super Bowl last year near Phoenix, Arizona.</p>
+<p>Before this year, the Super Bowl with the highest re-sale ticket price was in 2021 when the Tampa Bay Buccaneers defeated the Chiefs in Tampa, Florida. That year, however, tickets were limited because of restrictions connected to the COVID-19 pandemic.</p>
+<p>TickPick said the highest prices for a non-COVID Super Bowl came in 2020 when the Chiefs and 49ers played in Miami, Florida. The average ticket that year was over $6,000. TickPick, however, noted that prices for this year might go down as the game gets closer.</p>
+<p>Brett Goldberg is the co-CEO for TickPick. In a message to the Associated Press, he wrote: "<strong>Location</strong> has always <strong>impacted</strong> demand for a Super Bowl, but Vegas takes things to a whole other level." He said Las Vegas is already "the <strong>entertainment</strong> capital of the world."</p>
+<p>Sometimes, Goldberg wrote, two successful teams push down demand, because the average fan is tired of seeing them play again. However, he noted prices are high this year because "fans want to experience their team winning a Super Bowl in Vegas."</p>
+<p>StubHub is another ticket-selling website. Prices on that site were over $9,000. StubHub said tickets are selling faster this year than in recent years.</p>
+<p>"The demand has far surpassed the last time Kansas City and San Francisco met in Miami," said a spokesperson from StubHub.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by the Associated Press.</em></p>
+<p>____________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>ticket </strong>–n. a piece of paper or digital proof that gives the holder the right to see an event or performance</p>
+<p><strong>tourist </strong>–n. a person who travels for pleasure and not business</p>
+<p><strong>casino </strong>–n. a place where people play games of chance in an effort to win money</p>
+<p><strong>location </strong>–n. the place where something is</p>
+<p><strong>impacted </strong><em>–adj.</em> affected or influenced</p>
+<p><strong>entertainment </strong>–n. the industry aimed at providing performances, activities and services to give people pleasure</p>
+<p><em>We want to hear from you. Are you planning to pay attention to this year's Super Bowl?</em></p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:It Has Never Been More Costly to See the Super Bowl]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Tickets for the American football Super Bowl game
+[00:03.44]are among the hardest to get in all of sports.
+[00:08.48]Because of that,
+[00:09.84]some websites that buy
+[00:12.20]and re-sell tickets
+[00:14.68]have set prices for the upcoming game
+[00:17.44]in Las Vegas, Nevada at almost $10,000.
+[00:22.40]The National Football League championship game
+[00:25.60]between the Kansas City Chiefs
+[00:28.16]and San Francisco 49ers
+[00:30.52]is on Sunday, February 11.
+[00:33.96]The Chiefs won last year's Super Bowl.
+[00:37.76]They feature star quarterback
+[00:40.40]Patrick Mahomes and Travis Kelce,
+[00:44.12]the boyfriend of singer Taylor Swift.
+[00:46.96]Many people believe Swift will fly to the game
+[00:50.56]after performing in Japan only one day earlier.
+[00:55.44]The 49ers are one of the most popular teams
+[00:58.84]in the western part of the U.S.
+[01:01.20]Las Vegas is a busy, tourist city
+[01:05.80]known for its hotels and casinos.
+[01:08.88]It is the first-ever Super Bowl in Las Vegas.
+[01:14.08]For many years,
+[01:15.96]the league did not want to have games
+[01:17.84]in Las Vegas because the city permits sports gambling.
+[01:23.44]That changed when the Oakland Raiders moved
+[01:26.68]to Las Vegas to play in a new stadium
+[01:30.28]before the 2020 season.
+[01:33.56]The combination of two well-known teams
+[01:36.96]plus a city that many people like to visit
+[01:40.36]means tickets on a website called TickPick
+[01:43.96]are in high demand.
+[01:45.96]They are re-selling for almost double
+[01:49.12]last year's cost.
+[01:51.80]The Chiefs defeated the Philadelphia Eagles
+[01:55.20]in the Super Bowl last year near Phoenix, Arizona.
+[02:00.36]Before this year, the Super Bowl with the highest
+[02:03.36]re-sale ticket price was in 2021
+[02:07.76]when the Tampa Bay Buccaneers
+[02:10.04]defeated the Chiefs in Tampa, Florida.
+[02:13.04]That year, however, tickets were limited
+[02:17.28]because of restrictions
+[02:18.96]connected to the COVID-19 pandemic.
+[02:23.08]TickPick said the highest prices
+[02:26.00]for a non-COVID Super Bowl came in 2020
+[02:29.92]when the Chiefs and 49ers
+[02:32.40]played in Miami, Florida.
+[02:34.88]The average ticket that year was over $6,000.
+[02:40.00]TickPick, however, noted that prices for this year
+[02:43.48]might go down as the game gets closer.
+[02:48.16]Brett Goldberg is the co-CEO for TickPick.
+[02:52.80]In a message to the Associated Press, he wrote:
+[02:56.28]"Location has always impacted
+[02:58.76]demand for a Super Bowl,
+[03:00.64]but Vegas takes things to a whole other level."
+[03:05.96]He said Las Vegas is already
+[03:08.08]"the entertainment capital of the world."
+[03:11.56]Sometimes, Goldberg wrote,
+[03:14.12]two successful teams push down demand,
+[03:18.36]because the average fan is
+[03:20.56]tired of seeing them play again.
+[03:22.64]However, he noted prices are high this year
+[03:26.44]because "fans want to experience
+[03:28.84]their team winning a Super Bowl in Vegas."
+[03:33.52]StubHub is another ticket-selling website.
+[03:36.84]Prices on that site were over $9,000.
+[03:42.52]StubHub said tickets are selling
+[03:44.40]faster this year than in recent years.
+[03:47.40]"The demand has far surpassed
+[03:50.68]the last time Kansas City and San Francisco met
+[03:53.88]in Miami," said a spokesperson from StubHub.
+[03:57.48]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

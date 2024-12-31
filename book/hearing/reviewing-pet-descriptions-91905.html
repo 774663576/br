@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reviewing Pet Descriptions</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Reviewing Pet Descriptions" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202312/reviewing-pet-descriptions.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reviewing Pet Descriptions</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202312/reviewing-pet-descriptions.mp3" id="mp3"></a>
+<a href="venezuela-s-claims-on-guyana-s-territory-raise-concerns-91903.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">07 December 2023</span><br/>
+<p>A few weeks ago, we asked our readers and listeners to describe their pets. We asked them to practice using <strong>multiple</strong> adjectives in a certain order. One reader, Maria from Argentina, wrote to us about her dog, Ceferina.</p>
+<p>In this week's <em>Everyday Grammar</em>, we will <strong>review</strong> Maria's message describing her dog. And we will give some grammar suggestions.</p>
+<p><strong>Maria's Message about her Pet</strong></p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-c0a8-0242-5e22-08dbf6776a4c_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p><em>I have five dogs, three cats and one<strong> rooster</strong>. I love animals very much but I am going to describe only one of them. My female dog called Ceferina. She is a senior big dog. </em></p>
+<p><em>I meet her at the street. She was very ill and sad. Now is a <strong>cute</strong> dog. </em></p>
+<p><em>Her colors is black and her eyes brown. She is a friendly dog. She looks like brave but she is lovely dog. </em></p>
+<p><strong>Review of Maria's message</strong></p>
+<p>Let's start with the first two sentences.</p>
+<p><em>I have five dogs, three cats and one rooster. I love animals very much but I am going to describe only one of them.</em></p>
+<p>These two sentences are almost perfect. Maria uses number adjectives to describe how many pets she has. Maria has nine pets total! She then says that she will only choose one.</p>
+<p>We suggest adding "my" before "animals" because Maria then refers to her animals as "them" in the second half of the sentence. The choice "my" is a more specific choice. We also suggest adding a comma before "but" to separate the two clauses.</p>
+<p><em>I love my animals very much, but I am going to describe only one of them.</em></p>
+<p>Let's move onto the next two sentences.</p>
+<p><em>My female dog called Ceferina. She is a senior big dog. </em></p>
+<p>In the first sentence, Maria describes the <strong>gender </strong>of the dog. We recommend adding "is" before "called." This is a <strong>passive</strong> sentence, so we must use a form of "be" plus the verb in the past participle form.</p>
+<p><em>My female dog is called Ceferina.</em></p>
+<p>The next sentence has two adjectives: "senior" and "big." This is where we should pay attention to the order of adjectives. When we use two or more adjectives from different categories, we must order them a certain way in the sentence.</p>
+<p>The order of the adjective categories is as follows: quantity, opinion, size, age, shape or length, color, <strong>origin, </strong>material, and purpose.</p>
+<p>We recommend changing the order of the adjectives "senior" and "big" based on the order of adjectives rule. Size adjectives come before age adjectives.</p>
+<p><em>She is a big senior dog.</em></p>
+<p>Note that we do not need a comma between the adjectives because these are cumulative adjectives. In other words, they build on each other. They are from different adjective categories so they cannot be separated by a comma.</p>
+<p>Let's look at the next few sentences.</p>
+<p><em>I meet her at the street. She was very ill and sad. Now is a cute dog. </em></p>
+<p>First, instead of "meet," you can use the verb "find" to say that you first discovered or saw your dog. You should use the past tense of "find" because you are talking about a time in the past.</p>
+<p>Next, we suggest changing the preposition "at" to either the preposition "in" or "on."</p>
+<p>"In the street" means that you found her in the middle of the street. "In" is used for talking about an enclosed space. "On the street" means that you found her somewhere along the street. "On" is used for general location.</p>
+<p>Maria did a great job separating the adjectives "ill" and "sad" with the conjunction "and." These are opinion adjectives and carry equal importance in the sentence. This makes them coordinating adjectives, so we can use "and" or only a comma to separate them. We can also change their order and keep the same meaning.</p>
+<p>In the next sentence, we need a subject. We can use the pronoun "she." We also suggest adding a comma after "now."</p>
+<p><em>I found her on the street. She was very ill and sad. Now, she is a cute dog. </em></p>
+<p>And finally, we have the last three sentences.</p>
+<p><em>Her colors is black and her eyes brown. She is a friendly dog. She looks like brave but she is lovely dog. </em></p>
+<p>In the first sentence, we have some subject-verb agreement issues. Since Maria's dog is black, "color" can be singular.</p>
+<p>We need the verb "are" in the second half of that sentence to go after "eyes."</p>
+<p><em>Her color is black and her eyes are brown. </em></p>
+<p>Finally, in the last sentence we suggest a different word for "brave." We want another word that is the opposite of "lovely." We could say that Ceferina looks "fierce," which is like "brave" and "intense" combined.</p>
+<p>We can also remove "like" because we are not making a comparison, just a contrast. And finally, we need to add the indefinite article "a" before dog.</p>
+<p><em>She looks fierce, but she is a lovely dog. </em></p>
+<p><strong>Final thoughts</strong></p>
+<p>Today, we looked at Maria's message about her dog, Ceferina. We talked about the order of adjectives, commas, and subject verb agreement. We learned about coordinating and cumulative adjectives and their connection to the order of adjectives.</p>
+<p>Thank you, Maria, for telling us about Ceferina! We are happy she found such a loving home.</p>
+<p>I'm Faith Pirlo.</p>
+<p>And I'm Anna Mateo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in the Story</h2>
+<p><strong>rooster</strong> – <em>n.</em> an adult male chicken</p>
+<p><strong>cute </strong>– <em>adj</em>. having a pleasing, youthful appearance</p>
+<p><strong>gender </strong>– <em>n.</em><strong> </strong>the state of being male or female</p>
+<p><strong>passive </strong><em>– adj. the quality of not being active or not taking action and letting things happen</em></p>
+<p><strong>origin </strong>–<em> n. </em>the place that a person or thing comes from</p>
+<p><strong>clause </strong>– <em>n</em>. (grammar) a part of a sentence that has its own subject and verb</p>
+<p> </p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

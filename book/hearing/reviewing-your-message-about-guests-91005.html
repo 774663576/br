@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reviewing Your Message about Guests</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Reviewing Your Message about Guests" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202306/reviewing-your-message-about-guests.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reviewing Your Message about Guests</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202306/reviewing-your-message-about-guests.mp3" id="mp3"></a>
+<a href="ai-tools-block-online-abuse-directed-at-soccer-stars-91000.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">08 June 2023</span><br/>
+<p>A few weeks ago, we asked our readers and listeners to write about having guests over. Many of you wrote in using the words you learned. One reader, Gerardo, wrote to us about his <strong>cousin</strong> Peter's visit.</p>
+<p>In this week's <em>Everyday Grammar</em>, we will comment on Gerardo's message. And we will give some grammar suggestions.</p>
+<p><strong>Gerardo's Message about his Guest</strong></p><div class="contentImage"><img alt="Everyday Grammar: Reviewing Your Message about Guests" src="https://files.21voa.com/gdb/01000000-0aff-0242-1117-08db67734fbd_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Reviewing Your Message about Guests</span></div>
+<p><em>I usually am very fond of guests. Two weeks ago, I suddenly met my cousin Peter near the bus station. We have not seen each other for ages. He came to the cita for just three weeks. So I invited him over for drinks last week-end. He was short of time but he finally accepted. On Saturday, we spent time catching up talking about those beautiful days we played games and eating in the countryside when we were very young. We had dinner together and then he left.</em></p>
+<p><strong>Review of Gerardo's Message</strong></p>
+<p>Let's start with the first two sentences.</p>
+<p><em>I usually am very fond of guests. Two weeks ago, I suddenly met my cousin Peter near the bus station. </em></p>
+<p>Gerardo uses the adverb "usually," which means "generally" or "under normal conditions." While this is a good adverb to use, we suggest placing the adverb after the auxiliary or helping verb "be."</p>
+<p>I am usually very fond of guests.</p>
+<p>The adjective "fond" is a great descriptive word. It is stronger than "like" but a little less strong than "love."</p>
+<p>Lastly, in these two sentences, we have "suddenly met." The adverb and verb combination are a good way to describe the chance<strong> </strong>meeting. In American English, we have a <strong>phrasal verb</strong> that is widely used in everyday speech for that chance meeting, "run into."</p>
+<p>"Run into" means to meet someone by chance or without planning.</p>
+<p>I am usually very fond of guests. Two weeks ago, I ran into my cousin Peter near the bus station.</p>
+<p>Let's move onto the next three sentences.</p>
+<p><em>We have not seen each other for ages. He came to the cita for just three weeks. So I invited him over for drinks last week-end</em>.</p>
+<p>There are only a few small changes we need in these three sentences. Since Gerardo is writing in the past <strong>tense</strong> throughout the <strong>paragraph</strong>, we suggest keeping the past tense in the third sentence by using the past perfect.</p>
+<p>The past perfect is:</p>
+<p>Helping verb "had" plus the past participle of the verb.</p>
+<p>We had not seen each other for ages.</p>
+<p>In the fourth sentence, there is a small spelling error. We can change "cita" to "city."</p>
+<p>He came to the city for just three weeks.</p>
+<p>In the fifth sentence we will add a comma after the word "so." "So" in this case is an <strong>introductory</strong> word or transition. We add a comma after introductory words of this kind to show that the main part of the sentence follows.</p>
+<p>And lastly in that sentence, we can remove the <strong>hyphen</strong> (–) between the words "week" and "end" and combine them as a one-word compound noun.</p>
+<p>So, I invited him over for drinks last weekend.</p>
+<p>Let's look at the sixth sentence.</p>
+<p><em>He was short of time but he finally accepted.</em></p>
+<p> </p>
+<p>We suggest changing two things in this sentence. First, we suggest changing the preposition "of" to "on." While both "short of" and "short on" can mean similar things, "short on" means there is less time than expected or wanted, while "short of" means a lacking of something. Plus, "short on time" is used more often in American English than "short of time."</p>
+<p>Our final observation is that we need to add a comma between "time" and the conjunction "but." These are two separate sentences combined with "but," so we need a comma.</p>
+<p>He was short on time, but he finally accepted.</p>
+<p>We will continue with the final part of Gerardo's paragraph and suggest some organizational tips later.</p>
+<p><strong>Closing thoughts</strong></p>
+<p>Today, we looked at Gerardo's message about his cousin's visit. We thought about adverb placement, commas and verbal tense. We learned a new phrasal verb "run into." We even looked at the small differences between "short of time" and "short on time."</p>
+<p>We will continue with Gerardo's message in a few weeks. Thank you, Gerardo, for sending your writing to us.</p>
+<p>I'm Faith Pirlo.</p>
+<p>I'm Bryan Lynn.</p>
+<p>And I'm Dorothy Gundy.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>______________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>cousin </strong>– <em>n</em>. a child of a person's uncle or aunt</p>
+<p><strong>grammar </strong>–<em> n</em>. the whole system and structure of a language</p>
+<p><strong>fond </strong>– <em>adj</em>. feeling or showing love or friendship</p>
+<p><strong>phrasal verb </strong><em>– n. grammar:</em> a group of words that functions as a verb and is made up of a verb and a preposition, an adverb, or both</p>
+<p><strong>paragraph</strong> – <em>n</em>. a part of a piece of writing that usually that begins on a new line and often is made up of a few sentences</p>
+<p><strong>tense</strong> – <em>n</em>. a form of a verb that is used to show when an action happened</p>
+<p><strong>introductory </strong><strong>–</strong><strong> </strong><em>adj.</em> providing information about something that is about to begin</p>
+<p><strong>phrase</strong> <em>– n. </em>a group of two or more words that express a single idea but do not usually form a complete sentence</p>
+<p><strong>clause </strong>– <em>n</em>. (grammar) a part of a sentence that has its own subject and verb</p>
+<p><strong>hyphen </strong><em>– n. </em>a punctuation mark - used to divide or to compound words, word elements, or numbers</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

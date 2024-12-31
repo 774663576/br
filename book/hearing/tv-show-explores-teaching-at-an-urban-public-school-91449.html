@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - TV Show Explores Teaching at an Urban Public School</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, TV Show Explores Teaching at an Urban Public School" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/tv-show-explores-teaching-at-an-urban-public-school.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>TV Show Explores Teaching at an Urban Public School</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/tv-show-explores-teaching-at-an-urban-public-school.mp3" id="mp3"></a>
+<a href="us-city-turns-to-science-to-help-reduce-gun-violence-91445.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dan Novak</span><br/>
+<span class="datetime">05 September 2023</span><br/>
+<p>An American TV show called <em>Abbott Elementary</em> is a <strong>comedy</strong> about teachers in a Philadelphia elementary school.</p>
+<p>The show has been praised for being funny, <strong>smart</strong> and heartwarming and for dealing with important education issues. Over two seasons of 35 <strong>episodes</strong>, the show has explored education issues like school budgets, <strong>charter schools</strong> and teacher mental health.</p>
+<p>The show is on ABC, one of the biggest American television networks. The show is being aired at a time of teacher shortages and debates about how race issues and history should be taught.</p><div class="contentImage"><img alt="Quinta Brunson plays second-grade teacher Janine on ABC's Abbott Elementary (ABC/Gilles Mingasson)" src="https://files.21voa.com/gdb/01000000-0a00-0242-ddba-08db8c806273_w268_r1.jpg"/><br/><span class="imagecaption">Quinta Brunson plays second-grade teacher Janine on ABC's Abbott Elementary (ABC/Gilles Mingasson)</span></div>
+<p>The creator and star of the show is Quinta Brunson. Brunson's mother was a public school teacher in Philadelphia. Brunson plays a young, second-grade teacher named Janine at Abbott Elementary. The show follows several other teachers at Abbott, which is a badly supervised and majority-Black school that does not have enough money. Although the teachers often run into trouble with students and the administration, they care about their jobs and try to help their students.</p>
+<p>Brunson said in an interview with <em>Education Week</em> that two writers on the show are former teachers. She said she wanted all the writers to have "a healthy relationship to education."</p>
+<p>She added that since the COVID-19 pandemic, education has been a subject on the minds of everyone.</p>
+<p>"Three years ago, no one was talking about teachers as much as they are now," Brunson said. "And now, everywhere we look, we're talking about education...I hope that it leads us into a better place in this country with our treatment of education, specifically public education."</p>
+<p>Sara Jones is a professor of elementary education at Illinois State University. Next spring, she will be teaching a class on <em>Abbott Elementary</em>. At each class, students will watch an episode of the show then discuss an issue related to urban education that appeared in that episode. The class will also read related research papers from education experts.</p>
+<p>Jones is a former elementary school teacher and has researched urban education. She said the show covers many issues that come up in her research like teacher shortages, teacher training and unfair use of public money.</p>
+<p>"I immediately fell in love with the <strong>characters</strong> and the storytelling and that connection to my own teaching experience," Jones told VOA.</p>
+<p>The class is part of the university's honors program instead of the education school, so it will have students from different areas of study. Jones added that the show is funny and interesting but deals with issues in a simple way that people who are not involved in education can understand.</p>
+<p>A repeated issue in the show's second season is the charter school movement. Charter schools receive public money but operate outside the public school system. Charter schools also receive private money. Businessmen like Facebook co-founder Mark Zuckerberg and former Microsoft chief Bill Gates have invested money in some charter schools. In <em>Abbott</em>, a group called Legendary Charter schools threatens to turn every public school in Philadelphia into a charter school.</p>
+<p>Charter schools do not have the same operating requirements as local government-operated public schools. Critics argue that charter schools receive local tax money that could go to traditional public schools.</p>
+<p>In one episode, the teachers discuss the threat of Legendary charter schools. One of the older teachers, Barbara, says, charters "take our funding. Not to mention the private money from wealthy donors with <strong>ulterior</strong> <strong>motives</strong>."</p>
+<p>But the principal, Ava, who is often portrayed as foolish says, "<strong>Weird</strong> cash swirling around? Don't threaten me with a good time."</p>
+<p>Jones said the story explores urban school issues better than most shows on television, including the news media.</p>
+<p>"I hope students will get from (this class) a deeper understanding of those issues and perhaps a shift in <strong>perspective</strong> about particularly urban schools."</p>
+<p>Brunson said she hopes people who watch the show will be more likely to support schools and teachers.</p>
+<p>"It's a public service," Brunson said of teaching. "Who are we without teachers? Who are we without the people who teach us how to read?"</p>
+<p>I'm Dan Novak.</p>
+<p><em>Dan Novak wrote this story for VOA Learning English.</em></p>
+<p><em>__________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p class="CxSpMiddle"><strong>comedy</strong><strong> </strong><em>— n. </em>a kind of performance meant to make people laugh</p>
+<p class="CxSpMiddle"><strong>smart </strong><em>–adj.</em> showing a sharp mind or clever way of looking at things</p>
+<p class="CxSpMiddle"><strong>episode </strong><em>–n</em>. one in a series of television or radio shows</p>
+<p class="CxSpMiddle"><strong>charter school </strong>–n. a school established under a charter (legal agreement) that is not part of the local government, but receives some public tax money as called for by local law</p>
+<p class="CxSpMiddle"><strong>character </strong>–n. a person in a television show, play or other performance</p>
+<p class="CxSpMiddle"><strong>ulterior motive </strong>–n. an addition reason that something is done that is usually hidden</p>
+<p class="CxSpMiddle"><strong>weird</strong><strong> </strong><em>— adj. </em>unusual or strange</p>
+<p class="CxSpMiddle"><strong>perspective </strong><em>— n. </em>a way of looking at an issue as it relates to other things</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

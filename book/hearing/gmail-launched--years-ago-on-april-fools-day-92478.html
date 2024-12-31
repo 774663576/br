@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Gmail Launched 20 Years Ago on April Fools’ Day</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Gmail Launched 20 Years Ago on April Fools’ Day" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202404/gmail-launched-20-years-ago-on-april-fools-day.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Gmail Launched 20 Years Ago on April Fools’ Day</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202404/gmail-launched-20-years-ago-on-april-fools-day.mp3" id="mp3"></a>
+<a href="ai-chatbots-to-help-with-mental-health-struggles-92477.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Bryan Lynn</span><br/>
+<span class="datetime">01 April 2024</span><br/>
+<p>When Google launched Gmail in 2004, it quickly grew into one of the internet's most popular email services.</p>
+<p>At the time, though, many people thought the Gmail launch was a joke. This is because it was announced on April 1, April Fools' Day. And Google's co-founders, Larry Page and Sergey Brin, had already established themselves as April Fools' Day <strong>pranksters</strong>.</p>
+<p>One year, Google published a false job opening promising job seekers a position at a research center on the moon. Another year on April Fools' Day, the company said it was considering adding a tool that would permit users to "smell" search results.</p><div class="contentImage"><img alt="FILE - The logo for Google's Gmail email service is shown in this web graphic. (Image Credit: AP)" src="https://files.21voa.com/gdb/01000000-0aff-0242-8257-08dc527a24d9_cx0_cy17_cw0_w268_r1.jpg"/><br/><span class="imagecaption">FILE - The logo for Google's Gmail email service is shown in this web graphic. (Image Credit: AP)</span></div>
+<p>Page and Brin later said Gmail's launch was the perfect April Fools' Day prank. This is because they felt the new offerings, or features, might have seemed too good to be true for users.</p>
+<p>Gmail launched as a free service. The new features included an increase in storage space up to 1 gigabyte per account. While that amount may not seem like a lot today, at the time, it was considered very large.</p>
+<p>In 2004, for example, 1 gigabyte was enough to store about 13,500 emails. This compared to just 30 to 60 emails that could be saved with the then-leading email services run by Yahoo and Microsoft.</p>
+<p>In addition, the new Gmail included Google's search technology. This permitted users to quickly find specific emails, photos or other data stored in the service. Gmail also introduced a feature that grouped multiple email communications about the same subjects.</p>
+<p>Former Google executive Marissa Mayer spoke to The Associated Press (AP) about her involvement developing Gmail at the company. "The original <strong>pitch</strong> we put together was all about the three ‘S's," Mayer told the AP. She explained that the S's stood for "storage, search and speed." Mayer helped design several products at Google before leaving the company and later becoming Yahoo's chief executive.</p>
+<p>When Gmail's launch happened in 2004, some readers began contacting the AP to suggest the news agency must have been fooled by Google's announcement. But that reaction by users was "part of the <strong>charm</strong>" of making a product that people will not believe is real, said Paul Buchheit. He recently spoke to the AP about his efforts to help build Gmail.</p>
+<p>Buchheit explained that the Gmail project was developed quietly at Google, which even gave the effort a secret name. He noted that at the time, he was just Google's 23rd employee hired. The company now employs more than 180,000 people.</p>
+<p>Although the Gmail launch captured a lot of publicity, it started out being offered only to a limited number of people. This is because at the time, Google only had enough computing power to support a small number of users.</p>
+<p>"When we launched, we only had 300 machines and they were really old machines that no one else wanted," Buchheit told the AP. "We only had enough <strong>capacity</strong> for 10,000 users, which is a little <strong>absurd</strong>," he added.</p>
+<p>But the account limitations actually led to more interest in the service and persuaded large numbers of people to request new Gmail accounts. At one point, Buchheit said invitations to open a new account were selling for $250 each on eBay.</p>
+<p>Over time, Google was able to increase the number of new Gmail accounts it established as it expanded its data centers. This move sped up the process of getting a new Gmail account. But the company did not begin approving all new Gmail requests until it officially opened up the service to the world in 2007.</p>
+<p>A few weeks later on April Fool's Day in 2007, Google announced a new service called "Gmail Paper." The service was described as a way for users to print their email out on paper and send it through the regular mail. But this time, Google was actually joking.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>The Associated Press reported this story. Bryan Lynn adapted the report for VOA Learning English. </em></p>
+<h2 class="wsw__h2">________________________________</h2>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>prankster </strong><em>– n. </em>a person that plays a trick on someone else</p>
+<p><strong>pitch </strong><em>– v. </em>to try to persuade something to do something</p>
+<p><strong>charm </strong><em>– n. </em>a quality that makes a person like someone or something</p>
+<p><strong>capacity </strong><em>– n. </em>the ability to do, experience of understand something</p>
+<p><strong>absurd </strong><em>– adj. </em>very silly or outrageous</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

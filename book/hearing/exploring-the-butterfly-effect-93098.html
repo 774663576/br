@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Exploring the 'Butterfly Effect'</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Exploring the 'Butterfly Effect'" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/exploring-the-butterfly-effect.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Exploring the 'Butterfly Effect'</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/exploring-the-butterfly-effect.mp3" id="mp3"></a>
+<a href="us-agency-issues-final-rules-for-flying-air-taxis-93097.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">26 October, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>Butterflies are <strong>delicate</strong> insects. Their wings are thin and can be easily damaged. So, how can a butterfly cause major things to happen?</p>
+<p>That is the idea behind the expression <u>butterfly effect.</u></p><div class="contentImage"><img alt="FILE - This August 19, 2015, photo shows a monarch butterfly landing on a flower in Vista, California. (AP File Photo/Gregory Bull)" src="https://files.21voa.com/gdb/16F8E90F-DF91-462D-9A6F-826A25794F3C_w268_r1.jpg"/><br/><span class="imagecaption">FILE - This August 19, 2015, photo shows a monarch butterfly landing on a flower in Vista, California. (AP File Photo/Gregory Bull)</span></div>
+<p>The theory goes like this: When a butterfly <strong>flaps</strong> its wings on one side of the planet it can make a small change that, over time, could lead to a big event, like a storm, all the way on the other side of the planet.</p>
+<p>The <u>butterfly effect</u> is when very small changes lead to large and unpredictable changes in the future.</p>
+<p><em>For example, let's say a group of television writers demand higher pay. Their employers refuse. So, the writers go on strike. Then television actors join the strike. Their action forces the television industry to stop production. Then, other businesses that support that industry are affected and so are the towns and communities where those businesses are centered. These changes all resulted from that first demand for higher pay.</em></p>
+<p>A similar expression involves the game of dominoes -- the <u>domino effect</u>.</p>
+<p>Dominoes are small rectangular game pieces. One way to play with dominoes is to set them up in a line or pattern. Then you push the domino at the start of the line into the one next to it and so on and so on ... until all the dominos fall down. You started the <u>domino effect</u> with your single push of a single domino.</p>
+<p>The <u>butterfly effect</u> and <u>domino effect</u> are <u>chain reactions</u>. One thing leads to another. We often say that something sets off a <u>chain reaction</u>.</p>
+<p>Here is an example:</p>
+<p><em>The angry argument between the two friends set off a <u>chain reaction</u> of events that no one could have predicted. One thing led to another and now they are enemies. </em></p>
+<p>You can also call this a <u>chain of events</u>. Like <u>butterfly effect</u> and <u>domino effect</u>, one event causes, or <strong>triggers,</strong> the next one to happen.</p>
+<p>Now, let's hear two friends use some of these expressions:</p>
+<p><em>A: Hey, I'm having the official opening for my bookstore this weekend. You should stop by.</em></p>
+<p><em>B: I will! And congratulations. You've been working on that for a while. </em></p>
+<p><em>A: Nearly a year. There are so many steps in starting a business. </em></p>
+<p><em>B: How did you begin?</em></p>
+<p><em>A: It was a <u>domino effect</u>. As soon as I finished the first thing, the next thing to do became clear, and the next and the next. </em></p>
+<p><em>B: Sounds like starting that <u>chain of events</u> was important.</em></p>
+<p><em>A: Absolutely.</em></p>
+<p><em>B: As a writer, did you always want to own a bookstore? </em></p>
+<p><em>A: It's funny you ask. When I was little, my friend's parents owned a bookstore. I'd hang out there for hours!</em></p>
+<p><em>B: It's like the <u>butterfly effect</u>. Something that happened a long time ago, affected your future today. </em></p>
+<p><em>A: Hmm, that sounds like a good story to write. </em></p>
+<p>And that's <em>Words and Their Stories</em>.</p>
+<p>Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>delicate</strong> <em>– adj. </em>easily torn or damaged</p>
+<p><strong>flap </strong><em>– v. </em>to move or cause to move with a beating motion</p>
+<p><strong>domino </strong><em>– n. </em>a flat rectangular block (as of wood or plastic) whose face is divided into two equal parts that are blank or bear usually from one to six dots arranged as on dice faces</p>
+<p><strong>trigger </strong><em>– n. </em>something that causes something else to happen</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

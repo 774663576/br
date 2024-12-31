@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - What Does the Song, ‘This Is Me’ Mean?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, What Does the Song, ‘This Is Me’ Mean?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/what-does-the-song-this-is-me-mean.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>What Does the Song, ‘This Is Me’ Mean?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/what-does-the-song-this-is-me-mean.mp3" id="mp3"></a>
+<a href="grammar-and-cleaning-91324.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Dr. Jill Robbins</span><br/>
+<span class="datetime">11 August 2023</span><br/>
+<p>Hello. This week on <em>Ask a Teacher</em>, we will explain parts of a song for a listener.</p>
+<p><strong>Question:</strong></p>
+<p>I have a song I want you to explain. It is <em>This Is Me</em> from the <em>Greatest Showman.</em></p><div class="contentImage"><img alt="" src="https://files.21voa.com/gdb/01000000-0aff-0242-ad6e-08db945b5327_w268_r1.png"/><br/><span class="imagecaption"></span></div>
+<p>Masafumi, Japan</p>
+<p><strong>Answer:</strong></p>
+<p>Dear Masfumi,</p>
+<p>Thanks for writing to us. The song you asked about is from a <a class="wsw__a" href="https://www.youtube.com/watch?v=CjxugyZCfuw" target="_self">2017 movie about P.T. Barnum</a>. He started his circus, a traveling show featuring unusual animals and people, in 1870. He gathered performers of all kinds for the show. One was a very small man. Another was a very tall woman. A woman named Josephine Clofullia had a beard; her face was covered with long hair. In her act people called her a "bearded lady."</p>
+<p>In the movie, Hugh Jackman plays the part of P.T. Barnum. One of his lines in the movie expresses his view of the unusual people he employs: "Every one of us is special, and nobody is like anyone else. That's the point of my show."</p>
+<p>The actor who sings the song <em>This Is Me</em> in the movie is Keala Settle. She plays the character Lettie Lutz, a bearded lady, in <em>The Greatest Showman.</em></p>
+<p><strong>Song meaning</strong></p>
+<p>Now that you know about where the song appears and who sings it, let us look at its meaning. The song is about strength in the face of criticism. The singer confirms her individuality and self-acceptance.</p>
+<p>Here are the words of the song showing its basic meaning. First, the criticism:</p>
+<p><em>Hide away, they say<br/>
+'Cause we don't want your broken parts<br/>
+I've learned to be ashamed of all my scars<br/>
+Run away, they say<br/>
+No one will love you as you are</em></p>
+<p>Next, her resistance to it and self-acceptance:</p>
+<p><em>When the sharpest words wanna cut me down<br/>
+I'm gonna send a flood, gonna drown them out<br/>
+I am brave, I am <strong>bruised</strong><br/>
+I am who I'm meant to be, this is me</em></p>
+<p>To be "bruised" can mean to have marks on one's skin from a blow. But it can also mean a person received an emotional injury. Another image we can draw from the song's words is the person who hears a "different drummer" and marches, or moves forward, to that beat.</p>
+<p><em>Look out 'cause here I come<br/>
+And I'm marching on to the beat I drum<br/>
+I'm not scared to be seen<br/>
+I make no apologies, this is me</em></p>
+<p>The song uses a common expression about a person who does not follow the expected path. That person is "marching to the beat of a different drummer."</p>
+<p>In one part of the song, the singer uses "we" to include all of the unusual performers in the show.</p>
+<p><em>We are bursting through the <strong>barricades</strong><br/>
+And reaching for the sun (we are warriors)<br/>
+Yeah, that's what we've become</em></p>
+<p><strong>Connection to social issues</strong></p>
+<p>I hope this answers your question, Masafumi. You may also find it interesting to know that Barnum was against the practice of slavery before it became illegal in this country. And the ideas presented in the movie <em>The</em> <em>Greatest Showman </em>are being debated today.</p>
+<p>Do you have a question for us? Write to us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a> and we will try to answer you in another <em>Ask a Teacher</em>.</p>
+<p>I'm Jill Robbins.</p>
+<p>And I'm Dorothy Gundy.</p>
+<p><em>Dr. Jill Robbins wrote this lesson for VOA Learning English.</em></p>
+<p>______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>bruised </strong><em>– adj.</em> injured in a way that causes discoloration to the skin</p>
+<p><strong>barricade</strong> – <em>n. </em>a line of vehicles or other objects placed across a road or open space to stop people from getting past, for example, during street fighting or as a protest</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 英国驱逐23名俄罗斯外交人员</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 英国驱逐23名俄罗斯外交人员" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201803/britain-expels-russian-diplomats.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>英国驱逐23名俄罗斯外交人员</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201803/britain-expels-russian-diplomats.mp3" id="mp3"></a>
+<a href="/static/lrc/britain-expels-russian-diplomats.lrc" id="lrc"></a>
+<a href="britain-expels-russian-diplomats-78340.html" id="CnPage" target="_blank"></a>
+<a href="trump-dismisses-tillerson-as-secretary-of-state-78328.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Britain will expel 23 Russian diplomats in answer to a chemical attack on a Russian double agent and his daughter in the city of Salisbury, England. Prime Minister Theresa May announced the expulsion decision Wednesday. May said the attack was an unlawful use of force by Russia against Britain.<br/>英国将驱逐23名俄罗斯外交官，作为一位俄罗斯双面间谍及其女儿在英格兰索尔兹伯里遭遇化学袭击的回应。英国首相特蕾莎·梅周三宣布了这一驱逐决定。她说，这次袭击是俄罗斯对英格兰非法使用武力。 
+<p>She also said Britain would suspend high-level talks with the Russian Federation and withdraw an invitation to the Russian foreign minister to visit the country. And, she said, no government ministers or members of the British royal family would attend World Cup games this summer in Russia.<br/>梅首相还表示，英国将暂停与俄罗斯联邦的高层交流，并撤销对俄罗斯外长的访问邀请。她还说，不会有任何部长级官员或英国皇室成员出席今年在俄罗斯举行的世界杯。</p>
+<p>These and other measures are designed to strengthen British defenses against a hostile state, May said.<br/>梅首相表示，这些以及其它措施旨在加强英国对敌对国家的防御。</p>
+<p>Russian officials have denied that Russia was involved in the chemical attack. A spokesperson called Britain's actions "unacceptable, unjustified, and shortsighted." The spokesperson warned Britain to expect the Russian government to answer with measures of its own.<br/>俄罗斯官员否认俄罗斯参与了化学袭击。一位发言人称英国的行为“不可接受、不合理以及短视。”这位发言人警告英国等着俄罗斯政府做出自己的回应。</p>
+<p><strong>Why the restrictions?<br/>为何出台这些制裁？</strong></p>
+<p>Britain's restrictions against Russia come after an attack earlier this month on Sergei Skripal, age 66, and his 33-year-old daughter, Yulia.<br/>英国对俄罗斯的制裁发生在本月早些时候66岁的谢尔盖·斯卡利帕尔（Sergei Skripal）和他33岁的女儿尤莉娅（Yulia）遭遇袭击之后。</p>
+<p>Sergei Skripal is a former Russian military intelligence official. In the 1990s, he secretly told the British government about Russian spies working in Europe. In 2004, Russia charged Skripal with treason and put him in jail. But he was freed in a spy exchange deal in 2010. Skripal settled in Britain. His daughter was visiting him there.<br/>斯卡利帕尔是一位前俄罗斯军事情报官员。在20世纪90年代，他向英国政府秘密泄露了俄罗斯在欧洲的间谍网。2004年，俄罗斯以叛国罪控告斯卡利帕尔并将他投入监狱。但是在2010年的一次间谍交换中他被释放。斯卡利帕尔在英国定居。他的女儿当时是来探望他。</p>
+<p>On March 4, the Skripals were found at a shopping center in the southern English city of Salisbury. They could not be woken. The father and daughter were taken to the hospital. They remain there in serious condition.<br/>3月4日，斯卡利帕尔一家在英国南部城市索尔兹伯里的一家购物中心被发现，他们都已昏迷。这对父女被送到医院，他们仍然处于病危状态。</p>
+<p>A police officer was also harmed in the attack. He is also in the hospital in serious condition.<br/>一位警官也在这次袭击中受到伤害。他也在医院处于病危状态。</p>
+<p>May has said the Skripals were poisoned with a nerve agent Russia developed in the 1980s. The chemical was designed to be used in bombs during military operations.<br/>梅首相表示，斯卡利帕尔是中了俄罗斯上世纪80年代开发的一种神经毒剂的毒害。这种化学品被设计用于军用炸弹。</p>
+<p>The prime minister asked Russian officials to explain if they were responsible for the attack, or if they had lost control of the poison.<br/>梅首相要求俄罗斯官员解释他们是否该对这次袭击负责，或者他们是否失去了对这种毒物的控制。</p>
+<p>But, May said, Russian officials did not take her question seriously.<br/>但是梅首相表示，俄罗斯官员并未认真对待她的问题。</p>
+<p>May said the 23 expelled Russian diplomats must leave Britain within one week. And, she said, British officials will closely watch for travelers to Britain who might be a threat.<br/>梅首相表示，这23名被驱逐的俄罗斯外交人员必须在一周内离开英国。她还表示，英国官员将密切关注前来英国的可能存在威胁的旅客。</p>
+<p>May also spoke about taking action against "serious criminals and corrupt elites." She said, "There is no place for these people, or their money, in our country."<br/>梅首相还谈到了要对“严重罪犯和腐败分子”采取行动。她说，“这些人或他们的资金在我们国家没有容身之处。”</p>
+<p>I'm Kelly Jean Kelly.<br/>我是凯利·吉恩·凯利。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Britain Expels 23 Russian Diplomats]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Britain will expel 23 Russian diplomats in answer to a chemical attack
+[00:07.08]on a Russian double agent and his daughter in the city of Salisbury, England.
+[00:13.96]Prime Minister Theresa May announced the expulsion decision Wednesday.
+[00:20.80]May said the attack was an unlawful use of force by Russia against Britain.
+[00:28.88]She also said Britain would suspend high-level talks with the Russian Federation
+[00:37.64]and withdraw an invitation to the Russian foreign minister to visit the country.
+[00:44.84]And, she said, no government ministers or members of the British royal family
+[00:52.16]would attend World Cup games this summer in Russia.
+[00:57.36]These and other measures are designed to strengthen British defenses
+[01:03.44]against a hostile state, May said.
+[01:07.42]Russian officials have denied that Russia was involved in the chemical attack.
+[01:14.08]A spokesperson called Britain's actions "unacceptable, unjustified, and shortsighted."
+[01:22.72]The spokesperson warned Britain to expect the Russian government
+[01:27.75]to answer with measures of its own.
+[01:33.12]Britain's restrictions against Russia come after an attack earlier this month
+[01:39.28]on Sergei Skripal, age 66, and his 33-year-old daughter, Yulia.
+[01:47.28]Sergei Skripal is a former Russian military intelligence official.
+[01:53.80]In the 1990s, he secretly told the British government about Russian spies working in Europe.
+[02:02.20]In 2004, Russia charged Skripal with treason and put him in jail.
+[02:08.72]But he was freed in a spy exchange deal in 2010.
+[02:14.52]Skripal settled in Britain. His daughter was visiting him there.
+[02:19.72]On March 4, the Skripals were found at a shopping center
+[02:25.76]in the southern English city of Salisbury.
+[02:29.76]They could not be woken.
+[02:32.08]The father and daughter were taken to the hospital.
+[02:35.88]They remain there in serious condition.
+[02:40.08]A police officer was also harmed in the attack.
+[02:44.60]He is also in the hospital in serious condition.
+[02:49.02]May has said the Skripals were poisoned with a nerve agent Russia developed in the 1980s.
+[02:58.04]The chemical was designed to be used in bombs during military operations.
+[03:05.56]The prime minister asked Russian officials
+[03:08.84]to explain if they were responsible for the attack,
+[03:12.68]or if they had lost control of the poison.
+[03:17.00]But, May said, Russian officials did not take her question seriously.
+[03:24.00]May said the 23 expelled Russian diplomats must leave Britain within one week.
+[03:32.36]And, she said, British officials will closely watch for travelers to Britain who might be a threat.
+[03:42.60]May also spoke about taking action against "serious criminals and corrupt elites."
+[03:52.16]said, "There is no place for these people, or their money, in our country."
+[03:59.88]I'm Kelly Jean Kelly.
+[04:01.92]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

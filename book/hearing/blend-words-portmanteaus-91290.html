@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Blend Words: Portmanteaus</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Blend Words: Portmanteaus" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202308/blend-words-portmanteaus.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Blend Words: Portmanteaus</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202308/blend-words-portmanteaus.mp3" id="mp3"></a>
+<a href="us-agency-permits-sesame-to-be-added-to-foods-91289.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">03 August 2023</span><br/>
+<p>What do the words "<a class="wsw__a" href="https://www.21voa.com/a/teen-vs-tween/7174983.html">tween</a>," "<a class="wsw__a" href="https://www.21voa.com/a/barbenheimer-two-movies-one-day/7187869.html">Barbenheimer</a>" and "brunch" have in common?</p>
+<p>These words are portmanteaus -- words that are formed by combining parts of two separate words.</p><div class="contentImage"><img alt="Everyday Grammar: Blend Words: Portmanteaus " src="https://files.21voa.com/gdb/01000000-0aff-0242-7b07-08db92c97a97_w268_r1.png"/><br/><span class="imagecaption">Everyday Grammar: Blend Words: Portmanteaus </span></div>
+<p>But unlike compound nouns, which are formed from two words, portmanteaus combine parts of the spelling of each word <em>and</em> their meanings.</p>
+<p>In this week's <em>Everyday Grammar</em>, we will learn more about how portmanteaus are created. We will also learn about their history and find out some common portmanteaus in English.</p>
+<p><strong>What are portmanteaus?</strong></p>
+<p>Portmanteaus are blend words in English. They are formed from words or parts of words that are combined in some way. The spellings of the original words are combined into the new word and their meanings are blended, too.</p>
+<p>At the start of this lesson, you heard the word "tween." This is is a blend of "teen" and "between." This portmanteau means the age in between childhood and the teenage years, or around 10 to 12 years old.</p>
+<p>"Barbenheimer" is a blend word of the movies "Barbie" and "Oppenheimer." It is used to describe the event of seeing both movies on the same day. Both films came out in movie theaters on the same day last month.</p>
+<p>And "brunch" is a common weekend meal that combines "breakfast" and "lunch." "Brunch" is often eaten in the late morning and early afternoon and includes food and drink choices from both meals.</p>
+<p><strong>Why are blend words called a "portmanteau?"</strong></p>
+<p>Where does the idea of portmanteaus come from?</p>
+<p>We borrow the word "portmanteau" from French. "Porter" means "to carry" in French, and "manteau" in French is a coat. When both words are blended, a "portmanteau" means a large suitcase that folds in half and can carry a lot of things.</p>
+<p>So how did a suitcase come to mean all blend words in English?</p>
+<p>We have British writer Lewis Carroll to thank for linking the word "portmanteau" to blend words in English. Carroll wrote <em>Alice's Adventures in Wonderland</em>. In his follow-up book <em>Though the Looking Glass</em>, Carroll wrote about the idea of portmanteaus.</p>
+<p>In the story, Alice reads a book with a poem called "Jabberwocky." In the poem, Carroll makes up several blend words. Alice is confused so she asks another character, Humpty Dumpty, about the words. He answers, "You see, it's like a portmanteau — there are two meanings packed up into one word."</p>
+<p>Just like the piece of luggage called a "portmanteau" has two sections folded into one, a portmanteau blend word carries both meanings of the original words but folds them together to create a new word.</p>
+<p>Let's look at some common portmanteaus.</p>
+<p><strong>Examples of portmanteaus </strong></p>
+<p>Portmanteaus can be nouns, verbs or adjectives. Some portmanteaus are created by combining the beginning section, syllable or letters of the first word with the final part, syllable or letters of the second word.</p>
+<p>They are often used in entertainment, for names of places, in government, for food and for technology.</p>
+<p>Here are a few common portmanteaus.</p>
+<p>A "biopic" is a blend of <em>"</em>bio<em>graphy" and "picture." It means a film about a person based on their life. </em></p>
+<p><em>"Chillax" is a blended verb of "chill" and "relax" and means to calm down. </em></p>
+<p>"Cosplay" is a combination of "costume" and "roleplay." "Cosplay" is when people dress up as characters from videogames, literature, films or television.</p>
+<p>"Hangry" means to be angry because you are hungry.</p>
+<p>"Motel" is a combination of "motor" and "hotel." It is like a hotel, but for people driving on long road trips.</p>
+<p>"Smog" blends the words "smoke" and "fog" to create the noun that describes air pollution.</p>
+<p>"Email" is a blend of "electronic" and "mail." It is the computer-based alternative to paper mail.</p>
+<p>"Internet" is also a portmanteau, which combines "interconnected" and "network."</p>
+<p>"Podcast" combines "iPod" with "broadcast." Podcasts are digital audio programs.</p>
+<p>And lastly, we have "vlog." It is a blend of "video" and "log." These are journals that people record with a video camera and publish online.</p>
+<p><strong>Closing thoughts</strong></p>
+<p>In today's report, we learned about "portmanteaus." Portmanteaus have an interesting history in the English language. Writer Lewis Carroll created several portmanteaus and described the term in his book,<em> Through the Looking Glass</em>. Portmanteaus blend the spelling and meanings of two words together. "Brunch," "vlog," and "hangry" are all portmanteaus.</p>
+<p>Now it's your turn. Take the portmanteaus you learned today and try to use them in sentences.</p>
+<p>You can write your sentences in the comments or send us an email at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>And that's <em>Everyday Grammar</em>!</p>
+<p>I'm Faith Pirlo.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><strong>_______________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>brunch </strong>– <em>n. </em>a meal usually taken late in the morning that combines a late breakfast and an early lunch</p>
+<p><strong>suitcase</strong> – n. a large case that you use to carry your clothing and belongings when you are traveling</p>
+<p><strong>luggage </strong>– <em>n.</em> bags and cases used by travelers</p>
+<p><strong>creativity</strong> – <em>n.</em> the ability to make new things or think of new ideas</p>
+<p><strong>syllable </strong><em>– n. </em>a unit of spoken language that consists of one or more vowel sounds alone or with one or more consonant sounds preceding or following</p>
+<p><strong>chill </strong>– <em>v.</em> to calm down</p>
+<p><strong>costume </strong>–<em> n. </em>clothing worn by people, such as actors, who are trying to look like people living in different places or times</p>
+<p><strong>roleplay</strong> – <em>v</em>. to pretend to be a character and act in the same way as that character</p>
+<p><strong>iPod</strong> – <em>n</em>. small, handheld Apple device that played music</p>
+<p><strong>journal </strong><em>– n. </em>a record of experiences, events, ideas, etc.</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

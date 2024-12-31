@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Europe Launches Mission to Create Simulated Solar Eclipse</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, Europe Launches Mission to Create Simulated Solar Eclipse" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202412/europe-launches-mission-to-create-simulated-solar-eclipse.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Europe Launches Mission to Create Simulated Solar Eclipse</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202412/europe-launches-mission-to-create-simulated-solar-eclipse.mp3" id="mp3"></a>
+<a href="american-stories-chicken-little-93226.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Bryan Lynn</span><br/><span class="datetime">15 December, 2024</span><br/>
+<p>Two European satellites were recently launched on a mission that will include a <strong>simulated</strong> total solar eclipse.</p>
+<p>The European Space Agency (ESA) launched the satellites on December 5 from southern India aboard an Indian-built rocket.</p>
+<p>ESA says its Proba-3 mission aims to demonstrate <strong>precision </strong>formation flying abilities as the two satellites travel together in a fixed position.</p><div class="contentImage"><img alt="This artist illustration shows one of two satellites - part of the European Space Agency's Proba-3 mission - positioned for a simulated total solar eclipse.
+(Image Credit: CREDIT - ESA-P. Carril, 2013)" src="https://files.21voa.com/gdb/a624d48f-1a3a-46c6-afe3-13cf2ebaee4f_cx0_cy11_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This artist illustration shows one of two satellites - part of the European Space Agency's Proba-3 mission - positioned for a simulated total solar eclipse.
+(Image Credit: CREDIT - ESA-P. Carril, 2013)</span></div>
+<p>The two satellites are set to separate and fly 150 meters apart in about a month when they reach their target area high above Earth.</p>
+<p><strong>Creating simulated solar eclipse</strong></p>
+<p>In one of the mission's major experiments, the two spacecraft will carry out a series of <strong>artificial</strong> total solar eclipses. A shadow created by one satellite will permit the other to observe sun activity while blocking out the sun itself.</p>
+<p>The goal of this operation is to give scientists the chance to study the sun's outermost atmosphere, known as the corona. The corona is difficult to observe because of the brightness of the sun.</p>
+<p>Scientists have repeatedly tried to study this part of the sun from observations on Earth during real total solar eclipses. But those eclipses do not happen often and usually only last up to five minutes. The Proba-3 team plans to carry out total eclipses at least twice a week, with each lasting up to six hours.</p>
+<p>Scientists say repeated studies of the corona can help provide new information about how solar activity influences Earth. For example, the project could help scientists better understand why the corona is so much hotter than the sun itself, and how the sun's energy output changes over time.</p>
+<span class="c-sticky-element__close-el c-sticky-element__swipe-el ta-c" title="close">
+<span class="ico ico-close m-0"></span>
+</span>
+<p>Sometimes, intense solar activity can result in geomagnetic storms, which can cause difficulties for power and communication systems on Earth.</p>
+<p>"For six hours at a time, it will be able to see the sun's <strong>faint </strong>atmosphere, the corona, in the hard-to-observe region between the sun's edge and 1.4 million kilometers from its surface," ESA said in a pre-launch statement.</p>
+<p>Mission leaders say the eclipse experiments will require extreme precision – within just one millimeter – to effectively position the spacecraft. To keep their position, the satellites will depend on <strong>GPS</strong>, laser systems and radio links.</p>
+<p>ESA <a class="wsw__a" href="https://www.esa.int/Enabling_Support/Space_Engineering_Technology/Proba-3/Proba-3_Flying_two_spacecraft_is_harder_than_one">said</a> in a statement, “Proba-3 is very different because our satellites will be flying just one-and-a-half football fields away from each other during active formation flying.”</p>
+<p>Esther Bastida Pertegaz is a systems engineer on the Proba-3 mission. She said in a video, "The corona of the sun ... has been very poorly investigated. One of the things we really want to understand is ... how do coronal mass ejections or solar wind <strong>originate</strong> in this area."</p>
+<p>The $210 million project is being supported by over 40 European companies, Reuters news agency reports. These include SENER Aerospace, Redwire Space, and Airbus Defence and Space.</p>
+<p>ESA says Proba-3 will aim for at least 1,000 hours of “on demand” totality during its two-year operation. Once the mission is complete, both satellites will continually drop lower until they burn up in the atmosphere. Officials said that would likely happen within five years.</p>
+<p>ESA has said other orbits of Proba-3 – besides the eclipse experiments – will be carried out to demonstrate a range of precise formation flying to help support future missions.</p>
+<p>I'm Bryan Lynn.</p>
+<p><em>Bryan Lynn wrote this story for VOA Learning English, based on reports from The Associated Press, Reuters and the European Space Agency. </em></p>
+<p><strong>_____________________________________________</strong></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>simulate</strong><strong> </strong><em>– v.</em> to do or make something that behaves or looks like something real but is not</p>
+<p><strong>precise </strong><em>– adj.</em> exact</p>
+<p><strong>artificial</strong><strong> </strong><em>–</em> <em>adj. </em>something created by a machine and not a natural process</p>
+<p><strong>faint</strong><strong> </strong><em>– adj. </em>very light; hard to see</p>
+<p><strong>GPS</strong><strong> </strong><em>– n.</em> a system built to follow the movements of something with an electronically-powered piece of equipment</p>
+<p><strong>originate</strong><strong> </strong><em>– v.</em> where something begins</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

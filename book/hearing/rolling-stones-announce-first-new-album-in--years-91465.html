@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Rolling Stones Announce First New Album in 18 Years</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, Rolling Stones Announce First New Album in 18 Years" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202309/rolling-stones-announce-first-new-album-in-18-years.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Rolling Stones Announce First New Album in 18 Years</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202309/rolling-stones-announce-first-new-album-in-18-years.mp3" id="mp3"></a>
+<a href="/static/lrc/rolling-stones-announce-first-new-album-in-18-years.lrc" id="lrc"></a>
+<a href="congolese-arts-center-helps-street-children-find-their-voice-91462.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">08 September 2023</span><br/>
+<p>
+The Rolling Stones said this week that their first new collection of songs in almost 20 years comes out on October 20.</p>
+<p>The album will be called <em>Hackney Diamonds</em>. The name comes from broken glass often seen on the streets of east London's Hackney area.</p>
+<p>Three of the band's <strong>original</strong> members - Mick Jagger, Keith Richards and Ronnie Wood – came to the Hackney Empire, a historic theater, for the announcement.</p><div class="contentImage"><img alt="Rolling Stones band members Mick Jagger, Keith Richards and Ronnie Wood attend a launch event for their new album Hackney Diamonds, at Hackney Empire in London, Britain, September 6, 2023. (REUTERS/Toby Melville)" src="https://files.21voa.com/gdb/205a3811-7361-4e74-85db-bdc11fe5c9e9_w268_r1.jpg"/><br/><span class="imagecaption">Rolling Stones band members Mick Jagger, Keith Richards and Ronnie Wood attend a launch event for their new album "Hackney Diamonds", at Hackney Empire in London, Britain, September 6, 2023. (REUTERS/Toby Melville)</span></div>
+<p>The Rolling Stones are still traveling the world and performing concerts, but they have not made an album since 2016. That recording did not include new material.</p>
+<p>Richards, 79, said the band only made a new album because Jagger wanted to sing. So they went to record new songs after almost 20 years.</p>
+<p>"When you have a singer that wants to sing," Richards said, "you <strong>grab</strong> him and throw him in the studio." Richards said the songs came together with "energy and urgency."</p>
+<p>Jagger, who is 80, said, "we are quite pleased," with the new album. He said the group would not have put a recording together if "we hadn't really liked it. We said we had to make a record we really love ourselves ... we hope you all like it."</p>
+<p>They released the first song, called <em>Angry</em>, this week. But Jagger said the rest of the songs are not angry. He said the album contains "love songs, <strong>ballads</strong>, country..." sounds.</p>
+<p>The new recording includes songs with Paul McCartney, Lady Gaga, Stevie Wonder and Charlie Watts, the Rolling Stones <strong>drummer</strong> who died in 2021. Watts recorded sounds for two songs in 2019. Steve Jordan is the drummer for the other 10.</p>
+<p>"Of course, he's missed incredibly," Richards said about Watts. But he added that Jordan was Watts' suggestion for a <strong>replacement</strong>.</p>
+<p>Jagger said the addition of Lady Gaga to the album was unplanned. The Stones were recording at a <strong>studio</strong> in Los Angeles and Lady Gaga just happened to be in the studio next door. So, she recorded the song <em>Sweet Sound of Heaven</em> with the band.</p>
+<p>"She walked in next to me and we started singing together," Jagger said.</p>
+<p>Wood said McCartney of the Beatles played the bass guitar on one <strong>track</strong>. "You know, he was loving it." McCartney's band was perhaps the Rolling Stones' biggest <strong>rival</strong> in the 1960s.</p>
+<p>Taric Fioravanti was one of the fans who lined up outside hoping to see the band arrive. He is from Brazil. "I love these guys," he said. "They're 80 years old. Most bands have stopped making music by that age," he added.</p>
+<p>The Rolling Stones started in 1962. They celebrated their 60th year with a tour of Europe in 2022 and they said they have plans to visit North America in 2024.</p>
+<p>Wood, 76, plays guitar. He said the idea of retirement is "Impossible. You've got to keep playing," he added.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on reports by The Associated Press and Reuters.</em></p>
+<p>________________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>resident</strong> <em>–n. </em>a person who lives in a region, city; a home or land owner</p>
+<p><strong>original</strong> <em>–adj. </em>the first or existing at the beginning</p>
+<p><strong>grab</strong> <em>–v. </em>to quickly take hold of something with your hands</p>
+<p><strong>ballad</strong> <em>–n. </em>a kind of slow, romantic song</p>
+<p><strong>drummer</strong> <em>–n. </em>a person who provides the beat in music, usually using drumsticks and drums to make a sound</p>
+<p><strong>replacement</strong> <em>–n. </em>a person who steps in if someone is not available to do a task</p>
+<p><strong>studio</strong> <em>–n. </em>quiet room used to record music or voice</p>
+<p><strong>track</strong> <em>–n. </em>one song of a group that are included in an album</p>
+<p><strong>rival</strong> <em>–n. </em>a person or thing trying to be more successful than another</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Rolling Stones Announce First New Album in 18 Years]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]The Rolling Stones said this week
+[00:03.28]that their first new collection of songs
+[00:06.72]in almost 20 years comes out on October 20.
+[00:12.32]The album will be called Hackney Diamonds.
+[00:15.36]The name comes from broken glass
+[00:18.36]often seen on the streets of east London's Hackney area.
+[00:24.36]Three of the band's original members - Mick Jagger,
+[00:27.92]Keith Richards and Ronnie Wood – came to the Hackney Empire,
+[00:33.40]a historic theater, for the announcement.
+[00:37.32]The Rolling Stones are still traveling the world
+[00:40.72]and performing concerts,
+[00:42.88]but they have not made an album since 2016.
+[00:46.76]That recording did not include new material.
+[00:51.48]Richards, 79, said the band only made a new album
+[00:57.08]because Jagger wanted to sing.
+[00:59.56]So they went to record new songs after almost 20 years.
+[01:06.56]"When you have a singer that wants to sing," Richards said,
+[01:10.16]"you grab him and throw him in the studio."
+[01:14.64]Richards said the songs came together with "energy and urgency."
+[01:20.44]Jagger, who is 80, said, "we are quite pleased,"
+[01:23.80]with the new album.
+[01:24.92]He said the group would not have put a recording together
+[01:28.80]if "we hadn't really liked it.
+[01:31.32]We said we had to make a record
+[01:33.92]we really love ourselves ... we hope you all like it."
+[01:39.88]They released the first song, called Angry, this week.
+[01:44.56]But Jagger said the rest of the songs are not angry.
+[01:48.20]He said the album contains
+[01:50.48]"love songs, ballads, country..." sounds.
+[01:56.64]The new recording includes songs with Paul McCartney,
+[02:00.16]Lady Gaga, Stevie Wonder and Charlie Watts,
+[02:04.20]the Rolling Stones drummer who died in 2021.
+[02:09.36]Watts recorded sounds for two songs in 2019.
+[02:15.88]Steve Jordan is the drummer for the other 10.
+[02:19.48]"Of course, he's missed incredibly," Richards said about Watts.
+[02:25.56]But he added that Jordan was Watts' suggestion for a replacement.
+[02:32.56]Jagger said the addition of Lady Gaga to the album was unplanned.
+[02:37.44]The Stones were recording at a studio in Los Angeles
+[02:42.04]and Lady Gaga just happened to be in the studio next door.
+[02:47.48]So, she recorded the song
+[02:49.96]Sweet Sound of Heaven with the band.
+[02:53.92]"She walked in next to me
+[02:55.56]and we started singing together," Jagger said.
+[02:59.80]Wood said McCartney of the Beatles
+[03:02.20]played the bass guitar on one track.
+[03:04.72]"You know, he was loving it."
+[03:07.20]McCartney's band was perhaps
+[03:09.64]the Rolling Stones' biggest rival in the 1960s.
+[03:14.44]Taric Fioravanti was one of the fans
+[03:18.48]who lined up outside hoping to see the band arrive.
+[03:22.72]He is from Brazil. "I love these guys," he said.
+[03:27.04]"They're 80 years old.
+[03:29.12]Most bands have stopped making music by that age," he added.
+[03:34.80]The Rolling Stones started in 1962.
+[03:38.36]They celebrated their 60th year with a tour of Europe in 2022
+[03:44.84]and they said they have plans to visit North America in 2024.
+[03:50.68]Wood, 76, plays guitar.
+[03:54.68]He said the idea of retirement is "Impossible.
+[03:58.48]You've got to keep playing," he added.
+[04:01.60]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

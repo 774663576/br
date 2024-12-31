@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Classical Violin Brings Afghan, Iranian to Indiana</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Education Report, Classical Violin Brings Afghan, Iranian to Indiana" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202212/classical-violin-brings-afghan-iranian-to-indiana.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Classical Violin Brings Afghan, Iranian to Indiana</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202212/classical-violin-brings-afghan-iranian-to-indiana.mp3" id="mp3"></a>
+<a href="remembering-musician-christine-mcvie-of-fleetwood-mac-90068.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Andrew Smith</span><br/>
+<span class="datetime">03 December 2022</span><br/>
+<p>Mehran Fanous wanted to play the violin from the moment he first heard a recording at the age of six. And ten-year-old Parastoo Heidarinejad heard that the instrument was difficult to play, so she wanted a <strong>challenge</strong>.</p>
+<p>The dream of becoming a violinist has taken them from their native Afghanistan and Iran to Bloomington, Indiana. The small city in the Midwest is also home to the Jacobs School of Music at Indiana University, the largest music school in the United States.</p>
+<p><strong>Mehran</strong></p><div class="contentImage"><img alt="Mehran Fanous of Afghanistan left, and Parastoo Heidarinejad of Iran at the Jacobs School of Music in Bloomington, Indiana. (Photo by Ethan Levy/Indiana Daily Student)" src="https://files.21voa.com/gdb/00bf0000-0aff-0242-cf9d-08dac7f87477_w268_r1.png"/><br/><span class="imagecaption">Mehran Fanous of Afghanistan left, and Parastoo Heidarinejad of Iran at the Jacobs School of Music in Bloomington, Indiana. (Photo by Ethan Levy/Indiana Daily Student)</span></div>
+<p>Mehran was six years old when he listened to his brother's recording of <em>Zigeunerweisen </em>for violin. Hearing that recording made Mehran want to learn Western classical music and play the instrument.</p>
+<p>Just a year later, Mehran's musical ability won him a place at the Afghanistan National Institute of Music, or ANIM. There, he studied with William Harvey, who happened to be the violinist in the recording.</p>
+<p>Harvey, who studied violin under Mimi Zweig at Jacobs School of Music, is also the founder of <a class="wsw__a" href="http://culturesinharmony.org/">Cultures in Harmony</a>. The organization brings musicians from different countries together. One of its main goals is "to promote international and cultural understanding through music and interaction."</p>
+<p>Even before the Taliban took control of Afghanistan's government in August of 2021, Mehran's family knew they must leave for him to follow his dream. The Taliban does not permit playing or listening to music.</p>
+<p>With help from the UN refugee agency UNHCR, Mehran and his mother left Afghanistan for India where he continued online learning with Harvey. Meanwhile, his father, who sings traditional Afghan music, left Afghanistan for the U.S. in August 2021. And his brother Elham was studying piano at the Manhattan School of Music in New York City.</p>
+<p>Mehran arrived in the U.S in December 2021 after his acceptance at Jacobs with help from Harvey and Zweig. Mehran told VOA about the experience:</p>
+<p>"Somehow, I just felt when I came to the United States, like I was really happy, like when I was in the classroom, I was enjoying my every moment. . . When I sit in the classroom, I really feel happy. . ."</p>
+<p>Mehran said he practices violin about five or six hours a day— three hours in the morning between classes, and another three hours at night. He wants to be able to perform the most famous pieces, such as Tchaikovsky's concerto for violin.</p>
+<p>His teacher Zweig observed that Mehran has talent and works hard.</p>
+<p>"He's so smart and so gifted, and he's practicing all the time."</p>
+<p>When asked about the way people view Afghanistan, Mehran said:</p>
+<p>"People judge Afghanistan based on Taliban sometimes, which is really, like, not good. So a good example that I can give right now,. . . I was in Afghanistan, and if it wasn't for Afghanistan, I could never start music. Like, there was a music school at least in Afghanistan."</p>
+<p><strong>Parastoo</strong></p>
+<p>Heidarinejad goes by the name Parastoo.</p>
+<p>Growing up, she listened to both Persian and Western music. Her father played Setar, a traditional Persian instrument, and her older sister was learning to play piano. Having heard that the violin is a difficult instrument to play, she chose it. "I wanted to challenge myself," she said.</p>
+<p>Parastoo's family moved often, so she did not receive methodical training until the age of 17. At that time, she traveled every week to Iran's capital city of Tehran, to take lessons. A year later, she was accepted into the University of Tehran. She said it was the beginning of her <strong>journey</strong> to be a violinist.</p>
+<p>Like Mehran, Parastoo recognized that to be a classical violinist, she would need to find training in a Western country. She is now a second-year master's student in historical performance and Baroque violin at the Jacobs School of Music.</p>
+<p>The Baroque period in classical music dates from about 1600 to 1750.</p>
+<p>"What makes this <strong>genre</strong> of music very special and interesting to me is that even if I listen to or play the same piece many times, there are still new things to discover."</p>
+<p>She said that while her music education in the U.S. is close to what she received in Iran, in the U.S. there are many more music festivals and competitions for performers.</p>
+<p>It took Parastoo some time to feel more comfortable with speaking English. During this period, she discovered something she liked very much about U.S. culture.</p>
+<p>"I was very surprised by how much people were supportive and patient with me. They were listening so carefully without <strong>interrupting</strong> or correcting me and trying to understand what I was trying to say."</p>
+<p>It also helps that there is a Persian community in Bloomington, Indiana.</p>
+<p>"We usually celebrate important Persian events such as the new year together. I also have <strong>incredible</strong> non-Persian friends at school that I spend most of my free time with."</p>
+<p>Parastoo aims to continue her study for a Doctorate in Baroque violin performance. And she hopes to teach Baroque music and Historical Performance in Iran someday.</p>
+<p>For now, Mehran and Parastoo are bringing music and cultures together in the small college town.</p>
+<p>I'm Andrew Smith. And I'm Caty Weaver.</p>
+<p><em>Andrew Smith wrote this story for VOA Learning English.</em></p>
+<p>____________________________________________________________</p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>challenge </strong><em>-n. </em>something difficult to do or accomplish</p>
+<p><strong>journey </strong><em>-n. </em>a travel experience, usually of long distance and duration</p>
+<p><strong>genre </strong><em>-n. </em>a category or style of art</p>
+<p><strong>interrupt </strong><em>-v. </em>to do or say something that makes another person stop what they are doing or saying</p>
+<p><strong>incredible </strong><em>-adj. </em>excellent, amazing, beyond ordinary</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

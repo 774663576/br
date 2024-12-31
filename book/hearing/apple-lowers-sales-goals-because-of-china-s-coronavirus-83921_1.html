@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 苹果公司因为新型冠状病毒爆发调低销售目标</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 苹果公司因为新型冠状病毒爆发调低销售目标" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202002/apple-lowers-sales-goals-because-of-china-s-coronavirus.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>苹果公司因为新型冠状病毒爆发调低销售目标</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202002/apple-lowers-sales-goals-because-of-china-s-coronavirus.mp3" id="mp3"></a>
+<a href="/static/lrc/apple-lowers-sales-goals-because-of-china-s-coronavirus.lrc" id="lrc"></a>
+<a href="apple-lowers-sales-goals-because-of-china-s-coronavirus-83921.html" id="CnPage" target="_blank"></a>
+<a href="questions-remain-as-france-marks--years-since-nuclear-tests-83920.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Computer maker Apple is warning investors that it will not meet its three-month financial goal because of the coronavirus outbreak in China.<br/>
+计算机制造商苹果公司警告投资者，由于中国冠状病毒的爆发，该公司将无法实现其首季度的财务目标。
+<p>The company said Monday that all of its iPhone factories are outside Hubei province, where the outbreak began. It also said that all of the factories have reopened, but production is moving slowly.<br/>
+苹果公司周一称其所有iPhone工厂均不在爆发疫情的湖北省。该公司还说，这些工厂都已经复工，但是生产进展缓慢。</p>
+<p>"The health...of every person who helps make these products possible is our...priority," Apple said in a statement.<br/>
+苹果公司在一份声明中表示：“使得这些产品成为可能的每个人的健康是我们重中之重。”</p>
+<p>The number of people who died from the virus reached at least 1,770 by Monday. The new coronavirus causes a disease called COVID-19.<br/>
+截至周一，这种病毒已经造成至少1770人病故。这种新型冠状病毒被称为COVID-19。</p>
+<p>Apple says demand for iPhones has fallen in China because many of Apple's 42 stores there have been closed or have reduced hours. China is Apple's third largest market for iPhones, after the United States and Europe.<br/>
+苹果公司表示，iPhone手机在中国的需求有所下降，因为该公司42家中国门店有大部分都已经停业或是缩短了营业时间。中国是苹果公司仅次于美国和欧洲的第三大iPhone手机市场。</p>
+<p>One person told the Reuters News Agency that Apple's supply chain was affected by the outbreak. Apple's suppliers and other smart phone makers are expected to face financial difficulties in the future.<br/>
+一位人士对路透社表示，苹果公司的供应链受到了疫情影响。预计苹果公司的供应商和其它智能手机制造商未来都将面临财务困难。</p>
+<p>"If one...factory stays closed and they're the only supplier, then everyone has to stop and wait. And if there are two suppliers and one is shut down, then we need the other to do more," said the person who did not have permission to speak about the company and did not want to be identified.<br/>
+这位未被授权谈到该公司并且不愿意具名的人士表示：“如果一家工厂关闭，而它们又是唯一的供应商，那么每个人都得停下来等待。如果有两家供应商，其中一家关闭，那么我们就需要另一家干得更多。”</p>
+<p>Stacy Rasgon is a financial expert with Bernstein, a business advising company. He said Apple's problems also mean fewer chips will be sold for cell phones because most chips are made in China.<br/>
+斯塔西·拉斯冈是博恩斯坦商业咨询公司的财务专家。他说苹果公司的麻烦也意味着上市销售的手机芯片量会减少，因为大部分芯片都在中国制造。</p>
+<p>The research company Canalys estimates that Apple and competitor Huawei receive 99 percent of their production from China.<br/>
+据科纳仕市场研究公司估计，苹果公司及其竞争对手华为公司99%的产品都在中国生产。</p>
+<p>"Every electronic supply chain runs through China in a big way," Rasgon said.<br/>
+拉斯冈表示：“每条电子供应链都大规模贯穿中国。”</p>
+<p>Outside of China, Apple said iPhone demand has been strong. The company expects to meet its sales goals for the rest of the world, but it is unclear if difficulties with supplies will affect sales in the future.<br/>
+苹果公司表示，iPhone手机在中国之外的需求一直都很强劲。该公司期望在全球其它地区能够实现其销售目标，但目前尚不清楚供应困难是否会影响未来的销售。</p>
+<p>Late last month, Apple said it expected revenue between $63 and $67 billion for the three-month period ending on March 30.<br/>
+上个月月底，苹果公司称其预计第一季度的收入在630-670亿美元之间。</p>
+<p>I'm Susan Shand.<br/>
+我是苏珊·尚德。(51VOA.COM原创翻译，禁止转载，违者必究！)</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Apple Lowers Sales Goals Because of Coronavirus Outbreak]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Computer maker Apple is warning investors that it will not meet its three-month financial goal because of the coronavirus outbreak in China.
+[00:14.28]The company said Monday that all of its iPhone factories are outside Hubei province, where the outbreak began.
+[00:25.44]It also said that all of the factories have reopened, but production is moving slowly.
+[00:34.12]"The health...of every person who helps make these products possible is our...priority," Apple said in a statement.
+[00:44.72]The number of people who died from the virus reached at least 1,770 by Monday.
+[00:54.28]The new coronavirus causes a disease called COVID-19.
+[01:02.00]Apple says demand for iPhones has fallen in China because many of Apple's 42 stores there have been closed or have reduced hours.
+[01:14.48]China is Apple's third largest market for iPhones, after the United States and Europe.
+[01:22.88]One person told the Reuters News Agency that Apple's supply chain was affected by the outbreak.
+[01:30.56]Apple's suppliers and other smart phone makers are expected to face financial difficulties in the future.
+[01:40.48]"If one...factory stays closed and they're the only supplier, then everyone has to stop and wait.
+[01:48.64]And if there are two suppliers and one is shut down, then we need the other to do more,"
+[01:55.48]said the person who did not have permission to speak about the company and did not want to be identified.
+[02:04.40]Stacy Rasgon is a financial expert with Bernstein, a business advising company.
+[02:12.24]He said Apple's problems also mean fewer chips will be sold for cell phones because most chips are made in China.
+[02:22.12]The research company Canalys estimates that Apple and competitor Huawei receive 99 percent of their production from China.
+[02:34.40]"Every electronic supply chain runs through China in a big way," Rasgon said.
+[02:41.96]Outside of China, Apple said iPhone demand has been strong.
+[02:47.24]The company expects to meet its sales goals for the rest of the world,
+[02:52.76]but it is unclear if difficulties with supplies will affect sales in the future.
+[02:59.96]Late last month, Apple said it expected revenue between $63 and $67 billion for the three-month period ending on March 30.
+[03:12.52]I'm Susan Shand.
+[03:14.44]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

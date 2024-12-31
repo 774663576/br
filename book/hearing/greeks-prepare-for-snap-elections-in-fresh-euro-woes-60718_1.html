@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 希腊准备提前举行大选</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 希腊准备提前举行大选" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201501/se-econ-greek-elections-15jan15.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>希腊准备提前举行大选</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201501/se-econ-greek-elections-15jan15.mp3" id="mp3"></a>
+<a href="/static/lrc/se-econ-greek-elections-15jan15.lrc" id="lrc"></a>
+<a href="greeks-prepare-for-snap-elections-in-fresh-euro-woes-60718.html" id="CnPage" target="_blank"></a>
+<a href="will-chinese-drink-coffee-over-tea-60692.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>1月2日it is，无改动。<br/>http://www.21voa.com/VOA_Special_English/greeks-prepare-for-early-elections-60570.html<br/>http://home.putclub.com/listen.php?subject=REPORT-2014-01-14&amp;tid=385575&amp;url=http://stream.21voa.com/temp-econ-15jan15.mp3</p>
+<p>From VOA Learning English, this is the Economics Report.<br/>这里是美国之音慢速英语经济报道。</p>
+<p>European officials are urging Greece to continue with economic reforms as the country prepares for early elections. The vote was called for this week after Greek lawmakers failed to elect a new president.<br/>在希腊准备提前大选之际，欧洲官员督促希腊继续进行经济改革。在希腊立法人员未能选出新任总统之后，这次选举在本周应运而生。</p>
+<p>Some Greek citizens say they are not looking forward to the elections. Suzanna Steiner is one of them.<br/>一些希腊民众表示，他们并不期待这次选举。苏珊娜·施泰纳（Suzanna Steiner）就是其中之一。</p>
+<p>She says the vote should not be happening now. It is the worst time for the economy and for security, she says, and everyone is unhappy.<br/>她说，现在不应该进行选举。经济和安全处于最糟糕的时刻，大家都不高兴。</p>
+<p>Dakis Voultsis is a businessman. He agrees with Suzanna Steiner.<br/>Dakis Voultsis是一位商人。他认同施泰纳的说法。</p>
+<p>He says the government should have been left to do its work. But, he says, now that early elections are set for January 25, Greeks will have to decide whom to vote for.<br/>他说，应该让政府完成其职责。但他表示，提前选举日期定在1月25日，希腊人将不得不决定给谁投票。</p>
+<p>On Monday, parliament failed for the third time to elect a president. The failure forced Prime Minister Antonis Samaras to call for general elections.<br/>周一，希腊国会第三次未能选出总统。这迫使希腊总理安东尼斯·萨马拉斯（Antonis Samaras）呼吁进行大选。</p>
+<p>His New Democracy Party controls what has been the ruling coalition in Greece. But the Syriza Party is more popular in opinion studies. Syriza says that if it wins control of parliament, "austerity will be history." For years, the government has cut spending in an effort to solve a major debt crisis.<br/>他的新民主党控制了希腊执政联盟。但在民意调查中激进左翼联盟党更受欢迎。激进左翼联盟党表示，如果它获得议会控制权，“紧缩将成为历史。”多年来，希腊政府一直在削减开支以解决严重债务危机。</p>
+<p>Alexis Tsipras is the leader of Syriza.<br/>亚历克西斯·齐普拉斯(Alexis Tsipras)是激进左翼联盟党领导人。</p>
+<p>He says the new election will be the beginning of the end for the current leadership. He says the government sank Greece into poverty and worsened unemployment.<br/>他说，这次新选举将是结束当前领导层的开始。他说，政府让希腊陷入了贫困和严重失业中。</p>
+<p>The Syriza party says it wants to renegotiate two economic rescue plans -- worth nearly $300 billion. The financial aid came from the European Commission, the European Central Bank and the International Monetary Fund. They made the aid dependent on Greece enacting strong measures aimed at ending its financial problems.<br/>激进左翼联盟党表示，它希望重新协商两项价值接近3千亿美元的经济援助计划。这些金融援助来自于欧盟委员会、欧洲央行和国际货币基金组织。他们提出了挂钩于希腊制定有力措施结束其财政问题的援助。</p>
+<p>Opponents, however, say the spending cuts and tax increases have harmed the country. Greece now has an unemployment rate of more than 25 percent.<br/>然而反对者表示，削减开支和增加税收已经损害了希腊。希腊目前的失业率超过了25%。</p>
+<p>The economic crisis in Eurozone countries was at its height in 2010 and 2011. At that time, many observers feared that economic unrest in Greece might lead to its withdrawal from the European Union. They feared it could eventually lead to the single monetary union breaking up.<br/>欧元区国家的经济危机在2010和2011年最为严重。当时许多观察家担心希腊的经济动荡可能会导致希腊退出欧盟。他们担心这可能会最终导致这一单一货币联盟破产。</p>
+<p>But today, observers say the fears are not so extreme. Dimitris Sotiropolous teaches political science at the University of Athens. He thinks Syriza would negotiate with international lenders and would not risk losing Greece's place within the Eurozone if it won the election.<br/>但观察家如今表示，恐慌并没那么严重。Dimitris Sotiropolous在雅典大学教政治学。他认为激进左翼联盟党如果胜选将会和国际贷款机构谈判，不会冒让希腊失去欧元区位置的风险。</p>
+<p>And that's the Economics Report from VOA Learning English. I'm Mario Ritter.<br/>以上就是本期美国之音慢速英语经济报道的全部内容。我是马里奥·理特（Mario Ritter）。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！) </p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:Greeks Prepare for Snap Elections in Fresh Euro Woes]
+[ar:Mario Ritter]
+[al:Economics Report]
+[by:www.21voa.com]
+[00:00.00]From VOA Learning English, this is the Economics Report.
+[00:04.81]European officials are urging Greece 
+[00:07.98]to continue with economic reforms 
+[00:10.75]as the country prepares for early elections. 
+[00:14.24]The vote was called for this week 
+[00:17.51]after Greek lawmakers failed to elect a new president.
+[00:22.12]Some Greek citizens say they are not looking forward 
+[00:26.96]to the elections. Suzanna Steiner is one of them.
+[00:31.99]She says the vote should not be happening now. 
+[00:37.76]It is the worst time for the economy and for security, 
+[00:42.44]she says, and everyone is unhappy.
+[00:45.42]Dakis Voultsis is a businessman. 
+[00:49.40]He agrees with Suzanna Steiner.
+[00:52.88]He says the government should have been left to do its work. 
+[00:59.06]But, he says, now that early elections are set for January 25, 
+[01:04.30]Greeks will have to decide whom to vote for.
+[01:07.57]On Monday, parliament failed for the third time 
+[01:12.12]to elect a president. 
+[01:13.57]The failure forced Prime Minister Antonis Samaras 
+[01:18.26]to call for general elections.
+[01:20.42]His New Democracy Party controls 
+[01:25.02]what has been the ruling coalition in Greece. 
+[01:28.34]But the Syriza Party is more popular in opinion studies. 
+[01:34.46]Syriza says that if it wins control of parliament, 
+[01:39.84]"austerity will be history." 
+[01:42.37]For years, the government has cut spending in an effort 
+[01:47.75]to solve a major debt crisis.
+[01:50.24]Alexis Tsipras is the leader of Syriza.
+[01:55.32]He says the new election will be the beginning 
+[02:04.58]of the end for the current leadership. 
+[02:06.93]He says the government sank Greece into poverty 
+[02:10.76]and worsened unemployment.
+[02:13.05]The Syriza party says 
+[02:16.04]it wants to renegotiate two economic rescue plans -- 
+[02:20.27]worth nearly $300 billion. 
+[02:24.73]The financial aid came from the European Commission, 
+[02:28.01]the European Central Bank and the International Monetary Fund. 
+[02:33.48]They made the aid dependent on Greece 
+[02:37.72]enacting strong measures aimed at ending its financial problems.
+[02:42.90]Opponents, however, say the spending cuts and tax increases 
+[02:49.22]have harmed the country. 
+[02:51.06]Greece now has an unemployment rate of more than 25 percent.
+[02:57.24]The economic crisis in Eurozone countries 
+[03:01.87]was at its height in 2010 and 2011. 
+[03:06.06]At that time, many observers feared 
+[03:10.39]that economic unrest in Greece 
+[03:12.73]might lead to its withdrawal from the European Union. 
+[03:17.16]They feared it could eventually 
+[03:20.54]lead to the single monetary union breaking up.
+[03:24.14]But today, observers say the fears are not so extreme. 
+[03:29.92]Dimitris Sotiropolous teaches political science 
+[03:34.66]at the University of Athens. 
+[03:36.90]He thinks Syriza would negotiate with international lenders 
+[03:42.47]and would not risk losing Greece's place 
+[03:45.65]within the Eurozone if it won the election.
+[03:49.24]And that's the Economics Report from VOA Learning English. 
+[03:54.47]I'm Mario Ritter.
+[03:56.16]更多听力请访问51voa.com
+
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

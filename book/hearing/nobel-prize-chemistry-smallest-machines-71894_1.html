@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 三位造出全球最小机器的科学家获得诺贝尔化学奖</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 三位造出全球最小机器的科学家获得诺贝尔化学奖" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201610/nobel-prize-chemistry-smallest-machines.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>三位造出全球最小机器的科学家获得诺贝尔化学奖</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201610/nobel-prize-chemistry-smallest-machines.mp3" id="mp3"></a>
+<a href="/static/lrc/nobel-prize-chemistry-smallest-machines.lrc" id="lrc"></a>
+<a href="nobel-prize-chemistry-smallest-machines-71894.html" id="CnPage" target="_blank"></a>
+<a href="nobel-prize-in-physics-awarded-for-research-in-strange-states-of-matter-71876.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">Three scientists have won the Nobel Prize in Chemistry for their work in developing tiny machines.<br/>三位科学家因为他们在开发分子机器中的成果而获得了诺贝尔化学奖。 
+<p>The three men are Jean-Pierre Sauvage, Sir James Fraser Stoddart and Bernard Feringa.<br/>这三位得奖者是让·皮埃尔·索维奇（Jean-Pierre Sauvage）、詹姆斯·弗雷泽·斯托达特（Sir James Fraser）和伯纳德·费伦加（Bernard Feringa）。</p>
+<p>They designed extremely thin molecular machines. The machines are said to be 1,000 times thinner than a single piece of hair and have parts that move when energy is added.<br/>他们设计了非常细小的分子机器，据说该机器比一根头发还要细一千倍，而且它的零件获得能量时可以运动。</p>
+<p>The Royal Swedish Academy of Sciences said the scientists' work could lead to developments in new materials and energy storage systems.<br/>瑞典皇家科学院表示，这些科学家们的成果能够引发新材料和储能系统的发展。</p>
+<p>The science of making things unimaginably small is called nanotechnology. Nanotechnology gets its name from a measure of distance. A nanometer, or nano, is one-thousand-millionth of a meter, about the size of atoms and molecules.<br/>让物体小到不可思议的这门科学被称之为纳米技术。纳米技术以其距离度量单位而得名。一纳米是十亿分之一米，这大约是原子和分子的大小。</p>
+<p>Jean-Paul Sauvage of France is a retired professor at the University of Strasbourg. He began the work on a molecular machine in 1983 when he successfully linked together two molecules shaped like a circle or ring. It marked the first time chemists were able to make a molecule act in such a way.<br/>索维奇是斯特拉斯堡大学的一名退休教授。1983年他开始研究分子机器，当时他成功地将两个环状分子联合起来，这标志着化学家首次能够以这种方式操控分子。</p>
+<p>Fraser Stoddart is a professor of chemistry at Northwestern University in the United States. In 1991, he built on Sauvage's work. He found a way to move the molecular ring onto a molecular axle and was able to move the ring along the axle.<br/>斯托达特是美国西北大学的化学教授。1991年，他在索维奇的研究基础上找到了一种办法，让这种分子环穿到一根分子轴上，并能够让该分子环沿该分子轴运动。</p>
+<p>Bernard Feringa is a professor of organic chemistry at the University of Groningen in the Netherlands. In 1999, he developed a molecular motor. It used a molecular blade that turned continuously in the same direction.<br/>费伦加是荷兰格罗宁根大学的有机化学教授。1999年，他开发了一种分子马达，它采用了的分子叶片可以在同一方向上持续转动。</p>
+<p>Sara Snogerup Linse explained the importance of their work to reporters in Stockholm.<br/>萨拉·斯诺格瑞普·林森（Sara Snogerup Linse）在斯德哥尔摩解释了他们的研究成果的重要性。</p>
+<p>"Maybe this morning you ground your coffee, maybe you used a motorized vehicle to get here - you used man-made machines operating on the centimeter to meter length scale. It's been a dream of scientists for over half a century to take this development all the way down to the molecular scale - that's nanometers. A nanometer is one million times smaller than a millimeter..."<br/>他说，“也许今天早上你磨了咖啡，也许你驾驶机动车到这里，这时你用到的是在厘米到米这个长度范围运转的人造机器。半个多世纪以来科学家们一直梦想将这种发展下降到分子尺度，也就是纳米级别。纳米比毫米还要小一百万倍。”</p>
+<p>Snogerup Linse is chair of the Nobel Chemistry Committee.<br/>林森是诺贝尔化学奖委员会主席。</p>
+<p>Sauvage, Stoddart and Feringa will share a $930,000 prize for their work. They will also receive a medal and diploma at an award ceremony on December 10.<br/>索维奇、斯托达特和费伦加因为他们的成果将分享93万美元的奖金。他们还将在12月10日的颁奖典礼上获得奖章和证书。</p>
+<p>I'm Anne Ball.<br/>我是安妮·波尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Three scientists have won the Nobel Prize in Chemistry
+[00:05.96]for their work in developing tiny machines.
+[00:11.20]The three men are Jean-Pierre Sauvage,
+[00:15.68]Sir James Fraser Stoddart and Bernard Feringa.
+[00:20.48]They designed extremely thin molecular machines.
+[00:27.56]The machines are said to be 1,000 times thinner than a single piece of hair
+[00:36.16]and have parts that move when energy is added.
+[00:42.12]The Royal Swedish Academy of Sciences said the scientists' work
+[00:48.28]could lead to developments in new materials and energy storage systems.
+[00:55.96]The science of making things unimaginably small is called nanotechnology.
+[01:04.96]Nanotechnology gets its name from a measure of distance.
+[01:11.52]A nanometer, or nano, is one-thousand-millionth of a meter,
+[01:20.00]about the size of atoms and molecules.
+[01:24.76]Jean-Paul Sauvage of France is a retired professor at the University of Strasbourg.
+[01:33.48]He began the work on a molecular machine in 1983
+[01:38.92]when he successfully linked together two molecules shaped like a circle or ring.
+[01:48.16]It marked the first time chemists were able to make a molecule act in such a way.
+[01:56.52]Fraser Stoddart is a professor of chemistry at Northwestern University in the United States.
+[02:05.44]In 1991, he built on Sauvage's work.
+[02:10.88]He found a way to move the molecular ring onto a molecular axle
+[02:19.16]and was able to move the ring along the axle.
+[02:24.68]Bernard Feringa is a professor of organic chemistry
+[02:29.93]at the University of Groningen in the Netherlands.
+[02:34.28]In 1999, he developed a molecular motor.
+[02:40.03]It used a molecular blade that turned continuously in the same direction.
+[02:48.32]Sara Snogerup Linse explained the importance of their work to reporters in Stockholm.
+[02:56.87]"Maybe this morning you ground your coffee,
+[02:59.82]maybe you used a motorized vehicle to get here
+[03:03.50]- you used man-made machines operating on the centimeter to meter length scale.
+[03:10.83]It's been a dream of scientists for over half a century
+[03:15.40]to take this development all the way down to the molecular scale - that's nanometers.
+[03:21.85]A nanometer is one million times smaller than a millimeter..."
+[03:25.48]Snogerup Linse is chair of the Nobel Chemistry Committee.
+[03:31.16]Sauvage, Stoddart and Feringa will share a $930,000 prize for their work.
+[03:41.04]They will also receive a medal and diploma at an award ceremony on December 10.
+[03:49.33]I'm Anne Ball.
+[03:51.64]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

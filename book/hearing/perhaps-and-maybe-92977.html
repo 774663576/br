@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Perhaps and Maybe</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Ask a Teacher, Perhaps and Maybe" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202409/perhaps-and-maybe.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Perhaps and Maybe</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202409/perhaps-and-maybe.mp3" id="mp3"></a>
+<a href="james-earl-jones-darth-vader-voice-can-speak-anew-with-ai-92976.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Andrew Smith</span><br/><span class="datetime">13 September, 2024</span><br/>
+<p>Hello! This week on <em>Ask a Teacher</em>, we answer a question from Renata in Brazil about the usage of the words “perhaps” and “maybe.”</p>
+<p><strong>Question</strong></p>
+<p>Dear Teacher,</p><div class="contentImage"><img src="https://files.21voa.com/gdb/3c866149-fa04-4f35-8778-206251032463_w268_r1.png"/></div>
+<p>I'm trying to learn English, but from now I [have] a question about what's the difference between "perhaps" and "maybe".</p>
+<p><strong>Answer</strong></p>
+<p>Thank you for writing to us, Renata. I'm happy to answer this question.</p>
+<p>The two words mean the same thing. We use them to express the idea that we are guessing or unsure about something. However, there are some differences in how we use the two words.</p>
+<p>Language researchers use the <a class="wsw__a" href="https://nam10.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.english-corpora.org%2Fcoca%2F&amp;data=05%7C02%7CAndrewSmith%4021voa.com%7C749494b552994caa362908dcbcaf0592%7Cba99e87c673541c2b1c1354eee3a8659%7C0%7C0%7C638592707116585301%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0%7C%7C%7C&amp;sdata=16C39dnI2Wx52MxTMBgizzwHDhiORhP4RHKn8Zsskn8%3D&amp;reserved=0" title="https://nam10.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.english-corpora.org%2Fcoca%2F&amp;data=05%7C02%7CAndrewSmith%4021voa.com%7C749494b552994caa362908dcbcaf0592%7Cba99e87c673541c2b1c1354eee3a8659%7C0%7C0%7C638592707116585301%7CUnknown%7CTWF">Corpus of Contemporary American English</a> to study the usage of words. They have found that speakers of American English use “maybe” more than twice as often as the word “perhaps.” The Corpus contains over one billion words collected from American print, video, and audio media.</p>
+<p>Here is an example of the use of “maybe:”</p>
+<p><em>A: Are you going to the beach this weekend?</em></p>
+<p><em>B: Maybe—but I need to check the weather first. </em></p>
+<p>In this situation, if a speaker used the word “perhaps” instead of “maybe,” it might sound too formal, or serious, in American English.</p>
+<p>However, in written English, we often use the word “perhaps” instead of “maybe.” You can find many examples of both of these words in stories on our website at <a class="wsw__a" href="https://www.21voa.com/">www.21voa.com</a>.</p>
+<p>In writing, we can use <strong>commas</strong> to place the word “perhaps” between <strong>phrases</strong> or <strong>clauses</strong> in a sentence. Consider this example:</p>
+<p><em>It is easy, perhaps, to train a young dog to obey its owner. But training an older dog might not be so easy. </em></p>
+<p>Note that if we put the word “maybe” in place of “perhaps” in this writing example, it might not seem like good writing to a native speaker.</p>
+<p>Sometimes a writer will choose to use the word “maybe” instead of “perhaps” to communicate a particular feeling. Consider the following example:</p>
+<p><em>Government officials say the new trade deal will help the economies of both countries. Maybe. Such predictions have often been wrong in the past. </em></p>
+<p>Here, by using the word “maybe,” the writer communicates more strongly a feeling that the government officials might be wrong.</p>
+<p>Finally, be careful not to confuse the <strong>adverb</strong> “maybe” with the verb phrase “may be.” You can learn more about this by reading the <a class="wsw__a" href="https://www.21voa.com/a/maybe-and-may-be-are-driving-me-crazy-/4807820.html"><em>Ask a Teacher</em> program called “Maybe and May Be Are ‘Driving Me Crazy.'"</a></p>
+<p>For our readers and listeners, do you have a question about American English? Perhaps you would like to know how American English has changed over the years. Or maybe you just need to know how to use particular words. Whatever your question may be, send us an email at <a class="wsw__a" href="21voa.com">21voa.com</a>.</p>
+<p>And that's <em>Ask a Teacher</em>.</p>
+<p>I'm Andrew Smith.</p>
+<p><em>Andrew Smith wrote this lesson for VOA Learning English.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>comma</strong><strong> </strong>–n. a punctuation mark that often separates clauses, phrases, or words in a series</p>
+<p><strong>phrase</strong> <em>–n. </em>a group of words that express an idea but do not form a complete sentence</p>
+<p><strong>clause</strong> <em>–n.</em> a group of words expressing an idea that can, on their own, form a sentence</p>
+<p><strong>adverb</strong><strong> </strong>–n. a word that modifies a word expressing action, time, place, manner or degree</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

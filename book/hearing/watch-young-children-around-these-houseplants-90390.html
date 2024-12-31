@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Watch Young Children around These Houseplants</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Health Report, Watch Young Children around These Houseplants" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202302/watch-young-children-around-these-houseplants.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Watch Young Children around These Houseplants</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202302/watch-young-children-around-these-houseplants.mp3" id="mp3"></a>
+<a href="high-costs-force-native-hawaiians-to-leave-for-las-vegas-90388.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Ashley Thompson</span><br/>
+<span class="datetime">06 February 2023</span><br/>
+<p>Indoor plants are a beautiful way to brighten up your home, especially in the gray months of winter.</p>
+<p>But there can be a dark side to houseplants if you have children or if children visit your home. It is important that you know which plants are toxic to young, curious humans.</p>
+<p>Gardening expert Jessica Damiano recently wrote about the issue for The Associated Press. She said she often points out houseplants in friends' homes that should be kept out of children's mouths. "I don't mind <strong>dashing</strong> friends' hopes of an Instagram-worthy indoor jungle if it means...preventing harm," Damiano wrote.</p><div class="contentImage"><img alt="This Jan. 17, 2023, image provided by Jessica Damiano shows a vining pothos houseplant, which has toxic properties so should be kept away from children. (Jessica Damiano via AP)" src="https://files.21voa.com/gdb/800f0000-c0a8-0242-22cc-08daffbf66d8_cx0_cy1_cw0_w268_r1.jpg"/><br/><span class="imagecaption">This Jan. 17, 2023, image provided by Jessica Damiano shows a vining pothos houseplant, which has toxic properties so should be kept away from children. (Jessica Damiano via AP)</span></div>
+<p>Kaitlyn Brown works at America's Poison Centers in Arlington, Virginia. She told the AP, "We get an average of 33,000 calls a year from people whose kids put different plants in their mouths."</p>
+<p>She added that the cases usually involve children under 3, "because they explore their environment," she said, "and they put everything in their mouths."</p>
+<p>Most accidental <strong>exposures</strong> are not serious, Brown said. But in some cases a child's breathing, skin and eyes can be badly harmed.</p>
+<p>Damiano wrote that she recently visited her cousin's home and saw a Dieffenbachia plant in the kitchen. Her cousin told her that her young son, who had just begun crawling, had shown interest in the leaves.</p>
+<p>Damiano had to explain to her cousin that eating a small amount of the plant's stem can cause temporary but severe pain. The plant parts can cause throat and mouth <strong>swelling</strong>. The plant's sap can cause nose, skin and eye pain.</p>
+<p>Other plants that can cause similar reactions include: Caladium, flamingo flower, Swiss cheese plant, peace lily, ZZ plant, philodendron and pothos.</p>
+<p>Amaryllis and its relatives including clivia and daffodil, contain lycorine, a toxic substance that can cause a range of stomach issues.</p>
+<p>Damiano wrote that parents should teach their young children not to put non-food plant parts into their mouths. Parents should also educate themselves, she said. She urges parents to research whether the plants in their homes are safe to grow around children. She also suggests learning the official botanical names of any houseplants so that they are able to provide that information quickly to a poison control expert, if needed.</p>
+<p>Not all houseplants are problematic, of course. Spider plants (Chlorophytum comosum) are nontoxic and are also among the easiest indoor plants to grow.</p>
+<p>African violets, Boston ferns, Christmas cactus, waxplants, parlor palms, radiator plants, prayer plants and baby's tears are other safe choices.</p>
+<p>I'm Ashley Thompson.</p>
+<p><em>Jessica Damiano reported this story for The Associated Press. Ashley Thompson adapted it for VOA Learning English.</em></p>
+<p><em>_______________________________________________________________________</em></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>dash</strong> - v. to destroy or ruin (something, such as a hope or an expectation)</p>
+<p><strong>exposure</strong> - n. the fact or condition of being affected by something or experiencing something : the condition of being exposed <em>to</em> something</p>
+<p><strong>swelling</strong> - n. the condition of being larger than normal</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

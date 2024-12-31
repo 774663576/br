@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 全球首列氢气动力列车在德国开始运营</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Science in the News, 全球首列氢气动力列车在德国开始运营" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201809/world-s-first-hydrogen-trains-launch-in-germany.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>全球首列氢气动力列车在德国开始运营</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201809/world-s-first-hydrogen-trains-launch-in-germany.mp3" id="mp3"></a>
+<a href="/static/lrc/world-s-first-hydrogen-trains-launch-in-germany.lrc" id="lrc"></a>
+<a href="world-s-first-hydrogen-trains-launch-in-germany-80156.html" id="CnPage" target="_blank"></a>
+<a href="south-korean-delegation-begins-first-day-of-talks-in-north-korea-80144.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">The world's first hydrogen-powered trains have begun running in Germany. They began carrying passengers Monday in Germany's northern Lower Saxony state. The new trains will run 100-kilometer trips and can travel up to 140 kilometers an hour.<br/>全球首批氢动力列车已经在德国开始运营。周一，它们在德国下萨克森州北部开始运送乘客。这些新列车的运营路线将达到100公里，时速可以达到140公里每小时。
+<p>A French railroad company called Alstom built the two trains. Teams in Germany and France cooperated on the project, which was supported by the German government. The new train model, called the Coradia iLint, signals the beginning of efforts in Germany and other nations to move away from pollution-producing diesel trains.<br/>法国阿尔斯通铁路公司建造了这两辆列车。德国和法国的团队在该项目上进行了合作，并得到了德国政府的支持。这种名为Coradia iLint的新型列车标志着德国等国家努力摆脱会制造污染的柴油列车的开始。</p>
+<p><strong>Hydrogen trains vs. diesel trains<br/>氢动力列车对比柴油列车</strong></p>
+<p>The Coradia iLint is designed to run on non-electrified train lines with low levels of noise. It uses a process that combines hydrogen and oxygen to produce electrical power. If the system produces more energy than the train needs at that time, it can store the extra energy in batteries. The only emissions are water and steam.<br/>Coradia iLint设计用于非电气化列车线路，噪音低。它采用了氢氧结合产生电能的生产流程。如果系统产生的能量超过了当时列车所需的能量，它可以将额外的电能储存在电池中。这种列车唯一的排放物是水和蒸汽。</p>
+<p>A single tank of hydrogen can run a Coradia iLint train for about 1,000 kilometers. This is very similar to the distance a diesel-powered train can run on with a single tank.<br/>一个氢气罐可以让Coradia iLint列车行驶大约1000公里，跟单油罐的柴油动力列车的行驶距离非常接近。</p>
+<p>Hydrogen-powered trains cost more than diesel trains to build. But Alstom officials say the operating costs are much lower. The company plans to provide another 14 Coradia iLint trains to Lower Saxony by 2021.<br/>氢动力列车的成本高于柴油列车。但是阿尔斯通官员表示，它的运营成本要低得多。该公司计划在2021年前向下萨克森州提供另外14辆Coradia iLint列车。</p>
+<p>The head of railroad operations in the area, Carmen Schwabl, praised replacing diesel trains with hydrogen. She said the move was an important first step in using clean-burning technologies to reach climate protection goals.<br/>该地区的铁路运营负责人Carmen Schwabl赞扬了用氢动力列车取代柴油列车。她说，此举是采用清洁燃烧技术实现气候保护目标的重要一步。</p>
+<p>Schwabl added: "We also do this because about 120 diesel trainsets in our vehicle pool will reach the end of their lifetime within the next 30 years, meaning we will have to replace them. The experience gained with this project helps us find a sustainable and practical solution."<br/>Schwabl补充说：“我们这样做还因为有大约120辆柴油列车组将在未来30年内达到其使用寿命，这意味着我们必须更换它们。这个项目中获得的经验将有助于我们找到可持续发展、切实可行的解决方案。”</p>
+<p>Officials say the area's many wind turbines will produce part of the energy to create the hydrogen to power the trains.<br/>有关官员表示，该地区很多风力涡轮机将提供部分能量，用于生产驱动火车的氢气。</p>
+<p>Alstom says several other European countries have also expressed interest in developing hydrogen train systems. France has already said it wants its first hydrogen train to be operating by 2022.<br/>阿尔斯通公司表示，其它几个欧洲国家也表示有意开发氢动力列车系统。法国已经表示希望在2022年前开始运营首辆氢动力列车。</p>
+<p>I'm Bryan Lynn.<br/>我是布莱恩·林恩。(51VOA.COM原创翻译，禁止转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:World’s First Hydrogen Trains Launch in Germany]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.00]American Defense Secretary Jim Mattis has accused Russia
+[00:05.72]of trying to influence a planned vote in Macedonia.
+[00:12.22]The vote could open a path for the country to join NATO.
+[00:18.62]Mattis spoke to reporters traveling with him
+[00:22.56]to Skopje, the Macedonian capital.
+[00:26.40]He said he had "no doubt" that Moscow had given money
+[00:32.44]to pro-Russian groups to defeat the vote about changing Macedonia's name.
+[00:40.48]A name change would end a dispute with Greece,
+[00:45.24]which has territory of the same name.
+[00:49.11]Greece has repeatedly blocked Macedonia's request to join NATO.
+[00:55.74]Mattis said, "We ought to leave the Macedonian people
+[01:00.83]to make up their own minds.''
+[01:03.97]Macedonians will vote on September 30th to decide on the possible name change.
+[01:12.72]In June, Greece and Macedonia agreed that Macedonia would change its name.
+[01:21.29]In return Greece would end its objections to Macedonia's request to join NATO.
+[01:30.07]Other Western leaders had accused Russia of interference in the issue earlier,
+[01:37.54]including the Chancellor of Germany and the chief of NATO.
+[01:42.73]In July, Greece expelled two Russian diplomats accused
+[01:48.72]of giving money to groups against the name change.
+[01:53.63]Russia objected to the expulsions as baseless.
+[01:58.64]The dispute over the name began
+[02:02.01]when Macedonia gained independence from Yugoslavia in 1991.
+[02:09.51]Greece argued that the use of the name was an insult to Greek history.
+[02:16.12]Officials also said sharing the name could lead
+[02:20.74]to a Macedonian claim on the Greek territory named Macedonia.
+[02:26.99]More than 100 United Nations member-countries recognize Macedonia
+[02:34.72]officially as the Former Yugoslav Republic of Macedonia.
+[02:41.22]The vote will ask Macedonians to decide
+[02:46.21]if they want to join the EU and NATO by "accepting the agreement
+[02:52.77]between the Republic of Macedonia and the Republic of Greece?"
+[02:58.88]If the majority vote "yes" the country
+[03:02.38]will be renamed the "Republic of North Macedonia."
+[03:07.42]I'm Caty Weaver. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

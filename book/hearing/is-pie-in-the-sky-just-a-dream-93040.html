@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Is ‘Pie in the Sky’ Just a Dream?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Words And Their Stories, Is ‘Pie in the Sky’ Just a Dream?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202410/is-pie-in-the-sky-just-a-dream.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Is ‘Pie in the Sky’ Just a Dream?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202410/is-pie-in-the-sky-just-a-dream.mp3" id="mp3"></a>
+<a href="municipal-report-o-henry-american-stories-93039.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content"><span class="byline">By Anna Matteo</span><br/><span class="datetime">05 October, 2024</span><br/>
+<p>And now, <em>Words and Their Stories, </em>from VOA Learning English.</p>
+<p>On this program, we explore words and expressions in the English language. We give examples, notes on usage, and sometimes, we use them in short conversations.</p>
+<p>Today we talk about the sweet dish at the end of a meal -- the dessert. One of the most famous kinds of dessert is pie. With a <strong>buttery crust</strong> and sweet fillings like apple, berries, or banana cream, a well-made pie is a dreamy food, indeed.</p><div class="contentImage"><img alt="FILE - This photo shows citrus pumpkin meringue pie in Concord, New Hampshire, October 12, 2015. (AP Photo/Matthew Mead)" src="https://files.21voa.com/gdb/F4273A16-11CB-4FC3-895A-1FCF29915CEC_w268_r1.jpg"/><br/><span class="imagecaption">FILE - This photo shows citrus pumpkin meringue pie in Concord, New Hampshire, October 12, 2015. (AP Photo/Matthew Mead)</span></div>
+<p>And that gives us the expression <u>pie in the sky</u>.</p>
+<p>Imagine a perfect pie coming down to you from the sky. That is like a dream. And a <u>pie in the sky</u> is a dream, too.</p>
+<p>Anything described as<u> pie-in-the-sky</u> is fun to daydream about but is very unlikely to happen. When we act in a <u>pie-in-the-sky</u> manner, we are being <strong>foolishly optimistic</strong>.</p>
+<p>Any industry or area of life can have <u>pie-in-the-sky</u> ideas. So, you can use this expression for different situations.</p>
+<p>In business, let's say a company has lost money for two straight years. But the company chief promised increased earnings in the coming year. Her claims, as they say, were simply <u>pie in the sky</u>. She had no business plan or data to support them.</p>
+<p>An unpublished writer may have <u>pie-in-the-sky</u> dreams about her book being turned into a multi-million dollar film project.</p>
+<p>A teacher may have <u>pie-in-the-sky</u> wishes that all his students complete their homework on time.</p>
+<p><u>Pies in the sky</u> are empty promises or empty wishes. They are wishful thinking. They are as unlikely as tasty pies falling from the sky.</p>
+<p>American English has another similar expression: <u>pipe dream</u>. The expression is also used to describe a plan, hope, or wish that is highly unlikely to happen.</p>
+<p>However, this expression does not come from a tasty <strong>bakery</strong>. Word experts say it started in <strong>opium dens</strong>. Here, people would smoke opium in long pipes and then fall into a dreamlike state where nothing seemed real.</p>
+<p>Now let's hear two friends using the expressions <u>pipe dream</u> and <u>pie in the sky</u>.</p>
+<p><em>A: Hey, did you hear about Sarah? She's moving to Spain! </em></p>
+<p><em>B: Really? Last week, she told me she was having trouble paying her <strong>rent</strong>. </em></p>
+<p><em>A: Well, she told me this morning that she's moving to Madrid to open a bakery. </em></p>
+<p><em>B: Sarah? Open a bakery? That sounds like a total <u>pie in the sky</u> to me. She can't even make toast.</em></p>
+<p><em>A: You know, it sounded like <u>a pipe dream</u> when she told me. She didn't have details. Just a lot of dreamy talk. </em></p>
+<p><em>B: Well, if she wants to turn her <u>pie-in-the-sky</u> bakery dream into a reality, I'd advise her to do one thing first – learn how to bake. </em></p>
+<p>And that's all the time we have for this <em>Words and Their Stories</em>. Until next time, I'm Anna Matteo.</p>
+<p><em>Anna Matteo wrote this lesson for VOA Learning English. </em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>butter </strong><em>-n.</em><strong> </strong>a solid yellow fatty food made by churning milk or cream :<strong> buttery </strong><em>-adj. </em>containing or spread with butter</p>
+<p><strong>crust </strong><em>-n. </em>the pastry shell of a pie</p>
+<p><strong>foolishly </strong><em>-adv. </em>having or showing a lack of good sense, judgment, or discretion</p>
+<p><strong>optimistic </strong><em>-adj. </em>feeling or showing hope for the future</p>
+<p><strong>bakery </strong><em>-n. </em>a place where bread, cakes, and pastry are made or sold</p>
+<p><strong>opium </strong><em>-n. </em>a bitter brownish addictive narcotic drug that consists of the dried latex obtained from immature seed capsules of the opium poppy</p>
+<p><strong>den </strong><em>-n. </em>a dirty run-down place in which people live or gather<em> </em></p>
+<p><strong>rent </strong><em>-n. </em>money paid for the use of property <strong>: </strong>a periodic payment made by a tenant to the owner for the use of the owner's property</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

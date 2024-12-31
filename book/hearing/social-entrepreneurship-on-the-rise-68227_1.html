@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 社会企业家不断增多</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, In the News, 社会企业家不断增多" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201602/social-entrepreneurship-on-the-rise.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>社会企业家不断增多</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201602/social-entrepreneurship-on-the-rise.mp3" id="mp3"></a>
+<a href="/static/lrc/social-entrepreneurship-on-the-rise.lrc" id="lrc"></a>
+<a href="social-entrepreneurship-on-the-rise-68227.html" id="CnPage" target="_blank"></a>
+<a href="infantino-fifa-presidency-68207.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>Social entrepreneurs – people who create start-up companies that would help the environment, health care or agriculture – are on the rise.<br/>创办有助于环境、医疗保健和农业的创业公司的社会企业家在不断增加。</p>
+<p>These entrepreneurs use innovation to tackle important economic and social problems. They can be for-profit or non-profit entities.<br/>这些企业家利用创新来解决重要的经济和社会问题。这些公司可以是营利或非营利性质的实体。</p>
+<p>Funding for social entrepreneurs is increasing. This is coming from foundations, institutional investors and individuals.<br/>对社会企业家的资助也越来越多。这些资助来自于基金会、机构投资者和个人。</p>
+<p>Kiplinger is a personal finance publication in Washington, D.C. It reported that the amount of assets in socially responsible investing – focused on companies doing good in the world – almost doubled, from $3.74 trillion in 2012 to $6.57 trillion in 2014.<br/>Kiplinger是华盛顿特区的一份个人理财刊物。据报道，侧重于全球行善公司的社会责任投资的资产额几乎增加了一倍，从2012年的3.74万亿增加到了2014年的6.57万亿。</p>
+<p>Globally, interest in socially responsible investing is growing even faster. The 2014 Global Sustainable Investment Review said that between 2012 and 2014, global assets rose to $21.4 trillion from $13.3 trillion – an increase of 61 percent.<br/>从全球来看，对社会责任投资的兴趣增长甚至更快。《2014年全球可持续投资回顾》表示，在2012年到2014年之间，全球资产从13.3万亿上升到21.4万亿，同比增长了61%。</p>
+<p>The Schwab Foundation for Social Entrepreneurship, in Geneva, Switzerland, is an example of a foundation that advances social entrepreneurs around the world. Each year, working with the World Economic Forum, the foundation searches the globe "for outstanding social innovators, with business models that are proven to drive social and environmental change," said their website.<br/>位于瑞士日内瓦的施瓦布社会企业家基金会就是提升世界各地社会企业家的基金会的一个榜样。根据他们的网站表示，该基金会每年同世界经济论坛合作，在全球甄选被证实拥有推动社会和环境变革的业务模式的优秀社会创新者。</p>
+<p>Getting rich is not the primary aim of social entrepreneurs. Instead, their focus is on fulfilling their mission to improve society.<br/>致富不是社会企业家的首要目标。相反他们的重点是完成自己改善社会的使命。</p>
+<p>"While profits are ideally generated, the main aim is not to maximize financial returns for shareholders, but to grow the social venture and reach more people in need," said the Schwab Foundation website. Usually, social entrepreneurs reinvest their profits in the enterprise to expand it.<br/>施瓦布基金会网站表示，“虽然利润很理想地产生了，但是主要目的并不是最大化股东的财务回报，而是发展社会企业并接触到更多需要帮助的人。”通常，社会企业家会把利润再度投资到企业帮助企业扩大。</p>
+<p>Kristin Groos Richmond is co-founder of Revolution Foods and one of the social entrepreneurs selected by the Schwab Foundation. Her company, in Oakland, California, is dedicated to providing fresh food, prepared daily, for families and schools, and is active in 11 states across the U.S. and Washington, DC.<br/>克里斯汀·格鲁斯·瑞奇蒙（Kristin Groos Richmond）是Revolution Foods的联合创始人，也是施瓦布基金会甄选的社会企业家之一。她的公司在加州奥克兰，该公司致力于每天为家庭和学校准备新鲜食物。该公司在美国11个州以及华盛顿特区运营。</p>
+<p>Richmond said social entrepreneurs are driven by their values. She gave the following advice to aspiring social entrepreneurs: "Align yourself with a team, a board and investors who believe in your mission."<br/>瑞奇蒙表示，社会企业家受到他们的价值观所驱动。她对有抱负的社会企业家提出了以下建议：“向那些认同自己使命的团队、董事会和投资者看齐。”</p>
+<p>Many social entrepreneurs create novel solutions to solve world problems. Bart Weetjens, a Belgian social entrepreneur, is an example. He kept rats a childhood pets, then realized they could be put to work detecting land mines.<br/>许多社会企业家创造了解决世界问题的新方案。比利时的社会企业家巴特·维特延斯（Bart Weetjens）就是一个例子。他喂养老鼠作为儿时宠物，然后他意识到可以让老鼠探测地雷。</p>
+<p>He founded the non-profit organization APOPO in 1997. APOPO has used specially trained rats on leashes to clear more than 13,200 unexploded bombs from minefields in Tanzania, Mozambique, Angola and Cambodia, according to the National Geographic.<br/>他在1997年创建了非营利组织APOPO。根据美国国家地理杂志表示，该组织利用受过专门训练并系上皮带的老鼠在坦桑尼亚、莫桑比克、安哥拉以及柬埔寨的雷区清理了超过13200枚未爆炸的炸弹。</p>
+<p>APOPO uses African giant-pouched rats, which are huge, cat-sized rats native to central Africa. They have "an extraordinary sense of smell," said the National Geographic. The rats are lightweight enough to walk across the mines without setting them off. And their sensitive noses can sniff out explosives buried in the ground, even decades after a war has ended.<br/>APOPO组织采用了非洲中部原产的体型大似猫的非洲巨鼠。国家地理杂志说，这种老鼠拥有超乎寻常的嗅觉。这些老鼠足够轻，在地雷上走过也不会引起爆炸。而他们灵敏的鼻子能够嗅出埋在地下的爆炸物，即使是战争结束几十年之后。</p>
+<p>In addition, many business schools – both in the U.S. and other countries – now offer courses in social entrepreneurship. The Wharton School at the University of Pennsylvania is an example. It is ranked by US News &amp; World Report as one of the nation's top business schools.<br/>此外无论是美国还是其它国家的很多商学院现在都提供社会创业课程。宾夕法尼亚大学的沃顿商学院就是一个例子。该学院被《美国新闻与世界报道》评为全美最顶尖的商学院之一。</p>
+<p>Wharton Online offers a five-week class on social entrepreneurship, four to six hours a week, through Coursera, a global e-learning platform. Graduates of the course receive a certificate and "learn how to develop, test and deploy high-impact solutions to society's toughest problems," according to Coursera's website.<br/>《沃顿在线》通过Coursera这家全球电子学习平台提供了为期五周，每周四到六个小时的社会创业课程。根据Coursera网站所言，该课程的毕业生将获得一个证书并“学会如何针对社会最棘手问题开发、测试和部署高影响力的解决方案。”</p>
+<p>Social entrepreneurs have also won increased media attention. For example, Forbes showcased "30 Under 30" – the top social entrepreneurs younger than 30 from around the world.<br/>社会企业家也赢得了媒体越来越多的关注。例如，福布斯展示了“30 Under 30”，也就是年龄在30岁以下的全球顶尖社会企业家。</p>
+<p>One honoree, Sejal Hathi, age 25, was a molecular biology student at Yale, who sought to help girls globally. She founded Girltank (www.girltank.org), a for-profit start-up, to identify and develop girls with potential to be high-impact leaders. The website refers to it as "the she lab for social entrepreneurship."<br/>获奖人之一的Sejal Hathi年方25岁，是耶鲁大学一名分子生物学学生，她寻求帮助全球女生。她创办了Girltank这家非营利性初创企业，来找到并开发具备成为高影响力领导者潜力的女生。该网站将其称作为“社会创业女性实验室”。</p>
+<p>"Girltank creates a virtual tank for young women interested in social entrepreneurship to utilize the collective genius of the group to brainstorm ideas and solutions, crowd-sourcing funding for their ventures, and receive peer-to-peer mentoring," according to the website.<br/>根据该网站表示，“Girltank为有志于社会创业的年轻女性创建一个虚拟池，利用该组织的集体智慧来集思广益，对她们的风险企业进行众包资助，并接受一对一的辅导。“</p>
+<p>I'm Mary Gotschall.<br/>我是玛丽·歌切尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.20]Social entrepreneurs – people who create start-up companies
+[00:04.28]that would help the environment, health care or agriculture – are on the rise.
+[00:10.00]These entrepreneurs use innovation
+[00:12.84]to tackle important economic and social problems.
+[00:16.52]They can be for-profit or non-profit entities.
+[00:20.45]Funding for social entrepreneurs is increasing.
+[00:24.12]This is coming from foundations, institutional investors and individuals.
+[00:31.33]Kiplinger is a personal finance publication in Washington, D.C.
+[00:37.85]It reported that the amount of assets in socially responsible investing
+[00:43.36]– focused on companies doing good in the world – almost doubled,
+[00:48.08]from $3.74 trillion in 2012 to $6.57 trillion in 2014.
+[00:57.12]Globally, interest in socially responsible investing is growing even faster.
+[01:03.04]The 2014 Global Sustainable Investment Review
+[01:07.44]said that between 2012 and 2014,
+[01:11.48]global assets rose to $21.4 trillion from $13.3 trillion
+[01:19.31]– an increase of 61 percent.
+[01:22.23]The Schwab Foundation for Social Entrepreneurship,
+[01:25.68]in Geneva, Switzerland, is an example
+[01:28.92]of a foundation that advances social entrepreneurs around the world.
+[01:33.70]Each year, working with the World Economic Forum,
+[01:38.11]the foundation searches the globe "for outstanding social innovators,
+[01:43.47]with business models that are proven to drive social
+[01:47.24]and environmental change," said their website.
+[01:50.69]Getting rich is not the primary aim of social entrepreneurs.
+[01:55.66]Instead, their focus is on fulfilling their mission to improve society.
+[02:01.34]"While profits are ideally generated,
+[02:04.12]the main aim is not to maximize financial returns for shareholders,
+[02:09.08]but to grow the social venture and reach more people in need,"
+[02:13.66]said the Schwab Foundation website.
+[02:16.40]Usually, social entrepreneurs reinvest their profits in the enterprise to expand it.
+[02:23.45]Kristin Groos Richmond is co-founder of Revolution Foods
+[02:28.84]and one of the social entrepreneurs selected by the Schwab Foundation.
+[02:33.41]Her company, in Oakland, California,
+[02:36.32]is dedicated to providing fresh food, prepared daily, for families and schools,
+[02:42.46]and is active in 11 states across the U.S. and Washington, DC.
+[02:47.60]Richmond said social entrepreneurs are driven by their values.
+[02:52.28]She gave the following advice to aspiring social entrepreneurs:
+[02:57.24]"Align yourself with a team, a board and investors who believe in your mission."
+[03:03.12]Many social entrepreneurs create novel solutions to solve world problems.
+[03:09.04]Bart Weetjens, a Belgian social entrepreneur, is an example.
+[03:14.64]He kept rats a childhood pets,
+[03:16.96]then realized they could be put to work detecting land mines.
+[03:21.18]He founded the non-profit organization APOPO in 1997.
+[03:26.92]APOPO has used specially trained rats on leashes
+[03:31.24]to clear more than 13,200 unexploded bombs
+[03:36.44]from minefields in Tanzania, Mozambique, Angola and Cambodia,
+[03:42.80]according to the National Geographic.
+[03:45.00]APOPO uses African giant-pouched rats,
+[03:48.59]which are huge, cat-sized rats native to central Africa.
+[03:53.17]They have "an extraordinary sense of smell," said the National Geographic.
+[03:58.07]The rats are lightweight enough to walk across the mines without setting them off.
+[04:03.92]And their sensitive noses can sniff out explosives buried in the ground,
+[04:09.60]even decades after a war has ended.
+[04:12.60]In addition, many business schools – both in the U.S. and other countries
+[04:18.72]– now offer courses in social entrepreneurship.
+[04:22.80]The Wharton School at the University of Pennsylvania is an example.
+[04:28.37]It is ranked by US News &amp; World Report
+[04:31.84]as one of the nation's top business schools.
+[04:34.78]Wharton Online offers a five-week class on social entrepreneurship,
+[04:40.12]four to six hours a week, through Coursera, a global e-learning platform.
+[04:46.28]Graduates of the course receive a certificate
+[04:49.54]and "learn how to develop, test and deploy
+[04:53.02]high-impact solutions to society's toughest problems,"
+[04:57.28]according to Coursera's website.
+[04:59.67]Social entrepreneurs have also won increased media attention.
+[05:04.24]For example, Forbes showcased "30 Under 30"
+[05:09.08]– the top social entrepreneurs younger than 30 from around the world.
+[05:14.53]One honoree, Sejal Hathi, age 25,
+[05:19.44]was a molecular biology student at Yale,
+[05:22.56]who sought to help girls globally.
+[05:25.24]She founded Girltank (www.girltank.org), a for-profit start-up,
+[05:29.09]to identify and develop girls with potential to be high-impact leaders.
+[05:35.36]The website refers to it as "the she lab for social entrepreneurship." "
+[05:41.12]Girltank creates a virtual tank
+[05:43.72]for young women interested in social entrepreneurship
+[05:47.04]to utilize the collective genius of the group to brainstorm ideas and solutions,
+[05:52.67]crowd-sourcing funding for their ventures,
+[05:55.64]and receive peer-to-peer mentoring," according to the website.
+[06:00.19]I'm Mary Gotschall.
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

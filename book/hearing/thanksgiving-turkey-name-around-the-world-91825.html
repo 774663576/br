@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - How Did Thanksgiving 'Turkey' Get Its Name?</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Arts &amp; Culture, How Did Thanksgiving 'Turkey' Get Its Name?" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202311/thanksgiving-turkey-name-around-the-world.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>How Did Thanksgiving 'Turkey' Get Its Name?</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202311/thanksgiving-turkey-name-around-the-world.mp3" id="mp3"></a>
+<a href="drug-trials-often-do-not-include-overweight-people-91820.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Ashley Thompson and Anna Matteo</span><br/>
+<span class="datetime">21 November 2023</span><br/>
+<p>The U.S. Thanksgiving holiday is <strong>symbolized </strong>by its traditional food, a large bird we call a turkey. But turkey is certainly not from Turkey.</p>
+<p>In fact, its English name is based on one big mistake. We could say it is a case of mistaken identity.</p><div class="contentImage"><img alt="President Joe Biden speaks after pardoning the national Thanksgiving turkey, Liberty, during a pardoning ceremony at the White House in Washington, Monday, Nov. 20, 2023. (AP Photo/Susan Walsh)" src="https://files.21voa.com/gdb/01000000-c0a8-0242-b0b6-08dbea009118_w268_r1.jpg"/><br/><span class="imagecaption">President Joe Biden speaks after pardoning the national Thanksgiving turkey, Liberty, during a pardoning ceremony at the White House in Washington, Monday, Nov. 20, 2023. (AP Photo/Susan Walsh)</span></div>
+<p>Let's set the record straight.</p>
+<p>The word "Turkey" has meant "the land of the Turks" since ancient times. The word "turkey" as it refers to the bird first appeared in the English language in the mid-1500s.</p>
+<p>The misunderstanding over the word happened because of two similar-looking kinds of birds.</p>
+<p>There is an African bird called the guinea fowl. It has dark feathers with white spots and a patch of brown on the back of its neck. Portuguese traders brought the guinea fowl to Europe through North Africa.</p>
+<p>This foreign bird came to Europe through Turkish lands. So, the English thought of the bird as a "Turkish chicken."</p>
+<p>When Europeans came to North America, they saw a bird that looked like the guinea fowl. This bird was native to the North American continent.</p>
+<p>Orin Hargraves is a lexicographer, someone who writes dictionaries. Hargraves explains what happened.</p>
+<p>"Some Europeans saw an American turkey, thought that it was the guinea fowl, which at that time was called the ‘turkey cock,' and so gave it the same name."</p>
+<p>Hundreds of years later, we continue to call this North American bird "turkey," even though it has no connection at all with the country Turkey, or even with Europe.</p>
+<p>But English is not the only language with interesting -- and even questionable -- names for this North American bird.</p>
+<p>The Turkish, for their part, call turkey "hindi," the Turkish name for India<em>.</em> The reference to India probably comes from the old, wrong idea that the New World was in Eastern Asia.</p>
+<p>The French call it "dinde," a name that also connects the bird to India. "D'Inde" means "from India" in the French language. "Turkey" has similar names in several other languages.</p>
+<p>So, what do they call this North American bird in India? Well, in the Hindi language, "turkey" is "tarki."</p>
+<p>But wait, there's more. In Portuguese, the same bird is called "Peru," after the South American nation.</p>
+<p>Thanks to our VOA Learning English Facebook friends, we have a few more names for "turkey" to share with you.</p>
+<p>The Vietnamese word for the bird is "gà t<i>&amp;#</i>226;y" or western chicken. Our Facebook friend Nguyen Duc explains that "local chicken is smaller than western chicken."</p>
+<p>A Facebook friend in Myanmar explained that the Burmese word for "turkey" is "kyat sin." The name <strong>translates </strong>to "elephant chicken" in English.</p>
+<p>"That animal looks like a big chicken," Zaw Myo Win explained.</p>
+<p>The Dari language name for the bird, "fel murgh" also translates to "elephant chicken."</p>
+<p>Abdulla Kawer explained to us that "here in Afghanistan this name represents the size of this delicious meal." He adds that he thinks the descriptive name "elephant chicken" is "better than a country name."</p>
+<p>I'm Ashley Thompson.</p>
+<p><em>Ashley Thompson and Anna Matteo wrote this report for Learning English. It was first published in 2017.</em></p>
+<p><em>How do you say 'turkey' in your language? Let us know in the comments section!</em></p>
+<p><em>________________________________________________</em></p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>symbolize </strong><em>- v. </em>to represent or express a particular idea or quality</p>
+<p><strong>translate<em> </em></strong><em>- v. </em>to change words from one language into another language</p>
+</div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

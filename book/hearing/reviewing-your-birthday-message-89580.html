@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - Reviewing Your Birthday Message</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Everyday Grammar, Reviewing Your Birthday Message" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202209/reviewing-your-birthday-message.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>Reviewing Your Birthday Message</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202209/reviewing-your-birthday-message.mp3" id="mp3"></a>
+<a href="regular-salarymen-in-japan-become-tiktok-stars-89579.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="content">
+<span class="byline">By Faith Pirlo</span><br/>
+<span class="datetime">01 September 2022</span><br/>
+<p>Recently, our readers and listeners wrote many lovely messages about their birthdays. We have been reading all of them. Most messages are happy. You wrote about gifts you received, the people who celebrated with you, or where and how you celebrated.</p>
+<p>Some messages seemed sad. Some of you do not get to celebrate your birthdays. Other messages were a mix of sad and happy.</p>
+<p>In this week's Everyday Grammar, we are looking at Farhana's message about her birthday. She wrote:</p>
+<div class="contentImage"><img alt="Everyday Grammar: Describing Your Birthday" src="https://files.21voa.com/gdb/019e0000-0aff-0242-f2de-08da80763c93_w268_r1.png"/><br/>
+<span class="imagecaption">Everyday Grammar: Describing Your Birthday</span></div>
+<p><strong>A message from Farhana</strong></p>
+<p>My birthday was on last 23 march. This was my 27th birthday. In my birthday no one wished me except my younger sister. And actually there was no devise for this day. I spent my whole day as like it is a normal day. Sometimes i felt sad and sometimes i wasn't.</p>
+<p><strong>Review of Farhana's message </strong></p>
+<p>Let us start at the beginning. Farhana writes:</p>
+<p>My birthday was on last 23 march.</p>
+<p>We suggest changing this sentence to the present tense to say when your birthday is.</p>
+<p>My birthday is March 23.</p>
+<p>In American English, the usual order for dates is month, day, year. So instead of "23 March," Americans usually say "March 23."</p>
+<p>You used the past tense in this sentence:</p>
+<p>This was my 27th birthday.</p>
+<p>Another way we can say how old we are, is to use the past tense of the verb "turn."</p>
+<p>I turned 27 this year.</p>
+<p>Here, "turn" means to reach or pass into a new age.</p>
+<p>Next Farhana wrote this:</p>
+<p>In my birthday no one wished me except my younger sister.</p>
+<p>We can change the word order of this sentence to make it clearer.</p>
+<p>No one wished me happy birthday, except my younger sister.</p>
+<p>Instead of a prepositional phrase, "In my birthday," we can just start the sentence with "No one." "No one" is an <strong>indefinite </strong>pronoun meaning "no person." You could also use the pronoun "nobody."</p>
+<p>Onto the next sentence:</p>
+<p>And<strong> </strong>actually there was no devise for this day.</p>
+<p>"To devise" is a verb meaning to plan or think up something. You were close! But in this sentence we need a noun. And we find it in the definition of devise: plan.</p>
+<p>Actually, there was no plan for the day.</p>
+<p>If you wanted to use the word devise, however, you could! It would come right after "plan" in the sentence.</p>
+<p>Actually, there was no plan devised for the day.</p>
+<p>Farhana's next sentence is:</p>
+<p>I spent my whole day as like it is a normal day.</p>
+<p>We should make a few changes to this sentence.</p>
+<p>"As" and "like" are both used to make<strong> </strong>comparisons between nouns.</p>
+<p>"As" is an adverb, and "like" is a preposition. We only need one of these to make the comparison.</p>
+<p>We can say:</p>
+<p>I spent my whole day like it was a normal day.</p>
+<p>Let us look at Farhana's last sentence:</p>
+<p>Sometimes i felt sad and sometimes i wasn't.</p>
+<p>We suggest changing this sentence to:</p>
+<p>Sometimes I felt sad, but other times I didn't.</p>
+<p>Now the two parts of the sentence agree in verb use.</p>
+<p>Also, We always <strong>capitalize</strong> the pronoun "I" in sentences. We used the conjunction "but" with "other times" only to create more <strong>contrast</strong>. It is also correct to write:</p>
+<p>Sometimes I felt sad and sometimes I didn't.</p>
+<p><strong>Closing thoughts</strong></p>
+<p>Now, let's hear the revised message about Farhana's birthday:</p>
+<p>My birthday is March 23. I turned 27 this year. No one wished me happy birthday except my younger sister. Actually, there was no plan for the day. I spent my whole day like it was a normal day. Sometimes I felt sad, but other times, I didn't.</p>
+<p>Thank you for Farhana for your message. We would like to wish you a happy birthday, early, for next year when you turn 28! We hope you enjoy the day.</p>
+<p>If you would like to receive advice on American English, write us a short message of 5-8 sentences about your favorite <strong>character</strong> from a book. You can describe what the character looks like, their thoughts, actions, what they say, or what other characters think of them. You can also talk about why you like this character. Send your writing to our email address: <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a>.</p>
+<p>Maybe we will choose your message for a future episode of <em>Everyday Grammar</em>.<strong> </strong></p>
+<p>I'm Caty Weaver.</p>
+<p><em>Faith Pirlo wrote this lesson for VOA Learning English.</em></p>
+<p><em>Describe your favorite character by writing us at <a class="wsw__a" href="mailto:learningenglish@voanews.com">learningenglish@voanews.com</a> or by leaving a comment.</em></p>
+<p><strong>_________________________________________________________________</strong></p>
+<h2 class="wsw__h2"><strong>Words in This Story</strong></h2>
+<p><strong>indefinite</strong><em> – adj.</em> unclear in meaning or detail</p>
+<p><strong>devise </strong><em>– v.</em> to think of; to come up with, to invent or plan</p>
+<p><strong>capitalize </strong><em>– v. </em>to begin (a word or name) with a capital letter</p>
+<p><strong>contrast</strong> – <em>n</em>. a difference between things or people that are being compared</p>
+<p><strong>character</strong> <em>–</em> <em>n</em>. a person who appears in a movie, book, film...</p>
+<p><strong>feedback</strong> <em>– n.</em> the transmission of corrective information</p></div>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

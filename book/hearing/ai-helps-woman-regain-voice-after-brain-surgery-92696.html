@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA Special English - AI Helps Woman Regain Voice after Brain Surgery</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA Special English" name="keywords">
+<meta content="VOA Special English, Technology Report, AI Helps Woman Regain Voice after Brain Surgery" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/202405/ai-helps-woman-regain-voice-after-brain-surgery.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>AI Helps Woman Regain Voice after Brain Surgery</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/202405/ai-helps-woman-regain-voice-after-brain-surgery.mp3" id="mp3"></a>
+<a href="/static/lrc/ai-helps-woman-regain-voice-after-brain-surgery.lrc" id="lrc"></a>
+<a href="new-study-examines-how-elephants-say-hello-92695.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<span class="byline">By Dan Friedell</span><br/>
+<span class="datetime">16 May 2024</span><br/>
+<p>Lots of people are concerned about the ability that artificial intelligence (AI) has to copy their voices. When AI is used to make false recordings of things that a person never said, it is called a "deepfake."</p>
+<p>However, more and more stories are coming out about how AI is helping people who can no longer speak, regain a version of their voice.</p>
+<p>For example, country music singer Randy Travis recently released his first new song in over 10 years with the help of AI technology. Travis suffered a <strong>stroke</strong> and can no longer sing.</p><div class="contentImage"><img alt="Alexis Bogan, whose speech was impaired by a brain tumor, uses an AI-powered smartphone app to create an audible drink order at a Starbucks drive-thru on Monday, April 29, 2024, in Lincoln, R.I. (AP Photo/Steven Senne)" src="https://files.21voa.com/gdb/da658f9a-092b-4bc2-8939-527701567d1f_w268_r1.jpg"/><br/><span class="imagecaption">Alexis Bogan, whose speech was impaired by a brain tumor, uses an AI-powered smartphone app to create an audible drink order at a Starbucks drive-thru on Monday, April 29, 2024, in Lincoln, R.I. (AP Photo/Steven Senne)</span></div>
+<p>The technology is also able to help people like 21-year-old Alexis "Lexi" Bogan from the eastern state of Rhode Island.</p>
+<p>Bogan used to love singing along with songs by her favorite musicians like Taylor Swift and Zach Bryan. She was a singer in her school music group as a teenager. If she was spending time with friends, she would be the loudest during a discussion about politics over a large fire in the back yard.</p>
+<p>But a surprise <strong>diagnosis</strong> changed all that. Last August, doctors removed a <strong>tumor</strong> from the back of her brain. The surgery was a success. But after doctors removed a tube used to help her breathe during the operation, Bogan had trouble speaking.</p>
+<p>Bogan is working with <strong>therapists</strong> and has regained some ability to speak, but there is no sign that she will ever be able to speak like she used to.</p>
+<p>Last month, Bogan got her voice back in a way. Experts created a tool for her using AI. She uses a text-to-voice <strong>app</strong> on her phone so she can now do things like order her favorite coffee at Starbucks. She uses it by writing words in her phone and holding it up at the coffee shop so servers can hear her.</p>
+<p>The app uses OpenAI's voice tool. Programmers trained the app using a 15-second sound recording from a cooking video Bogan made as a teenager. Most of the video had cooking sounds, so that is all they could use. But it was enough.</p>
+<p>Bogan's doctors say Lexi's case shows why AI can be helpful.</p>
+<p>Dr. Rohaid Ali is training in neuroscience at Brown University's medical school. He called Bogan "a <strong>trailblazer</strong>." He said the technology can help millions of people with brain injuries, throat cancer or other diseases that prevent a person from speaking.</p>
+<p>Fatima Mirza is another doctor working on the project. She said there is a risk that AI technology can be used by bad people, "but we can't forget about the patient and the social good." She said the technology permits Bogan to have something close to her true voice.</p>
+<p>The doctors had already worked with OpenAI on an earlier project. When they found out the company wanted to test their voice <strong>generator</strong> to help patients, they thought of Bogan.</p>
+<p>Bogan said "it's almost like a part of my identity was taken when I lost my voice."</p>
+<p>She said she was starting to forget what her real voice sounded like before she started using the app.</p>
+<p>The app makes mistakes, but people who know Bogan do not seem worried. They are just happy to hear Lexi's voice.</p>
+<p>"I get so emotional every time I hear her voice," said her mother, Pamela, with tears in her eyes.</p>
+<p>Bogan said it helped "<strong>boost</strong> my <strong>confidence</strong> to somewhat where it was before all this happened." She said she uses the app about 40 times per day.</p>
+<p>The doctors are working with other patients to gather voice samples and they hope to bring the app to other hospitals around the world. But right now, the app, called Voice Engine, is not publicly available. Other AI companies, however, are making their voice-<strong>cloning</strong> services available to entertainment companies or other organizations.</p>
+<p>Jeff Harris is OpenAI's project leader for Voice Engine. He said the company is "very limited in who we're giving the technology to" because they want to be sure everyone whose voice is being used has given permission.</p>
+<p>Bogan believes the technology will progress over time so that when she is older, she does not have to depend on the voice she had as a teenager. She is excited that she is contributing to a change that will help people who are currently using robotic-sounding voices.</p>
+<p>For now, "even though I don't have my voice fully back, I have something that helps me find my voice again," she said.</p>
+<p>I'm Dan Friedell.</p>
+<p><em>Dan Friedell adapted this story for Learning English based on a report by The Associated Press.</em></p>
+<p>_______________________________________________</p>
+<h2 class="wsw__h2">Words in This Story</h2>
+<p><strong>stroke </strong><em>—n.</em> a serious medical problem in which a blood vessel gets blocked</p>
+<p><strong>diagnosis </strong><em>–n.</em> a medical opinion that explains the cause of an illness or disease</p>
+<p><strong>tumor </strong><em>–n.</em> an abnormal growth of tissue</p>
+<p><strong>therapist </strong><em>–n.</em> a person who helps a patient with a medical or physical problem with treatments that do not usually use medicine</p>
+<p><strong>app </strong><em>–n.</em> a computer program that has one main purpose</p>
+<p><strong>trailblazer </strong><em>–n.</em> a person who is among the first to do something</p>
+<p><strong>generator </strong><em>–n.</em> something that creates things automatically like numbers, or electrical current</p>
+<p><strong>boost </strong><em>–v.</em> to lift or raise up</p>
+<p><strong>confidence </strong><em>–n.</em> a feeling of being sure of and believing in oneself</p>
+<p><strong>cloning </strong><em>–n. (technology)</em> using software and computer commands to create copies of digital things</p>
+</div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[ti:AI Helps Woman Regain Voice after Brain Surgery]
+[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.04]Lots of people are concerned
+[00:02.80]about the ability
+[00:03.80]that artificial intelligence (AI)
+[00:07.20]has to copy their voices.
+[00:09.96]When AI is used to make
+[00:12.40]false recordings of things
+[00:14.72]that a person never said,
+[00:16.84]it is called a "deepfake."
+[00:19.56]However, more and more stories are coming out
+[00:23.20]about how AI is helping people
+[00:25.76]who can no longer speak,
+[00:27.68]regain a version of their voice.
+[00:31.60]For example, country music singer Randy Travis
+[00:36.08]recently released his first new song
+[00:40.04]in over 10 years with the help of AI technology.
+[00:45.00]Travis suffered a stroke
+[00:47.96]and can no longer sing.
+[00:50.68]The technology is also able to help
+[00:53.52]people like 21-year-old Alexis "Lexi" Bogan
+[00:58.72]from the eastern state of Rhode Island.
+[01:01.52]Bogan used to love singing along
+[01:04.40]with songs by her favorite musicians
+[01:07.32]like Taylor Swift and Zach Bryan.
+[01:10.96]She was a singer
+[01:12.88]in her school music group as a teenager.
+[01:16.56]If she was spending time with friends,
+[01:19.12]she would be the loudest
+[01:20.84]during a discussion about politics
+[01:23.72]over a large fire in the back yard.
+[01:26.88]But a surprise diagnosis changed all that.
+[01:31.00]Last August, doctors removed
+[01:33.60]a tumor from the back of her brain.
+[01:36.32]The surgery was a success.
+[01:38.96]But after doctors removed a tube
+[01:42.28]used to help her breathe during the operation,
+[01:46.16]Bogan had trouble speaking.
+[01:49.40]Bogan is working with therapists
+[01:51.76]and has regained some ability to speak,
+[01:56.28]but there is no sign that she
+[01:58.24]will ever be able to speak like she used to.
+[02:02.40]Last month, Bogan got her voice back in a way.
+[02:07.00]Experts created a tool for her using AI.
+[02:11.92]She uses a text-to-voice app on her phone
+[02:16.04]so she can now do things like
+[02:18.56]order her favorite coffee at Starbucks.
+[02:22.28]She uses it by writing words in her phone
+[02:26.00]and holding it up at the coffee shop
+[02:28.60]so servers can hear her.
+[02:30.36]The app uses OpenAI's voice tool.
+[02:34.80]Programmers trained the app
+[02:36.88]using a 15-second sound recording
+[02:39.60]from a cooking video Bogan made as a teenager.
+[02:43.28]Most of the video had cooking sounds,
+[02:46.32]so that is all they could use.
+[02:48.44]But it was enough.
+[02:51.52]Bogan's doctors say Lexi's case
+[02:54.96]shows why AI can be helpful.
+[02:58.64]Dr. Rohaid Ali is training in neuroscience
+[03:02.56]at Brown University's medical school.
+[03:06.00]He called Bogan "a trailblazer."
+[03:08.56]He said the technology can help
+[03:11.20]millions of people with brain injuries,
+[03:14.20]throat cancer or other diseases
+[03:18.12]that prevent a person from speaking.
+[03:22.32]Fatima Mirza is another doctor working on the project.
+[03:26.52]She said there is a risk that AI technology
+[03:30.80]can be used by bad people,
+[03:32.44]"but we can't forget
+[03:34.88]about the patient and the social good."
+[03:38.60]She said the technology permits Bogan
+[03:41.40]to have something close to her true voice.
+[03:44.92]The doctors had already worked with OpenAI
+[03:48.36]on an earlier project.
+[03:51.12]When they found out the company
+[03:52.88]wanted to test their voice generator
+[03:55.48]to help patients, they thought of Bogan.
+[03:59.88]Bogan said "it's almost like a part of
+[04:02.72]my identity was taken when I lost my voice."
+[04:07.00]She said she was starting to forget what her real voice
+[04:10.20]sounded like before she started using the app.
+[04:14.48]The app makes mistakes,
+[04:16.64]but people who know Bogan do not seem worried.
+[04:20.24]They are just happy to hear Lexi's voice.
+[04:23.84]"I get so emotional every time I hear her voice,"
+[04:28.08]said her mother, Pamela, with tears in her eyes.
+[04:32.60]Bogan said it helped "boost my confidence
+[04:36.04]to somewhat where it was before all this happened."
+[04:39.88]She said she uses the app about 40 times per day.
+[04:45.40]The doctors are working with other patients
+[04:47.92]to gather voice samples
+[04:50.16]and they hope to bring the app
+[04:51.88]to other hospitals around the world.
+[04:54.84]But right now, the app, called Voice Engine,
+[04:58.52]is not publicly available.
+[05:01.64]Other AI companies, however,
+[05:03.72]are making their voice-cloning services available
+[05:06.60]to entertainment companies or other organizations.
+[05:10.80]Jeff Harris is OpenAI's project leader for Voice Engine.
+[05:14.84]He said the company is "very limited
+[05:17.52]in who we're giving the technology to"
+[05:20.36]because they want to be sure everyone
+[05:22.40]whose voice is being used has given permission.
+[05:25.72]Bogan believes the technology
+[05:28.24]will progress over time
+[05:30.96]so that when she is older,
+[05:33.00]she does not have to depend
+[05:34.76]on the voice she had as a teenager.
+[05:37.44]She is excited that she is contributing to a change
+[05:41.36]that will help people who are currently using
+[05:44.20]robotic-sounding voices.
+[05:47.64]For now, "even though I don't have my voice fully back,
+[05:51.36]I have something that helps me find my voice again," she said.
+[05:55.72]I'm Dan Friedell. 
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>

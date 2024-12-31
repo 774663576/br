@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta charset="utf-8"/>
+<title>VOA慢速英语 - 人民币汇率与中国股市双双大跌</title>
+<meta content="all" name="robots"/>
+<meta content="慢速英语,VOA慢速英语" name="keywords">
+<meta content="VOA慢速英语, Economics Report, 人民币汇率与中国股市双双大跌" name="description"/>
+<link href="./static/css/2024.css" rel="stylesheet" type="text/css"/>
+<link href="./static/css/jplayer.css" rel="stylesheet" type="text/css"/>
+<script src="./static/js/jquery.min.js" type="text/javascript"></script>
+<script src="./static/js/posfixed.js" type="text/javascript"></script>
+<script src="./static/js/lrc.js" type="text/javascript"></script>
+<script src="./static/js/jquery.jplayer.min.js" type="text/javascript"></script>
+</meta></head>
+<body>
+<script>
+//var page_next ="";
+$(document).ready(function(){
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                mp3:"https://files.21voa.com/audio/201601/china-market-falls.mp3" //mp3的播放地址
+            }).jPlayer("repeat");
+            $.lrc.init($('#lrc_content').val());
+			if(newlrc.get_query('auto')==1){
+                $(this).jPlayer("play");
+            }
+               newlrc.do_ploop();
+        },
+        timeupdate: function(event) {
+            if(event.jPlayer.status.currentTime==0){
+                time = 0.1;
+            }else {
+                time = event.jPlayer.status.currentTime;
+            }
+        },
+        play: function(event) {
+            $.lrc.start(function() {
+                return time;
+            });
+            newlrc.fstart = 1;
+        },
+        ended2:function(event){
+                if(newlrc.ploop==1 && page_next !=''){
+                //window.location.href=page_next;
+                return;
+            }
+            $.lrc.init($('#lrc_content').val());
+            newlrc.fstart = 0;
+        },
+        pause: function (event){
+            if(event.jPlayer.status.currentTime==0){
+                $.lrc.init($('#lrc_content').val());
+            }
+            newlrc.fstart = 0;
+        },
+        repeat2: function (event){
+        },
+		repeat : function (event){
+            if(event.jPlayer.options.loop) {
+                $(this).unbind(".jPlayerRepeat").bind($.jPlayer.event.ended + ".jPlayer.jPlayerRepeat", function() {
+                    $(this).jPlayer("play");
+                });
+                newlrc.cancle_ploop();
+            } else {
+                $(this).unbind(".jPlayerRepeat");
+            }
+        },
+		swfPath: "/static/js/",
+		solution:"html, flash", //支持的页面
+		supplied: "mp3",        //支持的音频的格式
+		wmode: "window",
+                volume: 0.8, 
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+    	});
+});
+        var newlrc = {
+        fstart:0,
+        floop:0,
+        jp : $("#jquery_jplayer_1"),
+        jump: function (t){
+            this.jp.jPlayer("play",t);
+        },
+        pause: function(){
+            this.jp.jPlayer("pause");
+        },
+        play: function(){
+            this.jp.jPlayer("play");
+
+        },
+        loop_one: function(){
+            
+        },
+        loop: function(){
+			        },
+        ploop :0,
+        doloop: function(){
+            this.jp.jPlayer("option",'loop',true);
+        },
+        
+        cancle_loop : function (){
+            this.jp.jPlayer("option",'loop',false);
+        },
+        do_ploop: function(){
+            if(this.ploop==1){
+                return;
+            }
+            this.ploop = 1;
+            this.cancle_loop(); //将单曲循环取消
+            this.ploop_show();
+        },
+        cancle_ploop : function(){
+            if(this.ploop==0){
+                return;
+            }
+            this.ploop = 0;
+            this.ploop_show();
+        },
+        ploop_show : function(){
+            $(".l_do_loop").toggle();
+            $(".l_cancle_loop").toggle();
+        },
+        get_query : function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }        
+}
+</script>
+<script>
+$(function(){
+	$('.jplayer').posfixed({
+		distance : 0,
+		pos : 'top',
+		type : 'while',
+		tag : {
+			obj : $('.content_top'),
+			direction : 'right',
+			distance : 20
+		},
+		hide : false
+	});
+});
+</script>
+<body>
+<div id="main">
+<div id="righter">
+<div class="title"><h1>人民币汇率与中国股市双双大跌</h1></div>
+<div class="jplayer">
+<div class="jp-jplayer" id="jquery_jplayer_1"></div>
+<div aria-label="media player" class="jp-audio" id="jp_container_1" role="application">
+<div class="jp-type-single">
+<div class="jp-gui jp-interface">
+<div class="jp-controls">
+<button class="jp-play" role="button" tabindex="0">play</button>
+<button class="jp-stop" role="button" tabindex="0">stop</button>
+</div>
+<div class="jp-progress">
+<div class="jp-seek-bar">
+<div class="jp-play-bar"></div>
+</div>
+</div>
+<div class="jp-volume-controls">
+<button class="jp-mute" role="button" tabindex="0">mute</button>
+<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+<div class="jp-volume-bar">
+<div class="jp-volume-bar-value"></div>
+</div>
+</div>
+<div class="jp-time-holder">
+<div aria-label="time" class="jp-current-time" role="timer"> </div>
+<div aria-label="duration" class="jp-duration" role="timer"> </div>
+<div class="jp-toggles">
+<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+<div class="menubar">
+<a href="https://files.21voa.com/audio/201601/china-market-falls.mp3" id="mp3"></a>
+<a href="/static/lrc/china-market-falls.lrc" id="lrc"></a>
+<a href="china-market-falls-67273.html" id="CnPage" target="_blank"></a>
+<a href="north-korea-nuclear-test-67248.html" id="next"></a>
+<a href="/static/help.html" id="help" target="_blank"></a> <a href="/static/report.html" id="report" target="_blank"></a>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-no-solution">
+<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+		</div>
+</div>
+</div>
+</div>
+<div class="lrc_box"><ul id="lrc_list"></ul></div>
+<div class="content">
+<p>China stopped trading on its stock market Thursday for the second time this week.<br/>中国股市周四停止了交易，这是本周的第二次。</p>
+<p>Stock shares fell seven percent in value before trading was halted. The China Securities Regulatory Commission used its "circuit-breaker" system to keep share prices from falling even further.<br/>在交易被中止之前，股价下跌了7%。中国证监会利用其熔断机制防止股价进一步下跌。</p>
+<p>The value of country's currency, the yuan, fell after the People's Bank of China pushed down its guidance rate one half of one percent. It is now 6.56 yuan for one U.S. dollar, the lowest level in almost five years.<br/>人民币在中国人民银行将其指导利率压低0.5个百分点后开始下跌。目前兑换1美元需要6.56元人民币，这是近五年以来的最低水平。</p>
+<p>Observers say the situation in both the stock and money markets could worsen in the coming days.<br/>观察家表示，股市和货币市场的情况未来都有可能会恶化。</p>
+<p>On Thursday, the Chinese stock market fell five percent shortly after opening, and then another two percent in just one minute after the time-out.<br/>周四，中国股市在开盘不久后就下跌5%，在暂停交易之后的仅仅一分钟就又再度下跌2%。</p>
+<p>Some investors are blaming the commission for developing the circuit-breaker rules. The measures force the stock exchange to halt trading for 15 minutes if share prices fall five percent. The exchange is forced to close for the day if prices drop seven percent or more.<br/>一些投资者将其归咎于证监会制定的熔断机制。如果股价下跌5%，该机制就会迫使证交所暂停15分钟交易。如果股价下跌超过7%，证交所当天就被迫关闭。</p>
+<p>Chinese officials enacted the rule to cool the market, but it ended up causing concern among investors, says Johnny Fang. He works for Z-Ben Advisors, a financial advisory service.<br/>Johnny Fang表示，中国官员制定该政策是为了让市场降温，但是它最终引起了投资者的担忧。Johnny Fang就职于财务咨询公司Z-Ben Advisors。</p>
+<p>"The effect on the market is opposite of what was expected. Investors regard the circuit breaker as an accelerator for the bear market," he added.<br/>他补充，“熔断机制对市场的作用与预期相反。投资者把熔断机制视为熊市的加速器。”</p>
+<p>This also affected stock markets around the world. The leading measure of American stocks fell more than two percent Thursday. The Dow Jones Industrial Average closed down nearly 400 points.<br/>这也影响到了世界各地的股市。美国股市主要指数周四下跌了超过2%。道琼斯工业平均指数下跌了近400点。</p>
+<p>Investors are worried about China's economy and falling world oil prices.<br/>投资者都在担心中国经济和全球油价下跌。</p>
+<p>Late Thursday, China's regulators met to decide whether they should use the circuit breaker on Friday or not. They decided against using the system.<br/>周四晚，中国监管部门召开会议决定是否应该继续使用熔断机制。他们决定不再使用该机制。</p>
+<p>A spokesman for the regulatory commission said "the negative effect of the mechanism outweighed its positive effect."<br/>中国证监会发言人表示，“这一机制的负面影响超过了它的积极作用。”</p>
+<p>The Shanghai and Shenzhen exchanges will not use the circuit breaker on Friday.<br/>周五沪深两市将不再使用熔断机制。</p>
+<p>I'm Dan Friedell.<br/>我是丹·费里德尔。(51VOA.COM对本文翻译保留全部权利，未经授权请勿转载，违者必究！)</p></div>
+<textarea id="lrc_content" name="textfield" style="display:none;">[by:www.21voa.com]
+[00:00.00]快捷键：S播放/暂停，A快退，D快进，W循环。
+[00:00.60]China stopped trading on its stock market Thursday for the second time this week.
+[00:07.24]Stock shares fell seven percent in value before trading was halted.
+[00:13.88]The China Securities Regulatory Commission
+[00:19.08]used its "circuit-breaker" system to keep share prices from falling even further.
+[00:28.64]The value of country's currency, the yuan,
+[00:33.16]fell after the People's Bank of China pushed down its guidance rate one half of one percent.
+[00:42.68]It is now 6.56 yuan for one U.S. dollar,
+[00:50.04]the lowest level in almost five years.
+[00:54.04]Observers say the situation in both the stock and money markets could worsen in the coming days.
+[01:02.24]On Thursday, the Chinese stock market fell five percent shortly after opening,
+[01:09.04]and then another two percent in just one minute after the time-out.
+[01:14.88]Some investors are blaming the commission for developing the circuit-breaker rules.
+[01:21.48]The measures force the stock exchange to halt trading for 15 minutes if share prices fall five percent.
+[01:31.12]The exchange is forced to close for the day if prices drop seven percent or more.
+[01:38.64]Chinese officials enacted the rule to cool the market,
+[01:43.24]but it ended up causing concern among investors, says Johnny Fang.
+[01:49.04]He works for Z-Ben Advisors, a financial advisory service.
+[01:55.72]"The effect on the market is opposite of what was expected.
+[02:00.60]Investors regard the circuit breaker as an accelerator for the bear market," he added.
+[02:06.80]This also affected stock markets around the world.
+[02:11.56]The leading measure of American stocks fell more than two percent Thursday.
+[02:16.86]The Dow Jones Industrial Average closed down nearly 400 points.
+[02:24.48]Investors are worried about China's economy and falling world oil prices.
+[02:31.96]Late Thursday, China's regulators met to decide whether they should use the circuit breaker on Friday or not.
+[02:41.40]They decided against using the system.
+[02:45.48]A spokesman for the regulatory commission said
+[02:48.64]"the negative effect of the mechanism outweighed its positive effect."
+[02:54.52]The Shanghai and Shenzhen exchanges will not use the circuit breaker on Friday.
+[03:02.60]I'm Dan Friedell.
+[03:04.12]
+
+</textarea>
+</div></div>
+<div class="clearing"></div>
+</body></body></html>
