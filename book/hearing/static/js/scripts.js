@@ -14,6 +14,24 @@ function postMsgToEts(data) {
     }
 }
 
+document.addEventListener('mouseup', handleTextSelection);
+document.addEventListener('touchend', handleTextSelection);
+
+// 处理文本选择
+function handleTextSelection(event) {
+    const selection = window.getSelection();
+    const selectedText = selection.toString();
+
+    if (selectedText) {
+        var json = JSON.stringify({
+            message: "showSelectedPopup",
+            data: selectedText
+        });
+        postMsgToEts(json);
+        window.getSelection().removeAllRanges();
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     // 获取内容区域
     const contentElement = document.querySelector('.content');
