@@ -40,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const style = document.createElement('style');
     style.textContent = `
         .clickable.active {
-            background-color: #ff9b9b;
-            
-            color: #fff;
+            color: #ff9b9b;
         }
     `;
     document.head.appendChild(style);
