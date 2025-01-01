@@ -1,4 +1,12 @@
-﻿
+﻿window.onload = function() {
+    var textarea = document.getElementById('lrc_content');
+    var lrcBox = document.querySelector('.lrc_box');
+
+    if (!textarea && lrcBox) {
+        lrcBox.style.display = 'none';
+    }
+};
+
 (function($){
 	$.lrc = {
 		handle: null, /* 定时执行句柄 */
