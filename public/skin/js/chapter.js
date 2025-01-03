@@ -258,8 +258,8 @@ function createSpeedControl() {
     const speedControlDiv = document.createElement('div');
     speedControlDiv.classList.add('speed-control');
     speedControlDiv.innerHTML = `
-        <span>语速:</span>
-        <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1">
+        <span class="speed-lable">语速:</span>
+        <input type="range" class="speed-slider" min="0.5" max="1" step="0.1" value="1">
         <span class="speed-value">1.0x</span>
     `;
 
