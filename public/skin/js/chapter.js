@@ -187,102 +187,219 @@ function handleTextSelection(event) {
 document.addEventListener('mouseup', handleTextSelection);
 document.addEventListener('touchend', handleTextSelection);
 
+
 document.addEventListener("DOMContentLoaded", function () {
 	const lines = document.querySelectorAll('.line_en');
 
 	lines.forEach(function (line) {
-		if (line.querySelector('.audio-control')) return;  // 防止重复添加按钮
+		// 防止重复添加按钮
+		if (line.querySelector('.audio-control')) return;
 
 		const playButton = document.createElement('button');
 		playButton.classList.add('audio-control');
 
-		const svg = `
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<polygon points="5 3 19 12 5 21 5 3"></polygon>
-			</svg>
-		`;
-		playButton.innerHTML = svg;
+		const playIcon = createPlayIcon();
+		playButton.innerHTML = playIcon;
+
+		// 给每个 line 元素增加一个 audio 属性，用来保存对应的音频实例
+		line.audio = null;
 
 		playButton.addEventListener('click', function () {
-			speakText(line.textContent, playButton, line);
+			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${line.textContent}&le=en`;
+			handleAudioControl(audioUrl, playButton, line);
 		});
 
-		// 将按钮放在 line 元素的末尾
 		line.appendChild(playButton);
 	});
 });
 
-function speakText(text, playButton, line) {
-	const words = text.split(' ');
+function createPlayIcon() {
+	return `
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polygon points="5 3 19 12 5 21 5 3"></polygon>
+		</svg>
+	`;
+}
 
-	// 保存按钮位置，防止更新 innerHTML 时丢失
-	const buttonContainer = playButton.parentNode;
-	line.innerHTML = words.map(word => {
-		return `<span class="word">${word}</span>`;
-	}).join(' ');
+function createPauseIcon() {
+	return `
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<rect x="6" y="4" width="4" height="16"></rect>
+			<rect x="14" y="4" width="4" height="16"></rect>
+		</svg>
+	`;
+}
 
-	// 重新插入按钮
-	buttonContainer.appendChild(playButton);
+function createLoadingIcon() {
+	return `
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+			<circle cx="12" cy="12" r="10" opacity="0.25" />
+			<path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
+		</svg>
+	`;
+}
 
-	if (responsiveVoice.isPlaying()) {
-		console.log("---------pause---------");
-		responsiveVoice.cancel();
-		const svg = `
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<polygon points="5 3 19 12 5 21 5 3"></polygon>
-			</svg>
-		`;
-		playButton.innerHTML = svg;
-		return;
-	}
-
-	const loadingSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
-            <circle cx="12" cy="12" r="10" opacity="0.25" />
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
-        </svg>`;
-	playButton.innerHTML = loadingSvg;
-
-	let currentWordIndex = 0;
-	responsiveVoice.speak(text, "US English Female", {
-		rate: 1, // 语速
-		onstart: function () {
-			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="4" width="4" height="16"></rect>
-            <rect x="14" y="4" width="4" height="16"></rect>
-        </svg>`; // 更新按钮图标为暂停样式
-		},
-		onend: function () {
-			console.log("---------end------------------");
-			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>`; // 更新按钮图标为播放样式
-			resetHighlight();
-		},
-
-		onboundary: function(event) {
-			console.log("---------boundary------------------", event);
-			if (event.name === "word") {
-				// 高亮当前单词
-				highlightWord(currentWordIndex);
-				currentWordIndex++;
+// 停止所有正在播放的音频
+function stopAllAudioExcept(currentLine) {
+	const allLines = document.querySelectorAll('.line_en');
+	allLines.forEach(function (line) {
+		if (line !== currentLine && line.audio && !line.audio.paused) {
+			line.audio.pause();
+			line.audio.currentTime = 0; // 你可以选择注释掉这一行，保持播放进度
+			const playButton = line.querySelector('.audio-control');
+			if (playButton) {
+				playButton.innerHTML = createPlayIcon(); // 恢复为播放图标
 			}
 		}
 	});
+}
 
-	function highlightWord(index) {
-		console.log("---------highlightWord---------", index);
-		const wordSpans = line.querySelectorAll('.word');
-		if (wordSpans[index]) {
-			resetHighlight();
-			wordSpans[index].classList.add('highlight');
+function handleAudioControl(audioUrl, playButton, line) {
+	// 如果当前音频还没创建，或者已经暂停，则播放
+	if (!line.audio) {
+		// 插入播放的旋转加载图标
+		playButton.innerHTML = createLoadingIcon();
+
+		// 使用 Audio 对象播放在线音频
+		line.audio = new Audio(audioUrl);
+
+		// 音频播放开始时更新按钮图标
+		line.audio.addEventListener('play', function () {
+			playButton.innerHTML = createPauseIcon();  // 暂停图标
+		});
+
+		// 音频播放结束时更新按钮图标
+		line.audio.addEventListener('ended', function () {
+			playButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+		});
+
+		// 播放音频
+		line.audio.play().catch(function(error) {
+			console.error("Audio playback failed:", error);
+			playButton.innerHTML = createPlayIcon(); // 恢复播放图标
+		});
+	} else {
+		// 如果音频已经在播放，点击则暂停
+		if (!line.audio.paused) {
+			line.audio.pause();
+			playButton.innerHTML = createPlayIcon(); // 恢复播放图标
+		} else {
+			// 音频已暂停，继续播放
+			line.audio.play();
+			playButton.innerHTML = createPauseIcon(); // 暂停图标
 		}
 	}
 
-	function resetHighlight() {
-		const wordSpans = line.querySelectorAll('.word');
-		wordSpans.forEach(span => span.classList.remove('highlight'));
-	}
+	// 在播放新音频之前，暂停其他所有音频
+	stopAllAudioExcept(line);
 }
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function () {
+// 	const lines = document.querySelectorAll('.line_en');
+
+// 	lines.forEach(function (line) {
+// 		if (line.querySelector('.audio-control')) return;  // 防止重复添加按钮
+
+// 		const playButton = document.createElement('button');
+// 		playButton.classList.add('audio-control');
+
+// 		const svg = `
+// 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+// 				<polygon points="5 3 19 12 5 21 5 3"></polygon>
+// 			</svg>
+// 		`;
+// 		playButton.innerHTML = svg;
+
+// 		playButton.addEventListener('click', function () {
+// 			speakText(line.textContent, playButton, line);
+// 		});
+
+// 		// 将按钮放在 line 元素的末尾
+// 		line.appendChild(playButton);
+// 	});
+// });
+
+// function speakText(text, playButton, line) {
+// 	const words = text.split(' ');
+
+// 	// 保存按钮位置，防止更新 innerHTML 时丢失
+// 	const buttonContainer = playButton.parentNode;
+// 	line.innerHTML = words.map(word => {
+// 		return `<span class="word">${word}</span>`;
+// 	}).join(' ');
+
+// 	// 重新插入按钮
+// 	buttonContainer.appendChild(playButton);
+
+// 	if (responsiveVoice.isPlaying()) {
+// 		console.log("---------pause---------");
+// 		responsiveVoice.cancel();
+// 		const svg = `
+// 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+// 				<polygon points="5 3 19 12 5 21 5 3"></polygon>
+// 			</svg>
+// 		`;
+// 		playButton.innerHTML = svg;
+// 		return;
+// 	}
+
+// 	const loadingSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+//             <circle cx="12" cy="12" r="10" opacity="0.25" />
+//             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
+//         </svg>`;
+// 	playButton.innerHTML = loadingSvg;
+
+// 	let currentWordIndex = 0;
+// 	responsiveVoice.speak(text, "US English Female", {
+// 		rate: 1, // 语速
+// 		onstart: function () {
+// 			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//             <rect x="6" y="4" width="4" height="16"></rect>
+//             <rect x="14" y="4" width="4" height="16"></rect>
+//         </svg>`; // 更新按钮图标为暂停样式
+// 		},
+// 		onend: function () {
+// 			console.log("---------end------------------");
+// 			playButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//             <polygon points="5 3 19 12 5 21 5 3"></polygon>
+//         </svg>`; // 更新按钮图标为播放样式
+// 			resetHighlight();
+// 		},
+
+// 		onboundary: function(event) {
+// 			console.log("---------boundary------------------", event);
+// 			if (event.name === "word") {
+// 				// 高亮当前单词
+// 				highlightWord(currentWordIndex);
+// 				currentWordIndex++;
+// 			}
+// 		}
+// 	});
+
+// 	function highlightWord(index) {
+// 		console.log("---------highlightWord---------", index);
+// 		const wordSpans = line.querySelectorAll('.word');
+// 		if (wordSpans[index]) {
+// 			resetHighlight();
+// 			wordSpans[index].classList.add('highlight');
+// 		}
+// 	}
+
+// 	function resetHighlight() {
+// 		const wordSpans = line.querySelectorAll('.word');
+// 		wordSpans.forEach(span => span.classList.remove('highlight'));
+// 	}
+// }
+
+
+
+
+
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 // 	const lines = document.querySelectorAll('.line_en');
