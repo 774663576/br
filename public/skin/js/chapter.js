@@ -188,6 +188,11 @@ document.addEventListener('mouseup', handleTextSelection);
 document.addEventListener('touchend', handleTextSelection);
 
 
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
 	const lines = document.querySelectorAll('.line_en');
 
@@ -204,15 +209,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		// 给每个 line 元素增加一个 audio 属性，用来保存对应的音频实例
 		line.audio = null;
 
+		// 添加播放按钮事件监听器
 		playButton.addEventListener('click', function () {
 			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${line.textContent}&le=en`;
 			handleAudioControl(audioUrl, playButton, line);
 		});
 
+		// 动态添加语速控制器
+		const speedControl = createSpeedControl();
 		line.appendChild(playButton);
+		line.appendChild(speedControl);  // 将语速控制器添加到line下方
+
+		// 将播放按钮和语速控制器放置在一起
 	});
 });
 
+// 创建播放图标
 function createPlayIcon() {
 	return `
 		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -221,6 +233,7 @@ function createPlayIcon() {
 	`;
 }
 
+// 创建暂停图标
 function createPauseIcon() {
 	return `
 		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -230,6 +243,7 @@ function createPauseIcon() {
 	`;
 }
 
+// 创建加载图标
 function createLoadingIcon() {
 	return `
 		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
@@ -237,6 +251,32 @@ function createLoadingIcon() {
 			<path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
 		</svg>
 	`;
+}
+
+// 创建语速控制器
+function createSpeedControl() {
+    const speedControlDiv = document.createElement('div');
+    speedControlDiv.classList.add('speed-control');
+    speedControlDiv.innerHTML = `
+        <span>语速:</span>
+        <input type="range" class="speed-slider" min="0.5" max="2" step="0.1" value="1">
+        <span class="speed-value">1.0x</span>
+    `;
+
+    const slider = speedControlDiv.querySelector('.speed-slider');
+    const valueDisplay = speedControlDiv.querySelector('.speed-value');
+
+    slider.addEventListener('input', function () {
+        const rate = parseFloat(this.value);
+        valueDisplay.textContent = rate.toFixed(1) + 'x';
+        // 获取父元素.line_en
+        const line = this.closest('.line_en');
+        if (line && line.audio) {
+            line.audio.playbackRate = rate;
+        }
+    });
+
+    return speedControlDiv;
 }
 
 // 停止所有正在播放的音频
@@ -250,10 +290,16 @@ function stopAllAudioExcept(currentLine) {
 			if (playButton) {
 				playButton.innerHTML = createPlayIcon(); // 恢复为播放图标
 			}
+			// 隐藏语速控制器
+			const speedControl = line.querySelector('.speed-control');
+			if (speedControl) {
+				speedControl.style.display = 'none'; // 隐藏语速控制器
+			}
 		}
 	});
 }
 
+// 处理音频控制
 function handleAudioControl(audioUrl, playButton, line) {
 	// 如果当前音频还没创建，或者已经暂停，则播放
 	if (!line.audio) {
@@ -263,14 +309,29 @@ function handleAudioControl(audioUrl, playButton, line) {
 		// 使用 Audio 对象播放在线音频
 		line.audio = new Audio(audioUrl);
 
+		// 设置音频的初始语速
+		const speedSlider = line.querySelector('.speed-slider');
+		console.log('---speedSlider---',speedSlider.value)
+		line.audio.playbackRate = parseFloat(speedSlider.value);
+
 		// 音频播放开始时更新按钮图标
 		line.audio.addEventListener('play', function () {
 			playButton.innerHTML = createPauseIcon();  // 暂停图标
+			// 显示语速控制器
+			const speedControl = line.querySelector('.speed-control');
+			if (speedControl) {
+				speedControl.style.display = 'flex'; // 显示语速控制器
+			}
 		});
 
 		// 音频播放结束时更新按钮图标
 		line.audio.addEventListener('ended', function () {
 			playButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+			// 隐藏语速控制器
+			const speedControl = line.querySelector('.speed-control');
+			if (speedControl) {
+				speedControl.style.display = 'none'; // 隐藏语速控制器
+			}
 		});
 
 		// 播放音频
@@ -283,10 +344,20 @@ function handleAudioControl(audioUrl, playButton, line) {
 		if (!line.audio.paused) {
 			line.audio.pause();
 			playButton.innerHTML = createPlayIcon(); // 恢复播放图标
+			// 隐藏语速控制器
+			const speedControl = line.querySelector('.speed-control');
+			if (speedControl) {
+				speedControl.style.display = 'none'; // 隐藏语速控制器
+			}
 		} else {
 			// 音频已暂停，继续播放
 			line.audio.play();
 			playButton.innerHTML = createPauseIcon(); // 暂停图标
+			// 显示语速控制器
+			const speedControl = line.querySelector('.speed-control');
+			if (speedControl) {
+				speedControl.style.display = 'flex'; // 显示语速控制器
+			}
 		}
 	}
 
