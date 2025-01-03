@@ -58,8 +58,12 @@ function handleTextSelection(event) {
         window.getSelection().removeAllRanges();
     }
 }
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let currentAudioButton = null;
+    let currentAudio = null;
 
     // 初始化所有语速控制器
     document.querySelectorAll('.speed-slider').forEach(slider => {
@@ -70,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
             valueDisplay.textContent = rate.toFixed(1) + 'x';
 
             // 如果当前正在播放，实时更新语速
-            if (responsiveVoice.isPlaying()) {
-                stopCurrentSpeech();
+            if (currentAudio && !currentAudio.paused) {
+                stopCurrentAudio();
                 const audioButton = currentAudioButton;
                 if (audioButton) {
                     audioButton.click();
@@ -80,17 +84,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    function stopCurrentSpeech() {
-        if (responsiveVoice.isPlaying()) {
-            responsiveVoice.cancel();
+    function stopCurrentAudio() {
+        if (currentAudio && !currentAudio.paused) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;  // 重置音频
             if (currentAudioButton) {
-                currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>`;
+                currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
             }
-            currentUtterance = null;
+            currentAudio = null;
             currentAudioButton = null;
         }
+    }
+
+    function createPlayIcon() {
+        return `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+        `;
+    }
+
+    function createPauseIcon() {
+        return `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+        `;
     }
 
     document.querySelectorAll('.translation-toggle').forEach(button => {
@@ -107,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.textContent = isHidden ? '隐藏英文翻译' : '显示英文翻译';
 
             if (!isHidden) {
-                stopCurrentSpeech();
+                stopCurrentAudio();
             }
         });
     });
@@ -119,46 +139,160 @@ document.addEventListener('DOMContentLoaded', function () {
             const container = this.closest('.english-container');
             const speedSlider = container.querySelector('.speed-slider');
 
-            if (responsiveVoice.isPlaying() && currentAudioButton === this) {
-                stopCurrentSpeech();
+            // 如果当前语音已经播放且是当前按钮，则暂停
+            if (currentAudio && !currentAudio.paused && currentAudioButton === this) {
+                currentAudio.pause();
+                currentAudioButton.innerHTML = createPlayIcon();
                 return;
             }
 
-            stopCurrentSpeech();
+            // 停止之前的语音播放
+            stopCurrentAudio();
             currentAudioButton = this;
-            currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
-            <circle cx="12" cy="12" r="10" opacity="0.25" />
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
-        </svg>`;
-            responsiveVoice.cancel();
-            responsiveVoice.speak(englishText, "US English Female", {
-                rate: parseFloat(speedSlider.value), // 语速
-                onstart: function () {
-                    // 播放开始时的回调
-                    speedSlider.disabled = true;
-                    console.log("Audio started");  // 调试信息
-                    currentAudioButton = button;  // 确保正确引用当前按钮
-                    currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="4" width="4" height="16"></rect>
-            <rect x="14" y="4" width="4" height="16"></rect>
-        </svg>`; // 更新按钮图标为暂停样式
-                },
-                onend: function () {
-                    // 播放结束时的回调
-                    speedSlider.disabled = false;
-                    console.log("Audio ended");  // 调试信息
-                    currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>`; // 更新按钮图标为播放样式
-                    currentAudioButton = null;
-                }
+            currentAudioButton.innerHTML = createPauseIcon();  // 显示暂停图标
+
+            // 使用 Audio 播放新的语音
+            currentAudio = new Audio();
+            currentAudio.src = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(englishText)}&le=en`;
+            currentAudio.playbackRate = parseFloat(speedSlider.value);  // 语速控制
+
+            // 播放开始时的回调
+            currentAudio.addEventListener('play', function () {
+                currentAudioButton.innerHTML = createPauseIcon();  // 更新为暂停图标
             });
+
+            // 播放结束时的回调
+            currentAudio.addEventListener('ended', function () {
+                currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+                currentAudio = null;
+                currentAudioButton = null;
+            });
+
+            currentAudio.play();
         });
     });
 
+    // 页面切换时停止播放
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
-            stopCurrentSpeech();
+            stopCurrentAudio();
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     let currentAudioButton = null;
+
+//     // 初始化所有语速控制器
+//     document.querySelectorAll('.speed-slider').forEach(slider => {
+//         const valueDisplay = slider.nextElementSibling;
+
+//         slider.addEventListener('input', function () {
+//             const rate = parseFloat(this.value);
+//             valueDisplay.textContent = rate.toFixed(1) + 'x';
+
+//             // 如果当前正在播放，实时更新语速
+//             if (responsiveVoice.isPlaying()) {
+//                 stopCurrentSpeech();
+//                 const audioButton = currentAudioButton;
+//                 if (audioButton) {
+//                     audioButton.click();
+//                 }
+//             }
+//         });
+//     });
+
+//     function stopCurrentSpeech() {
+//         if (responsiveVoice.isPlaying()) {
+//             responsiveVoice.cancel();
+//             if (currentAudioButton) {
+//                 currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//                 <polygon points="5 3 19 12 5 21 5 3"></polygon>
+//             </svg>`;
+//             }
+//             currentUtterance = null;
+//             currentAudioButton = null;
+//         }
+//     }
+
+//     document.querySelectorAll('.translation-toggle').forEach(button => {
+//         button.addEventListener('click', function () {
+//             const section = this.closest('.english-container');
+//             const englishText = section.querySelector('.english-text');
+//             const audioButton = section.querySelector('.audio-control');
+//             const speedControl = section.querySelector('.speed-control');
+//             const isHidden = englishText.style.display === 'none' || englishText.style.display === '';
+
+//             englishText.style.display = isHidden ? 'block' : 'none';
+//             audioButton.style.display = isHidden ? 'block' : 'none';
+//             speedControl.style.display = isHidden ? 'flex' : 'none';
+//             this.textContent = isHidden ? '隐藏英文翻译' : '显示英文翻译';
+
+//             if (!isHidden) {
+//                 stopCurrentSpeech();
+//             }
+//         });
+//     });
+
+//     document.querySelectorAll('.audio-control').forEach(button => {
+//         button.addEventListener('click', function () {
+//             const section = this.closest('.english-text');
+//             const englishText = section.getAttribute('data-text');
+//             const container = this.closest('.english-container');
+//             const speedSlider = container.querySelector('.speed-slider');
+
+//             if (responsiveVoice.isPlaying() && currentAudioButton === this) {
+//                 stopCurrentSpeech();
+//                 return;
+//             }
+
+//             stopCurrentSpeech();
+//             currentAudioButton = this;
+//             currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-spin">
+//             <circle cx="12" cy="12" r="10" opacity="0.25" />
+//             <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="4" />
+//         </svg>`;
+//             responsiveVoice.cancel();
+//             responsiveVoice.speak(englishText, "US English Female", {
+//                 rate: parseFloat(speedSlider.value), // 语速
+//                 onstart: function () {
+//                     // 播放开始时的回调
+//                     speedSlider.disabled = true;
+//                     console.log("Audio started");  // 调试信息
+//                     currentAudioButton = button;  // 确保正确引用当前按钮
+//                     currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//             <rect x="6" y="4" width="4" height="16"></rect>
+//             <rect x="14" y="4" width="4" height="16"></rect>
+//         </svg>`; // 更新按钮图标为暂停样式
+//                 },
+//                 onend: function () {
+//                     // 播放结束时的回调
+//                     speedSlider.disabled = false;
+//                     console.log("Audio ended");  // 调试信息
+//                     currentAudioButton.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+//             <polygon points="5 3 19 12 5 21 5 3"></polygon>
+//         </svg>`; // 更新按钮图标为播放样式
+//                     currentAudioButton = null;
+//                 }
+//             });
+//         });
+//     });
+
+//     document.addEventListener('visibilitychange', function () {
+//         if (document.hidden) {
+//             stopCurrentSpeech();
+//         }
+//     });
+// });
