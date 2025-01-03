@@ -61,6 +61,10 @@ function handleTextSelection(event) {
 
 
 
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     let currentAudioButton = null;
     let currentAudio = null;
@@ -75,11 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // 如果当前正在播放，实时更新语速
             if (currentAudio && !currentAudio.paused) {
-                stopCurrentAudio();
-                const audioButton = currentAudioButton;
-                if (audioButton) {
-                    audioButton.click();
-                }
+                currentAudio.playbackRate = rate;
             }
         });
     });
@@ -87,12 +87,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function stopCurrentAudio() {
         if (currentAudio && !currentAudio.paused) {
             currentAudio.pause();
-            currentAudio.currentTime = 0;  // 重置音频
             if (currentAudioButton) {
                 currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
             }
-            currentAudio = null;
-            currentAudioButton = null;
         }
     }
 
@@ -151,24 +148,35 @@ document.addEventListener('DOMContentLoaded', function () {
             currentAudioButton = this;
             currentAudioButton.innerHTML = createPauseIcon();  // 显示暂停图标
 
-            // 使用 Audio 播放新的语音
-            currentAudio = new Audio();
-            currentAudio.src = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(englishText)}&le=en`;
-            currentAudio.playbackRate = parseFloat(speedSlider.value);  // 语速控制
+            // 如果没有现有的音频，则创建新的 Audio
+            if (!currentAudio) {
+                currentAudio = new Audio();
+                currentAudio.src = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(englishText)}&le=en`;
+                currentAudio.playbackRate = parseFloat(speedSlider.value);  // 语速控制
 
-            // 播放开始时的回调
-            currentAudio.addEventListener('play', function () {
-                currentAudioButton.innerHTML = createPauseIcon();  // 更新为暂停图标
-            });
+                // 播放开始时的回调
+                currentAudio.addEventListener('play', function () {
+                    currentAudioButton.innerHTML = createPauseIcon();  // 更新为暂停图标
+                });
 
-            // 播放结束时的回调
-            currentAudio.addEventListener('ended', function () {
-                currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
-                currentAudio = null;
-                currentAudioButton = null;
-            });
+                // 播放结束时的回调
+                currentAudio.addEventListener('ended', function () {
+                    currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+                    currentAudio = null;
+                    currentAudioButton = null;
+                });
 
-            currentAudio.play();
+                // 错误处理
+                currentAudio.addEventListener('error', function () {
+                    console.error('音频加载出错');
+                    currentAudioButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+                });
+
+                currentAudio.play();
+            } else {
+                // 如果已有音频实例，继续播放
+                currentAudio.play();
+            }
         });
     });
 
