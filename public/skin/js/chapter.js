@@ -19,47 +19,47 @@ function postMsgToEts(data) {
 }
 // 处理单词点击
 document.addEventListener("DOMContentLoaded", function () {
-    const englishTextElements = document.querySelectorAll('.line_en');
+	const englishTextElements = document.querySelectorAll('.line_en');
 
-    englishTextElements.forEach(function (paragraph) {
-        const text = paragraph.innerHTML;
-        const modifiedText = text.replace(/\b\w+\b/g, function (match) {
-            return `<span class="clickable" data-word="${match}">${match}</span>`;
-        });
-        paragraph.innerHTML = modifiedText;
-    });
+	englishTextElements.forEach(function (paragraph) {
+		const text = paragraph.innerHTML;
+		const modifiedText = text.replace(/\b\w+\b/g, function (match) {
+			return `<span class="clickable" data-word="${match}">${match}</span>`;
+		});
+		paragraph.innerHTML = modifiedText;
+	});
 
-    document.body.addEventListener('click', function (event) {
-        // 先移除之前的高亮
-        const highlighted = document.querySelector('.wordClickHighLight');
-        if (highlighted) {
-            highlighted.classList.remove('wordClickHighLight');
-        }
+	document.body.addEventListener('click', function (event) {
+		// 先移除之前的高亮
+		const highlighted = document.querySelector('.wordClickHighLight');
+		if (highlighted) {
+			highlighted.classList.remove('wordClickHighLight');
+		}
 
-        // 如果点击的是可点击单词
-        if (event.target && event.target.classList.contains('clickable')) {
-            const wordText = event.target.innerText || event.target.textContent;
+		// 如果点击的是可点击单词
+		if (event.target && event.target.classList.contains('clickable')) {
+			const wordText = event.target.innerText || event.target.textContent;
 
-            // 给选中的单词添加高亮样式
-            event.target.classList.add('wordClickHighLight');
-            
-            var json = JSON.stringify({
-                message: "showWordPopup",
-                data: {
-                    word: wordText,
-                    x: 0,
-                    y: 0
-                }
-            });
-            postMsgToEts(json);
-            window.showWordPopup.postMessage(json);
-        }
-    });
+			// 给选中的单词添加高亮样式
+			event.target.classList.add('wordClickHighLight');
+
+			var json = JSON.stringify({
+				message: "showWordPopup",
+				data: {
+					word: wordText,
+					x: 0,
+					y: 0
+				}
+			});
+			postMsgToEts(json);
+			window.showWordPopup.postMessage(json);
+		}
+	});
 });
 
 
 $(function () {
-	
+
 	// 中文行
 	var $cnLines = $(".line_cn");
 	for (var i = 0; i < $cnLines.length; i++) {
@@ -80,7 +80,7 @@ $(function () {
 	}
 
 
-	
+
 
 	// 获取页面中的所有 <a> 标签
 	const links = document.querySelectorAll('.pagebar a');
@@ -166,26 +166,59 @@ $(function () {
 		return word;
 	};
 });
+document.addEventListener('contextmenu', function (event) {
+	event.preventDefault();  // 阻止右键菜单
+});
 // 监听用户选择文本的事件
-function handleTextSelection(event) {
-	const selection = window.getSelection(); // 获取用户选中的文本
-	const selectedText = selection.toString(); // 获取选中的文本
 
-	if (selectedText) {
-		console.log('---------' + selectedText)
-		var json = JSON.stringify({
-			message: "showSelectedPopup",
-			data: selectedText
-		});
-		postMsgToEts(json);
-		window.getSelection().removeAllRanges();
+let selectionTimeout;
 
-	}
-}
+document.addEventListener('selectionchange', function () {
+	// 清除上一次的定时器
+	clearTimeout(selectionTimeout);
 
-// 监听 touchend 和 mouseup 事件
-document.addEventListener('mouseup', handleTextSelection);
-document.addEventListener('touchend', handleTextSelection);
+	// 设置一个延迟，等待用户停止选择后再处理
+	selectionTimeout = setTimeout(function () {
+		const selection = window.getSelection(); // 获取用户选中的文本
+		const selectedText = selection.toString(); // 获取选中的文本
+
+		if (selectedText) {
+			console.log('---------' + selectedText);
+			var json = JSON.stringify({
+				message: "showSelectedPopup",
+				data: selectedText
+			});
+			postMsgToEts(json);
+			// 触发自定义的操作，比如向 Flutter 发送消息
+			window.showSelectedPopup.postMessage("");
+
+			// 清除选择区域
+			window.getSelection().removeAllRanges();
+		}
+	}, 1000);  // 1000ms 延迟，调整这个值根据需要
+});
+
+// function handleTextSelection(event) {
+// 	const selection = window.getSelection(); // 获取用户选中的文本
+// 	const selectedText = selection.toString(); // 获取选中的文本
+// 	console.log('----handleTextSelection-----' + selectedText)
+
+// 	if (selectedText) {
+// 		console.log('----handleTextSelection--selectedText---' + selectedText)
+// 		var json = JSON.stringify({
+// 			message: "showSelectedPopup",
+// 			data: selectedText
+// 		});
+// 		postMsgToEts(json);
+// 		window.showSelectedPopup.postMessage("");
+// 		window.getSelection().removeAllRanges();
+
+// 	}
+// }
+
+// // 监听 touchend 和 mouseup 事件
+// document.addEventListener('mouseup', handleTextSelection);
+// document.addEventListener('touchend', handleTextSelection);
 
 
 
@@ -255,28 +288,28 @@ function createLoadingIcon() {
 
 // 创建语速控制器
 function createSpeedControl() {
-    const speedControlDiv = document.createElement('div');
-    speedControlDiv.classList.add('speed-control');
-    speedControlDiv.innerHTML = `
+	const speedControlDiv = document.createElement('div');
+	speedControlDiv.classList.add('speed-control');
+	speedControlDiv.innerHTML = `
         <span class="speed-lable">语速:</span>
         <input type="range" class="speed-slider" min="0.5" max="1" step="0.1" value="1">
         <span class="speed-value">1.0x</span>
     `;
 
-    const slider = speedControlDiv.querySelector('.speed-slider');
-    const valueDisplay = speedControlDiv.querySelector('.speed-value');
+	const slider = speedControlDiv.querySelector('.speed-slider');
+	const valueDisplay = speedControlDiv.querySelector('.speed-value');
 
-    slider.addEventListener('input', function () {
-        const rate = parseFloat(this.value);
-        valueDisplay.textContent = rate.toFixed(1) + 'x';
-        // 获取父元素.line_en
-        const line = this.closest('.line_en');
-        if (line && line.audio) {
-            line.audio.playbackRate = rate;
-        }
-    });
+	slider.addEventListener('input', function () {
+		const rate = parseFloat(this.value);
+		valueDisplay.textContent = rate.toFixed(1) + 'x';
+		// 获取父元素.line_en
+		const line = this.closest('.line_en');
+		if (line && line.audio) {
+			line.audio.playbackRate = rate;
+		}
+	});
 
-    return speedControlDiv;
+	return speedControlDiv;
 }
 
 // 停止所有正在播放的音频
@@ -311,7 +344,7 @@ function handleAudioControl(audioUrl, playButton, line) {
 
 		// 设置音频的初始语速
 		const speedSlider = line.querySelector('.speed-slider');
-		console.log('---speedSlider---',speedSlider.value)
+		console.log('---speedSlider---', speedSlider.value)
 		line.audio.playbackRate = parseFloat(speedSlider.value);
 
 		// 音频播放开始时更新按钮图标
@@ -335,7 +368,7 @@ function handleAudioControl(audioUrl, playButton, line) {
 		});
 
 		// 播放音频
-		line.audio.play().catch(function(error) {
+		line.audio.play().catch(function (error) {
 			console.error("Audio playback failed:", error);
 			playButton.innerHTML = createPlayIcon(); // 恢复播放图标
 		});
