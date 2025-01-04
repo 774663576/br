@@ -180,9 +180,10 @@ document.addEventListener('selectionchange', function () {
 	// 设置一个延迟，等待用户停止选择后再处理
 	selectionTimeout = setTimeout(function () {
 		const selection = window.getSelection(); // 获取用户选中的文本
-		const selectedText = selection.toString(); // 获取选中的文本
+		let selectedText = selection.toString(); // 获取选中的文本
 
 		if (selectedText) {
+			selectedText = selectedText.replace(/[\u4e00-\u9fa5]/g, '');
 			console.log('---------' + selectedText);
 			var json = JSON.stringify({
 				message: "showSelectedPopup",
