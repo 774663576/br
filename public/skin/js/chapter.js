@@ -191,7 +191,7 @@ document.addEventListener('selectionchange', function () {
 			});
 			postMsgToEts(json);
 			// 触发自定义的操作，比如向 Flutter 发送消息
-			window.showSelectedPopup.postMessage("");
+			window.showSelectedPopup.postMessage(selectedText);
 
 			// 清除选择区域
 			window.getSelection().removeAllRanges();

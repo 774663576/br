@@ -14,23 +14,40 @@ function postMsgToEts(data) {
     }
 }
 
-document.addEventListener('mouseup', handleTextSelection);
-document.addEventListener('touchend', handleTextSelection);
 
-// 处理文本选择
-function handleTextSelection(event) {
-    const selection = window.getSelection();
-    const selectedText = selection.toString();
+document.addEventListener('contextmenu', function (event) {
+	event.preventDefault();  // 阻止右键菜单
+});
+// 监听用户选择文本的事件
 
-    if (selectedText) {
-        var json = JSON.stringify({
-            message: "showSelectedPopup",
-            data: selectedText
-        });
-        postMsgToEts(json);
-        window.getSelection().removeAllRanges();
-    }
-}
+let selectionTimeout;
+
+document.addEventListener('selectionchange', function () {
+	// 清除上一次的定时器
+	clearTimeout(selectionTimeout);
+
+	// 设置一个延迟，等待用户停止选择后再处理
+	selectionTimeout = setTimeout(function () {
+		const selection = window.getSelection(); // 获取用户选中的文本
+		let selectedText = selection.toString(); // 获取选中的文本
+
+		if (selectedText) {
+			selectedText = selectedText.replace(/[\u4e00-\u9fa5]/g, '');
+			console.log('---------' + selectedText);
+			var json = JSON.stringify({
+				message: "showSelectedPopup",
+				data: selectedText
+			});
+			postMsgToEts(json);
+			// 触发自定义的操作，比如向 Flutter 发送消息
+			window.showSelectedPopup.postMessage(selectedText);
+
+			// 清除选择区域
+			window.getSelection().removeAllRanges();
+		}
+	}, 1000);  // 1000ms 延迟，调整这个值根据需要
+});
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // 获取内容区域
