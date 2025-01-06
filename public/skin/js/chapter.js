@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		const playButton = document.createElement('button');
 		playButton.classList.add('audio-control');
 
-		const playIcon = createPlayIcon();
+		const playIcon = createHearIcon();
 		playButton.innerHTML = playIcon;
 
 		// 给每个 line 元素增加一个 audio 属性，用来保存对应的音频实例
@@ -245,7 +245,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// 添加播放按钮事件监听器
 		playButton.addEventListener('click', function () {
-			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${line.textContent}&le=en`;
+			var text=line.textContent;
+			console.log(text)
+			text=text.replace('语速:','')
+			text=text.replace('1.0x','')
+			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&le=en`;
 			handleAudioControl(audioUrl, playButton, line);
 		});
 
@@ -257,7 +261,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		// 将播放按钮和语速控制器放置在一起
 	});
 });
-
+//创建听力图标
+function createHearIcon() {
+	return `
+		<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="24px" height="24.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M352.8 576c-17.6-0.8-32 12.8-32.8 29.6v140c-0.8 18.4 13.6 33.6 31.2 34.4 18.4 0.8 33.6-13.6 34.4-31.2V608.8c0-18.4-14.4-32.8-32.8-32.8z m320 0c-17.6-0.8-32 12.8-32.8 29.6v140c-0.8 18.4 13.6 33.6 31.2 34.4 18.4 0.8 33.6-13.6 34.4-31.2V608.8c0-18.4-15.2-32.8-32.8-32.8z m-160 45.6c-17.6-0.8-32 12.8-32.8 29.6V700c-0.8 18.4 13.6 33.6 31.2 34.4s33.6-13.6 34.4-31.2v-48c0-19.2-14.4-33.6-32.8-33.6z" fill="#ff9b9b" /><path d="M842.4 484.8v-36c2.4-179.2-140.8-326.4-320-329.6h-9.6C328 119.2 183.2 264 183.2 448.8v36C77.6 491.2-4 581.6 2.4 688c5.6 101.6 89.6 180.8 191.2 181.6H216c17.6 0.8 32-12.8 32.8-29.6V448.8c0-150.4 113.6-264 264-264s264 113.6 264 264v388c-0.8 17.6 12.8 32 29.6 32.8h26.4c106.4-0.8 192-87.2 192-193.6-1.6-101.6-80.8-185.6-182.4-191.2z" fill="#ff9b9b" /></svg>
+	`;
+}
 // 创建播放图标
 function createPlayIcon() {
 	return `
@@ -360,7 +369,7 @@ function handleAudioControl(audioUrl, playButton, line) {
 
 		// 音频播放结束时更新按钮图标
 		line.audio.addEventListener('ended', function () {
-			playButton.innerHTML = createPlayIcon();  // 恢复为播放图标
+			playButton.innerHTML = createHearIcon();  // 恢复为播放图标
 			// 隐藏语速控制器
 			const speedControl = line.querySelector('.speed-control');
 			if (speedControl) {
