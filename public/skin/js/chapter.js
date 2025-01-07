@@ -185,19 +185,210 @@ document.addEventListener('selectionchange', function () {
 		if (selectedText) {
 			selectedText = selectedText.replace(/[\u4e00-\u9fa5]/g, '');
 			console.log('---------' + selectedText);
-			var json = JSON.stringify({
-				message: "showSelectedPopup",
-				data: selectedText
-			});
-			postMsgToEts(json);
-			// 触发自定义的操作，比如向 Flutter 发送消息
-			window.showSelectedPopup.postMessage(selectedText);
+			const range = selection.getRangeAt(0);
+			const rect = range.getBoundingClientRect();
+			showContextMenu(rect.left, rect.bottom);
 
+			if (h5Port) {
+				var json = JSON.stringify({
+					message: "showSelectedPopup",
+					data: selectedText
+				});
+				postMsgToEts(json);
+			}
+			// 触发自定义的操作，比如向 Flutter 发送消息
+			if (window.showSelectedPopup) {
+				window.showSelectedPopup.postMessage(selectedText);
+			}
 			// 清除选择区域
-			window.getSelection().removeAllRanges();
+			// window.getSelection().removeAllRanges();
 		}
 	}, 1000);  // 1000ms 延迟，调整这个值根据需要
 });
+
+
+let contextMenu;
+
+document.addEventListener('click', function (e) {
+	if (contextMenu && !contextMenu.contains(e.target)) {
+		hideContextMenu();
+	}
+});
+
+// 通用的菜单项创建函数
+function createMenuItem(iconSVG, text, handler) {
+	const menuItem = document.createElement('li');
+	menuItem.innerHTML = iconSVG + text;  // 使用自定义 SVG 图标和文字
+	menuItem.addEventListener('click', function (e) {
+		handler();
+		hideContextMenu(); // 点击菜单项时隐藏上下文菜单
+	});
+	return menuItem;
+}
+
+// 创建上下文菜单
+function createContextMenu(menuItems) {
+	// 创建上下文菜单
+	contextMenu = document.createElement('div');
+	contextMenu.classList.add('context-menu');
+	const ul = document.createElement('ul');
+
+	// 动态创建菜单项
+	menuItems.forEach(item => {
+		const menuItem = createMenuItem(item.iconSVG, item.text, item.handler);
+		ul.appendChild(menuItem);
+	});
+
+	contextMenu.appendChild(ul);
+	document.body.appendChild(contextMenu);
+}
+
+// 显示上下文菜单
+function showContextMenu(x, y) {
+	if (!contextMenu) {
+		createContextMenu([
+			{ iconSVG: copyIconSVG, text: '复制', handler: handleCopy },
+			{ iconSVG: translateIconSVG, text: '翻译', handler: handleTranslate },
+			{ iconSVG: noteIconSVG, text: '笔记', handler: handleNote }
+		]);
+	}
+
+	contextMenu.style.display = 'block';
+
+	// 获取滚动偏移量
+	const scrollX = window.scrollX || window.pageXOffset;
+	const scrollY = window.scrollY || window.pageYOffset;
+
+	// 调整位置，考虑滚动偏移
+	x += scrollX;
+	y += scrollY;
+
+	// 确保菜单不超出视窗
+	const menuRect = contextMenu.getBoundingClientRect();
+	const windowWidth = window.innerWidth;
+	const windowHeight = window.innerHeight;
+
+	if (x + menuRect.width > windowWidth + scrollX) {
+		x = windowWidth + scrollX - menuRect.width - 5;
+	}
+	if (y + menuRect.height > windowHeight + scrollY) {
+		y = y - menuRect.height - 10;
+	}
+
+	contextMenu.style.left = x + 'px';
+	contextMenu.style.top = y + 'px';
+}
+
+
+// 隐藏上下文菜单
+function hideContextMenu() {
+	if (contextMenu) {
+		contextMenu.style.display = 'none';
+	}
+}
+
+// 复制
+function handleCopy() {
+	const selectedText = window.getSelection().toString();
+	alert(selectedText)
+	console.log('----handleCopy-----' + selectedText);
+
+	if (selectedText) {
+		// 执行复制操作
+		if (h5Port) {
+			var json = JSON.stringify({
+				message: "toast",
+				data: '复制成功'
+			});
+			postMsgToEts(json);
+		}
+		if (window.toast) {
+			window.toast.postMessage('复制成功');
+		}
+
+		// 执行浏览器的复制操作
+		const textArea = document.createElement('textarea');
+		textArea.value = selectedText;
+		document.body.appendChild(textArea);
+		textArea.select();
+		document.execCommand('copy');
+		document.body.removeChild(textArea);
+
+		hideContextMenu();
+	}
+}
+
+
+// 翻译
+function handleTranslate() {
+	const selectedText = window.getSelection().toString();
+	console.log('----handleTranslate-----' + selectedText);
+
+	if (h5Port) {
+		var json = JSON.stringify({
+			message: "translate",
+			data: selectedText
+		});
+		postMsgToEts(json);
+	}
+	if (window.translate) {
+		window.translate.postMessage(selectedText);
+	}
+}
+
+// 保存笔记
+function handleNote() {
+	const selectedText = window.getSelection().toString();
+	console.log('----handleNote-----' + selectedText);
+	if (h5Port) {
+		var json = JSON.stringify({
+			message: "note",
+			data: selectedText
+		});
+		postMsgToEts(json);
+	}
+	if (window.note) {
+		window.note.postMessage(selectedText);
+	}
+}
+
+
+
+const copyIconSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18">
+    <path d="M833.33 767.96h-91.9c-21.73 0-39.34-17.6-39.34-39.34s17.62-39.34 39.34-39.34h91.9c8.82 0 15.98-7.18 15.98-15.98V193.8c0-8.8-7.17-15.98-15.98-15.98H353.84c-8.82 0-15.98 7.18-15.98 15.98v90.86c0 21.75-17.62 39.34-39.34 39.34s-39.34-17.6-39.34-39.34V193.8c0-52.21 42.47-94.67 94.67-94.67h479.49c52.19 0 94.67 42.45 94.67 94.67v479.49c-0.01 52.21-42.49 94.67-94.68 94.67z" fill="#ffffff"></path>
+    <path d="M675.96 925.33H196.47c-52.19 0-94.67-42.45-94.67-94.67V351.17c0-52.21 42.47-94.67 94.67-94.67h479.49c52.19 0 94.67 42.45 94.67 94.67v479.49c-0.01 52.22-42.48 94.67-94.67 94.67zM196.47 335.19c-8.82 0-15.98 7.18-15.98 15.98v479.49c0 8.8 7.17 15.98 15.98 15.98h479.49c8.82 0 15.98-7.18 15.98-15.98V351.17c0-8.8-7.17-15.98-15.98-15.98H196.47z" fill="#ffffff"></path>
+</svg>`;
+
+const translateIconSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18">
+    <path d="M896 452.256L772.256 576H851.2A341.344 341.344 0 0 1 512 874.656a340.64 340.64 0 0 1-300.8-179.2L136.544 736c74.656 138.656 217.6 224 375.456 224 221.856 0 403.2-168.544 424.544-384h83.2L896 452.256z" fill="#ffffff"></path>
+    <path d="M322.144 710.4l78.944 29.856 46.944-121.6h128l44.8 121.6 78.944-29.856-136.544-369.056h-102.4L322.176 710.4zM512 448l32 85.344h-64L512 448z" fill="#ffffff"></path>
+    <path d="M172.8 490.656A341.344 341.344 0 0 1 512 192c125.856 0 241.056 68.256 300.8 179.2l74.656-40.544a424.32 424.32 0 0 0-375.456-224c-221.856 0-403.2 168.544-424.544 384h-83.2L128 614.4l123.744-123.744H172.8z" fill="#ffffff"></path>
+</svg>`;
+
+const noteIconSVG = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18">
+    <path d="M770.816 351.61088l-155.0336-155.0336-413.47072 413.39904v155.0336h155.07456l413.42976-413.39904zM893.2352 229.21216l-81.07008 81.07008-155.0336-155.0336 81.05984-81.07008a41.17504 41.17504 0 0 1 58.24512 0l96.78848 96.78848a41.18528 41.18528 0 0 1 0.01024 58.24512zM49.14176 828.11904h919.26528v153.27232H49.14176z" fill="#ffffff"></path>
+</svg>`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // function handleTextSelection(event) {
 // 	const selection = window.getSelection(); // 获取用户选中的文本
@@ -245,10 +436,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 		// 添加播放按钮事件监听器
 		playButton.addEventListener('click', function () {
-			var text=line.textContent;
+			var text = line.textContent;
 			console.log(text)
-			text=text.replace('语速:','')
-			text=text.replace('1.0x','')
+			text = text.replace('语速:', '')
+			text = text.replace('1.0x', '')
 			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&le=en`;
 			handleAudioControl(audioUrl, playButton, line);
 		});
