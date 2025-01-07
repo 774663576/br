@@ -1,12 +1,21 @@
 
 var h5Port;
-
+var appVersion;
 window.addEventListener('message', function (event) {
 	if (event.data == '__harmony_os_port__') {
 		console.error("------__harmony_os_port__----" + event.data);
-
 		if (event.ports[0] != null) {
 			h5Port = event.ports[0]; //保存从ets侧发送过来的端口
+			getAppVersion();
+			h5Port.onmessage = function (event) {
+				var result = JSON.parse(event.data);
+				console.log('---从ets侧发送的消息-----' + result.method)
+				switch (result.method) {
+					case 'appVersion':
+						appVersion = result.version;
+						break;
+				}
+			}
 		}
 	}
 })
@@ -17,6 +26,21 @@ function postMsgToEts(data) {
 		console.error("h5Port is null, Please initialize first");
 	}
 }
+function getAppVersion() {
+	var json = JSON.stringify({
+		message: "getAppVersion",
+	});
+	console.log('---getAppVersion-----' + json)
+	postMsgToEts(json);
+}
+document.addEventListener("DOMContentLoaded", function () {
+	if (window.getAppVersion) {
+		window.getAppVersion.postMessage('');
+	}
+});
+
+
+
 // 处理单词点击
 document.addEventListener("DOMContentLoaded", function () {
 	const englishTextElements = document.querySelectorAll('.line_en');
@@ -188,18 +212,21 @@ document.addEventListener('selectionchange', function () {
 			console.log('---------' + selectedText);
 			const range = selection.getRangeAt(0);
 			const rect = range.getBoundingClientRect();
-			showContextMenu(rect.left, rect.bottom);
-
-			if (h5Port) {
-				var json = JSON.stringify({
-					message: "showSelectedPopup",
-					data: selectedText
-				});
-				postMsgToEts(json);
-			}
-			// 触发自定义的操作，比如向 Flutter 发送消息
-			if (window.showSelectedPopup) {
-				window.showSelectedPopup.postMessage(selectedText);
+			console.log('----appVersion---' + appVersion);
+			if (appVersion && appVersion >= 1500000) {
+				showContextMenu(rect.left, rect.bottom);
+			} else {
+				if (h5Port) {
+					var json = JSON.stringify({
+						message: "showSelectedPopup",
+						data: selectedText
+					});
+					postMsgToEts(json);
+				}
+				// 触发自定义的操作，比如向 Flutter 发送消息
+				if (window.showSelectedPopup) {
+					window.showSelectedPopup.postMessage(selectedText);
+				}
 			}
 			// 清除选择区域
 			// window.getSelection().removeAllRanges();
@@ -284,7 +311,7 @@ function showContextMenu(x, y) {
 // 隐藏上下文菜单
 function hideContextMenu() {
 	// if (contextMenu) {
-		contextMenu.style.display = 'none';
+	contextMenu.style.display = 'none';
 	// }
 }
 
