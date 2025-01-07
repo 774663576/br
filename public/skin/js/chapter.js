@@ -172,7 +172,7 @@ document.addEventListener('contextmenu', function (event) {
 // 监听用户选择文本的事件
 
 let selectionTimeout;
-
+let currentSelectedText;
 document.addEventListener('selectionchange', function () {
 	// 清除上一次的定时器
 	clearTimeout(selectionTimeout);
@@ -184,6 +184,7 @@ document.addEventListener('selectionchange', function () {
 
 		if (selectedText) {
 			selectedText = selectedText.replace(/[\u4e00-\u9fa5]/g, '');
+			currentSelectedText = selectedText;
 			console.log('---------' + selectedText);
 			const range = selection.getRangeAt(0);
 			const rect = range.getBoundingClientRect();
@@ -282,73 +283,58 @@ function showContextMenu(x, y) {
 
 // 隐藏上下文菜单
 function hideContextMenu() {
-	if (contextMenu) {
+	// if (contextMenu) {
 		contextMenu.style.display = 'none';
-	}
+	// }
 }
 
 // 复制
 function handleCopy() {
-	const selectedText = window.getSelection().toString();
-	alert(selectedText)
-	console.log('----handleCopy-----' + selectedText);
-
-	if (selectedText) {
-		// 执行复制操作
+	if (currentSelectedText) {
 		if (h5Port) {
 			var json = JSON.stringify({
-				message: "toast",
-				data: '复制成功'
+				message: "copyText",
+				data: currentSelectedText
 			});
 			postMsgToEts(json);
 		}
-		if (window.toast) {
-			window.toast.postMessage('复制成功');
+		if (window.copyText) {
+			window.copyText.postMessage(currentSelectedText);
 		}
-
-		// 执行浏览器的复制操作
-		const textArea = document.createElement('textarea');
-		textArea.value = selectedText;
-		document.body.appendChild(textArea);
-		textArea.select();
-		document.execCommand('copy');
-		document.body.removeChild(textArea);
-
-		hideContextMenu();
 	}
+	hideContextMenu();
 }
 
 
 // 翻译
 function handleTranslate() {
-	const selectedText = window.getSelection().toString();
-	console.log('----handleTranslate-----' + selectedText);
-
-	if (h5Port) {
-		var json = JSON.stringify({
-			message: "translate",
-			data: selectedText
-		});
-		postMsgToEts(json);
-	}
-	if (window.translate) {
-		window.translate.postMessage(selectedText);
+	if (currentSelectedText) {
+		if (h5Port) {
+			var json = JSON.stringify({
+				message: "translate",
+				data: currentSelectedText
+			});
+			postMsgToEts(json);
+		}
+		if (window.translate) {
+			window.translate.postMessage(currentSelectedText);
+		}
 	}
 }
 
 // 保存笔记
 function handleNote() {
-	const selectedText = window.getSelection().toString();
-	console.log('----handleNote-----' + selectedText);
-	if (h5Port) {
-		var json = JSON.stringify({
-			message: "note",
-			data: selectedText
-		});
-		postMsgToEts(json);
-	}
-	if (window.note) {
-		window.note.postMessage(selectedText);
+	if (currentSelectedText) {
+		if (h5Port) {
+			var json = JSON.stringify({
+				message: "note",
+				data: currentSelectedText
+			});
+			postMsgToEts(json);
+		}
+		if (window.note) {
+			window.note.postMessage(currentSelectedText);
+		}
 	}
 }
 
