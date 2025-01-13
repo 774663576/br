@@ -551,6 +551,7 @@ function createSpeedControl() {
 
 			// 获取当前行元素
 			const line = this.closest('.line_en');
+			console.log('--audio---'+line.audio)
 			// 如果有正在播放的音频，停止它
 			if (line && line.audio) {
 				line.audio.pause();
@@ -562,10 +563,10 @@ function createSpeedControl() {
 					playButton.innerHTML = createHearIcon();
 				}
 				// 隐藏语速控制器
-				const speedControl = line.querySelector('.speed-control');
-				if (speedControl) {
-					speedControl.style.display = 'none';
-				}
+				// const speedControl = line.querySelector('.speed-control');
+				// if (speedControl) {
+				// 	speedControl.style.display = 'none';
+				// }
 			}
 		});
 	});
