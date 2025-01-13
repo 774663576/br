@@ -516,11 +516,14 @@ function createSpeedControl() {
 	const speedControlDiv = document.createElement('div');
 	speedControlDiv.classList.add('speed-control');
 	speedControlDiv.innerHTML = `
-        <span class="speed-lable">语速:</span>
-        <input type="range" class="speed-slider" min="0.5" max="1" step="0.1" value="1">
-        <span class="speed-value">1.0x</span>
-	<div class="accent-tabs">
-	      <button class="accent-tab active" data-accent="0">美音</button>
+  <div class="speed-row">
+            <span class="speed-lable">语速:</span>
+            <input type="range" class="speed-slider" min="0.5" max="1" step="0.1" value="1">
+            <span class="speed-value">1.0x</span>
+        </div>
+        <div class="accent-tabs">
+		     <button class="accent-tab active" data-accent="0">美音</button>
+
             <button class="accent-tab" data-accent="1">英音</button>
         </div>
     `;
