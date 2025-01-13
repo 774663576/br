@@ -40,6 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+function receiveMessageFromFlutter(message) {
+	console.log('---receiveMessageFromFlutter-----');
+	switch (message.method) {
+		case 'appVersion':
+			appVersion = message.version;
+			break;
+	}
+}
 
 // 处理单词点击
 document.addEventListener("DOMContentLoaded", function () {
@@ -453,7 +461,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			console.log(text)
 			text = text.replace('语速:', '')
 			text = text.replace('1.0x', '')
-			const audioUrl = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&le=en`;
+
+			const activeTab = line.querySelector('.accent-tab.active');
+			const accentType = activeTab.dataset.accent;
+			const audioUrl = `https://dict.youdao.com/dictvoice?type=${accentType}&audio=${encodeURIComponent(text)}&le=en`;
 			handleAudioControl(audioUrl, playButton, line);
 		});
 
@@ -508,10 +519,15 @@ function createSpeedControl() {
         <span class="speed-lable">语速:</span>
         <input type="range" class="speed-slider" min="0.5" max="1" step="0.1" value="1">
         <span class="speed-value">1.0x</span>
+	<div class="accent-tabs">
+	      <button class="accent-tab active" data-accent="0">美音</button>
+            <button class="accent-tab" data-accent="1">英音</button>
+        </div>
     `;
 
 	const slider = speedControlDiv.querySelector('.speed-slider');
 	const valueDisplay = speedControlDiv.querySelector('.speed-value');
+	const accentTabs = speedControlDiv.querySelectorAll('.accent-tab');
 
 	slider.addEventListener('input', function () {
 		const rate = parseFloat(this.value);
@@ -522,6 +538,35 @@ function createSpeedControl() {
 			line.audio.playbackRate = rate;
 		}
 	});
+	// 添加音标切换事件
+	accentTabs.forEach(tab => {
+		tab.addEventListener('click', function () {
+			// 移除所有tab的active状态
+			accentTabs.forEach(t => t.classList.remove('active'));
+			// 添加当前点击tab的active状态
+			this.classList.add('active');
+
+			// 获取当前行元素
+			const line = this.closest('.line_en');
+			// 如果有正在播放的音频，停止它
+			if (line && line.audio) {
+				line.audio.pause();
+				line.audio.currentTime = 0;
+				line.audio = null;
+				// 重置播放按钮图标
+				const playButton = line.querySelector('.audio-control');
+				if (playButton) {
+					playButton.innerHTML = createHearIcon();
+				}
+				// 隐藏语速控制器
+				const speedControl = line.querySelector('.speed-control');
+				if (speedControl) {
+					speedControl.style.display = 'none';
+				}
+			}
+		});
+	});
+
 
 	return speedControlDiv;
 }
