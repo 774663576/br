@@ -71,7 +71,7 @@ def save_to_database(articles):
                 if exists:
 
                     continue
-                    # 更新现有文章
+                    # # 更新现有文章
                     # sql = """
                     # UPDATE voa_cj 
                     # SET title = %s, url = %s, date = %s, audio = %s, image = %s, update_time = %s, views = %s
@@ -90,8 +90,8 @@ def save_to_database(articles):
                 else:
                     # 插入新文章
                     sql = """
-                    INSERT INTO voa_cj (id, title, url, date, audio, image, update_time,views)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO voa_cj (id, title, url, date, audio, image, update_time, views,voa_type)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s)
                     """
                     cursor.execute(sql, (
                         article['id'],
@@ -101,7 +101,8 @@ def save_to_database(articles):
                         article['audio'],
                         article['image'],
                         current_time,
-                        views
+                        views,
+                        'voa_mansu'
                     ))
         conn.commit()
         conn.close()
@@ -422,7 +423,7 @@ def main():
         if not os.path.exists('voa'):
             os.makedirs('voa')
             
-        url = "https://m.tingclass.net/list-10616-1.html"
+        url = "https://m.tingclass.net/list-8335-1.html"
         results = parse_voa_list(url)
         
         if results:
