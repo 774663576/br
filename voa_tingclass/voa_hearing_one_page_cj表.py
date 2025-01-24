@@ -9,9 +9,6 @@ from pymysql.cursors import DictCursor
 import paramiko
 import random
 
-# 全局变量
-translation_available = True
-
 # 数据库配置
 DB_CONFIG = {
    'host': '59.110.149.111',
@@ -22,56 +19,37 @@ DB_CONFIG = {
 
 # 服务器配置
 SERVER_CONFIG = {
-    'hostname': '59.110.149.111',
+ 'hostname': '59.110.149.111',
     'username': 'root',
     'password': '<172.reading>',
     'remote_path': '/home/book/voa'
+    # 'sudo_password': 'your_sudo_password'  # 如果需要sudo密码
 }
 
-def is_chinese(char):
-    """判断一个字符是否是汉字"""
-    return '\u4e00' <= char <= '\u9fff'
-
-def get_translation(text):
-    """获取文本翻译，根据第一个字符判断翻译方向"""
-    global translation_available
-    
-    if not text or not translation_available:
-        return text
-        
+def init_database():
+    """初始化数据库表"""
     try:
-        # 判断翻译方向
-        is_zh_to_en = is_chinese(text[0]) if text else False
-        langpair = 'zh|en' if is_zh_to_en else 'en|zh'
-        
-        url = f'https://api.mymemory.translated.net/get?q={text}&langpair={langpair}'
-        response = requests.get(url, timeout=10)
-        data = response.json()
-        
-        # 获取翻译结果
-        translated_text = data.get('responseData', {}).get('translatedText', '')
-        
-        # 检查是否包含错误信息关键词
-        error_keywords = ['MYMEMORY WARNING', 'YOU USED ALL', 'AVAILABLE FREE TRANSLATIONS']
-        if any(keyword in translated_text.upper() for keyword in error_keywords):
-            print("翻译服务配额已用尽，停止后续翻译")
-            translation_available = False
-            return text
-            
-        # 只有在没有警告信息的情况下才返回翻译结果
-        if data.get('responseStatus') == 200 and translated_text:
-            # 根据翻译方向返回不同格式
-            if is_zh_to_en:
-                return f"{text} = {translated_text}"
-            else:
-                return f"{translated_text} = {text}"
-        else:
-            return text
-            
+        conn = pymysql.connect(**DB_CONFIG)
+        with conn.cursor() as cursor:
+            sql = """
+            CREATE TABLE IF NOT EXISTS voa_cj (
+                id VARCHAR(20) PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,
+                url VARCHAR(255) NOT NULL,
+                date VARCHAR(20),
+                audio VARCHAR(255),
+                image VARCHAR(255),
+                update_time VARCHAR(20),
+                views INT
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            """
+            cursor.execute(sql)
+        conn.commit()
+        conn.close()
+        print("数据库表初始化成功")
     except Exception as e:
-        print(f"获取翻译失败: {e}")
-        return text
-
+        print(f"初始化数据库失败: {e}")
+        raise e
 def save_to_database(articles):
     """保存文章到数据库"""
     try:
@@ -81,25 +59,24 @@ def save_to_database(articles):
             current_time = datetime.now().strftime('%Y-%m-%d')
             
             for article in articles:
+
                 # 生成随机views数值
                 views = random.randint(5000, 10000)
 
                 # 检查文章是否已存在
-                check_sql = "SELECT id FROM articles WHERE id = %s"
+                check_sql = "SELECT id FROM voa_cj WHERE id = %s"
                 cursor.execute(check_sql, (article['id'],))
                 exists = cursor.fetchone()
                 
                 if exists:
+
                     continue
+                   
                 else:
                     # 插入新文章
                     sql = """
-                    INSERT INTO articles (
-                        id, title, url, date, audio, image, update_time, 
-                        views, category, vocabulary_count, voa_type
-                    ) VALUES (
-                        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
-                    )
+                    INSERT INTO voa_cj (id, title, url, date, audio, image, update_time,views)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                     """
                     cursor.execute(sql, (
                         article['id'],
@@ -109,10 +86,7 @@ def save_to_database(articles):
                         article['audio'],
                         article['image'],
                         current_time,
-                        views,
-                        '',  # category 默认为空
-                        0,   # vocabulary_count 默认为0
-                        'voa_mansu'  # voa_type 固定值
+                        views
                     ))
         conn.commit()
         conn.close()
@@ -153,20 +127,28 @@ def change_permissions():
     try:
         print("\n正在修改文件权限...")
         
+        # 创建SSH客户端
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         
+        # 连接服务器
         ssh.connect(
             hostname=SERVER_CONFIG['hostname'],
             username=SERVER_CONFIG['username'],
             password=SERVER_CONFIG['password']
         )
         
-        command = f"chmod -R 755 {SERVER_CONFIG['remote_path']}"
+        # 执行chmod命令
+        if 'sudo_password' in SERVER_CONFIG:
+            command = f"echo {SERVER_CONFIG['sudo_password']} | sudo -S chmod -R 755 {SERVER_CONFIG['remote_path']}"
+        else:
+            command = f"sudo chmod -R 755 {SERVER_CONFIG['remote_path']}"
+            
         stdin, stdout, stderr = ssh.exec_command(command)
         
+        # 检查命令执行结果
         error = stderr.read().decode()
-        if error and 'password' not in error.lower():
+        if error and 'password' not in error.lower():  # 忽略sudo密码提示
             print(f"修改权限时出错: {error}")
         else:
             print("文件权限修改成功")
@@ -175,7 +157,6 @@ def change_permissions():
         
     except Exception as e:
         print(f"修改文件权限失败: {e}")
-
 def upload_files(latest_articles):
     """只上传最新文章的HTML文件到服务器"""
     try:
@@ -184,6 +165,7 @@ def upload_files(latest_articles):
         success_count = 0
         fail_count = 0
         
+        # 只上传最新文章的HTML文件
         for article in latest_articles:
             filename = f"{article['id']}.html"
             if os.path.exists(f"voa/{filename}"):
@@ -198,6 +180,7 @@ def upload_files(latest_articles):
         print(f"成功: {success_count} 个文件")
         print(f"失败: {fail_count} 个文件")
         
+        # 上传完成后修改权限
         if success_count > 0:
             change_permissions()
         
@@ -266,7 +249,6 @@ def clean_article_content(content_div):
         print(f"清理文章内容时出错: {e}")
         
     return content_div
-
 def save_article_html(article_id, content):
     """保存文章HTML内容"""
     if not content:
@@ -333,9 +315,11 @@ def parse_voa_list(url):
     """解析VOA文章列表 - 只抓取第一页"""
     start_time = time.time()
     
+    # 创建保存HTML文件的目录
     if not os.path.exists('voa'):
         os.makedirs('voa')
     
+    # 获取第一页内容
     print("正在获取首页内容...")
     html_content = get_web_content(url)
     if not html_content:
@@ -347,6 +331,7 @@ def parse_voa_list(url):
     try:
         soup = BeautifulSoup(html_content, 'html.parser')
         
+        # 解析当前页的文章列表
         articles_on_page = 0
         for li in soup.find_all('li'):
             link = li.find('a', class_='tittle')
@@ -361,10 +346,12 @@ def parse_voa_list(url):
             
             # 提取文章ID
             article_id = ''
+            # 先尝试从URL参数中提取
             id_param = re.search(r'[?&]id=(\d+)', article_url)
             if id_param:
                 article_id = id_param.group(1)
             else:
+                # 如果没有找到，再尝试从路径中提取
                 id_path = re.search(r'show-\d+-(\d+)-\d+\.html', article_url)
                 if id_path:
                     article_id = id_path.group(1)
@@ -373,12 +360,10 @@ def parse_voa_list(url):
                 print(f"无法获取文章ID，跳过: {article_url}")
                 continue
             
-            # 处理标题
             title = re.sub(r'\([0-9-]+\)', '', title).strip()
+            # title = title.replace('VOA常速英语听力练习素材：', '')
             title = title.split('：')[-1].strip()
-            
-            # 获取翻译
-            title = get_translation(title)
+
             
             # 获取文章详情页的音频和图片
             print(f"正在获取文章 {article_id} - {title} 的内容...")
@@ -395,51 +380,59 @@ def parse_voa_list(url):
             
             all_articles.append(article_data)
             articles_on_page += 1
-            
-            # 添加随机延迟，避免请求过快
-            time.sleep(random.uniform(1, 3))
         
         print(f"完成，获取到 {articles_on_page} 篇文章")
         
     except Exception as e:
         print(f"处理文章列表时出错: {e}")
     
+    # 保存文章到数据库
+    if all_articles:
+        save_to_database(all_articles)
+    
+    # 计算总用时
     total_time = time.time() - start_time
     print(f"\n抓取完成！")
     print(f"总用时: {total_time:.2f} 秒")
     print(f"总文章数: {len(all_articles)} 篇")
     
     return all_articles
-
 def main():
     """主函数"""
     try:
+        # 初始化数据库
+        init_database()
+        
+        # 创建保存HTML文件的目录
         if not os.path.exists('voa'):
             os.makedirs('voa')
             
-        url = "https://m.tingclass.net/list-8335-1.html"
+        url = "https://m.tingclass.net/list-10616-1.html"
         results = parse_voa_list(url)
         
         if results:
-            # 首先检查哪些是新文章
+            # 打印统计信息
+            print("\n保存统计:")
+            print(f"HTML文件保存在: voa/ 目录")
+            print(f"总文章数: {len(results)}")
+            
+            # 检查哪些是新文章
             conn = pymysql.connect(**DB_CONFIG)
             with conn.cursor() as cursor:
                 new_articles = []
                 for article in results:
-                    sql = "SELECT id FROM articles WHERE id = %s"
+                    # 检查文章是否已存在
+                    sql = "SELECT id FROM voa_cj WHERE id = %s"
                     cursor.execute(sql, (article['id'],))
                     exists = cursor.fetchone()
                     if not exists:
                         new_articles.append(article)
             conn.close()
             
-            # 如果有新文章，先上传文件，再保存到数据库
+            # 只上传新文章的HTML文件
             if new_articles:
                 print(f"\n发现 {len(new_articles)} 篇新文章")
-                upload_files(new_articles)
-                # 上传完成后再保存到数据库
-                save_to_database(results)
-                print("新文章已保存到数据库")
+                upload_files(new_articles)  # 这个函数现在会在上传后自动修改权限
             else:
                 print("\n没有发现新文章，无需上传")
             
