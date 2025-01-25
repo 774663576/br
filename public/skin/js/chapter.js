@@ -26,6 +26,14 @@ function postMsgToEts(data) {
 		console.error("h5Port is null, Please initialize first");
 	}
 }
+function playAudio(audioUrl) {
+	console.log("---playAudio---");
+	var json = JSON.stringify({
+		message: "playAudio",
+		audioUrl: audioUrl
+	});
+	postMsgToEts(json);
+}
 function getAppVersion() {
 	var json = JSON.stringify({
 		message: "getAppVersion",
@@ -458,7 +466,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		// 添加播放按钮事件监听器
 		playButton.addEventListener('click', function () {
 			var text = line.textContent;
-			console.log(text)
+			if (appVersion && appVersion >= 1800000) {
+				const audioUrl = `https://dict.youdao.com/dictvoice?type=2&audio=${encodeURIComponent(text)}&le=en`;
+				console.log(audioUrl)
+				playAudio(audioUrl);
+				return;
+			}
+
 			text = text.replace('语速:', '')
 			text = text.replace('1.0x', '')
 
@@ -468,12 +482,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			handleAudioControl(audioUrl, playButton, line);
 		});
 
-		// 动态添加语速控制器
-		const speedControl = createSpeedControl();
-		line.appendChild(playButton);
-		line.appendChild(speedControl);  // 将语速控制器添加到line下方
-
-		// 将播放按钮和语速控制器放置在一起
+		if (appVersion && appVersion >= 1800000) {
+			line.appendChild(playButton);
+		} else {
+			// 动态添加语速控制器
+			const speedControl = createSpeedControl();
+			line.appendChild(playButton);
+			line.appendChild(speedControl);  // 将语速控制器添加到line下方
+		}
 	});
 });
 //创建听力图标
@@ -551,7 +567,7 @@ function createSpeedControl() {
 
 			// 获取当前行元素
 			const line = this.closest('.line_en');
-			console.log('--audio---'+line.audio)
+			console.log('--audio---' + line.audio)
 			// 如果有正在播放的音频，停止它
 			if (line && line.audio) {
 				line.audio.pause();

@@ -407,7 +407,7 @@ def main():
         if not os.path.exists('voa'):
             os.makedirs('voa')
             
-        url = "https://m.tingclass.net/list-10616-1.html"
+        url = "https://m.tingclass.net/list-10616-2.html"
         results = parse_voa_list(url)
         
         if results:
