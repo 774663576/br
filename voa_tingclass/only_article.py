@@ -368,7 +368,7 @@ def extract_article_info(html_content):
             'date': datetime.now().strftime('%Y-%m-%d'),
             'audio': audio_url,
             'image': image_url,
-            'category': 'VOA常速英语',
+            'category': '',
             'vocabulary_count': 0,
             'voa_type': 'voa_changsu'
         }
@@ -420,7 +420,7 @@ def main(url):
 
 if __name__ == "__main__":
     # 这里填入文章URL
-    article_url = "https://m.tingclass.net/show-10616-592457-1.html"
+    article_url = "https://m.tingclass.net/show-10616-592695-1.html"
     
     print("=" * 50)
     print("VOA文章处理程序")

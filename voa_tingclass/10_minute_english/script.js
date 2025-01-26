@@ -1,60 +1,55 @@
-var h5Port;
-window.addEventListener('message', function (event) {
-    if (event.data == '__harmony_os_port__') {
-        if (event.ports[0] != null) {
-            h5Port = event.ports[0];
-        }
-    }
-});
-
-function postMsgToEts(data) {
-    if (h5Port) {
-        h5Port.postMessage(data);
-    } else {
-        console.error("h5Port is null, Please initialize first");
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const contentElement = document.querySelector('.article-content');
 
-    function processNode(node) {
-        if (node.nodeType === 3) { // 文本节点
-            // 检查父节点是否是第一个p标签
-            if (node.parentElement.tagName === 'P' && 
-                node.parentElement === contentElement.querySelector('p:first-child')) {
-                return; // 跳过第一个p标签的处理
+    function processContent() {
+        // 找到第一张图片
+        const firstImg = contentElement.querySelector('img');
+        if (!firstImg) return;
+
+        // 获取所有段落
+        const paragraphs = contentElement.getElementsByTagName('p');
+        let foundImage = false;
+
+        // 遍历所有段落
+        for (let p of paragraphs) {
+            // 检查是否已经遇到了图片
+            if (!foundImage) {
+                if (p.contains(firstImg)) {
+                    foundImage = true;
+                }
+                continue;
             }
 
-            const text = node.textContent;
-            if (/[a-zA-Z]/.test(text)) {
-                const wrapper = document.createElement('span');
-                const words = text.split(/(\s+|[.,!?;])/);
-                const fragment = document.createDocumentFragment();
+            // 处理图片后的段落
+            const textNodes = [];
+            const walk = document.createTreeWalker(p, NodeFilter.SHOW_TEXT);
+            let node;
+            while (node = walk.nextNode()) {
+                textNodes.push(node);
+            }
 
-                words.forEach(word => {
-                    if (/^[a-zA-Z]+$/.test(word)) {
-                        const span = document.createElement('span');
-                        span.textContent = word;
-                        span.className = 'clickable';
-                        fragment.appendChild(span);
-                    } else {
-                        fragment.appendChild(document.createTextNode(word));
-                    }
-                });
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                if (/[a-zA-Z]/.test(text)) {
+                    const wrapper = document.createElement('span');
+                    const words = text.split(/(\s+|[.,!?;])/);
+                    const fragment = document.createDocumentFragment();
 
-                wrapper.appendChild(fragment);
-                node.parentNode.replaceChild(wrapper, node);
-            }
-        } else if (node.nodeType === 1) { // 元素节点
-            // 跳过第一个p标签
-            if (node.tagName === 'P' && node === contentElement.querySelector('p:first-child')) {
-                return;
-            }
-            
-            if (!node.classList.contains('clickable') && node.tagName !== 'IMG') {
-                Array.from(node.childNodes).forEach(child => processNode(child));
-            }
+                    words.forEach(word => {
+                        if (/^[a-zA-Z]+$/.test(word)) {
+                            const span = document.createElement('span');
+                            span.textContent = word;
+                            span.className = 'clickable';
+                            fragment.appendChild(span);
+                        } else {
+                            fragment.appendChild(document.createTextNode(word));
+                        }
+                    });
+
+                    wrapper.appendChild(fragment);
+                    textNode.parentNode.replaceChild(wrapper, textNode);
+                }
+            });
         }
     }
 
@@ -62,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (contentElement) {
         setTimeout(() => {
             try {
-                processNode(contentElement);
+                processContent();
                 console.log('Content processing completed');
             } catch (error) {
                 console.error('Error processing content:', error);

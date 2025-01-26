@@ -129,33 +129,16 @@ def extract_article_info(html_content, url):
         # 初始化图片URL
         image_url = ''
         
-        # 提取标题
-        title = ''
-        meta_desc = soup.find('meta', attrs={'name': 'description'})
-        if meta_desc:
-            content = meta_desc.get('content', '')
-            # 查找第一个中文字符的位置
-            chinese_start = -1
-            for i, char in enumerate(content):
-                if '\u4e00' <= char <= '\u9fff':
-                    chinese_start = i
-                    break
-            
-            if chinese_start > 0:
-                english_title = content[:chinese_start].strip()
-                # 找到下一个英文字符的位置
-                english_start = -1
-                for i in range(chinese_start, len(content)):
-                    if content[i].isascii() and content[i].isalpha():
-                        english_start = i
-                        break
-                
-                if english_start > chinese_start:
-                    chinese_title = content[chinese_start:english_start].strip()
-                    title = f"{chinese_title} = {english_title}"
-                    print(f"提取到标题: {title}")
-        
         if content_box:
+            # 提取标题
+            title = ''
+            title_div = content_box.find('div', style='text-align: center;')
+            if title_div and title_div.strong:
+                english_title = title_div.strong.text.strip()
+                chinese_title = title_div.find_next('p').strong.text.strip()
+                title = f"{chinese_title} = {english_title}"
+            print(f"提取到标题: {title}")
+            
             # 处理所有段落
             has_image = False
             for p in content_box.find_all(['p', 'div']):
@@ -436,7 +419,7 @@ def main(url):
         return None
 
 if __name__ == "__main__":
-    article_url = "https://m.tingclass.net/show-8754-292242-1.html"
+    article_url = "https://m.tingclass.net/show-8754-292243-1.html"
     
     print("=" * 50)
     print("10分钟英语文章处理程序")
