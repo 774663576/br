@@ -134,7 +134,6 @@ def extract_article_info(html_content, url):
         meta_desc = soup.find('meta', attrs={'name': 'description'})
         if meta_desc:
             content = meta_desc.get('content', '')
-            # 查找第一个中文字符的位置
             chinese_start = -1
             for i, char in enumerate(content):
                 if '\u4e00' <= char <= '\u9fff':
@@ -143,7 +142,6 @@ def extract_article_info(html_content, url):
             
             if chinese_start > 0:
                 english_title = content[:chinese_start].strip()
-                # 找到下一个英文字符的位置
                 english_start = -1
                 for i in range(chinese_start, len(content)):
                     if content[i].isascii() and content[i].isalpha():
@@ -153,11 +151,25 @@ def extract_article_info(html_content, url):
                 if english_start > chinese_start:
                     chinese_title = content[chinese_start:english_start].strip()
                     title = f"{chinese_title} = {english_title}"
-                    print(f"提取到标题: {title}")
+                    print(f"从meta description提取到标题: {title}")
         
         if content_box:
             # 处理所有段落
             has_image = False
+            # 先处理直接的strong标签内容
+            direct_strong = content_box.find('strong', recursive=False)
+            if direct_strong:
+                text = direct_strong.text.strip()
+                if text:
+                    new_p = soup.new_tag('p')
+                    new_p['style'] = 'text-indent: 2em; line-height: 1.75em; margin-bottom: 15px; margin-top: 15px;'
+                    span = soup.new_tag('span')
+                    span['style'] = 'font-size: 14px; font-family: 宋体, SimSun;'
+                    span.string = text
+                    new_p.append(span)
+                    content_div.append(new_p)
+
+            # 处理其他段落
             for p in content_box.find_all(['p', 'div']):
                 text = p.get_text().strip()
                 if text:  # 只处理非空内容
