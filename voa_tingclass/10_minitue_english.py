@@ -58,7 +58,7 @@ def search_pixabay_image(query):
         results = response.json()
         if results["totalHits"] > 0:
             # 优先使用 webformatURL (640px)，适合手机显示
-            return results["hits"][0]["webformatURL"]
+            return results["hits"][0]["largeImageURL"]
             
         # 如果英文搜索没结果，尝试使用中文
         print("英文搜索无结果，尝试中文搜索...")
@@ -71,7 +71,7 @@ def search_pixabay_image(query):
         
         results = response.json()
         if results["totalHits"] > 0:
-            return results["hits"][0]["webformatURL"]
+            return results["hits"][0]["largeImageURL"]
             
     except Exception as e:
         print(f"搜索图片失败: {e}")
