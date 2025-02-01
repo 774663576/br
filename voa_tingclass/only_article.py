@@ -2,7 +2,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import traceback
 import pymysql
@@ -10,6 +10,9 @@ import paramiko
 import random
 import time
 from urllib.parse import quote
+
+# 获取明天的日期
+TOMORROW_DATE = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
 
 # 数据库配置
 DB_CONFIG = {
@@ -250,11 +253,13 @@ def save_to_database(article_data):
                 article_data['id'],
                 article_data['title'],
                 article_data['url'],
-                article_data['date'],
+                # article_data['date'],
+                TOMORROW_DATE,
                 article_data['audio'],
                 article_data['image'],
                 '',
-                datetime.now().strftime('%Y-%m-%d'),
+                # datetime.now().strftime('%Y-%m-%d'),
+                TOMORROW_DATE,
                 views,
                 0,
                 'voa_changsu'
@@ -420,7 +425,7 @@ def main(url):
 
 if __name__ == "__main__":
     # 这里填入文章URL
-    article_url = "https://m.tingclass.net/show-10616-592695-1.html"
+    article_url = "https://m.tingclass.net/show-10616-592638-1.html"
     
     print("=" * 50)
     print("VOA文章处理程序")

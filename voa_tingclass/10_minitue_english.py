@@ -2,7 +2,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import traceback
 import pymysql
@@ -11,6 +11,9 @@ import random
 import time
 from urllib.parse import quote
 from html import unescape
+
+# 获取明天的日期
+TOMORROW_DATE = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
 
 # 数据库配置
 DB_CONFIG = {
@@ -284,10 +287,10 @@ def extract_article_info(html_content, url):
             'id': article_id,
             'title': title,
             'url': f'http://readingstuday.top/10_minute_english/{article_id}.html',
-            'date': '2025-02-02',
+            'date': TOMORROW_DATE,
             'audio': audio_url,
             'image': image_url,
-            'update_time': '2025-02-02',
+            'update_time': TOMORROW_DATE,
             'views': views
         }
         
