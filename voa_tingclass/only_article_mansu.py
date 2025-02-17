@@ -13,7 +13,7 @@ from urllib.parse import quote
 
 # 获取明天的日期
 TOMORROW_DATE = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
-
+# TOMORROW_DATE='2025-02-04'
 # 数据库配置
 DB_CONFIG = {
    'host': '59.110.149.111',
@@ -262,7 +262,7 @@ def save_to_database(article_data):
                 TOMORROW_DATE,
                 views,
                 0,
-                'voa_changsu'
+                'voa_mansu'
             ))
             
         conn.commit()
@@ -375,7 +375,7 @@ def extract_article_info(html_content):
             'image': image_url,
             'category': '',
             'vocabulary_count': 0,
-            'voa_type': 'voa_changsu'
+            'voa_type': 'voa_mansu'
         }
         
         return article_data, str(content_div) if content_div else ''
@@ -423,13 +423,21 @@ def main(url):
         traceback.print_exc()
         return None
 
+def get_article_url():
+    """获取用户输入的文章URL"""
+    while True:
+        url = input("\n请输入文章URL (例如: https://m.tingclass.net/show-8754-290156-1.html): ").strip()
+        if url and url.startswith("https://m.tingclass.net/show-"):
+            return url
+        print("无效的URL格式! 请输入正确的tingclass.net文章URL.")
+
 if __name__ == "__main__":
-    # 这里填入文章URL
-    article_url = "https://m.tingclass.net/show-10616-592638-1.html"
+    print("=" * 50)
+    print("voa慢速")
+    print("=" * 50)
     
-    print("=" * 50)
-    print("VOA文章处理程序")
-    print("=" * 50)
+    article_url = get_article_url()
+    print(f"\n开始处理文章: {article_url}")
     
     article_data = main(article_url)
     
@@ -440,3 +448,5 @@ if __name__ == "__main__":
         print(json.dumps(article_data, ensure_ascii=False, indent=4))
     else:
         print("\n处理失败!")
+    
+    input("\n按回车键退出...")

@@ -2,7 +2,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 import json
 import traceback
 import pymysql
@@ -10,10 +10,6 @@ import paramiko
 import random
 import time
 from urllib.parse import quote
-from html import unescape
-
-# 获取明天的日期
-TOMORROW_DATE = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
 
 # 数据库配置
 DB_CONFIG = {
@@ -31,56 +27,8 @@ SERVER_CONFIG = {
     'remote_path': '/home/book/10_minute_english'
 }
 
-def download_and_save_image(image_url, article_id):
-    """下载图片并保存到服务器"""
-    try:
-        # 下载图片
-        response = requests.get(image_url, timeout=10)
-        response.raise_for_status()
-        
-        # 获取文件扩展名
-        ext = image_url.split('.')[-1]
-        if '?' in ext:
-            ext = ext.split('?')[0]
-        filename = f"{article_id}.{ext}"
-        
-        # 本地临时保存
-        local_img_dir = os.path.join('10_minute_english', 'img')
-        if not os.path.exists(local_img_dir):
-            os.makedirs(local_img_dir)
-            
-        local_path = os.path.join(local_img_dir, filename)
-        with open(local_path, 'wb') as f:
-            f.write(response.content)
-            
-        # 上传到服务器
-        transport = paramiko.Transport((SERVER_CONFIG['hostname'], 22))
-        transport.connect(username=SERVER_CONFIG['username'], password=SERVER_CONFIG['password'])
-        sftp = paramiko.SFTPClient.from_transport(transport)
-        
-        # 确保远程目录存在
-        remote_img_dir = SERVER_CONFIG['remote_path'] + '/img'
-        try:
-            sftp.stat(remote_img_dir)
-        except IOError:
-            sftp.mkdir(remote_img_dir)
-            
-        remote_path = f"{remote_img_dir}/{filename}"
-        sftp.put(local_path, remote_path)
-        
-        sftp.close()
-        transport.close()
-        
-        # 返回图片的URL
-        return f"http://readingstuday.top/10_minute_english/img/{filename}"
-        
-    except Exception as e:
-        print(f"下载和保存图片失败: {e}")
-        traceback.print_exc()
-        return None
-
-def search_pixabay_image(query, article_id):
-    """从Pixabay搜索相关图片并保存"""
+def search_pixabay_image(query):
+    """从Pixabay搜索相关图片"""
     try:
         # Pixabay API配置
         api_key = "48439108-45c403e837503d7b07b791295"
@@ -100,6 +48,7 @@ def search_pixabay_image(query, article_id):
             "min_width": 800,
             "min_height": 600,
             "safesearch": "true",
+            # "category": "education"  # 教育相关的图片
         }
         
         print(f"使用英文关键词搜索图片: {search_term}")
@@ -108,9 +57,8 @@ def search_pixabay_image(query, article_id):
         
         results = response.json()
         if results["totalHits"] > 0:
-            image_url = results["hits"][0]["largeImageURL"]
-            image_url = image_url.replace("_1280", "_480")
-            return download_and_save_image(image_url, article_id)
+            # 优先使用 webformatURL (640px)，适合手机显示
+            return results["hits"][0]["largeImageURL"]
             
         # 如果英文搜索没结果，尝试使用中文
         print("英文搜索无结果，尝试中文搜索...")
@@ -123,14 +71,13 @@ def search_pixabay_image(query, article_id):
         
         results = response.json()
         if results["totalHits"] > 0:
-            image_url = results["hits"][0]["largeImageURL"]
-            image_url = image_url.replace("_1280", "_480")
-            return download_and_save_image(image_url, article_id)
+            return results["hits"][0]["largeImageURL"]
             
     except Exception as e:
         print(f"搜索图片失败: {e}")
         traceback.print_exc()
     return None
+
 def get_web_content(url, max_retries=3):
     """获取网页内容，增加重试机制"""
     headers = {
@@ -195,8 +142,6 @@ def extract_article_info(html_content, url):
             
             if chinese_start > 0:
                 english_title = content[:chinese_start].strip()
-                # 解码HTML实体
-                english_title = unescape(english_title)
                 english_start = -1
                 for i in range(chinese_start, len(content)):
                     if content[i].isascii() and content[i].isalpha():
@@ -205,7 +150,6 @@ def extract_article_info(html_content, url):
                 
                 if english_start > chinese_start:
                     chinese_title = content[chinese_start:english_start].strip()
-                    chinese_title = unescape(chinese_title)  # 同样解码中文部分
                     title = f"{chinese_title} = {english_title}"
                     print(f"从meta description提取到标题: {title}")
         
@@ -236,7 +180,8 @@ def extract_article_info(html_content, url):
                     span.string = text
                     new_p.append(span)
                     content_div.append(new_p)
-                                    # 处理图片
+                    
+                # 处理图片
                 img = p.find('img')
                 if img and img.get('src'):
                     has_image = True
@@ -246,16 +191,13 @@ def extract_article_info(html_content, url):
                     
                     # 保存第一张图片URL作为文章封面
                     if not image_url:
-                        # 下载并保存图片
-                        saved_image_url = download_and_save_image(img_url, article_id)
-                        if saved_image_url:
-                            image_url = saved_image_url
-                            print(f"提取到封面图片: {image_url}")
+                        image_url = img_url
+                        print(f"提取到封面图片: {image_url}")
                     
                     new_p = soup.new_tag('p')
                     new_p['style'] = 'text-align: center;'
                     new_img = soup.new_tag('img')
-                    new_img['src'] = image_url  # 使用保存后的图片URL
+                    new_img['src'] = img_url
                     new_img['style'] = 'max-width: 100%; height: auto; margin: 10px 0;'
                     new_p.append(new_img)
                     content_div.append(new_p)
@@ -263,7 +205,8 @@ def extract_article_info(html_content, url):
             # 如果文章没有图片，尝试搜索相关图片
             if not has_image and title:
                 print("文章没有图片，尝试搜索相关图片...")
-                image_url = search_pixabay_image(title, article_id)
+                image_url = search_pixabay_image(title)
+                image_url=image_url.replace("_1280", "_480")
                 
                 if image_url:
                     print(f"找到相关图片: {image_url}")
@@ -287,10 +230,11 @@ def extract_article_info(html_content, url):
             'id': article_id,
             'title': title,
             'url': f'http://readingstuday.top/10_minute_english/{article_id}.html',
-            'date': TOMORROW_DATE,
+            'date': '2025-02-01',
             'audio': audio_url,
             'image': image_url,
-            'update_time': TOMORROW_DATE,
+            # 'update_time': datetime.now().strftime('%Y-%m-%d'),
+            'update_time': '2025-02-01',
             'views': views
         }
         
@@ -330,6 +274,7 @@ def save_article_html(article_id, content):
     except Exception as e:
         print(f"保存HTML内容失败: {e}")
         traceback.print_exc()
+
 def upload_to_server(local_dir, filename):
     """上传文件到服务器"""
     try:
@@ -504,21 +449,12 @@ def main(url):
         traceback.print_exc()
         return None
 
-def get_article_url():
-    """获取用户输入的文章URL"""
-    while True:
-        url = input("\n请输入文章URL (例如: https://m.tingclass.net/show-8754-290156-1.html): ").strip()
-        if url and url.startswith("https://m.tingclass.net/show-"):
-            return url
-        print("无效的URL格式! 请输入正确的tingclass.net文章URL.")
-
 if __name__ == "__main__":
+    article_url = "https://m.tingclass.net/show-8754-291459-1.html"
+    
     print("=" * 50)
     print("10分钟英语文章处理程序")
     print("=" * 50)
-    
-    article_url = get_article_url()
-    print(f"\n开始处理文章: {article_url}")
     
     article_data = main(article_url)
     
@@ -529,5 +465,3 @@ if __name__ == "__main__":
         print(json.dumps(article_data, ensure_ascii=False, indent=4))
     else:
         print("\n处理失败!")
-    
-    input("\n按回车键退出...")
