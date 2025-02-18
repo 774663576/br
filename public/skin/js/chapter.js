@@ -293,6 +293,7 @@ function showContextMenu(x, y) {
 		createContextMenu([
 			{ iconSVG: copyIconSVG, text: '复制', handler: handleCopy },
 			{ iconSVG: translateIconSVG, text: '翻译', handler: handleTranslate },
+			{ iconSVG: aiSvg, text: 'AI解析', handler: handleJieXi },
 			{ iconSVG: noteIconSVG, text: '笔记', handler: handleNote }
 		]);
 	}
@@ -364,7 +365,20 @@ function handleTranslate() {
 		}
 	}
 }
-
+function handleJieXi() {
+	if (currentSelectedText) {
+		if (h5Port) {
+			var json = JSON.stringify({
+				message: "aiJieXi",
+				data: currentSelectedText
+			});
+			postMsgToEts(json);
+		}
+		if (window.aiJieXi) {
+			window.aiJieXi.postMessage(currentSelectedText);
+		}
+	}
+}
 // 保存笔记
 function handleNote() {
 	if (currentSelectedText) {
@@ -399,6 +413,9 @@ const translateIconSVG = `
 const noteIconSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18">
     <path d="M770.816 351.61088l-155.0336-155.0336-413.47072 413.39904v155.0336h155.07456l413.42976-413.39904zM893.2352 229.21216l-81.07008 81.07008-155.0336-155.0336 81.05984-81.07008a41.17504 41.17504 0 0 1 58.24512 0l96.78848 96.78848a41.18528 41.18528 0 0 1 0.01024 58.24512zM49.14176 828.11904h919.26528v153.27232H49.14176z" fill="#ffffff"></path>
+</svg>`;
+const aiSvg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="18" height="18">
+    <text x="50%" y="50%" font-weight="700" font-size="800" text-anchor="middle" alignment-baseline="central" fill="#ffffff">AI</text>
 </svg>`;
 
 

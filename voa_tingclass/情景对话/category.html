@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语学习分类</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 15px;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .item {
+            background: #f8f8f8;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .item:active {
+            background: #e8e8e8;
+        }
+
+        @media (max-width: 320px) {
+            .items-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+
+    <script>
+        const data = {
+  "categories": [
+    {
+      "category": "日常生活",
+      "items": [
+        {
+          "title": "美食话题",
+          "category": "food",
+          "cid": "11"
+        },
+        {
+          "title": "日常话题",
+          "category": "daily",
+          "cid": "13"
+        },
+        {
+          "title": "租房英语",
+          "category": "rent",
+          "cid": "12"
+        },
+        {
+          "title": "购房英语",
+          "category": "house",
+          "cid": "14"
+        },
+        {
+          "title": "乘车英语",
+          "category": "transport",
+          "cid": "15"
+        },
+        {
+          "title": "驾驶英语",
+          "category": "driving",
+          "cid": "16"
+        },
+        {
+          "title": "健康话题",
+          "category": "health",
+          "cid": "17"
+        },
+        {
+          "title": "家庭话题",
+          "category": "family",
+          "cid": "57"
+        },
+        {
+          "title": "接打电话",
+          "category": "phone",
+          "cid": "58"
+        },
+        {
+          "title": "问路场景",
+          "category": "direction",
+          "cid": "59"
+        }
+      ]
+    },
+    {
+      "category": "时尚购物",
+      "items": [
+        {
+          "title": "购买鞋帽",
+          "category": "shoes",
+          "cid": "56"
+        },
+        {
+          "title": "购买衣服",
+          "category": "clothes",
+          "cid": "19"
+        },
+        {
+          "title": "购买食品",
+          "category": "groceries",
+          "cid": "20"
+        },
+        {
+          "title": "日化用品",
+          "category": "toiletries",
+          "cid": "22"
+        },
+        {
+          "title": "电子产品",
+          "category": "electronics",
+          "cid": "21"
+        },
+        {
+          "title": "讨价还价",
+          "category": "bargaining",
+          "cid": "23"
+        },
+        {
+          "title": "网上购物",
+          "category": "online_shopping",
+          "cid": "24"
+        },
+        {
+          "title": "商品纠纷",
+          "category": "disputes",
+          "cid": "25"
+        },
+        {
+          "title": "其他用品",
+          "category": "others",
+          "cid": "26"
+        }
+      ]
+    },
+    {
+      "category": "文化教育",
+      "items": [
+        {
+          "title": "校园英语",
+          "category": "campus",
+          "cid": "27"
+        },
+        {
+          "title": "大学生活",
+          "category": "college",
+          "cid": "28"
+        },
+        {
+          "title": "借书话题",
+          "category": "library",
+          "cid": "29"
+        },
+        {
+          "title": "继续教育",
+          "category": "education",
+          "cid": "30"
+        }
+      ]
+    },
+    {
+      "category": "人际交往",
+      "items": [
+        {
+          "title": "兴趣爱好",
+          "category": "hobbies",
+          "cid": "66"
+        },
+        {
+          "title": "天气话题",
+          "category": "weather",
+          "cid": "67"
+        },
+        {
+          "title": "家庭话题",
+          "category": "family_life",
+          "cid": "68"
+        },
+        {
+          "title": "节假日话题",
+          "category": "holidays",
+          "cid": "69"
+        },
+        {
+          "title": "体育运动",
+          "category": "sports",
+          "cid": "71"
+        },
+        {
+          "title": "明星八卦",
+          "category": "celebrity",
+          "cid": "72"
+        },
+        {
+          "title": "评头论足",
+          "category": "comments",
+          "cid": "73"
+        },
+        {
+          "title": "初次认识",
+          "category": "introduction",
+          "cid": "33"
+        },
+        {
+          "title": "恋爱婚姻",
+          "category": "relationship",
+          "cid": "31"
+        },
+        {
+          "title": "日常闲谈",
+          "category": "chat",
+          "cid": "32"
+        }
+      ]
+    },
+    {
+      "category": "态度情感",
+      "items": [
+        {
+          "title": "讨厌",
+          "category": "dislike",
+          "cid": "60"
+        },
+        {
+          "title": "抱怨",
+          "category": "complaint",
+          "cid": "62"
+        },
+        {
+          "title": "赞美",
+          "category": "praise",
+          "cid": "63"
+        },
+        {
+          "title": "害怕难过",
+          "category": "fear",
+          "cid": "64"
+        },
+        {
+          "title": "同意许诺",
+          "category": "agree",
+          "cid": "65"
+        },
+        {
+          "title": "生气",
+          "category": "angry",
+          "cid": "61"
+        },
+        {
+          "title": "高兴",
+          "category": "happy",
+          "cid": "76"
+        },
+        {
+          "title": "道歉",
+          "category": "apology",
+          "cid": "75"
+        },
+        {
+          "title": "反对拒绝",
+          "category": "disagree",
+          "cid": "74"
+        }
+      ]
+    },
+    {
+      "category": "出国旅游",
+      "items": [
+        {
+          "title": "预订机票",
+          "category": "flight",
+          "cid": "34"
+        },
+        {
+          "title": "旅行休闲",
+          "category": "travel",
+          "cid": "36"
+        },
+        {
+          "title": "机场英语",
+          "category": "airport",
+          "cid": "37"
+        },
+        {
+          "title": "出国签证",
+          "category": "visa",
+          "cid": "38"
+        },
+        {
+          "title": "参观景点",
+          "category": "sightseeing",
+          "cid": "35"
+        }
+      ]
+    },
+    {
+      "category": "酒店英语",
+      "items": [
+        {
+          "title": "前台登记",
+          "category": "reception",
+          "cid": "39"
+        },
+        {
+          "title": "酒店服务",
+          "category": "hotel_service",
+          "cid": "40"
+        }
+      ]
+    },
+    {
+      "category": "职场英语",
+      "items": [
+        {
+          "title": "办公室话题",
+          "category": "office",
+          "cid": "70"
+        },
+        {
+          "title": "求职面试",
+          "category": "interview",
+          "cid": "41"
+        },
+        {
+          "title": "裁员辞职",
+          "category": "resignation",
+          "cid": "42"
+        },
+        {
+          "title": "员工培训",
+          "category": "training",
+          "cid": "43"
+        }
+      ]
+    },
+    {
+      "category": "商务英语",
+      "items": [
+        {
+          "title": "洽谈业务",
+          "category": "business_talk",
+          "cid": "44"
+        },
+        {
+          "title": "商业询价",
+          "category": "inquiry",
+          "cid": "45"
+        },
+        {
+          "title": "咨询商品",
+          "category": "product_info",
+          "cid": "46"
+        },
+        {
+          "title": "结算方式",
+          "category": "payment",
+          "cid": "48"
+        }
+      ]
+    },
+    {
+      "category": "金融法律",
+      "items": [
+        {
+          "title": "开户销户",
+          "category": "account",
+          "cid": "49"
+        },
+        {
+          "title": "存款取款",
+          "category": "deposit",
+          "cid": "50"
+        },
+        {
+          "title": "银行卡业务",
+          "category": "bank_card",
+          "cid": "51"
+        },
+        {
+          "title": "投资理财",
+          "category": "investment",
+          "cid": "53"
+        },
+        {
+          "title": "法律英语",
+          "category": "law",
+          "cid": "54"
+        }
+      ]
+    }
+  ]
+}
+
+        function renderCategories() {
+            const container = document.getElementById('app');
+            data.categories.forEach(category => {
+                const section = document.createElement('div');
+                section.className = 'category-section';
+                
+                const title = document.createElement('div');
+                title.className = 'category-title';
+                title.textContent = category.category;
+                
+                const itemsGrid = document.createElement('div');
+                itemsGrid.className = 'items-grid';
+                
+                category.items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'item';
+                    itemDiv.textContent = item.title;
+                    itemDiv.dataset.cid = item.cid;
+                    itemDiv.dataset.category = item.category;
+                    itemDiv.onclick = () => {
+                        console.log(`Selected: ${item.title}, CID: ${item.cid}`);
+                    };
+                    itemsGrid.appendChild(itemDiv);
+                });
+                
+                section.appendChild(title);
+                section.appendChild(itemsGrid);
+                container.appendChild(section);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCategories);
+    </script>
+</body>
+</html>

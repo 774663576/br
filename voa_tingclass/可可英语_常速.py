@@ -536,7 +536,7 @@ def main(url):
 
 if __name__ == "__main__":
     # 这里填入文章URL
-    article_url = "https://kekenet.com/lesson/79-700205"
+    article_url = "https://kekenet.com/lesson/96-700494"
     
     print("=" * 50)
     print("VOA文章处理程序")
