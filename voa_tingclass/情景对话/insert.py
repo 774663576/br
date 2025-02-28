@@ -49,7 +49,7 @@ for root, dirs, files in os.walk(json_folder_path):
                             conversation['reply_english'],
                             conversation['reply_chinese']
                         ))
-                        print(f"成功插入数据: {item['title']}")  # 打印插入成功的日志
+                        print(f"成功插入数据: {item['title']}-----{ conversation['english']}")  # 打印插入成功的日志
                     except Exception as e:
                         print(f"插入数据时出错: {e}")  # 插入数据出错的日志
 

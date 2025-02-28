@@ -32,10 +32,15 @@ def parse_dialog_content(html, parent_category, current_cid, current_category, c
         if content_box:
             conversations = []
             for dl in content_box.select('.h_jing'):
-                eng_text = dl.select_one('dt').get_text(strip=True).replace('a', '', 1)
+                # eng_text = dl.select_one('dt').get_text(strip=True).replace('a', '', 1)
+                eng_text = ''.join([text for text in dl.select_one('dt').stripped_strings if not text.startswith('a') and not any(c for c in text if '\u4e00' <= c <= '\u9fff')])
+                print(f"eng_text---{eng_text}")
                 chn_text = dl.select_one('dt p').text if dl.select_one('dt p') else ''
                 
-                reply_eng = dl.select_one('dd').get_text(strip=True).replace('b', '', 1) if dl.select_one('dd') else ''
+                # reply_eng = dl.select_one('dd').get_text(strip=True).replace('b', '', 1) if dl.select_one('dd') else ''
+                reply_eng= ''.join([text for text in dl.select_one('dd').stripped_strings if not text.startswith('b') and not any(c for c in text if '\u4e00' <= c <= '\u9fff')]) if dl.select_one('dd') else ''
+                print(f"reply_eng---{reply_eng}")
+
                 reply_chn = dl.select_one('dd p').text if dl.select_one('dd p') else ''
                 
                 conversations.append({
@@ -135,8 +140,8 @@ def main():
                 dialogs = parse_dialog_content(content, category_name, cid, subcategory, category_title)
                 all_category_dialogs.extend(dialogs)
                 
-                print(f"暂停2秒后继续...")
-                time.sleep(2)
+                print(f"暂停1秒后继续...")
+                time.sleep(1)
                 page += 1
             
             # 保存整个分类的对话到一个文件

@@ -426,7 +426,7 @@ def upload_files(article_data):
         traceback.print_exc()
         return False
 
-def extract_article_info(html_content):
+def extract_article_info(html_content, article_url):
     """从HTML中提取文章信息"""
     try:
         print("\n开始解析文章内容...")
@@ -466,8 +466,6 @@ def extract_article_info(html_content):
         content_div = soup.find('div', class_='caption-box')
         
         image_url = search_pixabay_image(title, article_id)
-
-         
                 
         print(f"提取到图片URL: {image_url}")
         
@@ -507,7 +505,7 @@ def main(url):
             return None
             
         # 提取文章信息
-        article_data, cleaned_html = extract_article_info(html_content)
+        article_data, cleaned_html = extract_article_info(html_content, url)
         # print("cleaned_html:")
         # print(cleaned_html)
         if article_data and cleaned_html:
@@ -535,12 +533,12 @@ def main(url):
         return None
 
 if __name__ == "__main__":
-    # 这里填入文章URL
-    article_url = "https://kekenet.com/lesson/96-700494"
-    
     print("=" * 50)
     print("VOA文章处理程序")
     print("=" * 50)
+    
+    # 请求用户输入文章URL
+    article_url = input("请输入文章URL (例如: https://kekenet.com/lesson/96-700494): ")
     
     article_data = main(article_url)
     

@@ -38,8 +38,8 @@ class KekenetScraper:
         self.headless = headless
         self.retry_count = retry_count
         self.session_start_time = datetime.now()
-        self.outputDir='可可英语/李阳疯狂英语365句'
-        self.category='liyang_fengkuangyingyu365'
+        self.outputDir='可可英语/速英语短文听力'
+        self.category='mansuduanwentingli'
         self.serverUrl='http://readingstuday.top/kouyu/'+self.category+'/'
 
         
@@ -406,7 +406,7 @@ class KekenetScraper:
 def main():
     """主函数"""
     # 课程列表URL
-    course_url = "https://kekenet.com/course/1327"
+    course_url = "https://kekenet.com/course/15690"
     
     print("=" * 50)
     print("可可英语文章爬虫")
